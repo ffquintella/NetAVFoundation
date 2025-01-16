@@ -1,0 +1,226 @@
+parameters:
+
+- name: statusContext
+  type: string 
+  default: '10.16' # default context, since we started dealing with iOS devices. 
+
+- name: clearProvisionatorCache
+  type: boolean
+  default: false
+
+# can depend on the pool, which is annoying, but we should keep it in mind
+- name: keyringPass
+  type: string
+
+- name: isPR
+  type: boolean
+
+- name: repositoryAlias
+  type: string
+  default: self
+
+- name: commit
+  type: string
+  default: HEAD
+
+- name: uploadPrefix
+  type: string
+  default: '$(MaciosUploadPrefix)'
+
+- name: retryCount
+  type: number
+  default: 3
+
+steps:
+
+- template: ../common/checkout.yml
+  parameters:
+    isPR: ${{ parameters.isPR }}
+    repositoryAlias: ${{ parameters.repositoryAlias }}
+    commit: ${{ parameters.commit }}
+
+- template: agent-cleanser/v1.yml@yaml-templates # Uninstalls mono, Xamarin.Mac (if installed) plus cleanses the Provisionator Xcode cache and kills processes at the end
+  parameters:
+    CleanseProcesses: true
+
+- bash: $(Build.SourcesDirectory)/$(BUILD_REPOSITORY_TITLE)/tools/devops/automation/scripts/disable-codeql-arm64.sh
+  displayName: 'Disable CodeQL on arm64'
+  name: disableCodeQLOnArm64
+
+# Write a generic failure message to the failure comment file, so a failure will be reported
+# if something goes wrong before we successfully complete the tests (in which case we delete the file).
+- pwsh: |
+    Set-Content -Path "$Env:GITHUB_FAILURE_COMMENT_FILE" -Value "Tests on macOS ${{ parameters.statusContext }} failed for unknown reasons."
+  displayName: "Initialize state"
+  env:
+    CONTEXT: ${{ parameters.statusContext }}
+    GITHUB_TOKEN: $(GitHub.Token)
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+
+- bash: $(System.DefaultWorkingDirectory)/$(BUILD_REPOSITORY_TITLE)/tools/devops/automation/scripts/bash/remove-ui-prompt.sh
+  env:
+    OSX_KEYCHAIN_PASS: ${{ parameters.keyringPass }}
+  displayName: 'Remove security UI-prompt (http://stackoverflow.com/a/40039594/183422)'
+  condition: succeededOrFailed() # we do not care about the previous process cleanup
+  continueOnError: true
+
+# download the packages that have been created, install them, later download the zip files that contain the already built
+# tests and execute them.
+
+- pwsh: '& "$Env:SYSTEM_DEFAULTWORKINGDIRECTORY/$Env:BUILD_REPOSITORY_TITLE/tools/devops/automation/scripts/show_bot_info.ps1"'
+  displayName: 'Show Bot Info'
+
+- bash: '$SYSTEM_DEFAULTWORKINGDIRECTORY/$BUILD_REPOSITORY_TITLE/tools/devops/automation/scripts/bash/clean-bot.sh'
+  displayName: 'Clean bot'
+  continueOnError: true
+  timeoutInMinutes: 60
+
+- bash: |
+    if [[ $(ioreg -l | grep -e 'VMware' | wc -l) -ne 0 ]]; then
+      echo "Using VMware virtualization."
+      echo "##vso[task.setvariable variable=VM_VENDOR]VMware"
+    fi
+
+    if [[ $(ioreg -l | grep -e 'VirtualBox' | wc -l) -ne 0 ]]; then
+      echo "Using VirtualBox virtualization."
+      echo "##vso[task.setvariable variable=VM_VENDOR]VirtualBox"
+    fi
+
+    if [[ $(ioreg -l | grep -e 'Parallels' | wc -l) -ne 0 ]]; then
+      echo "Using Parallels virtualization."
+      echo "##vso[task.setvariable variable=VM_VENDOR]Parallels"
+    fi
+
+  displayName: 'Set VM Vendor'
+
+# Use a cmdlet to check if the space available in the devices root system is larger than 50 gb. If there is not
+# enough space available it:
+# 1. Set the status of the build to error. It is not a failure since no tests have been ran.
+# 2. Set a comment stating the same as what was sent to the status.
+# 3. Cancel the pipeline and do not execute any of the following steps.
+- pwsh: |
+    Import-Module $Env:SYSTEM_DEFAULTWORKINGDIRECTORY\$Env:BUILD_REPOSITORY_TITLE\tools\devops\automation\scripts\MaciosCI.psd1
+    Assert-HDFreeSpace -Size 5
+  env:
+    CONTEXT: ${{ parameters.statusContext }}
+    GITHUB_TOKEN: $(GitHub.Token)
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+  displayName: 'Check HD Free Space'
+  timeoutInMinutes: 5
+
+- task: xamops.azdevex.provisionator-task.provisionator@2
+  displayName: 'Provision Brew components'
+  inputs:
+    provisioning_script: $(Build.SourcesDirectory)/$(BUILD_REPOSITORY_TITLE)/tools/devops/provision-brew-packages.csx
+    provisioning_extra_args: '-vvvv'
+    github_token: $(Github.Token)
+  timeoutInMinutes: 30
+  enabled: false
+
+- bash: |
+    sudo rm -Rf $(Build.SourcesDirectory)/package
+    sudo rm -Rf $(Build.SourcesDirectory)/artifacts
+  displayName: "Remove artifacts"
+  condition: always()
+
+# Executed ONLY if we want to clear the provisionator cache.
+- bash: rm -rf "$TOOLS_DIR/provisionator"
+  env:
+    TOOLS_DIR: $(Agent.ToolsDirectory)
+  displayName: 'Remove Provisionator Tool Cache'
+  condition: ${{ parameters.clearProvisionatorCache }}
+
+# Go get the tests!, this depends on how the test was triggered
+- ${{ if or(contains(variables['Build.Reason'], 'ResourceTrigger'), contains(variables['Build.Reason'], 'BuildCompletion'), contains(variables['Build.DefinitionName'], 'xamarin-macios-ci-tests'), contains(variables['Build.DefinitionName'], 'xamarin-macios-pr-tests')) }}:
+  - download: macios
+    displayName: Download Mac tests
+    artifact: 'mac-test-package'
+
+  # the default location when downloading is $(Pipeline.Workspace)/<pipeline resource identifier>/<artifact name>
+  - pwsh: |
+      $source = "$(Pipeline.Workspace)/macios/mac-test-package"
+      $destination = "$(Build.SourcesDirectory)/artifacts/tmp/mac-test-package"
+      New-Item -ItemType Directory -Force -Path $destination 
+      Write-Host "Moving content from $source to $destination"
+      # move all the files from the source to the destination
+      Get-ChildItem -Path $source -Recurse -File | Move-Item -Destination $destination 
+    displayName: Move artifacts to the expected location
+
+- ${{ else }}:
+  - task: DownloadPipelineArtifact@2
+    displayName: Download Mac tests
+    inputs:
+      artifact: 'mac-test-package'
+      allowFailedBuilds: true
+      path: $(Build.SourcesDirectory)/artifacts/tmp
+
+- bash: |
+    set -ex
+    ls -Rla@ $(Build.SourcesDirectory)/artifacts/tmp
+    xattr -s -c -r $(Build.SourcesDirectory)/artifacts/tmp/${{ parameters.uploadPrefix }}mac-test-package/mac-test-package.7z
+    7z x $(Build.SourcesDirectory)/artifacts/tmp/${{ parameters.uploadPrefix }}mac-test-package/mac-test-package.7z -o$(Build.SourcesDirectory)/artifacts/ -bb1
+    # no prefix! we did expand to the exact name we are using
+    xattr -s -c -r $(Build.SourcesDirectory)/artifacts/mac-test-package
+    ls -Rla@ $(Build.SourcesDirectory)/artifacts/mac-test-package
+  displayName: Expand tests.
+
+- bash: |
+    ls -Rla $(Build.SourcesDirectory)/artifacts
+    # no prefix, we do know the path!
+    $(Build.SourcesDirectory)/artifacts/mac-test-package/test-dependencies.sh
+  displayName: Install dependencies.
+  timeoutInMinutes: 60
+
+- task: UseDotNet@2
+  inputs:
+    version: 8.x
+
+- pwsh: >-
+    $(System.DefaultWorkingDirectory)/$(BUILD_REPOSITORY_TITLE)/tools/devops/automation/scripts/run_mac_tests.ps1
+    -GithubToken $(GitHub.Token)
+    -RepositoryUri "$(Build.Repository.Uri)"
+    -SourcesDirectory "$(Build.SourcesDirectory)"
+    -GithubFailureCommentFile "$Env:GITHUB_FAILURE_COMMENT_FILE"
+    -StatusContext "${{ parameters.statusContext }}"
+  displayName: 'Run tests'
+  timeoutInMinutes: 90
+  ${{ if not(parameters.isPR) }}:
+    retryCountOnTaskFailure: ${{ parameters.retryCount }}
+  env:
+    CONTEXT: ${{ parameters.statusContext }}
+    GITHUB_TOKEN: $(GitHub.Token)
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+    MONO_DEBUG: no-gdb-backtrace
+    TEST_BOT: $(Agent.Name)
+
+- bash: $(System.DefaultWorkingDirectory)/$(BUILD_REPOSITORY_TITLE)/tools/devops/automation/scripts/bash/collect-and-upload-crash-reports.sh
+  displayName: 'Collect and upload crash reports'
+  condition: always() # who knows when crash reports can end up being useful
+  continueOnError: true
+  env:
+    MACIOS_UPLOAD_PREFIX: ${{ parameters.uploadPrefix }}
+
+# Make sure to report any errors
+- pwsh: |
+    Import-Module $Env:SYSTEM_DEFAULTWORKINGDIRECTORY\$Env:BUILD_REPOSITORY_TITLE\tools\devops\automation\scripts\MaciosCI.psd1
+    $githubComments = New-GitHubCommentsObjectFromUrl -Url "$(Build.Repository.Uri)" -Token $(GitHub.Token) -Hash $Env:COMMENT_HASH
+
+    if (Test-Path -Path "$Env:GITHUB_FAILURE_COMMENT_FILE" -PathType Leaf)  {
+      $githubComments.NewCommentFromFile("Tests on macOS ${{ parameters.statusContext }} failed", ":x:", "$Env:GITHUB_FAILURE_COMMENT_FILE", "macOS ${{ parameters.statusContext }}")
+    } else {
+      $message = ":white_check_mark: **All** tests on macOS ${{ parameters.statusContext }} passed."
+      $githubComments.NewCommentFromMessage("Tests on macOS ${{ parameters.statusContext }} passed", ":computer:", $message, "macOS ${{ parameters.statusContext }}")
+    }
+  displayName: 'Report results to GitHub'
+  timeoutInMinutes: 5
+  condition: always() # in particular we care if something failed, but let's always run just in case
+  continueOnError: true
+  env:
+    CONTEXT: ${{ parameters.statusContext }}
+    GITHUB_TOKEN: $(GitHub.Token)
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+    TEST_BOT: $(Agent.Name)
+    ${{ if eq(parameters.repositoryAlias, 'self') }}:
+      COMMENT_HASH: $(fix_commit.GIT_HASH)
+    ${{ else }}:
+      COMMENT_HASH: $(Build.SourceVersion)

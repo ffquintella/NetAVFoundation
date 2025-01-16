@@ -1,0 +1,83 @@
+parameters:
+# name of the pool that contains the iOS devices
+- name: macPool
+  type: string
+
+- name: useImage
+  type: boolean
+  default: false
+
+- name: stageName
+  type: string
+
+- name: displayName
+  type: string
+
+- name: statusContext
+  type: string
+  default: '10.16'
+
+- name: keyringPass
+  type: string
+
+- name: demands
+  type: object
+  default: []
+
+- name: isPR
+  type: boolean
+
+- name: repositoryAlias
+  type: string
+  default: self
+
+- name: commit
+  type: string
+  default: HEAD
+
+- name: postPipeline
+  type: boolean
+  default: false
+
+- name: stageDisplayNamePrefix
+  type: string
+  default: ''
+
+
+stages:
+
+- stage: ${{ parameters.stageName }}
+  displayName: ${{ parameters.displayName }}
+  dependsOn:
+  - ${{ if eq(parameters.postPipeline, false) }}:
+    - build_macos_tests
+  - configure_build
+  condition: and(succeeded(), eq(stageDependencies.configure_build.outputs['configure.decisions.RUN_MAC_TESTS'], 'true'))
+  variables:
+    GITHUB_FAILURE_COMMENT_FILE: $(System.DefaultWorkingDirectory)/github-comment-file.md
+
+  jobs:
+  - job: run_tests
+    displayName: 'macOS tests'
+    timeoutInMinutes: 120
+    workspace:
+      clean: all
+
+    pool:
+      ${{ if eq(parameters.useImage, false) }}:
+        name: ${{ parameters.macPool }}
+        demands: ${{ parameters.demands }}
+      ${{ else }}:
+        vmImage: ${{ parameters.macPool }}
+
+    variables:
+      PR_ID: $[ stageDependencies.configure_build.configure.outputs['labels.pr_number'] ]
+
+    steps:
+    - template: build.yml
+      parameters:
+        isPR: ${{ parameters.isPR }}
+        repositoryAlias: ${{ parameters.repositoryAlias }}
+        commit: ${{ parameters.commit }}
+        statusContext: ${{ parameters.statusContext }}
+        keyringPass: ${{ parameters.keyringPass }} 

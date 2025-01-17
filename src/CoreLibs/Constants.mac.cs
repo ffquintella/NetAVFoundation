@@ -44,6 +44,14 @@ namespace ObjCRuntime {
 		public const string CFNetworkLibrary = "/System/Library/Frameworks/CFNetwork.framework/CFNetwork";
 		public const string AppKitLibrary = "/System/Library/Frameworks/AppKit.framework/AppKit";
 		
+		public const string CoreGraphicsLibrary = "/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics";
+		public const string AccessibilityLibrary = "/System/Library/Frameworks/MediaAccessibility.framework/MediaAccessibility";
+		public const string CoreTextLibrary = "/System/Library/Frameworks/CoreText.framework/CoreText";
+		
+
+		
+		
+		
 		
 		
 #if !XAMCORE_5_0

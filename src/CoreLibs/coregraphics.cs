@@ -10,8 +10,8 @@ using ObjCRuntime;
 
 namespace CoreGraphics {
 
-	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
-	enum CGToneMapping : uint {
+	//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+	public enum CGToneMapping : uint {
 		Default = 0,
 		ImageSpecificLumaScaling,
 		ReferenceWhiteBased,
@@ -22,72 +22,72 @@ namespace CoreGraphics {
 
 	/// <summary>Specifies various boxes for the <see cref="M:CoreGraphics.CGContextPDF.BeginPage(CoreGraphics.CGPDFPageInfo)" /> method.</summary>
 	[Partial]
-	interface CGPDFPageInfo {
+	public partial class CGPDFPageInfo {
 
 		[Internal]
 		[Field ("kCGPDFContextMediaBox")]
-		IntPtr kCGPDFContextMediaBox { get; }
+		public extern IntPtr kCGPDFContextMediaBox { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextCropBox")]
-		IntPtr kCGPDFContextCropBox { get; }
+		public extern IntPtr kCGPDFContextCropBox { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextBleedBox")]
-		IntPtr kCGPDFContextBleedBox { get; }
+		public extern IntPtr kCGPDFContextBleedBox { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextTrimBox")]
-		IntPtr kCGPDFContextTrimBox { get; }
+		public extern IntPtr kCGPDFContextTrimBox { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextArtBox")]
-		IntPtr kCGPDFContextArtBox { get; }
+		public extern IntPtr kCGPDFContextArtBox { get; }
 	}
 
 	/// <summary>Auxiliary parameters for constructing a <see cref="T:CoreGraphics.CGContextPDF" />.</summary>
 	[Partial]
-	interface CGPDFInfo {
+	public partial class CGPDFInfo {
 
 		[Internal]
 		[Field ("kCGPDFContextTitle")]
-		IntPtr kCGPDFContextTitle { get; }
+		public extern IntPtr kCGPDFContextTitle { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextAuthor")]
-		IntPtr kCGPDFContextAuthor { get; }
+		public extern IntPtr kCGPDFContextAuthor { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextSubject")]
-		IntPtr kCGPDFContextSubject { get; }
+		public extern IntPtr kCGPDFContextSubject { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextKeywords")]
-		IntPtr kCGPDFContextKeywords { get; }
+		public extern IntPtr kCGPDFContextKeywords { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextCreator")]
-		IntPtr kCGPDFContextCreator { get; }
+		public extern IntPtr kCGPDFContextCreator { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextOwnerPassword")]
-		IntPtr kCGPDFContextOwnerPassword { get; }
+		public extern IntPtr kCGPDFContextOwnerPassword { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextUserPassword")]
-		IntPtr kCGPDFContextUserPassword { get; }
+		public extern IntPtr kCGPDFContextUserPassword { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextEncryptionKeyLength")]
-		IntPtr kCGPDFContextEncryptionKeyLength { get; }
+		public extern IntPtr kCGPDFContextEncryptionKeyLength { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextAllowsPrinting")]
-		IntPtr kCGPDFContextAllowsPrinting { get; }
+		public extern IntPtr kCGPDFContextAllowsPrinting { get; }
 
 		[Internal]
 		[Field ("kCGPDFContextAllowsCopying")]
-		IntPtr kCGPDFContextAllowsCopying { get; }
+		public extern IntPtr kCGPDFContextAllowsCopying { get; }
 
 #if false
 		kCGPDFContextOutputIntent;
@@ -103,115 +103,115 @@ namespace CoreGraphics {
 		[MacCatalyst (13, 1)]
 		[Internal]
 		[Field ("kCGPDFContextAccessPermissions")]
-		IntPtr kCGPDFContextAccessPermissions { get; }
+		public extern IntPtr kCGPDFContextAccessPermissions { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Internal]
 		[Field ("kCGPDFContextCreateLinearizedPDF")]
-		IntPtr kCGPDFContextCreateLinearizedPDF { get; }
+		public extern IntPtr kCGPDFContextCreateLinearizedPDF { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Internal]
 		[Field ("kCGPDFContextCreatePDFA")]
-		IntPtr kCGPDFContextCreatePDFA { get; }
+		public extern IntPtr kCGPDFContextCreatePDFA { get; }
 	}
 
 	/// <summary>Provides string constants whose values are known color spaces.</summary>
 	[Static]
 	[MacCatalyst (13, 1)]
-	interface CGColorSpaceNames {
+	public static class CGColorSpaceNames {
 		[Field ("kCGColorSpaceGenericGray")]
-		NSString GenericGray { get; }
+		public static extern NSString GenericGray { get; }
 
 		[Field ("kCGColorSpaceGenericRGB")]
-		NSString GenericRgb { get; }
+		public static extern NSString GenericRgb { get; }
 
 		[Field ("kCGColorSpaceGenericCMYK")]
-		NSString GenericCmyk { get; }
+		public static extern NSString GenericCmyk { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceDisplayP3")]
-		NSString DisplayP3 { get; }
+		public static extern NSString DisplayP3 { get; }
 
 		[Field ("kCGColorSpaceGenericRGBLinear")]
-		NSString GenericRgbLinear { get; }
+		public static extern NSString GenericRgbLinear { get; }
 
 		[Field ("kCGColorSpaceAdobeRGB1998")]
-		NSString AdobeRgb1998 { get; }
+		public static extern NSString AdobeRgb1998 { get; }
 
 		[Field ("kCGColorSpaceSRGB")]
-		NSString Srgb { get; }
+		public static extern NSString Srgb { get; }
 
 		[Field ("kCGColorSpaceGenericGrayGamma2_2")]
-		NSString GenericGrayGamma2_2 { get; }
+		public static extern NSString GenericGrayGamma2_2 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceGenericXYZ")]
-		NSString GenericXyz { get; }
+		public static extern NSString GenericXyz { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceACESCGLinear")]
-		NSString AcesCGLinear { get; }
+		public static extern NSString AcesCGLinear { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceITUR_709")]
-		NSString ItuR_709 { get; }
+		public static extern NSString ItuR_709 { get; }
 
-		[Mac (12, 1), iOS (15, 2), TV (15, 2), Watch (8, 3)]
+		//[Mac (12, 1), iOS (15, 2), TV (15, 2), Watch (8, 3)]
 		[MacCatalyst (15, 2)]
 		[Field ("kCGColorSpaceITUR_709_PQ")]
-		NSString ItuR_709_PQ { get; }
+		public static extern NSString ItuR_709_PQ { get; }
 
-		[Mac (13, 0), iOS (16, 0), TV (16, 0), MacCatalyst (16, 0), Watch (9, 0)]
+		//[Mac (13, 0), iOS (16, 0), TV (16, 0), MacCatalyst (16, 0), Watch (9, 0)]
 		[Field ("kCGColorSpaceITUR_709_HLG")]
-		NSString ItuR_709_Hlg { get; }
+		public static extern NSString ItuR_709_Hlg { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceITUR_2020")]
-		NSString ItuR_2020 { get; }
+		public static extern NSString ItuR_2020 { get; }
 
-		[Mac (12, 1), iOS (15, 2), TV (15, 2), Watch (8, 3)]
+		//[Mac (12, 1), iOS (15, 2), TV (15, 2), Watch (8, 3)]
 		[MacCatalyst (15, 2)]
 		[Field ("kCGColorSpaceITUR_2020_sRGBGamma")]
-		NSString ItuR_2020_sRgbGamma { get; }
+		public static extern NSString ItuR_2020_sRgbGamma { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceROMMRGB")]
-		NSString RommRgb { get; }
+		public static extern NSString RommRgb { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceDCIP3")]
-		NSString Dcip3 { get; }
+		public static extern NSString Dcip3 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceExtendedSRGB")]
-		NSString ExtendedSrgb { get; }
+		public static extern NSString ExtendedSrgb { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceLinearSRGB")]
-		NSString LinearSrgb { get; }
+		public static extern NSString LinearSrgb { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceExtendedLinearSRGB")]
-		NSString ExtendedLinearSrgb { get; }
+		public static extern NSString ExtendedLinearSrgb { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceExtendedGray")]
-		NSString ExtendedGray { get; }
+		public static extern NSString ExtendedGray { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceLinearGray")]
-		NSString LinearGray { get; }
+		public static extern NSString LinearGray { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceExtendedLinearGray")]
-		NSString ExtendedLinearGray { get; }
+		public static extern NSString ExtendedLinearGray { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -219,7 +219,7 @@ namespace CoreGraphics {
 		[NoTV]
 		[Obsolete ("Now accessible as GenericCmyk.")]
 		[Field ("kCGColorSpaceGenericCMYK")]
-		NSString GenericCMYK { get; }
+		public static extern NSString GenericCMYK { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -227,7 +227,7 @@ namespace CoreGraphics {
 		[NoTV]
 		[Obsolete ("Now accessible as AdobeRgb1998.")]
 		[Field ("kCGColorSpaceAdobeRGB1998")]
-		NSString AdobeRGB1998 { get; }
+		public static extern NSString AdobeRGB1998 { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -235,7 +235,7 @@ namespace CoreGraphics {
 		[NoTV]
 		[Obsolete ("Now accessible as Srgb.")]
 		[Field ("kCGColorSpaceSRGB")]
-		NSString SRGB { get; }
+		public static extern NSString SRGB { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -243,7 +243,7 @@ namespace CoreGraphics {
 		[NoTV]
 		[Obsolete ("Now accessible as GenericRgb.")]
 		[Field ("kCGColorSpaceGenericRGB")]
-		NSString GenericRGB { get; }
+		public static extern NSString GenericRGB { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -251,35 +251,35 @@ namespace CoreGraphics {
 		[NoTV]
 		[Obsolete ("Now accessible as GenericRgb.")]
 		[Field ("kCGColorSpaceGenericRGBLinear")]
-		NSString GenericRGBLinear { get; }
+		public static extern NSString GenericRGBLinear { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceGenericLab")]
-		NSString GenericLab { get; }
+		public static extern NSString GenericLab { get; }
 
-		[iOS (12, 3)]
+		//[iOS (12, 3)]
 		[TV (12, 3)]
 		[Watch (5, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceExtendedLinearITUR_2020")]
-		NSString ExtendedLinearItur_2020 { get; }
+		public static extern NSString ExtendedLinearItur_2020 { get; }
 
-		[iOS (14, 1), TV (14, 2), Watch (7, 1)]
+		//[iOS (14, 1), TV (14, 2), Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGColorSpaceExtendedITUR_2020")]
-		NSString ExtendedItur_2020 { get; }
+		public static extern NSString ExtendedItur_2020 { get; }
 
-		[iOS (12, 3)]
+		//[iOS (12, 3)]
 		[TV (12, 3)]
 		[Watch (5, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceExtendedLinearDisplayP3")]
-		NSString ExtendedLinearDisplayP3 { get; }
+		public static extern NSString ExtendedLinearDisplayP3 { get; }
 
-		[iOS (14, 1), TV (14, 2), Watch (7, 1)]
+		//[iOS (14, 1), TV (14, 2), Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGColorSpaceExtendedDisplayP3")]
-		NSString ExtendedDisplayP3 { get; }
+		public static extern NSString ExtendedDisplayP3 { get; }
 
 		[Watch (5, 0)]
 		[Deprecated (PlatformName.MacOSX, 10, 15, 4, message: "Use 'Itur_2100_PQ' instead.")]
@@ -289,9 +289,9 @@ namespace CoreGraphics {
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'Itur_2100_PQ' instead.")]
 		[Field ("kCGColorSpaceITUR_2020_PQ_EOTF")]
-		NSString Itur_2020_PQ_Eotf { get; }
+		public static extern NSString Itur_2020_PQ_Eotf { get; }
 
-		[iOS (13, 4), TV (13, 4), Watch (6, 2)]
+		//[iOS (13, 4), TV (13, 4), Watch (6, 2)]
 		[Deprecated (PlatformName.MacOSX, 11, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[Deprecated (PlatformName.iOS, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[Deprecated (PlatformName.TvOS, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
@@ -299,9 +299,9 @@ namespace CoreGraphics {
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[Field ("kCGColorSpaceITUR_2020_PQ")]
-		NSString Itur_2020_PQ { get; }
+		public static extern NSString Itur_2020_PQ { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[Deprecated (PlatformName.MacOSX, 10, 15, 4)]
@@ -311,21 +311,21 @@ namespace CoreGraphics {
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Field ("kCGColorSpaceDisplayP3_PQ_EOTF")]
-		NSString DisplayP3_PQ_Eotf { get; }
+		public static extern NSString DisplayP3_PQ_Eotf { get; }
 
-		[iOS (13, 4), TV (13, 4), Watch (6, 2)]
+		//[iOS (13, 4), TV (13, 4), Watch (6, 2)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceDisplayP3_PQ")]
-		NSString DisplayP3_PQ { get; }
+		public static extern NSString DisplayP3_PQ { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGColorSpaceDisplayP3_HLG")]
-		NSString DisplayP3_Hlg { get; }
+		public static extern NSString DisplayP3_Hlg { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[Deprecated (PlatformName.MacOSX, 11, 0, message: "Use 'Itur_2100_PQ' instead.")]
@@ -335,55 +335,55 @@ namespace CoreGraphics {
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[Field ("kCGColorSpaceITUR_2020_HLG")]
-		NSString Itur_2020_Hlg { get; }
+		public static extern NSString Itur_2020_Hlg { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGColorSpaceITUR_2100_HLG")]
-		NSString Itur_2100_Hlg { get; }
+		public static extern NSString Itur_2100_Hlg { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGColorSpaceITUR_2100_PQ")]
-		NSString Itur_2100_PQ { get; }
+		public static extern NSString Itur_2100_PQ { get; }
 
-		[iOS (15, 0), TV (15, 0), Watch (8, 0), MacCatalyst (15, 0)]
+		//[iOS (15, 0), TV (15, 0), Watch (8, 0), MacCatalyst (15, 0)]
 		[Field ("kCGColorSpaceExtendedRange")]
-		NSString ExtendedRange { get; }
+		public static extern NSString ExtendedRange { get; }
 
-		[iOS (15, 0), TV (15, 0), Watch (8, 0), MacCatalyst (15, 0)]
+		//[iOS (15, 0), TV (15, 0), Watch (8, 0), MacCatalyst (15, 0)]
 		[Field ("kCGColorSpaceLinearDisplayP3")]
-		NSString LinearDisplayP3 { get; }
+		public static extern NSString LinearDisplayP3 { get; }
 
-		[iOS (15, 0), TV (15, 0), Watch (8, 0), MacCatalyst (15, 0)]
+		//[iOS (15, 0), TV (15, 0), Watch (8, 0), MacCatalyst (15, 0)]
 		[Field ("kCGColorSpaceLinearITUR_2020")]
-		NSString LinearItur_2020 { get; }
+		public static extern NSString LinearItur_2020 { get; }
 
-		[Mac (15, 0), iOS (18, 0), TV (18, 0), Watch (11, 0), MacCatalyst (18, 0)]
+		//[Mac (15, 0), iOS (18, 0), TV (18, 0), Watch (11, 0), MacCatalyst (18, 0)]
 		[Field ("kCGColorSpaceCoreMedia709")]
-		NSString CoreMedia709 { get; }
+		public static extern NSString CoreMedia709 { get; }
 	}
 
 	[Partial]
-	partial interface CGColorConversionInfo {
+	partial class CGColorConversionInfo {
 
 		[Internal]
 		[Field ("kCGColorConversionBlackPointCompensation")]
-		NSString BlackPointCompensationKey { get; }
+		public extern NSString BlackPointCompensationKey { get; }
 
 		[Internal]
 		[Field ("kCGColorConversionTRCSize")]
 		[MacCatalyst (13, 1)]
-		NSString TrcSizeKey { get; }
+		extern NSString TrcSizeKey { get; }
 	}
 
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CGColorConversionInfo")]
-	interface CGColorConversionOptions {
+	//[StrongDictionary ("CGColorConversionInfo")]
+	public class CGColorConversionOptions: DictionaryContainer {
 		bool BlackPointCompensation { get; set; }
 		CGSize TrcSize { get; set; }
 	}
@@ -414,15 +414,20 @@ namespace CoreGraphics {
 	}
 
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CGPDFOutlineKeys")]
-	interface CGPDFOutlineOptions {
-		string OutlineTitle { get; set; }
-		NSDictionary [] OutlineChildren { get; set; }
-		NSObject OutlineDestination { get; set; }
-		CGRect DestinationRect { get; set; }
+	//[StrongDictionary ("CGPDFOutlineKeys")]
+	public class CGPDFOutlineOptions: DictionaryContainer {
+		
+		public CGPDFOutlineOptions(IntPtr handle): base(handle) { }
+		
+		public CGPDFOutlineOptions(NSObject obj): base(obj.Handle) { }
+		
+		public string OutlineTitle { get; set; }
+		public NSDictionary [] OutlineChildren { get; set; }
+		public NSObject OutlineDestination { get; set; }
+		public CGRect DestinationRect { get; set; }
 	}
 
-	[iOS (13, 0)]
+	//[iOS (13, 0)]
 	[TV (13, 0)]
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
@@ -442,25 +447,25 @@ namespace CoreGraphics {
 		NSString LanguageTextKey { get; }
 	}
 
-	[iOS (13, 0)]
+	//[iOS (13, 0)]
 	[TV (13, 0)]
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CGPdfTagPropertyKeys")]
-	interface CGPdfTagProperties {
+	//[StrongDictionary ("CGPdfTagPropertyKeys")]
+	public class CGPdfTagProperties : DictionaryContainer {
 		// <quote>The following CGPDFTagProperty keys are to be paired with CFStringRef values</quote>
-		string ActualText { get; set; }
-		string AlternativeText { get; set; }
-		string TitleText { get; set; }
-		string LanguageText { get; set; }
+		public string ActualText { get; set; }
+		public string AlternativeText { get; set; }
+		public string TitleText { get; set; }
+		public string LanguageText { get; set; }
 	}
 
 	// macOS 10.5
-	[iOS (14, 0)]
+	//[iOS (14, 0)]
 	[TV (14, 0)]
 	[Watch (7, 0)]
 	[MacCatalyst (14, 0)]
-	enum CGConstantColor {
+	public enum CGConstantColor {
 		[Field ("kCGColorWhite")]
 		White,
 		[Field ("kCGColorBlack")]
@@ -517,8 +522,12 @@ namespace CoreGraphics {
 
 #if NET
 	[NoiOS, NoTV, NoWatch, MacCatalyst (13, 1)]
-	[StrongDictionary ("CGSessionKeys")]
-	interface CGSessionProperties {
+	//[StrongDictionary ("CGSessionKeys")]
+	public class  CGSessionProperties: DictionaryContainer
+	{
+
+		public CGSessionProperties(NSObject obj) : base(obj.Handle ){}
+		
 		uint UserId { get; }
 		string UserName { get; }
 		uint ConsoleSet { get; }
@@ -527,7 +536,7 @@ namespace CoreGraphics {
 	}
 #endif
 
-	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+	//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	[Partial]
 	partial interface CGToneMappingOptionKeys {
 		[Internal]
@@ -559,23 +568,23 @@ namespace CoreGraphics {
 		NSString ExrToneMappingGammaKneeHighKey { get; }
 	}
 
-	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
-	[StrongDictionary ("CGToneMappingOptionKeys")]
-	interface CGToneMappingOptions {
-		bool Use100nitsHlgOotf { get; set; }
-		bool UseBT1886ForCoreVideoGamma { get; set; }
-		bool SkipBoostToHdr { get; set; }
-		float ExrToneMappingGammaDefog { get; set; }
-		float ExrToneMappingGammaExposure { get; set; }
-		float ExrToneMappingGammaKneeLow { get; set; }
-		float ExrToneMappingGammaKneeHigh { get; set; }
+	//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+	//[StrongDictionary ("CGToneMappingOptionKeys")]
+	public class CGToneMappingOptions : DictionaryContainer {
+		public bool Use100nitsHlgOotf { get; set; }
+		public bool UseBT1886ForCoreVideoGamma { get; set; }
+		public bool SkipBoostToHdr { get; set; }
+		public float ExrToneMappingGammaDefog { get; set; }
+		public float ExrToneMappingGammaExposure { get; set; }
+		public float ExrToneMappingGammaKneeLow { get; set; }
+		public float ExrToneMappingGammaKneeHigh { get; set; }
 	}
 
-	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+	//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	[Partial]
 	[Internal]
-	interface CoreGraphicsFields {
+	public class CoreGraphicsFields {
 		[Field ("kCGDefaultHDRImageContentHeadroom")]
-		float DefaultHdrImageContentHeadroom { get; }
+		public extern static float DefaultHdrImageContentHeadroom { get; }
 	}
 }

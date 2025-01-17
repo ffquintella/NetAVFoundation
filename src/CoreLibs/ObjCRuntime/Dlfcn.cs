@@ -62,6 +62,10 @@ namespace ObjCRuntime {
 			static public readonly IntPtr Handle = Dlfcn._dlopen (Constants.CoreFoundationLibrary, 0);
 		}
 		
+		static public class CoreGraphics {
+			static public readonly IntPtr Handle = Dlfcn._dlopen (Constants.CoreGraphicsLibrary, 0);
+		}
+		
 		static public class libdispatch {
 			static public readonly IntPtr Handle = Dlfcn._dlopen (Constants.libdispatchLibrary, 0);
 		}

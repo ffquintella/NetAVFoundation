@@ -109,6 +109,9 @@ namespace Foundation {
 	
 	public partial class NSMutableDictionary : NSDictionary, IDictionary, IDictionary<NSObject, NSObject> {
 
+		
+		public NSMutableDictionary (NativeHandle handle) : base(handle){}
+		
 		static readonly IntPtr class_ptr = Class.GetHandle (typeof(NSMutableDictionary));
 		
 		// some API, like SecItemCopyMatching, returns a retained NSMutableDictionary

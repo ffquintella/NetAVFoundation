@@ -440,4 +440,23 @@ namespace CoreGraphics {
 
 #endif // !COREBUILD
 	}
+	
+	static public class CGColorExtensions {
+		public static NSString  GetConstant (this CGConstantColor  self)
+		{
+			switch (self)
+			{
+				case CGConstantColor.Black:
+					return new NSString("kCGColorBlack");
+					break;
+				case CGConstantColor.White:
+					return new NSString("kCGColorWhite");
+					break;
+				default:
+					return new NSString("kCGColorClear");
+					break;
+			}
+		}
+	}
+	
 }

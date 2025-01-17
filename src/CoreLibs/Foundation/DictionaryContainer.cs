@@ -65,6 +65,12 @@ namespace Foundation {
 		{
 			Dictionary = new NSMutableDictionary ();
 		}
+		
+		protected DictionaryContainer (IntPtr handle)
+		{
+			Dictionary = new NSMutableDictionary (handle);
+		}
+
 
 		protected DictionaryContainer (NSDictionary? dictionary)
 		{

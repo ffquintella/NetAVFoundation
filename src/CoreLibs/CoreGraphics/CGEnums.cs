@@ -116,7 +116,7 @@ namespace CoreGraphics {
 		PlusLighter,
 	}
 
-	[iOS (13, 0)]
+	//[iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	public enum CGPdfTagType /* int32_t */ {
 		Document = 100,
@@ -168,7 +168,7 @@ namespace CoreGraphics {
 		Figure = 700,
 		Formula,
 		Form,
-		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		Object = 800,
 	}
 

@@ -37,2448 +37,2448 @@ namespace ImageIO {
 	/// <summary>Known properties of various metadata prefixes. Most often used with <see cref="M:ImageIO.CGImageMetadata.CopyTagMatchingImageProperty(Foundation.NSString,Foundation.NSString)" />.</summary>
 	[Static]
 	// Bad name should end with Keys
-	interface CGImageProperties {
+	public static class CGImageProperties {
 		// Format-Specific Dictionaries
 		[Field ("kCGImagePropertyTIFFDictionary")]
-		NSString TIFFDictionary { get; }
+		public static extern NSString TIFFDictionary { get; }
 		[Field ("kCGImagePropertyGIFDictionary")]
-		NSString GIFDictionary { get; }
+		public static extern NSString GIFDictionary { get; }
 		[Field ("kCGImagePropertyJFIFDictionary")]
-		NSString JFIFDictionary { get; }
+		public static extern NSString JFIFDictionary { get; }
 		[Field ("kCGImagePropertyExifDictionary")]
-		NSString ExifDictionary { get; }
+		public static extern NSString ExifDictionary { get; }
 		[Field ("kCGImagePropertyPNGDictionary")]
-		NSString PNGDictionary { get; }
+		public static extern NSString PNGDictionary { get; }
 		[Field ("kCGImagePropertyIPTCDictionary")]
-		NSString IPTCDictionary { get; }
+		public static extern NSString IPTCDictionary { get; }
 		[Field ("kCGImagePropertyGPSDictionary")]
-		NSString GPSDictionary { get; }
+		public static extern NSString GPSDictionary { get; }
 		[Field ("kCGImagePropertyRawDictionary")]
-		NSString RawDictionary { get; }
+		public static extern NSString RawDictionary { get; }
 		[Field ("kCGImagePropertyCIFFDictionary")]
-		NSString CIFFDictionary { get; }
+		public static extern NSString CIFFDictionary { get; }
 		[Field ("kCGImageProperty8BIMDictionary")]
-		NSString EightBIMDictionary { get; }
+		public static extern NSString EightBIMDictionary { get; }
 		[Field ("kCGImagePropertyDNGDictionary")]
-		NSString DNGDictionary { get; }
+		public static extern NSString DNGDictionary { get; }
 		[Field ("kCGImagePropertyExifAuxDictionary")]
-		NSString ExifAuxDictionary { get; }
+		public static extern NSString ExifAuxDictionary { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSDictionary")]
-		NSString HeicsDictionary { get; }
+		public static extern NSString HeicsDictionary { get; }
 
-		[iOS (14, 0), TV (14, 0), Watch (7, 0)]
+		//[iOS (14, 0), TV (14, 0), Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPDictionary")]
-		NSString WebPDictionary { get; }
+		public static extern NSString WebPDictionary { get; }
 
-		[iOS (14, 1), TV (14, 2), Watch (7, 1)]
+		//[iOS (14, 1), TV (14, 2), Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGImagePropertyTGADictionary")]
-		NSString TgaDictionary { get; }
+		public static extern NSString TgaDictionary { get; }
 
-		[Mac (14, 0), iOS (17, 0), TV (17, 0), Watch (10, 0), MacCatalyst (17, 0)]
+		//[Mac (14, 0), iOS (17, 0), TV (17, 0), Watch (10, 0), MacCatalyst (17, 0)]
 		[Field ("kCGImagePropertyAVISDictionary")]
-		NSString AvisDictionary { get; }
+		public static extern NSString AvisDictionary { get; }
 
 		// Camera-Maker Dictionaries
 		[Field ("kCGImagePropertyMakerCanonDictionary")]
-		NSString MakerCanonDictionary { get; }
+		public static extern NSString MakerCanonDictionary { get; }
 		[Field ("kCGImagePropertyMakerNikonDictionary")]
-		NSString MakerNikonDictionary { get; }
+		public static extern NSString MakerNikonDictionary { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyMakerMinoltaDictionary")]
-		NSString MakerMinoltaDictionary { get; }
+		public static extern NSString MakerMinoltaDictionary { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyMakerFujiDictionary")]
-		NSString MakerFujiDictionary { get; }
+		public static extern NSString MakerFujiDictionary { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyMakerOlympusDictionary")]
-		NSString MakerOlympusDictionary { get; }
+		public static extern NSString MakerOlympusDictionary { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyMakerPentaxDictionary")]
-		NSString MakerPentaxDictionary { get; }
+		public static extern NSString MakerPentaxDictionary { get; }
 
 		// Image Source Container Properties
 		[Field ("kCGImagePropertyFileSize")]
-		NSString FileSize { get; }
+		public static extern NSString FileSize { get; }
 
 		// Individual Image Properties
 		[Field ("kCGImagePropertyDPIHeight")]
-		NSString DPIHeight { get; }
+		public static extern NSString DPIHeight { get; }
 		[Field ("kCGImagePropertyDPIWidth")]
-		NSString DPIWidth { get; }
+		public static extern NSString DPIWidth { get; }
 		[Field ("kCGImagePropertyPixelWidth")]
-		NSString PixelWidth { get; }
+		public static extern NSString PixelWidth { get; }
 		[Field ("kCGImagePropertyPixelHeight")]
-		NSString PixelHeight { get; }
+		public static extern NSString PixelHeight { get; }
 		[Field ("kCGImagePropertyDepth")]
-		NSString Depth { get; }
+		public static extern NSString Depth { get; }
 		[Field ("kCGImagePropertyOrientation")]
-		NSString Orientation { get; }
+		public static extern NSString Orientation { get; }
 		[Field ("kCGImagePropertyIsFloat")]
-		NSString IsFloat { get; }
+		public static extern NSString IsFloat { get; }
 		[Field ("kCGImagePropertyIsIndexed")]
-		NSString IsIndexed { get; }
+		public static extern NSString IsIndexed { get; }
 		[Field ("kCGImagePropertyHasAlpha")]
-		NSString HasAlpha { get; }
+		public static extern NSString HasAlpha { get; }
 		[Field ("kCGImagePropertyColorModel")]
-		NSString ColorModel { get; }
+		public static extern NSString ColorModel { get; }
 		[Field ("kCGImagePropertyProfileName")]
-		NSString ProfileName { get; }
+		public static extern NSString ProfileName { get; }
 
 		// Color Model Values
 
 		[Field ("kCGImagePropertyColorModelRGB")]
-		NSString ColorModelRGB { get; }
+		public static extern NSString ColorModelRGB { get; }
 		[Field ("kCGImagePropertyColorModelGray")]
-		NSString ColorModelGray { get; }
+		public static extern NSString ColorModelGray { get; }
 		[Field ("kCGImagePropertyColorModelCMYK")]
-		NSString ColorModelCMYK { get; }
+		public static extern NSString ColorModelCMYK { get; }
 		[Field ("kCGImagePropertyColorModelLab")]
-		NSString ColorModelLab { get; }
+		public static extern NSString ColorModelLab { get; }
 
 		// EXIF Dictionary Keys
 
 		[Field ("kCGImagePropertyExifExposureTime")]
-		NSString ExifExposureTime { get; }
+		public static extern NSString ExifExposureTime { get; }
 		[Field ("kCGImagePropertyExifFNumber")]
-		NSString ExifFNumber { get; }
+		public static extern NSString ExifFNumber { get; }
 		[Field ("kCGImagePropertyExifExposureProgram")]
-		NSString ExifExposureProgram { get; }
+		public static extern NSString ExifExposureProgram { get; }
 		[Field ("kCGImagePropertyExifSpectralSensitivity")]
-		NSString ExifSpectralSensitivity { get; }
+		public static extern NSString ExifSpectralSensitivity { get; }
 		[Field ("kCGImagePropertyExifISOSpeedRatings")]
-		NSString ExifISOSpeedRatings { get; }
+		public static extern NSString ExifISOSpeedRatings { get; }
 		[Field ("kCGImagePropertyExifOECF")]
-		NSString ExifOECF { get; }
+		public static extern NSString ExifOECF { get; }
 		[Field ("kCGImagePropertyExifVersion")]
-		NSString ExifVersion { get; }
+		public static extern NSString ExifVersion { get; }
 		[Field ("kCGImagePropertyExifDateTimeOriginal")]
-		NSString ExifDateTimeOriginal { get; }
+		public static extern NSString ExifDateTimeOriginal { get; }
 		[Field ("kCGImagePropertyExifDateTimeDigitized")]
-		NSString ExifDateTimeDigitized { get; }
+		public static extern NSString ExifDateTimeDigitized { get; }
 		[Field ("kCGImagePropertyExifComponentsConfiguration")]
-		NSString ExifComponentsConfiguration { get; }
+		public static extern NSString ExifComponentsConfiguration { get; }
 		[Field ("kCGImagePropertyExifCompressedBitsPerPixel")]
-		NSString ExifCompressedBitsPerPixel { get; }
+		public static extern NSString ExifCompressedBitsPerPixel { get; }
 		[Field ("kCGImagePropertyExifShutterSpeedValue")]
-		NSString ExifShutterSpeedValue { get; }
+		public static extern NSString ExifShutterSpeedValue { get; }
 		[Field ("kCGImagePropertyExifApertureValue")]
-		NSString ExifApertureValue { get; }
+		public static extern NSString ExifApertureValue { get; }
 		[Field ("kCGImagePropertyExifBrightnessValue")]
-		NSString ExifBrightnessValue { get; }
+		public static extern NSString ExifBrightnessValue { get; }
 		[Field ("kCGImagePropertyExifExposureBiasValue")]
-		NSString ExifExposureBiasValue { get; }
+		public static extern NSString ExifExposureBiasValue { get; }
 		[Field ("kCGImagePropertyExifMaxApertureValue")]
-		NSString ExifMaxApertureValue { get; }
+		public static extern NSString ExifMaxApertureValue { get; }
 		[Field ("kCGImagePropertyExifSubjectDistance")]
-		NSString ExifSubjectDistance { get; }
+		public static extern NSString ExifSubjectDistance { get; }
 		[Field ("kCGImagePropertyExifMeteringMode")]
-		NSString ExifMeteringMode { get; }
+		public static extern NSString ExifMeteringMode { get; }
 		[Field ("kCGImagePropertyExifLightSource")]
-		NSString ExifLightSource { get; }
+		public static extern NSString ExifLightSource { get; }
 		[Field ("kCGImagePropertyExifFlash")]
-		NSString ExifFlash { get; }
+		public static extern NSString ExifFlash { get; }
 		[Field ("kCGImagePropertyExifFocalLength")]
-		NSString ExifFocalLength { get; }
+		public static extern NSString ExifFocalLength { get; }
 		[Field ("kCGImagePropertyExifSubjectArea")]
-		NSString ExifSubjectArea { get; }
+		public static extern NSString ExifSubjectArea { get; }
 		[Field ("kCGImagePropertyExifMakerNote")]
-		NSString ExifMakerNote { get; }
+		public static extern NSString ExifMakerNote { get; }
 		[Field ("kCGImagePropertyExifUserComment")]
-		NSString ExifUserComment { get; }
+		public static extern NSString ExifUserComment { get; }
 		[Field ("kCGImagePropertyExifSubsecTime")]
-		NSString ExifSubsecTime { get; }
+		public static extern NSString ExifSubsecTime { get; }
 		[Field ("kCGImagePropertyExifSubsecTimeOrginal")]
-		NSString ExifSubsecTimeOrginal { get; }
+		public static extern NSString ExifSubsecTimeOrginal { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifSubsecTimeOriginal")]
-		NSString ExifSubsecTimeOriginal { get; }
+		public static extern NSString ExifSubsecTimeOriginal { get; }
 		[Field ("kCGImagePropertyExifSubsecTimeDigitized")]
-		NSString ExifSubsecTimeDigitized { get; }
+		public static extern NSString ExifSubsecTimeDigitized { get; }
 		[Field ("kCGImagePropertyExifFlashPixVersion")]
-		NSString ExifFlashPixVersion { get; }
+		public static extern 	NSString ExifFlashPixVersion { get; }
 		[Field ("kCGImagePropertyExifColorSpace")]
-		NSString ExifColorSpace { get; }
+		public static extern NSString ExifColorSpace { get; }
 		[Field ("kCGImagePropertyExifPixelXDimension")]
-		NSString ExifPixelXDimension { get; }
+		public static extern NSString ExifPixelXDimension { get; }
 		[Field ("kCGImagePropertyExifPixelYDimension")]
-		NSString ExifPixelYDimension { get; }
+		public static extern NSString ExifPixelYDimension { get; }
 		[Field ("kCGImagePropertyExifRelatedSoundFile")]
-		NSString ExifRelatedSoundFile { get; }
+		public static extern NSString ExifRelatedSoundFile { get; }
 		[Field ("kCGImagePropertyExifFlashEnergy")]
-		NSString ExifFlashEnergy { get; }
+		public static extern NSString ExifFlashEnergy { get; }
 		[Field ("kCGImagePropertyExifSpatialFrequencyResponse")]
-		NSString ExifSpatialFrequencyResponse { get; }
+		public static extern NSString ExifSpatialFrequencyResponse { get; }
 		[Field ("kCGImagePropertyExifFocalPlaneXResolution")]
-		NSString ExifFocalPlaneXResolution { get; }
+		public static extern NSString ExifFocalPlaneXResolution { get; }
 		[Field ("kCGImagePropertyExifFocalPlaneYResolution")]
-		NSString ExifFocalPlaneYResolution { get; }
+		public static extern NSString ExifFocalPlaneYResolution { get; }
 		[Field ("kCGImagePropertyExifFocalPlaneResolutionUnit")]
-		NSString ExifFocalPlaneResolutionUnit { get; }
+		public static extern NSString ExifFocalPlaneResolutionUnit { get; }
 		[Field ("kCGImagePropertyExifSubjectLocation")]
-		NSString ExifSubjectLocation { get; }
+		public static extern NSString ExifSubjectLocation { get; }
 		[Field ("kCGImagePropertyExifExposureIndex")]
-		NSString ExifExposureIndex { get; }
+		public static extern NSString ExifExposureIndex { get; }
 		[Field ("kCGImagePropertyExifSensingMethod")]
-		NSString ExifSensingMethod { get; }
+		public static extern NSString ExifSensingMethod { get; }
 		[Field ("kCGImagePropertyExifFileSource")]
-		NSString ExifFileSource { get; }
+		public static extern NSString ExifFileSource { get; }
 		[Field ("kCGImagePropertyExifSceneType")]
-		NSString ExifSceneType { get; }
+		public static extern NSString ExifSceneType { get; }
 		[Field ("kCGImagePropertyExifCFAPattern")]
-		NSString ExifCFAPattern { get; }
+		public static extern NSString ExifCFAPattern { get; }
 		[Field ("kCGImagePropertyExifCustomRendered")]
-		NSString ExifCustomRendered { get; }
+		public static extern NSString ExifCustomRendered { get; }
 		[Field ("kCGImagePropertyExifExposureMode")]
-		NSString ExifExposureMode { get; }
+		public static extern NSString ExifExposureMode { get; }
 		[Field ("kCGImagePropertyExifWhiteBalance")]
-		NSString ExifWhiteBalance { get; }
+		public static extern NSString ExifWhiteBalance { get; }
 		[Field ("kCGImagePropertyExifDigitalZoomRatio")]
-		NSString ExifDigitalZoomRatio { get; }
+		public static extern NSString ExifDigitalZoomRatio { get; }
 		[Field ("kCGImagePropertyExifFocalLenIn35mmFilm")]
-		NSString ExifFocalLenIn35mmFilm { get; }
+		public static extern NSString ExifFocalLenIn35mmFilm { get; }
 		[Field ("kCGImagePropertyExifSceneCaptureType")]
-		NSString ExifSceneCaptureType { get; }
+		public static extern NSString ExifSceneCaptureType { get; }
 		[Field ("kCGImagePropertyExifGainControl")]
-		NSString ExifGainControl { get; }
+		public static extern NSString ExifGainControl { get; }
 		[Field ("kCGImagePropertyExifContrast")]
-		NSString ExifContrast { get; }
+		public static extern 	NSString ExifContrast { get; }
 		[Field ("kCGImagePropertyExifSaturation")]
-		NSString ExifSaturation { get; }
+		public static extern NSString ExifSaturation { get; }
 		[Field ("kCGImagePropertyExifSharpness")]
-		NSString ExifSharpness { get; }
+		public static extern NSString ExifSharpness { get; }
 		[Field ("kCGImagePropertyExifDeviceSettingDescription")]
-		NSString ExifDeviceSettingDescription { get; }
+		public static extern NSString ExifDeviceSettingDescription { get; }
 		[Field ("kCGImagePropertyExifSubjectDistRange")]
-		NSString ExifSubjectDistRange { get; }
+		public static extern NSString ExifSubjectDistRange { get; }
 		[Field ("kCGImagePropertyExifImageUniqueID")]
-		NSString ExifImageUniqueID { get; }
+		public static extern NSString ExifImageUniqueID { get; }
 		[Field ("kCGImagePropertyExifGamma")]
-		NSString ExifGamma { get; }
+		public static extern NSString ExifGamma { get; }
 
-		[iOS (13, 1), TV (13, 1), Watch (6, 1)]
+		//[iOS (13, 1), TV (13, 1), Watch (6, 1)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifCompositeImage")]
-		NSString ExifCompositeImage { get; }
+		public static extern NSString ExifCompositeImage { get; }
 
-		[iOS (13, 1), TV (13, 1), Watch (6, 1)]
+		//[iOS (13, 1), TV (13, 1), Watch (6, 1)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifSourceImageNumberOfCompositeImage")]
-		NSString ExifSourceImageNumberOfCompositeImage { get; }
+		public static extern NSString ExifSourceImageNumberOfCompositeImage { get; }
 
-		[iOS (13, 1), TV (13, 1), Watch (6, 1)]
+		//[iOS (13, 1), TV (13, 1), Watch (6, 1)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifSourceExposureTimesOfCompositeImage")]
-		NSString ExifSourceExposureTimesOfCompositeImage { get; }
+		public static extern NSString ExifSourceExposureTimesOfCompositeImage { get; }
 
 		// misdocumented (first 4.3, then 5.0) but the constants were not present until 6.x
 
 		[Field ("kCGImagePropertyExifCameraOwnerName")]
 		[MacCatalyst (13, 1)]
-		NSString ExifCameraOwnerName { get; }
+		public static extern NSString ExifCameraOwnerName { get; }
 
 		[Field ("kCGImagePropertyExifBodySerialNumber")]
 		[MacCatalyst (13, 1)]
-		NSString ExifBodySerialNumber { get; }
+		public static extern NSString ExifBodySerialNumber { get; }
 
 		[Field ("kCGImagePropertyExifLensSpecification")]
 		[MacCatalyst (13, 1)]
-		NSString ExifLensSpecification { get; }
+		public static extern NSString ExifLensSpecification { get; }
 
 		[Field ("kCGImagePropertyExifLensMake")]
 		[MacCatalyst (13, 1)]
-		NSString ExifLensMake { get; }
+		public static extern NSString ExifLensMake { get; }
 
 		[Field ("kCGImagePropertyExifLensModel")]
 		[MacCatalyst (13, 1)]
-		NSString ExifLensModel { get; }
+		public static extern NSString ExifLensModel { get; }
 
 		[Field ("kCGImagePropertyExifLensSerialNumber")]
 		[MacCatalyst (13, 1)]
-		NSString ExifLensSerialNumber { get; }
+		public static extern NSString ExifLensSerialNumber { get; }
 
 		// EXIF Auxiliary Dictionary Keys
 
 		[Field ("kCGImagePropertyExifAuxLensInfo")]
-		NSString ExifAuxLensInfo { get; }
+		public static extern NSString ExifAuxLensInfo { get; }
 		[Field ("kCGImagePropertyExifAuxLensModel")]
-		NSString ExifAuxLensModel { get; }
+		public static extern NSString ExifAuxLensModel { get; }
 		[Field ("kCGImagePropertyExifAuxSerialNumber")]
-		NSString ExifAuxSerialNumber { get; }
+		public static extern NSString ExifAuxSerialNumber { get; }
 		[Field ("kCGImagePropertyExifAuxLensID")]
-		NSString ExifAuxLensID { get; }
+		public static extern NSString ExifAuxLensID { get; }
 		[Field ("kCGImagePropertyExifAuxLensSerialNumber")]
-		NSString ExifAuxLensSerialNumber { get; }
+		public static extern NSString ExifAuxLensSerialNumber { get; }
 		[Field ("kCGImagePropertyExifAuxImageNumber")]
-		NSString ExifAuxImageNumber { get; }
+		public static extern NSString ExifAuxImageNumber { get; }
 		[Field ("kCGImagePropertyExifAuxFlashCompensation")]
-		NSString ExifAuxFlashCompensation { get; }
+		public static extern NSString ExifAuxFlashCompensation { get; }
 		[Field ("kCGImagePropertyExifAuxOwnerName")]
-		NSString ExifAuxOwnerName { get; }
+		public static extern NSString ExifAuxOwnerName { get; }
 		[Field ("kCGImagePropertyExifAuxFirmware")]
-		NSString ExifAuxFirmware { get; }
+		public static extern NSString ExifAuxFirmware { get; }
 
 		// GIF Dictionary Keys
 
 		[Field ("kCGImagePropertyGIFLoopCount")]
-		NSString GIFLoopCount { get; }
+		public static extern NSString GIFLoopCount { get; }
 		[Field ("kCGImagePropertyGIFDelayTime")]
-		NSString GIFDelayTime { get; }
+		public static extern NSString GIFDelayTime { get; }
 		[Field ("kCGImagePropertyGIFImageColorMap")]
-		NSString GIFImageColorMap { get; }
+		public static extern NSString GIFImageColorMap { get; }
 		[Field ("kCGImagePropertyGIFHasGlobalColorMap")]
-		NSString GIFHasGlobalColorMap { get; }
+		public static extern NSString GIFHasGlobalColorMap { get; }
 		[Field ("kCGImagePropertyGIFUnclampedDelayTime")]
-		NSString GIFUnclampedDelayTime { get; }
+		public static extern NSString GIFUnclampedDelayTime { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyGIFCanvasPixelWidth")]
-		NSString GifCanvasPixelWidth { get; }
+		public static extern NSString GifCanvasPixelWidth { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyGIFCanvasPixelHeight")]
-		NSString GifCanvasPixelHeight { get; }
+		public static extern NSString GifCanvasPixelHeight { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyGIFFrameInfoArray")]
-		NSString GifFrameInfoArray { get; }
+		public static extern NSString GifFrameInfoArray { get; }
 
 		// GPS Dictionary Keys
 
 		[Field ("kCGImagePropertyGPSVersion")]
-		NSString GPSVersion { get; }
+		public static extern NSString GPSVersion { get; }
 		[Field ("kCGImagePropertyGPSLatitudeRef")]
-		NSString GPSLatitudeRef { get; }
+		public static extern NSString GPSLatitudeRef { get; }
 		[Field ("kCGImagePropertyGPSLatitude")]
-		NSString GPSLatitude { get; }
+		public static extern NSString GPSLatitude { get; }
 		[Field ("kCGImagePropertyGPSLongitudeRef")]
-		NSString GPSLongitudeRef { get; }
+		public static extern NSString GPSLongitudeRef { get; }
 		[Field ("kCGImagePropertyGPSLongitude")]
-		NSString GPSLongitude { get; }
+		public static extern NSString GPSLongitude { get; }
 		[Field ("kCGImagePropertyGPSAltitudeRef")]
-		NSString GPSAltitudeRef { get; }
+		public static extern NSString GPSAltitudeRef { get; }
 		[Field ("kCGImagePropertyGPSAltitude")]
-		NSString GPSAltitude { get; }
+		public static extern NSString GPSAltitude { get; }
 		[Field ("kCGImagePropertyGPSTimeStamp")]
-		NSString GPSTimeStamp { get; }
+		public static extern NSString GPSTimeStamp { get; }
 		[Field ("kCGImagePropertyGPSSatellites")]
-		NSString GPSSatellites { get; }
+		public static extern NSString GPSSatellites { get; }
 		[Field ("kCGImagePropertyGPSStatus")]
-		NSString GPSStatus { get; }
+		public static extern NSString GPSStatus { get; }
 		[Field ("kCGImagePropertyGPSMeasureMode")]
-		NSString GPSMeasureMode { get; }
+		public static extern NSString GPSMeasureMode { get; }
 		[Field ("kCGImagePropertyGPSDOP")]
-		NSString GPSDOP { get; }
+		public static extern NSString GPSDOP { get; }
 		[Field ("kCGImagePropertyGPSSpeedRef")]
-		NSString GPSSpeedRef { get; }
+		public static extern NSString GPSSpeedRef { get; }
 		[Field ("kCGImagePropertyGPSSpeed")]
-		NSString GPSSpeed { get; }
+		public static extern NSString GPSSpeed { get; }
 		[Field ("kCGImagePropertyGPSTrackRef")]
-		NSString GPSTrackRef { get; }
+		public static extern NSString GPSTrackRef { get; }
 		[Field ("kCGImagePropertyGPSTrack")]
-		NSString GPSTrack { get; }
+		public static extern NSString GPSTrack { get; }
 		[Field ("kCGImagePropertyGPSImgDirectionRef")]
-		NSString GPSImgDirectionRef { get; }
+		public static extern NSString GPSImgDirectionRef { get; }
 		[Field ("kCGImagePropertyGPSImgDirection")]
-		NSString GPSImgDirection { get; }
+		public static extern NSString GPSImgDirection { get; }
 		[Field ("kCGImagePropertyGPSMapDatum")]
-		NSString GPSMapDatum { get; }
+		public static extern NSString GPSMapDatum { get; }
 		[Field ("kCGImagePropertyGPSDestLatitudeRef")]
-		NSString GPSDestLatitudeRef { get; }
+		public static extern NSString GPSDestLatitudeRef { get; }
 		[Field ("kCGImagePropertyGPSDestLatitude")]
-		NSString GPSDestLatitude { get; }
+		public static extern NSString GPSDestLatitude { get; }
 		[Field ("kCGImagePropertyGPSDestLongitudeRef")]
-		NSString GPSDestLongitudeRef { get; }
+		public static extern NSString GPSDestLongitudeRef { get; }
 		[Field ("kCGImagePropertyGPSDestLongitude")]
-		NSString GPSDestLongitude { get; }
+		public static extern NSString GPSDestLongitude { get; }
 		[Field ("kCGImagePropertyGPSDestBearingRef")]
-		NSString GPSDestBearingRef { get; }
+		public static extern NSString GPSDestBearingRef { get; }
 		[Field ("kCGImagePropertyGPSDestBearing")]
-		NSString GPSDestBearing { get; }
+		public static extern NSString GPSDestBearing { get; }
 		[Field ("kCGImagePropertyGPSDestDistanceRef")]
-		NSString GPSDestDistanceRef { get; }
+		public static extern NSString GPSDestDistanceRef { get; }
 		[Field ("kCGImagePropertyGPSDestDistance")]
-		NSString GPSDestDistance { get; }
+		public static extern NSString GPSDestDistance { get; }
 		[Field ("kCGImagePropertyGPSAreaInformation")]
-		NSString GPSAreaInformation { get; }
+		public static extern NSString GPSAreaInformation { get; }
 		[Field ("kCGImagePropertyGPSDateStamp")]
-		NSString GPSDateStamp { get; }
+		public static extern NSString GPSDateStamp { get; }
 		[Field ("kCGImagePropertyGPSDifferental")]
-		NSString GPSDifferental { get; }
+		public static extern NSString GPSDifferental { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyGPSHPositioningError")]
-		NSString GPSHPositioningError { get; }
+		public static extern NSString GPSHPositioningError { get; }
 
 		// IPTC Dictionary Keys
 
 		[Field ("kCGImagePropertyIPTCObjectTypeReference")]
-		NSString IPTCObjectTypeReference { get; }
+		public static extern NSString IPTCObjectTypeReference { get; }
 		[Field ("kCGImagePropertyIPTCObjectAttributeReference")]
-		NSString IPTCObjectAttributeReference { get; }
+		public static extern NSString IPTCObjectAttributeReference { get; }
 		[Field ("kCGImagePropertyIPTCObjectName")]
-		NSString IPTCObjectName { get; }
+		public static extern NSString IPTCObjectName { get; }
 		[Field ("kCGImagePropertyIPTCEditStatus")]
-		NSString IPTCEditStatus { get; }
+		public static extern NSString IPTCEditStatus { get; }
 		[Field ("kCGImagePropertyIPTCEditorialUpdate")]
-		NSString IPTCEditorialUpdate { get; }
+		public static extern NSString IPTCEditorialUpdate { get; }
 		[Field ("kCGImagePropertyIPTCUrgency")]
-		NSString IPTCUrgency { get; }
+		public static extern NSString IPTCUrgency { get; }
 		[Field ("kCGImagePropertyIPTCSubjectReference")]
-		NSString IPTCSubjectReference { get; }
+		public static extern NSString IPTCSubjectReference { get; }
 		[Field ("kCGImagePropertyIPTCCategory")]
-		NSString IPTCCategory { get; }
+		public static extern NSString IPTCCategory { get; }
 		[Field ("kCGImagePropertyIPTCSupplementalCategory")]
-		NSString IPTCSupplementalCategory { get; }
+		public static extern NSString IPTCSupplementalCategory { get; }
 		[Field ("kCGImagePropertyIPTCFixtureIdentifier")]
-		NSString IPTCFixtureIdentifier { get; }
+		public static extern NSString IPTCFixtureIdentifier { get; }
 		[Field ("kCGImagePropertyIPTCKeywords")]
-		NSString IPTCKeywords { get; }
+		public static extern NSString IPTCKeywords { get; }
 		[Field ("kCGImagePropertyIPTCContentLocationCode")]
-		NSString IPTCContentLocationCode { get; }
+		public static extern NSString IPTCContentLocationCode { get; }
 		[Field ("kCGImagePropertyIPTCContentLocationName")]
-		NSString IPTCContentLocationName { get; }
+		public static extern NSString IPTCContentLocationName { get; }
 		[Field ("kCGImagePropertyIPTCReleaseDate")]
-		NSString IPTCReleaseDate { get; }
+		public static extern NSString IPTCReleaseDate { get; }
 		[Field ("kCGImagePropertyIPTCReleaseTime")]
-		NSString IPTCReleaseTime { get; }
+		public static extern NSString IPTCReleaseTime { get; }
 		[Field ("kCGImagePropertyIPTCExpirationDate")]
-		NSString IPTCExpirationDate { get; }
+		public static extern NSString IPTCExpirationDate { get; }
 		[Field ("kCGImagePropertyIPTCExpirationTime")]
-		NSString IPTCExpirationTime { get; }
+		public static extern NSString IPTCExpirationTime { get; }
 		[Field ("kCGImagePropertyIPTCSpecialInstructions")]
-		NSString IPTCSpecialInstructions { get; }
+		public static extern NSString IPTCSpecialInstructions { get; }
 		[Field ("kCGImagePropertyIPTCActionAdvised")]
-		NSString IPTCActionAdvised { get; }
+		public static extern NSString IPTCActionAdvised { get; }
 		[Field ("kCGImagePropertyIPTCReferenceService")]
-		NSString IPTCReferenceService { get; }
+		public static extern NSString IPTCReferenceService { get; }
 		[Field ("kCGImagePropertyIPTCReferenceDate")]
-		NSString IPTCReferenceDate { get; }
+		public static extern NSString IPTCReferenceDate { get; }
 		[Field ("kCGImagePropertyIPTCReferenceNumber")]
-		NSString IPTCReferenceNumber { get; }
+		public static extern NSString IPTCReferenceNumber { get; }
 		[Field ("kCGImagePropertyIPTCDateCreated")]
-		NSString IPTCDateCreated { get; }
+		public static extern NSString IPTCDateCreated { get; }
 		[Field ("kCGImagePropertyIPTCTimeCreated")]
-		NSString IPTCTimeCreated { get; }
+		public static extern NSString IPTCTimeCreated { get; }
 		[Field ("kCGImagePropertyIPTCDigitalCreationDate")]
-		NSString IPTCDigitalCreationDate { get; }
+		public static extern NSString IPTCDigitalCreationDate { get; }
 		[Field ("kCGImagePropertyIPTCDigitalCreationTime")]
-		NSString IPTCDigitalCreationTime { get; }
+		public static extern NSString IPTCDigitalCreationTime { get; }
 		[Field ("kCGImagePropertyIPTCOriginatingProgram")]
-		NSString IPTCOriginatingProgram { get; }
+		public static extern NSString IPTCOriginatingProgram { get; }
 		[Field ("kCGImagePropertyIPTCProgramVersion")]
-		NSString IPTCProgramVersion { get; }
+		public static extern NSString IPTCProgramVersion { get; }
 		[Field ("kCGImagePropertyIPTCObjectCycle")]
-		NSString IPTCObjectCycle { get; }
+		public static extern NSString IPTCObjectCycle { get; }
 		[Field ("kCGImagePropertyIPTCByline")]
-		NSString IPTCByline { get; }
+		public static extern NSString IPTCByline { get; }
 		[Field ("kCGImagePropertyIPTCBylineTitle")]
-		NSString IPTCBylineTitle { get; }
+		public static extern NSString IPTCBylineTitle { get; }
 		[Field ("kCGImagePropertyIPTCCity")]
-		NSString IPTCCity { get; }
+		public static extern NSString IPTCCity { get; }
 		[Field ("kCGImagePropertyIPTCSubLocation")]
-		NSString IPTCSubLocation { get; }
+		public static extern NSString IPTCSubLocation { get; }
 		[Field ("kCGImagePropertyIPTCProvinceState")]
-		NSString IPTCProvinceState { get; }
+		public static extern NSString IPTCProvinceState { get; }
 		[Field ("kCGImagePropertyIPTCCountryPrimaryLocationCode")]
-		NSString IPTCCountryPrimaryLocationCode { get; }
+		public static extern NSString IPTCCountryPrimaryLocationCode { get; }
 		[Field ("kCGImagePropertyIPTCCountryPrimaryLocationName")]
-		NSString IPTCCountryPrimaryLocationName { get; }
+		public static extern NSString IPTCCountryPrimaryLocationName { get; }
 		[Field ("kCGImagePropertyIPTCOriginalTransmissionReference")]
-		NSString IPTCOriginalTransmissionReference { get; }
+		public static extern NSString IPTCOriginalTransmissionReference { get; }
 		[Field ("kCGImagePropertyIPTCHeadline")]
-		NSString IPTCHeadline { get; }
+		public static extern NSString IPTCHeadline { get; }
 		[Field ("kCGImagePropertyIPTCCredit")]
-		NSString IPTCCredit { get; }
+		public static extern NSString IPTCCredit { get; }
 		[Field ("kCGImagePropertyIPTCSource")]
-		NSString IPTCSource { get; }
+		public static extern NSString IPTCSource { get; }
 		[Field ("kCGImagePropertyIPTCCopyrightNotice")]
-		NSString IPTCCopyrightNotice { get; }
+		public static extern NSString IPTCCopyrightNotice { get; }
 		[Field ("kCGImagePropertyIPTCContact")]
-		NSString IPTCContact { get; }
+		public static extern NSString IPTCContact { get; }
 		[Field ("kCGImagePropertyIPTCCaptionAbstract")]
-		NSString IPTCCaptionAbstract { get; }
+		public static extern NSString IPTCCaptionAbstract { get; }
 		[Field ("kCGImagePropertyIPTCWriterEditor")]
-		NSString IPTCWriterEditor { get; }
+		public static extern NSString IPTCWriterEditor { get; }
 		[Field ("kCGImagePropertyIPTCImageType")]
-		NSString IPTCImageType { get; }
+		public static extern NSString IPTCImageType { get; }
 		[Field ("kCGImagePropertyIPTCImageOrientation")]
-		NSString IPTCImageOrientation { get; }
+		public static extern NSString IPTCImageOrientation { get; }
 		[Field ("kCGImagePropertyIPTCLanguageIdentifier")]
-		NSString IPTCLanguageIdentifier { get; }
+		public static extern NSString IPTCLanguageIdentifier { get; }
 		[Field ("kCGImagePropertyIPTCStarRating")]
-		NSString IPTCStarRating { get; }
+		public static extern NSString IPTCStarRating { get; }
 		[Field ("kCGImagePropertyIPTCCreatorContactInfo")]
-		NSString IPTCCreatorContactInfo { get; }
+		public static extern NSString IPTCCreatorContactInfo { get; }
 		[Field ("kCGImagePropertyIPTCRightsUsageTerms")]
-		NSString IPTCRightsUsageTerms { get; }
+		public static extern NSString IPTCRightsUsageTerms { get; }
 		[Field ("kCGImagePropertyIPTCScene")]
-		NSString IPTCScene { get; }
+		public static extern NSString IPTCScene { get; }
 
 		// IPTC Creator Contact Info Dictionary Keys
 
 		[Field ("kCGImagePropertyIPTCContactInfoCity")]
-		NSString IPTCContactInfoCity { get; }
+		public static extern NSString IPTCContactInfoCity { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoCountry")]
-		NSString IPTCContactInfoCountry { get; }
+		public static extern NSString IPTCContactInfoCountry { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoAddress")]
-		NSString IPTCContactInfoAddress { get; }
+		public static extern NSString IPTCContactInfoAddress { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoPostalCode")]
-		NSString IPTCContactInfoPostalCode { get; }
+		public static extern NSString IPTCContactInfoPostalCode { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoStateProvince")]
-		NSString IPTCContactInfoStateProvince { get; }
+		public static extern NSString IPTCContactInfoStateProvince { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoEmails")]
-		NSString IPTCContactInfoEmails { get; }
+		public static extern NSString IPTCContactInfoEmails { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoPhones")]
-		NSString IPTCContactInfoPhones { get; }
+		public static extern NSString IPTCContactInfoPhones { get; }
 		[Field ("kCGImagePropertyIPTCContactInfoWebURLs")]
-		NSString IPTCContactInfoWebURLs { get; }
+		public static extern NSString IPTCContactInfoWebURLs { get; }
 
 		// JFIF Dictionary Keys
 
 		[Field ("kCGImagePropertyJFIFVersion")]
-		NSString JFIFVersion { get; }
+		public static extern NSString JFIFVersion { get; }
 		[Field ("kCGImagePropertyJFIFXDensity")]
-		NSString JFIFXDensity { get; }
+		public static extern NSString JFIFXDensity { get; }
 		[Field ("kCGImagePropertyJFIFYDensity")]
-		NSString JFIFYDensity { get; }
+		public static extern NSString JFIFYDensity { get; }
 		[Field ("kCGImagePropertyJFIFDensityUnit")]
-		NSString JFIFDensityUnit { get; }
+		public static extern NSString JFIFDensityUnit { get; }
 		[Field ("kCGImagePropertyJFIFIsProgressive")]
-		NSString JFIFIsProgressive { get; }
+		public static extern NSString JFIFIsProgressive { get; }
 
 		// PNG Dictionary Keys
 
 		[Field ("kCGImagePropertyPNGGamma")]
-		NSString PNGGamma { get; }
+		public static extern NSString PNGGamma { get; }
 		[Field ("kCGImagePropertyPNGInterlaceType")]
-		NSString PNGInterlaceType { get; }
+		public static extern NSString PNGInterlaceType { get; }
 		[Field ("kCGImagePropertyPNGXPixelsPerMeter")]
-		NSString PNGXPixelsPerMeter { get; }
+		public static extern NSString PNGXPixelsPerMeter { get; }
 		[Field ("kCGImagePropertyPNGYPixelsPerMeter")]
-		NSString PNGYPixelsPerMeter { get; }
+		public static extern NSString PNGYPixelsPerMeter { get; }
 		[Field ("kCGImagePropertyPNGsRGBIntent")]
-		NSString PNGsRGBIntent { get; }
+		public static extern NSString PNGsRGBIntent { get; }
 		[Field ("kCGImagePropertyPNGChromaticities")]
-		NSString PNGChromaticities { get; }
+		public static extern NSString PNGChromaticities { get; }
 		[Field ("kCGImagePropertyPNGAuthor")]
-		NSString PNGAuthor { get; }
+		public static extern NSString PNGAuthor { get; }
 		[Field ("kCGImagePropertyPNGCopyright")]
-		NSString PNGCopyright { get; }
+		public static extern NSString PNGCopyright { get; }
 		[Field ("kCGImagePropertyPNGCreationTime")]
-		NSString PNGCreationTime { get; }
+		public static extern NSString PNGCreationTime { get; }
 		[Field ("kCGImagePropertyPNGDescription")]
-		NSString PNGDescription { get; }
+		public static extern NSString PNGDescription { get; }
 		[Field ("kCGImagePropertyPNGModificationTime")]
-		NSString PNGModificationTime { get; }
+		public static extern NSString PNGModificationTime { get; }
 		[Field ("kCGImagePropertyPNGSoftware")]
-		NSString PNGSoftware { get; }
+		public static extern NSString PNGSoftware { get; }
 		[Field ("kCGImagePropertyPNGTitle")]
-		NSString PNGTitle { get; }
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		public static extern NSString PNGTitle { get; }
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyPNGPixelsAspectRatio")]
-		NSString PNGPixelsAspectRatio { get; }
+		public static extern NSString PNGPixelsAspectRatio { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPNGCompressionFilter")]
-		NSString PNGCompressionFilter { get; }
+		public static extern NSString PNGCompressionFilter { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAPNGLoopCount")]
-		NSString PNGLoopCount { get; }
+		public static extern NSString PNGLoopCount { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAPNGDelayTime")]
-		NSString PNGDelayTime { get; }
+		public static extern NSString PNGDelayTime { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAPNGUnclampedDelayTime")]
-		NSString PNGUnclampedDelayTime { get; }
+		public static extern NSString PNGUnclampedDelayTime { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAPNGFrameInfoArray")]
-		NSString ApngFrameInfoArray { get; }
+		public static extern NSString ApngFrameInfoArray { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAPNGCanvasPixelWidth")]
-		NSString ApngCanvasPixelWidth { get; }
+		public static extern NSString ApngCanvasPixelWidth { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAPNGCanvasPixelHeight")]
-		NSString ApngCanvasPixelHeight { get; }
+		public static extern NSString ApngCanvasPixelHeight { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPNGComment")]
-		NSString PNGComment { get; }
+		public static extern NSString PNGComment { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPNGDisclaimer")]
-		NSString PNGDisclaimer { get; }
+		public static extern NSString PNGDisclaimer { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPNGSource")]
-		NSString PNGSource { get; }
+		public static extern 	NSString PNGSource { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPNGWarning")]
-		NSString PNGWarning { get; }
+		public static extern NSString PNGWarning { get; }
 
-		[Watch (7, 4), TV (14, 5), iOS (14, 5)]
+		//[Watch (7, 4), TV (14, 5), iOS (14, 5)]
 		[MacCatalyst (14, 5)]
 		[Field ("kCGImagePropertyPNGTransparency")]
-		NSString PNGTransparency { get; }
+		public static extern NSString PNGTransparency { get; }
 
 		// TIFF Dictionary Keys
 
 		[Field ("kCGImagePropertyTIFFCompression")]
-		NSString TIFFCompression { get; }
+		public static extern NSString TIFFCompression { get; }
 		[Field ("kCGImagePropertyTIFFPhotometricInterpretation")]
-		NSString TIFFPhotometricInterpretation { get; }
+		public static extern NSString TIFFPhotometricInterpretation { get; }
 		[Field ("kCGImagePropertyTIFFDocumentName")]
-		NSString TIFFDocumentName { get; }
+		public static extern NSString TIFFDocumentName { get; }
 		[Field ("kCGImagePropertyTIFFImageDescription")]
-		NSString TIFFImageDescription { get; }
+		public static extern NSString TIFFImageDescription { get; }
 		[Field ("kCGImagePropertyTIFFMake")]
-		NSString TIFFMake { get; }
+		public static extern NSString TIFFMake { get; }
 		[Field ("kCGImagePropertyTIFFModel")]
-		NSString TIFFModel { get; }
+		public static extern NSString TIFFModel { get; }
 		[Field ("kCGImagePropertyTIFFOrientation")]
-		NSString TIFFOrientation { get; }
+		public static extern NSString TIFFOrientation { get; }
 		[Field ("kCGImagePropertyTIFFXResolution")]
-		NSString TIFFXResolution { get; }
+		public static extern NSString TIFFXResolution { get; }
 		[Field ("kCGImagePropertyTIFFYResolution")]
-		NSString TIFFYResolution { get; }
-		[Mac (14, 4), iOS (17, 4), MacCatalyst (17, 4), TV (17, 4), Watch (10, 4)]
+		public static extern NSString TIFFYResolution { get; }
+		//[Mac (14, 4), iOS (17, 4), MacCatalyst (17, 4), TV (17, 4), Watch (10, 4)]
 		[Field ("kCGImagePropertyTIFFXPosition")]
-		NSString TIFFXPosition { get; }
-		[Mac (14, 4), iOS (17, 4), MacCatalyst (17, 4), TV (17, 4), Watch (10, 4)]
+		public static extern NSString TIFFXPosition { get; }
+		//[Mac (14, 4), iOS (17, 4), MacCatalyst (17, 4), TV (17, 4), Watch (10, 4)]
 		[Field ("kCGImagePropertyTIFFYPosition")]
-		NSString TIFFYPosition { get; }
+		public static extern NSString TIFFYPosition { get; }
 		[Field ("kCGImagePropertyTIFFResolutionUnit")]
-		NSString TIFFResolutionUnit { get; }
+		public static extern NSString TIFFResolutionUnit { get; }
 		[Field ("kCGImagePropertyTIFFSoftware")]
-		NSString TIFFSoftware { get; }
+		public static extern NSString TIFFSoftware { get; }
 		[Field ("kCGImagePropertyTIFFTransferFunction")]
-		NSString TIFFTransferFunction { get; }
+		public static extern NSString TIFFTransferFunction { get; }
 		[Field ("kCGImagePropertyTIFFDateTime")]
-		NSString TIFFDateTime { get; }
+		public static extern NSString TIFFDateTime { get; }
 		[Field ("kCGImagePropertyTIFFArtist")]
-		NSString TIFFArtist { get; }
+		public static extern NSString TIFFArtist { get; }
 		[Field ("kCGImagePropertyTIFFHostComputer")]
-		NSString TIFFHostComputer { get; }
+		public static extern NSString TIFFHostComputer { get; }
 		[Field ("kCGImagePropertyTIFFWhitePoint")]
-		NSString TIFFWhitePoint { get; }
+		public static extern 	NSString TIFFWhitePoint { get; }
 		[Field ("kCGImagePropertyTIFFPrimaryChromaticities")]
-		NSString TIFFPrimaryChromaticities { get; }
+		public static extern 	NSString TIFFPrimaryChromaticities { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyTIFFTileLength")]
-		NSString TIFFTileLength { get; }
+		public static extern NSString TIFFTileLength { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyTIFFTileWidth")]
-		NSString TIFFTileWidth { get; }
+		public static extern NSString TIFFTileWidth { get; }
 
 		// DNG Dictionary Keys
 
 		[Field ("kCGImagePropertyDNGVersion")]
-		NSString DNGVersion { get; }
+		public static extern 	NSString DNGVersion { get; }
 		[Field ("kCGImagePropertyDNGBackwardVersion")]
-		NSString DNGBackwardVersion { get; }
+		public static extern NSString DNGBackwardVersion { get; }
 		[Field ("kCGImagePropertyDNGUniqueCameraModel")]
-		NSString DNGUniqueCameraModel { get; }
+		public static extern NSString DNGUniqueCameraModel { get; }
 		[Field ("kCGImagePropertyDNGLocalizedCameraModel")]
-		NSString DNGLocalizedCameraModel { get; }
+		public static extern NSString DNGLocalizedCameraModel { get; }
 		[Field ("kCGImagePropertyDNGCameraSerialNumber")]
-		NSString DNGCameraSerialNumber { get; }
+		public static extern 	NSString DNGCameraSerialNumber { get; }
 		[Field ("kCGImagePropertyDNGLensInfo")]
-		NSString DNGLensInfo { get; }
+		public static extern NSString DNGLensInfo { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBlackLevel")]
-		NSString DNGBlackLevel { get; }
+		public static extern NSString DNGBlackLevel { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGWhiteLevel")]
-		NSString DNGWhiteLevel { get; }
+		public static extern NSString DNGWhiteLevel { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCalibrationIlluminant1")]
-		NSString DNGCalibrationIlluminant1 { get; }
+		public static extern NSString DNGCalibrationIlluminant1 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCalibrationIlluminant2")]
-		NSString DNGCalibrationIlluminant2 { get; }
+		public static extern NSString DNGCalibrationIlluminant2 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGColorMatrix1")]
-		NSString DNGColorMatrix1 { get; }
+		public static extern NSString DNGColorMatrix1 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGColorMatrix2")]
-		NSString DNGColorMatrix2 { get; }
+		public static extern 	NSString DNGColorMatrix2 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCameraCalibration1")]
-		NSString DNGCameraCalibration1 { get; }
+		public static extern NSString DNGCameraCalibration1 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCameraCalibration2")]
-		NSString DNGCameraCalibration2 { get; }
+		public static extern NSString DNGCameraCalibration2 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAsShotNeutral")]
-		NSString DNGAsShotNeutral { get; }
+		public static extern NSString DNGAsShotNeutral { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAsShotWhiteXY")]
-		NSString DNGAsShotWhiteXY { get; }
+		public static extern NSString DNGAsShotWhiteXY { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBaselineExposure")]
-		NSString DNGBaselineExposure { get; }
+		public static extern NSString DNGBaselineExposure { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBaselineNoise")]
-		NSString DNGBaselineNoise { get; }
+		public static extern NSString DNGBaselineNoise { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBaselineSharpness")]
-		NSString DNGBaselineSharpness { get; }
+		public static extern NSString DNGBaselineSharpness { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPrivateData")]
-		NSString DNGPrivateData { get; }
+		public static extern NSString DNGPrivateData { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCameraCalibrationSignature")]
-		NSString DNGCameraCalibrationSignature { get; }
+		public static extern NSString DNGCameraCalibrationSignature { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileCalibrationSignature")]
-		NSString DNGProfileCalibrationSignature { get; }
+		public static extern NSString DNGProfileCalibrationSignature { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGNoiseProfile")]
-		NSString DNGNoiseProfile { get; }
+		public static extern NSString DNGNoiseProfile { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGWarpRectilinear")]
-		NSString DNGWarpRectilinear { get; }
+		public static extern NSString DNGWarpRectilinear { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGWarpFisheye")]
-		NSString DNGWarpFisheye { get; }
+		public static extern NSString DNGWarpFisheye { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGFixVignetteRadial")]
-		NSString DNGFixVignetteRadial { get; }
+		public static extern NSString DNGFixVignetteRadial { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGActiveArea")]
-		NSString DNGActiveArea { get; }
+		public static extern NSString DNGActiveArea { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAnalogBalance")]
-		NSString DNGAnalogBalance { get; }
+		public static extern NSString DNGAnalogBalance { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAntiAliasStrength")]
-		NSString DNGAntiAliasStrength { get; }
+		public static extern 	NSString DNGAntiAliasStrength { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAsShotICCProfile")]
-		NSString DNGAsShotICCProfile { get; }
+		public static extern NSString DNGAsShotICCProfile { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAsShotPreProfileMatrix")]
-		NSString DNGAsShotPreProfileMatrix { get; }
+		public static extern NSString DNGAsShotPreProfileMatrix { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGAsShotProfileName")]
-		NSString DNGAsShotProfileName { get; }
+		public static extern NSString DNGAsShotProfileName { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBaselineExposureOffset")]
-		NSString DNGBaselineExposureOffset { get; }
+		public static extern NSString DNGBaselineExposureOffset { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBayerGreenSplit")]
-		NSString DNGBayerGreenSplit { get; }
+		public static extern NSString DNGBayerGreenSplit { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBestQualityScale")]
-		NSString DNGBestQualityScale { get; }
+		public static extern NSString DNGBestQualityScale { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBlackLevelDeltaH")]
-		NSString DNGBlackLevelDeltaHorizontal { get; }
+		public static extern NSString DNGBlackLevelDeltaHorizontal { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBlackLevelDeltaV")]
-		NSString DNGBlackLevelDeltaVertical { get; }
+		public static extern NSString DNGBlackLevelDeltaVertical { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGBlackLevelRepeatDim")]
-		NSString DNGBlackLevelRepeatDim { get; }
+		public static extern NSString DNGBlackLevelRepeatDim { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCFALayout")]
-		NSString DNGCfaLayout { get; }
+		public static extern NSString DNGCfaLayout { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCFAPlaneColor")]
-		NSString DNGCfaPlaneColor { get; }
+		public static extern NSString DNGCfaPlaneColor { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGChromaBlurRadius")]
-		NSString DNGChromaBlurRadius { get; }
+		public static extern NSString DNGChromaBlurRadius { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGColorimetricReference")]
-		NSString DNGColorimetricReference { get; }
+		public static extern NSString DNGColorimetricReference { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCurrentICCProfile")]
-		NSString DNGCurrentICCProfile { get; }
+		public static extern NSString DNGCurrentICCProfile { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGCurrentPreProfileMatrix")]
-		NSString DNGCurrentPreProfileMatrix { get; }
+		public static extern NSString DNGCurrentPreProfileMatrix { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGDefaultBlackRender")]
-		NSString DNGDefaultBlackRender { get; }
+		public static extern NSString DNGDefaultBlackRender { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGDefaultCropOrigin")]
-		NSString DNGDefaultCropOrigin { get; }
+		public static extern NSString DNGDefaultCropOrigin { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGDefaultCropSize")]
-		NSString DNGDefaultCropSize { get; }
+		public static extern NSString DNGDefaultCropSize { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGDefaultScale")]
-		NSString DNGDefaultScale { get; }
+		public static extern NSString DNGDefaultScale { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGDefaultUserCrop")]
-		NSString DNGDefaultUserCrop { get; }
+		public static extern NSString DNGDefaultUserCrop { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGExtraCameraProfiles")]
-		NSString DNGExtraCameraProfiles { get; }
+		public static extern NSString DNGExtraCameraProfiles { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGForwardMatrix1")]
-		NSString DNGForwardMatrix1 { get; }
+		public static extern NSString DNGForwardMatrix1 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGForwardMatrix2")]
-		NSString DNGForwardMatrix2 { get; }
+		public static extern NSString DNGForwardMatrix2 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGLinearizationTable")]
-		NSString DNGLinearizationTable { get; }
+		public static extern 	NSString DNGLinearizationTable { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGLinearResponseLimit")]
-		NSString DNGLinearResponseLimit { get; }
+		public static extern NSString DNGLinearResponseLimit { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGMakerNoteSafety")]
-		NSString DNGMakerNoteSafety { get; }
+		public static extern NSString DNGMakerNoteSafety { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGMaskedAreas")]
-		NSString DNGMaskedAreas { get; }
+		public static extern NSString DNGMaskedAreas { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGNewRawImageDigest")]
-		NSString DNGNewRawImageDigest { get; }
+		public static extern NSString DNGNewRawImageDigest { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGNoiseReductionApplied")]
-		NSString DNGNoiseReductionApplied { get; }
+		public static extern NSString DNGNoiseReductionApplied { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOpcodeList1")]
-		NSString DNGOpcodeList1 { get; }
+		public static extern NSString DNGOpcodeList1 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOpcodeList2")]
-		NSString DNGOpcodeList2 { get; }
+		public static extern NSString DNGOpcodeList2 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOpcodeList3")]
-		NSString DNGOpcodeList3 { get; }
+		public static extern NSString DNGOpcodeList3 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOriginalBestQualityFinalSize")]
-		NSString DNGOriginalBestQualityFinalSize { get; }
+		public static extern NSString DNGOriginalBestQualityFinalSize { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOriginalDefaultCropSize")]
-		NSString DNGOriginalDefaultCropSize { get; }
+		public static extern NSString DNGOriginalDefaultCropSize { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOriginalDefaultFinalSize")]
-		NSString DNGOriginalDefaultFinalSize { get; }
+		public static extern NSString DNGOriginalDefaultFinalSize { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOriginalRawFileData")]
-		NSString DNGOriginalRawFileData { get; }
+		public static extern NSString DNGOriginalRawFileData { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOriginalRawFileDigest")]
-		NSString DNGOriginalRawFileDigest { get; }
+		public static extern NSString DNGOriginalRawFileDigest { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGOriginalRawFileName")]
-		NSString DNGOriginalRawFileName { get; }
+		public static extern NSString DNGOriginalRawFileName { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPreviewApplicationName")]
-		NSString DNGPreviewApplicationName { get; }
+		public static extern NSString DNGPreviewApplicationName { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPreviewApplicationVersion")]
-		NSString DNGPreviewApplicationVersion { get; }
+		public static extern NSString DNGPreviewApplicationVersion { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPreviewColorSpace")]
-		NSString DNGPreviewColorSpace { get; }
+		public static extern NSString DNGPreviewColorSpace { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPreviewDateTime")]
-		NSString DNGPreviewDateTime { get; }
+		public static extern NSString DNGPreviewDateTime { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPreviewSettingsDigest")]
-		NSString DNGPreviewSettingsDigest { get; }
+		public static extern NSString DNGPreviewSettingsDigest { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGPreviewSettingsName")]
-		NSString DNGPreviewSettingsName { get; }
+		public static extern NSString DNGPreviewSettingsName { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileCopyright")]
-		NSString DNGProfileCopyright { get; }
+		public static extern NSString DNGProfileCopyright { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileEmbedPolicy")]
-		NSString DNGProfileEmbedPolicy { get; }
+		public static extern NSString DNGProfileEmbedPolicy { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileHueSatMapData1")]
-		NSString DNGProfileHueSatMapData1 { get; }
+		public static extern NSString DNGProfileHueSatMapData1 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileHueSatMapData2")]
-		NSString DNGProfileHueSatMapData2 { get; }
+		public static extern NSString DNGProfileHueSatMapData2 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileHueSatMapDims")]
-		NSString DNGProfileHueSatMapDims { get; }
+		public static extern NSString DNGProfileHueSatMapDims { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileHueSatMapEncoding")]
-		NSString DNGProfileHueSatMapEncoding { get; }
+		public static extern NSString DNGProfileHueSatMapEncoding { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileLookTableData")]
-		NSString DNGProfileLookTableData { get; }
+		public static extern NSString DNGProfileLookTableData { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileLookTableDims")]
-		NSString DNGProfileLookTableDims { get; }
+		public static extern NSString DNGProfileLookTableDims { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileLookTableEncoding")]
-		NSString DNGProfileLookTableEncoding { get; }
+		public static extern NSString DNGProfileLookTableEncoding { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileName")]
-		NSString DNGProfileName { get; }
+		public static extern 	NSString DNGProfileName { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGProfileToneCurve")]
-		NSString DNGProfileToneCurve { get; }
+		public static extern NSString DNGProfileToneCurve { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGRawDataUniqueID")]
-		NSString DNGRawDataUniqueId { get; }
+		public static extern NSString DNGRawDataUniqueId { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGRawImageDigest")]
-		NSString DNGRawImageDigest { get; }
+		public static extern NSString DNGRawImageDigest { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGRawToPreviewGain")]
-		NSString DNGRawToPreviewGain { get; }
+		public static extern NSString DNGRawToPreviewGain { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGReductionMatrix1")]
-		NSString DNGReductionMatrix1 { get; }
+		public static extern NSString DNGReductionMatrix1 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGReductionMatrix2")]
-		NSString DNGReductionMatrix2 { get; }
+		public static extern 	NSString DNGReductionMatrix2 { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGRowInterleaveFactor")]
-		NSString DNGRowInterleaveFactor { get; }
+		public static extern NSString DNGRowInterleaveFactor { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGShadowScale")]
-		NSString DNGShadowScale { get; }
+		public static extern NSString DNGShadowScale { get; }
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyDNGSubTileBlockSize")]
-		NSString DNGSubTileBlockSize { get; }
+		public static extern NSString DNGSubTileBlockSize { get; }
 
 		// 8BIM Dictionary Keys
 
 		[Field ("kCGImageProperty8BIMLayerNames")]
-		NSString EightBIMLayerNames { get; }
+		public static extern NSString EightBIMLayerNames { get; }
 
 		// CIFF Dictionary Keys
 
 		[Field ("kCGImagePropertyCIFFDescription")]
-		NSString CIFFDescription { get; }
+		public static extern 	NSString CIFFDescription { get; }
 		[Field ("kCGImagePropertyCIFFFirmware")]
-		NSString CIFFFirmware { get; }
+		public static extern 	NSString CIFFFirmware { get; }
 		[Field ("kCGImagePropertyCIFFOwnerName")]
-		NSString CIFFOwnerName { get; }
+		public static extern NSString CIFFOwnerName { get; }
 		[Field ("kCGImagePropertyCIFFImageName")]
-		NSString CIFFImageName { get; }
+		public static extern NSString CIFFImageName { get; }
 		[Field ("kCGImagePropertyCIFFImageFileName")]
-		NSString CIFFImageFileName { get; }
+		public static extern NSString CIFFImageFileName { get; }
 		[Field ("kCGImagePropertyCIFFReleaseMethod")]
-		NSString CIFFReleaseMethod { get; }
+		public static extern NSString CIFFReleaseMethod { get; }
 		[Field ("kCGImagePropertyCIFFReleaseTiming")]
-		NSString CIFFReleaseTiming { get; }
+		public static extern NSString CIFFReleaseTiming { get; }
 		[Field ("kCGImagePropertyCIFFRecordID")]
-		NSString CIFFRecordID { get; }
+		public static extern NSString CIFFRecordID { get; }
 		[Field ("kCGImagePropertyCIFFSelfTimingTime")]
-		NSString CIFFSelfTimingTime { get; }
+		public static extern NSString CIFFSelfTimingTime { get; }
 		[Field ("kCGImagePropertyCIFFCameraSerialNumber")]
-		NSString CIFFCameraSerialNumber { get; }
+		public static extern NSString CIFFCameraSerialNumber { get; }
 		[Field ("kCGImagePropertyCIFFImageSerialNumber")]
-		NSString CIFFImageSerialNumber { get; }
+		public static extern NSString CIFFImageSerialNumber { get; }
 		[Field ("kCGImagePropertyCIFFContinuousDrive")]
-		NSString CIFFContinuousDrive { get; }
+		public static extern NSString CIFFContinuousDrive { get; }
 		[Field ("kCGImagePropertyCIFFFocusMode")]
-		NSString CIFFFocusMode { get; }
+		public static extern NSString CIFFFocusMode { get; }
 		[Field ("kCGImagePropertyCIFFMeteringMode")]
-		NSString CIFFMeteringMode { get; }
+		public static extern NSString CIFFMeteringMode { get; }
 		[Field ("kCGImagePropertyCIFFShootingMode")]
-		NSString CIFFShootingMode { get; }
+		public static extern NSString CIFFShootingMode { get; }
 		[Field ("kCGImagePropertyCIFFLensMaxMM")]
-		NSString CIFFLensMaxMM { get; }
+		public static extern NSString CIFFLensMaxMM { get; }
 		[Field ("kCGImagePropertyCIFFLensMinMM")]
-		NSString CIFFLensMinMM { get; }
+		public static extern 	NSString CIFFLensMinMM { get; }
 		[Field ("kCGImagePropertyCIFFLensModel")]
-		NSString CIFFLensModel { get; }
+	public static extern 	NSString CIFFLensModel { get; }
 		[Field ("kCGImagePropertyCIFFWhiteBalanceIndex")]
-		NSString CIFFWhiteBalanceIndex { get; }
+		public static extern NSString CIFFWhiteBalanceIndex { get; }
 		[Field ("kCGImagePropertyCIFFFlashExposureComp")]
-		NSString CIFFFlashExposureComp { get; }
+	public static extern 	NSString CIFFFlashExposureComp { get; }
 		[Field ("kCGImagePropertyCIFFMeasuredEV")]
-		NSString CIFFMeasuredEV { get; }
+	public static extern 	NSString CIFFMeasuredEV { get; }
 
 		// HEICS
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSLoopCount")]
-		NSString HeicsLoopCount { get; }
+		public static extern NSString HeicsLoopCount { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSDelayTime")]
-		NSString HeicsDelayTime { get; }
+		public static extern NSString HeicsDelayTime { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSUnclampedDelayTime")]
-		NSString HeicsSUnclampedDelayTime { get; }
+		public static extern NSString HeicsSUnclampedDelayTime { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSCanvasPixelWidth")]
-		NSString HeicsCanvasPixelWidth { get; }
+		public static extern NSString HeicsCanvasPixelWidth { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSCanvasPixelHeight")]
-		NSString HeicsCanvasPixelHeight { get; }
+		public static extern NSString HeicsCanvasPixelHeight { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHEICSFrameInfoArray")]
-		NSString HeicsFrameInfoArray { get; }
+		public static extern NSString HeicsFrameInfoArray { get; }
 
 		// Nikon Camera Dictionary Keys
 
 		[Field ("kCGImagePropertyMakerNikonISOSetting")]
-		NSString MakerNikonISOSetting { get; }
+		public static extern NSString MakerNikonISOSetting { get; }
 		[Field ("kCGImagePropertyMakerNikonColorMode")]
-		NSString MakerNikonColorMode { get; }
+		public static extern NSString MakerNikonColorMode { get; }
 		[Field ("kCGImagePropertyMakerNikonQuality")]
-		NSString MakerNikonQuality { get; }
+		public static extern NSString MakerNikonQuality { get; }
 		[Field ("kCGImagePropertyMakerNikonWhiteBalanceMode")]
-		NSString MakerNikonWhiteBalanceMode { get; }
+		public static extern NSString MakerNikonWhiteBalanceMode { get; }
 		[Field ("kCGImagePropertyMakerNikonSharpenMode")]
-		NSString MakerNikonSharpenMode { get; }
+		public static extern NSString MakerNikonSharpenMode { get; }
 		[Field ("kCGImagePropertyMakerNikonFocusMode")]
-		NSString MakerNikonFocusMode { get; }
+		public static extern NSString MakerNikonFocusMode { get; }
 		[Field ("kCGImagePropertyMakerNikonFlashSetting")]
-		NSString MakerNikonFlashSetting { get; }
+		public static extern NSString MakerNikonFlashSetting { get; }
 		[Field ("kCGImagePropertyMakerNikonISOSelection")]
-		NSString MakerNikonISOSelection { get; }
+		public static extern NSString MakerNikonISOSelection { get; }
 		[Field ("kCGImagePropertyMakerNikonFlashExposureComp")]
-		NSString MakerNikonFlashExposureComp { get; }
+		public static extern NSString MakerNikonFlashExposureComp { get; }
 		[Field ("kCGImagePropertyMakerNikonImageAdjustment")]
-		NSString MakerNikonImageAdjustment { get; }
+		public static extern NSString MakerNikonImageAdjustment { get; }
 		[Field ("kCGImagePropertyMakerNikonLensAdapter")]
-		NSString MakerNikonLensAdapter { get; }
+		public static extern NSString MakerNikonLensAdapter { get; }
 		[Field ("kCGImagePropertyMakerNikonLensType")]
-		NSString MakerNikonLensType { get; }
+		public static extern NSString MakerNikonLensType { get; }
 		[Field ("kCGImagePropertyMakerNikonLensInfo")]
-		NSString MakerNikonLensInfo { get; }
+		public static extern NSString MakerNikonLensInfo { get; }
 		[Field ("kCGImagePropertyMakerNikonFocusDistance")]
-		NSString MakerNikonFocusDistance { get; }
+		public static extern NSString MakerNikonFocusDistance { get; }
 		[Field ("kCGImagePropertyMakerNikonDigitalZoom")]
-		NSString MakerNikonDigitalZoom { get; }
+		public static extern NSString MakerNikonDigitalZoom { get; }
 		[Field ("kCGImagePropertyMakerNikonShootingMode")]
-		NSString MakerNikonShootingMode { get; }
+		public static extern NSString MakerNikonShootingMode { get; }
 		[Field ("kCGImagePropertyMakerNikonShutterCount")]
-		NSString MakerNikonShutterCount { get; }
+		public static extern NSString MakerNikonShutterCount { get; }
 		[Field ("kCGImagePropertyMakerNikonCameraSerialNumber")]
-		NSString MakerNikonCameraSerialNumber { get; }
+		public static extern NSString MakerNikonCameraSerialNumber { get; }
 
 		// Canon Camera Dictionary Keys
 
 		[Field ("kCGImagePropertyMakerCanonOwnerName")]
-		NSString MakerCanonOwnerName { get; }
+		public static extern NSString MakerCanonOwnerName { get; }
 		[Field ("kCGImagePropertyMakerCanonCameraSerialNumber")]
-		NSString MakerCanonCameraSerialNumber { get; }
+		public static extern 	NSString MakerCanonCameraSerialNumber { get; }
 		[Field ("kCGImagePropertyMakerCanonImageSerialNumber")]
-		NSString MakerCanonImageSerialNumber { get; }
+		public static extern 	NSString MakerCanonImageSerialNumber { get; }
 		[Field ("kCGImagePropertyMakerCanonFlashExposureComp")]
-		NSString MakerCanonFlashExposureComp { get; }
+		public static extern NSString MakerCanonFlashExposureComp { get; }
 		[Field ("kCGImagePropertyMakerCanonContinuousDrive")]
-		NSString MakerCanonContinuousDrive { get; }
+		public static extern NSString MakerCanonContinuousDrive { get; }
 		[Field ("kCGImagePropertyMakerCanonLensModel")]
-		NSString MakerCanonLensModel { get; }
+		public static extern NSString MakerCanonLensModel { get; }
 		[Field ("kCGImagePropertyMakerCanonFirmware")]
-		NSString MakerCanonFirmware { get; }
+		public static extern NSString MakerCanonFirmware { get; }
 		[Field ("kCGImagePropertyMakerCanonAspectRatioInfo")]
-		NSString MakerCanonAspectRatioInfo { get; }
+		public static extern NSString MakerCanonAspectRatioInfo { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifISOSpeed")]
-		NSString ExifISOSpeed { get; }
+		public static extern NSString ExifISOSpeed { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifISOSpeedLatitudeyyy")]
-		NSString ExifISOSpeedLatitudeYyy { get; }
+		public static extern NSString ExifISOSpeedLatitudeYyy { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifISOSpeedLatitudezzz")]
-		NSString ExifISOSpeedLatitudeZzz { get; }
+		public static extern NSString ExifISOSpeedLatitudeZzz { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifRecommendedExposureIndex")]
-		NSString ExifRecommendedExposureIndex { get; }
+		public static extern NSString ExifRecommendedExposureIndex { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifSensitivityType")]
-		NSString ExifSensitivityType { get; }
+		public static extern NSString ExifSensitivityType { get; }
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifStandardOutputSensitivity")]
-		NSString ExifStandardOutputSensitivity { get; }
+		public static extern NSString ExifStandardOutputSensitivity { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifOffsetTime")]
-		NSString ExifOffsetTime { get; }
+		public static extern NSString ExifOffsetTime { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifOffsetTimeOriginal")]
-		NSString ExifOffsetTimeOriginal { get; }
+		public static extern NSString ExifOffsetTimeOriginal { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyExifOffsetTimeDigitized")]
-		NSString ExifOffsetTimeDigitized { get; }
+		public static extern NSString ExifOffsetTimeDigitized { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyMakerAppleDictionary")]
-		NSString MakerAppleDictionary { get; }
+		public static extern NSString MakerAppleDictionary { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyImageCount")]
-		NSString ImageCount { get; }
+		public static extern NSString ImageCount { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyImageIndex")]
-		NSString ImageIndex { get; }
+		public static extern NSString ImageIndex { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyWidth")]
-		NSString Width { get; }
+		public static extern NSString Width { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyHeight")]
-		NSString Height { get; }
+		public static extern NSString Height { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyBytesPerRow")]
-		NSString BytesPerRow { get; }
+		public static extern NSString BytesPerRow { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyNamedColorSpace")]
-		NSString NamedColorSpace { get; }
+		public static extern NSString NamedColorSpace { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPixelFormat")]
-		NSString PixelFormat { get; }
+		public static extern NSString PixelFormat { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyImages")]
-		NSString Images { get; }
+		public static extern NSString Images { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyThumbnailImages")]
-		NSString ThumbnailImages { get; }
+		public static extern NSString ThumbnailImages { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAuxiliaryData")]
-		NSString AuxiliaryData { get; }
+		public static extern NSString AuxiliaryData { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyAuxiliaryDataType")]
-		NSString AuxiliaryDataType { get; }
+		public static extern NSString AuxiliaryDataType { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyFileContentsDictionary")]
-		NSString FileContentsDictionary { get; }
+		public static extern NSString FileContentsDictionary { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyOpenEXRDictionary")]
-		NSString OpenExrDictionary { get; }
+		public static extern NSString OpenExrDictionary { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAboutCvTerm")]
-		NSString IPTCExtAboutCvTerm { get; }
+		public static extern NSString IPTCExtAboutCvTerm { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAboutCvTermCvId")]
-		NSString IPTCExtAboutCvTermCvId { get; }
+		public static extern NSString IPTCExtAboutCvTermCvId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAboutCvTermId")]
-		NSString IPTCExtAboutCvTermId { get; }
+		public static extern NSString IPTCExtAboutCvTermId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAboutCvTermName")]
-		NSString IPTCExtAboutCvTermName { get; }
+		public static extern NSString IPTCExtAboutCvTermName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAboutCvTermRefinedAbout")]
-		NSString IPTCExtAboutCvTermRefinedAbout { get; }
+		public static extern NSString IPTCExtAboutCvTermRefinedAbout { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAddlModelInfo")]
-		NSString IPTCExtAddlModelInfo { get; }
+		public static extern NSString IPTCExtAddlModelInfo { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkOrObject")]
-		NSString IPTCExtArtworkOrObject { get; }
+		public static extern NSString IPTCExtArtworkOrObject { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkCircaDateCreated")]
-		NSString IPTCExtArtworkCircaDateCreated { get; }
+		public static extern NSString IPTCExtArtworkCircaDateCreated { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkContentDescription")]
-		NSString IPTCExtArtworkContentDescription { get; }
+		public static extern NSString IPTCExtArtworkContentDescription { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkContributionDescription")]
-		NSString IPTCExtArtworkContributionDescription { get; }
+		public static extern NSString IPTCExtArtworkContributionDescription { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkCopyrightNotice")]
-		NSString IPTCExtArtworkCopyrightNotice { get; }
+		public static extern NSString IPTCExtArtworkCopyrightNotice { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkCreator")]
-		NSString IPTCExtArtworkCreator { get; }
+		public static extern NSString IPTCExtArtworkCreator { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkCreatorID")]
-		NSString IPTCExtArtworkCreatorId { get; }
+		public static extern NSString IPTCExtArtworkCreatorId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkCopyrightOwnerID")]
-		NSString IPTCExtArtworkCopyrightOwnerId { get; }
+		public static extern NSString IPTCExtArtworkCopyrightOwnerId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkCopyrightOwnerName")]
-		NSString IPTCExtArtworkCopyrightOwnerName { get; }
+		public static extern NSString IPTCExtArtworkCopyrightOwnerName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkLicensorID")]
-		NSString IPTCExtArtworkLicensorId { get; }
+		public static extern NSString IPTCExtArtworkLicensorId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkLicensorName")]
-		NSString IPTCExtArtworkLicensorName { get; }
+		public static extern NSString IPTCExtArtworkLicensorName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkDateCreated")]
-		NSString IPTCExtArtworkDateCreated { get; }
+		public static extern NSString IPTCExtArtworkDateCreated { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkPhysicalDescription")]
-		NSString IPTCExtArtworkPhysicalDescription { get; }
+		public static extern NSString IPTCExtArtworkPhysicalDescription { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkSource")]
-		NSString IPTCExtArtworkSource { get; }
+		public static extern NSString IPTCExtArtworkSource { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkSourceInventoryNo")]
-		NSString IPTCExtArtworkSourceInventoryNo { get; }
+		public static extern NSString IPTCExtArtworkSourceInventoryNo { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkSourceInvURL")]
-		NSString IPTCExtArtworkSourceInvUrl { get; }
+		public static extern NSString IPTCExtArtworkSourceInvUrl { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkStylePeriod")]
-		NSString IPTCExtArtworkStylePeriod { get; }
+		public static extern NSString IPTCExtArtworkStylePeriod { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtArtworkTitle")]
-		NSString IPTCExtArtworkTitle { get; }
+		public static extern NSString IPTCExtArtworkTitle { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAudioBitrate")]
-		NSString IPTCExtAudioBitrate { get; }
+		public static extern NSString IPTCExtAudioBitrate { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAudioBitrateMode")]
-		NSString IPTCExtAudioBitrateMode { get; }
+		public static extern NSString IPTCExtAudioBitrateMode { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtAudioChannelCount")]
-		NSString IPTCExtAudioChannelCount { get; }
+		public static extern NSString IPTCExtAudioChannelCount { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtCircaDateCreated")]
-		NSString IPTCExtCircaDateCreated { get; }
+		public static extern NSString IPTCExtCircaDateCreated { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContainerFormat")]
-		NSString IPTCExtContainerFormat { get; }
+		public static extern NSString IPTCExtContainerFormat { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContainerFormatIdentifier")]
-		NSString IPTCExtContainerFormatIdentifier { get; }
+		public static extern NSString IPTCExtContainerFormatIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContainerFormatName")]
-		NSString IPTCExtContainerFormatName { get; }
+		public static extern NSString IPTCExtContainerFormatName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContributor")]
-		NSString IPTCExtContributor { get; }
+		public static extern NSString IPTCExtContributor { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContributorIdentifier")]
-		NSString IPTCExtContributorIdentifier { get; }
+		public static extern NSString IPTCExtContributorIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContributorName")]
-		NSString IPTCExtContributorName { get; }
+		public static extern NSString IPTCExtContributorName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtContributorRole")]
-		NSString IPTCExtContributorRole { get; }
+		public static extern NSString IPTCExtContributorRole { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtCopyrightYear")]
-		NSString IPTCExtCopyrightYear { get; }
+		public static extern NSString IPTCExtCopyrightYear { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtCreator")]
-		NSString IPTCExtCreator { get; }
+		public static extern NSString IPTCExtCreator { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtCreatorIdentifier")]
-		NSString IPTCExtCreatorIdentifier { get; }
+		public static extern NSString IPTCExtCreatorIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtCreatorName")]
-		NSString IPTCExtCreatorName { get; }
+		public static extern NSString IPTCExtCreatorName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtCreatorRole")]
-		NSString IPTCExtCreatorRole { get; }
+		public static extern NSString IPTCExtCreatorRole { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtControlledVocabularyTerm")]
-		NSString IPTCExtControlledVocabularyTerm { get; }
+		public static extern NSString IPTCExtControlledVocabularyTerm { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreen")]
-		NSString IPTCExtDataOnScreen { get; }
+		public static extern NSString IPTCExtDataOnScreen { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegion")]
-		NSString IPTCExtDataOnScreenRegion { get; }
+		public static extern NSString IPTCExtDataOnScreenRegion { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionD")]
-		NSString IPTCExtDataOnScreenRegionD { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionD { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionH")]
-		NSString IPTCExtDataOnScreenRegionH { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionH { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionText")]
-		NSString IPTCExtDataOnScreenRegionText { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionText { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionUnit")]
-		NSString IPTCExtDataOnScreenRegionUnit { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionUnit { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionW")]
-		NSString IPTCExtDataOnScreenRegionW { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionW { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionX")]
-		NSString IPTCExtDataOnScreenRegionX { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionX { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDataOnScreenRegionY")]
-		NSString IPTCExtDataOnScreenRegionY { get; }
+		public static extern NSString IPTCExtDataOnScreenRegionY { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDigitalImageGUID")]
-		NSString IPTCExtDigitalImageGuid { get; }
+		public static extern NSString IPTCExtDigitalImageGuid { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDigitalSourceFileType")]
-		NSString IPTCExtDigitalSourceFileType { get; }
+		public static extern NSString IPTCExtDigitalSourceFileType { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDigitalSourceType")]
-		NSString IPTCExtDigitalSourceType { get; }
+		public static extern NSString IPTCExtDigitalSourceType { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDopesheet")]
-		NSString IPTCExtDopesheet { get; }
+		public static extern NSString IPTCExtDopesheet { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDopesheetLink")]
-		NSString IPTCExtDopesheetLink { get; }
+		public static extern NSString IPTCExtDopesheetLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDopesheetLinkLink")]
-		NSString IPTCExtDopesheetLinkLink { get; }
+		public static extern NSString IPTCExtDopesheetLinkLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtDopesheetLinkLinkQualifier")]
-		NSString IPTCExtDopesheetLinkLinkQualifier { get; }
+		public static extern NSString IPTCExtDopesheetLinkLinkQualifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEmbdEncRightsExpr")]
-		NSString IPTCExtEmbdEncRightsExpr { get; }
+		public static extern NSString IPTCExtEmbdEncRightsExpr { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEmbeddedEncodedRightsExpr")]
-		NSString IPTCExtEmbeddedEncodedRightsExpr { get; }
+		public static extern NSString IPTCExtEmbeddedEncodedRightsExpr { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprType")]
-		NSString IPTCExtEmbeddedEncodedRightsExprType { get; }
+		public static extern NSString IPTCExtEmbeddedEncodedRightsExprType { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEmbeddedEncodedRightsExprLangID")]
-		NSString IPTCExtEmbeddedEncodedRightsExprLangId { get; }
+		public static extern NSString IPTCExtEmbeddedEncodedRightsExprLangId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEpisode")]
-		NSString IPTCExtEpisode { get; }
+		public static extern NSString IPTCExtEpisode { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEpisodeIdentifier")]
-		NSString IPTCExtEpisodeIdentifier { get; }
+		public static extern NSString IPTCExtEpisodeIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEpisodeName")]
-		NSString IPTCExtEpisodeName { get; }
+		public static extern NSString IPTCExtEpisodeName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEpisodeNumber")]
-		NSString IPTCExtEpisodeNumber { get; }
+		public static extern NSString IPTCExtEpisodeNumber { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtEvent")]
-		NSString IPTCExtEvent { get; }
+		public static extern NSString IPTCExtEvent { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtShownEvent")]
-		NSString IPTCExtShownEvent { get; }
+		public static extern NSString IPTCExtShownEvent { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtShownEventIdentifier")]
-		NSString IPTCExtShownEventIdentifier { get; }
+		public static extern NSString IPTCExtShownEventIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtShownEventName")]
-		NSString IPTCExtShownEventName { get; }
+		public static extern NSString IPTCExtShownEventName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtExternalMetadataLink")]
-		NSString IPTCExtExternalMetadataLink { get; }
+		public static extern NSString IPTCExtExternalMetadataLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtFeedIdentifier")]
-		NSString IPTCExtFeedIdentifier { get; }
+		public static extern NSString IPTCExtFeedIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtGenre")]
-		NSString IPTCExtGenre { get; }
+		public static extern NSString IPTCExtGenre { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtGenreCvId")]
-		NSString IPTCExtGenreCvId { get; }
+		public static extern NSString IPTCExtGenreCvId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtGenreCvTermId")]
-		NSString IPTCExtGenreCvTermId { get; }
+		public static extern NSString IPTCExtGenreCvTermId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtGenreCvTermName")]
-		NSString IPTCExtGenreCvTermName { get; }
+		public static extern NSString IPTCExtGenreCvTermName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtGenreCvTermRefinedAbout")]
-		NSString IPTCExtGenreCvTermRefinedAbout { get; }
+		public static extern NSString IPTCExtGenreCvTermRefinedAbout { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtHeadline")]
-		NSString IPTCExtHeadline { get; }
+		public static extern NSString IPTCExtHeadline { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtIPTCLastEdited")]
-		NSString IPTCExtIPTCLastEdited { get; }
+		public static extern NSString IPTCExtIPTCLastEdited { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLinkedEncRightsExpr")]
-		NSString IPTCExtLinkedEncRightsExpr { get; }
+		public static extern NSString IPTCExtLinkedEncRightsExpr { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLinkedEncodedRightsExpr")]
-		NSString IPTCExtLinkedEncodedRightsExpr { get; }
+		public static extern NSString IPTCExtLinkedEncodedRightsExpr { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLinkedEncodedRightsExprType")]
-		NSString IPTCExtLinkedEncodedRightsExprType { get; }
+		public static extern NSString IPTCExtLinkedEncodedRightsExprType { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLinkedEncodedRightsExprLangID")]
-		NSString IPTCExtLinkedEncodedRightsExprLangId { get; }
+		public static extern NSString IPTCExtLinkedEncodedRightsExprLangId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationCreated")]
-		NSString IPTCExtLocationCreated { get; }
+		public static extern NSString IPTCExtLocationCreated { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationCity")]
-		NSString IPTCExtLocationCity { get; }
+		public static extern NSString IPTCExtLocationCity { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationCountryCode")]
-		NSString IPTCExtLocationCountryCode { get; }
+		public static extern NSString IPTCExtLocationCountryCode { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationCountryName")]
-		NSString IPTCExtLocationCountryName { get; }
+		public static extern NSString IPTCExtLocationCountryName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationGPSAltitude")]
-		NSString IPTCExtLocationGpsAltitude { get; }
+		public static extern NSString IPTCExtLocationGpsAltitude { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationGPSLatitude")]
-		NSString IPTCExtLocationGpsLatitude { get; }
+		public static extern NSString IPTCExtLocationGpsLatitude { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationGPSLongitude")]
-		NSString IPTCExtLocationGpsLongitude { get; }
+		public static extern NSString IPTCExtLocationGpsLongitude { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationIdentifier")]
-		NSString IPTCExtLocationIdentifier { get; }
+		public static extern NSString IPTCExtLocationIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationLocationId")]
-		NSString IPTCExtLocationLocationId { get; }
+		public static extern NSString IPTCExtLocationLocationId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationLocationName")]
-		NSString IPTCExtLocationLocationName { get; }
+		public static extern NSString IPTCExtLocationLocationName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationProvinceState")]
-		NSString IPTCExtLocationProvinceState { get; }
+		public static extern NSString IPTCExtLocationProvinceState { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationSublocation")]
-		NSString IPTCExtLocationSublocation { get; }
+		public static extern NSString IPTCExtLocationSublocation { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationWorldRegion")]
-		NSString IPTCExtLocationWorldRegion { get; }
+		public static extern NSString IPTCExtLocationWorldRegion { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtLocationShown")]
-		NSString IPTCExtLocationShown { get; }
+		public static extern NSString IPTCExtLocationShown { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtMaxAvailHeight")]
-		NSString IPTCExtMaxAvailHeight { get; }
+		public static extern NSString IPTCExtMaxAvailHeight { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtMaxAvailWidth")]
-		NSString IPTCExtMaxAvailWidth { get; }
+		public static extern NSString IPTCExtMaxAvailWidth { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtModelAge")]
-		NSString IPTCExtModelAge { get; }
+		public static extern NSString IPTCExtModelAge { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtOrganisationInImageCode")]
-		NSString IPTCExtOrganisationInImageCode { get; }
+		public static extern NSString IPTCExtOrganisationInImageCode { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtOrganisationInImageName")]
-		NSString IPTCExtOrganisationInImageName { get; }
+		public static extern NSString IPTCExtOrganisationInImageName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonHeard")]
-		NSString IPTCExtPersonHeard { get; }
+		public static extern NSString IPTCExtPersonHeard { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonHeardIdentifier")]
-		NSString IPTCExtPersonHeardIdentifier { get; }
+		public static extern NSString IPTCExtPersonHeardIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonHeardName")]
-		NSString IPTCExtPersonHeardName { get; }
+		public static extern NSString IPTCExtPersonHeardName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImage")]
-		NSString IPTCExtPersonInImage { get; }
+		public static extern NSString IPTCExtPersonInImage { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageWDetails")]
-		NSString IPTCExtPersonInImageWDetails { get; }
+		public static extern NSString IPTCExtPersonInImageWDetails { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageCharacteristic")]
-		NSString IPTCExtPersonInImageCharacteristic { get; }
+		public static extern NSString IPTCExtPersonInImageCharacteristic { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageCvTermCvId")]
-		NSString IPTCExtPersonInImageCvTermCvId { get; }
+		public static extern NSString IPTCExtPersonInImageCvTermCvId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageCvTermId")]
-		NSString IPTCExtPersonInImageCvTermId { get; }
+		public static extern NSString IPTCExtPersonInImageCvTermId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageCvTermName")]
-		NSString IPTCExtPersonInImageCvTermName { get; }
+		public static extern NSString IPTCExtPersonInImageCvTermName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageCvTermRefinedAbout")]
-		NSString IPTCExtPersonInImageCvTermRefinedAbout { get; }
+		public static extern NSString IPTCExtPersonInImageCvTermRefinedAbout { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageDescription")]
-		NSString IPTCExtPersonInImageDescription { get; }
+		public static extern NSString IPTCExtPersonInImageDescription { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageId")]
-		NSString IPTCExtPersonInImageId { get; }
+		public static extern NSString IPTCExtPersonInImageId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPersonInImageName")]
-		NSString IPTCExtPersonInImageName { get; }
+		public static extern NSString IPTCExtPersonInImageName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtProductInImage")]
-		NSString IPTCExtProductInImage { get; }
+		public static extern NSString IPTCExtProductInImage { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtProductInImageDescription")]
-		NSString IPTCExtProductInImageDescription { get; }
+		public static extern NSString IPTCExtProductInImageDescription { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtProductInImageGTIN")]
-		NSString IPTCExtProductInImageGtin { get; }
+		public static extern NSString IPTCExtProductInImageGtin { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtProductInImageName")]
-		NSString IPTCExtProductInImageName { get; }
+		public static extern NSString IPTCExtProductInImageName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPublicationEvent")]
-		NSString IPTCExtPublicationEvent { get; }
+		public static extern NSString IPTCExtPublicationEvent { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPublicationEventDate")]
-		NSString IPTCExtPublicationEventDate { get; }
+		public static extern NSString IPTCExtPublicationEventDate { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPublicationEventIdentifier")]
-		NSString IPTCExtPublicationEventIdentifier { get; }
+		public static extern NSString IPTCExtPublicationEventIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtPublicationEventName")]
-		NSString IPTCExtPublicationEventName { get; }
+		public static extern NSString IPTCExtPublicationEventName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRating")]
-		NSString IPTCExtRating { get; }
+		public static extern NSString IPTCExtRating { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRatingRegion")]
-		NSString IPTCExtRatingRatingRegion { get; }
+		public static extern NSString IPTCExtRatingRatingRegion { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionCity")]
-		NSString IPTCExtRatingRegionCity { get; }
+		public static extern NSString IPTCExtRatingRegionCity { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionCountryCode")]
-		NSString IPTCExtRatingRegionCountryCode { get; }
+		public static extern NSString IPTCExtRatingRegionCountryCode { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionCountryName")]
-		NSString IPTCExtRatingRegionCountryName { get; }
+		public static extern NSString IPTCExtRatingRegionCountryName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionGPSAltitude")]
-		NSString IPTCExtRatingRegionGpsAltitude { get; }
+		public static extern NSString IPTCExtRatingRegionGpsAltitude { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionGPSLatitude")]
-		NSString IPTCExtRatingRegionGpsLatitude { get; }
+		public static extern NSString IPTCExtRatingRegionGpsLatitude { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionGPSLongitude")]
-		NSString IPTCExtRatingRegionGpsLongitude { get; }
+		public static extern NSString IPTCExtRatingRegionGpsLongitude { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionIdentifier")]
-		NSString IPTCExtRatingRegionIdentifier { get; }
+		public static extern NSString IPTCExtRatingRegionIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionLocationId")]
-		NSString IPTCExtRatingRegionLocationId { get; }
+		public static extern NSString IPTCExtRatingRegionLocationId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionLocationName")]
-		NSString IPTCExtRatingRegionLocationName { get; }
+		public static extern NSString IPTCExtRatingRegionLocationName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionProvinceState")]
-		NSString IPTCExtRatingRegionProvinceState { get; }
+		public static extern NSString IPTCExtRatingRegionProvinceState { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionSublocation")]
-		NSString IPTCExtRatingRegionSublocation { get; }
+		public static extern NSString IPTCExtRatingRegionSublocation { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingRegionWorldRegion")]
-		NSString IPTCExtRatingRegionWorldRegion { get; }
+		public static extern NSString IPTCExtRatingRegionWorldRegion { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingScaleMaxValue")]
-		NSString IPTCExtRatingScaleMaxValue { get; }
+		public static extern NSString IPTCExtRatingScaleMaxValue { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingScaleMinValue")]
-		NSString IPTCExtRatingScaleMinValue { get; }
+		public static extern NSString IPTCExtRatingScaleMinValue { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingSourceLink")]
-		NSString IPTCExtRatingSourceLink { get; }
+		public static extern NSString IPTCExtRatingSourceLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingValue")]
-		NSString IPTCExtRatingValue { get; }
+		public static extern NSString IPTCExtRatingValue { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRatingValueLogoLink")]
-		NSString IPTCExtRatingValueLogoLink { get; }
+		public static extern NSString IPTCExtRatingValueLogoLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRegistryID")]
-		NSString IPTCExtRegistryId { get; }
+		public static extern NSString IPTCExtRegistryId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRegistryEntryRole")]
-		NSString IPTCExtRegistryEntryRole { get; }
+		public static extern NSString IPTCExtRegistryEntryRole { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRegistryItemID")]
-		NSString IPTCExtRegistryItemId { get; }
+		public static extern NSString IPTCExtRegistryItemId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtRegistryOrganisationID")]
-		NSString IPTCExtRegistryOrganisationId { get; }
+		public static extern NSString IPTCExtRegistryOrganisationId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtReleaseReady")]
-		NSString IPTCExtReleaseReady { get; }
+		public static extern NSString IPTCExtReleaseReady { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeason")]
-		NSString IPTCExtSeason { get; }
+		public static extern NSString IPTCExtSeason { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeasonIdentifier")]
-		NSString IPTCExtSeasonIdentifier { get; }
+		public static extern NSString IPTCExtSeasonIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeasonName")]
-		NSString IPTCExtSeasonName { get; }
+		public static extern NSString IPTCExtSeasonName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeasonNumber")]
-		NSString IPTCExtSeasonNumber { get; }
+		public static extern NSString IPTCExtSeasonNumber { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeries")]
-		NSString IPTCExtSeries { get; }
+		public static extern NSString IPTCExtSeries { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeriesIdentifier")]
-		NSString IPTCExtSeriesIdentifier { get; }
+		public static extern NSString IPTCExtSeriesIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSeriesName")]
-		NSString IPTCExtSeriesName { get; }
+		public static extern NSString IPTCExtSeriesName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtStorylineIdentifier")]
-		NSString IPTCExtStorylineIdentifier { get; }
+		public static extern NSString IPTCExtStorylineIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtStreamReady")]
-		NSString IPTCExtStreamReady { get; }
+		public static extern NSString IPTCExtStreamReady { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtStylePeriod")]
-		NSString IPTCExtStylePeriod { get; }
+		public static extern NSString IPTCExtStylePeriod { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSupplyChainSource")]
-		NSString IPTCExtSupplyChainSource { get; }
+		public static extern NSString IPTCExtSupplyChainSource { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSupplyChainSourceIdentifier")]
-		NSString IPTCExtSupplyChainSourceIdentifier { get; }
+		public static extern NSString IPTCExtSupplyChainSourceIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtSupplyChainSourceName")]
-		NSString IPTCExtSupplyChainSourceName { get; }
+		public static extern NSString IPTCExtSupplyChainSourceName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTemporalCoverage")]
-		NSString IPTCExtTemporalCoverage { get; }
+		public static extern NSString IPTCExtTemporalCoverage { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTemporalCoverageFrom")]
-		NSString IPTCExtTemporalCoverageFrom { get; }
+		public static extern NSString IPTCExtTemporalCoverageFrom { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTemporalCoverageTo")]
-		NSString IPTCExtTemporalCoverageTo { get; }
+		public static extern NSString IPTCExtTemporalCoverageTo { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTranscript")]
-		NSString IPTCExtTranscript { get; }
+		public static extern NSString IPTCExtTranscript { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTranscriptLink")]
-		NSString IPTCExtTranscriptLink { get; }
+		public static extern NSString IPTCExtTranscriptLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTranscriptLinkLink")]
-		NSString IPTCExtTranscriptLinkLink { get; }
+		public static extern NSString IPTCExtTranscriptLinkLink { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtTranscriptLinkLinkQualifier")]
-		NSString IPTCExtTranscriptLinkLinkQualifier { get; }
+		public static extern NSString IPTCExtTranscriptLinkLinkQualifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoBitrate")]
-		NSString IPTCExtVideoBitrate { get; }
+		public static extern NSString IPTCExtVideoBitrate { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoBitrateMode")]
-		NSString IPTCExtVideoBitrateMode { get; }
+		public static extern NSString IPTCExtVideoBitrateMode { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoDisplayAspectRatio")]
-		NSString IPTCExtVideoDisplayAspectRatio { get; }
+		public static extern NSString IPTCExtVideoDisplayAspectRatio { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoEncodingProfile")]
-		NSString IPTCExtVideoEncodingProfile { get; }
+		public static extern NSString IPTCExtVideoEncodingProfile { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoShotType")]
-		NSString IPTCExtVideoShotType { get; }
+		public static extern NSString IPTCExtVideoShotType { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoShotTypeIdentifier")]
-		NSString IPTCExtVideoShotTypeIdentifier { get; }
+		public static extern NSString IPTCExtVideoShotTypeIdentifier { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoShotTypeName")]
-		NSString IPTCExtVideoShotTypeName { get; }
+		public static extern NSString IPTCExtVideoShotTypeName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVideoStreamsCount")]
-		NSString IPTCExtVideoStreamsCount { get; }
+		public static extern NSString IPTCExtVideoStreamsCount { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtVisualColor")]
-		NSString IPTCExtVisualColor { get; }
+		public static extern NSString IPTCExtVisualColor { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtWorkflowTag")]
-		NSString IPTCExtWorkflowTag { get; }
+		public static extern NSString IPTCExtWorkflowTag { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtWorkflowTagCvId")]
-		NSString IPTCExtWorkflowTagCvId { get; }
+		public static extern NSString IPTCExtWorkflowTagCvId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtWorkflowTagCvTermId")]
-		NSString IPTCExtWorkflowTagCvTermId { get; }
+		public static extern NSString IPTCExtWorkflowTagCvTermId { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtWorkflowTagCvTermName")]
-		NSString IPTCExtWorkflowTagCvTermName { get; }
+		public static extern NSString IPTCExtWorkflowTagCvTermName { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyIPTCExtWorkflowTagCvTermRefinedAbout")]
-		NSString IPTCExtWorkflowTagCvTermRefinedAbout { get; }
+		public static extern NSString IPTCExtWorkflowTagCvTermRefinedAbout { get; }
 
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyOpenEXRAspectRatio")]
-		NSString OpenExrAspectRatio { get; }
+		public static extern NSString OpenExrAspectRatio { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImagePropertyPrimaryImage")]
-		NSString PrimaryImage { get; }
+		public static extern NSString PrimaryImage { get; }
 
 		// WebP Dictionary Keys
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPLoopCount")]
-		NSString WebPLoopCount { get; }
+		public static extern NSString WebPLoopCount { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPDelayTime")]
-		NSString WebPDelayTime { get; }
+		public static extern NSString WebPDelayTime { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPUnclampedDelayTime")]
-		NSString WebPUnclampedDelayTime { get; }
+		public static extern NSString WebPUnclampedDelayTime { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPFrameInfoArray")]
-		NSString WebPFrameInfoArray { get; }
+		public static extern NSString WebPFrameInfoArray { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPCanvasPixelWidth")]
-		NSString WebPCanvasPixelWidth { get; }
+		public static extern NSString WebPCanvasPixelWidth { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Field ("kCGImagePropertyWebPCanvasPixelHeight")]
-		NSString WebPCanvasPixelHeight { get; }
+		public static extern NSString WebPCanvasPixelHeight { get; }
 
-		[iOS (14, 1), TV (14, 2), Watch (7, 1)]
+		//[iOS (14, 1), TV (14, 2), Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGImagePropertyTGACompression")]
-		NSString TgaCompression { get; }
+		public static extern NSString TgaCompression { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupImageIndexLeft")]
-		NSString GroupImageIndexLeft { get; }
+		public static extern NSString GroupImageIndexLeft { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupImageIndexRight")]
-		NSString GroupImageIndexRight { get; }
+		public static extern NSString GroupImageIndexRight { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupImageIsAlternateImage")]
-		NSString GroupImageIsAlternateImage { get; }
+		public static extern NSString GroupImageIsAlternateImage { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupImageIsLeftImage")]
-		NSString GroupImageIsLeftImage { get; }
+		public static extern NSString GroupImageIsLeftImage { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupImageIsRightImage")]
-		NSString GroupImageIsRightImage { get; }
+		public static extern NSString GroupImageIsRightImage { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupImagesAlternate")]
-		NSString GroupImagesAlternate { get; }
+		public static extern NSString GroupImagesAlternate { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupIndex")]
-		NSString GroupIndex { get; }
+		public static extern NSString GroupIndex { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroups")]
-		NSString Groups { get; }
+		public static extern NSString Groups { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupType")]
-		NSString GroupType { get; }
+		public static extern NSString GroupType { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupTypeStereoPair")]
-		NSString GroupTypeStereoPair { get; }
+		public static extern NSString GroupTypeStereoPair { get; }
 
-		[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
+		//[iOS (15, 0), TV (15, 0), MacCatalyst (15, 0), Watch (8, 0)]
 		[Field ("kCGImagePropertyGroupTypeAlternate")]
-		NSString GroupTypeAlternate { get; }
+		public static extern NSString GroupTypeAlternate { get; }
 
-		[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+		//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
 		[Field ("kCGImagePropertyGroupImageBaseline")]
-		NSString GroupImageBaseline { get; }
+		public static extern NSString GroupImageBaseline { get; }
 
-		[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+		//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
 		[Field ("kCGImagePropertyGroupImageDisparityAdjustment")]
-		NSString GroupImageDisparityAdjustment { get; }
+		public static extern NSString GroupImageDisparityAdjustment { get; }
 
-		[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+		//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
 		[Field ("kCGImagePropertyHEIFDictionary")]
-		NSString HeifDictionary { get; }
+		public static extern NSString HeifDictionary { get; }
 
-		[iOS (16, 4), Mac (13, 3), Watch (9, 4), TV (16, 4), MacCatalyst (16, 4)]
+		//[iOS (16, 4), Mac (13, 3), Watch (9, 4), TV (16, 4), MacCatalyst (16, 4)]
 		[Field ("kCGImagePropertyOpenEXRCompression")]
-		NSString OpenExrCompression { get; }
+		public static extern NSString OpenExrCompression { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImagePropertyGroupImageIndexMonoscopic")]
-		NSString GroupImageIndexMonoscopic { get; }
+		public static extern NSString GroupImageIndexMonoscopic { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImagePropertyGroupImageIsMonoscopicImage")]
-		NSString GroupImageIsMonoscopicImage { get; }
+		public static extern NSString GroupImageIsMonoscopicImage { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImagePropertyGroupImageStereoAggressors")]
-		NSString GroupImageStereoAggressors { get; }
+		public static extern NSString GroupImageStereoAggressors { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImagePropertyGroupMonoscopicImageLocation")]
-		NSString GroupMonoscopicImageLocation { get; }
+		public static extern NSString GroupMonoscopicImageLocation { get; }
 	}
 
 	/// <summary>Holds constants specifying standard metadata namespaces. Primarily used with <see cref="P:ImageIO.CGImageMetadataTag.Namespace" />.</summary>
 	[Static]
-	interface CGImageMetadataTagNamespaces {
+	public static class CGImageMetadataTagNamespaces {
 		[Field ("kCGImageMetadataNamespaceExif")]
-		NSString Exif { get; }
+		public static extern NSString Exif { get; }
 		[Field ("kCGImageMetadataNamespaceExifAux")]
-		NSString ExifAux { get; }
+		public static extern NSString ExifAux { get; }
 		[Field ("kCGImageMetadataNamespaceExifEX")]
 		[MacCatalyst (13, 1)]
-		NSString ExifEx { get; }
+		public static extern NSString ExifEx { get; }
 		[Field ("kCGImageMetadataNamespaceDublinCore")]
-		NSString DublinCore { get; }
+		public static extern NSString DublinCore { get; }
 		[Field ("kCGImageMetadataNamespaceIPTCCore")]
-		NSString IPTCCore { get; }
+		public static extern NSString IPTCCore { get; }
 		[Field ("kCGImageMetadataNamespacePhotoshop")]
-		NSString Photoshop { get; }
+		public static extern NSString Photoshop { get; }
 		[Field ("kCGImageMetadataNamespaceTIFF")]
-		NSString TIFF { get; }
+		public static extern NSString TIFF { get; }
 		[Field ("kCGImageMetadataNamespaceXMPBasic")]
-		NSString XMPBasic { get; }
+		public static extern NSString XMPBasic { get; }
 		[Field ("kCGImageMetadataNamespaceXMPRights")]
-		NSString XMPRights { get; }
+		public static extern NSString XMPRights { get; }
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageMetadataNamespaceIPTCExtension")]
-		NSString IPTCExtension { get; }
+		public static extern NSString IPTCExtension { get; }
 	}
 
 	/// <summary>Constants defining standard prefixes. Primarily used with <see cref="P:ImageIO.CGImageMetadataTag.Prefix" />.</summary>
 	[Static]
-	interface CGImageMetadataTagPrefixes {
+	public static class CGImageMetadataTagPrefixes {
 		[Field ("kCGImageMetadataPrefixExif")]
-		NSString Exif { get; }
+		public static extern NSString Exif { get; }
 		[Field ("kCGImageMetadataPrefixExifAux")]
-		NSString ExifAux { get; }
+		public static extern NSString ExifAux { get; }
 		[Field ("kCGImageMetadataPrefixExifEX")]
 		[MacCatalyst (13, 1)]
-		NSString ExifEx { get; }
+		public static extern NSString ExifEx { get; }
 		[Field ("kCGImageMetadataPrefixDublinCore")]
-		NSString DublinCore { get; }
+		public static extern NSString DublinCore { get; }
 		[Field ("kCGImageMetadataPrefixIPTCCore")]
-		NSString IPTCCore { get; }
+		public static extern NSString IPTCCore { get; }
 		[Field ("kCGImageMetadataPrefixPhotoshop")]
-		NSString Photoshop { get; }
+		public static extern NSString Photoshop { get; }
 		[Field ("kCGImageMetadataPrefixTIFF")]
-		NSString TIFF { get; }
+		public static extern NSString TIFF { get; }
 		[Field ("kCGImageMetadataPrefixXMPBasic")]
-		NSString XMPBasic { get; }
+		public static extern NSString XMPBasic { get; }
 		[Field ("kCGImageMetadataPrefixXMPRights")]
-		NSString XMPRights { get; }
+		public static extern NSString XMPRights { get; }
 		[Watch (4, 3)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageMetadataPrefixIPTCExtension")]
-		NSString IPTCExtension { get; }
+		public static extern NSString IPTCExtension { get; }
 	}
 
-	interface CGImageMetadata {
+	public static class CGImageMetadata {
 		[Field ("kCFErrorDomainCGImageMetadata")]
-		NSString ErrorDomain { get; }
+		public static extern NSString ErrorDomain { get; }
 	}
 
 	/// <summary>Use an instance of this class to configure the CGImageSource.</summary>
@@ -2528,265 +2528,265 @@ namespace ImageIO {
 	}
 
 	[Partial]
-	[Watch (10, 0), TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
-	interface CGImageDecodeOptions {
+	//[Watch (10, 0), TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
+	public partial class CGImageDecodeOptions {
 		[Internal]
 		[Field ("kCGImageSourceDecodeRequest")]
-		IntPtr DecodeRequest { get; }
+		public extern IntPtr DecodeRequest { get; }
 
 		[Internal]
 		[Field ("kCGImageSourceDecodeToHDR")]
-		IntPtr DecodeToHDR { get; }
+		public extern IntPtr DecodeToHDR { get; }
 
 		[Internal]
 		[Field ("kCGImageSourceDecodeToSDR")]
-		IntPtr DecodeToSDR { get; }
+		public extern IntPtr DecodeToSDR { get; }
 
-		[iOS (18, 0), MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), Watch (11, 0)]
+		//[iOS (18, 0), MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), Watch (11, 0)]
 		[Internal]
 		[Field ("kCGImageSourceGenerateImageSpecificLumaScaling")]
-		IntPtr GenerateImageSpecificLumaScaling { get; }
+		public extern IntPtr GenerateImageSpecificLumaScaling { get; }
 
 		[Internal]
 		[Field ("kCGImageSourceDecodeRequestOptions")]
-		IntPtr DecodeRequestOptions { get; }
+		public extern IntPtr DecodeRequestOptions { get; }
 	}
 
 	/// <summary>Specifies whether the callback in <see cref="M:ImageIO.CGImageMetadata.EnumerateTags(Foundation.NSString,ImageIO.CGImageMetadataEnumerateOptions,ImageIO.CGImageMetadataTagBlock)" /> is recursive.</summary>
 	[Partial]
-	interface CGImageMetadataEnumerateOptions {
+	public partial class CGImageMetadataEnumerateOptions {
 		[Internal]
 		[Field ("kCGImageMetadataEnumerateRecursively")]
-		IntPtr kCGImageMetadataEnumerateRecursively { get; }
+		public extern IntPtr kCGImageMetadataEnumerateRecursively { get; }
 	}
 
 	// Defined in CGImageProperties.cs in CoreGraphics
-	interface CGImagePropertiesTiff { }
-	interface CGImagePropertiesExif { }
-	interface CGImagePropertiesJfif { }
-	interface CGImagePropertiesPng { }
-	interface CGImagePropertiesGps { }
-	interface CGImagePropertiesIptc { }
+	public interface CGImagePropertiesTiff { }
+	public interface CGImagePropertiesExif { }
+	public interface CGImagePropertiesJfif { }
+	public interface CGImagePropertiesPng { }
+	public interface CGImagePropertiesGps { }
+	public interface CGImagePropertiesIptc { }
 
 	/// <summary>Use an instance of this class to configure how an image is added to a <see cref="T:ImageIO.CGImageDestination" />.</summary>
 	///     <remarks>
 	///       <para>Use this class to configure the parameters when you add an image to CGImageDestination.</para>
 	///     </remarks>
-	[StrongDictionary ("CGImageDestinationOptionsKeys")]
-	interface CGImageDestinationOptions {
+	//[StrongDictionary ("CGImageDestinationOptionsKeys")]
+	public partial class CGImageDestinationOptions: DictionaryContainer {
 
 		[Export ("LossyCompressionQuality")]
-		float LossyCompressionQuality { get; set; }
+		public extern float LossyCompressionQuality { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("ImageMaxPixelSize")]
-		int ImageMaxPixelSize { get; set; }
+		public extern int ImageMaxPixelSize { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("EmbedThumbnail")]
-		bool EmbedThumbnail { get; set; }
+		public extern bool EmbedThumbnail { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("OptimizeColorForSharing")]
-		bool OptimizeColorForSharing { get; set; }
+		public extern bool OptimizeColorForSharing { get; set; }
 
 		[StrongDictionary]
 		[Export ("TIFFDictionary")]
-		CGImagePropertiesTiff TiffDictionary { get; set; }
+		public extern CGImagePropertiesTiff TiffDictionary { get; set; }
 
 		[Export ("GIFDictionary")]
-		NSDictionary GifDictionary { get; set; }
+		public extern NSDictionary GifDictionary { get; set; }
 
 		[StrongDictionary]
 		[Export ("JFIFDictionary")]
-		CGImagePropertiesJfif JfifDictionary { get; set; }
+		public extern CGImagePropertiesJfif JfifDictionary { get; set; }
 
 		[StrongDictionary]
 		[Export ("ExifDictionary")]
-		CGImagePropertiesExif ExifDictionary { get; set; }
+		public extern CGImagePropertiesExif ExifDictionary { get; set; }
 
 		[StrongDictionary]
 		[Export ("PNGDictionary")]
-		CGImagePropertiesPng PngDictionary { get; set; }
+		public extern CGImagePropertiesPng PngDictionary { get; set; }
 
 		[StrongDictionary]
 		[Export ("IPTCDictionary")]
-		CGImagePropertiesIptc IptcDictionary { get; set; }
+		public extern CGImagePropertiesIptc IptcDictionary { get; set; }
 
 		[StrongDictionary]
 		[Export ("GPSDictionary")]
-		CGImagePropertiesGps GpsDictionary { get; set; }
+		public extern CGImagePropertiesGps GpsDictionary { get; set; }
 
 		[Export ("RawDictionary")]
-		NSDictionary RawDictionary { get; set; }
+		public extern NSDictionary RawDictionary { get; set; }
 
 		[Export ("CIFFDictionary")]
-		NSDictionary CiffDictionary { get; set; }
+		public extern NSDictionary CiffDictionary { get; set; }
 
 		[Export ("EightBIMDictionary")]
-		NSDictionary EightBimDictionary { get; set; }
+		public extern NSDictionary EightBimDictionary { get; set; }
 
 		[Export ("DNGDictionary")]
-		NSDictionary DngDictionary { get; set; }
+		public extern NSDictionary DngDictionary { get; set; }
 
 		[Export ("ExifAuxDictionary")]
-		NSDictionary ExifAuxDictionary { get; set; }
+		public extern NSDictionary ExifAuxDictionary { get; set; }
 
-		[iOS (14, 0), TV (14, 0), Watch (7, 0)]
+		//[iOS (14, 0), TV (14, 0), Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Export ("WebPDictionary")]
-		NSDictionary WebPDictionary { get; set; }
+		public extern NSDictionary WebPDictionary { get; set; }
 
-		[iOS (14, 1), TV (14, 2), Watch (7, 1)]
+		//[iOS (14, 1), TV (14, 2), Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Export ("TgaDictionary")]
-		NSDictionary TgaDictionary { get; set; }
+		public extern NSDictionary TgaDictionary { get; set; }
 
-		[Mac (14, 0), iOS (17, 0), TV (17, 0), Watch (10, 0), MacCatalyst (17, 0)]
+		//[Mac (14, 0), iOS (17, 0), TV (17, 0), Watch (10, 0), MacCatalyst (17, 0)]
 		[Export ("AvisDictionary")]
-		NSDictionary AvisDictionary { get; set; }
+		public extern NSDictionary AvisDictionary { get; set; }
 
-		[iOS (14, 1)]
+		//[iOS (14, 1)]
 		[TV (14, 2)]
 		[Watch (7, 1)]
 		[MacCatalyst (14, 1)]
-		bool PreserveGainMap { get; set; }
+		public extern bool PreserveGainMap { get; set; }
 	}
 
 	/// <summary>Contains keys that index image destination options.</summary>
 	[Static]
-	interface CGImageDestinationOptionsKeys {
+	public static class CGImageDestinationOptionsKeys {
 
 		[Field ("kCGImageDestinationLossyCompressionQuality")]
-		NSString LossyCompressionQuality { get; }
+		public static extern NSString LossyCompressionQuality { get; }
 
 		[Field ("kCGImageDestinationBackgroundColor")]
-		NSString BackgroundColor { get; }
+		public static extern NSString BackgroundColor { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageDestinationImageMaxPixelSize")]
-		NSString ImageMaxPixelSize { get; }
+		public static extern NSString ImageMaxPixelSize { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageDestinationEmbedThumbnail")]
-		NSString EmbedThumbnail { get; }
+		public static extern NSString EmbedThumbnail { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageDestinationOptimizeColorForSharing")]
-		NSString OptimizeColorForSharing { get; }
+		public static extern NSString OptimizeColorForSharing { get; }
 
 		// [Field ("kCGImagePropertyTIFFDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.TIFFDictionary")]
-		NSString TIFFDictionary { get; }
+		public static extern NSString TIFFDictionary { get; }
 
 		// [Field ("kCGImagePropertyGIFDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.GIFDictionary")]
-		NSString GIFDictionary { get; }
+		public static extern NSString GIFDictionary { get; }
 
 		// [Field ("kCGImagePropertyJFIFDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.JFIFDictionary")]
-		NSString JFIFDictionary { get; }
+		public static extern NSString JFIFDictionary { get; }
 
 		// [Field ("kCGImagePropertyExifDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.ExifDictionary")]
-		NSString ExifDictionary { get; }
+		public static extern NSString ExifDictionary { get; }
 
 		// [Field ("kCGImagePropertyPNGDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.PNGDictionary")]
-		NSString PNGDictionary { get; }
+		public static extern NSString PNGDictionary { get; }
 
 		// [Field ("kCGImagePropertyIPTCDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.IPTCDictionary")]
-		NSString IPTCDictionary { get; }
+		public static extern NSString IPTCDictionary { get; }
 
 		// [Field ("kCGImagePropertyGPSDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.GPSDictionary")]
-		NSString GPSDictionary { get; }
+		public static extern NSString GPSDictionary { get; }
 
 		// [Field ("kCGImagePropertyRawDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.RawDictionary")]
-		NSString RawDictionary { get; }
+		public static extern NSString RawDictionary { get; }
 
 		// [Field ("kCGImagePropertyCIFFDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.CIFFDictionary")]
-		NSString CIFFDictionary { get; }
+		public static extern NSString CIFFDictionary { get; }
 
 		// [Field ("kCGImageProperty8BIMDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.EightBIMDictionary")]
-		NSString EightBIMDictionary { get; }
+		public static extern NSString EightBIMDictionary { get; }
 
 		// [Field ("kCGImagePropertyDNGDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.DNGDictionary")]
-		NSString DNGDictionary { get; }
+		public static extern NSString DNGDictionary { get; }
 
 		// [Field ("kCGImagePropertyExifAuxDictionary")]
 		[Static]
 		[Wrap ("CGImageProperties.ExifAuxDictionary")]
-		NSString ExifAuxDictionary { get; }
+		public static extern NSString ExifAuxDictionary { get; }
 
-		[iOS (14, 0), TV (14, 0), Watch (7, 0)]
+		//[iOS (14, 0), TV (14, 0), Watch (7, 0)]
 		[MacCatalyst (14, 0)]
 		[Static]
 		[Wrap ("CGImageProperties.WebPDictionary")]
-		NSString WebPDictionary { get; }
+		public static extern NSString WebPDictionary { get; }
 
-		[iOS (14, 1), TV (14, 2), Watch (7, 1)]
+		//[iOS (14, 1), TV (14, 2), Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Static]
 		[Wrap ("CGImageProperties.TgaDictionary")]
-		NSString TgaDictionary { get; }
+		public static extern NSString TgaDictionary { get; }
 
-		[Mac (14, 0), iOS (17, 0), TV (17, 0), Watch (10, 0)]
+		//[Mac (14, 0), iOS (17, 0), TV (17, 0), Watch (10, 0)]
 		[MacCatalyst (17, 0)]
 		[Static]
 		[Wrap ("CGImageProperties.AvisDictionary")]
-		NSString AvisDictionary { get; }
+		public static extern NSString AvisDictionary { get; }
 
-		[iOS (14, 1)]
+		//[iOS (14, 1)]
 		[TV (14, 2)]
 		[Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGImageDestinationPreserveGainMap")]
-		NSString PreserveGainMapKey { get; }
+		public static extern NSString PreserveGainMapKey { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeRequest")]
-		NSString EncodeRequest { get; }
+		public static extern NSString EncodeRequest { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeToSDR")]
-		NSString EncodeToSdr { get; }
+		public static extern NSString EncodeToSdr { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeToISOHDR")]
-		NSString EncodeToIsoHdr { get; }
+		public static extern NSString EncodeToIsoHdr { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeToISOGainmap")]
-		NSString EncodeToIsoGainmap { get; }
+		public static extern NSString EncodeToIsoGainmap { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeRequestOptions")]
-		NSString EncodeRequestOptions { get; }
+		public static extern NSString EncodeRequestOptions { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeBaseIsSDR")]
-		NSString EncodeBaseIsSdr { get; }
+		public static extern NSString EncodeBaseIsSdr { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageDestinationEncodeTonemapMode")]
-		NSString EncodeTonemapMode { get; }
+		public static extern NSString EncodeTonemapMode { get; }
 	}
 
 	/// <summary>Class that contains options for copying image sources.</summary>
@@ -2820,7 +2820,7 @@ namespace ImageIO {
 	}
 
 	[MacCatalyst (13, 1)]
-	enum CGImageAuxiliaryDataType {
+	public enum CGImageAuxiliaryDataType {
 		[Field ("kCGImageAuxiliaryDataTypeDepth")]
 		Depth,
 
@@ -2832,49 +2832,49 @@ namespace ImageIO {
 		[Field ("kCGImageAuxiliaryDataTypePortraitEffectsMatte")]
 		PortraitEffectsMatte,
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageAuxiliaryDataTypeSemanticSegmentationHairMatte")]
 		SemanticSegmentationHairMatte,
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageAuxiliaryDataTypeSemanticSegmentationSkinMatte")]
 		SemanticSegmentationSkinMatte,
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCGImageAuxiliaryDataTypeSemanticSegmentationTeethMatte")]
 		SemanticSegmentationTeethMatte,
 
-		[iOS (14, 1)]
+		//[iOS (14, 1)]
 		[TV (14, 2)]
 		[Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGImageAuxiliaryDataTypeSemanticSegmentationGlassesMatte")]
 		SemanticSegmentationGlassesMatte,
 
-		[iOS (14, 1)]
+		//[iOS (14, 1)]
 		[TV (14, 2)]
 		[Watch (7, 1)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCGImageAuxiliaryDataTypeHDRGainMap")]
 		TypeHdrGainMap,
 
-		[iOS (14, 3)]
+		//[iOS (14, 3)]
 		[TV (14, 3)]
 		[Watch (7, 2)]
 		[MacCatalyst (14, 3)]
 		[Field ("kCGImageAuxiliaryDataTypeSemanticSegmentationSkyMatte")]
 		SemanticSegmentationSkyMatte,
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageAuxiliaryDataTypeISOGainMap")]
 		IsoGainMap,
 	}
@@ -2882,130 +2882,130 @@ namespace ImageIO {
 	[MacCatalyst (13, 1)]
 	[Static]
 	[Internal]
-	interface CGImageAuxiliaryDataInfoKeys {
+	public static class CGImageAuxiliaryDataInfoKeys {
 		[Field ("kCGImageAuxiliaryDataInfoData")]
-		NSString DataKey { get; }
+		public static extern NSString DataKey { get; }
 
 		[Field ("kCGImageAuxiliaryDataInfoDataDescription")]
-		NSString DataDescriptionKey { get; }
+		public static extern NSString DataDescriptionKey { get; }
 
 		[Field ("kCGImageAuxiliaryDataInfoMetadata")]
-		NSString MetadataKey { get; }
+		public static extern NSString MetadataKey { get; }
 
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCGImageAuxiliaryDataInfoColorSpace")]
-		NSString ColorSpaceKey { get; }
+		public static extern NSString ColorSpaceKey { get; }
 	}
 
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CGImageAuxiliaryDataInfoKeys")]
-	interface CGImageAuxiliaryDataInfo {
+	//[StrongDictionary ("CGImageAuxiliaryDataInfoKeys")]
+	public class  CGImageAuxiliaryDataInfo : DictionaryContainer {
 
-		NSData Data { get; set; }
-		NSDictionary DataDescription { get; set; }
+		public NSData Data { get; set; }
+		public NSDictionary DataDescription { get; set; }
 		// Bound manually:
 		// CGImageMetadata Metadata { get; set; }))
-		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
-		CGColorSpace ColorSpace { get; set; }
+		//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		public CGColorSpace ColorSpace { get; set; }
 	}
 
-	[iOS (13, 0), TV (13, 0), Watch (6, 0)]
+	//[iOS (13, 0), TV (13, 0), Watch (6, 0)]
 	[MacCatalyst (13, 1)]
 	[Static]
 	[Internal]
-	interface CGImageAnimationOptionsKeys {
+	public static class CGImageAnimationOptionsKeys {
 		[Field ("kCGImageAnimationDelayTime")]
-		NSString DelayTimeKey { get; }
+		public static extern NSString DelayTimeKey { get; }
 
 		[Field ("kCGImageAnimationLoopCount")]
-		NSString LoopCountKey { get; }
+		public static extern NSString LoopCountKey { get; }
 
 		[Field ("kCGImageAnimationStartIndex")]
-		NSString StartIndexKey { get; }
+		public static extern NSString StartIndexKey { get; }
 	}
 
-	[iOS (13, 0), TV (13, 0), Watch (6, 0)]
+	//[iOS (13, 0), TV (13, 0), Watch (6, 0)]
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CGImageAnimationOptionsKeys")]
-	interface CGImageAnimationOptions {
-		double DelayTime { get; set; }
+	//[StrongDictionary ("CGImageAnimationOptionsKeys")]
+	public class CGImageAnimationOptions: DictionaryContainer {
+		public double DelayTime { get; set; }
 
-		nuint LoopCount { get; set; }
+		public nuint LoopCount { get; set; }
 
-		nuint StartIndex { get; set; }
+		public nuint StartIndex { get; set; }
 	}
 
 	[Static]
-	[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
-	interface IOCameraExtrinsics {
+	//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+	public static class IOCameraExtrinsics {
 		[Field ("kIIOCameraExtrinsics_CoordinateSystemID")]
-		NSString CoordinateSystemId { get; }
+		public static extern NSString CoordinateSystemId { get; }
 
 		[Field ("kIIOCameraExtrinsics_Position")]
-		NSString Position { get; }
+		public static extern NSString Position { get; }
 
 		[Field ("kIIOCameraExtrinsics_Rotation")]
-		NSString Rotation { get; }
+		public static extern NSString Rotation { get; }
 	}
 
 	[Static]
-	[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
-	interface IOCameraModel {
+	//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+	public static class IOCameraModel {
 		[Field ("kIIOCameraModel_Intrinsics")]
-		NSString Intrinsics { get; }
+		public static extern NSString Intrinsics { get; }
 
-		[Mac (13, 0), iOS (16, 0)]
+		//[Mac (13, 0), iOS (16, 0)]
 		[MacCatalyst (16, 0)]
 		[Field ("kIIOCameraModel_ModelType")]
-		NSString ModelType { get; }
+		public static extern NSString ModelType { get; }
 	}
 
 	[Static]
-	[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
-	interface IOCameraModelType {
+	//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+	public static class IOCameraModelType {
 		[Field ("kIIOCameraModelType_SimplifiedPinhole")]
-		NSString SimplifiedPinhole { get; }
+		public static extern NSString SimplifiedPinhole { get; }
 
 		[Field ("kIIOCameraModelType_GenericPinhole")]
-		NSString GenericPinhole { get; }
+		public static extern NSString GenericPinhole { get; }
 	}
 
 	[Static]
-	[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
+	//[iOS (16, 0), Mac (13, 0), Watch (9, 0), TV (16, 0), MacCatalyst (16, 0)]
 	interface IOMetadata {
 		[Field ("kIIOMetadata_CameraExtrinsicsKey")]
-		NSString CameraExtrinsicsKey { get; }
+		public static extern NSString CameraExtrinsicsKey { get; }
 
 		[Field ("kIIOMetadata_CameraModelKey")]
-		NSString CameraModelKey { get; }
+		public static extern NSString CameraModelKey { get; }
 	}
 
 	[Static]
-	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
-	interface IOStereoAggressors {
+	//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+	public static class IOStereoAggressors {
 		[Field ("kIIOStereoAggressors_Type")]
-		NSString Type { get; }
+		public static extern NSString Type { get; }
 
 		[Field ("kIIOStereoAggressors_SubTypeURI")]
-		NSString SubTypeUri { get; }
+		public static extern NSString SubTypeUri { get; }
 
 		[Field ("kIIOStereoAggressors_Severity")]
-		NSString Severity { get; }
+		public static extern NSString Severity { get; }
 	}
 
 	[Static]
-	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
-	interface IOMonoscopicImageLocation {
+	//[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+	public static class IOMonoscopicImageLocation {
 		[Field ("kIIOMonoscopicImageLocation_Unspecified")]
-		NSString Unspecified { get; }
+		public static extern NSString Unspecified { get; }
 
 		[Field ("kIIOMonoscopicImageLocation_Left")]
-		NSString Left { get; }
+		public static extern NSString Left { get; }
 
 		[Field ("kIIOMonoscopicImageLocation_Right")]
-		NSString Right { get; }
+		public static extern NSString Right { get; }
 
 		[Field ("kIIOMonoscopicImageLocation_Center")]
-		NSString Center { get; }
+		public static extern NSString Center { get; }
 	}
 }

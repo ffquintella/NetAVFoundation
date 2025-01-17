@@ -117,6 +117,10 @@ namespace Foundation
 {
 
     public partial class NSCoding: NSCopying {
+        
+        public NSCoding () : base (IntPtr.Zero) {}
+        public NSCoding (IntPtr handle) : base (handle) {}
+        
         // [Abstract]
         [Export ("initWithCoder:")]
         public extern NativeHandle Constructor (NSCoder decoder);

@@ -54,6 +54,29 @@ namespace Foundation
 			return PropertyListWithStream (stream, NSPropertyListReadOptions.Immutable, ref format, out error);
 		}
 	}
+	
+	[BaseType (typeof (NSObject))]
+	[DisableDefaultCtor]
+	public partial class NSPropertyListSerialization {
+		[Static, Export ("dataWithPropertyList:format:options:error:")]
+		public static extern NSData DataWithPropertyList (NSObject plist, NSPropertyListFormat format,
+			NSPropertyListWriteOptions options, out NSError error);
+
+		[Static, Export ("writePropertyList:toStream:format:options:error:")]
+		public static extern nint WritePropertyList (NSObject plist, NSOutputStream stream, NSPropertyListFormat format,
+			NSPropertyListWriteOptions options, out NSError error);
+
+		[Static, Export ("propertyListWithData:options:format:error:")]
+		public static extern NSObject PropertyListWithData (NSData data, NSPropertyListReadOptions options,
+			ref NSPropertyListFormat format, out NSError error);
+
+		[Static, Export ("propertyListWithStream:options:format:error:")]
+		public static extern NSObject PropertyListWithStream (NSInputStream stream, NSPropertyListReadOptions options,
+			ref NSPropertyListFormat format, out NSError error);
+
+		[Static, Export ("propertyList:isValidForFormat:")]
+		public static extern bool IsValidForFormat (NSObject plist, NSPropertyListFormat format);
+	}
 }
 
 #endif

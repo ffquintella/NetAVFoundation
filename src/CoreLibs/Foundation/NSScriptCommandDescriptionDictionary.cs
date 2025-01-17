@@ -60,6 +60,33 @@ namespace Foundation {
 		}
 	}
 
+	[NoiOS]
+	[NoTV]
+	[NoWatch]
+	[MacCatalyst (15, 0)]
+	//[StrongDictionary ("NSScriptCommandArgumentDescriptionKeys")]
+	public partial class NSScriptCommandArgumentDescription {
+		string AppleEventCode { get; set; }
+		string Type { get; set; }
+		string Optional { get; set; }
+	}
+	
+	[NoiOS]
+	[NoTV]
+	[NoWatch]
+	[MacCatalyst (15, 0)]
+	//[StrongDictionary ("NSScriptCommandDescriptionDictionaryKeys")]
+	public partial class NSScriptCommandDescriptionDictionary  {
+		public string CommandClass { get; set; }
+		public string AppleEventCode { get; set; }
+		public string AppleEventClassCode { get; set; }
+		public string Type { get; set; }
+		public string ResultAppleEventCode { get; set; }
+		public NSMutableDictionary Arguments { get; set; }
+		
+		public NSMutableDictionary Dictionary { get; set; }
+	}
+	
 #endif
 
 }

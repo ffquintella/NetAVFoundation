@@ -10575,66 +10575,9 @@ namespace Foundation {
 		bool IsEnumeratingDirectoryPostOrder { get; }
 	}
 
-	delegate bool NSPredicateEvaluator (NSObject evaluatedObject, NSDictionary bindings);
 
-	[BaseType (typeof (NSObject))]
-	// 'init' returns NIL
-	[DisableDefaultCtor]
-	partial class NSPredicate : NSSecureCoding, NSCopying {
-		[Static]
-		[Internal]
-		[Export ("predicateWithFormat:argumentArray:")]
-		NSPredicate _FromFormat (string predicateFormat, [NullAllowed] NSObject [] arguments);
 
-		[Static, Export ("predicateWithValue:")]
-		NSPredicate FromValue (bool value);
-
-		[Static, Export ("predicateWithBlock:")]
-		NSPredicate FromExpression (NSPredicateEvaluator evaluator);
-
-		[Export ("predicateFormat")]
-		string PredicateFormat { get; }
-
-		[Export ("predicateWithSubstitutionVariables:")]
-		NSPredicate PredicateWithSubstitutionVariables (NSDictionary substitutionVariables);
-
-		[Export ("evaluateWithObject:")]
-		bool EvaluateWithObject (NSObject obj);
-
-		[Export ("evaluateWithObject:substitutionVariables:")]
-		bool EvaluateWithObject (NSObject obj, NSDictionary substitutionVariables);
-
-		[return: NullAllowed]
-		[Static]
-		[NoiOS]
-		[NoMacCatalyst]
-		[NoWatch]
-		[NoTV]
-		[Export ("predicateFromMetadataQueryString:")]
-		NSPredicate FromMetadataQueryString (string query);
-
-		[MacCatalyst (13, 1)]
-		[Export ("allowEvaluation")]
-		void AllowEvaluation ();
-	}
-
-	[Category, BaseType (typeof (NSOrderedSet))] 
-	partial class NSPredicateSupport_NSOrderedSet {
-		[Export ("filteredOrderedSetUsingPredicate:")]
-		NSOrderedSet FilterUsingPredicate (NSPredicate p);
-	}
-
-	[Category, BaseType (typeof (NSMutableOrderedSet))]
-	partial class NSPredicateSupport_NSMutableOrderedSet {
-		[Export ("filterUsingPredicate:")]
-		void FilterUsingPredicate (NSPredicate p);
-	}
-
-	[Category, BaseType (typeof (NSArray))]
-	partial class NSPredicateSupport_NSArray {
-		[Export ("filteredArrayUsingPredicate:")]
-		NSArray FilterUsingPredicate (NSArray array);
-	}
+	
 
 #pragma warning disable 618
 	[Category, BaseType (typeof (NSMutableArray))]
@@ -10854,28 +10797,7 @@ namespace Foundation {
 		//		bool CanInitWithTask (NSUrlSessionTask task);
 	}
 
-	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	partial class NSPropertyListSerialization {
-		[Static, Export ("dataWithPropertyList:format:options:error:")]
-		NSData DataWithPropertyList (NSObject plist, NSPropertyListFormat format,
-			NSPropertyListWriteOptions options, out NSError error);
 
-		[Static, Export ("writePropertyList:toStream:format:options:error:")]
-		nint WritePropertyList (NSObject plist, NSOutputStream stream, NSPropertyListFormat format,
-			NSPropertyListWriteOptions options, out NSError error);
-
-		[Static, Export ("propertyListWithData:options:format:error:")]
-		NSObject PropertyListWithData (NSData data, NSPropertyListReadOptions options,
-			ref NSPropertyListFormat format, out NSError error);
-
-		[Static, Export ("propertyListWithStream:options:format:error:")]
-		NSObject PropertyListWithStream (NSInputStream stream, NSPropertyListReadOptions options,
-			ref NSPropertyListFormat format, out NSError error);
-
-		[Static, Export ("propertyList:isValidForFormat:")]
-		bool IsValidForFormat (NSObject plist, NSPropertyListFormat format);
-	}
 
 	partial class INSExtensionRequestHandling { }
 
@@ -11379,119 +11301,13 @@ namespace Foundation {
 	
 #endif
 
-	[DisableDefaultCtor]
-	[BaseType (typeof (NSObject))]
-	[MacCatalyst (15, 0)]
-	[NoiOS]
-	[NoTV]
-	[NoWatch]
-	partial class NSScriptCommand : NSCoding {
 
-		[Internal]
-		[DesignatedInitializer]
-		[Export ("initWithCommandDescription:")]
-		NativeHandle Constructor (NSScriptCommandDescription cmdDescription);
 
-		[Internal]
-		[Static]
-		[Export ("currentCommand")]
-		IntPtr GetCurrentCommand ();
 
-		[Export ("appleEvent")]
-		[NullAllowed]
-		NSAppleEventDescriptor AppleEvent { get; }
 
-		[Export ("executeCommand")]
-		IntPtr Execute ();
 
-		[NullAllowed]
-		[Export ("evaluatedReceivers")]
-		NSObject EvaluatedReceivers { get; }
-	}
 
-	[NoiOS]
-	[NoTV]
-	[NoWatch]
-	[MacCatalyst (15, 0)]
-	[StrongDictionary ("NSScriptCommandArgumentDescriptionKeys")]
-	partial class NSScriptCommandArgumentDescription {
-		string AppleEventCode { get; set; }
-		string Type { get; set; }
-		string Optional { get; set; }
-	}
-
-	[NoiOS]
-	[NoTV]
-	[NoWatch]
-	[MacCatalyst (15, 0)]
-	[StrongDictionary ("NSScriptCommandDescriptionDictionaryKeys")]
-	partial class NSScriptCommandDescriptionDictionary {
-		string CommandClass { get; set; }
-		string AppleEventCode { get; set; }
-		string AppleEventClassCode { get; set; }
-		string Type { get; set; }
-		string ResultAppleEventCode { get; set; }
-		NSMutableDictionary Arguments { get; set; }
-	}
-
-	[NoiOS]
-	[NoTV]
-	[NoWatch]
-	[MacCatalyst (15, 0)]
-	[DisableDefaultCtor]
-	[BaseType (typeof (NSObject))]
-	partial class NSScriptCommandDescription : NSCoding {
-
-		[Internal]
-		[DesignatedInitializer]
-		[Export ("initWithSuiteName:commandName:dictionary:")]
-		NativeHandle Constructor (NSString suiteName, NSString commandName, [NullAllowed] NSDictionary commandDeclaration);
-
-		[Internal]
-		[Export ("appleEventClassCode")]
-		int FCCAppleEventClassCode { get; }
-
-		[Internal]
-		[Export ("appleEventCode")]
-		int FCCAppleEventCode { get; }
-
-		[Export ("commandClassName")]
-		string ClassName { get; }
-
-		[Export ("commandName")]
-		string Name { get; }
-
-		[Export ("suiteName")]
-		string SuitName { get; }
-
-		[Internal]
-		[Export ("appleEventCodeForArgumentWithName:")]
-		int FCCAppleEventCodeForArgument (NSString name);
-
-		[Export ("argumentNames")]
-		string [] ArgumentNames { get; }
-
-		[Internal]
-		[Export ("isOptionalArgumentWithName:")]
-		bool NSIsOptionalArgument (NSString name);
-
-		[return: NullAllowed]
-		[Internal]
-		[Export ("typeForArgumentWithName:")]
-		NSString GetNSTypeForArgument (NSString name);
-
-		[Internal]
-		[Export ("appleEventCodeForReturnType")]
-		int FCCAppleEventCodeForReturnType { get; }
-
-		[NullAllowed]
-		[Export ("returnType")]
-		string ReturnType { get; }
-
-		[Internal]
-		[Export ("createCommandInstance")]
-		IntPtr CreateCommandInstancePtr ();
-	}
+	
 
 	[NoiOS, NoTV, NoWatch]
 	[BaseType (typeof (NSObject))]

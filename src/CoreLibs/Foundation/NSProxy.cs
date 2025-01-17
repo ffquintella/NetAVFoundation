@@ -26,6 +26,7 @@ namespace Foundation {
 	}
 }
 
+/*
 #if !NET || (__IOS__ || __MACOS__)
 namespace WebKit {
 	// We need to keep NSProxy if WKNavigationDelegate or IWKNavigationDelegate are used
@@ -36,3 +37,4 @@ namespace WebKit {
 	}
 }
 #endif
+*/

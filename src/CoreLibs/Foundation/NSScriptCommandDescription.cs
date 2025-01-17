@@ -24,9 +24,74 @@ namespace Foundation {
 			get { return typeKey; }
 		}
 	}
+	
+	[NoiOS]
+	[NoTV]
+	[NoWatch]
+	[MacCatalyst (15, 0)]
+	[DisableDefaultCtor]
+	[BaseType (typeof (NSObject))]
+	public partial class NSScriptCommandDescription : NSCoding {
+
+		[Internal]
+		[DesignatedInitializer]
+		[Export ("initWithSuiteName:commandName:dictionary:")]
+		public extern NativeHandle Constructor (NSString suiteName, NSString commandName, [NullAllowed] NSDictionary commandDeclaration);
+
+		[Internal]
+		[Export ("appleEventClassCode")]
+		public extern int FCCAppleEventClassCode { get; }
+
+		[Internal]
+		[Export ("appleEventCode")]
+		public extern int FCCAppleEventCode { get; }
+
+		[Export ("commandClassName")]
+		public extern string ClassName { get; }
+
+		[Export ("commandName")]
+		public extern string Name { get; }
+
+		[Export ("suiteName")]
+		public extern string SuitName { get; }
+
+		[Internal]
+		[Export ("appleEventCodeForArgumentWithName:")]
+		public extern int FCCAppleEventCodeForArgument (NSString name);
+
+		[Export ("argumentNames")]
+		public extern string [] ArgumentNames { get; }
+
+		[Internal]
+		[Export ("isOptionalArgumentWithName:")]
+		public extern bool NSIsOptionalArgument (NSString name);
+
+		[return: NullAllowed]
+		[Internal]
+		[Export ("typeForArgumentWithName:")]
+		public extern NSString GetNSTypeForArgument (NSString name);
+
+		[Internal]
+		[Export ("appleEventCodeForReturnType")]
+		public extern int FCCAppleEventCodeForReturnType { get; }
+
+		[NullAllowed]
+		[Export ("returnType")]
+		public extern string ReturnType { get; }
+
+		[Internal]
+		[Export ("createCommandInstance")]
+		public extern IntPtr CreateCommandInstancePtr ();
+	}
 
 	public partial class NSScriptCommandDescription {
 
+		public NSScriptCommandDescription(NSString suiteName, NSString commandName,
+			[NullAllowed] NSDictionary commandDeclaration)
+		{
+			Handle = Constructor(suiteName, commandName, commandDeclaration);
+		}
+		
 		NSScriptCommandDescriptionDictionary description = null;
 
 		static int ToIntValue (string fourCC)
@@ -134,5 +199,45 @@ namespace Foundation {
 		}
 	}
 #endif
+	
+	[DisableDefaultCtor]
+	[BaseType (typeof (NSObject))]
+	[MacCatalyst (15, 0)]
+	[NoiOS]
+	[NoTV]
+	[NoWatch]
+	public partial class NSScriptCommand : NSCoding {
+
+		public NSScriptCommand (NSScriptCommandDescription cmdDescription)
+		{
+			if (cmdDescription == null)
+				throw new ArgumentNullException ("cmdDescription");
+			Handle = Constructor (cmdDescription);
+		}
+		
+		public NSScriptCommand (IntPtr handle) : base(handle) {}
+		
+		[Internal]
+		[DesignatedInitializer]
+		[Export ("initWithCommandDescription:")]
+		public extern NativeHandle Constructor (NSScriptCommandDescription cmdDescription);
+
+		[Internal]
+		[Static]
+		[Export ("currentCommand")]
+		public extern IntPtr GetCurrentCommand ();
+
+		[Export ("appleEvent")]
+		[NullAllowed]
+		public extern NSAppleEventDescriptor AppleEvent { get; }
+
+		[Export ("executeCommand")]
+		public extern IntPtr Execute ();
+
+		[NullAllowed]
+		[Export ("evaluatedReceivers")]
+		public extern NSObject EvaluatedReceivers { get; }
+	}
+
 
 }

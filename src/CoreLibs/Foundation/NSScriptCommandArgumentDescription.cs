@@ -27,7 +27,7 @@ namespace Foundation {
 		}
 	}
 
-	public partial class NSScriptCommandArgumentDescription {
+	public partial class NSScriptCommandArgumentDescription : StrongDictionaryAttribute {
 		public string Name { get; set; }
 
 		public bool IsOptional { 
@@ -38,6 +38,8 @@ namespace Foundation {
 				Optional = (value) ? "Yes" : "No";
 			}
 		}
+		
+		public NSMutableDictionary Dictionary { get; set; }
 
 		public NSScriptCommandArgumentDescription (string name, string eventCode, string type, bool isOptional=false)
 		{

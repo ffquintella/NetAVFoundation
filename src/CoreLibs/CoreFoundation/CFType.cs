@@ -66,6 +66,6 @@ namespace CoreFoundation {
 		}
 	}
 
-	public partial class ICFType : INativeObject {
+	public partial interface ICFType : INativeObject {
 	}
 }

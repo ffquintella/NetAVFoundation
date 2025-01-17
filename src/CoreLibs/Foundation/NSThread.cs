@@ -30,6 +30,10 @@ namespace Foundation {
 
 	public partial class NSThread {
 
+		public NSThread() : base(IntPtr.Zero)
+		{
+		}
+
 		public static double Priority {
 			get { return _GetPriority (); }
 			// ignore the boolean return value
@@ -55,5 +59,88 @@ namespace Foundation {
 		{
 			Handle = InitNSThread (target, selector, argument);
 		}
+	}
+	
+	[BaseType (typeof (NSObject))]
+	//[DesignatedDefaultCtor]
+	public partial class NSThread : NSObject {
+		[Static, Export ("currentThread", ArgumentSemantic.Strong)]
+		public static extern NSThread Current { get; }
+
+		[Static, Export ("callStackSymbols", ArgumentSemantic.Copy)]
+		public static extern string [] NativeCallStack { get; }
+
+		//+ (void)detachNewThreadSelector:(SEL)selector toTarget:(id)target withObject:(id)argument;
+
+		[Static, Export ("isMultiThreaded")]
+		public static extern bool IsMultiThreaded { get; }
+
+		//- (NSMutableDictionary *)threadDictionary;
+
+		[Static, Export ("sleepUntilDate:")]
+		public static extern void SleepUntil (NSDate date);
+
+		[Static, Export ("sleepForTimeInterval:")]
+		public static extern void SleepFor (double timeInterval);
+
+		[Static, Export ("exit")]
+		public static extern void Exit ();
+
+		[Static, Export ("threadPriority"), Internal]
+		public static extern double _GetPriority ();
+
+		[Static, Export ("setThreadPriority:"), Internal]
+		public static extern bool _SetPriority (double priority);
+
+		//+ (NSArray *)callStackReturnAddresses;
+
+		[NullAllowed] // by default this property is null
+		[Export ("name")]
+		public extern string? Name { get; set; }
+
+		[Export ("stackSize")]
+		public extern nuint StackSize { get; set; }
+
+		[Export ("isMainThread")]
+		public extern bool IsMainThread { get; }
+
+		// MainThread is already used for the instance selector and we can't reuse the same name
+		[Static]
+		[Export ("isMainThread")]
+		public static extern bool IsMain { get; }
+
+		[Static]
+		[Export ("mainThread", ArgumentSemantic.Strong)]
+		public static extern NSThread MainThread { get; }
+
+		[Export ("isExecuting")]
+		public extern bool IsExecuting { get; }
+
+		[Export ("isFinished")]
+		public extern bool IsFinished { get; }
+
+		[Export ("isCancelled")]
+		public extern bool IsCancelled { get; }
+
+		[Export ("cancel")]
+		public extern void Cancel ();
+
+		[Export ("start")]
+		public extern void Start ();
+
+		[Export ("main")]
+		public extern void Main ();
+
+		[MacCatalyst (13, 1)]
+		[Export ("qualityOfService")]
+		public extern NSQualityOfService QualityOfService { get; set; }
+
+		[Notification]
+		[Field ("NSThreadWillExitNotification")]
+		public extern NSString ThreadWillExitNotification { get; }
+
+		[Notification]
+		[Field ("NSWillBecomeMultiThreadedNotification")]
+		public extern NSString WillBecomeMultiThreadedNotification { get; }
 	}
 }

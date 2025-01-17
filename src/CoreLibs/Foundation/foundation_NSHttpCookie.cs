@@ -130,55 +130,55 @@ namespace Foundation
 		public extern NSHttpCookie [] CookiesWithResponseHeaderFields (NSDictionary headerFields, NSUrl url);
 
 		[Export ("properties")]
-		public extern static NSDictionary Properties { get; }
+		public extern  NSDictionary Properties { get; }
 
 		[Export ("version")]
-		public extern static nuint Version { get; }
+		public extern  nuint Version { get; }
 
 		[Export ("value")]
-		public extern static string Value { get; }
+		public extern  string Value { get; }
 
 		[Export ("expiresDate")]
-		public extern static NSDate ExpiresDate { get; }
+		public extern  NSDate ExpiresDate { get; }
 
 		[Export ("isSessionOnly")]
-		public extern static bool IsSessionOnly { get; }
+		public extern  bool IsSessionOnly { get; }
 
 		[Export ("domain")]
-		public extern static string Domain { get; }
+		public extern  string Domain { get; }
 
 		[Export ("name")]
-		public extern static string Name { get; }
+		public extern  string Name { get; }
 
 		[Export ("path")]
-		public extern static string Path { get; }
+		public extern  string Path { get; }
 
 		[Export ("isSecure")]
-		public extern static bool IsSecure { get; }
+		public extern  bool IsSecure { get; }
 
 		[Export ("isHTTPOnly")]
-		public extern static bool IsHttpOnly { get; }
+		public extern  bool IsHttpOnly { get; }
 
 		[Export ("comment")]
-		public extern static string Comment { get; }
+		public extern  string Comment { get; }
 
 		[Export ("commentURL")]
-		public extern static NSUrl CommentUrl { get; }
+		public extern  NSUrl CommentUrl { get; }
 
 		[Export ("portList")]
-		public extern static NSNumber [] PortList { get; }
+		public extern  NSNumber [] PortList { get; }
 
 		[Field ("NSHTTPCookieName")]
-		public extern static NSString KeyName { get; }
+		public static extern  NSString KeyName { get; }
 
 		[Field ("NSHTTPCookieValue")]
-		public extern static NSString KeyValue { get; }
+		public static extern  NSString KeyValue { get; }
 
 		[Field ("NSHTTPCookieOriginURL")]
-		public extern static NSString KeyOriginUrl { get; }
+		public extern  NSString KeyOriginUrl { get; }
 
 		[Field ("NSHTTPCookieVersion")]
-		public extern static NSString KeyVersion { get; }
+		public static extern  NSString KeyVersion { get; }
 
 		[Field ("NSHTTPCookieDomain")]
 		public extern static NSString KeyDomain { get; }

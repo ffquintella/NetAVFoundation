@@ -5,14 +5,19 @@
 //     Manuel de la Pena <mandel@microsoft.com>
 using System;
 using ObjCRuntime;
-using Network;
+//using Network;
 
 using Foundation;
 
 namespace Foundation {
 
-	// the following was added to make the use of the configuration easier for the NUrlSessionHandler. 
-	// Apple APIs do not give an easy way to know the type of configuration that was created, this is an 
+	public abstract class NSUrlSessionConfiguration: NSObject
+	{
+	}
+
+	/*
+	// the following was added to make the use of the configuration easier for the NUrlSessionHandler.
+	// Apple APIs do not give an easy way to know the type of configuration that was created, this is an
 	// issue when we want to interact with the cookie containers, since depending on the configuration type
 	// the cookie container can be shared or not. This code should be transparent to the user, and is only used internaly.
 	public partial class NSUrlSessionConfiguration {
@@ -83,4 +88,61 @@ namespace Foundation {
 		}
 
 	}
+	
+	[MacCatalyst (13, 1)]
+	   [BaseType (typeof (NSObject), Name = "NSURLSessionConfiguration")]
+	   [DisableDefaultCtorAttribute]
+	   partial class NSUrlSessionConfiguration : NSCopying {
+
+	   	[Internal]
+	   	[Static, Export ("defaultSessionConfiguration", ArgumentSemantic.Strong)]
+	   	NSUrlSessionConfiguration _DefaultSessionConfiguration { get; }
+
+	   	[Internal]
+	   	[Static, Export ("ephemeralSessionConfiguration", ArgumentSemantic.Strong)]
+	   	NSUrlSessionConfiguration _EphemeralSessionConfiguration { get; }
+
+	   	[Internal]
+	   	[Static, Export ("backgroundSessionConfiguration:")]
+	   	NSUrlSessionConfiguration _BackgroundSessionConfiguration (string identifier);
+
+	   	[Export ("identifier", ArgumentSemantic.Copy), NullAllowed]
+	   	string Identifier { get; }
+
+	   	[Export ("requestCachePolicy")]
+	   	NSUrlRequestCachePolicy RequestCachePolicy { get; set; }
+
+	   	[Export ("timeoutIntervalForRequest")]
+	   	double TimeoutIntervalForRequest { get; set; }
+
+	   	[Export ("timeoutIntervalForResource")]
+	   	double TimeoutIntervalForResource { get; set; }
+
+	   	[Export ("networkServiceType")]
+	   	NSUrlRequestNetworkServiceType NetworkServiceType { get; set; }
+
+	   	[Export ("allowsCellularAccess")]
+	   	bool AllowsCellularAccess { get; set; }
+
+	   	[Export ("discretionary")]
+	   	bool Discretionary { [Bind ("isDiscretionary")] get; set; }
+
+	   	[MacCatalyst (13, 1)]
+	   	[Export ("sessionSendsLaunchEvents")]
+	   	bool SessionSendsLaunchEvents { get; set; }
+
+	   	[NullAllowed]
+	   	[Export ("connectionProxyDictionary", ArgumentSemantic.Copy)]
+	   	NSDictionary ConnectionProxyDictionary { get; set; }
+
+	   	[NoWatch]
+	   	[MacCatalyst (13, 1)]
+	   	ProxyConfigurationDictionary StrongConnectionProxyDictionary {
+	   		[Wrap ("new ProxyConfigurationDictionary (ConnectionProxyDictionary!)")]
+	   		get;
+	   		[Wrap ("ConnectionProxyDictionary = value.GetDictionary ()")]
+	   		set;
+	   	}
+	
+	*/
 }

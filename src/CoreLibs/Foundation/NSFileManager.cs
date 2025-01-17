@@ -57,7 +57,7 @@ namespace Foundation {
 	[SupportedOSPlatform ("macos")]
 	[SupportedOSPlatform ("tvos")]
 #endif
-	public class NSFileAttributes {
+	public class NSFileAttributes: DictionaryContainer {
 		public bool? AppendOnly { get; set; }
 		public bool? Busy { get; set; }
 		public bool? ExtensionHidden { get; set; }
@@ -83,7 +83,7 @@ namespace Foundation {
 #if !MONOMAC
 		public NSFileProtection? ProtectionKey { get; set; }
 #endif
-
+		
 		internal NSDictionary ToDictionary ()
 		{
 			NSFileType? type;
@@ -480,4 +480,371 @@ namespace Foundation {
 			}
 		}
 	}
+	
+	[NoMacCatalyst]
+	[BaseType (typeof (NSObject))]
+	[DisableDefaultCtor]
+	public interface NSWorkspaceAuthorization {
+	}
+	
+	public partial class NSFileManager {
+
+		[NoTV, NoWatch]
+		[MacCatalyst (13, 1)]
+		[Export ("trashItemAtURL:resultingItemURL:error:")]
+		public extern bool TrashItem (NSUrl url, out NSUrl resultingItemUrl, out NSError error);
+
+		[NoiOS]
+		[NoMacCatalyst]
+		[NoWatch]
+		[NoTV]
+		[Static]
+		[Export ("fileManagerWithAuthorization:")]
+		public extern static NSFileManager FromAuthorization (NSWorkspaceAuthorization authorization);
+	}
+	
+	[BaseType (typeof (NSObject))]
+	public partial class NSFileManager: NSObject {
+		[Field ("NSFileType")]
+		public static extern NSString NSFileType { get; }
+
+		[Field ("NSFileTypeDirectory")]
+		public static extern NSString TypeDirectory { get; }
+
+		[Field ("NSFileTypeRegular")]
+		public static extern  NSString TypeRegular { get; }
+
+		[Field ("NSFileTypeSymbolicLink")]
+		public static extern NSString TypeSymbolicLink { get; }
+
+		[Field ("NSFileTypeSocket")]
+		public static extern NSString TypeSocket { get; }
+
+		[Field ("NSFileTypeCharacterSpecial")]
+		public static extern NSString TypeCharacterSpecial { get; }
+
+		[Field ("NSFileTypeBlockSpecial")]
+		public static extern NSString TypeBlockSpecial { get; }
+
+		[Field ("NSFileTypeUnknown")]
+		public static extern NSString TypeUnknown { get; }
+
+		[Field ("NSFileSize")]
+		public static extern NSString Size { get; }
+
+		[Field ("NSFileModificationDate")]
+		public static extern NSString ModificationDate { get; }
+
+		[Field ("NSFileReferenceCount")]
+		public static extern NSString ReferenceCount { get; }
+
+		[Field ("NSFileDeviceIdentifier")]
+		public static extern NSString DeviceIdentifier { get; }
+
+		[Field ("NSFileOwnerAccountName")]
+		public static extern NSString OwnerAccountName { get; }
+
+		[Field ("NSFileGroupOwnerAccountName")]
+		public static extern NSString GroupOwnerAccountName { get; }
+
+		[Field ("NSFilePosixPermissions")]
+		public static extern NSString PosixPermissions { get; }
+
+		[Field ("NSFileSystemNumber")]
+		public static extern NSString SystemNumber { get; }
+
+		[Field ("NSFileSystemFileNumber")]
+		public static extern NSString SystemFileNumber { get; }
+
+		[Field ("NSFileExtensionHidden")]
+		public static extern NSString ExtensionHidden { get; }
+
+		[Field ("NSFileHFSCreatorCode")]
+		public static extern NSString HfsCreatorCode { get; }
+
+		[Field ("NSFileHFSTypeCode")]
+		public static extern NSString HfsTypeCode { get; }
+
+		[Field ("NSFileImmutable")]
+		public static extern NSString Immutable { get; }
+
+		[Field ("NSFileAppendOnly")]
+		public static extern NSString AppendOnly { get; }
+
+		[Field ("NSFileCreationDate")]
+		public static extern NSString CreationDate { get; }
+
+		[Field ("NSFileOwnerAccountID")]
+		public static extern NSString OwnerAccountID { get; }
+
+		[Field ("NSFileGroupOwnerAccountID")]
+		public static extern NSString GroupOwnerAccountID { get; }
+
+		[Field ("NSFileBusy")]
+		public static extern NSString Busy { get; }
+
+		[MacCatalyst (13, 1)]
+		[Field ("NSFileProtectionKey")]
+		public static extern NSString FileProtectionKey { get; }
+
+		[Obsolete ("Use the 'NSFileProtectionType' instead.")]
+		[MacCatalyst (13, 1)]
+		[Field ("NSFileProtectionNone")]
+		public static extern NSString FileProtectionNone { get; }
+
+		[Obsolete ("Use the 'NSFileProtectionType' instead.")]
+		[MacCatalyst (13, 1)]
+		[Field ("NSFileProtectionComplete")]
+		public static extern NSString FileProtectionComplete { get; }
+
+		[Obsolete ("Use the 'NSFileProtectionType' instead.")]
+		[MacCatalyst (13, 1)]
+		[Field ("NSFileProtectionCompleteUnlessOpen")]
+		public static extern NSString FileProtectionCompleteUnlessOpen { get; }
+
+		[Obsolete ("Use the 'NSFileProtectionType' instead.")]
+		[MacCatalyst (13, 1)]
+		[Field ("NSFileProtectionCompleteUntilFirstUserAuthentication")]
+		public static extern NSString FileProtectionCompleteUntilFirstUserAuthentication { get; }
+
+		[Field ("NSFileSystemSize")]
+		public static extern NSString SystemSize { get; }
+
+		[Field ("NSFileSystemFreeSize")]
+		public static extern NSString SystemFreeSize { get; }
+
+		[Field ("NSFileSystemNodes")]
+		public static extern NSString SystemNodes { get; }
+
+		[Field ("NSFileSystemFreeNodes")]
+		public static extern NSString SystemFreeNodes { get; }
+
+		[Static, Export ("defaultManager", ArgumentSemantic.Strong)]
+		public static extern NSFileManager DefaultManager { get; }
+
+		[Export ("delegate", ArgumentSemantic.Assign)]
+		[NullAllowed]
+		public static extern NSObject WeakDelegate { get; set; }
+
+		[Wrap ("WeakDelegate")]
+		[NullAllowed]
+		public static extern INSFileManagerDelegate Delegate { get; set; }
+
+		[Export ("setAttributes:ofItemAtPath:error:")]
+		public static extern bool SetAttributes (NSDictionary attributes, string path, out NSError error);
+
+		[Export ("createDirectoryAtPath:withIntermediateDirectories:attributes:error:")]
+		public static extern bool CreateDirectory (string path, bool createIntermediates, [NullAllowed] NSDictionary attributes, out NSError error);
+
+		[Export ("contentsOfDirectoryAtPath:error:")]
+		public extern string [] GetDirectoryContent (string path, out NSError error);
+
+		[Export ("subpathsOfDirectoryAtPath:error:")]
+		public extern string [] GetDirectoryContentRecursive (string path, out NSError error);
+
+		[Export ("attributesOfItemAtPath:error:")]
+		[Internal]
+		internal extern NSDictionary _GetAttributes (string path, out NSError error);
+
+		[Export ("attributesOfFileSystemForPath:error:")]
+		[Internal]
+		internal extern NSDictionary _GetFileSystemAttributes (String path, out NSError error);
+
+		[Export ("createSymbolicLinkAtPath:withDestinationPath:error:")]
+		public extern bool CreateSymbolicLink (string path, string destPath, out NSError error);
+
+		[Export ("destinationOfSymbolicLinkAtPath:error:")]
+		public extern string GetSymbolicLinkDestination (string path, out NSError error);
+
+		[Export ("copyItemAtPath:toPath:error:")]
+		public extern bool Copy (string srcPath, string dstPath, out NSError error);
+
+		[Export ("moveItemAtPath:toPath:error:")]
+		public extern bool Move (string srcPath, string dstPath, out NSError error);
+
+		[Export ("linkItemAtPath:toPath:error:")]
+		public extern bool Link (string srcPath, string dstPath, out NSError error);
+
+		[Export ("removeItemAtPath:error:")]
+		public extern bool Remove ([NullAllowed] string path, out NSError error);
+
+#if DEPRECATED
+		// These are not available on iOS, and deprecated on OSX.
+		[Export ("linkPath:toPath:handler:")]
+		public extern bool LinkPath (string src, string dest, IntPtr handler);
+
+		[Export ("copyPath:toPath:handler:")]
+		public extern bool CopyPath (string src, string dest, IntPtr handler);
+
+		[Export ("movePath:toPath:handler:")]
+		public extern bool MovePath (string src, string dest, IntPtr handler);
+
+		[Export ("removeFileAtPath:handler:")]
+		public extern bool RemoveFileAtPath (string path, IntPtr handler);
+#endif
+		[Export ("currentDirectoryPath")]
+		public extern string GetCurrentDirectory ();
+
+		[Export ("changeCurrentDirectoryPath:")]
+		public extern bool ChangeCurrentDirectory (string path);
+
+		[Export ("fileExistsAtPath:")]
+		public extern bool FileExists (string path);
+
+		[Export ("fileExistsAtPath:isDirectory:")]
+		public extern bool FileExists (string path, ref bool isDirectory);
+
+		[Export ("isReadableFileAtPath:")]
+		public extern bool IsReadableFile (string path);
+
+		[Export ("isWritableFileAtPath:")]
+		public extern bool IsWritableFile (string path);
+
+		[Export ("isExecutableFileAtPath:")]
+		public extern bool IsExecutableFile (string path);
+
+		[Export ("isDeletableFileAtPath:")]
+		public extern bool IsDeletableFile (string path);
+
+		[Export ("contentsEqualAtPath:andPath:")]
+		public extern bool ContentsEqual (string path1, string path2);
+
+		[Export ("displayNameAtPath:")]
+		public extern string DisplayName (string path);
+
+		[Export ("componentsToDisplayForPath:")]
+		public extern string [] ComponentsToDisplay (string path);
+
+		[Export ("enumeratorAtPath:")]
+		public extern NSDirectoryEnumerator GetEnumerator (string path);
+
+		[Export ("subpathsAtPath:")]
+		public extern string [] Subpaths (string path);
+
+		[Export ("contentsAtPath:")]
+		public extern NSData Contents (string path);
+
+		[Export ("createFileAtPath:contents:attributes:")]
+		public extern bool CreateFile (string path, NSData data, [NullAllowed] NSDictionary attr);
+
+		[Export ("contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error:")]
+		public extern NSUrl [] GetDirectoryContent (NSUrl url, [NullAllowed] NSArray properties, NSDirectoryEnumerationOptions options, out NSError error);
+
+		[Export ("copyItemAtURL:toURL:error:")]
+		public extern bool Copy (NSUrl srcUrl, NSUrl dstUrl, out NSError error);
+
+		[Export ("moveItemAtURL:toURL:error:")]
+		public extern bool Move (NSUrl srcUrl, NSUrl dstUrl, out NSError error);
+
+		[Export ("linkItemAtURL:toURL:error:")]
+		public extern bool Link (NSUrl srcUrl, NSUrl dstUrl, out NSError error);
+
+		[Export ("removeItemAtURL:error:")]
+		public extern bool Remove ([NullAllowed] NSUrl url, out NSError error);
+
+		[Export ("enumeratorAtURL:includingPropertiesForKeys:options:errorHandler:")]
+		public extern NSDirectoryEnumerator GetEnumerator (NSUrl url, [NullAllowed] NSString [] keys, NSDirectoryEnumerationOptions options, [NullAllowed] NSEnumerateErrorHandler handler);
+
+		[Export ("URLForDirectory:inDomain:appropriateForURL:create:error:")]
+		public extern NSUrl GetUrl (NSSearchPathDirectory directory, NSSearchPathDomain domain, [NullAllowed] NSUrl url, bool shouldCreate, out NSError error);
+
+		[Export ("URLsForDirectory:inDomains:")]
+		public extern NSUrl [] GetUrls (NSSearchPathDirectory directory, NSSearchPathDomain domains);
+
+		[Export ("replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:")]
+		public extern bool Replace (NSUrl originalItem, NSUrl newItem, [NullAllowed] string backupItemName, NSFileManagerItemReplacementOptions options, out NSUrl resultingURL, out NSError error);
+
+		[Export ("mountedVolumeURLsIncludingResourceValuesForKeys:options:")]
+		public extern NSUrl [] GetMountedVolumes ([NullAllowed] NSArray properties, NSVolumeEnumerationOptions options);
+
+		// Methods to convert paths to/from C strings for passing to system calls - Not implemented
+		////- (const char *)fileSystemRepresentationWithPath:(NSString *)path;
+		//[Export ("fileSystemRepresentationWithPath:")]
+		//const char FileSystemRepresentationWithPath (string path);
+
+		////- (NSString *)stringWithFileSystemRepresentation:(const char *)str length:(NSUInteger)len;
+		//[Export ("stringWithFileSystemRepresentation:length:")]
+		//string StringWithFileSystemRepresentation (const char str, uint len);
+
+		[Export ("createDirectoryAtURL:withIntermediateDirectories:attributes:error:")]
+		public extern bool CreateDirectory (NSUrl url, bool createIntermediates, [NullAllowed] NSDictionary attributes, out NSError error);
+
+		[Export ("createSymbolicLinkAtURL:withDestinationURL:error:")]
+		public extern bool CreateSymbolicLink (NSUrl url, NSUrl destURL, out NSError error);
+
+		[Export ("setUbiquitous:itemAtURL:destinationURL:error:")]
+		public extern bool SetUbiquitous (bool flag, NSUrl url, NSUrl destinationUrl, out NSError error);
+
+		[Export ("isUbiquitousItemAtURL:")]
+		public extern bool IsUbiquitous (NSUrl url);
+
+		[Export ("startDownloadingUbiquitousItemAtURL:error:")]
+		public extern bool StartDownloadingUbiquitous (NSUrl url, out NSError error);
+
+		[Export ("evictUbiquitousItemAtURL:error:")]
+		public extern bool EvictUbiquitous (NSUrl url, out NSError error);
+
+		[Export ("URLForUbiquityContainerIdentifier:")]
+		public extern NSUrl GetUrlForUbiquityContainer ([NullAllowed] string containerIdentifier);
+
+		[Export ("URLForPublishingUbiquitousItemAtURL:expirationDate:error:")]
+		public extern NSUrl GetUrlForPublishingUbiquitousItem (NSUrl url, out NSDate expirationDate, out NSError error);
+
+		[Export ("ubiquityIdentityToken")]
+		public extern NSObject UbiquityIdentityToken { get; }
+
+		[Field ("NSUbiquityIdentityDidChangeNotification")]
+		[Notification]
+		public extern NSString UbiquityIdentityDidChangeNotification { get; }
+
+		[Export ("containerURLForSecurityApplicationGroupIdentifier:")]
+		public extern NSUrl GetContainerUrl (string securityApplicationGroupIdentifier);
+
+		[MacCatalyst (13, 1)]
+		[Export ("getRelationship:ofDirectory:inDomain:toItemAtURL:error:")]
+		public extern bool GetRelationship (out NSUrlRelationship outRelationship, NSSearchPathDirectory directory, NSSearchPathDomain domain, NSUrl toItemAtUrl, out NSError error);
+
+		[MacCatalyst (13, 1)]
+		[Export ("getRelationship:ofDirectoryAtURL:toItemAtURL:error:")]
+		public extern bool GetRelationship (out NSUrlRelationship outRelationship, NSUrl directoryURL, NSUrl otherURL, out NSError error);
+
+		[NoWatch]
+		[NoTV]
+		[NoiOS]
+		[NoMacCatalyst]
+		[Async]
+		[Export ("unmountVolumeAtURL:options:completionHandler:")]
+		public extern void UnmountVolume (NSUrl url, NSFileManagerUnmountOptions mask, Action<NSError> completionHandler);
+
+		[NoWatch, NoTV]
+		[MacCatalyst (13, 1)]
+		[Async, Export ("getFileProviderServicesForItemAtURL:completionHandler:")]
+		public extern void GetFileProviderServices (NSUrl url, Action<NSDictionary<NSString, NSFileProviderService>, NSError> completionHandler);
+	}
+	[NoWatch, NoTV]
+	[MacCatalyst (13, 1)]
+	[BaseType (typeof (NSObject))]
+	[DisableDefaultCtor]
+	public partial class NSFileProviderService : INativeObject
+	{
+		[Export ("name")]
+		public extern string Name { get; }
+
+		[Async]
+		[Export ("getFileProviderConnectionWithCompletionHandler:")]
+		public extern void GetFileProviderConnection (Action<NSXpcConnection, NSError> completionHandler);
+
+		public NativeHandle Handle { get; }
+	}
+
+#if MONOMAC
+	public partial class NSFilePresenter {
+		[NoiOS][NoMacCatalyst][NoWatch][NoTV]
+		[NullAllowed]
+		[Export ("primaryPresentedItemURL")]
+		public extern NSUrl PrimaryPresentedItemUrl { get; }
+	}
+
+	
+#endif
 }

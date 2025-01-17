@@ -43,7 +43,8 @@ namespace Foundation
 
 		public TProxy GetRootProxy<TProxy> () where TProxy : NSObject
 		{
-			return GetRootProxy<TProxy> (_GetRootProxy ());
+			throw new NotImplementedException();
+			//return GetRootProxy<TProxy> (_GetRootProxy ());
 		}
 
 		public static TProxy GetRootProxy<TProxy> (string name, string hostName) where TProxy : NSObject

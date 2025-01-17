@@ -18641,11 +18641,7 @@ namespace AppKit {
 		NSImage GetIcon (UTType contentType);
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface NSWorkspaceAuthorization {
-	}
+
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]

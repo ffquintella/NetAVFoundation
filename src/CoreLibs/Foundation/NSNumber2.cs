@@ -205,4 +205,189 @@ namespace Foundation {
 		}
 #endif
 	}
+	
+	[BaseType (typeof (NSValue))]
+	public partial class NSNumber : NSValue //, CKRecordValue, NSFetchRequestResult {
+	{
+		[Export ("charValue")]
+		public extern sbyte SByteValue { get; }
+
+		[Export ("unsignedCharValue")]
+		public extern byte ByteValue { get; }
+
+		[Export ("shortValue")]
+		public extern short Int16Value { get; }
+
+		[Export ("unsignedShortValue")]
+		public extern ushort UInt16Value { get; }
+
+		[Export ("intValue")]
+		public extern int Int32Value { get; }
+
+		[Export ("unsignedIntValue")]
+		public extern uint UInt32Value { get; }
+
+		[Export ("longValue")]
+		public extern nint LongValue { get; }
+
+		[Export ("unsignedLongValue")]
+		public extern nuint UnsignedLongValue { get; }
+
+		[Export ("longLongValue")]
+		public extern long Int64Value { get; }
+
+		[Export ("unsignedLongLongValue")]
+		public extern ulong UInt64Value { get; }
+
+		[Export ("floatValue")]
+		public extern float FloatValue { get; } /* float, not CGFloat */
+
+		[Export ("doubleValue")]
+		public extern double DoubleValue { get; }
+
+		[Export ("decimalValue")]
+		public extern NSDecimal NSDecimalValue { get; }
+
+		[Export ("boolValue")]
+		public extern bool BoolValue { get; }
+
+		[Export ("integerValue")]
+		public extern nint NIntValue { get; }
+
+		[Export ("unsignedIntegerValue")]
+		public extern nuint NUIntValue { get; }
+
+		[Export ("stringValue")]
+		public extern string StringValue { get; }
+
+		[Export ("compare:")]
+		public extern static nint Compare (NSNumber otherNumber);
+
+		[Export ("isEqualToNumber:")]
+		public extern static bool IsEqualTo (IntPtr number);
+
+		[Wrap ("IsEqualTo (number.GetHandle ())")]
+		public extern static bool IsEqualTo (NSNumber number);
+
+		[Export ("descriptionWithLocale:")]
+		public extern static string DescriptionWithLocale (NSLocale locale);
+
+		[DesignatedInitializer]
+		[Export ("initWithChar:")]
+		public extern static NativeHandle Constructor (sbyte value);
+
+		[DesignatedInitializer]
+		[Export ("initWithUnsignedChar:")]
+		public extern static NativeHandle Constructor (byte value);
+
+		[DesignatedInitializer]
+		[Export ("initWithShort:")]
+		public extern static NativeHandle Constructor (short value);
+
+		[DesignatedInitializer]
+		[Export ("initWithUnsignedShort:")]
+		public extern static NativeHandle Constructor (ushort value);
+
+		[DesignatedInitializer]
+		[Export ("initWithInt:")]
+		public extern static NativeHandle Constructor (int /* int, not NSInteger */ value);
+
+		[DesignatedInitializer]
+		[Export ("initWithUnsignedInt:")]
+		public extern static NativeHandle Constructor (uint /* unsigned int, not NSUInteger */value);
+
+		//[Export ("initWithLong:")]
+		//NativeHandle Constructor (long value);
+		//
+		//[Export ("initWithUnsignedLong:")]
+		//NativeHandle Constructor (ulong value);
+
+		[DesignatedInitializer]
+		[Export ("initWithLongLong:")]
+		public extern static NativeHandle Constructor (long value);
+
+		[DesignatedInitializer]
+		[Export ("initWithUnsignedLongLong:")]
+		public extern static NativeHandle Constructor (ulong value);
+
+		[DesignatedInitializer]
+		[Export ("initWithFloat:")]
+		public extern static NativeHandle Constructor (float /* float, not CGFloat */ value);
+
+		[DesignatedInitializer]
+		[Export ("initWithDouble:")]
+		public extern static NativeHandle Constructor (double value);
+
+		[DesignatedInitializer]
+		[Export ("initWithBool:")]
+		public extern static NativeHandle Constructor (bool value);
+
+		[DesignatedInitializer]
+		[Export ("initWithInteger:")]
+		public extern static NativeHandle Constructor (nint value);
+
+		[DesignatedInitializer]
+		[Export ("initWithUnsignedInteger:")]
+		public extern static NativeHandle Constructor (nuint value);
+
+		[Export ("numberWithChar:")]
+		[Static]
+		public extern static NSNumber FromSByte (sbyte value);
+
+		[Static]
+		[Export ("numberWithUnsignedChar:")]
+		public extern static NSNumber FromByte (byte value);
+
+		[Static]
+		[Export ("numberWithShort:")]
+		public extern static NSNumber FromInt16 (short value);
+
+		[Static]
+		[Export ("numberWithUnsignedShort:")]
+		public extern static NSNumber FromUInt16 (ushort value);
+
+		[Static]
+		[Export ("numberWithInt:")]
+		public extern static NSNumber FromInt32 (int /* int, not NSInteger */ value);
+
+		[Static]
+		[Export ("numberWithUnsignedInt:")]
+		public extern static NSNumber FromUInt32 (uint /* unsigned int, not NSUInteger */ value);
+
+		[Static]
+		[Export ("numberWithLong:")]
+		public extern static NSNumber FromLong (nint value);
+		//
+		[Static]
+		[Export ("numberWithUnsignedLong:")]
+		public extern static NSNumber FromUnsignedLong (nuint value);
+
+		[Static]
+		[Export ("numberWithLongLong:")]
+		public extern static NSNumber FromInt64 (long value);
+
+		[Static]
+		[Export ("numberWithUnsignedLongLong:")]
+		public extern static NSNumber FromUInt64 (ulong value);
+
+		[Static]
+		[Export ("numberWithFloat:")]
+		public extern static NSNumber FromFloat (float /* float, not CGFloat */ value);
+
+		[Static]
+		[Export ("numberWithDouble:")]
+		public extern static NSNumber FromDouble (double value);
+
+		[Static]
+		[Export ("numberWithBool:")]
+		public extern static NSNumber FromBoolean (bool value);
+
+		[Static]
+		[Export ("numberWithInteger:")]
+		public extern static NSNumber FromNInt (nint value);
+
+		[Static]
+		[Export ("numberWithUnsignedInteger:")]
+		public extern static NSNumber FromNUInt (nuint value);
+	}
 }

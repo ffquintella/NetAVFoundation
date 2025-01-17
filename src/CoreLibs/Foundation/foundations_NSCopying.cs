@@ -122,7 +122,10 @@ namespace Foundation
         [Export ("copyWithZone:")]
         public extern NSObject Copy ([NullAllowed] NSZone zone);
 		
+        public NSCopying (NativeHandle handle, bool owns) : base (handle, owns) {}
         public NSCopying (IntPtr handle) : base (handle) {}
+        
+        public NSCopying (NSObjectFlag t) : base (t) {}
 		
         public NSCopying () : base (IntPtr.Zero) {}
     }

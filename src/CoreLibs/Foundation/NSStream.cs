@@ -68,7 +68,7 @@ namespace Foundation {
 		public string Password;
 	}
 
-	public partial class NSStream {
+	public partial class NSStream : NSObject {
 		public NSObject this [NSString key] {
 			get {
 				return GetProperty (key);
@@ -268,5 +268,156 @@ namespace Foundation {
 			}
 			AssignStreams (read, write, out readStream, out writeStream);
 		}
+	}
+	
+	[BaseType (typeof (NSObject), Delegates = new string [] { "WeakDelegate" }, Events = new Type [] { typeof (NSStreamDelegate) })]
+	public partial class NSStream: NSObject {
+		[Export ("open")]
+		public extern void Open ();
+
+		[Export ("close")]
+		public extern void Close ();
+
+		// Header says:
+		//    assign /* actually weak */
+		// so bind as weak
+		[Export ("delegate", ArgumentSemantic.Weak), NullAllowed]
+		public extern NSObject WeakDelegate { get; set; }
+
+		[Wrap ("WeakDelegate")]
+		extern INSStreamDelegate Delegate { get; set; }
+
+#if NET
+		[Abstract]
+#endif
+		[return: NullAllowed]
+		[Protected]
+		[Export ("propertyForKey:")]
+		public extern NSObject GetProperty (NSString key);
+
+#if NET
+		[Abstract]
+#endif
+		[Protected]
+		[Export ("setProperty:forKey:")]
+		public extern bool SetProperty ([NullAllowed] NSObject property, NSString key);
+
+#if NET
+		[Export ("scheduleInRunLoop:forMode:")]
+		public extern void Schedule (NSRunLoop aRunLoop, NSString mode);
+
+		[Export ("removeFromRunLoop:forMode:")]
+		public extern void Unschedule (NSRunLoop aRunLoop, NSString mode);
+#else
+		[Export ("scheduleInRunLoop:forMode:")]
+		public void Schedule (NSRunLoop aRunLoop, string mode);
+
+		[Export ("removeFromRunLoop:forMode:")]
+		public void Unschedule (NSRunLoop aRunLoop, string mode);
+#endif
+		[Wrap ("Schedule (aRunLoop, mode.GetConstant ()!)")]
+		public extern void Schedule (NSRunLoop aRunLoop, NSRunLoopMode mode);
+
+		[Wrap ("Unschedule (aRunLoop, mode.GetConstant ()!)")]
+		public extern void Unschedule (NSRunLoop aRunLoop, NSRunLoopMode mode);
+
+		[Export ("streamStatus")]
+		public extern NSStreamStatus Status { get; }
+
+		[Export ("streamError")]
+		public extern NSError Error { get; }
+
+		[Advanced, Field ("NSStreamSocketSecurityLevelKey")]
+		public extern NSString SocketSecurityLevelKey { get; }
+
+		[Advanced, Field ("NSStreamSocketSecurityLevelNone")]
+		public extern NSString SocketSecurityLevelNone { get; }
+
+		[Advanced, Field ("NSStreamSocketSecurityLevelSSLv2")]
+		public extern NSString SocketSecurityLevelSslV2 { get; }
+
+		[Advanced, Field ("NSStreamSocketSecurityLevelSSLv3")]
+		public extern NSString SocketSecurityLevelSslV3 { get; }
+
+		[Advanced, Field ("NSStreamSocketSecurityLevelTLSv1")]
+		public extern NSString SocketSecurityLevelTlsV1 { get; }
+
+		[Advanced, Field ("NSStreamSocketSecurityLevelNegotiatedSSL")]
+		public extern NSString SocketSecurityLevelNegotiatedSsl { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyConfigurationKey")]
+		public extern NSString SocksProxyConfigurationKey { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyHostKey")]
+		public extern NSString SocksProxyHostKey { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyPortKey")]
+		public extern NSString SocksProxyPortKey { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyVersionKey")]
+		public extern NSString SocksProxyVersionKey { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyUserKey")]
+		public extern NSString SocksProxyUserKey { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyPasswordKey")]
+		public extern NSString SocksProxyPasswordKey { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyVersion4")]
+		public extern NSString SocksProxyVersion4 { get; }
+
+		[Advanced, Field ("NSStreamSOCKSProxyVersion5")]
+		public extern NSString SocksProxyVersion5 { get; }
+
+		[Advanced, Field ("NSStreamDataWrittenToMemoryStreamKey")]
+		public extern NSString DataWrittenToMemoryStreamKey { get; }
+
+		[Advanced, Field ("NSStreamFileCurrentOffsetKey")]
+		public extern NSString FileCurrentOffsetKey { get; }
+
+		[Advanced, Field ("NSStreamSocketSSLErrorDomain")]
+		public extern NSString SocketSslErrorDomain { get; }
+
+		[Advanced, Field ("NSStreamSOCKSErrorDomain")]
+		public extern NSString SocksErrorDomain { get; }
+
+		[Advanced, Field ("NSStreamNetworkServiceType")]
+		public extern NSString NetworkServiceType { get; }
+
+		[Advanced, Field ("NSStreamNetworkServiceTypeVoIP")]
+		public extern NSString NetworkServiceTypeVoIP { get; }
+
+		[Advanced, Field ("NSStreamNetworkServiceTypeVideo")]
+		public extern NSString NetworkServiceTypeVideo { get; }
+
+		[Advanced, Field ("NSStreamNetworkServiceTypeBackground")]
+		public extern NSString NetworkServiceTypeBackground { get; }
+
+		[Advanced, Field ("NSStreamNetworkServiceTypeVoice")]
+		public extern NSString NetworkServiceTypeVoice { get; }
+
+		[Advanced]
+		[MacCatalyst (13, 1)]
+		[Field ("NSStreamNetworkServiceTypeCallSignaling")]
+		public extern NSString NetworkServiceTypeCallSignaling { get; }
+
+		[MacCatalyst (13, 1)]
+		[Static, Export ("getBoundStreamsWithBufferSize:inputStream:outputStream:")]
+		public extern void GetBoundStreams (nuint bufferSize, out NSInputStream inputStream, out NSOutputStream outputStream);
+
+		[NoWatch]
+		[MacCatalyst (13, 1)]
+		[Static, Export ("getStreamsToHostWithName:port:inputStream:outputStream:")]
+		public extern static void GetStreamsToHost (string hostname, nint port, out NSInputStream inputStream, out NSOutputStream outputStream);
+	}
+
+	partial class INSStreamDelegate { }
+
+	[BaseType (typeof (NSObject))]
+	[Model]
+	[Protocol]
+	partial class NSStreamDelegate {
+		[Export ("stream:handleEvent:"), EventArgs ("NSStream"), EventName ("OnEvent")]
+		extern void HandleEvent (NSStream theStream, NSStreamEvent streamEvent);
 	}
 }

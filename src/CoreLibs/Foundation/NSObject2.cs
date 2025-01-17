@@ -1203,8 +1203,10 @@ namespace Foundation {
 		}
 
 		public NSIndexSet Indexes {
-			get {
-				return (NSIndexSet) dict [NSObject2.ChangeIndexesKey];
+			get
+			{
+				throw new NotImplementedException();
+				//return (NSIndexSet) dict [NSObject2.ChangeIndexesKey];
 			}
 		}
 

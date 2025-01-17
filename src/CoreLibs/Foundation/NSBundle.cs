@@ -17,7 +17,7 @@ namespace Foundation {
 
 		public string [] PathsForResources (string fileExtension)
 		{
-			return PathsForResources (fileExtension, null);
+			return PathsForResources (fileExtension);
 		}
 
 #if !MONOMAC && !XAMCORE_5_0

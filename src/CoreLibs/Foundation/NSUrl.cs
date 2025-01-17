@@ -769,7 +769,7 @@ namespace Foundation {
 		public  extern NSString UbiquitousSharedItemPermissionsReadWrite { get; }
 
 		[Field ("NSURLIsExcludedFromBackupKey")]
-		public  extern NSString IsExcludedFromBackupKey { get; }
+		public static extern NSString IsExcludedFromBackupKey { get; }
 
 		[Export ("bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:")]
 		public  extern NSData CreateBookmarkData (NSUrlBookmarkCreationOptions options, [NullAllowed] string [] resourceValues, [NullAllowed] NSUrl relativeUrl, out NSError error);

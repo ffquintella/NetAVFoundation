@@ -78,5 +78,69 @@ namespace Foundation {
 			: this (date, when.TotalSeconds, new NSTimerActionDispatcher (action), NSTimerActionDispatcher.Selector, null, repeats)
 		{
 		}
+
+		public NSTimer(NSDate date, double seconds, NSObject target, Selector selector, [NullAllowed] NSObject userInfo,
+			bool repeats)
+		{
+			Handle = Constructor(date, seconds, target, selector, userInfo, repeats);
+		}
+
 	}
+	
+	[BaseType (typeof (NSObject))]
+	//[Dispose ("if (disposing) { Invalidate (); } ", Optimizable = true)]
+	// init returns NIL
+	[DisableDefaultCtor]
+	partial class NSTimer: NSObject {
+
+		[Static, Export ("scheduledTimerWithTimeInterval:target:selector:userInfo:repeats:")]
+		public static extern NSTimer CreateScheduledTimer (double seconds, NSObject target, Selector selector, [NullAllowed] NSObject userInfo, bool repeats);
+
+		[MacCatalyst (13, 1)]
+		[Static]
+		[Export ("scheduledTimerWithTimeInterval:repeats:block:")]
+		public static extern NSTimer CreateScheduledTimer (double interval, bool repeats, Action<NSTimer> block);
+
+		[Static, Export ("timerWithTimeInterval:target:selector:userInfo:repeats:")]
+		public static extern NSTimer CreateTimer (double seconds, NSObject target, Selector selector, [NullAllowed] NSObject userInfo, bool repeats);
+
+		[MacCatalyst (13, 1)]
+		[Static]
+		[Export ("timerWithTimeInterval:repeats:block:")]
+		public static extern NSTimer CreateTimer (double interval, bool repeats, Action<NSTimer> block);
+
+		[DesignatedInitializer]
+		[Export ("initWithFireDate:interval:target:selector:userInfo:repeats:")]
+		public static extern NativeHandle Constructor (NSDate date, double seconds, NSObject target, Selector selector, [NullAllowed] NSObject userInfo, bool repeats);
+
+		[MacCatalyst (13, 1)]
+		[Export ("initWithFireDate:interval:repeats:block:")]
+		public static extern NativeHandle Constructor (NSDate date, double seconds, bool repeats, Action<NSTimer> block);
+
+		[Export ("fire")]
+		public extern void Fire ();
+
+		[NullAllowed] // by default this property is null
+		[Export ("fireDate", ArgumentSemantic.Copy)]
+		public extern NSDate FireDate { get; set; }
+
+		// Note: preserving this member allows us to re-enable the `Optimizable` binding flag
+		[Preserve (Conditional = true)]
+		[Export ("invalidate")]
+		public extern void Invalidate ();
+
+		[Export ("isValid")]
+		public extern bool IsValid { get; }
+
+		[Export ("timeInterval")]
+		public extern double TimeInterval { get; }
+
+		[Export ("userInfo")]
+		public extern NSObject UserInfo { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("tolerance")]
+		public extern double Tolerance { get; set; }
+	}
+	
 }

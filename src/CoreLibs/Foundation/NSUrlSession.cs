@@ -6,6 +6,7 @@ using System.IO;
 #nullable disable
 
 namespace Foundation {
+	/*
 	public partial class NSUrlSessionDownloadTaskRequest : IDisposable {
 		string tmpfile;
 
@@ -56,4 +57,5 @@ namespace Foundation {
 			}
 		}
 	}
+	*/
 }

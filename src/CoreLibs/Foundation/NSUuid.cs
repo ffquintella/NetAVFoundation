@@ -46,4 +46,25 @@ namespace Foundation {
 			return ret;
 		}
 	}
+	
+	[BaseType (typeof (NSObject), Name = "NSUUID")]
+	//[DesignatedDefaultCtor]
+	partial class NSUuid :  NSCopying {
+		[Export ("initWithUUIDString:")]
+		public extern NativeHandle Constructor (string str);
+
+		// bound manually to keep the managed/native signatures identical
+		//[Export ("initWithUUIDBytes:"), Internal]
+		//NativeHandle Constructor (IntPtr bytes, bool unused);
+
+		[Export ("getUUIDBytes:"), Internal]
+		public extern void GetUuidBytes (IntPtr uuid);
+
+		[Export ("UUIDString")]
+		public extern string AsString ();
+
+		//[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+		[Export ("compare:")]
+		public extern NSComparisonResult Compare (NSUuid otherUuid);
+	}
 }

@@ -96,6 +96,35 @@ namespace Foundation {
 			return sb.ToString ();
 		}
 	}
+	
+	[BaseType (typeof (NSObject))]
+	// 'init' returns NIL
+	[DisableDefaultCtor]
+	public partial class NSException :  NSCopying {
+
+		public NSException(string name, string reason, [NullAllowed] NSDictionary userInfo)
+		{
+			Handle = Constructor(name, reason, userInfo);
+		}
+		
+		[Export ("initWithName:reason:userInfo:")]
+		public extern NativeHandle Constructor (string name, string reason, [NullAllowed] NSDictionary userInfo);
+
+		[Export ("name")]
+		public extern string Name { get; }
+
+		[Export ("reason")]
+		public extern string Reason { get; }
+
+		[Export ("userInfo")]
+		public extern NSObject UserInfo { get; }
+
+		[Export ("callStackReturnAddresses")]
+		public extern NSNumber [] CallStackReturnAddresses { get; }
+
+		[Export ("callStackSymbols")]
+		public extern string [] CallStackSymbols { get; }
+	}
 }
 
 #endif // MONOMAC || NET

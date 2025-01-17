@@ -23,10 +23,10 @@ namespace Foundation
 				this.action = action;
 			}
 	
-			public override void Main ()
+			/*public override void Main ()
 			{
 				action ();
-			}
+			}*/
 		}
 
 		public static NSThread Start (Action action)

@@ -63,4 +63,23 @@ namespace Foundation {
 			SetAllowedClasses (allowedClasses, sel, argumentIndex, forReplyBlock);
 		}
 	}
+	
+	[BaseType (typeof (NSObject), Name = "NSXPCInterface")]
+	[DisableDefaultCtor]
+	partial class NSXpcInterface {
+		[Export ("interfaceWithProtocol:")]
+		[Static]
+		public static extern NSXpcInterface Create (Protocol protocol);
+
+		[Export ("protocol", ArgumentSemantic.Assign)]
+		public extern Protocol Protocol { get; set; }
+
+		[Export ("setClasses:forSelector:argumentIndex:ofReply:")]
+		public extern void SetAllowedClasses (NSSet<Class> allowedClasses, Selector methodSelector, nuint argumentIndex, bool forReplyBlock);
+
+		[Export ("classesForSelector:argumentIndex:ofReply:")]
+		public extern NSSet<Class> GetAllowedClasses (Selector methodSelector, nuint argumentIndex, bool forReplyBlock);
+
+		// Methods taking xpc_type_t have been skipped.
+	}
 }

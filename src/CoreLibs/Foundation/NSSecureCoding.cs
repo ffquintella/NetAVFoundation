@@ -51,10 +51,10 @@ namespace Foundation {
 			if (secure_coding == IntPtr.Zero)
 				return false;
 #if MONOMAC
-			if (Messaging.bool_objc_msgSend_IntPtr (ptr, Selector.GetHandle ("conformsToProtocol:"), secure_coding) == 0)
+			if (Messaging.bool_objc_msgSend_IntPtr (ptr, Selector.GetHandle ("conformsToProtocol:"), secure_coding) == false)
 				return false;
 
-			return Messaging.bool_objc_msgSend (ptr, Selector.GetHandle ("supportsSecureCoding")) != 0;
+			return Messaging.bool_objc_msgSend (ptr, Selector.GetHandle ("supportsSecureCoding")) != false;
 #else
 			if (Messaging.bool_objc_msgSend_IntPtr (ptr, selConformsToProtocolHandle, secure_coding) == 0)
 				return false;

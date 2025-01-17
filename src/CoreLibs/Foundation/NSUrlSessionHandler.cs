@@ -58,11 +58,28 @@ namespace System.Net.Http {
 namespace Foundation {
 #endif
 
+	// DUMMY CLASSES
+	public partial class NSUrlSessionHandler : HttpMessageHandler
+	{
+		protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+	public delegate bool NSUrlSessionHandlerTrustOverrideForUrlCallback (NSUrlSessionHandler sender, string url, SecTrust trust);
+		
+
 #if !NET
 	public delegate bool NSUrlSessionHandlerTrustOverrideCallback (NSUrlSessionHandler sender, SecTrust trust);
 #endif
-	public delegate bool NSUrlSessionHandlerTrustOverrideForUrlCallback (NSUrlSessionHandler sender, string url, SecTrust trust);
+	
 
+	static class NSHttpCookieExtensions
+	{
+	}
+
+	/*
 	// useful extensions for the class in order to set it in a header
 	static class NSHttpCookieExtensions {
 		static void AppendSegment (StringBuilder builder, string name, string? value)
@@ -205,7 +222,7 @@ namespace Foundation {
 			// inside a lock, but of course, the .Values collection will not like that because it is modified during the
 			// iteration. We split the operation in two, get all the diff cancelation sources, then try to cancel each of them
 			// which will do the correct lock dance. Note that we could be tempted to do a RemoveAll, that will yield the same
-			// runtime issue, this is dull but safe. 
+			// runtime issue, this is dull but safe.
 			List<TaskCompletionSource<HttpResponseMessage>> sources;
 			lock (inflightRequestsLock) { // just lock when we iterate
 				sources = new List<TaskCompletionSource<HttpResponseMessage>> (inflightRequests.Count);
@@ -334,8 +351,8 @@ namespace Foundation {
 #if !NET8_0
 		// we do check if a user does a request and the application goes to the background, but
 		// in certain cases the user does that on purpose (BeingBackgroundTask) and wants to be able
-		// to use the network. In those cases, which are few, we want the developer to explicitly 
-		// bypass the check when there are not request in flight 
+		// to use the network. In those cases, which are few, we want the developer to explicitly
+		// bypass the check when there are not request in flight
 		bool bypassBackgroundCheck = true;
 #endif
 
@@ -389,7 +406,7 @@ namespace Foundation {
 				var oldSession = session;
 				var configuration = session.Configuration;
 				if (value && configuration.HttpCookieStorage is null) {
-					// create storage because the user wants to use it. Things are not that easy, we have to 
+					// create storage because the user wants to use it. Things are not that easy, we have to
 					// consider the following:
 					// 1. Default Session -> uses sharedHTTPCookieStorage
 					// 2. Background Session -> uses sharedHTTPCookieStorage
@@ -420,7 +437,7 @@ namespace Foundation {
 			var innerException = new NSErrorException (error);
 
 			// errors that exists in both share the same error code, so we can use a single switch/case
-			// this also ease watchOS integration as if does not expose CFNetwork but (I would not be 
+			// this also ease watchOS integration as if does not expose CFNetwork but (I would not be
 			// surprised if it)could return some of it's error codes
 #if __WATCHOS__
 			if (error.Domain == NSError.NSUrlErrorDomain) {
@@ -531,15 +548,15 @@ namespace Foundation {
 			if (dataTask.State == NSUrlSessionTaskState.Suspended)
 				dataTask.Resume ();
 
-			// as per documentation: 
-			// If this token is already in the canceled state, the 
+			// as per documentation:
+			// If this token is already in the canceled state, the
 			// delegate will be run immediately and synchronously.
-			// Any exception the delegate generates will be 
+			// Any exception the delegate generates will be
 			// propagated out of this method call.
 			//
-			// The execution of the register ensures that if we 
+			// The execution of the register ensures that if we
 			// receive a already cancelled token or it is cancelled
-			// just before this call, we will cancel the task. 
+			// just before this call, we will cancel the task.
 			// Other approaches are harder, since querying the state
 			// of the token does not guarantee that in the next
 			// execution a threads cancels it.
@@ -663,7 +680,7 @@ namespace Foundation {
 			set {
 				if (value is not null)
 					throw new PlatformNotSupportedException ();
-			} 
+			}
 		}
 
 		// There doesn't seem to be a trivial way to specify the protocols to accept (or not)
@@ -769,7 +786,7 @@ namespace Foundation {
 			SslPolicyErrors EvaluateSslPolicyErrors (X509Certificate2? certificate, X509Chain chain, SecTrust secTrust)
 			{
 				var sslPolicyErrors = SslPolicyErrors.None;
-				
+
 				try {
 					if (certificate is null) {
 						sslPolicyErrors |= SslPolicyErrors.RemoteCertificateNotAvailable;
@@ -829,14 +846,14 @@ namespace Foundation {
 
 				lock (sessionHandler.inflightRequestsLock)
 					if (sessionHandler.inflightRequests.TryGetValue (task, out inflight)) {
-						// ensure that we did not cancel the request, if we did, do cancel the task, if we 
+						// ensure that we did not cancel the request, if we did, do cancel the task, if we
 						// cancel the task it means that we are not interested in any of the delegate methods:
-						// 
-						// DidReceiveResponse     We might have received a response, but either the user cancelled or a 
+						//
+						// DidReceiveResponse     We might have received a response, but either the user cancelled or a
 						//                        timeout did, if that is the case, we do not care about the response.
-						// DidReceiveData         Of buffer has a partial response ergo garbage and there is not real 
+						// DidReceiveData         Of buffer has a partial response ergo garbage and there is not real
 						//                        reason we would like to add more data.
-						// DidCompleteWithError - We are not changing a behaviour compared to the case in which 
+						// DidCompleteWithError - We are not changing a behaviour compared to the case in which
 						//                        we did not find the data.
 						if (inflight.CancellationToken.IsCancellationRequested) {
 							task?.Cancel ();
@@ -1025,7 +1042,7 @@ namespace Foundation {
 					return;
 				}
 
-				// apple caches post request with a body, which should not happen. https://github.com/xamarin/maccore/issues/2571 
+				// apple caches post request with a body, which should not happen. https://github.com/xamarin/maccore/issues/2571
 				var disableCache = sessionHandler.DisableCaching || (inflight.Request.Method == HttpMethod.Post && inflight.Request.Content is not null);
 				completionHandler (disableCache ? null! : proposedResponse);
 			}
@@ -1120,7 +1137,7 @@ namespace Foundation {
 				// 	Proxy-Authorization
 				// 	WWW-Authenticate
 				// but we are hiding such a situation from our users, we can nevertheless know if the header was added and deal with it. The idea is as follows,
-				// check if we are in the first attempt, if we are (PreviousFailureCount == 0), we check the headers of the request and if we do have the Auth 
+				// check if we are in the first attempt, if we are (PreviousFailureCount == 0), we check the headers of the request and if we do have the Auth
 				// header, it means that we do not have the correct credentials, in any other case just do what it is expected.
 
 				if (challenge.PreviousFailureCount == 0) {
@@ -1135,7 +1152,7 @@ namespace Foundation {
 					NetworkCredential? credentialsToUse = null;
 					if (authType != RejectProtectionSpaceAuthType) {
 						// interesting situation, when we use a credential that we created that is empty, we are not getting the RejectProtectionSpaceAuthType,
-						// nevertheless, we need to check is not the first challenge we will continue trusting the 
+						// nevertheless, we need to check is not the first challenge we will continue trusting the
 						// TryGetAuthenticationType method, but we will also check that the status response in not a 401
 						// look like we do get an exception from the credentials db:
 						//  TestiOSHttpClient[28769:26371051] CredStore - performQuery - Error copying matching creds.  Error=-25300, query={
@@ -1430,7 +1447,7 @@ namespace Foundation {
 						// (buffer) in the delegate. In this case, we cannot dispose the NSData because
 						// it might be that a different request received it and it is present in
 						// its NSUrlSessionDataTaskStream stream. We can only trust the gc to do the job
-						// which is better than copying the data over. 
+						// which is better than copying the data over.
 						current = null;
 						currentStream = null;
 					}
@@ -1683,4 +1700,5 @@ namespace Foundation {
 		}
 #endif
 	}
+	*/
 }

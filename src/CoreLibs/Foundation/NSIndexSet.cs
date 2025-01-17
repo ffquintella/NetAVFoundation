@@ -139,6 +139,73 @@ namespace Foundation {
 			Handle = this.Constructor((nuint)(uint)value);
 		}
 	}
+	
+	[BaseType (typeof (NSObject))]
+	public partial class NSIndexSet : NSMutableCopying {
+		[Static, Export ("indexSetWithIndex:")]
+		public extern NSIndexSet FromIndex (nint idx);
+
+		[Static, Export ("indexSetWithIndexesInRange:")]
+		public extern NSIndexSet FromNSRange (NSRange indexRange);
+
+		[Export ("initWithIndex:")]
+		public extern NativeHandle Constructor (nuint index);
+
+		[DesignatedInitializer]
+		[Export ("initWithIndexSet:")]
+		public extern NativeHandle Constructor (NSIndexSet other);
+
+		[Export ("count")]
+		public extern nint Count { get; }
+
+		[Export ("isEqualToIndexSet:")]
+		public extern bool IsEqual (NSIndexSet other);
+
+		[Export ("firstIndex")]
+		public extern nuint FirstIndex { get; }
+
+		[Export ("lastIndex")]
+		public extern nuint LastIndex { get; }
+
+		[Export ("indexGreaterThanIndex:")]
+		public extern nuint IndexGreaterThan (nuint index);
+
+		[Export ("indexLessThanIndex:")]
+		public extern nuint IndexLessThan (nuint index);
+
+		[Export ("indexGreaterThanOrEqualToIndex:")]
+		public extern nuint IndexGreaterThanOrEqual (nuint index);
+
+		[Export ("indexLessThanOrEqualToIndex:")]
+		public extern nuint IndexLessThanOrEqual (nuint index);
+
+		[Export ("containsIndex:")]
+		public extern bool Contains (nuint index);
+
+		[Export ("containsIndexes:")]
+		public extern bool Contains (NSIndexSet indexes);
+
+		[Export ("enumerateRangesUsingBlock:")]
+		extern void EnumerateRanges (NSRangeIterator iterator);
+
+		[Export ("enumerateRangesWithOptions:usingBlock:")]
+		extern void EnumerateRanges (NSEnumerationOptions opts, NSRangeIterator iterator);
+
+		[Export ("enumerateRangesInRange:options:usingBlock:")]
+		extern void EnumerateRanges (NSRange range, NSEnumerationOptions opts, NSRangeIterator iterator);
+
+		[Export ("enumerateIndexesUsingBlock:")]
+		public extern void EnumerateIndexes (EnumerateIndexSetCallback enumeratorCallback);
+
+		[Export ("enumerateIndexesWithOptions:usingBlock:")]
+		public extern void EnumerateIndexes (NSEnumerationOptions opts, EnumerateIndexSetCallback enumeratorCallback);
+
+		[Export ("enumerateIndexesInRange:options:usingBlock:")]
+		public extern void EnumerateIndexes (NSRange range, NSEnumerationOptions opts, EnumerateIndexSetCallback enumeratorCallback);
+	}
+	
+	delegate void NSRangeIterator (NSRange range, ref bool stop);
+	
 }
 
 #endif

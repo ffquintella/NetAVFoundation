@@ -117,4 +117,47 @@ namespace Foundation {
 			context.Invoke (callback, Handle, eventType);
 		}
 	}
+	
+	[BaseType (typeof (NSStream))]
+	[DefaultCtorVisibility (Visibility.Protected)]
+	partial class NSInputStream {
+		[Export ("hasBytesAvailable")]
+		public extern bool HasBytesAvailable ();
+
+		[Export ("initWithFileAtPath:")]
+		public extern NativeHandle Constructor (string path);
+
+		[DesignatedInitializer]
+		[Export ("initWithData:")]
+		public extern NativeHandle Constructor (NSData data);
+
+		[DesignatedInitializer]
+		[Export ("initWithURL:")]
+		public extern NativeHandle Constructor (NSUrl url);
+
+		[Static]
+		[Export ("inputStreamWithData:")]
+		public extern NSInputStream FromData (NSData data);
+
+		[Static]
+		[Export ("inputStreamWithFileAtPath:")]
+		public extern NSInputStream FromFile (string path);
+
+		[Static]
+		[Export ("inputStreamWithURL:")]
+		public extern NSInputStream FromUrl (NSUrl url);
+
+#if NET
+		[return: NullAllowed]
+		[Protected]
+		[Export ("propertyForKey:"), Override]
+		public extern NSObject GetProperty (NSString key);
+
+		[Protected]
+		[Export ("setProperty:forKey:"), Override]
+		public extern bool SetProperty ([NullAllowed] NSObject property, NSString key);
+
+#endif
+
+	}
 }

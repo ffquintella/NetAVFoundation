@@ -212,8 +212,11 @@ namespace CoreImage {
 		}
 
 		public CIImage (ICIImageProvider provider, nuint width, nuint height, CIFormat pixelFormat, CGColorSpace colorSpace, CIImageProviderOptions options)
-			: this (provider, width, height, CIImage.CIFormatToInt (pixelFormat), colorSpace, options?.Dictionary)
+			//: this (provider, width, height, CIImage.CIFormatToInt (pixelFormat), colorSpace, options?.Dictionary)
 		{
+			Handle = Constructor(provider, width, height, CIImage.CIFormatToInt (pixelFormat), colorSpace, options?.Dictionary);
+			
+			//(NSData d, nint bytesPerRow, CGSize size, int /* CIFormat = int */ pixelFormat, [NullAllowed] CGColorSpace colorSpace); 
 		}
 	}
 }

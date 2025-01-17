@@ -62,6 +62,9 @@ public static partial class Messaging {
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static void void_objc_msgSend_long_int_long (IntPtr receiver, IntPtr selector, long p1, int p2, long p3);
+		
+		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSendSuper")]
+		public extern static void void_objc_msgSendSuper_IntPtr_IntPtr(IntPtr receiver, IntPtr selector, IntPtr p1, IntPtr p2);
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static IntPtr IntPtr_objc_msgSend (IntPtr receiver, IntPtr selector);
@@ -83,6 +86,9 @@ public static partial class Messaging {
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSendSuper")]
 		public extern static IntPtr IntPtr_objc_msgSendSuper_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1);
+		
+		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSendSuper")]
+		public extern static IntPtr IntPtr_objc_msgSendSuper_IntPtr_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1, IntPtr p2);
 		
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static IntPtr IntPtr_objc_msgSend_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1);
@@ -182,8 +188,8 @@ public static partial class Messaging {
 		public extern static Matrix3 Matrix3_objc_msgSend (IntPtr receiver, IntPtr selector);
 #endif // !NET
 
-		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
-		public extern static CATransform3D CATransform3D_objc_msgSend (IntPtr receiver, IntPtr selector);
+		//[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
+		//public extern static CATransform3D CATransform3D_objc_msgSend (IntPtr receiver, IntPtr selector);
 #endif // !__WATCHOS__
 
 #if !__TVOS__
@@ -232,8 +238,8 @@ public static partial class Messaging {
 		public extern static void CGRect_objc_msgSend_stret_CGRect_CGRect_CGRect (out CGRect buf, IntPtr receiver, IntPtr selector, CGRect p1, CGRect p2, CGRect p3);
 
 #if !__WATCHOS__
-		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
-		public extern static void CATransform3D_objc_msgSend_stret (out CATransform3D buf, IntPtr receiver, IntPtr selector);
+		//[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
+		//public extern static void CATransform3D_objc_msgSend_stret (out CATransform3D buf, IntPtr receiver, IntPtr selector);
 #endif // !__WATCHOS__
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]

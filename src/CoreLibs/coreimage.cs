@@ -69,7 +69,7 @@ namespace CoreImage {
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIColor_Class/index.html">Apple documentation for <c>CIColor</c></related>
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	public class CIColor : NSCopying {
+	public partial class CIColor : NSCopying {
 		[Static]
 		[Export ("colorWithCGColor:")]
 		public static extern CIColor FromCGColor (CGColor c);
@@ -214,46 +214,46 @@ namespace CoreImage {
 	///     </remarks>
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/QuartzCoreFramework/Classes/CIContext_Class/index.html">Apple documentation for <c>CIContext</c></related>
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface CIContext {
+	//[DisableDefaultCtor]
+	partial class CIContext : NSObject {
 		// marked iOS5 but it's not working in iOS8.0
 		[MacCatalyst (13, 1)]
 		[Export ("init")]
-		NativeHandle Constructor ();
+		public extern NativeHandle Constructor ();
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("contextWithMTLDevice:")]
-		CIContext FromMetalDevice (IMTLDevice device);
+		public static extern CIContext FromMetalDevice (IMTLDevice device);
 
 		[MacCatalyst (13, 1)]
 		[Internal] // This overload is needed for our strong dictionary support (but only for Unified, since for Classic the generic version is transformed to this signature)
 		[Static]
 		[Export ("contextWithMTLDevice:options:")]
-		CIContext FromMetalDevice (IMTLDevice device, [NullAllowed] NSDictionary options);
+		public static extern CIContext FromMetalDevice (IMTLDevice device, [NullAllowed] NSDictionary options);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("contextWithMTLDevice:options:")]
-		CIContext FromMetalDevice (IMTLDevice device, [NullAllowed] NSDictionary<NSString, NSObject> options);
+		public static extern CIContext FromMetalDevice (IMTLDevice device, [NullAllowed] NSDictionary<NSString, NSObject> options);
 
 		[MacCatalyst (13, 1)]
 		[Internal, Static]
 		[Export ("contextWithCGContext:options:")]
-		CIContext FromContext (CGContext ctx, [NullAllowed] NSDictionary options);
+		public static extern CIContext FromContext (CGContext ctx, [NullAllowed] NSDictionary options);
 
 		[Static, Internal]
 		[Export ("contextWithOptions:")]
-		CIContext FromOptions ([NullAllowed] NSDictionary dictionary);
+		public static extern CIContext FromOptions ([NullAllowed] NSDictionary dictionary);
 
 		[MacCatalyst (13, 1)]
 		[Internal]
 		[Export ("initWithOptions:")]
-		NativeHandle Constructor ([NullAllowed] NSDictionary options);
+		public static extern NativeHandle Constructor ([NullAllowed] NSDictionary options);
 
 		[Static]
 		[Export ("context")]
-		CIContext Create ();
+		public static extern CIContext Create ();
 
 #if HAS_OPENGLES
 		[NoMac][NoMacCatalyst]
@@ -273,56 +273,56 @@ namespace CoreImage {
 
 		[MacCatalyst (13, 1)]
 		[Export ("render:toCVPixelBuffer:")]
-		void Render (CIImage image, CVPixelBuffer buffer);
+		public extern void Render (CIImage image, CVPixelBuffer buffer);
 
 		[MacCatalyst (13, 1)]
 		[Export ("render:toCVPixelBuffer:bounds:colorSpace:")]
 		// null is not documented for CGColorSpace but it makes sense with the other overload not having this parameter (unit tested)
-		void Render (CIImage image, CVPixelBuffer buffer, CGRect rectangle, [NullAllowed] CGColorSpace cs);
+		public extern void Render (CIImage image, CVPixelBuffer buffer, CGRect rectangle, [NullAllowed] CGColorSpace cs);
 
 		[MacCatalyst (13, 1)]
 		[Export ("render:toIOSurface:bounds:colorSpace:")]
-		void Render (CIImage image, IOSurface.IOSurface surface, CGRect bounds, [NullAllowed] CGColorSpace colorSpace);
+		public extern void Render (CIImage image, IOSurface.IOSurface surface, CGRect bounds, [NullAllowed] CGColorSpace colorSpace);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("inputImageMaximumSize")]
-		CGSize InputImageMaximumSize { get; }
+		public extern CGSize InputImageMaximumSize { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("outputImageMaximumSize")]
-		CGSize OutputImageMaximumSize { get; }
+		public extern CGSize OutputImageMaximumSize { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("render:toMTLTexture:commandBuffer:bounds:colorSpace:")]
-		void Render (CIImage image, IMTLTexture texture, [NullAllowed] IMTLCommandBuffer commandBuffer, CGRect bounds, CGColorSpace colorSpace);
+		public extern void Render (CIImage image, IMTLTexture texture, [NullAllowed] IMTLCommandBuffer commandBuffer, CGRect bounds, CGColorSpace colorSpace);
 
 		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'DrawImage (image, CGRect, CGRect)' instead.")]
 		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'DrawImage (image, CGRect, CGRect)' instead.")]
 		[Deprecated (PlatformName.MacOSX, 10, 8, message: "Use 'DrawImage (image, CGRect, CGRect)' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'DrawImage (image, CGRect, CGRect)' instead.")]
 		[Export ("drawImage:atPoint:fromRect:")]
-		void DrawImage (CIImage image, CGPoint atPoint, CGRect fromRect);
+		public extern void DrawImage (CIImage image, CGPoint atPoint, CGRect fromRect);
 
 		[Export ("drawImage:inRect:fromRect:")]
-		void DrawImage (CIImage image, CGRect inRectangle, CGRect fromRectangle);
+		public extern void DrawImage (CIImage image, CGRect inRectangle, CGRect fromRectangle);
 
 		[Export ("createCGImage:fromRect:")]
 		[return: Release ()]
 		[return: NullAllowed]
-		CGImage CreateCGImage (CIImage image, CGRect fromRectangle);
+		public extern CGImage? CreateCGImage (CIImage image, CGRect fromRectangle);
 
 		[Export ("createCGImage:fromRect:format:colorSpace:")]
 		[return: Release ()]
 		[return: NullAllowed]
-		CGImage CreateCGImage (CIImage image, CGRect fromRect, int /* CIFormat = int */ ciImageFormat, [NullAllowed] CGColorSpace colorSpace);
+		public extern CGImage? CreateCGImage (CIImage image, CGRect fromRect, int /* CIFormat = int */ ciImageFormat, [NullAllowed] CGColorSpace colorSpace);
 
 		[MacCatalyst (13, 1)]
 		[Export ("createCGImage:fromRect:format:colorSpace:deferred:")]
 		[return: Release]
 		[return: NullAllowed]
-		CGImage CreateCGImage (CIImage image, CGRect fromRect, CIFormat format, [NullAllowed] CGColorSpace colorSpace, bool deferred);
+		public extern CGImage? CreateCGImage (CIImage image, CGRect fromRect, CIFormat format, [NullAllowed] CGColorSpace colorSpace, bool deferred);
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -330,10 +330,10 @@ namespace CoreImage {
 		[NoTV]
 		[Internal, Export ("createCGLayerWithSize:info:")]
 		[return: NullAllowed]
-		CGLayer CreateCGLayer (CGSize size, [NullAllowed] NSDictionary info);
+		public extern CGLayer CreateCGLayer (CGSize size, [NullAllowed] NSDictionary info);
 
 		[Export ("render:toBitmap:rowBytes:bounds:format:colorSpace:")]
-		void RenderToBitmap (CIImage image, IntPtr bitmapPtr, nint bytesPerRow, CGRect bounds, int /* CIFormat = int */ bitmapFormat, [NullAllowed] CGColorSpace colorSpace);
+		public extern void RenderToBitmap (CIImage image, IntPtr bitmapPtr, nint bytesPerRow, CGRect bounds, int /* CIFormat = int */ bitmapFormat, [NullAllowed] CGColorSpace colorSpace);
 
 		//[Export ("render:toIOSurface:bounds:colorSpace:")]
 		//void RendertoIOSurfaceboundscolorSpace (CIImage im, IOSurfaceRef surface, CGRect r, CGColorSpaceRef cs, );
@@ -343,51 +343,51 @@ namespace CoreImage {
 		[NoWatch]
 		[NoTV]
 		[Export ("reclaimResources")]
-		void ReclaimResources ();
+		public extern void ReclaimResources ();
 
 		[MacCatalyst (13, 1)]
 		[Export ("clearCaches")]
-		void ClearCaches ();
+		public extern void ClearCaches ();
 
 		[Internal, Field ("kCIContextOutputColorSpace", "+CoreImage")]
-		NSString OutputColorSpace { get; }
+		internal static extern NSString OutputColorSpace { get; }
 
 		[Internal, Field ("kCIContextWorkingColorSpace", "+CoreImage")]
-		NSString _WorkingColorSpace { get; }
+		internal static extern NSString _WorkingColorSpace { get; }
 
 		[Internal, Field ("kCIContextUseSoftwareRenderer", "+CoreImage")]
-		NSString UseSoftwareRenderer { get; }
+		internal static extern NSString UseSoftwareRenderer { get; }
 
 		[MacCatalyst (13, 1)]
 		[Internal, Field ("kCIContextPriorityRequestLow", "+CoreImage")]
-		NSString PriorityRequestLow { get; }
+		internal static extern NSString PriorityRequestLow { get; }
 
 		[MacCatalyst (13, 1)]
 		[Internal, Field ("kCIContextWorkingFormat", "+CoreImage")]
-		NSString WorkingFormatField { get; }
+		internal static extern NSString WorkingFormatField { get; }
 
 		[MacCatalyst (13, 1)]
 		[Internal]
 		[Field ("kCIContextHighQualityDownsample", "+CoreImage")]
-		NSString HighQualityDownsample { get; }
+		internal static extern NSString HighQualityDownsample { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Internal]
 		[Field ("kCIContextAllowLowPower")]
-		NSString AllowLowPower { get; }
+		internal static extern NSString AllowLowPower { get; }
 
-		[iOS (14, 0)]
+		//[iOS (14, 0)]
 		[TV (14, 0)]
 		[MacCatalyst (14, 0)]
 		[Internal]
 		[Field ("kCIContextName")]
-		NSString Name { get; }
+		internal static extern NSString Name { get; }
 
-		[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
+		//[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
 		[Field ("kCIContextMemoryLimit")]
-		NSString MemoryLimit { get; }
+		public static extern NSString MemoryLimit { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -395,7 +395,7 @@ namespace CoreImage {
 		[NoTV]
 		[Export ("offlineGPUCount")]
 		[Static]
-		int OfflineGPUCount { get; }
+		public static extern int OfflineGPUCount { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -405,48 +405,48 @@ namespace CoreImage {
 		[Export ("contextForOfflineGPUAtIndex:")]
 		[Static]
 		[return: NullAllowed]
-		CIContext FromOfflineGpu (int gpuIndex);
+		public static extern CIContext? FromOfflineGpu (int gpuIndex);
 
 		[MacCatalyst (13, 1)]
 		[Export ("workingColorSpace")]
 		[NullAllowed]
-		CGColorSpace WorkingColorSpace { get; }
+		public  static extern CGColorSpace? WorkingColorSpace { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("workingFormat")]
-		CIFormat WorkingFormat { get; }
+		public static extern CIFormat WorkingFormat { get; }
 
 		[Internal]
 		[Field ("kCIContextOutputPremultiplied", "+CoreImage")]
-		NSString OutputPremultiplied { get; }
+		internal static extern NSString OutputPremultiplied { get; }
 
 		[MacCatalyst (13, 1)]
 		[Internal]
 		[Field ("kCIContextCacheIntermediates", "+CoreImage")]
-		NSString CacheIntermediates { get; }
+		internal static extern NSString CacheIntermediates { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("contextWithMTLCommandQueue:")]
-		CIContext Create (IMTLCommandQueue commandQueue);
+		public static extern CIContext Create (IMTLCommandQueue commandQueue);
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("contextWithMTLCommandQueue:options:")]
-		CIContext Create (IMTLCommandQueue commandQueue, [NullAllowed] NSDictionary<NSString, NSObject> options);
+		public static extern CIContext Create (IMTLCommandQueue commandQueue, [NullAllowed] NSDictionary<NSString, NSObject> options);
 
-		[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
+		//[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
 		[Export ("writeOpenEXRRepresentationOfImage:toURL:options:error:")]
-		bool WriteOpenExrRepresentation (CIImage image, NSUrl url, NSDictionary<NSString, NSObject> options, [NullAllowed] out NSError errorPtr);
+		public static extern bool WriteOpenExrRepresentation (CIImage image, NSUrl url, NSDictionary<NSString, NSObject> options, [NullAllowed] out NSError errorPtr);
 
-		[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
+		//[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
 		[Export ("OpenEXRRepresentationOfImage:options:error:")]
 		[return: NullAllowed]
-		NSData GetOpenEXRRepresentation (CIImage image, NSDictionary<NSString, NSObject> options, [NullAllowed] out NSError errorPtr);
+		public static extern NSData? GetOpenEXRRepresentation (CIImage image, NSDictionary<NSString, NSObject> options, [NullAllowed] out NSError errorPtr);
 	}
 
 	/// <summary>Extension methods for <see cref="T:CoreImage.CIContext" /> that can generate common image formats.</summary>
@@ -584,22 +584,22 @@ namespace CoreImage {
 
 	/// <include file="../docs/api/CoreImage/CIFilter.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIFilter']/*" />
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor] //  In iOS8 they expose custom filters, we expose a protected one in CIFilter.cs
-	interface CIFilter : NSSecureCoding, NSCopying {
+	//[DisableDefaultCtor] //  In iOS8 they expose custom filters, we expose a protected one in CIFilter.cs
+	public partial class CIFilter :  NSCopying {
 		[Export ("inputKeys")]
-		string [] InputKeys { get; }
+		public extern string [] InputKeys { get; }
 
 		[Export ("outputKeys")]
-		string [] OutputKeys { get; }
+		public extern string [] OutputKeys { get; }
 
 		[Export ("setDefaults")]
-		void SetDefaults ();
+		public extern void SetDefaults ();
 
 		[Export ("attributes")]
-		NSDictionary Attributes { get; }
+		public extern NSDictionary Attributes { get; }
 
 		[Export ("name")]
-		string Name {
+		public extern string Name {
 			get;
 			[MacCatalyst (13, 1)]
 			set;
@@ -608,59 +608,59 @@ namespace CoreImage {
 		[Static]
 		[Export ("filterWithName:")]
 		[return: NullAllowed]
-		CIFilter FromName (string name);
+		public static extern CIFilter? FromName (string name);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("filterWithName:withInputParameters:")]
 		[return: NullAllowed]
-		CIFilter GetFilter (string name, [NullAllowed] NSDictionary inputParameters);
+		public static extern CIFilter? GetFilter (string name, [NullAllowed] NSDictionary inputParameters);
 
 		[Static]
 		[Export ("filterNamesInCategory:")]
-		string [] FilterNamesInCategory ([NullAllowed] string category);
+		public static extern string [] FilterNamesInCategory ([NullAllowed] string category);
 
 		[Static]
 		[Export ("filterNamesInCategories:"), Internal]
-		string [] _FilterNamesInCategories ([NullAllowed] string [] categories);
+		public static extern string [] _FilterNamesInCategories ([NullAllowed] string [] categories);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("localizedNameForFilterName:")]
 		[return: NullAllowed]
-		string FilterLocalizedName (string filterName);
+		public static extern string? FilterLocalizedName (string filterName);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("localizedNameForCategory:")]
-		string CategoryLocalizedName (string category);
+		public static extern string CategoryLocalizedName (string category);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("localizedDescriptionForFilterName:")]
 		[return: NullAllowed]
-		string FilterLocalizedDescription (string filterName);
+		public static extern string? FilterLocalizedDescription (string filterName);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("localizedReferenceDocumentationForFilterName:")]
 		[return: NullAllowed]
-		NSUrl FilterLocalizedReferenceDocumentation (string filterName);
+		public static extern NSUrl FilterLocalizedReferenceDocumentation (string filterName);
 
 #if MONOMAC && !NET
 		[Static]
 		[Export ("registerFilterName:constructor:classAttributes:")]
-		void RegisterFilterName (string name, NSObject constructorObject, NSDictionary classAttributes);
+		public static extern void RegisterFilterName (string name, NSObject constructorObject, NSDictionary classAttributes);
 #else
 		[MacCatalyst (13, 1)]
 		[NoWatch]
 		[Static]
 		[Export ("registerFilterName:constructor:classAttributes:")]
 #if NET
-		void RegisterFilterName (string name, ICIFilterConstructor constructorObject, NSDictionary<NSString, NSObject> classAttributes);
+		public static extern void RegisterFilterName (string name, ICIFilterConstructor constructorObject, NSDictionary<NSString, NSObject> classAttributes);
 #else
 		[Advice ("The 'constructorObject' argument must implement 'ICIFilterConstructor'.")]
-		void RegisterFilterName (string name, NSObject constructorObject, NSDictionary<NSString, NSObject> classAttributes);
+		public static extern void RegisterFilterName (string name, NSObject constructorObject, NSDictionary<NSString, NSObject> classAttributes);
 #endif
 #endif
 
@@ -670,39 +670,39 @@ namespace CoreImage {
 		[NoTV]
 		[Export ("apply:arguments:options:")]
 		[return: NullAllowed]
-		CIImage Apply (CIKernel k, [NullAllowed] NSArray args, [NullAllowed] NSDictionary options);
+		public static extern CIImage? Apply (CIKernel k, [NullAllowed] NSArray args, [NullAllowed] NSDictionary options);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("viewForUIConfiguration:excludedKeys:")]
-		IKFilterUIView GetFilterUIView (NSDictionary configurationOptions, [NullAllowed] NSArray excludedKeys);
+		public static extern IKFilterUIView GetFilterUIView (NSDictionary configurationOptions, [NullAllowed] NSArray excludedKeys);
 
 		// added in 10.10 but it was already accessible in a different way before (manual bindings)
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("outputImage")]
 		[NullAllowed]
-		CIImage OutputImage { get; }
+		public static extern CIImage OutputImage { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("serializedXMPFromFilters:inputImageExtent:"), Static]
 		[return: NullAllowed]
-		NSData SerializedXMP (CIFilter [] filters, CGRect extent);
+		public static extern NSData SerializedXMP (CIFilter [] filters, CGRect extent);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("filterArrayFromSerializedXMP:inputImageExtent:error:"), Static]
-		CIFilter [] FromSerializedXMP (NSData xmpData, CGRect extent, out NSError error);
+		public static extern CIFilter [] FromSerializedXMP (NSData xmpData, CGRect extent, out NSError error);
 
 		[Export ("setValue:forKey:"), Internal]
-		void SetValueForKey ([NullAllowed] NSObject value, IntPtr key);
+		public static extern void SetValueForKey ([NullAllowed] NSObject value, IntPtr key);
 
 		[Export ("valueForKey:"), Internal]
 		[return: NullAllowed]
-		NSObject ValueForKey (IntPtr key);
+		public static extern NSObject ValueForKey (IntPtr key);
 
 		// CIRAWFilter (CIFilter)
 
@@ -713,7 +713,7 @@ namespace CoreImage {
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Static]
 		[Export ("filterWithImageURL:options:")]
-		CIFilter CreateRawFilter (NSUrl url, NSDictionary options);
+		public static extern CIFilter CreateRawFilter (NSUrl url, NSDictionary options);
 
 		[Deprecated (PlatformName.iOS, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use 'CIRawFilter' instead.")]
@@ -722,7 +722,7 @@ namespace CoreImage {
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Static]
 		[Wrap ("CreateRawFilter (url, options.GetDictionary ()!)")]
-		CIFilter CreateRawFilter (NSUrl url, CIRawFilterOptions options);
+		public static extern CIFilter CreateRawFilter (NSUrl url, CIRawFilterOptions options);
 
 		[Deprecated (PlatformName.iOS, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use 'CIRawFilter' instead.")]
@@ -731,7 +731,7 @@ namespace CoreImage {
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Static]
 		[Export ("filterWithImageData:options:")]
-		CIFilter CreateRawFilter (NSData data, NSDictionary options);
+		public static extern CIFilter CreateRawFilter (NSData data, NSDictionary options);
 
 		[Deprecated (PlatformName.iOS, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use 'CIRawFilter' instead.")]
@@ -740,7 +740,7 @@ namespace CoreImage {
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Static]
 		[Wrap ("CreateRawFilter (data, options.GetDictionary ()!)")]
-		CIFilter CreateRawFilter (NSData data, CIRawFilterOptions options);
+		public static extern CIFilter CreateRawFilter (NSData data, CIRawFilterOptions options);
 
 		[Deprecated (PlatformName.iOS, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use 'CIRawFilter' instead.")]
@@ -749,7 +749,7 @@ namespace CoreImage {
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Static]
 		[Export ("filterWithCVPixelBuffer:properties:options:")]
-		CIFilter CreateRawFilter (CVPixelBuffer pixelBuffer, NSDictionary properties, NSDictionary options);
+		public static extern CIFilter CreateRawFilter (CVPixelBuffer pixelBuffer, NSDictionary properties, NSDictionary options);
 
 		[Deprecated (PlatformName.iOS, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use 'CIRawFilter' instead.")]
@@ -758,27 +758,27 @@ namespace CoreImage {
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'CIRawFilter' instead.")]
 		[Static]
 		[Wrap ("CreateRawFilter (pixelBuffer, properties, options.GetDictionary ()!)")]
-		CIFilter CreateRawFilter (CVPixelBuffer pixelBuffer, NSDictionary properties, CIRawFilterOptions options);
+		public static extern CIFilter CreateRawFilter (CVPixelBuffer pixelBuffer, NSDictionary properties, CIRawFilterOptions options);
 
 		[iOS (17, 0), Mac (14, 0), MacCatalyst (17, 0), TV (17, 0)]
 		[Static]
 		[Export ("blurredRectangleGeneratorFilter")]
-		CIBlurredRectangleGenerator BlurredRectangleGeneratorFilter { get; }
+		public static extern CIBlurredRectangleGenerator BlurredRectangleGeneratorFilter { get; }
 
 		[iOS (17, 0), Mac (14, 0), MacCatalyst (17, 0), TV (17, 0)]
 		[Static]
 		[Export ("cannyEdgeDetectorFilter")]
-		CICannyEdgeDetector CannyEdgeDetectorFilter { get; }
+		public static extern CICannyEdgeDetector CannyEdgeDetectorFilter { get; }
 
 		[iOS (17, 0), Mac (14, 0), MacCatalyst (17, 0), TV (17, 0)]
 		[Static]
 		[Export ("roundedRectangleStrokeGeneratorFilter")]
-		CIRoundedRectangleStrokeGenerator RoundedRectangleStrokeGeneratorFilter { get; }
+		public static extern CIRoundedRectangleStrokeGenerator RoundedRectangleStrokeGeneratorFilter { get; }
 
 		[iOS (17, 0), Mac (14, 0), MacCatalyst (17, 0), TV (17, 0)]
 		[Static]
 		[Export ("sobelGradientsFilter")]
-		CISobelGradients SobelGradientsFilter { get; }
+		public static extern CISobelGradients SobelGradientsFilter { get; }
 	}
 
 	[iOS (15, 0), MacCatalyst (15, 0), TV (15, 0)]
@@ -1632,137 +1632,137 @@ namespace CoreImage {
 	}
 
 	/// <summary>Options that can be used when initializing a new <see cref="T:CoreImage.CIImage" />.</summary>
-	[StrongDictionary ("CIImageInitializationOptionsKeys")]
-	interface CIImageInitializationOptions {
+	//[StrongDictionary ("CIImageInitializationOptionsKeys")]
+	public partial class CIImageInitializationOptions : DictionaryContainer {
 		// Bug #60726: [Generator] Support INativeObject in StrongDictionary
 		// (https://bugzilla.xamarin.com/show_bug.cgi?id=60726)
 		// CGColorSpace ColorSpace { get; set; }
 
-		CoreGraphics.CGImageProperties Properties { get; set; }
+		public CoreGraphics.CGImageProperties Properties { get; set; }
 
 		[MacCatalyst (13, 1)]
-		bool ApplyOrientationProperty { get; set; }
+		public bool ApplyOrientationProperty { get; set; }
 
 		[MacCatalyst (13, 1)]
-		bool NearestSampling { get; set; }
+		public bool NearestSampling { get; set; }
 
 		[MacCatalyst (13, 1)]
-		bool AuxiliaryDepth { get; set; }
+		public bool AuxiliaryDepth { get; set; }
 
 		[MacCatalyst (13, 1)]
-		bool AuxiliaryDisparity { get; set; }
+		public bool AuxiliaryDisparity { get; set; }
 
 		[MacCatalyst (13, 1)]
-		bool AuxiliaryPortraitEffectsMatte { get; set; }
-
-		[iOS (13, 0)]
-		[TV (13, 0)]
-		[MacCatalyst (13, 1)]
-		bool AuxiliarySemanticSegmentationSkinMatte { get; set; }
+		public bool AuxiliaryPortraitEffectsMatte { get; set; }
 
 		[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
-		bool AuxiliarySemanticSegmentationHairMatte { get; set; }
+		public bool AuxiliarySemanticSegmentationSkinMatte { get; set; }
 
 		[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
-		bool AuxiliarySemanticSegmentationTeethMatte { get; set; }
+		public bool AuxiliarySemanticSegmentationHairMatte { get; set; }
+
+		[iOS (13, 0)]
+		[TV (13, 0)]
+		[MacCatalyst (13, 1)]
+		public bool AuxiliarySemanticSegmentationTeethMatte { get; set; }
 
 		[iOS (14, 1)]
 		[TV (14, 2)]
 		[MacCatalyst (14, 1)]
-		bool AuxiliarySemanticSegmentationGlassesMatte { get; set; }
+		public bool AuxiliarySemanticSegmentationGlassesMatte { get; set; }
 
 		[iOS (14, 1)]
 		[TV (14, 2)]
 		[MacCatalyst (14, 1)]
-		bool ToneMapHdrToSdr { get; set; }
+		public bool ToneMapHdrToSdr { get; set; }
 	}
 
 	[Internal]
 	[Static]
-	interface CIImageInitializationOptionsKeys {
+	Internal static class CIImageInitializationOptionsKeys {
 		[Field ("kCIImageColorSpace")]
-		NSString ColorSpaceKey { get; }
+		public static extern NSString ColorSpaceKey { get; }
 
 		[Field ("kCIImageProperties")]
-		NSString PropertiesKey { get; }
+		public static extern NSString PropertiesKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageNearestSampling")]
-		NSString NearestSamplingKey { get; }
+		public static extern NSString NearestSamplingKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageApplyOrientationProperty")]
-		NSString ApplyOrientationPropertyKey { get; }
+		public static extern NSString ApplyOrientationPropertyKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAuxiliaryDepth")]
-		NSString AuxiliaryDepthKey { get; }
+		public static extern NSString AuxiliaryDepthKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAuxiliaryDisparity")]
-		NSString AuxiliaryDisparityKey { get; }
+		public static extern NSString AuxiliaryDisparityKey { get; }
 
-		[MacCatalyst (13, 1)]
+		//[MacCatalyst (13, 1)]
 		[Field ("kCIImageAuxiliaryPortraitEffectsMatte")]
-		NSString AuxiliaryPortraitEffectsMatteKey { get; }
+		public static extern NSString AuxiliaryPortraitEffectsMatteKey { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAuxiliarySemanticSegmentationSkinMatte")]
-		NSString AuxiliarySemanticSegmentationSkinMatteKey { get; }
+		public static extern NSString AuxiliarySemanticSegmentationSkinMatteKey { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAuxiliarySemanticSegmentationHairMatte")]
-		NSString AuxiliarySemanticSegmentationHairMatteKey { get; }
+		public static extern NSString AuxiliarySemanticSegmentationHairMatteKey { get; }
 
-		[iOS (13, 0)]
+		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAuxiliarySemanticSegmentationTeethMatte")]
-		NSString AuxiliarySemanticSegmentationTeethMatteKey { get; }
+		public static extern NSString AuxiliarySemanticSegmentationTeethMatteKey { get; }
 
-		[iOS (14, 1)]
+		//[iOS (14, 1)]
 		[TV (14, 2)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCIImageAuxiliarySemanticSegmentationGlassesMatte")]
-		NSString AuxiliarySemanticSegmentationGlassesMatteKey { get; }
+		public static extern NSString AuxiliarySemanticSegmentationGlassesMatteKey { get; }
 
-		[iOS (14, 3), TV (14, 3)]
+		//[iOS (14, 3), TV (14, 3)]
 		[MacCatalyst (14, 3)]
 		[Field ("kCIImageAuxiliarySemanticSegmentationSkyMatte")]
-		NSString AuxiliarySemanticSegmentationSkyMatteKey { get; }
+		public static extern NSString AuxiliarySemanticSegmentationSkyMatteKey { get; }
 
-		[iOS (14, 1)]
+		//[iOS (14, 1)]
 		[TV (14, 2)]
 		[MacCatalyst (14, 1)]
 		[Field ("kCIImageToneMapHDRtoSDR")]
-		NSString ToneMapHdrToSdrKey { get; }
+		public static extern NSString ToneMapHdrToSdrKey { get; }
 
 	}
 
 	/// <include file="../docs/api/CoreImage/CIImage.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIImage']/*" />
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	public class CIImage : NSCopying {
+	//[DisableDefaultCtor]
+	public partial class CIImage : NSCopying {
 		[Static]
 		[Export ("imageWithCGImage:")]
-		public extern CIImage FromCGImage (CGImage image);
+		public static extern CIImage FromCGImage (CGImage image);
 
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
 		[Static]
 		[Export ("imageWithCGImage:options:")]
-		public extern CIImage FromCGImage (CGImage image, [NullAllowed] NSDictionary d);
+		public static extern CIImage FromCGImage (CGImage image, [NullAllowed] NSDictionary d);
 
 		[Static]
 		[Wrap ("FromCGImage (image, options.GetDictionary ())")]
-		public extern CIImage FromCGImage (CGImage image, [NullAllowed] CIImageInitializationOptionsWithMetadata options);
+		public static extern CIImage FromCGImage (CGImage image, [NullAllowed] CIImageInitializationOptionsWithMetadata options);
 
 		//[iOS (13, 0)]
 		[TV (13, 0)]
@@ -1770,14 +1770,14 @@ namespace CoreImage {
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
 		[Static]
 		[Export ("imageWithCGImageSource:index:options:")]
-		public static extern CIImage FromCGImageSource (CGImageSource source, nuint index, [NullAllowed] NSDictionary options);
+		public static static extern CIImage FromCGImageSource (CGImageSource source, nuint index, [NullAllowed] NSDictionary options);
 
 		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Wrap ("FromCGImageSource (source, index, options.GetDictionary ())")]
-		public static extern CIImage FromCGImageSource (CGImageSource source, nuint index, [NullAllowed] CIImageInitializationOptionsWithMetadata options);
+		public static static extern CIImage FromCGImageSource (CGImageSource source, nuint index, [NullAllowed] CIImageInitializationOptionsWithMetadata options);
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -2095,123 +2095,123 @@ namespace CoreImage {
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatRGBA16")]
-		public  extern int FormatRGBA16 { get; } /* CIFormat = int */
+		public  static extern int FormatRGBA16 { get; } /* CIFormat = int */
 
 		[Field ("kCIFormatARGB8")]
-		public  extern int FormatARGB8 { get; } /* CIFormat = int */
+		public static  extern int FormatARGB8 { get; } /* CIFormat = int */
 
 		[Field ("kCIFormatRGBAh")]
-		public  extern int FormatRGBAh { get; } /* CIFormat = int */
+		public static  extern int FormatRGBAh { get; } /* CIFormat = int */
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatRGBAf")]
-		public  extern int FormatRGBAf { get; } /* CIFormat = int */
+		public static  extern int FormatRGBAf { get; } /* CIFormat = int */
 
 		[Field ("kCIFormatBGRA8")]
-		public  extern int FormatBGRA8 { get; } /* CIFormat = int */
+		public static  extern int FormatBGRA8 { get; } /* CIFormat = int */
 
 		[Field ("kCIFormatRGBA8")]
-		public  extern int FormatRGBA8 { get; } /* CIFormat = int */
+		public static  extern int FormatRGBA8 { get; } /* CIFormat = int */
 
 		[Field ("kCIFormatABGR8")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatABGR8 { get; }
+		public static  extern int FormatABGR8 { get; }
 
 		[Field ("kCIFormatA8")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatA8 { get; }
+		public static  extern int FormatA8 { get; }
 
 		[Field ("kCIFormatA16")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatA16 { get; }
+		public static  extern int FormatA16 { get; }
 
 		[Field ("kCIFormatAh")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatAh { get; }
+		public static  extern int FormatAh { get; }
 
 		[Field ("kCIFormatAf")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatAf { get; }
+		public static  extern int FormatAf { get; }
 
 		[Field ("kCIFormatR8")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatR8 { get; }
+		public static  extern int FormatR8 { get; }
 
 		[Field ("kCIFormatR16")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatR16 { get; }
+		public static  extern int FormatR16 { get; }
 
 		[Field ("kCIFormatRh")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatRh { get; }
+		public static  extern int FormatRh { get; }
 
 		[Field ("kCIFormatRf")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatRf { get; }
+		public static  extern int FormatRf { get; }
 
 		[Field ("kCIFormatRG8")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatRG8 { get; }
+		public static  extern int FormatRG8 { get; }
 
 		[Field ("kCIFormatRG16")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatRG16 { get; }
+		public static  extern int FormatRG16 { get; }
 
 		[Field ("kCIFormatRGh")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatRGh { get; }
+		public static  extern int FormatRGh { get; }
 
 		[Field ("kCIFormatRGf")]
 		[MacCatalyst (13, 1)]
-		public  extern int FormatRGf { get; }
+		public  static extern int FormatRGf { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatL8")]
-		public  extern int FormatL8 { get; }
+		public static  extern int FormatL8 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatL16")]
-		public extern int FormatL16 { get; }
+		public static  extern int FormatL16 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatLh")]
-		public extern int FormatLh { get; }
+		public static extern int FormatLh { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatLf")]
-		public extern int FormatLf { get; }
+		public static extern int FormatLf { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatLA8")]
-		public extern int FormatLA8 { get; }
+		public static  extern int FormatLA8 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatLA16")]
-		public extern int FormatLA16 { get; }
+		public static extern int FormatLA16 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatLAh")]
-		public extern int FormatLAh { get; }
+		public static extern int FormatLAh { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIFormatLAf")]
-		public extern int FormatLAf { get; }
+		public static extern int FormatLAf { get; }
 
 		//[iOS (17, 0), TV (17, 0), MacCatalyst (17, 0), Mac (14, 0)]
 		[Field ("kCIFormatRGB10")]
-		public extern int FormatRgb10 { get; }
+		public static extern int FormatRgb10 { get; }
 
 		//[iOS (17, 0), TV (17, 0), MacCatalyst (17, 0), Mac (14, 0)]
 		[Field ("kCIFormatRGBX16")]
-		public extern int FormatRgbX16 { get; }
+		public static extern int FormatRgbX16 { get; }
 
 		//[iOS (17, 0), TV (17, 0), MacCatalyst (17, 0), Mac (14, 0)]
 		[Field ("kCIFormatRGBXf")]
-		public extern int FormatRgbXf { get; }
+		public static extern int FormatRgbXf { get; }
 
 		//[iOS (17, 0), TV (17, 0), MacCatalyst (17, 0), Mac (14, 0)]
 		[Field ("kCIFormatRGBXh")]
-		public extern int FormatRgbXh { get; }
+		public static extern int FormatRgbXh { get; }
 
 		// UIKit extensions
 		[NoMac]
@@ -2230,16 +2230,16 @@ namespace CoreImage {
 		public extern NativeHandle Constructor (UIImage image, [NullAllowed] CIImageInitializationOptions options);
 
 		[Field ("kCIImageAutoAdjustFeatures"), Internal]
-		public extern NSString AutoAdjustFeaturesKey { get; }
+		public static extern NSString AutoAdjustFeaturesKey { get; }
 
 		[Field ("kCIImageAutoAdjustRedEye"), Internal]
-		public extern NSString AutoAdjustRedEyeKey { get; }
+		public static extern NSString AutoAdjustRedEyeKey { get; }
 
 		[Field ("kCIImageAutoAdjustEnhance"), Internal]
-		public extern NSString AutoAdjustEnhanceKey { get; }
+		public static extern NSString AutoAdjustEnhanceKey { get; }
 
 		[Export ("autoAdjustmentFiltersWithOptions:"), Internal]
-		public extern NSArray _GetAutoAdjustmentFilters ([NullAllowed] NSDictionary opts);
+		public static extern NSArray _GetAutoAdjustmentFilters ([NullAllowed] NSDictionary opts);
 
 		[MacCatalyst (13, 1)]
 		[Export ("regionOfInterestForImage:inRect:")]
@@ -2274,32 +2274,32 @@ namespace CoreImage {
 
 		[MacCatalyst (13, 1)]
 		[Export ("imageBySamplingLinear")]
-		public extern CIImage CreateBySamplingLinear ();
+		public static extern CIImage CreateBySamplingLinear ();
 
 		[MacCatalyst (13, 1)]
 		[Export ("imageBySamplingNearest")]
-		public extern CIImage CreateBySamplingNearest ();
+		public static extern CIImage CreateBySamplingNearest ();
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAutoAdjustCrop"), Internal]
-		public extern NSString AutoAdjustCrop { get; }
+		public static extern NSString AutoAdjustCrop { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCIImageAutoAdjustLevel"), Internal]
-		public extern NSString AutoAdjustLevel { get; }
+		public static extern NSString AutoAdjustLevel { get; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("url")]
-		public extern NSUrl Url { get; }
+		public static extern NSUrl Url { get; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("colorSpace")]
-		public extern CGColorSpace ColorSpace { get; }
+		public static extern CGColorSpace ColorSpace { get; }
 
 		[MacCatalyst (13, 1)]
 		[Static, Internal]
 		[Export ("imageWithImageProvider:size::format:colorSpace:options:")]
-		public extern CIImage FromProvider (ICIImageProvider provider, nuint width, nuint height, int format, [NullAllowed] CGColorSpace colorSpace, [NullAllowed] NSDictionary options);
+		public static extern CIImage FromProvider (ICIImageProvider provider, nuint width, nuint height, int format, [NullAllowed] CGColorSpace colorSpace, [NullAllowed] NSDictionary options);
 
 		[MacCatalyst (13, 1)]
 		[Internal]
@@ -2310,7 +2310,7 @@ namespace CoreImage {
 		[Static]
 		[Export ("imageWithMTLTexture:options:")]
 		[return: NullAllowed]
-		public extern CIImage? FromMetalTexture (IMTLTexture texture, [NullAllowed] NSDictionary<NSString, NSObject> options);
+		public static extern CIImage? FromMetalTexture (IMTLTexture texture, [NullAllowed] NSDictionary<NSString, NSObject> options);
 
 		[MacCatalyst (13, 1)]
 		[Export ("imageByClampingToRect:")]
@@ -2663,10 +2663,10 @@ namespace CoreImage {
 
 	/// <summary>Options used in various calls to <see cref="T:CoreImage.CIImage" /> involving <see cref="T:CoreImage.ICIImageProvider" /> objects.</summary>
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CIImageProviderKeys")]
-	interface CIImageProviderOptions {
-		NSObject TileSize { get; set; }
-		NSObject UserInfo { get; set; }
+	//[StrongDictionary ("CIImageProviderKeys")]
+	public class CIImageProviderOptions : DictionaryContainer {
+		public NSObject TileSize { get; set; }
+		public NSObject UserInfo { get; set; }
 	}
 
 	[Internal]
@@ -2680,7 +2680,7 @@ namespace CoreImage {
 		NSString UserInfoKey { get; }
 	}
 
-	interface ICIImageProvider { }
+	public interface ICIImageProvider { }
 
 	// Informal protocol
 	/// <summary>Interface defining an image provider.</summary>
@@ -2895,51 +2895,51 @@ namespace CoreImage {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface CISampler : NSCopying {
+	public partial class CISampler : NSCopying {
 		[Static, Export ("samplerWithImage:")]
-		CISampler FromImage (CIImage sourceImage);
+		public static extern CISampler FromImage (CIImage sourceImage);
 
 		[Internal, Static]
 		[Export ("samplerWithImage:options:")]
-		CISampler FromImage (CIImage sourceImag, [NullAllowed] NSDictionary options);
+		internal static extern CISampler FromImage (CIImage sourceImag, [NullAllowed] NSDictionary options);
 
 		[Export ("initWithImage:")]
-		NativeHandle Constructor (CIImage sourceImage);
+		public extern NativeHandle Constructor (CIImage sourceImage);
 
 		[DesignatedInitializer]
 		[Internal, Export ("initWithImage:options:")]
-		NSObject Constructor (CIImage image, [NullAllowed] NSDictionary options);
+		internal  extern NSObject Constructor (CIImage image, [NullAllowed] NSDictionary options);
 
 		[Export ("definition")]
-		CIFilterShape Definition { get; }
+		public extern CIFilterShape Definition { get; }
 
 		[Export ("extent")]
-		CGRect Extent { get; }
+		public extern CGRect Extent { get; }
 
 		[Field ("kCISamplerAffineMatrix", "+CoreImage"), Internal]
-		NSString AffineMatrix { get; }
+		public extern NSString AffineMatrix { get; }
 
 		[Field ("kCISamplerWrapMode", "+CoreImage"), Internal]
-		NSString WrapMode { get; }
+		public extern NSString WrapMode { get; }
 
 		[Field ("kCISamplerFilterMode", "+CoreImage"), Internal]
-		NSString FilterMode { get; }
+		public extern NSString FilterMode { get; }
 
 		[Field ("kCISamplerWrapBlack", "+CoreImage"), Internal]
-		NSString WrapBlack { get; }
+		public extern NSString WrapBlack { get; }
 
 		[Field ("kCISamplerWrapClamp", "+CoreImage"), Internal]
-		NSString WrapClamp { get; }
+		public extern NSString WrapClamp { get; }
 
 		[Field ("kCISamplerFilterNearest", "+CoreImage"), Internal]
-		NSString FilterNearest { get; }
+		public extern NSString FilterNearest { get; }
 
 		[Field ("kCISamplerFilterLinear", "+CoreImage"), Internal]
-		NSString FilterLinear { get; }
+		public extern NSString FilterLinear { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCISamplerColorSpace", "+CoreImage"), Internal]
-		NSString ColorSpace { get; }
+		public extern NSString ColorSpace { get; }
 	}
 
 	/// <summary>A vector for use with Core Image objects such as <see cref="T:CoreImage.CIFilter" />.</summary>
@@ -2947,185 +2947,184 @@ namespace CoreImage {
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/QuartzCoreFramework/Classes/CIVector_Class/index.html">Apple documentation for <c>CIVector</c></related>
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface CIVector : NSSecureCoding, NSCopying {
+	public partial class CIVector : NSCopying {
 		[Static, Internal, Export ("vectorWithValues:count:")]
-		CIVector _FromValues (IntPtr values, nint count);
+		public static extern CIVector _FromValues (IntPtr values, nint count);
 
 		[Static]
 		[Export ("vectorWithX:")]
-		CIVector Create (nfloat x);
+		public static extern CIVector Create (nfloat x);
 
 		[Static]
 		[Export ("vectorWithX:Y:")]
-		CIVector Create (nfloat x, nfloat y);
+		public static extern CIVector Create (nfloat x, nfloat y);
 
 		[Static]
 		[Export ("vectorWithX:Y:Z:")]
-		CIVector Create (nfloat x, nfloat y, nfloat z);
+		public static extern CIVector Create (nfloat x, nfloat y, nfloat z);
 
 		[Static]
 		[Export ("vectorWithX:Y:Z:W:")]
-		CIVector Create (nfloat x, nfloat y, nfloat z, nfloat w);
+		public static extern CIVector Create (nfloat x, nfloat y, nfloat z, nfloat w);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("vectorWithCGPoint:")]
-		CIVector Create (CGPoint point);
+		public static extern CIVector Create (CGPoint point);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("vectorWithCGRect:")]
-		CIVector Create (CGRect point);
+		public static extern CIVector Create (CGRect point);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("vectorWithCGAffineTransform:")]
-		CIVector Create (CGAffineTransform affineTransform);
+		public static extern CIVector Create (CGAffineTransform affineTransform);
 
 		[Static]
 		[Export ("vectorWithString:")]
-		CIVector FromString (string representation);
+		public static extern CIVector FromString (string representation);
 
 		[MacCatalyst (13, 1)]
 		[Export ("initWithCGPoint:")]
-		NativeHandle Constructor (CGPoint p);
+		public static extern NativeHandle Constructor (CGPoint p);
 
 		[MacCatalyst (13, 1)]
 		[Export ("initWithCGRect:")]
-		NativeHandle Constructor (CGRect r);
+		public static extern NativeHandle Constructor (CGRect r);
 
 		[MacCatalyst (13, 1)]
 		[Export ("initWithCGAffineTransform:")]
-		NativeHandle Constructor (CGAffineTransform r);
-
-
+		public static extern NativeHandle Constructor (CGAffineTransform r);
+		
 		[Export ("initWithX:")]
-		NativeHandle Constructor (nfloat x);
+		public static extern NativeHandle Constructor (nfloat x);
 
 		[Export ("initWithX:Y:")]
-		NativeHandle Constructor (nfloat x, nfloat y);
+		public static extern NativeHandle Constructor (nfloat x, nfloat y);
 
 		[Export ("initWithX:Y:Z:")]
-		NativeHandle Constructor (nfloat x, nfloat y, nfloat z);
+		public static extern NativeHandle Constructor (nfloat x, nfloat y, nfloat z);
 
 		[Export ("initWithX:Y:Z:W:")]
-		NativeHandle Constructor (nfloat x, nfloat y, nfloat z, nfloat w);
+		public static extern NativeHandle Constructor (nfloat x, nfloat y, nfloat z, nfloat w);
 
 		[Export ("initWithString:")]
-		NativeHandle Constructor (string representation);
+		public static extern NativeHandle Constructor (string representation);
 
 		[Export ("valueAtIndex:"), Internal]
-		nfloat ValueAtIndex (nint index);
+		public static extern nfloat ValueAtIndex (nint index);
 
 		[Export ("count")]
-		nint Count { get; }
+		public  extern nint Count { get; }
 
 		[Export ("X")]
-		nfloat X { get; }
+		public extern nfloat X { get; }
 
 		[Export ("Y")]
-		nfloat Y { get; }
+		public  extern nfloat Y { get; }
 
 		[Export ("Z")]
-		nfloat Z { get; }
+		public  extern nfloat Z { get; }
 
 		[Export ("W")]
-		nfloat W { get; }
+		public  extern nfloat W { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("CGPointValue")]
-		CGPoint Point { get; }
+		public static extern CGPoint Point { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("CGRectValue")]
-		CGRect Rectangle { get; }
+		public static extern CGRect Rectangle { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("CGAffineTransformValue")]
-		CGAffineTransform AffineTransform { get; }
+		public static extern CGAffineTransform AffineTransform { get; }
 
 		[Export ("stringRepresentation"), Internal]
-		string StringRepresentation ();
+		public static extern string StringRepresentation ();
 
 	}
 
 	/// <include file="../docs/api/CoreImage/CIDetector.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIDetector']/*" />
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface CIDetector {
+	//[DisableDefaultCtor]
+	public partial class CIDetector: NSObject {
 		[Static, Export ("detectorOfType:context:options:"), Internal]
 		[return: NullAllowed]
-		CIDetector FromType (NSString detectorType, [NullAllowed] CIContext context, [NullAllowed] NSDictionary options);
+		public static extern CIDetector? FromType (NSString detectorType, [NullAllowed] CIContext context, [NullAllowed] NSDictionary options);
 
 		[Export ("featuresInImage:")]
-		CIFeature [] FeaturesInImage (CIImage image);
+		public static extern CIFeature [] FeaturesInImage (CIImage image);
 
 		[Export ("featuresInImage:options:")]
-		CIFeature [] FeaturesInImage (CIImage image, [NullAllowed] NSDictionary options);
+		public static extern CIFeature [] FeaturesInImage (CIImage image, [NullAllowed] NSDictionary options);
 
 		[Field ("CIDetectorTypeFace"), Internal]
-		NSString TypeFace { get; }
+		public static extern NSString TypeFace { get; }
 
 		[Field ("CIDetectorImageOrientation"), Internal]
-		NSString ImageOrientation { get; }
+		public static extern NSString ImageOrientation { get; }
 
 		[Field ("CIDetectorAccuracy"), Internal]
-		NSString Accuracy { get; }
+		public static extern NSString Accuracy { get; }
 
 		[Field ("CIDetectorAccuracyLow"), Internal]
-		NSString AccuracyLow { get; }
+		public static extern NSString AccuracyLow { get; }
 
 		[Field ("CIDetectorAccuracyHigh"), Internal]
-		NSString AccuracyHigh { get; }
+		public static extern NSString AccuracyHigh { get; }
 
 		[Field ("CIDetectorTracking"), Internal]
-		NSString Tracking { get; }
+		public static extern NSString Tracking { get; }
 
 		[Field ("CIDetectorMinFeatureSize"), Internal]
-		NSString MinFeatureSize { get; }
+		public static extern NSString MinFeatureSize { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorMaxFeatureCount"), Internal]
-		NSString MaxFeatureCount { get; }
+		public static extern NSString MaxFeatureCount { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorEyeBlink"), Internal]
-		NSString EyeBlink { get; }
+		public static extern NSString EyeBlink { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorSmile"), Internal]
-		NSString Smile { get; }
+		public static extern NSString Smile { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorAspectRatio")]
-		NSString AspectRatio { get; }
+		public static extern NSString AspectRatio { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorFocalLength")]
-		NSString FocalLength { get; }
+		public static extern NSString FocalLength { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorTypeQRCode")]
-		NSString TypeQRCode { get; }
+		public static extern NSString TypeQRCode { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorTypeRectangle")]
-		NSString TypeRectangle { get; }
+		public static extern NSString TypeRectangle { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorNumberOfAngles")]
-		NSString NumberOfAngles { get; }
+		public static extern NSString NumberOfAngles { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorReturnSubFeatures")]
-		NSString ReturnSubFeatures { get; }
+		public static extern NSString ReturnSubFeatures { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIDetectorTypeText")]
-		NSString TypeText { get; }
+		public static extern NSString TypeText { get; }
 	}
 
 	/// <summary>An area of an image in which a <see cref="T:CoreImage.CIDetector" /> has detected a match.</summary>
@@ -3133,27 +3132,27 @@ namespace CoreImage {
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/CoreImage/Reference/CIFeature_Ref/index.html">Apple documentation for <c>CIFeature</c></related>
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface CIFeature {
+	public partial class CIFeature: NSObject {
 		[Export ("type", ArgumentSemantic.Retain)]
-		NSString Type { get; }
+		public extern NSString Type { get; }
 
 		[Export ("bounds", ArgumentSemantic.Assign)]
-		CGRect Bounds { get; }
+		public extern CGRect Bounds { get; }
 
 		[Field ("CIFeatureTypeFace")]
-		NSString TypeFace { get; }
+		public extern NSString TypeFace { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIFeatureTypeRectangle")]
-		NSString TypeRectangle { get; }
+		public extern NSString TypeRectangle { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIFeatureTypeQRCode")]
-		NSString TypeQRCode { get; }
+		public extern NSString TypeQRCode { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("CIFeatureTypeText")]
-		NSString TypeText { get; }
+		public extern NSString TypeText { get; }
 	}
 
 	/// <summary>Locations of the eyes and mouths in a detected face. In video sequences, attempts to maintain a consistent <format type="text/html"><a href="https://docs.microsoft.com/en-us/search/index?search=Core%20Image%20CIFace%20Feature%20Tracking%20ID&amp;scope=Xamarin" title="P:CoreImage.CIFaceFeature.TrackingID">P:CoreImage.CIFaceFeature.TrackingID</a></format>.</summary>
@@ -3301,53 +3300,53 @@ namespace CoreImage {
 	///     <related type="externalDocumentation" href="https://developer.apple.com/reference/CoreImage/CIImageProcessorKernel">Apple documentation for <c>CIImageProcessorKernel</c></related>
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface CIImageProcessorKernel {
+	public partial class CIImageProcessorKernel: NSObject {
 		[Static]
 		[Export ("processWithInputs:arguments:output:error:")]
-		bool Process ([NullAllowed] ICIImageProcessorInput [] inputs, [NullAllowed] NSDictionary<NSString, NSObject> arguments, ICIImageProcessorOutput output, out NSError error);
+		public static extern bool Process ([NullAllowed] ICIImageProcessorInput [] inputs, [NullAllowed] NSDictionary<NSString, NSObject> arguments, ICIImageProcessorOutput output, out NSError error);
 
 		[Static]
 		[Export ("roiForInput:arguments:outputRect:")]
-		CGRect GetRegionOfInterest (int input, [NullAllowed] NSDictionary<NSString, NSObject> arguments, CGRect outputRect);
+		public static extern CGRect GetRegionOfInterest (int input, [NullAllowed] NSDictionary<NSString, NSObject> arguments, CGRect outputRect);
 
 		[Static]
 		[Export ("formatForInputAtIndex:")]
-		CIFormat GetFormat (int input);
+		public static extern CIFormat GetFormat (int input);
 
 		[Static]
 		[Export ("outputFormat")]
-		CIFormat OutputFormat { get; }
+		public static extern CIFormat OutputFormat { get; }
 
 		[Static]
 		[Export ("synchronizeInputs")]
-		bool SynchronizeInputs { get; }
+		public static extern bool SynchronizeInputs { get; }
 
 		[Static]
 		[Export ("applyWithExtent:inputs:arguments:error:")]
 		[return: NullAllowed]
-		CIImage Apply (CGRect extent, [NullAllowed] CIImage [] inputs, [NullAllowed] NSDictionary<NSString, NSObject> args, out NSError error);
+		public static extern CIImage Apply (CGRect extent, [NullAllowed] CIImage [] inputs, [NullAllowed] NSDictionary<NSString, NSObject> args, out NSError error);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("outputIsOpaque")]
-		bool OutputIsOpaque { get; }
+		public static extern bool OutputIsOpaque { get; }
 
-		[iOS (17, 0), MacCatalyst (17, 0), TV (17, 0), Mac (14, 0)]
+		//[iOS (17, 0), MacCatalyst (17, 0), TV (17, 0), Mac (14, 0)]
 		[Static]
 		[Export ("roiTileArrayForInput:arguments:outputRect:")]
-		CIVector [] GetRoiTileArray (int input, [NullAllowed] NSDictionary<NSString, NSObject> arguments, CGRect outputRect);
+		public static extern CIVector [] GetRoiTileArray (int input, [NullAllowed] NSDictionary<NSString, NSObject> arguments, CGRect outputRect);
 	}
 
 	/// <summary>Animates a transition by creating an accordion-fold effect on the source image.</summary>
 	[CoreImageFilter]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (CIFilter))]
-	interface CIAccordionFoldTransition : CIAccordionFoldTransitionProtocol {
+	public partial class CIAccordionFoldTransition : CIAccordionFoldTransitionProtocol {
 
 #if !NET
 		[Obsolete ("Use 'FoldCount' instead.")]
 		[CoreImageFilterProperty ("inputNumberOfFolds")]
-		int NumberOfFolds { get; set; }
+		public extern int NumberOfFolds { get; set; }
 #endif
 	}
 
@@ -3355,57 +3354,64 @@ namespace CoreImage {
 	[CoreImageFilter (IntPtrCtorVisibility = MethodAttributes.Family)] // was already protected in classic
 	[Abstract]
 	[BaseType (typeof (CIFilter))]
-	interface CICompositingFilter {
+	public abstract class CICompositingFilter: CIFilter {
 
+		public CICompositingFilter(NativeHandle handle): base(handle) {}
+		
 		[CoreImageFilterProperty ("inputImage")]
-		CIImage InputImage { get; set; }
+		public CIImage InputImage { get; set; }
 
 		[CoreImageFilterProperty ("inputBackgroundImage")]
-		CIImage BackgroundImage { get; set; }
+		public CIImage BackgroundImage { get; set; }
 	}
 
 	/// <include file="../docs/api/CoreImage/CIAdditionCompositing.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIAdditionCompositing']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CICompositingFilter))]
-	interface CIAdditionCompositing {
+	public class CIAdditionCompositing: CICompositingFilter {
+		public CIAdditionCompositing(NativeHandle handle): base(handle) {}
 	}
 
 	/// <summary>An abstract class that defines a <see cref="T:CoreImage.CIFilter" /> that performs an affine transform on an image and then performs a filtering operation on the transformed image.</summary>
 	[CoreImageFilter (IntPtrCtorVisibility = MethodAttributes.Family)] // was already protected in classic
 	[Abstract]
 	[BaseType (typeof (CIFilter))]
-	interface CIAffineFilter : CIFilterProtocol {
-
+	public abstract class CIAffineFilter : CIFilter { // CIFilterProtocol {
+		public CIAffineFilter(NativeHandle handle): base(handle) {}
 #if !NET
 		[NoMac]
 		[Obsolete ("Not every subclass expose this property.")]
 		[CoreImageFilterProperty ("inputTransform")]
-		CGAffineTransform Transform { get; set; }
+		public CGAffineTransform Transform { get; set; }
 #endif
 	}
 
 	/// <include file="../docs/api/CoreImage/CIAffineClamp.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIAffineClamp']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIAffineFilter))]
-	interface CIAffineClamp : CIAffineClampProtocol {
+	public class CIAffineClamp :  CIAffineFilter {//CIAffineClampProtocol {
+		public CIAffineClamp(NativeHandle handle): base(handle) {}
 	}
 
 	/// <include file="../docs/api/CoreImage/CIAffineTile.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIAffineTile']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIAffineFilter))]
-	interface CIAffineTile : CIAffineTileProtocol {
+	public class CIAffineTile :  CIAffineFilter {//CIAffineTileProtocol {
+		public CIAffineTile(NativeHandle handle): base(handle) {}
 	}
 
 	/// <include file="../docs/api/CoreImage/CIAffineTransform.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIAffineTransform']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIAffineFilter))]
-	interface CIAffineTransform {
+	public class CIAffineTransform : CIAffineFilter{
+		
+		public CIAffineTransform(NativeHandle handle): base(handle) {}
 
 		[CoreImageFilterProperty ("inputImage")]
-		CIImage InputImage { get; set; }
+		public CIImage InputImage { get; set; }
 
 		[CoreImageFilterProperty ("inputTransform")]
-		CGAffineTransform Transform { get; set; }
+		publicCGAffineTransform Transform { get; set; }
 	}
 
 	[iOS (14, 0)]
@@ -3732,12 +3738,13 @@ namespace CoreImage {
 	/// <include file="../docs/api/CoreImage/CICheckerboardGenerator.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CICheckerboardGenerator']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIFilter))]
-	interface CICheckerboardGenerator : CICheckerboardGeneratorProtocol {
+	public class CICheckerboardGenerator : CIFilter { //CICheckerboardGeneratorProtocol {
 
+		public CICheckerboardGenerator(NativeHandle handle): base(handle) {}
 #if !NET
 		[Obsolete ("Use 'InputCenter' instead.")]
 		[CoreImageFilterProperty ("inputCenter")]
-		CIVector Center { get; set; }
+		public CIVector Center { get; set; }
 #endif
 	}
 
@@ -3862,32 +3869,38 @@ namespace CoreImage {
 	[CoreImageFilter (IntPtrCtorVisibility = MethodAttributes.Family)] // was already protected in classic
 	[Abstract]
 	[BaseType (typeof (CIFilter))]
-	interface CIBlendFilter {
+	public abstract class CIBlendFilter: CIFilter {
 
+		public CIBlendFilter(NativeHandle handle): base(handle) {}
+		
 		[CoreImageFilterProperty ("inputImage")]
-		CIImage InputImage { get; set; }
+		public CIImage InputImage { get; set; }
 
 		[CoreImageFilterProperty ("inputBackgroundImage")]
-		CIImage BackgroundImage { get; set; }
+		public CIImage BackgroundImage { get; set; }
 	}
 
 	/// <include file="../docs/api/CoreImage/CIColorBlendMode.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorBlendMode']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIBlendFilter))]
-	interface CIColorBlendMode {
+	public class CIColorBlendMode: CIBlendFilter {
+		public CIColorBlendMode(NativeHandle handle): base(handle) {}
 	}
 
 	/// <include file="../docs/api/CoreImage/CIColorBurnBlendMode.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorBurnBlendMode']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIBlendFilter))]
-	interface CIColorBurnBlendMode {
+	public class CIColorBurnBlendMode: CIBlendFilter  {
+		public CIColorBurnBlendMode(NativeHandle handle): base(handle) {}
 	}
 
 	/// <include file="../docs/api/CoreImage/CIColorClamp.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorClamp']/*" />
 	[CoreImageFilter]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (CIFilter))]
-	interface CIColorClamp : CIColorClampProtocol {
+	public class CIColorClamp : CIFilter { // CIColorClampProtocol {
+		
+		public CIColorClamp(NativeHandle handle): base(handle) {}
 
 #if !NET
 		// here the prefix was not removed, edited to keep API compatibility
@@ -3905,7 +3918,8 @@ namespace CoreImage {
 	/// <include file="../docs/api/CoreImage/CIColorControls.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorControls']/*" />
 	[CoreImageFilter]
 	[BaseType (typeof (CIFilter))]
-	interface CIColorControls : CIColorControlsProtocol {
+	public class  CIColorControls :  CIFilter { //CIColorControlsProtocol {
+		public CIColorBurnBlendMode(NativeHandle handle): base(handle) {}
 	}
 
 	/// <include file="../docs/api/CoreImage/CIColorCrossPolynomial.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorCrossPolynomial']/*" />
@@ -3918,7 +3932,8 @@ namespace CoreImage {
 	/// <include file="../docs/api/CoreImage/CIColorCube.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorCube']/*" />
 	[CoreImageFilter (DefaultCtorVisibility = MethodAttributes.Public, StringCtorVisibility = MethodAttributes.Public)]
 	[BaseType (typeof (CIFilter))]
-	interface CIColorCube : CIColorCubeProtocol {
+	public class CIColorCube : CIFilter {// CIColorCubeProtocol {
+		public CIColorCube(NativeHandle handle): base(handle) {}
 	}
 
 	/// <include file="../docs/api/CoreImage/CIColorCubeWithColorSpace.xml" path="/Documentation/Docs[@DocId='T:CoreImage.CIColorCubeWithColorSpace']/*" />

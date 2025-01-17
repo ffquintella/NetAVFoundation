@@ -37,8 +37,13 @@ using CoreGraphics;
 
 namespace CoreImage {
 
-	public partial class CIImageInitializationOptions {
+	public partial class CIImageInitializationOptions  {
 #if !COREBUILD
+		
+		public CIImageInitializationOptions() : base() {}
+		
+		public CIImageInitializationOptions(NSDictionary dic) : base(dic) {}
+		
 		public CGColorSpace? ColorSpace {
 			get {
 				return GetNativeValue<CGColorSpace> (CIImageInitializationOptionsKeys.ColorSpaceKey);

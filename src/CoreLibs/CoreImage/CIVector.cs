@@ -44,6 +44,16 @@ namespace CoreImage {
 			this (values, values?.Length ?? 0)
 		{
 		}
+		
+		public CIVector (nfloat x, nfloat y)
+		{
+			Handle = Constructor(x, y);
+		}
+		
+		public CIVector (nfloat x, nfloat y, nfloat z, nfloat w)
+		{
+			Handle = Constructor(x, y, z, w);
+		}
 
 		[DesignatedInitializer]
 		[Export ("initWithValues:count:")]

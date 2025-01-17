@@ -295,9 +295,9 @@ namespace CoreImage {
 		}
 
 #if MONOMAC
-		public virtual CIImage? OutputImage {
-			get { return ValueForKey (CIFilterOutputKey.Image) as CIImage; }
-		}
+		//public virtual CIImage? OutputImage {
+		//	get { return ValueForKey (CIFilterOutputKey.Image) as CIImage; }
+		//}
 #endif
 
 		// Calls the selName selector for cases where we do not have an instance created
@@ -324,6 +324,7 @@ namespace CoreImage {
 				return new CIColorControls (handle);
 			case "CIColorCube":
 				return new CIColorCube (handle);
+			/*
 			case "CIColorDodgeBlendMode":
 				return new CIColorDodgeBlendMode (handle);
 			case "CIColorInvert":
@@ -720,6 +721,7 @@ namespace CoreImage {
 				return new CIToneMapHeadroom (handle);
 			case "CIAreaBoundsRed":
 				return new CIAreaBoundsRed (handle);
+				*/
 			default:
 				throw new NotImplementedException (String.Format ("Unknown filter type returned: `{0}', returning a default CIFilter", filterName));
 			}

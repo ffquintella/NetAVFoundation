@@ -63,6 +63,8 @@ namespace CoreImage {
 
 		internal NSDictionary ToDictionary ()
 		{
+			throw new NotImplementedException();
+			/*
 			var ret = new NSMutableDictionary ();
 
 			if (AffineMatrix.HasValue) {
@@ -85,6 +87,7 @@ namespace CoreImage {
 			if (ColorSpace is not null)
 				ret.LowlevelSetObject (ColorSpace.Handle, CISampler.ColorSpace.Handle);
 			return ret;
+			*/
 		}
 	}
 
@@ -97,8 +100,9 @@ namespace CoreImage {
 		}
 
 		[DesignatedInitializer]
-		public CISampler (CIImage sourceImage, CISamplerOptions? options) : this (sourceImage, options?.ToDictionary ())
+		public CISampler (CIImage sourceImage, CISamplerOptions? options) //: this (sourceImage, options?.ToDictionary ())
 		{
+			Handle = Constructor(sourceImage, options?.ToDictionary ()).Handle;
 		}
 	}
 }

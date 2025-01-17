@@ -46,7 +46,7 @@ namespace CoreImage {
 	[SupportedOSPlatform ("macos")]
 	[SupportedOSPlatform ("tvos")]
 #endif
-	public class CIContextOptions : DictionaryContainer {
+	public partial class CIContextOptions : DictionaryContainer {
 
 		public CIContextOptions ()
 		{
@@ -196,6 +196,11 @@ namespace CoreImage {
 		public CIContext (CIContextOptions options) :
 			this (options?.Dictionary)
 		{
+		}
+		
+		public CIContext (NSDictionary dict) 
+		{
+			Handle = Constructor (dict);
 		}
 
 		public static CIContext FromContext (CGContext ctx, CIContextOptions? options)

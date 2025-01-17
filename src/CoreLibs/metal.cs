@@ -19,7 +19,7 @@ using CoreAnimation;
 using CoreData;
 using CoreGraphics;
 using CoreImage;
-using CoreLocation;
+//using CoreLocation;
 using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
@@ -54,7 +54,7 @@ namespace Metal {
 	[Deprecated (PlatformName.MacCatalyst, 16, 0)]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface MTLArgument {
+	partial class MTLArgument: NSObject {
 		[Export ("name")]
 		string Name { get; }
 
@@ -113,7 +113,7 @@ namespace Metal {
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/Metal/Reference/MTLArrayType_Ref/index.html">Apple documentation for <c>MTLArrayType</c></related>
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (MTLType))]
-	interface MTLArrayType {
+	partial class MTLArrayType: MTLType {
 		[Export ("arrayLength")]
 		nuint Length { get; }
 
@@ -147,7 +147,7 @@ namespace Metal {
 	/// <summary>System protocol for enqueuing and writing commands into a buffer.</summary>
 	[MacCatalyst (13, 1)]
 	[Protocol] // From Apple Docs: Your app does not define classes that implement this protocol. Model is not needed
-	partial interface MTLCommandEncoder {
+	partial class MTLCommandEncoder {
 		[Abstract, Export ("device")]
 		IMTLDevice Device { get; }
 
@@ -172,7 +172,7 @@ namespace Metal {
 	/// <summary>System protocol for raw data that is accessible in strides.</summary>
 	[MacCatalyst (13, 1)]
 	[Protocol] // From Apple Docs: Your app does not define classes that implement this protocol. Model is not needed
-	partial interface MTLBuffer : MTLResource {
+	partial class  MTLBuffer : MTLResource {
 		[Abstract, Export ("length")]
 		nuint Length { get; }
 
@@ -224,7 +224,7 @@ namespace Metal {
 		[return: Release]
 		IMTLBuffer CreateRemoteBuffer (IMTLDevice device);
 
-		[Mac (13, 0), iOS (16, 0), TV (16, 0), MacCatalyst (16, 0)]
+		//[Mac (13, 0), iOS (16, 0), TV (16, 0), MacCatalyst (16, 0)]
 #if NET
 		[Abstract (GenerateExtensionMethod = true)]
 #endif
@@ -234,7 +234,7 @@ namespace Metal {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface MTLBufferLayoutDescriptor : NSCopying {
+	public partial class MTLBufferLayoutDescriptor : NSCopying {
 		[Export ("stride")]
 		nuint Stride { get; set; }
 
@@ -247,7 +247,7 @@ namespace Metal {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface MTLBufferLayoutDescriptorArray {
+	public partial class  MTLBufferLayoutDescriptorArray {
 		[Internal]
 		[Export ("objectAtIndexedSubscript:")]
 		MTLBufferLayoutDescriptor ObjectAtIndexedSubscript (nuint index);
@@ -263,7 +263,7 @@ namespace Metal {
 	/// <summary>Protocol for commands that are run on a GPU</summary>
 	[MacCatalyst (13, 1)]
 	[Protocol] // From Apple Docs: Your app does not define classes that implement this protocol. Model is not needed
-	partial interface MTLCommandBuffer {
+	partial class MTLCommandBuffer {
 
 		[Abstract, Export ("device")]
 		IMTLDevice Device { get; }
@@ -403,7 +403,7 @@ namespace Metal {
 		[NullAllowed, Export ("resourceStateCommandEncoder")]
 		IMTLResourceStateCommandEncoder ResourceStateCommandEncoder { get; }
 
-		[iOS (14, 0), TV (14, 0)]
+		//[iOS (14, 0), TV (14, 0)]
 		[MacCatalyst (14, 0)]
 #if NET
 		[Abstract]
@@ -411,7 +411,7 @@ namespace Metal {
 		[Export ("errorOptions")]
 		MTLCommandBufferErrorOption ErrorOptions { get; }
 
-		[iOS (14, 0), TV (14, 0)]
+		//[iOS (14, 0), TV (14, 0)]
 		[MacCatalyst (14, 0)]
 #if NET
 		[Abstract]
@@ -419,7 +419,7 @@ namespace Metal {
 		[Export ("logs")]
 		IMTLLogContainer Logs { get; }
 
-		[iOS (14, 0), TV (14, 0)]
+		//[iOS (14, 0), TV (14, 0)]
 		[MacCatalyst (14, 0)]
 #if NET
 		[Abstract]
@@ -427,7 +427,7 @@ namespace Metal {
 		[Export ("computeCommandEncoderWithDescriptor:")]
 		IMTLComputeCommandEncoder CreateComputeCommandEncoder (MTLComputePassDescriptor computePassDescriptor);
 
-		[iOS (14, 0), TV (14, 0)]
+		//[iOS (14, 0), TV (14, 0)]
 		[MacCatalyst (14, 0)]
 #if NET
 		[Abstract]
@@ -436,16 +436,16 @@ namespace Metal {
 		IMTLBlitCommandEncoder CreateBlitCommandEncoder (MTLBlitPassDescriptor blitPassDescriptor);
 
 		[Abstract (GenerateExtensionMethod = true)]
-		[iOS (14, 0), TV (16, 0), MacCatalyst (14, 0)]
+		//[iOS (14, 0), TV (16, 0), MacCatalyst (14, 0)]
 		[Export ("resourceStateCommandEncoderWithDescriptor:")]
 		IMTLResourceStateCommandEncoder CreateResourceStateCommandEncoder (MTLResourceStatePassDescriptor resourceStatePassDescriptor);
 
 		[Abstract (GenerateExtensionMethod = true)]
-		[iOS (14, 0), TV (16, 0), MacCatalyst (14, 0)]
+		//[iOS (14, 0), TV (16, 0), MacCatalyst (14, 0)]
 		[Export ("accelerationStructureCommandEncoder")]
 		IMTLAccelerationStructureCommandEncoder CreateAccelerationStructureCommandEncoder ();
 
-		[Mac (13, 0), iOS (16, 0), TV (16, 0), MacCatalyst (16, 0)]
+		//[Mac (13, 0), iOS (16, 0), TV (16, 0), MacCatalyst (16, 0)]
 #if NET
 		[Abstract (GenerateExtensionMethod = true)]
 #endif
@@ -453,12 +453,12 @@ namespace Metal {
 		IMTLAccelerationStructureCommandEncoder CreateAccelerationStructureCommandEncoder (MTLAccelerationStructurePassDescriptor descriptor);
 
 		[Abstract]
-		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Export ("useResidencySet:")]
 		void UseResidencySet (IMTLResidencySet residencySet);
 
 		[Abstract]
-		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
+		//[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Export ("useResidencySets:count:")]
 		void UseResidencySets (IntPtr /* const id <MTLResidencySet> _Nonnull[_Nonnull] */ residencySets, nuint count);
 	}
@@ -468,7 +468,7 @@ namespace Metal {
 	/// <summary>System protocol for objects that can queue command buffers for running on a GPU.</summary>
 	[MacCatalyst (13, 1)]
 	[Protocol] // From Apple Docs: Your app does not define classes that implement this protocol. Model is not needed
-	partial interface MTLCommandQueue {
+	partial class MTLCommandQueue {
 
 		[Abstract, Export ("label")]
 		string Label { get; set; }

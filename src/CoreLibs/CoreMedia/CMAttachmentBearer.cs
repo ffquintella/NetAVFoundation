@@ -21,7 +21,7 @@ namespace CoreMedia {
 #endif
 	public static class CMAttachmentBearer {
 
-		[DllImport (Constants.CoreMediaLibrary)]
+		[DllImport ( ObjCRuntime.Constants.CoreMediaLibrary)]
 		extern static /* CFDictionaryRef */ IntPtr CMCopyDictionaryOfAttachments (/* CFAllocatorRef */ IntPtr allocator, /* CMAttachmentBearerRef */ IntPtr target,
 			/* CMAttachmentMode */ CMAttachmentMode attachmentMode);
 

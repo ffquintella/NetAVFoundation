@@ -44,7 +44,7 @@ namespace Foundation {
 	public partial class NSMutableAttributedString {
 
 		public NSMutableAttributedString (string str, CTStringAttributes attributes)
-			: this (str, attributes is null ? null : attributes.Dictionary)
+			//: this (str, attributes is null ? null : attributes.Dictionary)
 		{
 		}
 

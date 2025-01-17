@@ -125,15 +125,7 @@ namespace AppKit {
 namespace UIKit {
 #endif
 
-#if NET || MONOMAC
-	/// <summary>A delegate used as the callback in <see cref="M:UIKit.NSLayoutManager.EnumerateLineFragments(Foundation.NSRange,UIKit.NSTextLayoutEnumerateLineFragments)" />.</summary>
-	delegate void NSTextLayoutEnumerateLineFragments (CGRect rect, CGRect usedRectangle, NSTextContainer textContainer, NSRange glyphRange, out bool stop);
-	/// <summary>A delegate used as the callback in <see cref="M:UIKit.NSLayoutManager.EnumerateEnclosingRects(Foundation.NSRange,Foundation.NSRange,UIKit.NSTextContainer,UIKit.NSTextLayoutEnumerateEnclosingRects)" />.</summary>
-	delegate void NSTextLayoutEnumerateEnclosingRects (CGRect rect, out bool stop);
-#else
-	delegate void NSTextLayoutEnumerateLineFragments (CGRect rect, CGRect usedRectangle, NSTextContainer textContainer, NSRange glyphRange, ref bool stop);
-	delegate void NSTextLayoutEnumerateEnclosingRects (CGRect rect, ref bool stop);
-#endif
+
 
 	// NSInteger -> NSLayoutManager.h
 	/// <summary>An enumeration whose values specify actions caused by control characters.</summary>
@@ -372,13 +364,7 @@ namespace UIKit {
 		NSTextView GetTextViewForBeginningOfSelection ();
 	}
 
-	/// <summary>Interface representing the required methods (if any) of the protocol <see cref="T:UIKit.NSLayoutManagerDelegate" />.</summary>
-	///     <remarks>
-	///       <para>This interface contains the required methods (if any) from the protocol defined by <see cref="T:UIKit.NSLayoutManagerDelegate" />.</para>
-	///       <para>If developers create classes that implement this interface, the implementation methods will automatically be exported to Objective-C with the matching signature from the method defined in the <see cref="T:UIKit.NSLayoutManagerDelegate" /> protocol.</para>
-	///       <para>Optional methods (if any) are provided by the <see cref="T:UIKit.NSLayoutManagerDelegate_Extensions" /> class as extension methods to the interface, allowing developers to invoke any optional methods on the protocol.</para>
-	///     </remarks>
-	interface INSLayoutManagerDelegate { }
+
 
 	/// <summary>A delegate object that exposes events for <see cref="T:UIKit.NSLayoutManager" />s.</summary>
 	///     
@@ -1107,72 +1093,72 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // Handle is nil
-	interface NSLayoutAnchor<AnchorType> : NSCopying, NSCoding {
+	public class NSLayoutAnchor<AnchorType> : NSCopying {
 		[Export ("constraintEqualToAnchor:")]
 #if MONOMAC && !NET
 		NSLayoutConstraint ConstraintEqualToAnchor (NSLayoutAnchor<AnchorType> anchor);
 #else
-		NSLayoutConstraint ConstraintEqualTo (NSLayoutAnchor<AnchorType> anchor);
+		public extern NSLayoutConstraint ConstraintEqualTo (NSLayoutAnchor<AnchorType> anchor);
 #endif
 
 		[Export ("constraintGreaterThanOrEqualToAnchor:")]
 #if MONOMAC && !NET
-		NSLayoutConstraint ConstraintGreaterThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor);
+		public extern NSLayoutConstraint ConstraintGreaterThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor);
 #else
-		NSLayoutConstraint ConstraintGreaterThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor);
+		public extern NSLayoutConstraint ConstraintGreaterThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor);
 #endif
 
 		[Export ("constraintLessThanOrEqualToAnchor:")]
 #if MONOMAC && !NET
-		NSLayoutConstraint ConstraintLessThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor);
+		public extern NSLayoutConstraint ConstraintLessThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor);
 #else
-		NSLayoutConstraint ConstraintLessThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor);
+		public extern NSLayoutConstraint ConstraintLessThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor);
 #endif
 
 		[Export ("constraintEqualToAnchor:constant:")]
 #if MONOMAC && !NET
-		NSLayoutConstraint ConstraintEqualToAnchor (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
+		public extern NSLayoutConstraint ConstraintEqualToAnchor (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
 #else
-		NSLayoutConstraint ConstraintEqualTo (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
+		public extern NSLayoutConstraint ConstraintEqualTo (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
 #endif
 
 		[Export ("constraintGreaterThanOrEqualToAnchor:constant:")]
 #if MONOMAC && !NET
-		NSLayoutConstraint ConstraintGreaterThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
+		public extern NSLayoutConstraint ConstraintGreaterThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
 #else
-		NSLayoutConstraint ConstraintGreaterThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
+		public extern NSLayoutConstraint ConstraintGreaterThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
 #endif
 
 		[Export ("constraintLessThanOrEqualToAnchor:constant:")]
 #if MONOMAC && !NET
-		NSLayoutConstraint ConstraintLessThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
+		public extern NSLayoutConstraint ConstraintLessThanOrEqualToAnchor (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
 #else
-		NSLayoutConstraint ConstraintLessThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
+		public extern NSLayoutConstraint ConstraintLessThanOrEqualTo (NSLayoutAnchor<AnchorType> anchor, nfloat constant);
 #endif
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoTV]
 		[Export ("name")]
-		string Name { get; }
+		public extern string Name { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoTV]
 		[NullAllowed, Export ("item", ArgumentSemantic.Weak)]
-		NSObject Item { get; }
+		public extern NSObject Item { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoTV]
 		[Export ("hasAmbiguousLayout")]
-		bool HasAmbiguousLayout { get; }
+		public extern bool HasAmbiguousLayout { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoTV]
 		[Export ("constraintsAffectingLayout")]
-		NSLayoutConstraint [] ConstraintsAffectingLayout { get; }
+		public extern NSLayoutConstraint [] ConstraintsAffectingLayout { get; }
 	}
 
 	/// <summary>An <see cref="T:UIKit.NSLayoutAnchor`1" /> whose methods create horizontal <see cref="T:UIKit.NSLayoutConstraint" /> objects.</summary>
@@ -1305,80 +1291,80 @@ namespace UIKit {
 	/// <include file="../docs/api/UIKit/NSLayoutConstraint.xml" path="/Documentation/Docs[@DocId='T:UIKit.NSLayoutConstraint']/*" />
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface NSLayoutConstraint
+	public partial class NSLayoutConstraint
 #if MONOMAC
-		: NSAnimatablePropertyContainer
+		//: NSAnimatablePropertyContainer
 #endif
 {
 		[Static]
 		[Export ("constraintsWithVisualFormat:options:metrics:views:")]
-		NSLayoutConstraint [] FromVisualFormat (string format, NSLayoutFormatOptions formatOptions, [NullAllowed] NSDictionary metrics, NSDictionary views);
+		public static extern NSLayoutConstraint [] FromVisualFormat (string format, NSLayoutFormatOptions formatOptions, [NullAllowed] NSDictionary metrics, NSDictionary views);
 
 		[Static]
 		[Export ("constraintWithItem:attribute:relatedBy:toItem:attribute:multiplier:constant:")]
-		NSLayoutConstraint Create (INativeObject view1, NSLayoutAttribute attribute1, NSLayoutRelation relation, [NullAllowed] INativeObject view2, NSLayoutAttribute attribute2, nfloat multiplier, nfloat constant);
+		public static extern NSLayoutConstraint Create (INativeObject view1, NSLayoutAttribute attribute1, NSLayoutRelation relation, [NullAllowed] INativeObject view2, NSLayoutAttribute attribute2, nfloat multiplier, nfloat constant);
 
 		[Export ("priority")]
-		float Priority { get; set; } // Returns a float, not nfloat.
+		public extern float Priority { get; set; } // Returns a float, not nfloat.
 
 		[Export ("shouldBeArchived")]
-		bool ShouldBeArchived { get; set; }
+		public extern bool ShouldBeArchived { get; set; }
 
 		[NullAllowed, Export ("firstItem", ArgumentSemantic.Assign)]
-		NSObject FirstItem { get; }
+		public extern NSObject? FirstItem { get; }
 
 		[Export ("firstAttribute")]
-		NSLayoutAttribute FirstAttribute { get; }
+		public extern NSLayoutAttribute FirstAttribute { get; }
 
 		[Export ("relation")]
-		NSLayoutRelation Relation { get; }
+		public extern NSLayoutRelation Relation { get; }
 
 		[Export ("secondItem", ArgumentSemantic.Assign)]
 		[NullAllowed]
-		NSObject SecondItem { get; }
+		public extern NSObject? SecondItem { get; }
 
 		[Export ("secondAttribute")]
-		NSLayoutAttribute SecondAttribute { get; }
+		public extern NSLayoutAttribute SecondAttribute { get; }
 
 		[Export ("multiplier")]
-		nfloat Multiplier { get; }
+		public extern nfloat Multiplier { get; }
 
 		[Export ("constant")]
-		nfloat Constant { get; set; }
+		public extern nfloat Constant { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("active")]
-		bool Active { [Bind ("isActive")] get; set; }
+		public extern bool Active { [Bind ("isActive")] get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Static, Export ("activateConstraints:")]
-		void ActivateConstraints (NSLayoutConstraint [] constraints);
+		public extern void ActivateConstraints (NSLayoutConstraint [] constraints);
 
 		[MacCatalyst (13, 1)]
 		[Static, Export ("deactivateConstraints:")]
-		void DeactivateConstraints (NSLayoutConstraint [] constraints);
+		public extern void DeactivateConstraints (NSLayoutConstraint [] constraints);
 
 		[MacCatalyst (13, 1)]
 		[Export ("firstAnchor", ArgumentSemantic.Copy)]
 #if MONOMAC && !NET
-		NSLayoutAnchor<NSObject> FirstAnchor { get; }
+		public extern NSLayoutAnchor<NSObject> FirstAnchor { get; }
 #else
 		[Internal]
-		IntPtr _FirstAnchor<AnchorType> ();
+		internal extern IntPtr _FirstAnchor<AnchorType> ();
 #endif
 
 		[MacCatalyst (13, 1)]
 		[Export ("secondAnchor", ArgumentSemantic.Copy)]
 #if MONOMAC && !NET
 		[NullAllowed]
-		NSLayoutAnchor<NSObject> SecondAnchor { get; }
+		public extern NSLayoutAnchor<NSObject> SecondAnchor { get; }
 #else
 		[Internal]
-		IntPtr _SecondAnchor<AnchorType> ();
+		public extern IntPtr _SecondAnchor<AnchorType> ();
 #endif
 
 		[NullAllowed, Export ("identifier")]
-		string Identifier { get; set; }
+		public extern string? Identifier { get; set; }
 	}
 
 	/// <summary>Defines the relationship between <see cref="T:UIKit.NSTextAttachment" />s and a <see cref="T:UIKit.NSLayoutManager" />.</summary>
@@ -1516,135 +1502,7 @@ namespace UIKit {
 		public extern NSTextAttachmentViewProvider GetViewProvider ([NullAllowed] View parentView, INSTextLocation location, [NullAllowed] NSTextContainer textContainer);
 	}
 
-	/// <include file="../docs/api/UIKit/NSTextStorage.xml" path="/Documentation/Docs[@DocId='T:UIKit.NSTextStorage']/*" />
-	[MacCatalyst (13, 1)]
-	[BaseType (typeof (NSMutableAttributedString), Delegates = new string [] { "Delegate" }, Events = new Type [] { typeof (NSTextStorageDelegate) })]
-	partial interface NSTextStorage : NSSecureCoding {
-		[Export ("initWithString:")]
-		NativeHandle Constructor (string str);
-
-		[Export ("layoutManagers")]
-#if MONOMAC || NET
-		NSLayoutManager [] LayoutManagers { get; }
-#else
-		NSObject [] LayoutManagers { get; }
-#endif
-
-		[Export ("addLayoutManager:")]
-		[PostGet ("LayoutManagers")]
-		void AddLayoutManager (NSLayoutManager aLayoutManager);
-
-		[Export ("removeLayoutManager:")]
-		[PostGet ("LayoutManagers")]
-		void RemoveLayoutManager (NSLayoutManager aLayoutManager);
-
-		[Export ("editedMask")]
-#if MONOMAC && !NET
-		NSTextStorageEditedFlags EditedMask {
-#else
-		NSTextStorageEditActions EditedMask {
-#endif
-			get;
-#if !NET && !MONOMAC && !__MACCATALYST__
-			[NotImplemented]
-			set;
-#endif
-		}
-
-		[Export ("editedRange")]
-		NSRange EditedRange {
-			get;
-		}
-
-		[Export ("changeInLength")]
-		nint ChangeInLength {
-			get;
-		}
-
-		[NullAllowed]
-		[Export ("delegate", ArgumentSemantic.Assign)]
-		NSObject WeakDelegate { get; set; }
-
-		[Wrap ("WeakDelegate")]
-		INSTextStorageDelegate Delegate { get; set; }
-
-		[Export ("edited:range:changeInLength:")]
-#if MONOMAC && !NET
-		void Edited (nuint editedMask, NSRange editedRange, nint delta);
-#else
-		void Edited (NSTextStorageEditActions editedMask, NSRange editedRange, nint delta);
-#endif
-
-		[Export ("processEditing")]
-		void ProcessEditing ();
-
-		[Export ("fixesAttributesLazily")]
-		bool FixesAttributesLazily { get; }
-
-		[Export ("invalidateAttributesInRange:")]
-		void InvalidateAttributes (NSRange range);
-
-		[Export ("ensureAttributesAreFixedInRange:")]
-		void EnsureAttributesAreFixed (NSRange range);
-
-		[Notification, Field ("NSTextStorageWillProcessEditingNotification")]
-#if !MONOMAC || NET
-		[Internal]
-#endif
-		NSString WillProcessEditingNotification { get; }
-
-		[Notification, Field ("NSTextStorageDidProcessEditingNotification")]
-#if !MONOMAC || NET
-		[Internal]
-#endif
-		NSString DidProcessEditingNotification { get; }
-
-		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
-		[NullAllowed]
-		[Export ("textStorageObserver", ArgumentSemantic.Weak)]
-		INSTextStorageObserving TextStorageObserver { get; set; }
-	}
-
-	/// <summary>Interface representing the required methods (if any) of the protocol <see cref="T:UIKit.NSTextStorageDelegate" />.</summary>
-	///     <remarks>
-	///       <para>This interface contains the required methods (if any) from the protocol defined by <see cref="T:UIKit.NSTextStorageDelegate" />.</para>
-	///       <para>If developers create classes that implement this interface, the implementation methods will automatically be exported to Objective-C with the matching signature from the method defined in the <see cref="T:UIKit.NSTextStorageDelegate" /> protocol.</para>
-	///       <para>Optional methods (if any) are provided by the <see cref="T:UIKit.NSTextStorageDelegate_Extensions" /> class as extension methods to the interface, allowing developers to invoke any optional methods on the protocol.</para>
-	///     </remarks>
-	interface INSTextStorageDelegate { }
-
-	/// <summary>A delegate object that provides events relating to processing editing for <see cref="T:UIKit.NSTextStorage" />.</summary>
-	///     
-	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextStorageDelegate_Protocol_TextKit/index.html">Apple documentation for <c>NSTextStorageDelegate</c></related>
-	[MacCatalyst (13, 1)]
-	[Model]
-	[BaseType (typeof (NSObject))]
-	[Protocol]
-	partial interface NSTextStorageDelegate {
-		[NoiOS]
-		[NoTV]
-		[NoMacCatalyst]
-		[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use WillProcessEditing instead.")]
-		[Export ("textStorageWillProcessEditing:")]
-		void TextStorageWillProcessEditing (NSNotification notification);
-
-		[NoiOS]
-		[NoTV]
-		[NoMacCatalyst]
-		[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use DidProcessEditing instead.")]
-		[Export ("textStorageDidProcessEditing:")]
-		void TextStorageDidProcessEditing (NSNotification notification);
-
-		[MacCatalyst (13, 1)]
-		[Export ("textStorage:willProcessEditing:range:changeInLength:")]
-		[EventArgs ("NSTextStorage")]
-		void WillProcessEditing (NSTextStorage textStorage, NSTextStorageEditActions editedMask, NSRange editedRange, nint delta);
-
-		[MacCatalyst (13, 1)]
-		[Export ("textStorage:didProcessEditing:range:changeInLength:")]
-		[EventArgs ("NSTextStorage")]
-		void DidProcessEditing (NSTextStorage textStorage, NSTextStorageEditActions editedMask, NSRange editedRange, nint delta);
-	}
+	
 
 	[TV (13, 0), iOS (13, 0)]
 	[MacCatalyst (13, 1)]
@@ -2343,7 +2201,7 @@ namespace UIKit {
 
 	interface INSTextContentManagerDelegate { }
 
-	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
 	interface NSTextContentManager : NSTextElementProvider, NSSecureCoding {
@@ -2398,9 +2256,9 @@ namespace UIKit {
 		bool AutomaticallySynchronizesToBackingStore { get; set; }
 	}
 
-	interface INSTextLocation { }
+	public interface INSTextLocation { }
 
-	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[Protocol]
 	interface NSTextLocation {
 		[Abstract]
@@ -2408,7 +2266,7 @@ namespace UIKit {
 		NSComparisonResult Compare (INSTextLocation location);
 	}
 
-	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	interface NSTextElement {
 		[Export ("initWithTextContentManager:")]
@@ -2597,44 +2455,44 @@ namespace UIKit {
 		NSTextLineFragment GetTextLineFragment (INSTextLocation textLocation, bool isUpstreamAffinity);
 	}
 
-	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface NSTextRange {
+	//[DisableDefaultCtor]
+	public class NSTextRange : NSObject {
 		[Export ("initWithLocation:endLocation:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (INSTextLocation location, [NullAllowed] INSTextLocation endLocation);
+		public extern NativeHandle Constructor (INSTextLocation location, [NullAllowed] INSTextLocation endLocation);
 
 		[Export ("initWithLocation:")]
-		NativeHandle Constructor (INSTextLocation location);
+		public extern NativeHandle Constructor (INSTextLocation location);
 
 		[Export ("empty")]
-		bool Empty { [Bind ("isEmpty")] get; }
+		public extern bool Empty { [Bind ("isEmpty")] get; }
 
 		[Export ("location", ArgumentSemantic.Strong)]
-		INSTextLocation Location { get; }
+		public extern INSTextLocation Location { get; }
 
 		[Export ("endLocation", ArgumentSemantic.Strong)]
-		INSTextLocation EndLocation { get; }
+		public extern INSTextLocation EndLocation { get; }
 
 		[Export ("isEqualToTextRange:")]
-		bool IsEqual (NSTextRange textRange);
+		public extern bool IsEqual (NSTextRange textRange);
 
 		[Export ("containsLocation:")]
-		bool Contains (INSTextLocation location);
+		public extern bool Contains (INSTextLocation location);
 
 		[Export ("containsRange:")]
-		bool Contains (NSTextRange textRange);
+		public extern bool Contains (NSTextRange textRange);
 
 		[Export ("intersectsWithTextRange:")]
-		bool Intersects (NSTextRange textRange);
+		public extern bool Intersects (NSTextRange textRange);
 
 		[Export ("textRangeByIntersectingWithTextRange:")]
 		[return: NullAllowed]
-		NSTextRange GetTextRangeByIntersecting (NSTextRange textRange);
+		public extern NSTextRange GetTextRangeByIntersecting (NSTextRange textRange);
 
 		[Export ("textRangeByFormingUnionWithTextRange:")]
-		NSTextRange GetTextRangeByFormingUnion (NSTextRange textRange);
+		public extern NSTextRange GetTextRangeByFormingUnion (NSTextRange textRange);
 	}
 
 	interface INSTextViewportLayoutControllerDelegate { }
@@ -2923,27 +2781,11 @@ namespace UIKit {
 		NSTextParagraph GetTextParagraph (NSTextContentStorage textContentStorage, NSRange range);
 	}
 
-	interface INSTextContentStorageDelegate { }
+	public interface INSTextContentStorageDelegate { }
 
-	interface INSTextStorageObserving { }
 
-	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
-	[Protocol]
-	interface NSTextStorageObserving {
-		[Abstract]
-		[NullAllowed, Export ("textStorage", ArgumentSemantic.Strong)]
-		NSTextStorage TextStorage { get; set; }
 
-		[Abstract]
-		[Export ("processEditingForTextStorage:edited:range:changeInLength:invalidatedRange:")]
-		void ProcessEditing (NSTextStorage textStorage, NSTextStorageEditActions editMask, NSRange newCharRange, nint delta, NSRange invalidatedCharRange);
-
-		[Abstract]
-		[Export ("performEditingTransactionForTextStorage:usingBlock:")]
-		void PerformEditingTransaction (NSTextStorage textStorage, Action transaction);
-	}
-
-	[TV (16, 0), iOS (16, 0), MacCatalyst (16, 0)]
+	//[TV (16, 0), iOS (16, 0), MacCatalyst (16, 0)]
 	enum NSTextListMarkerFormats {
 		[DefaultEnumValue]
 		[Field (null)]
@@ -3026,37 +2868,37 @@ namespace UIKit {
 		PrependEnclosingMarker = 1,
 	}
 
-	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSTextContentManager))]
-	interface NSTextContentStorage : NSTextStorageObserving {
+	public class NSTextContentStorage : NSTextStorageObserving {
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
-		INSTextContentStorageDelegate Delegate { get; set; }
+		public extern INSTextContentStorageDelegate? Delegate { get; set; }
 
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
-		NSObject WeakDelegate { get; set; }
+		public extern NSObject? WeakDelegate { get; set; }
 
 		[NullAllowed, Export ("attributedString", ArgumentSemantic.Copy)]
-		NSAttributedString AttributedString { get; set; }
+		public extern NSAttributedString? AttributedString { get; set; }
 
 		[Export ("attributedStringForTextElement:")]
 		[return: NullAllowed]
-		NSAttributedString GetAttributedString (NSTextElement textElement);
+		public extern NSAttributedString? GetAttributedString (NSTextElement textElement);
 
 		[Export ("textElementForAttributedString:")]
 		[return: NullAllowed]
-		NSTextElement GetTextElement (NSAttributedString attributedString);
+		public extern NSTextElement? GetTextElement (NSAttributedString attributedString);
 
 		[Export ("locationFromLocation:withOffset:")]
 		[return: NullAllowed]
-		INSTextLocation GetLocation (INSTextLocation location, nint offset);
+		public extern INSTextLocation? GetLocation (INSTextLocation location, nint offset);
 
 		[Export ("offsetFromLocation:toLocation:")]
-		nint GetOffset (INSTextLocation from, INSTextLocation to);
+		public extern nint GetOffset (INSTextLocation from, INSTextLocation to);
 
 		[Export ("adjustedRangeFromRange:forEditingTextSelection:")]
 		[return: NullAllowed]
-		NSTextRange GetAdjustedRange (NSTextRange textRange, bool forEditingTextSelection);
+		public extern NSTextRange? GetAdjustedRange (NSTextRange textRange, bool forEditingTextSelection);
 	}
 
 	[MacCatalyst (13, 0)]

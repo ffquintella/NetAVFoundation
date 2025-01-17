@@ -30,8 +30,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
 using System.Runtime.Versioning;
-
+using CoreFoundation;
 using ObjCRuntime;
 
 // Disable until we get around to enable + fix any issues.
@@ -46,12 +47,27 @@ namespace Foundation {
 		{
 		}
 
-		public NSOrderedSet (params object [] objs) : this (NSArray.FromObjects (objs))
+		public NSOrderedSet (params INativeObject [] objs) : this (NSArray.FromObjects (objs))
 		{
 		}
 
 		public NSOrderedSet (params string [] strings) : this (NSArray.FromStrings (strings))
 		{
+		}
+		
+		public NSOrderedSet (NSArray array) : this (array.Handle)
+		{
+		}
+		
+		public NSOrderedSet (NativeHandle handle) : base(handle)
+		{
+		}
+		
+		public NSOrderedSet (NSObject obj) 
+		{
+			if (obj == null)
+				throw new ArgumentNullException ("obj");
+			Handle = Constructor (obj);
 		}
 
 		public NSObject this [nint idx] {
@@ -177,12 +193,178 @@ namespace Foundation {
 		}
 	}
 
+	public partial class NSMutableOrderedSet<TKey> : NSMutableOrderedSet { }
+
+	[BaseType (typeof (NSOrderedSet))]
 	public partial class NSMutableOrderedSet {
+		[Export ("initWithObject:")]
+		public extern NativeHandle Constructor (NSObject start);
+
+		[Export ("initWithSet:")]
+		public extern NativeHandle Constructor (NSSet source);
+
+		[Export ("initWithOrderedSet:")]
+		public extern NativeHandle Constructor (NSOrderedSet source);
+
+		[DesignatedInitializer]
+		[Export ("initWithCapacity:")]
+		public extern NativeHandle Constructor (nint capacity);
+
+		[Export ("initWithArray:"), Internal]
+		public extern NativeHandle Constructor (NSArray array);
+
+		[Export ("unionSet:"), Internal]
+		public extern void UnionSet (NSSet other);
+
+		[Export ("minusSet:"), Internal]
+		public extern void MinusSet (NSSet other);
+
+		[Export ("unionOrderedSet:"), Internal]
+		public extern void UnionSet (NSOrderedSet other);
+
+		[Export ("minusOrderedSet:"), Internal]
+		public extern void MinusSet (NSOrderedSet other);
+
+		[Internal]
+		[Sealed]
+		[Export ("insertObject:atIndex:")]
+		public extern void _Insert (IntPtr obj, nint atIndex);
+
+		[Export ("insertObject:atIndex:")]
+		public extern void Insert (NSObject obj, nint atIndex);
+
+		[Export ("removeObjectAtIndex:")]
+		public extern void Remove (nint index);
+
+		[Internal]
+		[Sealed]
+		[Export ("replaceObjectAtIndex:withObject:")]
+		public extern void _Replace (nint objectAtIndex, IntPtr newObject);
+
+		[Export ("replaceObjectAtIndex:withObject:")]
+		public extern void Replace (nint objectAtIndex, NSObject newObject);
+
+		[Internal]
+		[Sealed]
+		[Export ("addObject:")]
+		public extern void _Add (IntPtr obj);
+
+		[Export ("addObject:")]
+		public extern void Add (NSObject obj);
+
+		[Internal]
+		[Sealed]
+		[Export ("addObjectsFromArray:")]
+		public extern void _AddObjects (NSArray source);
+
+		[Export ("addObjectsFromArray:")]
+		public extern void AddObjects (NSObject [] source);
+
+		[Internal]
+		[Sealed]
+		[Export ("insertObjects:atIndexes:")]
+		public extern void _InsertObjects (NSArray objects, NSIndexSet atIndexes);
+
+		[Export ("insertObjects:atIndexes:")]
+		public extern void InsertObjects (NSObject [] objects, NSIndexSet atIndexes);
+
+		[Export ("removeObjectsAtIndexes:")]
+		public extern void RemoveObjects (NSIndexSet indexSet);
+
+		[Export ("exchangeObjectAtIndex:withObjectAtIndex:")]
+		public extern void ExchangeObject (nint first, nint second);
+
+		[Export ("moveObjectsAtIndexes:toIndex:")]
+		public extern void MoveObjects (NSIndexSet indexSet, nint destination);
+
+		[Internal]
+		[Sealed]
+		[Export ("setObject:atIndex:")]
+		public extern void _SetObject (IntPtr obj, nint index);
+
+		[Export ("setObject:atIndex:")]
+		public extern void SetObject (NSObject obj, nint index);
+		
+		[Export ("getObject:atIndex:")]
+		public extern NativeHandle _GetObject ( nint index);
+		
+		[Export ("getObject:atIndex:")]
+		public extern NSObject GetObject ( nint index);
+
+		[Internal]
+		[Sealed]
+		[Export ("replaceObjectsAtIndexes:withObjects:")]
+		public extern void _ReplaceObjects (NSIndexSet indexSet, NSArray replacementObjects);
+
+		[Export ("replaceObjectsAtIndexes:withObjects:")]
+		public extern void ReplaceObjects (NSIndexSet indexSet, NSObject [] replacementObjects);
+
+		[Export ("removeObjectsInRange:")]
+		public extern void RemoveObjects (NSRange range);
+
+		[Export ("removeAllObjects")]
+		public extern void RemoveAllObjects ();
+
+		[Internal]
+		[Sealed]
+		[Export ("removeObject:")]
+		public extern void _RemoveObject (IntPtr obj);
+
+		[Export ("removeObject:")]
+		public extern void RemoveObject (NSObject obj);
+
+		[Internal]
+		[Sealed]
+		[Export ("removeObjectsInArray:")]
+		public extern void _RemoveObjects (NSArray objects);
+
+		[Export ("removeObjectsInArray:")]
+		public extern void RemoveObjects (NSObject [] objects);
+
+		[Export ("intersectOrderedSet:")]
+		public extern void Intersect (NSOrderedSet intersectWith);
+
+		[Export ("intersectSet:")]
+		public extern void Intersect (NSSet intersectWith);
+
+		[Export ("sortUsingComparator:")]
+		public extern void Sort (NSComparator comparator);
+
+		[Export ("sortWithOptions:usingComparator:")]
+		public extern void Sort (NSSortOptions sortOptions, NSComparator comparator);
+
+		[Export ("sortRange:options:usingComparator:")]
+		public extern void SortRange (NSRange range, NSSortOptions sortOptions, NSComparator comparator);
+
+#if false // https://github.com/xamarin/xamarin-macios/issues/15577
+		[Internal]
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Export ("applyDifference:")]
+		void _ApplyDifference (IntPtr difference);
+
+		[Sealed]
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Export ("applyDifference:")]
+		void ApplyDifference (NSOrderedCollectionDifference<NSObject> difference);
+#endif
+	}
+	
+	public partial class NSMutableOrderedSet: NSOrderedSet {
+		
+		
 		public NSMutableOrderedSet (params NSObject [] objs) : this (NSArray.FromNSObjects (objs))
 		{
 		}
+		
+		public NSMutableOrderedSet (NativeHandle handle) : base(handle){
+			
+		}
+		
+		public NSMutableOrderedSet (NSObject obj) : base(obj){
+			
+		}
 
-		public NSMutableOrderedSet (params object [] objs) : this (NSArray.FromObjects (objs))
+		public NSMutableOrderedSet (params INativeObject [] objs) : base (NSArray.FromObjects (objs))
 		{
 		}
 
@@ -234,6 +416,139 @@ namespace Foundation {
 				block.CleanupBlock ();
 			}
 		}
+#endif
+	}
+	
+	public partial class NSOrderedSet<TKey> : NSOrderedSet { }
+
+	[BaseType (typeof (NSObject))]
+	//[DesignatedDefaultCtor]
+	public partial class NSOrderedSet : NSMutableCopying {
+		[Export ("initWithObject:")]
+		public extern NativeHandle Constructor (NSObject start);
+
+		[Export ("initWithArray:"), Internal]
+		public extern NativeHandle Constructor (NSArray array);
+
+		[Export ("initWithSet:")]
+		public extern NativeHandle Constructor (NSSet source);
+
+		[Export ("initWithOrderedSet:")]
+		public extern NativeHandle Constructor (NSOrderedSet source);
+
+		[Export ("count")]
+		public extern nint Count { get; }
+
+		[Internal]
+		[Sealed]
+		[Export ("objectAtIndex:")]
+		public extern IntPtr _GetObject (nint idx);
+
+		[Export ("objectAtIndex:"), Internal]
+		public extern NSObject GetObject (nint idx);
+
+		[Export ("array"), Internal]
+		public extern IntPtr _ToArray ();
+
+		[Internal]
+		[Sealed]
+		[Export ("indexOfObject:")]
+		public extern nint _IndexOf (IntPtr obj);
+
+		[Export ("indexOfObject:")]
+		public extern nint IndexOf (NSObject obj);
+
+		[Export ("objectEnumerator"), Internal]
+		public extern NSEnumerator _GetEnumerator ();
+
+		[Internal]
+		[Sealed]
+		[Export ("set")]
+		public extern IntPtr _AsSet ();
+
+		[Export ("set")]
+		public extern NSSet AsSet ();
+
+		[Internal]
+		[Sealed]
+		[Export ("containsObject:")]
+		public extern bool _Contains (IntPtr obj);
+
+		[Export ("containsObject:")]
+		public extern bool Contains (NSObject obj);
+
+		[Internal]
+		[Sealed]
+		[Export ("firstObject")]
+		public extern IntPtr _FirstObject ();
+
+		[Export ("firstObject")]
+		[return: NullAllowed]
+		public extern NSObject FirstObject ();
+
+		[Internal]
+		[Sealed]
+		[Export ("lastObject")]
+		public extern IntPtr _LastObject ();
+
+		[Export ("lastObject")]
+		[return: NullAllowed]
+		public extern NSObject LastObject ();
+
+		[Export ("isEqualToOrderedSet:")]
+		public extern bool IsEqualToOrderedSet (NSOrderedSet other);
+
+		[Export ("intersectsOrderedSet:")]
+		public extern bool Intersects (NSOrderedSet other);
+
+		[Export ("intersectsSet:")]
+		public extern bool Intersects (NSSet other);
+
+		[Export ("isSubsetOfOrderedSet:")]
+		public extern bool IsSubset (NSOrderedSet other);
+
+		[Export ("isSubsetOfSet:")]
+		public extern bool IsSubset (NSSet other);
+
+		[Export ("reversedOrderedSet")]
+		public extern NSOrderedSet GetReverseOrderedSet ();
+
+#if false // https://github.com/xamarin/xamarin-macios/issues/15577
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Wrap ("Runtime.GetNSObject <NSOrderedCollectionDifference> (_GetDifference (other, options))")]
+		[return: NullAllowed]
+		NSOrderedCollectionDifference GetDifference (NSOrderedSet other, NSOrderedCollectionDifferenceCalculationOptions options);
+		
+		[Internal]
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Export ("differenceFromOrderedSet:withOptions:")]
+		IntPtr _GetDifference (NSOrderedSet other, NSOrderedCollectionDifferenceCalculationOptions options);
+
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Wrap ("Runtime.GetNSObject <NSOrderedCollectionDifference> (_GetDifference (other))")]
+		[return: NullAllowed]
+		NSOrderedCollectionDifference GetDifference (NSOrderedSet other);
+		
+		[Internal]
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Export ("differenceFromOrderedSet:")]
+		IntPtr _GetDifference (NSOrderedSet other);
+
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Wrap ("Runtime.GetNSObject <NSOrderedSet> (_GetOrderedSet (difference))")]
+		[return: NullAllowed]
+		NSOrderedSet GetOrderedSet (NSOrderedCollectionDifference difference);
+		
+		[Internal]
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Export ("orderedSetByApplyingDifference:")]
+		[return: NullAllowed]
+		IntPtr _GetOrderedSet (NSOrderedCollectionDifference difference);
+
+		[Internal]
+		[Watch (6,0), TV (13,0), iOS (13,0)]
+		[Export ("differenceFromOrderedSet:withOptions:usingEquivalenceTest:")]
+		/* NSOrderedCollectionDifference<NSObject>*/ IntPtr _GetDifference (NSOrderedSet other, NSOrderedCollectionDifferenceCalculationOptions options, /* Func<NSObject, NSObject, bool> */ ref BlockLiteral block);
 #endif
 	}
 }

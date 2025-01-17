@@ -49,6 +49,8 @@ namespace Foundation {
 			return res;
 		}
 		
+		public NSData() : base(IntPtr.Zero) {}
+		
 		public NSData(NativeHandle handle) : base(handle) {}
 
 		IEnumerator IEnumerable.GetEnumerator ()

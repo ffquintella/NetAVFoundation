@@ -73,7 +73,7 @@ namespace UIKit
 							views = new NSMutableDictionary ();
 						views [nskey] = (NSObject) value;
 						continue;
-					} else if (value is INativeObject && Messaging.bool_objc_msgSend_IntPtr (((INativeObject) value).Handle, Selector.GetHandle ("isKindOfClass:"), Class.GetHandle (typeof (View))) != 0) {
+					} else if (value is INativeObject && Messaging.bool_objc_msgSend_IntPtr (((INativeObject) value).Handle, Selector.GetHandle ("isKindOfClass:"), Class.GetHandle (typeof (View))) != false) {
 						if (views is null)
 							views = new NSMutableDictionary ();
 						views.LowlevelSetObject (((INativeObject) value).Handle, nskey.Handle);
@@ -129,7 +129,7 @@ namespace UIKit
 #endif
 		public NSLayoutAnchor<AnchorType> FirstAnchor<AnchorType> () where AnchorType : NSObject
 		{
-			return Runtime.GetNSObject<NSLayoutAnchor<AnchorType>> (_FirstAnchor ());
+			return Runtime.GetNSObject<NSLayoutAnchor<AnchorType>> (_FirstAnchor<AnchorType> ());
 		}
 
 #if NET
@@ -140,7 +140,7 @@ namespace UIKit
 #endif
 		public NSLayoutAnchor<AnchorType> SecondAnchor<AnchorType> () where AnchorType : NSObject
 		{
-			return Runtime.GetNSObject<NSLayoutAnchor<AnchorType>> (_SecondAnchor ());
+			return Runtime.GetNSObject<NSLayoutAnchor<AnchorType>> (_SecondAnchor<AnchorType> ());
 		}
 #endif // !MONOMAC || NET
 	}

@@ -39,6 +39,9 @@ using NativeHandle = System.IntPtr;
 #nullable disable
 
 namespace Foundation {
+	
+	//partial class NSMutableDictionary<TKey, TValue> : NSDictionary { }
+	
 #if NET
 	[SupportedOSPlatform ("ios")]
 	[SupportedOSPlatform ("maccatalyst")]
@@ -55,26 +58,26 @@ namespace Foundation {
 		}
 
 		public NSMutableDictionary (NSCoder coder)
-			: base (coder)
+			: base (coder.Handle, false)
 		{
 		}
 
 		internal NSMutableDictionary (NativeHandle handle)
-			: base (handle)
+			: base (handle, true)
 		{
 		}
 
 		public NSMutableDictionary (NSMutableDictionary<TKey, TValue> other)
-			: base (other)
+			: base (other.Handle, true)
 		{
 		}
 
 		public NSMutableDictionary (NSDictionary<TKey, TValue> other)
-			: base (other)
+			: base (other.Handle, true)
 		{
 		}
 
-		NSMutableDictionary (TKey [] keys, TValue [] values, bool validation)
+		/*NSMutableDictionary (TKey [] keys, TValue [] values, bool validation)
 			: base (NSArray.FromNSObjects (values), NSArray.FromNSObjects (keys))
 		{
 		}
@@ -89,6 +92,7 @@ namespace Foundation {
 		{
 
 		}
+		*/
 
 #if hide_loosely_typed_members
 		// Hide any loosely typed base members.
@@ -266,8 +270,8 @@ namespace Foundation {
 			if (objects.Length != keys.Length)
 				throw new ArgumentException (nameof (objects) + " and " + nameof (keys) + " arrays have different sizes");
 
-			using (var no = NSArray.FromObjects (objects))
-			using (var nk = NSArray.FromObjects (keys))
+			using (var no = NSArray.FromObjects ((NSObject[])objects))
+			using (var nk = NSArray.FromObjects ((NSObject[])keys))
 				return GenericFromObjectsAndKeysInternal (no, nk);
 		}
 
@@ -282,8 +286,8 @@ namespace Foundation {
 			if (count < 1 || objects.Length < count || keys.Length < count)
 				throw new ArgumentException (nameof (count));
 
-			using (var no = NSArray.FromNSObjects (objects))
-			using (var nk = NSArray.FromNSObjects (keys))
+			using (var no = NSArray.FromNSObjects ((NSObject[])objects))
+			using (var nk = NSArray.FromNSObjects ((NSObject[])keys))
 				return GenericFromObjectsAndKeysInternal (no, nk);
 		}
 
@@ -298,8 +302,8 @@ namespace Foundation {
 			if (count < 1 || objects.Length < count || keys.Length < count)
 				throw new ArgumentException (nameof (count));
 
-			using (var no = NSArray.FromObjects (objects))
-			using (var nk = NSArray.FromObjects (keys))
+			using (var no = NSArray.FromObjects ((NSObject[])objects))
+			using (var nk = NSArray.FromObjects ((NSObject[])keys))
 				return GenericFromObjectsAndKeysInternal (no, nk);
 		}
 		#region IDictionary<K,V>

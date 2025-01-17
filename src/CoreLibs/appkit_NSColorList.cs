@@ -48,6 +48,17 @@ using NativeHandle = System.IntPtr;
 
 namespace AppKit
 {
+    
+    [NoMacCatalyst]
+    [BaseType (typeof (NSObject))]
+    public class NSGlyphGenerator {
+        [Export ("generateGlyphsForGlyphStorage:desiredNumberOfCharacters:glyphIndex:characterIndex:")]
+        public  extern void GenerateGlyphs (NSObject nsGlyphStorageOrNSLayoutManager, nuint nchars, ref nuint glyphIndex, ref nuint charIndex);
+
+        [Static, Export ("sharedGlyphGenerator")]
+        public static extern NSGlyphGenerator SharedGlyphGenerator { get; }
+    }
+    
     [NoMacCatalyst]
     [BaseType (typeof (NSObject))]
     public partial class NSColorList : NSObject {

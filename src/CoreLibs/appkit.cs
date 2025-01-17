@@ -127,25 +127,9 @@ namespace AppKit {
 		Collaborate,
 	}
 
-	[Native]
-	[Mac (15, 0), NoMacCatalyst]
-	enum NSWritingToolsBehavior : long {
-		None = -1,
-		Default = 0,
-		Complete,
-		Limited,
-	}
 
-	[Flags]
-	[Native]
-	[Mac (15, 0), NoMacCatalyst]
-	enum NSWritingToolsResultOptions : ulong {
-		Default = 0,
-		PlainText = 1 << 0,
-		RichText = 1 << 1,
-		List = 1 << 2,
-		Table = 1 << 3,
-	}
+
+
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSCell))]
@@ -2493,337 +2477,7 @@ namespace AppKit {
 		CGRect Rectangle { get; }
 	}
 
-	[NoMacCatalyst]
-	[DesignatedDefaultCtor]
-	[BaseType (typeof (NSObject))]
-	interface NSCell : NSUserInterfaceItemIdentification, NSCoding, NSCopying, NSAccessibilityElementProtocol, NSAccessibility, NSObjectAccessibilityExtensions {
-		[Static, Export ("prefersTrackingUntilMouseUp")]
-		bool PrefersTrackingUntilMouseUp { get; }
 
-		[DesignatedInitializer]
-		[Export ("initTextCell:")]
-		NativeHandle Constructor (string aString);
-
-		[DesignatedInitializer]
-		[Export ("initImageCell:")]
-		NativeHandle Constructor (NSImage image);
-
-		[Export ("controlView")]
-		NSView ControlView { get; set; }
-
-		[Export ("type")]
-		NSCellType CellType { get; set; }
-
-		[Export ("state")]
-		NSCellStateValue State { get; set; }
-
-		[Export ("target", ArgumentSemantic.Weak), NullAllowed]
-		NSObject Target { get; set; }
-
-		[Export ("action"), NullAllowed]
-		Selector Action { get; set; }
-
-		[Export ("tag")]
-		nint Tag { get; set; }
-
-		[Export ("title")]
-		string Title { get; set; }
-
-		[Export ("isOpaque")]
-		bool IsOpaque { get; }
-
-		[Export ("enabled")]
-		bool Enabled { [Bind ("isEnabled")] get; set; }
-
-		[Export ("sendActionOn:")]
-		nint SendActionOn (NSEventType mask);
-
-		[Export ("continuous")]
-		bool IsContinuous { [Bind ("isContinuous")] get; set; }
-
-		[Export ("editable")]
-		bool Editable { [Bind ("isEditable")] get; set; }
-
-		[Export ("selectable")]
-		bool Selectable { [Bind ("isSelectable")] get; set; }
-
-		[Export ("bordered")]
-		bool Bordered { [Bind ("isBordered")] get; set; }
-
-		[Export ("bezeled")]
-		bool Bezeled { [Bind ("isBezeled")] get; set; }
-
-		[Export ("scrollable")]
-		bool Scrollable { [Bind ("isScrollable")] get; set; }
-
-		[Export ("highlighted")]
-		bool Highlighted { [Bind ("isHighlighted")] get; set; }
-
-		[Export ("alignment")]
-		NSTextAlignment Alignment { get; set; }
-
-		[Export ("wraps")]
-		bool Wraps { get; set; }
-
-		[Export ("font", ArgumentSemantic.Retain)]
-		NSFont Font { get; set; }
-
-		[Export ("isEntryAcceptable:")]
-		bool IsEntryAcceptable (string aString);
-
-		[Export ("keyEquivalent")]
-		string KeyEquivalent { get; }
-
-		[Export ("formatter", ArgumentSemantic.Retain), NullAllowed]
-		NSFormatter Formatter { get; set; }
-
-		[Export ("objectValue", ArgumentSemantic.Copy), NullAllowed]
-		NSObject ObjectValue { get; set; }
-
-		[Export ("hasValidObjectValue")]
-		bool HasValidObjectValue { get; }
-
-		[Export ("stringValue")]
-		string StringValue { get; set; }
-
-		[Export ("compare:")]
-		NSComparisonResult Compare (NSObject otherCell);
-
-		[Export ("intValue")]
-		int IntValue { get; set; } /* int, not NSInteger */
-
-		[Export ("floatValue")]
-		float FloatValue { get; set; } /* float, not CGFloat */
-
-		[Export ("doubleValue")]
-		double DoubleValue { get; set; }
-
-		[Export ("takeIntValueFrom:")]
-		void TakeIntValueFrom (NSObject sender);
-
-		[Export ("takeFloatValueFrom:")]
-		void TakeFloatValueFrom (NSObject sender);
-
-		[Export ("takeDoubleValueFrom:")]
-		void TakeDoubleValueFrom (NSObject sender);
-
-		[Export ("takeStringValueFrom:")]
-		void TakeStringValueFrom (NSObject sender);
-
-		[Export ("takeObjectValueFrom:")]
-		void TakeObjectValueFrom (NSObject sender);
-
-		[Export ("image", ArgumentSemantic.Retain)]
-		NSImage Image { get; set; }
-
-		[Deprecated (PlatformName.MacOSX, 10, 14, message: "'ControlTint' property not honored on 10.14. For custom cells, use 'NSColor.ControlAccentColor'.")]
-		[Export ("controlTint")]
-		NSControlTint ControlTint { get; set; }
-
-		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Implement 'ViewDidChangeEffectiveAppearance' on NSView or observe 'NSApplication.EffectiveAppearance'.")]
-		[Notification, Field ("NSControlTintDidChangeNotification")]
-		NSString ControlTintChangedNotification { get; }
-
-		[Export ("controlSize")]
-		NSControlSize ControlSize { get; set; }
-
-		[Export ("representedObject", ArgumentSemantic.Retain)]
-		NSObject RepresentedObject { get; set; }
-
-		[Export ("cellAttribute:")]
-		nint CellAttribute (NSCellAttribute aParameter);
-
-		[Export ("setCellAttribute:to:")]
-		void SetCellAttribute (NSCellAttribute aParameter, nint value);
-
-		[Export ("imageRectForBounds:")]
-		CGRect ImageRectForBounds (CGRect theRect);
-
-		[Export ("titleRectForBounds:")]
-		CGRect TitleRectForBounds (CGRect theRect);
-
-		[Export ("drawingRectForBounds:")]
-		CGRect DrawingRectForBounds (CGRect theRect);
-
-		[Export ("cellSize")]
-		CGSize CellSize { get; }
-
-		[Export ("cellSizeForBounds:")]
-		CGSize CellSizeForBounds (CGRect bounds);
-
-		[Export ("highlightColorWithFrame:inView:")]
-		[return: NullAllowed]
-		NSColor HighlightColor (CGRect cellFrame, NSView controlView);
-
-		[Export ("calcDrawInfo:")]
-		void CalcDrawInfo (CGRect aRect);
-
-		[Export ("setUpFieldEditorAttributes:")]
-		NSText SetUpFieldEditorAttributes (NSText textObj);
-
-		[Export ("drawInteriorWithFrame:inView:")]
-		void DrawInteriorWithFrame (CGRect cellFrame, NSView inView);
-
-		[Export ("drawWithFrame:inView:")]
-		void DrawWithFrame (CGRect cellFrame, NSView inView);
-
-		[Export ("highlight:withFrame:inView:")]
-		void Highlight (bool highlight, CGRect withFrame, NSView inView);
-
-		[Export ("mouseDownFlags")]
-		nint MouseDownFlags { get; }
-
-		[Export ("getPeriodicDelay:interval:")]
-		void GetPeriodicDelay (ref float /* float, not CGFloat */ delay, ref float /* float, not CGFloat */ interval);
-
-		[Export ("startTrackingAt:inView:")]
-		bool StartTracking (CGPoint startPoint, NSView inView);
-
-		[Export ("continueTracking:at:inView:")]
-		bool ContinueTracking (CGPoint lastPoint, CGPoint currentPoint, NSView inView);
-
-		[Export ("stopTracking:at:inView:mouseIsUp:")]
-		void StopTracking (CGPoint lastPoint, CGPoint stopPoint, NSView inView, bool mouseIsUp);
-
-		[Export ("trackMouse:inRect:ofView:untilMouseUp:")]
-		bool TrackMouse (NSEvent theEvent, CGRect cellFrame, NSView controlView, bool untilMouseUp);
-
-		[Export ("editWithFrame:inView:editor:delegate:event:")]
-		void EditWithFrame (CGRect aRect, [NullAllowed] NSView inView, [NullAllowed] NSText editor, [NullAllowed] NSObject delegateObject, NSEvent theEvent);
-
-		[Export ("selectWithFrame:inView:editor:delegate:start:length:")]
-		void SelectWithFrame (CGRect aRect, [NullAllowed] NSView inView, [NullAllowed] NSText editor, [NullAllowed] NSObject delegateObject, nint selStart, nint selLength);
-
-		[Export ("endEditing:")]
-		void EndEditing ([NullAllowed] NSText textObj);
-
-		[Export ("resetCursorRect:inView:")]
-		void ResetCursorRect (CGRect cellFrame, NSView inView);
-
-		[Export ("menu", ArgumentSemantic.Retain)]
-		[NullAllowed]
-		NSMenu Menu { get; set; }
-
-		[Export ("menuForEvent:inRect:ofView:")]
-		NSMenu MenuForEvent (NSEvent theEvent, CGRect cellFrame, NSView view);
-
-		[Static]
-		[Export ("defaultMenu")]
-		[NullAllowed]
-		NSMenu DefaultMenu { get; }
-
-		[Export ("setSendsActionOnEndEditing:")]
-		void SetSendsActionOnEndEditing (bool flag);
-
-		[Export ("sendsActionOnEndEditing")]
-		bool SendsActionOnEndEditing ();
-
-		[Export ("baseWritingDirection")]
-		NSWritingDirection BaseWritingDirection { get; set; }
-
-		[Export ("lineBreakMode")]
-		NSLineBreakMode LineBreakMode { get; set; }
-
-		[Export ("allowsUndo")]
-		bool AllowsUndo { get; set; }
-
-		[Export ("integerValue")]
-		nint IntegerValue { get; set; }
-
-		[Export ("takeIntegerValueFrom:")]
-		void TakeIntegerValueFrom (NSObject sender);
-
-		[Export ("truncatesLastVisibleLine")]
-		bool TruncatesLastVisibleLine { get; set; }
-
-		[Export ("userInterfaceLayoutDirection")]
-		NSUserInterfaceLayoutDirection UserInterfaceLayoutDirection { get; set; }
-
-		[Export ("fieldEditorForView:")]
-		NSTextView FieldEditorForView (NSView aControlView);
-
-		[Export ("usesSingleLineMode")]
-		bool UsesSingleLineMode { get; set; }
-
-		//  NSCell(NSCellAttributedStringMethods)
-		[Export ("refusesFirstResponder")]
-		bool RefusesFirstResponder ();
-
-		[Export ("acceptsFirstResponder")]
-		bool AcceptsFirstResponder ();
-
-		[Export ("showsFirstResponder")]
-		bool ShowsFirstResponder { get; set; }
-
-		[Deprecated (PlatformName.MacOSX, 10, 8, message: "Mnemonic methods have typically not been used.")]
-		[Export ("mnemonicLocation")]
-		nint MnemonicLocation { get; set; }
-
-		[Deprecated (PlatformName.MacOSX, 10, 8, message: "Mnemonic methods have typically not been used.")]
-		[Export ("mnemonic")]
-		string Mnemonic { get; }
-
-		[Deprecated (PlatformName.MacOSX, 10, 8, message: "Mnemonic methods have typically not been used.")]
-		[Export ("setTitleWithMnemonic:")]
-		void SetTitleWithMnemonic (string stringWithAmpersand);
-
-		[Export ("performClick:")]
-		void PerformClick (NSObject sender);
-
-		[Export ("focusRingType")]
-		NSFocusRingType FocusRingType { get; set; }
-
-		[Static, Export ("defaultFocusRingType")]
-		NSFocusRingType DefaultFocusRingType { get; }
-
-		[Export ("wantsNotificationForMarkedText")]
-		bool WantsNotificationForMarkedText { get; [NotImplemented] set; }
-
-		// NSCell(NSCellAttributedStringMethods)
-		[Export ("attributedStringValue")]
-		NSAttributedString AttributedStringValue { get; set; }
-
-		[Export ("allowsEditingTextAttributes")]
-		bool AllowsEditingTextAttributes { get; set; }
-
-		[Export ("importsGraphics")]
-		bool ImportsGraphics { get; set; }
-
-		// NSCell(NSCellMixedState) {
-		[Export ("allowsMixedState")]
-		bool AllowsMixedState { get; set; }
-
-		[Export ("nextState")]
-		nint NextState { get; }
-
-		[Export ("setNextState")]
-		void SetNextState ();
-
-		[Export ("hitTestForEvent:inRect:ofView:")]
-		NSCellHit HitTest (NSEvent forEvent, CGRect inRect, NSView ofView);
-
-		// NSCell(NSCellExpansion) 
-		[Export ("expansionFrameWithFrame:inView:")]
-		CGRect ExpansionFrame (CGRect withFrame, NSView inView);
-
-		[Export ("drawWithExpansionFrame:inView:")]
-		void DrawWithExpansionFrame (CGRect cellFrame, NSView inView);
-
-		[Export ("backgroundStyle")]
-		NSBackgroundStyle BackgroundStyle { get; set; }
-
-		[Export ("interiorBackgroundStyle")]
-		NSBackgroundStyle InteriorBackgroundStyle { get; }
-
-		[Export ("draggingImageComponentsWithFrame:inView:")]
-		NSDraggingImageComponent [] GenerateDraggingImageComponents (CGRect frame, NSView view);
-
-		[Export ("drawFocusRingMaskWithFrame:inView:")]
-		void DrawFocusRing (CGRect cellFrameMask, NSView inControlView);
-
-		[Export ("focusRingMaskBoundsForFrame:inView:")]
-		CGRect GetFocusRingMaskBounds (CGRect cellFrame, NSView controlView);
-	}
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSImageRep))]
@@ -6116,6 +5770,7 @@ namespace AppKit {
 		double AutosavingDelay { get; set; }
 	}
 
+	/*
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	interface NSDraggingImageComponent {
@@ -6142,6 +5797,7 @@ namespace AppKit {
 		[Field ("NSDraggingImageComponentLabelKey")]
 		NSString LabelKey { get; }
 	}
+	*/
 
 	[NoMacCatalyst]
 	delegate NSDraggingImageComponent [] NSDraggingItemImagesContentProvider ();
@@ -6276,9 +5932,7 @@ namespace AppKit {
 		void ResetSpringLoading ();
 	}
 
-	interface INSDraggingInfo { }
 
-	interface INSDraggingDestination { }
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
@@ -7418,15 +7072,7 @@ namespace AppKit {
 		NSAttributedString AttributedTitle { get; set; }
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSObject))]
-	interface NSGlyphGenerator {
-		[Export ("generateGlyphsForGlyphStorage:desiredNumberOfCharacters:glyphIndex:characterIndex:")]
-		void GenerateGlyphs (NSObject nsGlyphStorageOrNSLayoutManager, nuint nchars, ref nuint glyphIndex, ref nuint charIndex);
 
-		[Static, Export ("sharedGlyphGenerator")]
-		NSGlyphGenerator SharedGlyphGenerator { get; }
-	}
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
@@ -11009,6 +10655,7 @@ namespace AppKit {
 		void PasteboardChangedOwner (NSPasteboard sender);
 	}
 
+	/*
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // An uncaught exception was raised: +[NSPasteboard alloc]: unrecognized selector sent to class 0xac3dcbf0
@@ -11140,7 +10787,7 @@ namespace AppKit {
 		NSString NSHtmlType { get; }
 
 		[Field ("NSPICTPboardType")]
-		[Deprecated (PlatformName.MacOSX, 10, 6 /* Yes, 10.6 */, message: "Do not use, the PICT format was discontinued a long time ago.")]
+		[Deprecated (PlatformName.MacOSX, 10, 6 , message: "Do not use, the PICT format was discontinued a long time ago.")]
 		NSString NSPictType { get; }
 
 		[Field ("NSURLPboardType")]
@@ -11277,6 +10924,7 @@ namespace AppKit {
 		[Export ("prepareForNewContentsWithOptions:")]
 		nint PrepareForNewContents (NSPasteboardContentsOptions options);
 	}
+	*/
 
 	[NoMacCatalyst]
 	enum NSPasteboardName {
@@ -13007,6 +12655,7 @@ namespace AppKit {
 		nfloat RotationInDegrees { get; set; }
 	}
 
+	/*
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	interface NSRulerMarker : NSCoding, NSCopying {
@@ -13051,7 +12700,8 @@ namespace AppKit {
 		[Export ("representedObject", ArgumentSemantic.Retain)]
 		NSObject RepresentedObject { get; set; }
 	}
-
+	*/
+ /*
 	[NoMacCatalyst]
 	[BaseType (typeof (NSView))]
 	partial interface NSRulerView {
@@ -13136,6 +12786,7 @@ namespace AppKit {
 		[Export ("accessoryView", ArgumentSemantic.Retain), NullAllowed]
 		NSView AccessoryView { get; set; }
 	}
+	*/
 
 	[NoMacCatalyst]
 	enum NSRulerViewUnits {
@@ -13391,6 +13042,7 @@ namespace AppKit {
 
 	}
 
+	/*
 	[NoMacCatalyst]
 	[BaseType (typeof (NSView))]
 	partial interface NSScrollView : NSTextFinderBarContainer {
@@ -13573,7 +13225,7 @@ namespace AppKit {
 		[Export ("addFloatingSubview:forAxis:")]
 		void AddFloatingSubview (NSView view, NSEventGestureAxis axis);
 	}
-
+*/
 	[NoMacCatalyst]
 	[BaseType (typeof (NSTextField), Delegates = new string [] { "WeakDelegate" }, Events = new Type [] { typeof (NSSearchFieldDelegate) })]
 	interface NSSearchField {
@@ -15451,6 +15103,7 @@ namespace AppKit {
 
 	}
 
+	/*
 	interface INSTextFinderBarContainer { }
 
 	[NoMacCatalyst]
@@ -15468,6 +15121,7 @@ namespace AppKit {
 		[Export ("contentView")]
 		NSView ContentView { get; }
 	}
+	8/
 
 	[NoMacCatalyst]
 	[DesignatedDefaultCtor]
@@ -16962,193 +16616,10 @@ namespace AppKit {
 		NSTabViewItem GetTabViewItem (NSViewController viewController);
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSView), Delegates = new string [] { "Delegate" }, Events = new Type [] { typeof (NSTextDelegate) })]
-	partial interface NSText {
-		[DesignatedInitializer]
-		[Export ("initWithFrame:")]
-		NativeHandle Constructor (CGRect frameRect);
+	
 
-		[Export ("replaceCharactersInRange:withString:")]
-		void Replace (NSRange range, string aString);
 
-		[Export ("replaceCharactersInRange:withRTF:")]
-		void ReplaceWithRtf (NSRange range, NSData rtfData);
 
-		[Export ("replaceCharactersInRange:withRTFD:")]
-		void ReplaceWithRtfd (NSRange range, NSData rtfdData);
-
-		[Export ("RTFFromRange:")]
-		NSData RtfFromRange (NSRange range);
-
-		[Export ("RTFDFromRange:")]
-		NSData RtfdFromRange (NSRange range);
-
-		[Export ("writeRTFDToFile:atomically:")]
-		bool WriteRtfd (string path, bool atomically);
-
-		[Export ("readRTFDFromFile:")]
-		bool FromRtfdFile (string path);
-
-		[Export ("isRulerVisible")]
-		bool IsRulerVisible { get; }
-
-		[Export ("scrollRangeToVisible:")]
-		void ScrollRangeToVisible (NSRange range);
-
-		[Export ("setTextColor:range:")]
-		void SetTextColor (NSColor color, NSRange range);
-
-		[Export ("setFont:range:")]
-		void SetFont (NSFont font, NSRange range);
-
-		[Export ("sizeToFit")]
-		void SizeToFit ();
-
-		[Export ("copy:")]
-		void Copy (NSObject sender);
-
-		[Export ("copyFont:")]
-		void CopyFont (NSObject sender);
-
-		[Export ("copyRuler:")]
-		void CopyRuler (NSObject sender);
-
-		[Export ("cut:")]
-		void Cut (NSObject sender);
-
-		[Export ("delete:")]
-		void Delete (NSObject sender);
-
-		[Export ("paste:")]
-		void Paste (NSObject sender);
-
-		[Export ("pasteFont:")]
-		void PasteFont (NSObject sender);
-
-		[Export ("pasteRuler:")]
-		void PasteRuler (NSObject sender);
-
-		[Export ("selectAll:")]
-		void SelectAll (NSObject sender);
-
-		[Export ("changeFont:")]
-		void ChangeFont (NSObject sender);
-
-		[Export ("alignLeft:")]
-		void AlignLeft (NSObject sender);
-
-		[Export ("alignRight:")]
-		void AlignRight (NSObject sender);
-
-		[Export ("alignCenter:")]
-		void AlignCenter (NSObject sender);
-
-		[Export ("subscript:")]
-		void Subscript (NSObject sender);
-
-		[Export ("superscript:")]
-		void Superscript (NSObject sender);
-
-		[Export ("underline:")]
-		void Underline (NSObject sender);
-
-		[Export ("unscript:")]
-		void Unscript (NSObject sender);
-
-		[Export ("showGuessPanel:")]
-		void ShowGuessPanel (NSObject sender);
-
-		[Export ("checkSpelling:")]
-		void CheckSpelling (NSObject sender);
-
-		[Export ("toggleRuler:")]
-		void ToggleRuler (NSObject sender);
-
-		//Detected properties
-		[Export ("string")]
-		string Value { get; set; }
-
-		[Export ("delegate", ArgumentSemantic.Assign), NullAllowed]
-		NSObject WeakDelegate { get; set; }
-
-		[Wrap ("WeakDelegate")]
-		INSTextDelegate Delegate { get; set; }
-
-		[Export ("editable")]
-		bool Editable { [Bind ("isEditable")] get; set; }
-
-		[Export ("selectable")]
-		bool Selectable { [Bind ("isSelectable")] get; set; }
-
-		[Export ("richText")]
-		bool RichText { [Bind ("isRichText")] get; set; }
-
-		[Export ("importsGraphics")]
-		bool ImportsGraphics { get; set; }
-
-		[Export ("fieldEditor")]
-		bool FieldEditor { [Bind ("isFieldEditor")] get; set; }
-
-		[Export ("usesFontPanel")]
-		bool UsesFontPanel { get; set; }
-
-		[Export ("drawsBackground")]
-		bool DrawsBackground { get; set; }
-
-		[Export ("backgroundColor", ArgumentSemantic.Copy)]
-		NSColor BackgroundColor { get; set; }
-
-		[Export ("selectedRange")]
-		NSRange SelectedRange { get; set; }
-
-		[Export ("font", ArgumentSemantic.Retain)]
-		NSFont Font { get; set; }
-
-		[Export ("textColor", ArgumentSemantic.Copy)]
-		NSColor TextColor { get; set; }
-
-		[Export ("alignment")]
-		NSTextAlignment Alignment { get; set; }
-
-		[Export ("baseWritingDirection")]
-		NSWritingDirection BaseWritingDirection { get; set; }
-
-		[Export ("maxSize")]
-		CGSize MaxSize { get; set; }
-
-		[Export ("minSize")]
-		CGSize MinSize { get; set; }
-
-		[Export ("horizontallyResizable")]
-		bool HorizontallyResizable { [Bind ("isHorizontallyResizable")] get; set; }
-
-		[Export ("verticallyResizable")]
-		bool VerticallyResizable { [Bind ("isVerticallyResizable")] get; set; }
-	}
-
-	interface INSTextDelegate { }
-
-	[NoMacCatalyst]
-	[BaseType (typeof (NSObject))]
-	[Model]
-	[Protocol]
-	interface NSTextDelegate {
-		[Export ("textShouldBeginEditing:"), DelegateName ("NSTextPredicate"), DefaultValue (true)]
-		bool TextShouldBeginEditing (NSText textObject);
-
-		[Export ("textShouldEndEditing:"), DelegateName ("NSTextPredicate"), DefaultValue (true)]
-		bool TextShouldEndEditing (NSText textObject);
-
-		[Export ("textDidBeginEditing:"), EventArgs ("NSNotification")]
-		void TextDidBeginEditing (NSNotification notification);
-
-		[Export ("textDidEndEditing:"), EventArgs ("NSNotification")]
-		void TextDidEndEditing (NSNotification notification);
-
-		[Export ("textDidChange:"), EventArgs ("NSNotification")]
-		void TextDidChange (NSNotification notification);
-	}
 
 	/* 	We are presuming that Apple will be adding this to new classes in the future.
 	Because they want NSTextAttachmentCell to conform to this, they are essentially
@@ -17207,15 +16678,7 @@ namespace AppKit {
 		CGRect CellFrameForTextContainer (NSTextContainer textContainer, CGRect lineFrag, CGPoint position, nuint charIndex);
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSCell))]
-	interface NSTextAttachmentCell : NSTextAttachmentCellProtocol {
-		[Export ("initImageCell:")]
-		NativeHandle Constructor (NSImage image);
 
-		[Export ("initTextCell:")]
-		NativeHandle Constructor (string aString);
-	}
 
 
 
@@ -17550,61 +17013,7 @@ namespace AppKit {
 		bool EchosBullets { get; set; }
 	}
 
-	interface INSTextInputClient { }
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSObject))]
-	partial interface NSTextInputContext {
-		[Export ("initWithClient:")]
-		[DesignatedInitializer]
-		NativeHandle Constructor (INSTextInputClient client);
-
-		[Static]
-		[Export ("currentInputContext")]
-		NSTextInputContext CurrentInputContext { get; }
-
-		[Export ("client")]
-		INSTextInputClient Client { get; }
-
-		[Export ("acceptsGlyphInfo")]
-		bool AcceptsGlyphInfo { get; set; }
-
-		[NullAllowed, Export ("keyboardInputSources")]
-		string [] KeyboardInputSources { get; }
-
-		[NullAllowed, Export ("selectedKeyboardInputSource")]
-		string SelectedKeyboardInputSource { get; set; }
-
-		[NullAllowed, Export ("allowedInputSourceLocales", ArgumentSemantic.Copy)]
-		string [] AllowedInputSourceLocales { get; set; }
-
-		[Export ("activate")]
-		void Activate ();
-
-		[Export ("deactivate")]
-		void Deactivate ();
-
-		[Export ("handleEvent:")]
-		bool HandleEvent (NSEvent theEvent);
-
-		[Export ("discardMarkedText")]
-		void DiscardMarkedText ();
-
-		[Export ("invalidateCharacterCoordinates")]
-		void InvalidateCharacterCoordinates ();
-
-		[Static]
-		[Export ("localizedNameForInputSource:")]
-		string LocalizedNameForInputSource (string inputSourceIdentifier);
-
-		[Mac (14, 0)]
-		[Export ("textInputClientWillStartScrollingOrZooming")]
-		void TextInputClientWillStartScrollingOrZooming ();
-
-		[Mac (14, 0)]
-		[Export ("textInputClientDidEndScrollingOrZooming")]
-		void TextInputClientDidEndScrollingOrZooming ();
-	}
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSTextBlock))]
@@ -17708,623 +17117,7 @@ namespace AppKit {
 		NSString [] ValidAttributesForMarkedText { get; }
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSText), Delegates = new string [] { "Delegate" }, Events = new Type [] { typeof (NSTextViewDelegate) })]
-	partial interface NSTextView : NSTextInputClient, NSTextLayoutOrientationProvider, NSDraggingSource, NSAccessibilityNavigableStaticText, NSCandidateListTouchBarItemDelegate, NSTouchBarDelegate, NSMenuItemValidation, NSUserInterfaceValidations, NSTextInput, NSTextContent
-#if NET
-		, NSColorChanging // ChangeColor has the wrong param type
-#else
-		, NSTextFinderClient
-#endif
-	{
-		[DesignatedInitializer]
-		[Export ("initWithFrame:textContainer:")]
-		NativeHandle Constructor (CGRect frameRect, NSTextContainer container);
-
-		[Export ("initWithFrame:")]
-		NativeHandle Constructor (CGRect frameRect);
-
-		[Export ("replaceTextContainer:")]
-		void ReplaceTextContainer (NSTextContainer newContainer);
-
-		[Export ("textContainerOrigin")]
-		CGPoint TextContainerOrigin { get; }
-
-		[Export ("invalidateTextContainerOrigin")]
-		void InvalidateTextContainerOrigin ();
-
-		[Export ("layoutManager")]
-		NSLayoutManager LayoutManager { get; }
-
-		[Export ("textStorage")]
-		NSTextStorage TextStorage { get; }
-
-		[NullAllowed]
-		[Export ("textLayoutManager", ArgumentSemantic.Weak)]
-		NSTextLayoutManager TextLayoutManager { get; }
-
-		[NullAllowed]
-		[Export ("textContentStorage", ArgumentSemantic.Weak)]
-		NSTextContentStorage TextContentStorage { get; }
-
-		[Export ("setConstrainedFrameSize:")]
-		void SetConstrainedFrameSize (CGSize desiredSize);
-
-		[Export ("setAlignment:range:")]
-		void SetAlignmentRange (NSTextAlignment alignment, NSRange range);
-
-		[Export ("setBaseWritingDirection:range:")]
-		void SetBaseWritingDirection (NSWritingDirection writingDirection, NSRange range);
-
-		[Export ("turnOffKerning:")]
-		void TurnOffKerning (NSObject sender);
-
-		[Export ("tightenKerning:")]
-		void TightenKerning (NSObject sender);
-
-		[Export ("loosenKerning:")]
-		void LoosenKerning (NSObject sender);
-
-		[Export ("useStandardKerning:")]
-		void UseStandardKerning (NSObject sender);
-
-		[Export ("turnOffLigatures:")]
-		void TurnOffLigatures (NSObject sender);
-
-		[Export ("useStandardLigatures:")]
-		void UseStandardLigatures (NSObject sender);
-
-		[Export ("useAllLigatures:")]
-		void UseAllLigatures (NSObject sender);
-
-		[Export ("raiseBaseline:")]
-		void RaiseBaseline (NSObject sender);
-
-		[Export ("lowerBaseline:")]
-		void LowerBaseline (NSObject sender);
-
-		[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use unicode characters via the character palette.")]
-		[Export ("toggleTraditionalCharacterShape:")]
-		void ToggleTraditionalCharacterShape (NSObject sender);
-
-		[Export ("outline:")]
-		void Outline (NSObject sender);
-
-		[Export ("performFindPanelAction:")]
-		void PerformFindPanelAction (NSObject sender);
-
-		[Export ("alignJustified:")]
-		void AlignJustified (NSObject sender);
-
-#if !NET
-		[Export ("changeColor:")]
-		void ChangeColor (NSObject sender);
-#endif
-
-		[Export ("changeAttributes:")]
-		void ChangeAttributes (NSObject sender);
-
-		[Export ("changeDocumentBackgroundColor:")]
-		void ChangeDocumentBackgroundColor (NSObject sender);
-
-		[Export ("orderFrontSpacingPanel:")]
-		void OrderFrontSpacingPanel (NSObject sender);
-
-		[Export ("orderFrontLinkPanel:")]
-		void OrderFrontLinkPanel (NSObject sender);
-
-		[Export ("orderFrontListPanel:")]
-		void OrderFrontListPanel (NSObject sender);
-
-		[Export ("orderFrontTablePanel:")]
-		void OrderFrontTablePanel (NSObject sender);
-
-		[Export ("rulerView:didMoveMarker:")]
-		void RulerViewDidMoveMarker (NSRulerView ruler, NSRulerMarker marker);
-
-		[Export ("rulerView:didRemoveMarker:")]
-		void RulerViewDidRemoveMarker (NSRulerView ruler, NSRulerMarker marker);
-
-		[Export ("rulerView:didAddMarker:")]
-		void RulerViewDidAddMarker (NSRulerView ruler, NSRulerMarker marker);
-
-		[Export ("rulerView:shouldMoveMarker:")]
-		bool RulerViewShouldMoveMarker (NSRulerView ruler, NSRulerMarker marker);
-
-		[Export ("rulerView:shouldAddMarker:")]
-		bool RulerViewShouldAddMarker (NSRulerView ruler, NSRulerMarker marker);
-
-		[Export ("rulerView:willMoveMarker:toLocation:")]
-		nfloat RulerViewWillMoveMarker (NSRulerView ruler, NSRulerMarker marker, nfloat location);
-
-		[Export ("rulerView:shouldRemoveMarker:")]
-		bool RulerViewShouldRemoveMarker (NSRulerView ruler, NSRulerMarker marker);
-
-		[Export ("rulerView:willAddMarker:atLocation:")]
-		nfloat RulerViewWillAddMarker (NSRulerView ruler, NSRulerMarker marker, nfloat location);
-
-		[Export ("rulerView:handleMouseDown:")]
-		void RulerViewHandleMouseDown (NSRulerView ruler, NSEvent theEvent);
-
-		[Export ("setNeedsDisplayInRect:avoidAdditionalLayout:")]
-		void SetNeedsDisplay (CGRect rect, bool avoidAdditionalLayout);
-
-		[Export ("shouldDrawInsertionPoint")]
-		bool ShouldDrawInsertionPoint { get; }
-
-		[Export ("drawInsertionPointInRect:color:turnedOn:")]
-		void DrawInsertionPoint (CGRect rect, NSColor color, bool turnedOn);
-
-		[Export ("drawViewBackgroundInRect:")]
-		void DrawViewBackgroundInRect (CGRect rect);
-
-		[Export ("updateRuler")]
-		void UpdateRuler ();
-
-		[Export ("updateFontPanel")]
-		void UpdateFontPanel ();
-
-		[Export ("updateDragTypeRegistration")]
-		void UpdateDragTypeRegistration ();
-
-		[Export ("selectionRangeForProposedRange:granularity:")]
-		NSRange SelectionRange (NSRange proposedCharRange, NSSelectionGranularity granularity);
-
-		[Export ("clickedOnLink:atIndex:")]
-		void ClickedOnLink (NSObject link, nuint charIndex);
-
-		[Export ("startSpeaking:")]
-		void StartSpeaking (NSObject sender);
-
-		[Export ("stopSpeaking:")]
-		void StopSpeaking (NSObject sender);
-
-		[Export ("characterIndexForInsertionAtPoint:")]
-		nuint CharacterIndex (CGPoint point);
-
-		//Detected properties
-		[Export ("textContainer")]
-		NSTextContainer TextContainer { get; set; }
-
-		[Export ("textContainerInset")]
-		CGSize TextContainerInset { get; set; }
-
-		//
-		// Completion support
-		//
-		[Export ("complete:")]
-		void Complete ([NullAllowed] NSObject sender);
-
-		[Export ("rangeForUserCompletion")]
-		NSRange RangeForUserCompletion ();
-
-		[Export ("completionsForPartialWordRange:indexOfSelectedItem:")]
-		string [] CompletionsForPartialWord (NSRange charRange, out nint index);
-
-		[Export ("insertCompletion:forPartialWordRange:movement:isFinal:")]
-		void InsertCompletion (string completion, NSRange partialWordCharRange, nint movement, bool isFinal);
-
-		// Pasteboard
-		[Export ("writablePasteboardTypes")]
-		string [] WritablePasteboardTypes ();
-
-		[Export ("writeSelectionToPasteboard:type:")]
-		bool WriteSelectionToPasteboard (NSPasteboard pboard, string type);
-
-		[Export ("writeSelectionToPasteboard:types:")]
-		bool WriteSelectionToPasteboard (NSPasteboard pboard, string [] types);
-
-		[Export ("readablePasteboardTypes")]
-		string [] ReadablePasteboardTypes ();
-
-		[Export ("preferredPasteboardTypeFromArray:restrictedToTypesFromArray:")]
-		string GetPreferredPasteboardType (string [] availableTypes, string [] allowedTypes);
-
-		[Export ("readSelectionFromPasteboard:type:")]
-		bool ReadSelectionFromPasteboard (NSPasteboard pboard, string type);
-
-		[Export ("readSelectionFromPasteboard:")]
-		bool ReadSelectionFromPasteboard (NSPasteboard pboard);
-
-		[Static]
-		[Export ("registerForServices")]
-		void RegisterForServices ();
-
-		[Export ("validRequestorForSendType:returnType:")]
-		NSObject ValidRequestorForSendType (string sendType, string returnType);
-
-		[Export ("pasteAsPlainText:")]
-		void PasteAsPlainText ([NullAllowed] NSObject sender);
-
-		[Export ("pasteAsRichText:")]
-		void PasteAsRichText ([NullAllowed] NSObject sender);
-
-		//
-		// Dragging support
-		//
-
-		// FIXME: Binding
-		//[Export ("dragImageForSelectionWithEvent:origin:")]
-		//NSImage DragImageForSelection (NSEvent theEvent, NSPointPointer origin);
-
-		[Export ("acceptableDragTypes")]
-		string [] AcceptableDragTypes ();
-
-		[Export ("dragOperationForDraggingInfo:type:")]
-#if NET
-		NSDragOperation DragOperationForDraggingInfo (INSDraggingInfo dragInfo, string type);
-#else
-		NSDragOperation DragOperationForDraggingInfo (NSDraggingInfo dragInfo, string type);
-#endif
-
-		[Export ("cleanUpAfterDragOperation")]
-		void CleanUpAfterDragOperation ();
-
-		[Export ("setSelectedRanges:affinity:stillSelecting:")]
-		void SetSelectedRanges (NSArray /*NSRange []*/ ranges, NSSelectionAffinity affinity, bool stillSelectingFlag);
-
-		[Export ("setSelectedRange:affinity:stillSelecting:")]
-		void SetSelectedRange (NSRange charRange, NSSelectionAffinity affinity, bool stillSelectingFlag);
-
-		[Export ("selectionAffinity")]
-		NSSelectionAffinity SelectionAffinity ();
-
-		[Export ("updateInsertionPointStateAndRestartTimer:")]
-		void UpdateInsertionPointStateAndRestartTimer (bool restartFlag);
-
-		[Export ("toggleContinuousSpellChecking:")]
-		void ToggleContinuousSpellChecking (NSObject sender);
-
-		[Export ("spellCheckerDocumentTag")]
-		nint SpellCheckerDocumentTag ();
-
-		[Export ("toggleGrammarChecking:")]
-		void ToggleGrammarChecking (NSObject sender);
-
-		[Export ("setSpellingState:range:")]
-		void SetSpellingState (nint value, NSRange charRange);
-
-		[Export ("shouldChangeTextInRanges:replacementStrings:")]
-		bool ShouldChangeText (NSArray /* NSRange [] */ affectedRanges, string [] replacementStrings);
-
-		[Export ("rangesForUserTextChange")]
-		NSArray /* NSRange [] */ RangesForUserTextChange ();
-
-		[Export ("rangesForUserCharacterAttributeChange")]
-		NSArray /* NSRange [] */ RangesForUserCharacterAttributeChange ();
-
-		[Export ("rangesForUserParagraphAttributeChange")]
-		NSArray /* NSRange [] */ RangesForUserParagraphAttributeChange ();
-
-		//[Export ("shouldChangeTextInRange:replacementString:")]
-		//bool ShouldChangeText (NSRange affectedCharRange, string replacementString);
-
-		[Export ("rangeForUserTextChange")]
-		NSRange RangeForUserTextChange ();
-
-		[Export ("rangeForUserCharacterAttributeChange")]
-		NSRange RangeForUserCharacterAttributeChange ();
-
-		[Export ("rangeForUserParagraphAttributeChange")]
-		NSRange RangeForUserParagraphAttributeChange ();
-
-		[Export ("breakUndoCoalescing")]
-		void BreakUndoCoalescing ();
-
-		[Export ("isCoalescingUndo")]
-		bool IsCoalescingUndo ();
-
-		[Export ("showFindIndicatorForRange:")]
-		void ShowFindIndicatorForRange (NSRange charRange);
-
-		[Export ("setSelectedRange:")]
-		void SetSelectedRange (NSRange charRange);
-
-		[Export ("selectionGranularity")]
-		NSSelectionGranularity SelectionGranularity { get; set; }
-
-		[Export ("selectedTextAttributes")]
-		NSDictionary SelectedTextAttributes { get; set; }
-
-		[NullAllowed]
-		[Export ("insertionPointColor")]
-		NSColor InsertionPointColor { get; set; }
-
-		[Export ("markedTextAttributes")]
-		NSDictionary MarkedTextAttributes { get; set; }
-
-		[Export ("linkTextAttributes")]
-		NSDictionary LinkTextAttributes { get; set; }
-
-		[Export ("displaysLinkToolTips")]
-		bool DisplaysLinkToolTips { get; set; }
-
-		[Export ("acceptsGlyphInfo")]
-		bool AcceptsGlyphInfo { get; set; }
-
-		[Export ("rulerVisible")]
-		bool RulerVisible { [Bind ("isRulerVisible")] get; set; }
-
-		[Export ("usesRuler")]
-		bool UsesRuler { get; set; }
-
-		[Export ("continuousSpellCheckingEnabled")]
-		bool ContinuousSpellCheckingEnabled { [Bind ("isContinuousSpellCheckingEnabled")] get; set; }
-
-		[Export ("grammarCheckingEnabled")]
-		bool GrammarCheckingEnabled { [Bind ("isGrammarCheckingEnabled")] get; set; }
-
-		[Export ("typingAttributes")]
-		NSDictionary TypingAttributes { get; set; }
-
-		[Export ("usesFindPanel")]
-		bool UsesFindPanel { get; set; }
-
-		[Export ("allowsDocumentBackgroundColorChange")]
-		bool AllowsDocumentBackgroundColorChange { get; set; }
-
-		[Export ("defaultParagraphStyle")]
-		NSParagraphStyle DefaultParagraphStyle { get; set; }
-
-		[Export ("allowsUndo")]
-		bool AllowsUndo { get; set; }
-
-		[Export ("allowsImageEditing")]
-		bool AllowsImageEditing { get; set; }
-
-		[Wrap ("WeakDelegate")]
-		INSTextViewDelegate Delegate { get; set; }
-
-#pragma warning disable 0109 // warning CS0109: The member 'NSTextView.Editable' does not hide an accessible member. The new keyword is not required.
-		[Export ("editable")]
-		new bool Editable { [Bind ("isEditable")] get; set; }
-#pragma warning restore
-
-#pragma warning disable 0109 // warning CS0109: The member 'NSTextView.Selectable' does not hide an accessible member. The new keyword is not required.
-		[Export ("selectable")]
-		new bool Selectable { [Bind ("isSelectable")] get; set; }
-#pragma warning restore
-
-		[Export ("richText")]
-		bool RichText { [Bind ("isRichText")] get; set; }
-
-		[Export ("importsGraphics")]
-		bool ImportsGraphics { get; set; }
-
-		[Export ("drawsBackground")]
-		bool DrawsBackground { get; set; }
-
-		[Export ("backgroundColor")]
-		NSColor BackgroundColor { get; set; }
-
-		[Export ("fieldEditor")]
-		bool FieldEditor { [Bind ("isFieldEditor")] get; set; }
-
-		[Export ("usesFontPanel")]
-		bool UsesFontPanel { get; set; }
-
-		[Export ("allowedInputSourceLocales")]
-		string [] AllowedInputSourceLocales { get; set; }
-
-		// FIXME: binding
-		//[Export ("shouldChangeTextInRanges:replacementStrings:")]
-		//bool ShouldChangeTextInRanges (NSArray affectedRanges, NSArray replacementStrings);
-
-		// FIXME: binding
-		//[Export ("rangesForUserTextChange")]
-		//NSArray RangesForUserTextChange ();
-
-		// FIXME: binding
-		//[Export ("rangesForUserCharacterAttributeChange")]
-		//NSArray RangesForUserCharacterAttributeChange ();
-
-		// FIXME: binding
-		//[Export ("rangesForUserParagraphAttributeChange")]
-		//NSArray RangesForUserParagraphAttributeChange ();
-
-		[Export ("shouldChangeTextInRange:replacementString:")]
-		bool ShouldChangeText (NSRange affectedCharRange, string replacementString);
-
-		[Export ("didChangeText")]
-		void DidChangeText ();
-
-		[Export ("delegate", ArgumentSemantic.Assign), NullAllowed]
-		NSObject WeakDelegate { get; set; }
-
-		//
-		// Smart copy/paset support
-		//
-		[Export ("smartDeleteRangeForProposedRange:")]
-		NSRange SmartDeleteRangeForProposedRange (NSRange proposedCharRange);
-
-		[Export ("toggleSmartInsertDelete:")]
-		void ToggleSmartInsertDelete (NSObject sender);
-
-#if !NET
-		[Obsolete ("Use 'SmartInsert(string, NSRange, out string, out string)' overload instead.")]
-		[Wrap ("throw new NotSupportedException ()", IsVirtual = true)]
-		void SmartInsert (string pasteString, NSRange charRangeToReplace, string beforeString, string afterString);
-#endif
-
-		[Export ("smartInsertForString:replacingRange:beforeString:afterString:")]
-		void SmartInsert (string pasteString, NSRange charRangeToReplace, [NullAllowed] out string beforeString, [NullAllowed] out string afterString);
-
-		[Export ("smartInsertBeforeStringForString:replacingRange:")]
-		string SmartInsertBefore (string pasteString, NSRange charRangeToReplace);
-
-		[Export ("smartInsertAfterStringForString:replacingRange:")]
-		string SmartInsertAfter (string pasteString, NSRange charRangeToReplace);
-
-		[Export ("toggleAutomaticQuoteSubstitution:")]
-		void ToggleAutomaticQuoteSubstitution (NSObject sender);
-
-		[Export ("toggleAutomaticLinkDetection:")]
-		void ToggleAutomaticLinkDetection (NSObject sender);
-
-		[Export ("toggleAutomaticDataDetection:")]
-		void ToggleAutomaticDataDetection (NSObject sender);
-
-		[Export ("toggleAutomaticDashSubstitution:")]
-		void ToggleAutomaticDashSubstitution (NSObject sender);
-
-		[Export ("toggleAutomaticTextReplacement:")]
-		void ToggleAutomaticTextReplacement (NSObject sender);
-
-		[Export ("toggleAutomaticSpellingCorrection:")]
-		void ToggleAutomaticSpellingCorrection (NSObject sender);
-
-		[Export ("checkTextInRange:types:options:")]
-		void CheckText (NSRange range, NSTextCheckingTypes checkingTypes, NSDictionary options);
-
-		[Export ("handleTextCheckingResults:forRange:types:options:orthography:wordCount:")]
-		void HandleTextChecking (NSTextCheckingResult [] results, NSRange range, NSTextCheckingTypes checkingTypes, NSDictionary options, NSOrthography orthography, nint wordCount);
-
-		[Export ("orderFrontSubstitutionsPanel:")]
-		void OrderFrontSubstitutionsPanel (NSObject sender);
-
-		[Export ("checkTextInSelection:")]
-		void CheckTextInSelection (NSObject sender);
-
-		[Export ("checkTextInDocument:")]
-		void CheckTextInDocument (NSObject sender);
-
-		//Detected properties
-		[Export ("smartInsertDeleteEnabled")]
-		bool SmartInsertDeleteEnabled { get; set; }
-
-		[Export ("automaticQuoteSubstitutionEnabled")]
-		bool AutomaticQuoteSubstitutionEnabled { [Bind ("isAutomaticQuoteSubstitutionEnabled")] get; set; }
-
-		[Export ("automaticLinkDetectionEnabled")]
-		bool AutomaticLinkDetectionEnabled { [Bind ("isAutomaticLinkDetectionEnabled")] get; set; }
-
-		[Export ("automaticDataDetectionEnabled")]
-		bool AutomaticDataDetectionEnabled { [Bind ("isAutomaticDataDetectionEnabled")] get; set; }
-
-		[Export ("automaticDashSubstitutionEnabled")]
-		bool AutomaticDashSubstitutionEnabled { [Bind ("isAutomaticDashSubstitutionEnabled")] get; set; }
-
-		[Export ("automaticTextReplacementEnabled")]
-		bool AutomaticTextReplacementEnabled { [Bind ("isAutomaticTextReplacementEnabled")] get; set; }
-
-		[Export ("automaticSpellingCorrectionEnabled")]
-		bool AutomaticSpellingCorrectionEnabled { [Bind ("isAutomaticSpellingCorrectionEnabled")] get; set; }
-
-		[Export ("enabledTextCheckingTypes")]
-		NSTextCheckingTypes EnabledTextCheckingTypes { get; set; }
-
-		[Export ("usesRolloverButtonForSelection")]
-		bool UsesRolloverButtonForSelection { get; set; }
-
-		[Export ("toggleQuickLookPreviewPanel:")]
-		void ToggleQuickLookPreviewPanel (NSObject sender);
-
-		[Static]
-		[Export ("stronglyReferencesTextStorage")]
-		bool StronglyReferencesTextStorage { get; }
-
-		[Export ("automaticTextCompletionEnabled")]
-		bool AutomaticTextCompletionEnabled { [Bind ("isAutomaticTextCompletionEnabled")] get; set; }
-
-		[Export ("toggleAutomaticTextCompletion:")]
-		void ToggleAutomaticTextCompletion ([NullAllowed] NSObject sender);
-
-		[Export ("allowsCharacterPickerTouchBarItem")]
-		bool AllowsCharacterPickerTouchBarItem { get; set; }
-
-		[Export ("updateTouchBarItemIdentifiers")]
-		void UpdateTouchBarItemIdentifiers ();
-
-		[Export ("updateTextTouchBarItems")]
-		void UpdateTextTouchBarItems ();
-
-		[Export ("updateCandidates")]
-		void UpdateCandidates ();
-
-		[NullAllowed, Export ("candidateListTouchBarItem", ArgumentSemantic.Strong)]
-		NSCandidateListTouchBarItem CandidateListTouchBarItem { get; }
-
-		[Export ("performValidatedReplacementInRange:withAttributedString:")]
-		bool PerformValidatedReplacement (NSRange range, NSAttributedString attributedString);
-
-		[Static]
-		[Export ("scrollableTextView")]
-		NSScrollView CreateScrollableTextView ();
-
-		[Static]
-		[Export ("fieldEditor")]
-		NSTextView CreateFieldEditor ();
-
-		[Static]
-		[Export ("scrollableDocumentContentTextView")]
-		NSScrollView CreateScrollableDocumentContentTextView ();
-
-		[Static]
-		[Export ("scrollablePlainDocumentContentTextView")]
-		NSScrollView CreateScrollablePlainDocumentContentTextView ();
-
-		NSTextContentType ContentType {
-			[Wrap ("NSTextContentTypeExtensions.GetValue (GetContentType ()!)")]
-			get;
-			[Wrap ("SetContentType (value.GetConstant()!)")]
-			set;
-		}
-
-#if NET
-		// This came from the NSTextFinderClient protocol in legacy Xamarin, but NSTextView doesn't really implement that protocol,
-		// so when it was removed for .NET, we still need to expose the API from NSTextFinderClient that NSTextView actually has.
-		[Export ("selectedRanges", ArgumentSemantic.Copy)]
-		NSArray SelectedRanges { get; set;  }
-#endif
-
-		[NoiOS]
-		[Mac (13, 0)]
-		[Export ("initUsingTextLayoutManager:")]
-		NativeHandle Constructor (bool usingTextLayoutManager);
-
-		[NoiOS]
-		[Static]
-		[Mac (13, 0)]
-		[Export ("textViewUsingTextLayoutManager:")]
-		NSTextView Create (bool usingTextLayoutManager);
-
-		[Mac (14, 0)]
-		[Export ("inlinePredictionType", ArgumentSemantic.Assign)]
-		NSTextInputTraitType InlinePredictionType { get; set; }
-
-		// Inlined from the NSTextView (NSSharing) category
-		[Mac (15, 0)]
-		[Export ("writingToolsActive")]
-		bool WritingToolsActive { [Bind ("isWritingToolsActive")] get; }
-
-		// Inlined from the NSTextView (NSSharing) category
-		[Mac (15, 0)]
-		[Export ("writingToolsBehavior")]
-		NSWritingToolsBehavior WritingToolsBehavior { get; set; }
-
-		// Inlined from the NSTextView (NSSharing) category
-		[Mac (15, 0)]
-		[Export ("allowedWritingToolsResultOptions")]
-		NSWritingToolsResultOptions AllowedWritingToolsResultOptions { get; set; }
-
-		// Inlined from the NSTextView (NSTextChecking) category
-		[Mac (15, 0)]
-		[Export ("mathExpressionCompletionType")]
-		NSTextInputTraitType MathExpressionCompletionType { get; set; }
-
-		// Inlined from the NSTextView (NSTextView_TextHighlight) category
-		[Mac (15, 0)]
-		[Export ("textHighlightAttributes", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> TextHighlightAttributes { get; set; }
-
-		[Mac (15, 0)]
-		[Export ("drawTextHighlightBackgroundForTextRange:origin:")]
-		void DrawTextHighlightBackground (NSTextRange textRange, CGPoint origin);
-
-		[Mac (15, 0)]
-		[Export ("highlight:")]
-		void Highlight ([NullAllowed] NSObject sender);
-	}
+	
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
@@ -18427,112 +17220,7 @@ namespace AppKit {
 		void InsertAdaptiveImageGlyph (NSAdaptiveImageGlyph adaptiveImageGlyph, NSRange replacementRange);
 	}
 
-	interface INSTextViewDelegate { }
-
-	[NoiOS]
-	[NoMacCatalyst]
-	[BaseType (typeof (NSTextDelegate))]
-	[Model]
-	[Protocol]
-	partial interface NSTextViewDelegate {
-		[Export ("textView:clickedOnLink:atIndex:"), DelegateName ("NSTextViewLink"), DefaultValue (false)]
-		bool LinkClicked (NSTextView textView, NSObject link, nuint charIndex);
-
-		[Export ("textView:clickedOnCell:inRect:atIndex:"), EventArgs ("NSTextViewClicked")]
-		void CellClicked (NSTextView textView, NSTextAttachmentCell cell, CGRect cellFrame, nuint charIndex);
-
-		[Export ("textView:doubleClickedOnCell:inRect:atIndex:"), EventArgs ("NSTextViewDoubleClick")]
-		void CellDoubleClicked (NSTextView textView, NSTextAttachmentCell cell, CGRect cellFrame, nuint charIndex);
-
-		// 
-		[Export ("textView:writablePasteboardTypesForCell:atIndex:"), DelegateName ("NSTextViewCellPosition"), DefaultValue (null)]
-		string [] GetWritablePasteboardTypes (NSTextView view, NSTextAttachmentCell forCell, nuint charIndex);
-
-		[Export ("textView:writeCell:atIndex:toPasteboard:type:"), DelegateName ("NSTextViewCellPasteboard"), DefaultValue (true)]
-		bool WriteCell (NSTextView view, NSTextAttachmentCell cell, nuint charIndex, NSPasteboard pboard, string type);
-
-		[Export ("textView:willChangeSelectionFromCharacterRange:toCharacterRange:"), DelegateName ("NSTextViewSelectionChange"), DefaultValueFromArgument ("newSelectedCharRange")]
-		NSRange WillChangeSelection (NSTextView textView, NSRange oldSelectedCharRange, NSRange newSelectedCharRange);
-
-		[Export ("textView:willChangeSelectionFromCharacterRanges:toCharacterRanges:"), DelegateName ("NSTextViewSelectionWillChange"), DefaultValueFromArgument ("newSelectedCharRanges")]
-		NSValue [] WillChangeSelectionFromRanges (NSTextView textView, NSValue [] oldSelectedCharRanges, NSValue [] newSelectedCharRanges);
-
-		[Export ("textView:shouldChangeTextInRanges:replacementStrings:"), DelegateName ("NSTextViewSelectionShouldChange"), DefaultValue (true)]
-		bool ShouldChangeTextInRanges (NSTextView textView, NSValue [] affectedRanges, string [] replacementStrings);
-
-		[Export ("textView:shouldChangeTypingAttributes:toAttributes:"), DelegateName ("NSTextViewTypeAttribute"), DefaultValueFromArgument ("newTypingAttributes")]
-		NSDictionary ShouldChangeTypingAttributes (NSTextView textView, NSDictionary oldTypingAttributes, NSDictionary newTypingAttributes);
-
-		[Export ("textViewDidChangeSelection:"), EventArgs ("NSTextViewNotification")]
-		void DidChangeSelection (NSNotification notification);
-
-		[Export ("textViewDidChangeTypingAttributes:"), EventArgs ("NSTextViewNotification")]
-		void DidChangeTypingAttributes (NSNotification notification);
-
-		[Export ("textView:willDisplayToolTip:forCharacterAtIndex:"), DelegateName ("NSTextViewTooltip"), DefaultValueFromArgument ("tooltip")]
-		[return: NullAllowed]
-		string WillDisplayToolTip (NSTextView textView, string tooltip, nuint characterIndex);
-
-		[Export ("textView:completions:forPartialWordRange:indexOfSelectedItem:"), DelegateName ("NSTextViewCompletion"), DefaultValue (null)]
-		string [] GetCompletions (NSTextView textView, string [] words, NSRange charRange, ref nint index);
-
-		[Export ("textView:shouldChangeTextInRange:replacementString:"), DelegateName ("NSTextViewChangeText"), DefaultValue (true)]
-		bool ShouldChangeTextInRange (NSTextView textView, NSRange affectedCharRange, string replacementString);
-
-		[Export ("textView:doCommandBySelector:"), DelegateName ("NSTextViewSelectorCommand"), DefaultValue (false)]
-		bool DoCommandBySelector (NSTextView textView, Selector commandSelector);
-
-		[Export ("textView:shouldSetSpellingState:range:"), DelegateName ("NSTextViewSpellingQuery"), DefaultValue (0)]
-		nint ShouldSetSpellingState (NSTextView textView, nint value, NSRange affectedCharRange);
-
-		[Export ("textView:menu:forEvent:atIndex:"), DelegateName ("NSTextViewEventMenu"), DefaultValueFromArgument ("menu")]
-		NSMenu MenuForEvent (NSTextView view, NSMenu menu, NSEvent theEvent, nuint charIndex);
-
-		[Export ("textView:willCheckTextInRange:options:types:"), DelegateName ("NSTextViewOnTextCheck"), DefaultValueFromArgument ("options")]
-		NSDictionary WillCheckText (NSTextView view, NSRange range, NSDictionary options, NSTextCheckingTypes checkingTypes);
-
-		[Export ("textView:didCheckTextInRange:types:options:results:orthography:wordCount:"), DelegateName ("NSTextViewTextChecked"), DefaultValueFromArgument ("results")]
-		NSTextCheckingResult [] DidCheckText (NSTextView view, NSRange range, NSTextCheckingTypes checkingTypes, NSDictionary options, NSTextCheckingResult [] results, NSOrthography orthography, nint wordCount);
-
-#if !NET
-		[Export ("textView:draggedCell:inRect:event:"), EventArgs ("NSTextViewDraggedCell")]
-		void DraggedCell (NSTextView view, NSTextAttachmentCell cell, CGRect rect, NSEvent theevent);
-#else
-		[Export ("textView:draggedCell:inRect:event:atIndex:"), EventArgs ("NSTextViewDraggedCell")]
-		void DraggedCell (NSTextView view, NSTextAttachmentCell cell, CGRect rect, NSEvent theEvent, nuint charIndex);
-#endif
-
-		[Export ("undoManagerForTextView:"), DelegateName ("NSTextViewGetUndoManager"), DefaultValue (null)]
-		NSUndoManager GetUndoManager (NSTextView view);
-
-		[Export ("textView:shouldUpdateTouchBarItemIdentifiers:"), DelegateName ("NSTextViewUpdateTouchBarItemIdentifiers"), NoDefaultValue]
-		string [] ShouldUpdateTouchBarItemIdentifiers (NSTextView textView, string [] identifiers);
-
-		[Export ("textView:candidatesForSelectedRange:"), DelegateName ("NSTextViewGetCandidates"), NoDefaultValue]
-		[return: NullAllowed]
-		NSObject [] GetCandidates (NSTextView textView, NSRange selectedRange);
-
-		[Export ("textView:candidates:forSelectedRange:"), DelegateName ("NSTextViewTextCheckingResults"), NoDefaultValue]
-		NSTextCheckingResult [] GetTextCheckingCandidates (NSTextView textView, NSTextCheckingResult [] candidates, NSRange selectedRange);
-
-		[Export ("textView:shouldSelectCandidateAtIndex:"), DelegateName ("NSTextViewSelectCandidate"), NoDefaultValue]
-		bool ShouldSelectCandidates (NSTextView textView, nuint index);
-
-#if NET
-		[Mac (15, 0)]
-		[Export ("textViewWritingToolsWillBegin:"), EventArgs ("NSTextView")]
-		void WritingToolsWillBegin (NSTextView textView);
-
-		[Mac (15, 0)]
-		[Export ("textViewWritingToolsDidEnd:"), EventArgs ("NSTextView")]
-		void WritingToolsDidEnd (NSTextView textView);
-
-		[Mac (15, 0)]
-		[Export ("textView:writingToolsIgnoredRangesInEnclosingRange:"), DelegateName ("NSTextViewRange"), NoDefaultValue]
-		// Can't use BindAs in a protocol [return: BindAs (typeof (NSRange[]))]
-		NSValue [] GetWritingToolsIgnoredRangesInEnclosingRange (NSTextView textView, NSRange enclosingRange);
-#endif
-	}
+	
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSTextField))]
@@ -19119,6 +17807,7 @@ namespace AppKit {
 		NSTouchBarItem MakeItem (NSTouchBar touchBar, string identifier);
 	}
 
+	/*
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
@@ -19150,6 +17839,7 @@ namespace AppKit {
 		[Export ("visible")]
 		bool Visible { [Bind ("isVisible")] get; }
 	}
+	*/
 
 	[MacCatalyst (13, 1)]
 	public enum NSTouchBarItemIdentifier {
@@ -19378,11 +18068,7 @@ namespace AppKit {
 		string LeafKeyPathForNode (NSTreeNode node);
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSObject))]
-	partial interface NSTypesetter {
 
-	}
 
 
 
@@ -20556,202 +19242,7 @@ namespace AppKit {
 		NSSharingCollaborationModeRestriction [] GetCollaborationModeRestrictions (NSSharingServicePicker sharingServicePicker);
 	}
 
-	[NoMacCatalyst]
-	[BaseType (typeof (NSTypesetter))]
-	interface NSATSTypesetter {
-		[Static]
-		[Export ("sharedTypesetter")]
-		NSATSTypesetter SharedTypesetter { get; }
-	}
-
-	partial interface NSTypesetter {
-		[Export ("substituteFontForFont:")]
-		NSFont GetSubstituteFont (NSFont originalFont);
-
-		[Export ("textTabForGlyphLocation:writingDirection:maxLocation:")]
-		NSTextTab GetTextTab (nfloat glyphLocation, NSWritingDirection direction, nfloat maxLocation);
-
-		[Export ("setParagraphGlyphRange:separatorGlyphRange:")]
-		void SetParagraphGlyphRange (NSRange paragraphRange, NSRange paragraphSeparatorRange);
-
-		[Export ("paragraphGlyphRange")]
-		NSRange ParagraphGlyphRange { get; }
-
-		[Export ("paragraphSeparatorGlyphRange")]
-		NSRange ParagraphSeparatorGlyphRange { get; }
-
-		[Export ("paragraphCharacterRange")]
-		NSRange ParagraphCharacterRange { get; }
-
-		[Export ("paragraphSeparatorCharacterRange")]
-		NSRange ParagraphSeparatorCharacterRange { get; }
-
-		[Export ("layoutParagraphAtPoint:")]
-		nuint LayoutParagraphAtPoint (ref CGPoint lineFragmentOrigin);
-
-		[Export ("beginParagraph")]
-		void BeginParagraph ();
-
-		[Export ("endParagraph")]
-		void EndParagraph ();
-
-		[Export ("beginLineWithGlyphAtIndex:")]
-		void BeginLine (nuint glyphIndex);
-
-		[Export ("endLineWithGlyphRange:")]
-		void EndLine (NSRange lineGlyphRange);
-
-		[Export ("lineSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:")]
-		nfloat GetLineSpacingAfterGlyph (nuint glyphIndex, CGRect proposedLineFragmentRect);
-
-		[Export ("paragraphSpacingBeforeGlyphAtIndex:withProposedLineFragmentRect:")]
-		nfloat GetParagraphSpacingBeforeGlyph (nuint glyphIndex, CGRect proposedLineFragmentRect);
-
-		[Export ("paragraphSpacingAfterGlyphAtIndex:withProposedLineFragmentRect:")]
-		nfloat GetParagraphSpacingAfterGlyph (nuint glyphIndex, CGRect proposedLineFragmentRect);
-
-		[Export ("getLineFragmentRect:usedRect:forParagraphSeparatorGlyphRange:atProposedOrigin:")]
-		void GetLineFragment (out CGRect lineFragmentRect, out CGRect lineFragmentUsedRect, NSRange paragraphSeparatorGlyphRange, CGPoint proposedOrigin);
-
-		[Export ("attributesForExtraLineFragment")]
-		NSDictionary AttributesForExtraLineFragment ();
-
-		[Export ("actionForControlCharacterAtIndex:")]
-		NSTypesetterControlCharacterAction GetActionForControlCharacter (nuint charIndex);
-
-		[Export ("layoutManager")]
-		NSLayoutManager LayoutManager { get; }
-
-		[Export ("textContainers")]
-		NSTextContainer [] TextContainers { get; }
-
-		[Export ("currentTextContainer")]
-		NSTextContainer CurrentTextContainer { get; }
-
-		[Export ("currentParagraphStyle")]
-		NSParagraphStyle CurrentParagraphStyle { get; }
-
-		[Export ("setHardInvalidation:forGlyphRange:")]
-		void SetHardInvalidation (bool value, NSRange glyphRange);
-
-		[Export ("layoutGlyphsInLayoutManager:startingAtGlyphIndex:maxNumberOfLineFragments:nextGlyphIndex:")]
-		void LayoutGlyphs (NSLayoutManager layoutManager, nuint startGlyphIndex, nuint maxLineFragments, out nuint nextGlyph);
-
-		[Export ("layoutCharactersInRange:forLayoutManager:maximumNumberOfLineFragments:")]
-		NSRange LayoutCharacters (NSRange characterRange, NSLayoutManager layoutManager, nuint maxLineFragments);
-
-		// TODO: provide a higher level C# API for this too
-		[Static]
-		[Export ("printingAdjustmentInLayoutManager:forNominallySpacedGlyphRange:packedGlyphs:count:")]
-		CGSize GetInterGlyphSpacing (NSLayoutManager layoutManager, NSRange nominallySpacedGlyphsRange, IntPtr packedGlyphs, nuint packedGlyphsCount);
-
-		[Export ("baselineOffsetInLayoutManager:glyphIndex:")]
-		nfloat GetBaselineOffset (NSLayoutManager layoutManager, nuint glyphIndex);
-
-		[Static]
-		[Export ("sharedSystemTypesetter")]
-		NSTypesetter SharedSystemTypesetter { get; }
-
-		[Static]
-		[Export ("sharedSystemTypesetterForBehavior:")]
-		NSTypesetter GetSharedSystemTypesetter (NSTypesetterBehavior forBehavior);
-
-		[Static]
-		[Export ("defaultTypesetterBehavior")]
-		NSTypesetterBehavior DefaultTypesetterBehavior { get; }
-
-		//
-		// Detected properties
-		[Export ("usesFontLeading")]
-		bool UsesFontLeading { get; set; }
-
-		[Export ("typesetterBehavior")]
-		NSTypesetterBehavior TypesetterBehavior { get; set; }
-
-		[Export ("hyphenationFactor")]
-		float HyphenationFactor { get; set; } /* float, not CGFloat */
-
-		[Export ("lineFragmentPadding")]
-		nfloat LineFragmentPadding { get; set; }
-
-		[Export ("bidiProcessingEnabled")]
-		bool BidiProcessingEnabled { get; set; }
-
-		[Export ("attributedString")]
-		NSAttributedString AttributedString { get; set; }
-
-
-		///
-		/// NSLayoutPhaseInterface
-		///
-
-		[Export ("willSetLineFragmentRect:forGlyphRange:usedRect:baselineOffset:")]
-		void WillSetLineFragment (ref CGRect lineRect, NSRange glyphRange, ref CGRect usedRect, ref nfloat baselineOffset);
-
-		[Export ("shouldBreakLineByWordBeforeCharacterAtIndex:")]
-		bool ShouldBreakLineByWordBeforeCharacter (nuint charIndex);
-
-		[Export ("shouldBreakLineByHyphenatingBeforeCharacterAtIndex:")]
-		bool ShouldBreakLineByHyphenatingBeforeCharacter (nuint charIndex);
-
-		[Export ("hyphenationFactorForGlyphAtIndex:")]
-		float /* float, not CGFloat */ HyphenationFactorForGlyph (nuint glyphIndex);
-
-		[Export ("hyphenCharacterForGlyphAtIndex:")]
-		uint /* UTF32Char */ HyphenCharacterForGlyph (nuint glyphIndex);
-
-		[Export ("boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex:")]
-		CGRect GetBoundingBoxForControlGlyph (nuint glyphIndex, NSTextContainer textContainer, CGRect proposedLineFragment, CGPoint glyphPosition, nuint charIndex);
-
-		//
-		// NSGlyphStorageInterface
-		//
-		[Export ("characterRangeForGlyphRange:actualGlyphRange:")]
-		NSRange GetCharacterRangeForGlyphRange (NSRange glyphRange, out NSRange actualGlyphRange);
-
-		[Export ("glyphRangeForCharacterRange:actualCharacterRange:")]
-		NSRange GlyphRangeForCharacterRange (NSRange charRange, out NSRange actualCharRange);
-
-		// TODO: could use a higher level API
-		[Deprecated (PlatformName.MacOSX, 10, 13)]
-		[Export ("getGlyphsInRange:glyphs:characterIndexes:glyphInscriptions:elasticBits:bidiLevels:")]
-		nuint GetGlyphsInRange (NSRange glyphsRange, IntPtr glyphBuffer, IntPtr charIndexBuffer, IntPtr inscribeBuffer, IntPtr elasticBuffer, IntPtr bidiLevelBuffer);
-
-		[Export ("getLineFragmentRect:usedRect:remainingRect:forStartingGlyphAtIndex:proposedRect:lineSpacing:paragraphSpacingBefore:paragraphSpacingAfter:")]
-		void GetLineFragment (out CGRect lineFragment, out CGRect lineFragmentUsed, out CGRect remaining, nuint startingGlyphIndex, CGRect proposedRect, nfloat lineSpacing, nfloat paragraphSpacingBefore, nfloat paragraphSpacingAfter);
-
-		[Export ("setLineFragmentRect:forGlyphRange:usedRect:baselineOffset:")]
-		void SetLineFragment (CGRect fragmentRect, NSRange glyphRange, CGRect usedRect, nfloat baselineOffset);
-
-		[Export ("substituteGlyphsInRange:withGlyphs:")]
-		[Deprecated (PlatformName.MacOSX, 10, 13)]
-		void SubstituteGlyphs (NSRange glyphRange, IntPtr glyphs);
-
-		[Export ("insertGlyph:atGlyphIndex:characterIndex:")]
-		[Deprecated (PlatformName.MacOSX, 10, 13)]
-		void InsertGlyph (uint glyph, nuint glyphIndex, nuint characterIndex); // glyph is NSGlyph - typedef unsigned int NSGlyph;
-
-		[Export ("deleteGlyphsInRange:")]
-		[Deprecated (PlatformName.MacOSX, 10, 13)]
-		void DeleteGlyphs (NSRange glyphRange);
-
-		[Export ("setNotShownAttribute:forGlyphRange:")]
-		void SetNotShownAttribute (bool flag, NSRange glyphRange);
-
-		[Export ("setDrawsOutsideLineFragment:forGlyphRange:")]
-		void SetDrawsOutsideLineFragment (bool flag, NSRange glyphRange);
-
-		// TODO: high level C# binding
-		[Export ("setLocation:withAdvancements:forStartOfGlyphRange:")]
-		void SetLocation (CGPoint location, IntPtr advancements, NSRange glyphRange);
-
-		[Export ("setAttachmentSize:forGlyphRange:")]
-		void SetAttachmentSize (CGSize attachmentSize, NSRange glyphRange);
-
-		// TODO: high level C# binding
-		[Export ("setBidiLevels:forGlyphRange:")]
-		void SetBidiLevels (IntPtr levels, NSRange glyphRange);
-	}
+	
 
 	partial interface NSCollectionViewDelegate {
 		[Export ("collectionView:pasteboardWriterForItemAtIndex:")]
@@ -21060,65 +19551,7 @@ namespace AppKit {
 		NSString TextCheckingGenerateInlinePredictionsKey { get; }
 	}
 
-	partial interface NSTextViewDidChangeSelectionEventArgs {
-		// FIXME: verify property type "NSValue object containing an NSRange structure"
-		[Export ("NSOldSelectedCharacterRange")]
-		NSValue OldSelectedCharacterRange { get; }
-	}
 
-	partial interface NSTextViewWillChangeNotifyingTextViewEventArgs {
-		[Export ("NSOldNotifyingTextView")]
-		NSTextView OldView { get; }
-
-		[Export ("NSNewNotifyingTextView")]
-		NSTextView NewView { get; }
-	}
-
-	partial interface NSTextView : NSTextLayoutOrientationProvider {
-		[Export ("setLayoutOrientation:")]
-		void SetLayoutOrientation (NSTextLayoutOrientation theOrientation);
-
-		[Export ("changeLayoutOrientation:")]
-		void ChangeLayoutOrientation (NSObject sender);
-
-		[Export ("usesInspectorBar")]
-		bool UsesInspectorBar { get; set; }
-
-		[Export ("usesFindBar")]
-		bool UsesFindBar { get; set; }
-
-		[Export ("incrementalSearchingEnabled")]
-		bool IsIncrementalSearchingEnabled { [Bind ("isIncrementalSearchingEnabled")] get; set; }
-
-		[Export ("quickLookPreviewableItemsInRanges:")]
-		NSArray QuickLookPreviewableItemsInRanges (NSArray ranges);
-
-		[Export ("updateQuickLookPreviewPanel")]
-		void UpdateQuickLookPreviewPanel ();
-
-		[Notification (typeof (NSTextViewWillChangeNotifyingTextViewEventArgs))]
-		[Field ("NSTextViewWillChangeNotifyingTextViewNotification")]
-		NSString WillChangeNotifyingTextViewNotification { get; }
-
-		[Notification (typeof (NSTextViewDidChangeSelectionEventArgs))]
-		[Field ("NSTextViewDidChangeSelectionNotification")]
-		NSString DidChangeSelectionNotification { get; }
-
-		[Notification, Field ("NSTextViewDidChangeTypingAttributesNotification")]
-		NSString DidChangeTypingAttributesNotification { get; }
-
-		[MacCatalyst (13, 1)]
-		[Notification, Field ("NSTextViewWillSwitchToNSLayoutManagerNotification")]
-		NSString WillSwitchToNSLayoutManagerNotification { get; }
-
-		[MacCatalyst (13, 1)]
-		[Notification, Field ("NSTextViewDidSwitchToNSLayoutManagerNotification")]
-		NSString DidSwitchToNSLayoutManagerNotification { get; }
-
-		[MacCatalyst (13, 1)]
-		[Export ("usesAdaptiveColorMappingForDarkAppearance")]
-		bool UsesAdaptiveColorMappingForDarkAppearance { get; set; }
-	}
 
 
 
@@ -21371,13 +19804,7 @@ namespace AppKit {
 		NSString SharingServiceNamePostVideoOnTudou { get; }
 	}
 
-	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSTextView))]
-	partial interface NSTextView_SharingService {
 
-		[Export ("orderFrontSharingServicePicker:")]
-		void OrderFrontSharingServicePicker (NSObject sender);
-	}
 
 	/*partial interface NSTextViewDelegate {
 
@@ -21552,26 +19979,7 @@ namespace AppKit {
 		nint Movement { get; }
 	}
 
-	partial interface NSText {
-		[Notification, Field ("NSTextDidBeginEditingNotification")]
-		NSString DidBeginEditingNotification { get; }
 
-		[Notification (typeof (NSTextDidEndEditingEventArgs))]
-		[Field ("NSTextDidEndEditingNotification")]
-		NSString DidEndEditingNotification { get; }
-
-		[Notification, Field ("NSTextDidChangeNotification")]
-		NSString DidChangeNotification { get; }
-
-		[MacCatalyst (13, 1)]
-		[Field ("NSTextMovementUserInfoKey")]
-		NSString MovementUserInfoKey { get; }
-	}
-
-	partial interface NSTextInputContext {
-		[Notification, Field ("NSTextInputContextKeyboardSelectionDidChangeNotification")]
-		NSString KeyboardSelectionDidChangeNotification { get; }
-	}
 
 	partial interface NSToolbarItemEventArgs {
 		[Export ("item")]
@@ -23890,6 +22298,7 @@ namespace AppKit {
 
 	delegate NSAttributedString AttributedStringForCandidateHandler (NSObject candidate, nint index);
 
+	/*
 	[NoMacCatalyst]
 	[BaseType (typeof (NSTouchBarItem))]
 	[DisableDefaultCtor]
@@ -23932,6 +22341,7 @@ namespace AppKit {
 		[Export ("customizationLabel")]
 		string CustomizationLabel { get; set; }
 	}
+	*/
 
 	[NoMacCatalyst]
 	[Protocol, Model]
@@ -25360,177 +23770,7 @@ namespace AppKit {
 		void SetContentType (NSString contentType);
 	}
 
-	[NoMacCatalyst]
-	enum NSTextContentType {
-		[Field ("NSTextContentTypeUsername")]
-		Username,
-
-		[Field ("NSTextContentTypePassword")]
-		Password,
-
-		[Field ("NSTextContentTypeOneTimeCode")]
-		OneTimeCode,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeAddressCity")]
-		AddressCity,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeAddressCityAndState")]
-		AddressCityAndState,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeAddressState")]
-		AddressState,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeBirthdate")]
-		Birthdate,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeBirthdateDay")]
-		BirthdateDay,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeBirthdateMonth")]
-		BirthdateMonth,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeBirthdateYear")]
-		BirthdateYear,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCountryName")]
-		CountryName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardExpiration")]
-		CreditCardExpiration,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardExpirationMonth")]
-		CreditCardExpirationMonth,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardExpirationYear")]
-		CreditCardExpirationYear,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardFamilyName")]
-		CreditCardFamilyName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardGivenName")]
-		CreditCardGivenName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardMiddleName")]
-		CreditCardMiddleName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardName")]
-		CreditCardName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardNumber")]
-		CreditCardNumber,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardSecurityCode")]
-		CreditCardSecurityCode,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeCreditCardType")]
-		CreditCardType,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeDateTime")]
-		DateTime,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeEmailAddress")]
-		EmailAddress,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeFamilyName")]
-		FamilyName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeFlightNumber")]
-		FlightNumber,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeFullStreetAddress")]
-		FullStreetAddress,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeGivenName")]
-		GivenName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeJobTitle")]
-		JobTitle,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeLocation")]
-		Location,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeMiddleName")]
-		MiddleName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeName")]
-		Name,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeNamePrefix")]
-		NamePrefix,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeNameSuffix")]
-		NameSuffix,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeNewPassword")]
-		NewPassword,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeNickname")]
-		Nickname,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeOrganizationName")]
-		OrganizationName,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypePostalCode")]
-		PostalCode,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeShipmentTrackingNumber")]
-		ShipmentTrackingNumber,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeStreetAddressLine1")]
-		StreetAddressLine1,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeStreetAddressLine2")]
-		AddressLine2,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeSublocality")]
-		Sublocality,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeTelephoneNumber")]
-		TelephoneNumber,
-
-		[Mac (14, 0)]
-		[Field ("NSTextContentTypeURL")]
-		Url,
-	}
+	
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
@@ -25666,38 +23906,7 @@ namespace AppKit {
 		NSComboButtonStyle Style { get; set; }
 	}
 
-	interface INSPreviewRepresentableActivityItem { }
-
-	[NoMacCatalyst, Mac (13, 0)]
-	[Protocol]
-	interface NSPreviewRepresentableActivityItem {
-		[Abstract]
-		[Export ("item", ArgumentSemantic.Strong)]
-		NSObject Item { get; }
-
-		[NullAllowed, Export ("title")]
-		string Title { get; }
-
-		[NullAllowed, Export ("imageProvider", ArgumentSemantic.Strong)]
-		NSItemProvider ImageProvider { get; }
-
-		[NullAllowed, Export ("iconProvider", ArgumentSemantic.Strong)]
-		NSItemProvider IconProvider { get; }
-	}
-
-	[NoMacCatalyst, Mac (13, 0)]
-	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface NSPreviewRepresentingActivityItem : NSPreviewRepresentableActivityItem {
-		[NoiOS]
-		[Export ("initWithItem:title:image:icon:")]
-		NativeHandle Constructor (NSObject item, [NullAllowed] string title, [NullAllowed] NSImage image, [NullAllowed] NSImage icon);
-
-		[NoiOS]
-		[Export ("initWithItem:title:imageProvider:iconProvider:")]
-		[DesignatedInitializer]
-		NativeHandle Constructor (NSObject item, [NullAllowed] string title, [NullAllowed] NSItemProvider imageProvider, [NullAllowed] NSItemProvider iconProvider);
-	}
+	
 
 	[NoMacCatalyst, Mac (14, 0)]
 	[BaseType (typeof (NSObject))]

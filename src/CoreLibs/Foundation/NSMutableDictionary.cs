@@ -37,6 +37,76 @@ using NativeHandle = System.IntPtr;
 
 namespace Foundation {
 
+	[BaseType (typeof (NSDictionary))]
+	//[DesignatedDefaultCtor]
+	public partial class NSMutableDictionary : NSDictionary {
+		[Export ("dictionaryWithContentsOfFile:")]
+		[Static]
+		public static extern NSMutableDictionary FromFile (string path);
+
+		[Export ("dictionaryWithContentsOfURL:")]
+		[Static]
+		public static  extern NSMutableDictionary FromUrl (NSUrl url);
+
+		[Export ("dictionaryWithObject:forKey:")]
+		[Static]
+		public static extern NSMutableDictionary FromObjectAndKey (NSObject obj, NSObject key);
+
+		[Export ("dictionaryWithDictionary:")]
+		[Static, New]
+		public static new extern NSMutableDictionary FromDictionary (NSDictionary source);
+
+		[Export ("dictionaryWithObjects:forKeys:count:")]
+		[Static, Internal]
+		internal static extern  NSMutableDictionary FromObjectsAndKeysInternalCount (NSArray objects, NSArray keys, nint count);
+
+		[Export ("dictionaryWithObjects:forKeys:")]
+		[Static, Internal, New]
+		public static new extern NSMutableDictionary FromObjectsAndKeysInternal (NSArray objects, NSArray Keys);
+
+		[Export ("initWithDictionary:")]
+		public extern NativeHandle Constructor (NSDictionary other);
+
+		[Export ("initWithDictionary:copyItems:")]
+		public extern NativeHandle Constructor (NSDictionary other, bool copyItems);
+
+		[Export ("initWithContentsOfFile:")]
+		public extern NativeHandle Constructor (string fileName);
+
+		[Export ("initWithContentsOfURL:")]
+		public extern NativeHandle Constructor (NSUrl url);
+
+		[Internal]
+		[Export ("initWithObjects:forKeys:")]
+		internal extern NativeHandle Constructor (NSArray objects, NSArray keys);
+
+		[Export ("removeAllObjects"), Internal]
+		public extern void RemoveAllObjects ();
+
+		[Sealed]
+		[Internal]
+		[Export ("removeObjectForKey:")]
+		extern internal void _RemoveObjectForKey (IntPtr key);
+
+		[Export ("removeObjectForKey:"), Internal]
+		public extern void RemoveObjectForKey (NSObject key);
+
+		[Sealed]
+		[Internal]
+		[Export ("setObject:forKey:")] 
+		internal extern void _SetObject (IntPtr obj, IntPtr key);
+
+		[Export ("setObject:forKey:"), Internal]
+		public extern void SetObject (NSObject obj, NSObject key);
+
+		[Static]
+		[Export ("dictionaryWithSharedKeySet:")]
+		public extern static NSDictionary FromSharedKeySet (NSObject sharedKeyToken);
+
+		[Export ("addEntriesFromDictionary:")]
+		public extern void AddEntries (NSDictionary other);
+	}
+	
 	public partial class NSMutableDictionary : NSDictionary, IDictionary, IDictionary<NSObject, NSObject> {
 
 		static readonly IntPtr class_ptr = Class.GetHandle (typeof(NSMutableDictionary));

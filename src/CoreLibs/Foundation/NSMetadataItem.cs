@@ -149,6 +149,8 @@ namespace Foundation {
 		[SupportedOSPlatform ("maccatalyst")]
 		[SupportedOSPlatform ("tvos")]
 #endif
+
+/*
 #if NET
 		public NSItemDownloadingStatus UbiquitousItemDownloadingStatus {
 #else
@@ -158,6 +160,7 @@ namespace Foundation {
 				return NSItemDownloadingStatusExtensions.GetValue (Runtime.GetNSObject<NSString> (GetHandle (NSMetadataQuery.UbiquitousItemDownloadingStatusKey)));
 			}
 		}
+		*/
 
 #if NET
 		public bool? UbiquitousItemIsDownloading {

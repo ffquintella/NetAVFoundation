@@ -41,11 +41,24 @@ using ObjCRuntime;
 namespace Foundation {
 
 	public partial class NSSet : IEnumerable<NSObject> {
+
+		public NSSet(NSArray array)
+		{
+			
+		}
+
+		public NSSet()
+		{
+			
+		}
+		
+		public NSSet(NativeHandle handle) : base(handle) {}
+		
 		public NSSet (params NSObject [] objs) : this (NSArray.FromNSObjects (objs))
 		{
 		}
 
-		public NSSet (params object [] objs) : this (NSArray.FromObjects (objs))
+		public NSSet (params INativeObject [] objs) : this (NSArray.FromObjects (objs))
 		{
 		}
 
@@ -132,4 +145,78 @@ namespace Foundation {
 			return Contains (NSObject.FromObject (obj));
 		}
 	}
+	
+	[BaseType (typeof (NSObject))]
+	public partial class NSSet : NSMutableCopying {
+		[Export ("set")]
+		[Static]
+		public static extern NSSet CreateSet ();
+
+		[Export ("initWithSet:")]
+		public extern NativeHandle Constructor (NSSet other);
+
+		[Export ("initWithArray:")]
+		public extern NativeHandle Constructor (NSArray other);
+
+		[Export ("count")]
+		public extern nuint Count { get; }
+
+		[Internal]
+		[Sealed]
+		[Export ("member:")]
+		public extern IntPtr _LookupMember (IntPtr probe);
+
+		[Export ("member:")]
+		public extern NSObject LookupMember (NSObject probe);
+
+		[Internal]
+		[Sealed]
+		[Export ("anyObject")]
+		internal extern IntPtr _AnyObject { get; }
+
+		[Export ("anyObject")]
+		public extern NSObject AnyObject { get; }
+
+		[Internal]
+		[Sealed]
+		[Export ("containsObject:")]
+		internal extern bool _Contains (NativeHandle id);
+
+		[Export ("containsObject:")]
+		public extern bool Contains (NSObject id);
+
+		[Export ("allObjects")]
+		[Internal]
+		internal extern IntPtr _AllObjects ();
+
+		[Export ("isEqualToSet:")]
+		public extern bool IsEqualToSet (NSSet other);
+
+		[Export ("objectEnumerator"), Internal]
+		public extern NSEnumerator _GetEnumerator ();
+
+		[Export ("isSubsetOfSet:")]
+		public extern bool IsSubsetOf (NSSet other);
+
+		[Export ("enumerateObjectsUsingBlock:")]
+		public extern void Enumerate (NSSetEnumerator enumerator);
+
+		[Internal]
+		[Sealed]
+		[Export ("setByAddingObjectsFromSet:")]
+		internal extern NativeHandle _SetByAddingObjectsFromSet (NativeHandle other);
+
+		[Export ("setByAddingObjectsFromSet:"), Internal]
+		public extern NSSet SetByAddingObjectsFromSet (NSSet other);
+
+		[Export ("intersectsSet:")]
+		public extern bool IntersectsSet (NSSet other);
+
+		[Internal]
+		[Static]
+		[Export ("setWithArray:")]
+		public extern static NativeHandle _SetWithArray (NativeHandle array);
+	}
+
+	public partial class NSSet<TKey> : NSSet { }
 }

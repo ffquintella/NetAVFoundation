@@ -43,6 +43,11 @@ namespace Foundation {
 	public partial class NSOrderedSet : IEnumerable<NSObject> {
 		internal const string selSetWithArray = "orderedSetWithArray:";
 
+		
+		public NSOrderedSet () 
+		{
+		}
+
 		public NSOrderedSet (params NSObject [] objs) : this (NSArray.FromNSObjects (objs))
 		{
 		}
@@ -351,7 +356,9 @@ namespace Foundation {
 	
 	public partial class NSMutableOrderedSet: NSOrderedSet {
 		
-		
+		public NSMutableOrderedSet () : base()
+		{
+		}
 		public NSMutableOrderedSet (params NSObject [] objs) : this (NSArray.FromNSObjects (objs))
 		{
 		}

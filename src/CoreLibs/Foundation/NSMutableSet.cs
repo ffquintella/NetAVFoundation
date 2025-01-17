@@ -53,6 +53,19 @@ namespace Foundation {
 			: this (NSArray.FromNSObjects (objs))
 		{
 		}
+		
+		public NSMutableSet (NativeHandle handle ) : base (handle)
+		{
+		}
+		
+		public NSMutableSet (NSArray array) : base (array)
+		{
+		}
+
+		public NSMutableSet()
+		{
+			
+		}
 
 		public static NSMutableSet operator + (NSMutableSet first, NSMutableSet second)
 		{
@@ -77,5 +90,51 @@ namespace Foundation {
 			copy.MinusSet (second);
 			return copy;
 		}
+	}
+	
+	[BaseType (typeof (NSSet))]
+	public partial class NSMutableSet: NSSet {
+		[Export ("initWithArray:")]
+		public extern NativeHandle Constructor (NSArray other);
+
+		[Export ("initWithSet:")]
+		public extern NativeHandle Constructor (NSSet other);
+
+		[DesignatedInitializer]
+		[Export ("initWithCapacity:")]
+		public extern NativeHandle Constructor (nint capacity);
+
+		[Internal]
+		[Sealed]
+		[Export ("addObject:")]
+		public extern void _Add (IntPtr obj);
+
+		[Export ("addObject:")]
+		public extern void Add (NSObject nso);
+
+		[Internal]
+		[Sealed]
+		[Export ("removeObject:")]
+		public extern void _Remove (IntPtr nso);
+
+		[Export ("removeObject:")]
+		public extern void Remove (NSObject nso);
+
+		[Export ("removeAllObjects")]
+		public extern void RemoveAll ();
+
+		[Internal]
+		[Sealed]
+		[Export ("addObjectsFromArray:")]
+		public extern void _AddObjects (IntPtr objects);
+
+		[Export ("addObjectsFromArray:")]
+		public extern void AddObjects (NSObject [] objects);
+
+		[Internal, Export ("minusSet:")]
+		public extern void MinusSet (NSSet other);
+
+		[Internal, Export ("unionSet:")]
+		public extern void UnionSet (NSSet other);
 	}
 }

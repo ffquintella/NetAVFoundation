@@ -166,6 +166,13 @@ namespace Foundation {
 
 			Handle = CreateWithCharacters (Handle, str, 0, str.Length);
 		}
+		
+		public NSString ()
+		{
+			var str = "";
+
+			Handle = CreateWithCharacters (Handle, str, 0, str.Length);
+		}
 
 		public NSString (string value, int start, int length)
 		{
@@ -332,4 +339,272 @@ namespace Foundation {
 		}
 #endif // !COREBUILD
 	}
+	
+	[BaseType (typeof (NSObject)), Bind ("NSString")]
+	//[DesignatedDefaultCtor]
+	public partial class NSString : NSValue //, NSMutableCopying, CKRecordValue
+#if MONOMAC
+		//, NSPasteboardReading, NSPasteboardWriting // Documented that it implements NSPasteboard protocols even if header doesn't show it
+#endif
+		//, NSItemProviderReading, NSItemProviderWriting
+		{
+		[Export ("initWithData:encoding:")]
+		public extern NativeHandle Constructor (NSData data, NSStringEncoding encoding);
+
+		[NoiOS]
+		[NoMacCatalyst]
+		[NoWatch]
+		[NoTV]
+		[Bind ("sizeWithAttributes:")]
+		public extern CGSize StringSize ([NullAllowed] NSDictionary attributedStringAttributes);
+
+		[NoiOS]
+		[NoMacCatalyst]
+		[NoWatch]
+		[NoTV]
+		[Bind ("boundingRectWithSize:options:attributes:")]
+		public extern CGRect BoundingRectWithSize (CGSize size, NSStringDrawingOptions options, NSDictionary attributes);
+
+		[NoiOS]
+		[NoMacCatalyst]
+		[NoWatch]
+		[NoTV]
+		[Bind ("drawAtPoint:withAttributes:")]
+		public extern void DrawString (CGPoint point, NSDictionary attributes);
+
+		[NoiOS]
+		[NoMacCatalyst]
+		[NoWatch]
+		[NoTV]
+		[Bind ("drawInRect:withAttributes:")]
+		public extern void DrawString (CGRect rect, NSDictionary attributes);
+
+		[NoiOS]
+		[NoMacCatalyst]
+		[NoWatch]
+		[NoTV]
+		[Bind ("drawWithRect:options:attributes:")]
+		public extern void DrawString (CGRect rect, NSStringDrawingOptions options, NSDictionary attributes);
+
+		[Internal]
+		[Export ("characterAtIndex:")]
+		public extern char _characterAtIndex (nint index);
+
+		[Export ("length")]
+		public extern nint Length { get; }
+
+		[Sealed]
+		[Export ("isEqualToString:")]
+		extern bool IsEqualTo (IntPtr handle);
+
+		[Export ("compare:")]
+		public extern NSComparisonResult Compare (NSString aString);
+
+		[Export ("compare:options:")]
+		public extern NSComparisonResult Compare (NSString aString, NSStringCompareOptions mask);
+
+		[Export ("compare:options:range:")]
+		public extern NSComparisonResult Compare (NSString aString, NSStringCompareOptions mask, NSRange range);
+
+		[Export ("compare:options:range:locale:")]
+		public extern NSComparisonResult Compare (NSString aString, NSStringCompareOptions mask, NSRange range, [NullAllowed] NSLocale locale);
+
+		[Export ("stringByReplacingCharactersInRange:withString:")]
+		public extern NSString Replace (NSRange range, NSString replacement);
+
+		[Export ("commonPrefixWithString:options:")]
+		public extern NSString CommonPrefix (NSString aString, NSStringCompareOptions options);
+
+		// start methods from NSStringPathExtensions category
+
+		[Static]
+		[Export ("pathWithComponents:")]
+		public static extern string [] PathWithComponents (string [] components);
+
+		[Export ("pathComponents")]
+		public extern string [] PathComponents { get; }
+
+		[Export ("isAbsolutePath")]
+		public extern bool IsAbsolutePath { get; }
+
+		[Export ("lastPathComponent")]
+		public extern NSString LastPathComponent { get; }
+
+		[Export ("stringByDeletingLastPathComponent")]
+		public extern NSString DeleteLastPathComponent ();
+
+		[Export ("stringByAppendingPathComponent:")]
+		public extern NSString AppendPathComponent (NSString str);
+
+		[Export ("pathExtension")]
+		public extern NSString PathExtension { get; }
+
+		[Export ("stringByDeletingPathExtension")]
+		public extern NSString DeletePathExtension ();
+
+		[Export ("stringByAppendingPathExtension:")]
+		public extern NSString AppendPathExtension (NSString str);
+
+		[Export ("stringByAbbreviatingWithTildeInPath")]
+		public extern NSString AbbreviateTildeInPath ();
+
+		[Export ("stringByExpandingTildeInPath")]
+		public extern NSString ExpandTildeInPath ();
+
+		[Export ("stringByStandardizingPath")]
+		public extern NSString StandarizePath ();
+
+		[Export ("stringByResolvingSymlinksInPath")]
+		public extern NSString ResolveSymlinksInPath ();
+
+		[Export ("stringsByAppendingPaths:")]
+		public extern string [] AppendPaths (string [] paths);
+
+		// end methods from NSStringPathExtensions category
+
+		[Export ("capitalizedStringWithLocale:")]
+		public extern string Capitalize ([NullAllowed] NSLocale locale);
+
+		[Export ("lowercaseStringWithLocale:")]
+		public extern string ToLower (NSLocale locale);
+
+		[Export ("uppercaseStringWithLocale:")]
+		public extern string ToUpper (NSLocale locale);
+
+		[MacCatalyst (13, 1)]
+		[Export ("containsString:")]
+		public extern bool Contains (NSString str);
+
+		[MacCatalyst (13, 1)]
+		[Export ("localizedCaseInsensitiveContainsString:")]
+		public extern bool LocalizedCaseInsensitiveContains (NSString str);
+
+		[MacCatalyst (13, 1)]
+		[EditorBrowsable (EditorBrowsableState.Advanced)]
+		[Static, Export ("stringEncodingForData:encodingOptions:convertedString:usedLossyConversion:")]
+		public extern nuint DetectStringEncoding (NSData rawData, NSDictionary options, out string convertedString, out bool usedLossyConversion);
+
+		[MacCatalyst (13, 1)]
+		[Static, Wrap ("DetectStringEncoding(rawData,options.GetDictionary ()!, out convertedString, out usedLossyConversion)")]
+		public extern nuint DetectStringEncoding (NSData rawData, EncodingDetectionOptions options, out string convertedString, out bool usedLossyConversion);
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionSuggestedEncodingsKey")]
+		public extern NSString EncodingDetectionSuggestedEncodingsKey { get; }
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionDisallowedEncodingsKey")]
+		public extern NSString EncodingDetectionDisallowedEncodingsKey { get; }
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionUseOnlySuggestedEncodingsKey")]
+		public extern NSString EncodingDetectionUseOnlySuggestedEncodingsKey { get; }
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionAllowLossyKey")]
+		public extern NSString EncodingDetectionAllowLossyKey { get; }
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionFromWindowsKey")]
+		public extern NSString EncodingDetectionFromWindowsKey { get; }
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionLossySubstitutionKey")]
+		public extern NSString EncodingDetectionLossySubstitutionKey { get; }
+
+		[MacCatalyst (13, 1)]
+		[Internal, Field ("NSStringEncodingDetectionLikelyLanguageKey")]
+		public extern NSString EncodingDetectionLikelyLanguageKey { get; }
+
+		[Export ("lineRangeForRange:")]
+		public extern NSRange LineRangeForRange (NSRange range);
+
+		[Export ("getLineStart:end:contentsEnd:forRange:")]
+		public extern void GetLineStart (out nuint startPtr, out nuint lineEndPtr, out nuint contentsEndPtr, NSRange range);
+
+		[MacCatalyst (13, 1)]
+		[Export ("variantFittingPresentationWidth:")]
+		public extern NSString GetVariantFittingPresentationWidth (nint width);
+
+		[MacCatalyst (13, 1)]
+		[Export ("localizedStandardContainsString:")]
+		public extern bool LocalizedStandardContainsString (NSString str);
+
+		[MacCatalyst (13, 1)]
+		[Export ("localizedStandardRangeOfString:")]
+		public extern NSRange LocalizedStandardRangeOfString (NSString str);
+
+		[MacCatalyst (13, 1)]
+		[Export ("localizedUppercaseString")]
+		public extern NSString LocalizedUppercaseString { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("localizedLowercaseString")]
+		public extern NSString LocalizedLowercaseString { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("localizedCapitalizedString")]
+		public extern NSString LocalizedCapitalizedString { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("stringByApplyingTransform:reverse:")]
+		[return: NullAllowed]
+		public extern NSString TransliterateString (NSString transform, bool reverse);
+
+		[Export ("hasPrefix:")]
+		public extern bool HasPrefix (NSString prefix);
+
+		[Export ("hasSuffix:")]
+		public extern bool HasSuffix (NSString suffix);
+
+		// UNUserNotificationCenterSupport category
+		[NoTV]
+		[MacCatalyst (13, 1)]
+		[Static]
+		[Export ("localizedUserNotificationStringForKey:arguments:")]
+		public static extern NSString GetLocalizedUserNotificationString (NSString key, [Params][NullAllowed] NSObject [] arguments);
+
+		[Export ("getParagraphStart:end:contentsEnd:forRange:")]
+		public extern void GetParagraphPositions (out nuint paragraphStartPosition, out nuint paragraphEndPosition, out nuint contentsEndPosition, NSRange range);
+
+		[Export ("paragraphRangeForRange:")]
+		public extern NSRange GetParagraphRange (NSRange range);
+
+		[Export ("componentsSeparatedByString:")]
+		public extern NSString [] SeparateComponents (NSString separator);
+
+		[Export ("componentsSeparatedByCharactersInSet:")]
+		public extern NSString [] SeparateComponents (NSCharacterSet separator);
+
+		// From the NSItemProviderReading protocol
+
+		[MacCatalyst (13, 1)]
+		[Static]
+		[Export ("readableTypeIdentifiersForItemProvider", ArgumentSemantic.Copy)]
+		public static extern new string [] ReadableTypeIdentifiers { get; }
+
+		[MacCatalyst (13, 1)]
+		[Static]
+		[Export ("objectWithItemProviderData:typeIdentifier:error:")]
+		[return: NullAllowed]
+		public static extern new NSString GetObject (NSData data, string typeIdentifier, [NullAllowed] out NSError outError);
+
+		// From the NSItemProviderWriting protocol
+		[MacCatalyst (13, 1)]
+		[Static]
+		[Export ("writableTypeIdentifiersForItemProvider", ArgumentSemantic.Copy)]
+		public static extern new string [] WritableTypeIdentifiers { get; }
+	}
+	
+	[StrongDictionary ("NSString")]
+	public partial interface EncodingDetectionOptions {
+		NSStringEncoding [] EncodingDetectionSuggestedEncodings { get; set; }
+		NSStringEncoding [] EncodingDetectionDisallowedEncodings { get; set; }
+		bool EncodingDetectionUseOnlySuggestedEncodings { get; set; }
+		bool EncodingDetectionAllowLossy { get; set; }
+		bool EncodingDetectionFromWindows { get; set; }
+		NSString EncodingDetectionLossySubstitution { get; set; }
+		NSString EncodingDetectionLikelyLanguage { get; set; }
+	}
+	
 }

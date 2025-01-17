@@ -142,12 +142,19 @@ namespace CoreServices {
 			}
 		}
 
-		public void SetProxy (CFProxySettings proxySettings)
+		public void SetProxy(NSObject proxySettings)
+		{
+			throw new NotImplementedException();
+		}
+
+		/*
+		 public void SetProxy (CFProxySettings proxySettings)
 		{
 			if (proxySettings is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (proxySettings));
 
 			SetProperty (_Proxy, proxySettings.Dictionary);
 		}
+		*/
 	}
 }

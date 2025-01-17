@@ -13734,56 +13734,7 @@ namespace AppKit {
 		CGRect BarRectFlipped (bool flipped);
 	}
 
-	[MacCatalyst (13, 1)]
-	[BaseType (typeof (NSTouchBarItem))]
-	[DisableDefaultCtor]
-	interface NSSliderTouchBarItem {
-		[Export ("initWithIdentifier:")]
-		[DesignatedInitializer]
-		NativeHandle Constructor (string identifier);
-
-		[NoMacCatalyst]
-		[Export ("slider", ArgumentSemantic.Strong)]
-		NSSlider Slider { get; set; }
-
-		[NullAllowed, Export ("label")]
-		string Label { get; set; }
-
-		[NullAllowed, Export ("minimumValueAccessory", ArgumentSemantic.Strong)]
-		NSSliderAccessory MinimumValueAccessory { get; set; }
-
-		[NullAllowed, Export ("maximumValueAccessory", ArgumentSemantic.Strong)]
-		NSSliderAccessory MaximumValueAccessory { get; set; }
-
-		[Export ("valueAccessoryWidth")]
-		nfloat ValueAccessoryWidth { get; set; }
-
-		[NullAllowed, Export ("target", ArgumentSemantic.Weak)]
-		NSObject Target { get; set; }
-
-		[NullAllowed, Export ("action", ArgumentSemantic.Assign)]
-		Selector Action { get; set; }
-
-		[NullAllowed]
-		[Export ("customizationLabel")]
-		string CustomizationLabel { get; set; }
-
-		[NoMacCatalyst]
-		[Export ("view")]
-		INSUserInterfaceCompression View { get; }
-
-		[MacCatalyst (13, 1)]
-		[Export ("doubleValue")]
-		double DoubleValue { get; set; }
-
-		[MacCatalyst (13, 1)]
-		[Export ("minimumSliderWidth")]
-		nfloat MinimumSliderWidth { get; set; }
-
-		[MacCatalyst (13, 1)]
-		[Export ("maximumSliderWidth")]
-		nfloat MaximumSliderWidth { get; set; }
-	}
+	
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
@@ -17718,28 +17669,7 @@ namespace AppKit {
 		bool GetSelected (nint index);
 	}
 
-	[NoMacCatalyst]
-	[DisableDefaultCtor]
-	[BaseType (typeof (NSObject))]
-	interface NSTouch : NSCopying {
-		[Export ("identity", ArgumentSemantic.Retain)]
-		NSObject Identity { get; }
 
-		[Export ("phase")]
-		NSTouchPhase Phase { get; }
-
-		[Export ("normalizedPosition")]
-		CGPoint NormalizedPosition { get; }
-
-		[Export ("isResting")]
-		bool IsResting { get; }
-
-		[Export ("device", ArgumentSemantic.Retain)]
-		NSObject Device { get; }
-
-		[Export ("deviceSize")]
-		CGSize DeviceSize { get; }
-	}
 
 	[NoMacCatalyst]
 	[Category]

@@ -316,17 +316,17 @@ namespace Foundation {
 		//[Static, Export ("valueWithMKCoordinate:")]
 		//public extern static NSValue FromMKCoordinate (CoreLocation.CLLocationCoordinate2D coordinate);
 
-		[MacCatalyst (13, 1)]
-		[Static, Export ("valueWithMKCoordinateSpan:")]
-		public extern static NSValue FromMKCoordinateSpan (MapKit.MKCoordinateSpan coordinateSpan);
+		//[MacCatalyst (13, 1)]
+		//[Static, Export ("valueWithMKCoordinateSpan:")]
+		//public extern static NSValue FromMKCoordinateSpan (MapKit.MKCoordinateSpan coordinateSpan);
 
 		//[MacCatalyst (13, 1)]
 		//[Export ("MKCoordinateValue")]
 		//public extern CoreLocation.CLLocationCoordinate2D CoordinateValue { get; }
 
-		[MacCatalyst (13, 1)]
-		[Export ("MKCoordinateSpanValue")]
-		public extern MapKit.MKCoordinateSpan CoordinateSpanValue { get; }
+		//[MacCatalyst (13, 1)]
+		//[Export ("MKCoordinateSpanValue")]
+		//public extern MapKit.MKCoordinateSpan CoordinateSpanValue { get; }
 
 		/* SEE IF WE NEED
 #if !WATCH

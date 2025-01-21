@@ -39,7 +39,12 @@ namespace Metal {
 		static IMTLDevice? system_default;
 
 		public static IMTLDevice? SystemDefault {
-			get {
+			get
+			{
+
+				throw new NotImplementedException();
+				
+				/*
 				// Metal could be unavailable on the hardware (and we don't want to return an invalid instance)
 				// also the instance could be disposed (by mistake) which would make the app unusable
 				if ((system_default is null) || (system_default.Handle == IntPtr.Zero)) {
@@ -52,6 +57,7 @@ namespace Metal {
 					}
 				}
 				return system_default;
+				*/
 			}
 		}
 
@@ -191,6 +197,8 @@ namespace Metal {
 	public static partial class MTLDevice_Extensions {
 		public static IMTLBuffer? CreateBuffer<T> (this IMTLDevice This, T [] data, MTLResourceOptions options) where T : struct
 		{
+			throw new NotImplementedException();
+			/*
 			if (data is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (data));
 
@@ -201,6 +209,7 @@ namespace Metal {
 			} finally {
 				handle.Free ();
 			}
+			*/
 		}
 
 #if !NET
@@ -221,6 +230,8 @@ namespace Metal {
 
 		public unsafe static void GetDefaultSamplePositions (this IMTLDevice This, MTLSamplePosition [] positions, nuint count)
 		{
+			throw new NotImplementedException();
+			/*
 			if (positions is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (positions));
 
@@ -232,6 +243,7 @@ namespace Metal {
 #else
 				GetDefaultSamplePositions (This, (IntPtr) handle, count);
 #endif
+			*/
 		}
 #if IOS
 

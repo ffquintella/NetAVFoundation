@@ -2,7 +2,7 @@ using System.Runtime.InteropServices;
 using CoreAnimation;
 using CoreGraphics;
 using Foundation;
-using MapKit;
+//using MapKit;
 using ObjCRuntime;
 
 namespace ObjCRuntime;
@@ -44,7 +44,10 @@ public static partial class Messaging {
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static void void_objc_msgSend_IntPtr_IntPtr_IntPtr_NSRange_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1, IntPtr p2, IntPtr p3, NSRange p4, IntPtr p5);
-
+		
+		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
+		public extern static void void_objc_msgSend_IntPtr_UIntPtr_bool (IntPtr receiver, IntPtr selector, IntPtr p1, UIntPtr p2, bool p3);
+		
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static void void_objc_msgSend_int (IntPtr receiver, IntPtr selector, int value);
 
@@ -83,6 +86,9 @@ public static partial class Messaging {
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static IntPtr IntPtr_objc_msgSend_ref_IntPtr (IntPtr receiver, IntPtr selector, ref IntPtr p1);
+		
+		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
+		public extern static IntPtr IntPtr_objc_msgSend_IntPtr_ref_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1, ref IntPtr p2);
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSendSuper")]
 		public extern static IntPtr IntPtr_objc_msgSendSuper_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1);
@@ -158,14 +164,16 @@ public static partial class Messaging {
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static CGRect CGRect_objc_msgSend_IntPtr (IntPtr receiver, IntPtr selector, IntPtr p1);
+		/*
+	#if !__TVOS__
 
-#if !__TVOS__
-		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
-		public extern static CGRect CGRect_objc_msgSend_MKCoordinateRegion_IntPtr (IntPtr receiver, IntPtr selector, MKCoordinateRegion p1, IntPtr p2);
+			[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
+			public extern static CGRect CGRect_objc_msgSend_MKCoordinateRegion_IntPtr (IntPtr receiver, IntPtr selector, MKCoordinateRegion p1, IntPtr p2);
 
-		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
-		public extern static CGRect CGRect_objc_msgSend_MKMapRect (IntPtr receiver, IntPtr selector, MKMapRect p1);
-#endif // !__TVOS__
+			[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
+			public extern static CGRect CGRect_objc_msgSend_MKMapRect (IntPtr receiver, IntPtr selector, MKMapRect p1);
+	#endif // !__TVOS__
+	*/
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend")]
 		public extern static CGRect CGRect_objc_msgSend_CGRect (IntPtr receiver, IntPtr selector, CGRect p1);
@@ -192,10 +200,12 @@ public static partial class Messaging {
 		//public extern static CATransform3D CATransform3D_objc_msgSend (IntPtr receiver, IntPtr selector);
 #endif // !__WATCHOS__
 
+	/*
 #if !__TVOS__
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
 		public extern static void CGRect_objc_msgSend_stret_MKMapRect (out CGRect buf, IntPtr receiver, IntPtr selector, MKMapRect p1);
 #endif // !__TVOS__
+*/
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
 		public extern static void CGRect_objc_msgSend_stret (out CGRect buf, IntPtr receiver, IntPtr selector);
@@ -217,10 +227,12 @@ public static partial class Messaging {
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
 		public extern static void CGRect_objc_msgSend_stret_IntPtr (out CGRect buf, IntPtr receiver, IntPtr selector, IntPtr p1);
 
+		/*
 #if !__TVOS__
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
 		public extern static void CGRect_objc_msgSend_stret_MKCoordinateRegion_IntPtr (out CGRect buf, IntPtr receiver, IntPtr selector, MKCoordinateRegion p1, IntPtr p2);
 #endif // !__TVOS__
+*/
 
 		[DllImport (LIBOBJC_DYLIB, EntryPoint = "objc_msgSend_stret")]
 		public extern static void CGRect_objc_msgSend_stret_CGRect (out CGRect buf, IntPtr receiver, IntPtr selector, CGRect p1);

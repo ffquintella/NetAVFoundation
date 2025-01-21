@@ -27,6 +27,10 @@ namespace Metal {
 #endif
 		public static void SetBuffers (this IMTLIntersectionFunctionTable table, IMTLBuffer [] buffers, nuint [] offsets, NSRange range)
 		{
+			throw new NotImplementedException();
+			
+			/*
+			
 			if (buffers is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (buffers));
 			if (offsets is null)
@@ -45,6 +49,7 @@ namespace Metal {
 				}
 			}
 			GC.KeepAlive (buffers);
+			*/
 		}
 	}
 }

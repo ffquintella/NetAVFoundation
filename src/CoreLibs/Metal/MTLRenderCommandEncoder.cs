@@ -25,8 +25,11 @@ namespace Metal {
 #endif
 		public unsafe static void SetViewports (this IMTLRenderCommandEncoder This, MTLViewport [] viewports)
 		{
+			throw new NotImplementedException();
+			/*
 			fixed (void* handle = viewports)
 				This.SetViewports ((IntPtr) handle, (nuint) (viewports?.Length ?? 0));
+				*/
 		}
 
 #if NET
@@ -39,8 +42,11 @@ namespace Metal {
 #endif
 		public unsafe static void SetScissorRects (this IMTLRenderCommandEncoder This, MTLScissorRect [] scissorRects)
 		{
+			throw new NotImplementedException();
+			/*
 			fixed (void* handle = scissorRects)
 				This.SetScissorRects ((IntPtr) handle, (nuint) (scissorRects?.Length ?? 0));
+				*/
 		}
 
 #if NET
@@ -53,8 +59,11 @@ namespace Metal {
 #endif
 		public unsafe static void SetTileBuffers (this IMTLRenderCommandEncoder This, IMTLBuffer [] buffers, nuint [] offsets, NSRange range)
 		{
+			throw new NotImplementedException();
+			/*
 			fixed (void* handle = offsets)
 				This.SetTileBuffers (buffers, (IntPtr) handle, range);
+				*/
 		}
 
 #if NET
@@ -67,11 +76,14 @@ namespace Metal {
 #endif
 		public unsafe static void SetTileSamplerStates (this IMTLRenderCommandEncoder This, IMTLSamplerState [] samplers, float [] lodMinClamps, float [] lodMaxClamps, NSRange range)
 		{
+			throw new NotImplementedException();
+			/*
 			fixed (void* minHandle = lodMinClamps) {
 				fixed (void* maxHandle = lodMaxClamps) {
 					This.SetTileSamplerStates (samplers, (IntPtr) minHandle, (IntPtr) maxHandle, range);
 				}
 			}
+			*/
 		}
 	}
 }

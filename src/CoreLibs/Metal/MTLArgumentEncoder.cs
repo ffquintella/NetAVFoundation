@@ -12,6 +12,9 @@ namespace Metal {
 #if NET
 		public static void SetBuffers (this IMTLArgumentEncoder encoder, IMTLBuffer[] buffers, nuint[] offsets, NSRange range)
 		{
+			throw new NotImplementedException();
+			
+			/*
 			if (buffers is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (buffers));
 			if (offsets is null)
@@ -30,6 +33,7 @@ namespace Metal {
 				}
 			}
 			GC.KeepAlive (buffers);
+			*/
 		}
 #else
 		public unsafe static void SetBuffers (this IMTLArgumentEncoder This, IMTLBuffer [] buffers, nint [] offsets, Foundation.NSRange range)

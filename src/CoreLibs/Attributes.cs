@@ -590,3 +590,7 @@ public class EventNameAttribute : Attribute {
 [AttributeUsage (AttributeTargets.Parameter, AllowMultiple = false)]
 public class ParamsAttribute : Attribute {
 }
+
+public class AutoreleaseAttribute : Attribute {
+	public AutoreleaseAttribute () { }
+}

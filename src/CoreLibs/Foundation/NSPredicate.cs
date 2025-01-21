@@ -1,5 +1,7 @@
 // Copyright 2014, Xamarin Inc. All rights reserved.
 
+using CoreLibs;
+
 #if !COREBUILD
 
 namespace Foundation {

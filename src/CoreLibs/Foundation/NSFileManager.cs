@@ -32,6 +32,7 @@ using ObjCRuntime;
 using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using CoreLibs;
 
 #nullable enable
 

@@ -33,6 +33,7 @@ using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Runtime.Versioning;
 using CoreFoundation;
+using CoreLibs;
 using ObjCRuntime;
 
 // Disable until we get around to enable + fix any issues.

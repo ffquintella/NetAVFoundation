@@ -26,6 +26,7 @@ using System.Reflection;
 using System.Collections;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using CoreLibs;
 
 #if !COREBUILD
 using System.Text;

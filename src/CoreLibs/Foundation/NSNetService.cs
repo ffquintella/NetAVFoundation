@@ -24,6 +24,7 @@
 #if !WATCH // __WATCHOS_PROHIBITED
 
 using System;
+using CoreLibs;
 using ObjCRuntime;
 
 // Disable until we get around to enable + fix any issues.
@@ -40,9 +41,9 @@ namespace Foundation {
 		}
 	}
 	
-	[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use the Network.framework instead.")]
-	[Deprecated (PlatformName.iOS, 15, 0, message: "Use the Network.framework instead.")]
-	[Deprecated (PlatformName.TvOS, 15, 0, message: "Use the Network.framework instead.")]
+	//[Deprecated (PlatformName.MacOSX, 12, 0, message: "Use the Network.framework instead.")]
+	//[Deprecated (PlatformName.iOS, 15, 0, message: "Use the Network.framework instead.")]
+	//[Deprecated (PlatformName.TvOS, 15, 0, message: "Use the Network.framework instead.")]
 	[NoWatch]
 	[MacCatalyst (13, 1)]
 	[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use the Network.framework instead.")]
@@ -106,8 +107,8 @@ namespace Foundation {
 		public extern void Publish (NSNetServiceOptions options);
 
 		[Export ("resolve")]
-		[Deprecated (PlatformName.iOS, 2, 0, message: "Use 'Resolve (double)' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 4, message: "Use 'Resolve (double)' instead.")]
+		//[Deprecated (PlatformName.iOS, 2, 0, message: "Use 'Resolve (double)' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 4, message: "Use 'Resolve (double)' instead.")]
 		[NoWatch]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'Resolve (double)' instead.")]

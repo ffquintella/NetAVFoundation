@@ -40,6 +40,7 @@ using UIKit;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 // In Apple headers, this is a typedef to a pointer to a private struct
 using NSAppleEventManagerSuspensionID = System.IntPtr;
@@ -282,9 +283,9 @@ namespace Foundation
 		public static extern NSString UbiquitousItemHasUnresolvedConflictsKey { get; }
 
 		[Deprecated (PlatformName.iOS, 7, 0, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 9, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
-		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
+		//[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 9, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'UbiquitousItemDownloadingStatusKey' instead.")]
 		[Field ("NSMetadataUbiquitousItemIsDownloadedKey")]
 		public static extern NSString UbiquitousItemIsDownloadedKey { get; }
 

@@ -16,6 +16,7 @@ using AppKit;
 using AppKit;
 #endif
 using CoreGraphics;
+using CoreLibs;
 using Foundation;
 #if HAS_UIKIT
 using UIKit;

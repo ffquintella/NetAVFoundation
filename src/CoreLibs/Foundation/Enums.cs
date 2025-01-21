@@ -1,4 +1,5 @@
 using System;
+using CoreLibs;
 using ObjCRuntime;
 
 namespace Foundation {
@@ -38,7 +39,7 @@ namespace Foundation {
 	/// <summary>Run loop modes for <see cref="T:Foundation.NSRunLoop" />.</summary>
 	public enum NSRunLoopMode {
 
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field ("NSDefaultRunLoopMode")]
 		Default,
 

@@ -24,6 +24,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
+using CoreLibs;
 using ObjCRuntime;
 
 namespace Foundation {
@@ -227,9 +228,9 @@ namespace Foundation {
 		Hour = 32,
 		Minute = 64,
 		Second = 128,
-		[Deprecated (PlatformName.MacOSX, 10, 10)]
-		[Deprecated (PlatformName.iOS, 8, 0)]
-		[Deprecated (PlatformName.TvOS, 9, 0)]
+		//[Deprecated (PlatformName.MacOSX, 10, 10)]
+		//[Deprecated (PlatformName.iOS, 8, 0)]
+		//[Deprecated (PlatformName.TvOS, 9, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		Week = 256,
 		Weekday = 512,
@@ -984,10 +985,10 @@ namespace Foundation {
 	[Native]
 	public enum NSUrlRequestNetworkServiceType : ulong {
 		Default,
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'PushKit' framework instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'PushKit' framework instead.")]
-		[Deprecated (PlatformName.WatchOS, 6, 0, message: "Use 'PushKit' framework instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "Use 'PushKit' framework instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'PushKit' framework instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'PushKit' framework instead.")]
+		//[Deprecated (PlatformName.WatchOS, 6, 0, message: "Use 'PushKit' framework instead.")]
+		//[Deprecated (PlatformName.TvOS, 13, 0, message: "Use 'PushKit' framework instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'PushKit' framework instead.")]
 		VoIP,
 		Video,

@@ -21,6 +21,7 @@
 //
 using System;
 using AppKit;
+using CoreLibs;
 using ObjCRuntime;
 
 #nullable enable
@@ -167,10 +168,10 @@ namespace Foundation {
 	//, QLPreviewItem
 #endif
 	{
-		[Deprecated (PlatformName.iOS, 9, 0, message: "Use 'NSUrlComponents' instead.")]
-		[Deprecated (PlatformName.WatchOS, 2, 0, message: "Use 'NSUrlComponents' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'NSUrlComponents' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'NSUrlComponents' instead.")]
+		//[Deprecated (PlatformName.iOS, 9, 0, message: "Use 'NSUrlComponents' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 2, 0, message: "Use 'NSUrlComponents' instead.")]
+		//[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'NSUrlComponents' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'NSUrlComponents' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSUrlComponents' instead.")]
 		[Export ("initWithScheme:host:path:")]
 		public extern NativeHandle Constructor (string scheme, string host, string path);
@@ -232,10 +233,10 @@ namespace Foundation {
 		[Export ("isFileReferenceURL")]
 		public  extern bool IsFileReferenceUrl { get; }
 
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Always return 'null'. Use and parse 'Path' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Always return 'null'. Use and parse 'Path' instead.")]
-		[Deprecated (PlatformName.WatchOS, 6, 0, message: "Always return 'null'. Use and parse 'Path' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "Always return 'null'. Use and parse 'Path' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Always return 'null'. Use and parse 'Path' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Always return 'null'. Use and parse 'Path' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 6, 0, message: "Always return 'null'. Use and parse 'Path' instead.")]
+		//[Deprecated (PlatformName.TvOS, 13, 0, message: "Always return 'null'. Use and parse 'Path' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Always return 'null'. Use and parse 'Path' instead.")]
 		[Export ("parameterString")]
 		[NullAllowed]
@@ -433,10 +434,10 @@ namespace Foundation {
 		[Field ("NSURLVolumeURLKey")]
 		public  extern NSString VolumeURLKey { get; }
 
-		[Deprecated (PlatformName.iOS, 14, 0, message: "Use 'ContentTypeKey' instead.")]
-		[Deprecated (PlatformName.TvOS, 14, 0, message: "Use 'ContentTypeKey' instead.")]
-		[Deprecated (PlatformName.WatchOS, 7, 0, message: "Use 'ContentTypeKey' instead.")]
-		[Deprecated (PlatformName.MacOSX, 11, 0, message: "Use 'ContentTypeKey' instead.")]
+		//[Deprecated (PlatformName.iOS, 14, 0, message: "Use 'ContentTypeKey' instead.")]
+		//[Deprecated (PlatformName.TvOS, 14, 0, message: "Use 'ContentTypeKey' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 7, 0, message: "Use 'ContentTypeKey' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 11, 0, message: "Use 'ContentTypeKey' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0, message: "Use 'ContentTypeKey' instead.")]
 		[Field ("NSURLTypeIdentifierKey")]
 		public  extern NSString TypeIdentifierKey { get; }
@@ -699,7 +700,7 @@ namespace Foundation {
 		public  extern NSString UbiquitousItemIsDownloadedKey { get; }
 
 		[Field ("NSURLUbiquitousItemIsDownloadingKey")]
-		[Deprecated (PlatformName.iOS, 7, 0)]
+		//[Deprecated (PlatformName.iOS, 7, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		public  extern NSString UbiquitousItemIsDownloadingKey { get; }
 
@@ -710,15 +711,15 @@ namespace Foundation {
 		public  extern NSString UbiquitousItemIsUploadingKey { get; }
 
 		[Field ("NSURLUbiquitousItemPercentDownloadedKey")]
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 8, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
+		//[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 8, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSMetadataQuery.UbiquitousItemPercentDownloadedKey' on 'NSMetadataItem' instead.")]
 		public  extern NSString UbiquitousItemPercentDownloadedKey { get; }
 
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 8, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
+		//[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 8, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSMetadataQuery.UbiquitousItemPercentUploadedKey' on 'NSMetadataItem' instead.")]
 		[Field ("NSURLUbiquitousItemPercentUploadedKey")]
 		public  extern NSString UbiquitousItemPercentUploadedKey { get; }

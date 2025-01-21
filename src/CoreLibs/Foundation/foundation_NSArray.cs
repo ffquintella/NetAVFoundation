@@ -41,6 +41,7 @@ using UIKit;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 // In Apple headers, this is a typedef to a pointer to a private struct
 using NSAppleEventManagerSuspensionID = System.IntPtr;
@@ -140,18 +141,18 @@ namespace Foundation
 		[Export ("setValue:forKey:")]
 		public extern void SetValueForKey (NSObject value, NSString key);
 
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'Write (NSUrl, out NSError)' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'Write (NSUrl, out NSError)' instead.")]
-		[Deprecated (PlatformName.WatchOS, 6, 0, message: "Use 'Write (NSUrl, out NSError)' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "Use 'Write (NSUrl, out NSError)' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'Write (NSUrl, out NSError)' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'Write (NSUrl, out NSError)' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 6, 0, message: "Use 'Write (NSUrl, out NSError)' instead.")]
+		//[Deprecated (PlatformName.TvOS, 13, 0, message: "Use 'Write (NSUrl, out NSError)' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'Write (NSUrl, out NSError)' instead.")]
 		[Export ("writeToFile:atomically:")]
 		public extern bool WriteToFile (string path, bool useAuxiliaryFile);
 
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'NSMutableArray.FromFile' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'NSMutableArray.FromFile' instead.")]
-		[Deprecated (PlatformName.WatchOS, 6, 0, message: "Use 'NSMutableArray.FromFile' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "Use 'NSMutableArray.FromFile' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'NSMutableArray.FromFile' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'NSMutableArray.FromFile' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 6, 0, message: "Use 'NSMutableArray.FromFile' instead.")]
+		//[Deprecated (PlatformName.TvOS, 13, 0, message: "Use 'NSMutableArray.FromFile' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSMutableArray.FromFile' instead.")]
 		[Export ("arrayWithContentsOfFile:")]
 		[Static]

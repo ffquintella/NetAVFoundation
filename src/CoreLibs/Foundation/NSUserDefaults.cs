@@ -1,4 +1,5 @@
 using System;
+using CoreLibs;
 using ObjCRuntime;
 
 #nullable enable
@@ -176,9 +177,9 @@ namespace Foundation {
 		[Export ("removeVolatileDomainForName:")]
 		public extern void RemoveVolatileDomain (string domainName);
 
-		[Deprecated (PlatformName.iOS, 7, 0)]
-		[Deprecated (PlatformName.TvOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 9)]
+		//[Deprecated (PlatformName.iOS, 7, 0)]
+		//[Deprecated (PlatformName.TvOS, 9, 0)]
+		//[Deprecated (PlatformName.MacOSX, 10, 9)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Export ("persistentDomainNames")]
 		public extern string [] PersistentDomainNames ();

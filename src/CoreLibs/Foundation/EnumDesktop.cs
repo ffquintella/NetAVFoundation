@@ -24,7 +24,7 @@
 
 // FIXME: EnumDesktop.cs should be merged into Enums.cs
 using System;
-
+using CoreLibs;
 using ObjCRuntime;
 
 namespace Foundation {

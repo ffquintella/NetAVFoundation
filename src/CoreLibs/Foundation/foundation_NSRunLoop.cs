@@ -40,6 +40,7 @@ using UIKit;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 // In Apple headers, this is a typedef to a pointer to a private struct
 using NSAppleEventManagerSuspensionID = System.IntPtr;

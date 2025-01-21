@@ -8,6 +8,7 @@
 //
 using System;
 using System.Runtime.InteropServices;
+using CoreLibs;
 using ObjCRuntime;
 
 namespace Foundation {

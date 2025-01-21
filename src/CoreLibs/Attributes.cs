@@ -433,3 +433,160 @@ public class ErrorDomainAttribute : Attribute {
 	public string LibraryName { get; set; }
 }
 
+public class MarshalNativeExceptionsAttribute : Attribute {
+}
+
+public class SealedAttribute : Attribute {
+	public SealedAttribute () { }
+}
+
+public class DelegateNameAttribute : Attribute {
+	public DelegateNameAttribute (string s)
+	{
+		Name = s;
+	}
+
+	public string Name { get; set; }
+}
+
+public class EventArgsAttribute : Attribute {
+	public EventArgsAttribute (string s)
+	{
+		ArgName = s;
+	}
+	public EventArgsAttribute (string s, bool skip)
+	{
+		ArgName = s;
+		SkipGeneration = skip;
+	}
+	public EventArgsAttribute (string s, bool skip, bool fullname)
+	{
+		ArgName = s;
+		SkipGeneration = skip;
+		FullName = fullname;
+	}
+
+	public string ArgName { get; set; }
+	public bool SkipGeneration { get; set; }
+	public bool FullName { get; set; }
+}
+
+[AttributeUsage (AttributeTargets.Property, AllowMultiple = true)]
+public class NotificationAttribute : Attribute {
+	public NotificationAttribute (Type t) { Type = t; }
+	public NotificationAttribute (Type t, string notificationCenter) { Type = t; NotificationCenter = notificationCenter; }
+	public NotificationAttribute (string notificationCenter) { NotificationCenter = notificationCenter; }
+	public NotificationAttribute () { }
+
+	public Type Type { get; set; }
+	public string NotificationCenter { get; set; }
+}
+
+public class PostSnippetAttribute : SnippetAttribute {
+	public PostSnippetAttribute (string s) : base (s) { }
+}
+
+[AttributeUsage (AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = true)]
+public class SnippetAttribute : Attribute {
+	public SnippetAttribute (string s)
+	{
+		Code = s;
+	}
+	public string Code { get; set; }
+
+	public bool Optimizable { get; set; }
+}
+
+[AttributeUsage (AttributeTargets.All, AllowMultiple = true)]
+public class PostGetAttribute : Attribute {
+	public PostGetAttribute (string name)
+	{
+		MethodName = name;
+	}
+
+	public string MethodName { get; set; }
+}
+
+public class BindAttribute : Attribute {
+	public BindAttribute (string sel)
+	{
+		Selector = sel;
+	}
+	public string Selector { get; set; }
+
+	// By default [Bind] makes non-virtual methods
+	public bool Virtual { get; set; }
+}
+
+// flags the backing field for the property to with .NET's [ThreadStatic] property
+public class IsThreadStaticAttribute : Attribute {
+	public IsThreadStaticAttribute () { }
+}
+
+public class PreSnippetAttribute : SnippetAttribute {
+	public PreSnippetAttribute (string s) : base (s) { }
+}
+
+[AttributeUsage (AttributeTargets.Method, AllowMultiple = false)]
+public class AsyncAttribute : Attribute {
+
+	//This will automagically generate the async method.
+	//This works with 4 kinds of callbacks: (), (NSError), (result), (result, NSError)
+	public AsyncAttribute () { }
+
+	//This works with 2 kinds of callbacks: (...) and (..., NSError).
+	//Parameters are passed in order to a constructor in resultType
+	public AsyncAttribute (Type resultType)
+	{
+		ResultType = resultType;
+	}
+
+	//This works with 2 kinds of callbacks: (...) and (..., NSError).
+	//Parameters are passed in order to a result type that is automatically created if size > 1
+	//The generated method is named after the @methodName
+	public AsyncAttribute (string methodName)
+	{
+		MethodName = methodName;
+	}
+
+	public Type ResultType { get; set; }
+	public string MethodName { get; set; }
+	public string ResultTypeName { get; set; }
+	public string PostNonResultSnippet { get; set; }
+}
+
+// When applied to a method or property, flags the resulting generated code as internal
+public sealed class ProtectedAttribute : Attribute {
+}
+
+public class OverrideAttribute : Attribute {
+	public OverrideAttribute () { }
+}
+
+// Makes the result use the `new' attribtue
+public class NewAttribute : Attribute {
+	public NewAttribute () { }
+}
+
+//
+// This attribute is a convenience shorthand for settings the
+// [EditorBrowsable (EditorBrowsableState.Advanced)] flags
+//
+public class AdvancedAttribute : Attribute {
+	public AdvancedAttribute () { }
+}
+
+public class EventNameAttribute : Attribute {
+	public EventNameAttribute (string s)
+	{
+		EvtName = s;
+	}
+	public string EvtName { get; set; }
+}
+
+//
+// Indicates that this array should be turned into a params
+//
+[AttributeUsage (AttributeTargets.Parameter, AllowMultiple = false)]
+public class ParamsAttribute : Attribute {
+}

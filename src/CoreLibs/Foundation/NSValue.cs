@@ -30,6 +30,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 
 using CoreGraphics;
+using CoreLibs;
 using CoreMedia;
 using ObjCRuntime;
 
@@ -123,10 +124,10 @@ namespace Foundation {
 			
 		}
 		
-		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
-		[Deprecated (PlatformName.iOS, 11, 0, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
-		[Deprecated (PlatformName.TvOS, 11, 0, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
-		[Deprecated (PlatformName.WatchOS, 4, 0, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 13, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
+		//[Deprecated (PlatformName.iOS, 11, 0, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
+	//	[Deprecated (PlatformName.TvOS, 11, 0, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 4, 0, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Potential for buffer overruns. Use 'StoreValueAtAddress (IntPtr, nuint)' instead.")]
 		[Export ("getValue:")]
 		public extern void StoreValueAtAddress (IntPtr value);
@@ -327,6 +328,7 @@ namespace Foundation {
 		[Export ("MKCoordinateSpanValue")]
 		public extern MapKit.MKCoordinateSpan CoordinateSpanValue { get; }
 
+		/* SEE IF WE NEED
 #if !WATCH
 		[Export ("valueWithCATransform3D:")]
 		[Static]
@@ -335,6 +337,7 @@ namespace Foundation {
 		[Export ("CATransform3DValue")]
 		public extern CoreAnimation.CATransform3D CATransform3DValue { get; }
 #endif
+*/
 
 		//[iOS (16, 0)]
 		//[Mac (13, 0)]
@@ -447,18 +450,18 @@ namespace Foundation {
 		[Field ("NSIsNotNilTransformerName")]
 		public extern NSString IsNotNilTransformerName { get; }
 
-		[Deprecated (PlatformName.TvOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
-		[Deprecated (PlatformName.WatchOS, 5, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
-		[Deprecated (PlatformName.iOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.TvOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 5, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.iOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
 		[Field ("NSUnarchiveFromDataTransformerName")]
 		public extern NSString UnarchiveFromDataTransformerName { get; }
 
-		[Deprecated (PlatformName.TvOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
-		[Deprecated (PlatformName.WatchOS, 5, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
-		[Deprecated (PlatformName.iOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.TvOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 5, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.iOS, 12, 0, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'SecureUnarchiveFromDataTransformerName' instead.")]
 		[Field ("NSKeyedUnarchiveFromDataTransformerName")]
 		public extern NSString KeyedUnarchiveFromDataTransformerName { get; }

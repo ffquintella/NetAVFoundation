@@ -40,6 +40,7 @@ using UIKit;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 // In Apple headers, this is a typedef to a pointer to a private struct
 using NSAppleEventManagerSuspensionID = System.IntPtr;
@@ -219,18 +220,18 @@ namespace Foundation
 		[PostGet ("Operations")]
 		public extern void AddOperation (/* non null */ Action operation);
 
-		[Deprecated (PlatformName.MacOSX, 10, 15, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
-		[Deprecated (PlatformName.WatchOS, 6, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
+		//[Deprecated (PlatformName.WatchOS, 6, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
+		//[Deprecated (PlatformName.TvOS, 13, 0, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This API should not be used as it is subject to race conditions. If synchronization is needed use 'AddBarrier' instead.")]
 		[Export ("operations")]
 		public extern NSOperation [] Operations { get; }
 
-		[Deprecated (PlatformName.MacOSX, 10, 15)]
-		[Deprecated (PlatformName.iOS, 13, 0)]
-		[Deprecated (PlatformName.WatchOS, 6, 0)]
-		[Deprecated (PlatformName.TvOS, 13, 0)]
+		//[Deprecated (PlatformName.MacOSX, 10, 15)]
+		//[Deprecated (PlatformName.iOS, 13, 0)]
+		//[Deprecated (PlatformName.WatchOS, 6, 0)]
+		//[Deprecated (PlatformName.TvOS, 13, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Export ("operationCount")]
 		public extern nint OperationCount { get; }

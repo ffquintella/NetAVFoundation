@@ -1,3 +1,5 @@
+using CoreLibs;
+
 namespace Foundation
 {
     [BaseType(typeof(NSObject))] 

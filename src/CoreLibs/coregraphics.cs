@@ -5,6 +5,7 @@
 //
 
 using System;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -282,20 +283,12 @@ namespace CoreGraphics {
 		public static extern NSString ExtendedDisplayP3 { get; }
 
 		[Watch (5, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 15, 4, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 4, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 4, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.WatchOS, 6, 2, message: "Use 'Itur_2100_PQ' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'Itur_2100_PQ' instead.")]
 		[Field ("kCGColorSpaceITUR_2020_PQ_EOTF")]
 		public static extern NSString Itur_2020_PQ_Eotf { get; }
 
 		//[iOS (13, 4), TV (13, 4), Watch (6, 2)]
-		[Deprecated (PlatformName.MacOSX, 11, 0, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.iOS, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.TvOS, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.WatchOS, 7, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[Field ("kCGColorSpaceITUR_2020_PQ")]
@@ -304,10 +297,6 @@ namespace CoreGraphics {
 		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 15, 4)]
-		[Deprecated (PlatformName.iOS, 13, 4)]
-		[Deprecated (PlatformName.TvOS, 13, 4)]
-		[Deprecated (PlatformName.WatchOS, 6, 2)]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Field ("kCGColorSpaceDisplayP3_PQ_EOTF")]
@@ -328,10 +317,6 @@ namespace CoreGraphics {
 		//[iOS (13, 0)]
 		[TV (13, 0)]
 		[Watch (6, 0)]
-		[Deprecated (PlatformName.MacOSX, 11, 0, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.iOS, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.TvOS, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
-		[Deprecated (PlatformName.WatchOS, 7, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0, message: "Use 'Itur_2100_PQ' instead.")]
 		[Field ("kCGColorSpaceITUR_2020_HLG")]
@@ -477,7 +462,6 @@ namespace CoreGraphics {
 	// Adding suffix *Keys to avoid possible name clash
 	[NoiOS, NoTV, NoWatch, MacCatalyst (13, 1)]
 	[Static]
-	[Deprecated (PlatformName.MacOSX, 15, 0, message: "Use ScreenCaptureKit instead.")]
 	[Deprecated (PlatformName.MacCatalyst, 18, 0, message: "Use ScreenCaptureKit instead.")]
 	interface CGDisplayStreamKeys {
 

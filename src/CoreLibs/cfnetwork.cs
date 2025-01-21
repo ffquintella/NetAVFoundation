@@ -5,6 +5,7 @@
 //
 
 using System;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -19,50 +20,42 @@ namespace CoreServices {
 	[Partial]
 	public partial class CFHTTPStream {
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPAttemptPersistentConnection", "CFNetwork")]
 		NSString _AttemptPersistentConnection { get; }
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPFinalURL", "CFNetwork")]
 		NSString _FinalURL { get; }
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPFinalRequest", "CFNetwork")]
 		NSString _FinalRequest { get; }
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPProxy", "CFNetwork")]
 		NSString _Proxy { get; }
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPRequestBytesWrittenCount", "CFNetwork")]
 		NSString _RequestBytesWrittenCount { get; }
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPResponseHeader", "CFNetwork")]
 		NSString _ResponseHeader { get; }
 
-		[Deprecated (PlatformName.iOS, 9, 0)]
-		[Deprecated (PlatformName.MacOSX, 10, 11)]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Internal]
 		[Field ("kCFStreamPropertyHTTPShouldAutoredirect", "CFNetwork")]

@@ -10,16 +10,17 @@
 using System;
 using System.ComponentModel;
 
-using AudioUnit;
+//using AudioUnit;
 using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
 using CoreAnimation;
 using CoreGraphics;
+using CoreLibs;
 #if MONOMAC
 using AppKit;
-using AUViewControllerBase = AppKit.NSViewController;
-using UIViewController = AppKit.NSViewController;
+using AUViewControllerBase = Foundation.NSObject;
+using UIViewController = Foundation.NSObject;
 #else
 using UIKit;
 using AUViewControllerBase = UIKit.UIViewController;
@@ -57,9 +58,9 @@ namespace CoreAudioKit {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AUAudioUnitViewConfiguration : NSSecureCoding {
+	partial class AUAudioUnitViewConfiguration : NSCoding {
 		[Export ("initWithWidth:height:hostHasController:")]
-		NativeHandle Constructor (nfloat width, nfloat height, bool hostHasController);
+		extern NativeHandle Constructor (nfloat width, nfloat height, bool hostHasController);
 
 		[Export ("width")]
 		nfloat Width { get; }
@@ -71,21 +72,21 @@ namespace CoreAudioKit {
 		bool HostHasController { get; }
 	}
 
-	[Category]
+	//[Category]
 	[MacCatalyst (13, 1)]
-	[BaseType (typeof (AUAudioUnit))]
-	interface AUAudioUnitViewControllerExtensions {
+	//[BaseType (typeof (AUAudioUnit))]
+	partial class AUAudioUnitViewControllerExtensions {
 		[Export ("supportedViewConfigurations:")]
-		NSIndexSet GetSupportedViewConfigurations (AUAudioUnitViewConfiguration [] availableViewConfigurations);
+		extern NSIndexSet GetSupportedViewConfigurations (AUAudioUnitViewConfiguration [] availableViewConfigurations);
 
 		[Export ("selectViewConfiguration:")]
-		void SelectViewConfiguration (AUAudioUnitViewConfiguration viewConfiguration);
+		extern void SelectViewConfiguration (AUAudioUnitViewConfiguration viewConfiguration);
 	}
 
 	[NoiOS]
 	[NoMacCatalyst]
 	[Protocol]
-	interface AUCustomViewPersistentData {
+	partial class AUCustomViewPersistentData {
 
 		[Abstract]
 		[NullAllowed, Export ("customViewPersistentData", ArgumentSemantic.Assign)]
@@ -96,33 +97,33 @@ namespace CoreAudioKit {
 	[NoMacCatalyst]
 	[DisableDefaultCtor] // Crashes
 	[BaseType (typeof (NSView))]
-	interface AUGenericView : AUCustomViewPersistentData {
+	partial class AUGenericView : AUCustomViewPersistentData {
 
-		[Export ("audioUnit")]
-		AudioUnit.AudioUnit AudioUnit { get; }
+		//[Export ("audioUnit")]
+		//AudioUnit.AudioUnit AudioUnit { get; }
 
 		[Export ("showsExpertParameters")]
 		bool ShowsExpertParameters { get; set; }
 
-		[Export ("initWithAudioUnit:")]
-		NativeHandle Constructor (AudioUnit.AudioUnit au);
+		//[Export ("initWithAudioUnit:")]
+		//NativeHandle Constructor (AudioUnit.AudioUnit au);
 
-		[Export ("initWithAudioUnit:displayFlags:")]
-		NativeHandle Constructor (AudioUnit.AudioUnit au, AUGenericViewDisplayFlags inFlags);
+		//[Export ("initWithAudioUnit:displayFlags:")]
+		//NativeHandle Constructor (AudioUnit.AudioUnit au, AUGenericViewDisplayFlags inFlags);
 	}
 
 	[NoiOS]
 	[NoMacCatalyst]
 	[BaseType (typeof (NSView))]
 	[DisableDefaultCtor]
-	interface AUPannerView {
+	partial class AUPannerView {
 
-		[Export ("audioUnit")]
-		AudioUnit.AudioUnit AudioUnit { get; }
+		//[Export ("audioUnit")]
+		//AudioUnit.AudioUnit AudioUnit { get; }
 
-		[Static]
-		[Export ("AUPannerViewWithAudioUnit:")]
-		AUPannerView Create (AudioUnit.AudioUnit au);
+		//[Static]
+		//[Export ("AUPannerViewWithAudioUnit:")]
+		//AUPannerView Create (AudioUnit.AudioUnit au);
 	}
 
 	[NoiOS]
@@ -136,7 +137,7 @@ namespace CoreAudioKit {
 
 	[NoiOS]
 	[NoMacCatalyst]
-	[BaseType (typeof (NSViewController))]
+	//[BaseType (typeof (NSViewController))]
 	interface CAInterDeviceAudioViewController {
 
 		[Export ("initWithNibName:bundle:")]
@@ -145,7 +146,7 @@ namespace CoreAudioKit {
 
 	[NoiOS]
 	[NoMacCatalyst]
-	[DesignatedDefaultCtor]
+	//[DesignatedDefaultCtor]
 	[BaseType (typeof (NSWindowController))]
 	interface CANetworkBrowserWindowController {
 
@@ -267,7 +268,7 @@ namespace CoreAudioKit {
 		[Export ("initWithNibName:bundle:")]
 		NativeHandle Constructor ([NullAllowed] string nibName, [NullAllowed] NSBundle bundle);
 
-		[NullAllowed, Export ("auAudioUnit", ArgumentSemantic.Strong)]
-		AUAudioUnit AuAudioUnit { get; set; }
+		//[NullAllowed, Export ("auAudioUnit", ArgumentSemantic.Strong)]
+		//AUAudioUnit AuAudioUnit { get; set; }
 	}
 }

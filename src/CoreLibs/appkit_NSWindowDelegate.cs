@@ -10,6 +10,7 @@ using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
 using CoreData;
+using CoreLibs;
 //using CoreLibs.AppKit;
 //using Intents;
 //using SharedWithYouCore;
@@ -185,7 +186,7 @@ namespace AppKit
 		//[Mac (13, 2)]
 		[Export ("previewRepresentableActivityItemsForWindow:")]
 		[return: NullAllowed]
-		[IgnoredInDelegate]
+		//[IgnoredInDelegate]
 		public extern INSPreviewRepresentableActivityItem [] GetPreviewRepresentableActivityItems (NSWindow window);
 
 		[Export ("window:willResizeForVersionBrowserWithMaxPreferredSize:maxAllowedSize:"), DelegateName ("NSWindowSizeSize"), DefaultValueFromArgument ("maxPreferredSize")]

@@ -10,6 +10,7 @@ using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
 using CoreData;
+using CoreLibs;
 //using Intents;
 //using SharedWithYouCore;
 //using Symbols;
@@ -137,7 +138,7 @@ namespace AppKit
 	[NoMacCatalyst]
 	[BaseType (typeof (NSResponder), Delegates = new string [] { "Delegate" }, Events = new Type [] { typeof (NSWindowDelegate) })]
 	[DisableDefaultCtor]
-	public partial class NSWindow : NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility, NSMenuItemValidation, NSUserInterfaceValidations {
+	public partial class NSWindow {// : NSAnimatablePropertyContainer, NSUserInterfaceItemIdentification, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility, NSMenuItemValidation, NSUserInterfaceValidations {
 		[Static, Export ("frameRectForContentRect:styleMask:")]
 		public static extern CGRect FrameRectFor (CGRect contectRect, NSWindowStyle styleMask);
 
@@ -313,10 +314,10 @@ namespace AppKit
 		public extern void Update ();
 
 		[Export ("makeFirstResponder:")]
-		public extern bool MakeFirstResponder ([NullAllowed] NSResponder aResponder);
+		 extern bool MakeFirstResponder ([NullAllowed] NSResponder aResponder);
 
 		[Export ("firstResponder")]
-		public extern NSResponder FirstResponder { get; }
+		 extern NSResponder FirstResponder { get; }
 
 		[Export ("resizeFlags")]
 		public extern nint ResizeFlags { get; }
@@ -455,7 +456,7 @@ namespace AppKit
 		public extern string MiniWindowTitle { get; set; }
 
 		[Export ("dockTile")]
-		public extern NSDockTile DockTile { get; }
+		 extern NSDockTile DockTile { get; }
 
 		[Export ("documentEdited")]
 		public extern bool DocumentEdited { [Bind ("isDocumentEdited")] get; set; }
@@ -730,7 +731,7 @@ namespace AppKit
 		[Export ("windowController")]
 		[NullAllowed]
 #if NET
-		public extern NSWindowController WindowController { get; set; }
+		 extern NSWindowController WindowController { get; set; }
 #else
 		public extern NSObject WindowController { get; set; }
 #endif
@@ -743,10 +744,10 @@ namespace AppKit
 
 		[Static]
 		[Export ("standardWindowButton:forStyleMask:")]
-		public extern NSButton StandardWindowButton (NSWindowButton b, NSWindowStyle styleMask);
+		static extern NSButton StandardWindowButton (NSWindowButton b, NSWindowStyle styleMask);
 
 		[Export ("standardWindowButton:")]
-		public extern NSButton StandardWindowButton (NSWindowButton b);
+		 extern NSButton StandardWindowButton (NSWindowButton b);
 
 		[Export ("addChildWindow:ordered:")]
 		public extern void AddChildWindow (NSWindow childWin, NSWindowOrderingMode place);
@@ -762,7 +763,7 @@ namespace AppKit
 
 		[Export ("graphicsContext")]
 		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Add instances of NSView to display content in a window.")]
-		public extern NSGraphicsContext GraphicsContext { get; }
+		 extern NSGraphicsContext GraphicsContext { get; }
 
 		[Deprecated (PlatformName.MacOSX, 10, 7)]
 		[Export ("userSpaceScaleFactor")]
@@ -773,7 +774,7 @@ namespace AppKit
 
 		[Static]
 		[Export ("windowNumbersWithOptions:")]
-		public extern NSArray WindowNumbersWithOptions (NSWindowNumberListOptions options);
+		static extern NSArray WindowNumbersWithOptions (NSWindowNumberListOptions options);
 
 		[Static]
 		[Export ("windowNumberAtPoint:belowWindowWithWindowNumber:")]
@@ -799,7 +800,7 @@ namespace AppKit
 
 		[Export ("defaultButtonCell")]
 		[NullAllowed]
-		public extern NSButtonCell DefaultButtonCell { get; set; }
+		 extern NSButtonCell DefaultButtonCell { get; set; }
 
 		[Export ("disableKeyEquivalentForDefaultButtonCell")]
 		public extern void DisableKeyEquivalentForDefaultButtonCell ();
@@ -815,7 +816,7 @@ namespace AppKit
 
 		[Export ("toolbar")]
 		[NullAllowed]
-		public extern NSToolbar Toolbar { get; set; }
+		 extern NSToolbar Toolbar { get; set; }
 
 		[Export ("toggleToolbarShown:")]
 		public extern void ToggleToolbarShown (NSObject sender);
@@ -1023,25 +1024,25 @@ namespace AppKit
 		[Export ("titlebarAccessoryViewControllers", ArgumentSemantic.Copy)]
 		// Header says this is a r/w property, but it fails at runtime.
 		//  -[NSWindow setTitlebarAccessoryViewControllers:]: unrecognized selector sent to instance 0x6180001e0f00
-		public extern NSTitlebarAccessoryViewController [] TitlebarAccessoryViewControllers { get; }
+		 extern NSTitlebarAccessoryViewController [] TitlebarAccessoryViewControllers { get; }
 
 		[Export ("addTitlebarAccessoryViewController:")]
-		public extern void AddTitlebarAccessoryViewController (NSTitlebarAccessoryViewController childViewController);
+		 extern void AddTitlebarAccessoryViewController (NSTitlebarAccessoryViewController childViewController);
 
 		[Export ("insertTitlebarAccessoryViewController:atIndex:")]
-		public extern void InsertTitlebarAccessoryViewController (NSTitlebarAccessoryViewController childViewController, nint index);
+		 extern void InsertTitlebarAccessoryViewController (NSTitlebarAccessoryViewController childViewController, nint index);
 
 		[Export ("removeTitlebarAccessoryViewControllerAtIndex:")]
 		public extern void RemoveTitlebarAccessoryViewControllerAtIndex (nint index);
 
-		[Static, Export ("windowWithContentViewController:")]
-		public extern NSWindow GetWindowWithContentViewController (NSViewController contentViewController);
+		//[Static, Export ("windowWithContentViewController:")]
+		// extern NSWindow GetWindowWithContentViewController (NSViewController contentViewController);
 
-		[Export ("contentViewController", ArgumentSemantic.Strong)]
-		public extern NSViewController ContentViewController { get; set; }
+		//[Export ("contentViewController", ArgumentSemantic.Strong)]
+		//public extern NSViewController ContentViewController { get; set; }
 
 		[Export ("trackEventsMatchingMask:timeout:mode:handler:")]
-		public extern void TrackEventsMatching (NSEventMask mask, double timeout, string mode, NSWindowTrackEventsMatchingCompletionHandler trackingHandler);
+		 extern void TrackEventsMatching (NSEventMask mask, double timeout, string mode, NSWindowTrackEventsMatchingCompletionHandler trackingHandler);
 
 		[Export ("sheets", ArgumentSemantic.Copy)]
 		public extern NSWindow [] Sheets { get; }
@@ -1095,7 +1096,7 @@ namespace AppKit
 
 		[NullAllowed]
 		[Export ("appearanceSource", ArgumentSemantic.Weak)]
-		public extern INSAppearanceCustomization AppearanceSource { get; set; }
+		 extern INSAppearanceCustomization AppearanceSource { get; set; }
 
 		[Export ("subtitle")]
 		string Subtitle { get; set; }
@@ -1116,7 +1117,7 @@ namespace AppKit
 
 		//[Mac (15, 0)]
 		[Export ("beginDraggingSessionWithItems:event:source:")]
-		public extern NSDraggingSession BeginDraggingSession (NSDraggingItem [] items, NSEvent evnt, INSDraggingSource source);
+		 extern NSDraggingSession BeginDraggingSession (NSDraggingItem [] items, NSEvent evnt, INSDraggingSource source);
 
 		//[Mac (15, 0)]
 		[Export ("cascadingReferenceFrame")]

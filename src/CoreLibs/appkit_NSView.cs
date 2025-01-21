@@ -10,6 +10,7 @@ using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
 using CoreData;
+using CoreLibs;
 //using Intents;
 //using SharedWithYouCore;
 //using Symbols;
@@ -63,9 +64,10 @@ namespace AppKit
 
     [NoMacCatalyst]
     [BaseType(typeof(NSResponder))]
-    public partial class NSView : NSDraggingDestination, NSAnimatablePropertyContainer,
-	    NSUserInterfaceItemIdentification, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility,
-	    NSObjectAccessibilityExtensions
+    public partial class NSView 
+	    //: NSDraggingDestination, NSAnimatablePropertyContainer,
+	    //NSUserInterfaceItemIdentification, NSAppearanceCustomization, NSAccessibilityElementProtocol, NSAccessibility,
+	    //NSObjectAccessibilityExtensions
     {
 	    [DesignatedInitializer]
 	    [Export("initWithFrame:")]
@@ -244,7 +246,7 @@ namespace AppKit
 	    [Deprecated(PlatformName.MacOSX, 10, 13,
 		    message:
 		    "Use 'NSView.DisplayRectIgnoringOpacity (CGRect, NSGraphicsContext)' to draw into a graphics context.")]
-	    public extern bool LockFocusIfCanDrawInContext(NSGraphicsContext context);
+	    extern bool LockFocusIfCanDrawInContext(NSGraphicsContext context);
 
 	    [Export("focusView")]
 	    [Static]
@@ -280,14 +282,14 @@ namespace AppKit
 	    public extern void DrawRect(CGRect dirtyRect);
 
 	    [Export("displayRectIgnoringOpacity:inContext:")]
-	    public extern void DisplayRectIgnoringOpacity(CGRect aRect, NSGraphicsContext context);
+	    extern void DisplayRectIgnoringOpacity(CGRect aRect, NSGraphicsContext context);
 
 	    [return: NullAllowed]
 	    [Export("bitmapImageRepForCachingDisplayInRect:")]
-	    public extern NSBitmapImageRep BitmapImageRepForCachingDisplayInRect(CGRect rect);
+	    extern NSBitmapImageRep? BitmapImageRepForCachingDisplayInRect(CGRect rect);
 
 	    [Export("cacheDisplayInRect:toBitmapImageRep:")]
-	    public extern void CacheDisplay(CGRect rect, NSBitmapImageRep bitmapImageRep);
+	    extern void CacheDisplay(CGRect rect, NSBitmapImageRep bitmapImageRep);
 
 	    [Export("viewWillDraw")]
 	    public extern void ViewWillDraw();
@@ -376,16 +378,16 @@ namespace AppKit
 	    public extern void RemoveTrackingRect(nint tag);
 
 	    [Export("makeBackingLayer")]
-	    public extern CALayer MakeBackingLayer();
+	    extern CALayer MakeBackingLayer();
 
 	    [Export("addTrackingArea:")]
-	    public extern void AddTrackingArea(NSTrackingArea trackingArea);
+	    extern void AddTrackingArea(NSTrackingArea trackingArea);
 
 	    [Export("removeTrackingArea:")]
-	    public extern void RemoveTrackingArea(NSTrackingArea trackingArea);
+	    extern void RemoveTrackingArea(NSTrackingArea trackingArea);
 
 	    [Export("trackingAreas")]
-	    public extern NSTrackingArea[] TrackingAreas();
+	    extern NSTrackingArea[] TrackingAreas();
 
 	    [Export("updateTrackingAreas")]
 	    public extern void UpdateTrackingAreas();
@@ -411,7 +413,7 @@ namespace AppKit
 #if !NET
 	    public extern nint AddToolTip (CGRect rect, NSObject owner, IntPtr userData);
 #else
-	    public extern nint AddToolTip(CGRect rect, INSToolTipOwner owner, IntPtr userData);
+	   extern nint AddToolTip(CGRect rect, INSToolTipOwner owner, IntPtr userData);
 #endif
 
 #if NET
@@ -425,7 +427,7 @@ namespace AppKit
 #else
 	    [Wrap ("AddToolTip (rect, (NSObject)owner, IntPtr.Zero)")]
 #endif
-	    public extern nint AddToolTip(CGRect rect, INSToolTipOwner owner);
+	   extern nint AddToolTip(CGRect rect, INSToolTipOwner owner);
 
 	    [Wrap("AddToolTip (rect, owner, IntPtr.Zero)")]
 	    public extern nint AddToolTip(CGRect rect, NSObject owner);
@@ -497,7 +499,7 @@ namespace AppKit
 	    [Export("wantsLayer")] public extern bool WantsLayer { get; set; }
 
 	    [Export("layer", ArgumentSemantic.Retain), NullAllowed]
-	    public extern CALayer Layer { get; set; }
+	    extern CALayer Layer { get; set; }
 
 	    [Export("alphaValue")] public extern nfloat AlphaValue { get; set; }
 
@@ -530,7 +532,7 @@ namespace AppKit
 	    public extern string[] RegisteredDragTypes();
 
 	    [Export("beginDraggingSessionWithItems:event:source:")]
-	    public extern NSDraggingSession BeginDraggingSession(NSDraggingItem[] items, NSEvent evnt,
+	    extern NSDraggingSession BeginDraggingSession(NSDraggingItem[] items, NSEvent evnt,
 		    INSDraggingSource source);
 
 	    [Deprecated(PlatformName.MacOSX, 10, 7, message: "Use BeginDraggingSession instead.")]
@@ -810,13 +812,13 @@ namespace AppKit
 	    [Export("allowsVibrancy")] public extern bool AllowsVibrancy { get; }
 
 	    [Export("gestureRecognizers", ArgumentSemantic.Copy)]
-	    public extern NSGestureRecognizer[] GestureRecognizers { get; set; }
+	    extern NSGestureRecognizer[] GestureRecognizers { get; set; }
 
 	    [Export("addGestureRecognizer:")]
-	    public extern void AddGestureRecognizer(NSGestureRecognizer gestureRecognizer);
+	    extern void AddGestureRecognizer(NSGestureRecognizer gestureRecognizer);
 
 	    [Export("removeGestureRecognizer:")]
-	    public extern void RemoveGestureRecognizer(NSGestureRecognizer gestureRecognizer);
+	    extern void RemoveGestureRecognizer(NSGestureRecognizer gestureRecognizer);
 
 	    [Export("prepareForReuse")]
 	    public extern void PrepareForReuse();
@@ -838,7 +840,7 @@ namespace AppKit
 
 	    [NullAllowed]
 	    [Export("pressureConfiguration", ArgumentSemantic.Strong)]
-	    public extern NSPressureConfiguration PressureConfiguration { get; set; }
+	    extern NSPressureConfiguration PressureConfiguration { get; set; }
 
 	    [Export("willOpenMenu:withEvent:")]
 	    public extern void WillOpenMenu(NSMenu menu, NSEvent theEvent);
@@ -849,40 +851,40 @@ namespace AppKit
 	    // NSConstraintBasedLayoutCoreMethods
 
 	    [Export("leadingAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutXAxisAnchor LeadingAnchor { get; }
+	    extern NSLayoutXAxisAnchor LeadingAnchor { get; }
 
 	    [Export("trailingAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutXAxisAnchor TrailingAnchor { get; }
+	    extern NSLayoutXAxisAnchor TrailingAnchor { get; }
 
 	    [Export("leftAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutXAxisAnchor LeftAnchor { get; }
+	     extern NSLayoutXAxisAnchor LeftAnchor { get; }
 
 	    [Export("rightAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutXAxisAnchor RightAnchor { get; }
+	     extern NSLayoutXAxisAnchor RightAnchor { get; }
 
 	    [Export("topAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutYAxisAnchor TopAnchor { get; }
+	     extern NSLayoutYAxisAnchor TopAnchor { get; }
 
 	    [Export("bottomAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutYAxisAnchor BottomAnchor { get; }
+	     extern NSLayoutYAxisAnchor BottomAnchor { get; }
 
 	    [Export("widthAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutDimension WidthAnchor { get; }
+	     extern NSLayoutDimension WidthAnchor { get; }
 
 	    [Export("heightAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutDimension HeightAnchor { get; }
+	     extern NSLayoutDimension HeightAnchor { get; }
 
 	    [Export("centerXAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutXAxisAnchor CenterXAnchor { get; }
+	     extern NSLayoutXAxisAnchor CenterXAnchor { get; }
 
 	    [Export("centerYAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutYAxisAnchor CenterYAnchor { get; }
+	     extern NSLayoutYAxisAnchor CenterYAnchor { get; }
 
 	    [Export("firstBaselineAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutYAxisAnchor FirstBaselineAnchor { get; }
+	     extern NSLayoutYAxisAnchor FirstBaselineAnchor { get; }
 
 	    [Export("lastBaselineAnchor", ArgumentSemantic.Strong)]
-	    public extern NSLayoutYAxisAnchor LastBaselineAnchor { get; }
+	     extern NSLayoutYAxisAnchor LastBaselineAnchor { get; }
 
 	    [Export("firstBaselineOffsetFromTop")] public extern nfloat FirstBaselineOffsetFromTop { get; }
 
@@ -892,13 +894,13 @@ namespace AppKit
 	    [Field("NSViewNoIntrinsicMetric")] public extern nfloat NoIntrinsicMetric { get; }
 
 	    [Export("addLayoutGuide:")]
-	    public extern void AddLayoutGuide(NSLayoutGuide guide);
+	     extern void AddLayoutGuide(NSLayoutGuide guide);
 
 	    [Export("removeLayoutGuide:")]
-	    public extern void RemoveLayoutGuide(NSLayoutGuide guide);
+	     extern void RemoveLayoutGuide(NSLayoutGuide guide);
 
 	    [Export("layoutGuides", ArgumentSemantic.Copy)]
-	    public extern NSLayoutGuide[] LayoutGuides { get; }
+	     extern NSLayoutGuide[] LayoutGuides { get; }
 
 	    [Export("viewDidChangeEffectiveAppearance")]
 	    public extern void ViewDidChangeEffectiveAppearance();
@@ -929,12 +931,12 @@ namespace AppKit
 	    public extern NSEdgeInsets AdditionalSafeAreaInsets { get; set; }
 
 	    [Export("safeAreaLayoutGuide", ArgumentSemantic.Strong)]
-	    public extern NSLayoutGuide SafeAreaLayoutGuide { get; }
+	     extern NSLayoutGuide SafeAreaLayoutGuide { get; }
 
 	    [Export("safeAreaRect")] public extern CGRect SafeAreaRect { get; }
 
 	    [Export("layoutMarginsGuide", ArgumentSemantic.Strong)]
-	    public extern NSLayoutGuide LayoutMarginsGuide { get; }
+	     extern NSLayoutGuide LayoutMarginsGuide { get; }
 
 	    // category NSDisplayLink (NSView)
 	    [Export("displayLinkWithTarget:selector:")]

@@ -10,6 +10,7 @@ using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
 using CoreData;
+using CoreLibs;
 //using Intents;
 //using SharedWithYouCore;
 //using Symbols;
@@ -69,8 +70,7 @@ namespace AppKit
 
 		[Deprecated (PlatformName.MacOSX, 10, 12, message: "This method always returns null. If you need access to the current drawing context, use NSGraphicsContext.CurrentContext inside of a draw operation.")]
 		[Export ("context")]
-		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
-		public extern NSGraphicsContext Context { get; }
+		[DebuggerBrowsable (DebuggerBrowsableState.Never)] extern NSGraphicsContext Context { get; }
 
 		[Export ("clickCount")]
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
@@ -130,7 +130,7 @@ namespace AppKit
 
 		[Export ("trackingArea")]
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
-		public extern NSTrackingArea TrackingArea { get; }
+		extern NSTrackingArea TrackingArea { get; }
 
 		[Export ("subtype")]
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
@@ -261,19 +261,19 @@ namespace AppKit
 
 		[Static]
 		[Export ("mouseEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:clickCount:pressure:")]
-		public static extern NSEvent MouseEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, nint eNum, nint cNum, float /* float, not CGFloat */ pressure);
+		static extern NSEvent MouseEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, nint eNum, nint cNum, float /* float, not CGFloat */ pressure);
 
 		[Static]
 		[Export ("keyEventWithType:location:modifierFlags:timestamp:windowNumber:context:characters:charactersIgnoringModifiers:isARepeat:keyCode:")]
-		public static extern NSEvent KeyEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, string keys, string ukeys, bool isARepeat, ushort code);
+		static extern NSEvent KeyEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, string keys, string ukeys, bool isARepeat, ushort code);
 
 		[Static]
 		[Export ("enterExitEventWithType:location:modifierFlags:timestamp:windowNumber:context:eventNumber:trackingNumber:userData:")]
-		public static extern NSEvent EnterExitEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, nint eNum, nint tNum, IntPtr data);
+		static extern NSEvent EnterExitEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, nint eNum, nint tNum, IntPtr data);
 
 		[Static]
 		[Export ("otherEventWithType:location:modifierFlags:timestamp:windowNumber:context:subtype:data1:data2:")]
-		public static extern NSEvent OtherEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, short subtype, nint d1, nint d2);
+		static extern NSEvent OtherEvent (NSEventType type, CGPoint location, NSEventModifierMask flags, double time, nint wNum, [NullAllowed] NSGraphicsContext context, short subtype, nint d1, nint d2);
 
 		[Static]
 		[Export ("mouseLocation")]
@@ -301,11 +301,11 @@ namespace AppKit
 
 		[Static]
 		[Export ("addGlobalMonitorForEventsMatchingMask:handler:")]
-		public static extern NSObject AddGlobalMonitorForEventsMatchingMask (NSEventMask mask, GlobalEventHandler handler);
+		static extern NSObject AddGlobalMonitorForEventsMatchingMask (NSEventMask mask, GlobalEventHandler handler);
 
 		[Static]
 		[Export ("addLocalMonitorForEventsMatchingMask:handler:")]
-		public static extern NSObject AddLocalMonitorForEventsMatchingMask (NSEventMask mask, LocalEventHandler handler);
+		static extern NSObject AddLocalMonitorForEventsMatchingMask (NSEventMask mask, LocalEventHandler handler);
 
 		[Static]
 		[Export ("removeMonitor:")]
@@ -345,7 +345,7 @@ namespace AppKit
 		public static extern bool IsSwipeTrackingFromScrollEventsEnabled { get; }
 
 		[Export ("trackSwipeEventWithOptions:dampenAmountThresholdMin:max:usingHandler:")]
-		public extern void TrackSwipeEvent (NSEventSwipeTrackingOptions options, nfloat minDampenThreshold, nfloat maxDampenThreshold, NSEventTrackHandler trackingHandler);
+		extern void TrackSwipeEvent (NSEventSwipeTrackingOptions options, nfloat minDampenThreshold, nfloat maxDampenThreshold, NSEventTrackHandler trackingHandler);
 
 		[Export ("stage")]
 		public extern nint Stage { get; }

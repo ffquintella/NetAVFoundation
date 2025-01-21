@@ -35,7 +35,7 @@ using System.Diagnostics;
 #if MONOMAC
 using AppKit;
 using CoreVideo;
-using OpenGL;
+//using OpenGL;
 #else
 using UIKit;
 #endif
@@ -45,9 +45,10 @@ using OpenGLES;
 using Foundation;
 using CoreImage;
 using CoreGraphics;
+using CoreLibs;
 using ObjCRuntime;
 using Metal;
-using SceneKit; // For SCNAnimationEvent
+//using SceneKit; // For SCNAnimationEvent
 
 #if __TVOS__
 using CAEdrMetadata = Foundation.NSObject;
@@ -117,10 +118,10 @@ namespace CoreAnimation {
 	[NoTV]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface CAConstraintLayoutManager : NSCoding {
+	partial class CAConstraintLayoutManager : NSCoding {
 		[Static]
 		[Export ("layoutManager")]
-		CAConstraintLayoutManager LayoutManager { get; }
+		static extern CAConstraintLayoutManager LayoutManager { get; }
 	}
 
 	[NoiOS]
@@ -128,21 +129,21 @@ namespace CoreAnimation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	public partial class CAConstraint : NSSecureCoding {
-		[Export ("attribute")]
-		CAConstraintAttribute Attribute { get; }
+		//[Export ("attribute")]
+		//CAConstraintAttribute Attribute { get; }
 
 		[Export ("sourceName")]
-		string SourceName { get; }
+		extern string SourceName { get; }
 
-		[Export ("sourceAttribute")]
-		CAConstraintAttribute SourceAttribute { get; }
+		//[Export ("sourceAttribute")]
+		//CAConstraintAttribute SourceAttribute { get; }
 
 		[Export ("scale")]
-		nfloat Scale { get; }
-
+		extern nfloat Scale { get; }
+/*
 		[Static]
 		[Export ("constraintWithAttribute:relativeTo:attribute:scale:offset:")]
-		CAConstraint Create (CAConstraintAttribute attribute, string relativeToSource, CAConstraintAttribute srcAttr, nfloat scale, nfloat offset);
+		static extern CAConstraint Create (CAConstraintAttribute attribute, string relativeToSource, CAConstraintAttribute srcAttr, nfloat scale, nfloat offset);
 
 		[Static]
 		[Export ("constraintWithAttribute:relativeTo:attribute:offset:")]
@@ -154,6 +155,7 @@ namespace CoreAnimation {
 
 		[Export ("initWithAttribute:relativeTo:attribute:scale:offset:")]
 		NativeHandle Constructor (CAConstraintAttribute attribute, string relativeToSource, CAConstraintAttribute srcAttr, nfloat scale, nfloat offset);
+		*/
 	}
 
 	/// <include file="../docs/api/CoreAnimation/CADisplayLink.xml" path="/Documentation/Docs[@DocId='T:CoreAnimation.CADisplayLink']/*" />
@@ -185,9 +187,7 @@ namespace CoreAnimation {
 
 		[Export ("paused")]
 		public extern bool Paused { [Bind ("isPaused")] get; set; }
-
-		[Obsoleted (PlatformName.iOS, 10, 0, message: "Use 'PreferredFramesPerSecond' property.")]
-		[Obsoleted (PlatformName.TvOS, 10, 0, message: "Use 'PreferredFramesPerSecond' property.")]
+		
 		[Obsoleted (PlatformName.MacCatalyst, 13, 1, message: "Use 'PreferredFramesPerSecond' property.")]
 		[NoMac]
 		[Export ("frameInterval")]
@@ -200,8 +200,7 @@ namespace CoreAnimation {
 		[Export ("targetTimestamp")]
 		public extern double TargetTimestamp { get; }
 
-		[Deprecated (PlatformName.iOS, 15, 0, message: "Use 'PreferredFrameRateRange' property.")]
-		[Deprecated (PlatformName.TvOS, 15, 0, message: "Use 'PreferredFrameRateRange' property.")]
+
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use 'PreferredFrameRateRange' property.")]
 		[NoMac]
@@ -209,8 +208,8 @@ namespace CoreAnimation {
 		public extern nint PreferredFramesPerSecond { get; set; }
 
 		//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
-		[Export ("preferredFrameRateRange", ArgumentSemantic.Assign)]
-		public extern CAFrameRateRange PreferredFrameRateRange { get; set; }
+		//[Export ("preferredFrameRateRange", ArgumentSemantic.Assign)]
+		//public extern CAFrameRateRange PreferredFrameRateRange { get; set; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -226,455 +225,457 @@ namespace CoreAnimation {
 
 	/// <include file="../docs/api/CoreAnimation/CALayer.xml" path="/Documentation/Docs[@DocId='T:CoreAnimation.CALayer']/*" />
 	[BaseType (typeof (NSObject))]
-	[Dispose ("OnDispose ();", Optimizable = true)]
-	interface CALayer : CAMediaTiming, NSSecureCoding {
+	//[Dispose ("OnDispose ();", Optimizable = true)]
+	class CALayer : CAMediaTiming {
 		[Export ("layer")]
 		[Static]
-		CALayer Create ();
+		static extern CALayer Create ();
 
 		[Export ("presentationLayer")]
 		[NullAllowed]
-		CALayer PresentationLayer { get; }
+		static extern CALayer PresentationLayer { get; }
 
 		[Export ("modelLayer")]
-		CALayer ModelLayer { get; }
+		static extern CALayer ModelLayer { get; }
 
 		[Static]
 		[Export ("defaultValueForKey:")]
 		[return: NullAllowed]
-		NSObject DefaultValue (string key);
+		static extern NSObject DefaultValue (string key);
 
 		[Static]
 		[Export ("needsDisplayForKey:")]
-		bool NeedsDisplayForKey (string key);
+		static extern bool NeedsDisplayForKey (string key);
 
 		[Export ("bounds")]
-		CGRect Bounds { get; set; }
+		static extern CGRect Bounds { get; set; }
 
 		[Export ("zPosition")]
-		nfloat ZPosition { get; set; }
+		static extern nfloat ZPosition { get; set; }
 
 		[Export ("anchorPoint")]
-		CGPoint AnchorPoint { get; set; }
+		static extern CGPoint AnchorPoint { get; set; }
 
 		[Export ("anchorPointZ")]
-		nfloat AnchorPointZ { get; set; }
+		static extern nfloat AnchorPointZ { get; set; }
 
 		[Export ("position")]
-		CGPoint Position { get; set; }
+		static extern CGPoint Position { get; set; }
 
-		[Export ("transform")]
-		CATransform3D Transform { get; set; }
+		//[Export ("transform")]
+		//CATransform3D Transform { get; set; }
 
 		[Export ("affineTransform")]
-		CGAffineTransform AffineTransform { get; set; }
+		static extern CGAffineTransform AffineTransform { get; set; }
 
 		[Export ("frame")]
-		CGRect Frame { get; set; }
+		static extern CGRect Frame { get; set; }
 
 		[Export ("hidden")] // Setter needs setHidden instead
-		bool Hidden { [Bind ("isHidden")] get; set; }
+		static extern bool Hidden { [Bind ("isHidden")] get; set; }
 
 		[Export ("doubleSided")]  // Setter needs setDoubleSided
-		bool DoubleSided { [Bind ("isDoubleSided")] get; set; }
+		static extern bool DoubleSided { [Bind ("isDoubleSided")] get; set; }
 
 		[Export ("geometryFlipped")]
-		bool GeometryFlipped { [Bind ("isGeometryFlipped")] get; set; }
+		static extern bool GeometryFlipped { [Bind ("isGeometryFlipped")] get; set; }
 
 		[Export ("contentsAreFlipped")]
-		bool ContentsAreFlipped { get; }
+		static extern bool ContentsAreFlipped { get; }
 
 		[Export ("superlayer")]
 		[NullAllowed]
-		CALayer SuperLayer { get; }
+		static extern CALayer SuperLayer { get; }
 
 		[Export ("removeFromSuperlayer")]
-		void RemoveFromSuperLayer ();
+		static extern void RemoveFromSuperLayer ();
 
 		[NullAllowed] // by default this property is null
 		[Export ("sublayers", ArgumentSemantic.Copy)]
-		CALayer [] Sublayers { get; set; }
+		static extern CALayer [] Sublayers { get; set; }
 
 		[Export ("addSublayer:")]
 		[PostGet ("Sublayers")]
-		void AddSublayer (CALayer layer);
+		static extern void AddSublayer (CALayer layer);
 
 		[Export ("insertSublayer:atIndex:")]
 		[PostGet ("Sublayers")]
-		void InsertSublayer (CALayer layer, int index);
+		static extern void InsertSublayer (CALayer layer, int index);
 
 		[Export ("insertSublayer:below:")]
 		[PostGet ("Sublayers")]
-		void InsertSublayerBelow (CALayer layer, [NullAllowed] CALayer sibling);
+		static extern void InsertSublayerBelow (CALayer layer, [NullAllowed] CALayer sibling);
 
 		[Export ("insertSublayer:above:")]
 		[PostGet ("Sublayers")]
-		void InsertSublayerAbove (CALayer layer, [NullAllowed] CALayer sibling);
+		static extern void InsertSublayerAbove (CALayer layer, [NullAllowed] CALayer sibling);
 
 		[Export ("replaceSublayer:with:")]
 		[PostGet ("Sublayers")]
-		void ReplaceSublayer (CALayer layer, CALayer with);
+		static extern void ReplaceSublayer (CALayer layer, CALayer with);
 
-		[Export ("sublayerTransform")]
-		CATransform3D SublayerTransform { get; set; }
+		//[Export ("sublayerTransform")]
+		//CATransform3D SublayerTransform { get; set; }
 
 		[Export ("mask", ArgumentSemantic.Strong)]
 		[NullAllowed]
-		CALayer Mask { get; set; }
+		static extern CALayer Mask { get; set; }
 
 		[Export ("masksToBounds")]
-		bool MasksToBounds { get; set; }
+		static extern bool MasksToBounds { get; set; }
 
 		[Export ("convertPoint:fromLayer:")]
-		CGPoint ConvertPointFromLayer (CGPoint point, [NullAllowed] CALayer layer);
+		static extern CGPoint ConvertPointFromLayer (CGPoint point, [NullAllowed] CALayer layer);
 
 		[Export ("convertPoint:toLayer:")]
-		CGPoint ConvertPointToLayer (CGPoint point, [NullAllowed] CALayer layer);
+		static extern CGPoint ConvertPointToLayer (CGPoint point, [NullAllowed] CALayer layer);
 
 		[Export ("convertRect:fromLayer:")]
-		CGRect ConvertRectFromLayer (CGRect rect, [NullAllowed] CALayer layer);
+		static extern CGRect ConvertRectFromLayer (CGRect rect, [NullAllowed] CALayer layer);
 
 		[Export ("convertRect:toLayer:")]
-		CGRect ConvertRectToLayer (CGRect rect, [NullAllowed] CALayer layer);
+		static extern CGRect ConvertRectToLayer (CGRect rect, [NullAllowed] CALayer layer);
 
 		[Export ("convertTime:fromLayer:")]
-		double ConvertTimeFromLayer (double timeInterval, [NullAllowed] CALayer layer);
+		static extern double ConvertTimeFromLayer (double timeInterval, [NullAllowed] CALayer layer);
 
 		[Export ("convertTime:toLayer:")]
-		double ConvertTimeToLayer (double timeInterval, [NullAllowed] CALayer layer);
+		static extern double ConvertTimeToLayer (double timeInterval, [NullAllowed] CALayer layer);
 
 		[Export ("hitTest:")]
 		[return: NullAllowed]
-		CALayer HitTest (CGPoint p);
+		static extern CALayer HitTest (CGPoint p);
 
 		[Export ("containsPoint:")]
-		bool Contains (CGPoint p);
+		static extern bool Contains (CGPoint p);
 
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
 		[Export ("contents", ArgumentSemantic.Strong), NullAllowed]
-		CGImage Contents { get; set; }
+		static extern CGImage Contents { get; set; }
 
 		[Export ("contents", ArgumentSemantic.Strong)]
 		[Internal]
 		[Sealed]
-		IntPtr _Contents { get; set; }
+		static extern IntPtr _Contents { get; set; }
 
 		[NoiOS]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Export ("layoutManager", ArgumentSemantic.Retain)]
 		[NullAllowed]
-		NSObject LayoutManager { get; set; }
+		static extern NSObject LayoutManager { get; set; }
 
 		[Export ("contentsScale")]
-		nfloat ContentsScale { get; set; }
+		static extern nfloat ContentsScale { get; set; }
 
 		[Export ("contentsRect")]
-		CGRect ContentsRect { get; set; }
+		static extern CGRect ContentsRect { get; set; }
 
 		[Export ("contentsGravity", ArgumentSemantic.Copy)]
-		string ContentsGravity { get; set; }
+		static extern string ContentsGravity { get; set; }
 
 		[Export ("contentsCenter")]
-		CGRect ContentsCenter { get; set; }
+		static extern CGRect ContentsCenter { get; set; }
 
 		[Export ("minificationFilter", ArgumentSemantic.Copy)]
-		string MinificationFilter { get; set; }
+		static extern string MinificationFilter { get; set; }
 
 		[Export ("magnificationFilter", ArgumentSemantic.Copy)]
-		string MagnificationFilter { get; set; }
+		static extern string MagnificationFilter { get; set; }
 
 		[Export ("opaque")]
-		bool Opaque { [Bind ("isOpaque")] get; set; }
+		static extern bool Opaque { [Bind ("isOpaque")] get; set; }
 
 		[Export ("display")]
-		void Display ();
+		static extern void Display ();
 
 		[Export ("needsDisplay")]
-		bool NeedsDisplay { get; }
+		static extern bool NeedsDisplay { get; }
 
 		[Export ("setNeedsDisplay")]
-		void SetNeedsDisplay ();
+		static extern void SetNeedsDisplay ();
 
 		[Export ("setNeedsDisplayInRect:")]
-		void SetNeedsDisplayInRect (CGRect r);
+		static extern void SetNeedsDisplayInRect (CGRect r);
 
 		[Export ("displayIfNeeded")]
-		void DisplayIfNeeded ();
+		static extern void DisplayIfNeeded ();
 
 		[Export ("needsDisplayOnBoundsChange")]
-		bool NeedsDisplayOnBoundsChange { get; set; }
+		static extern bool NeedsDisplayOnBoundsChange { get; set; }
 
 		[Export ("drawInContext:")]
-		void DrawInContext (CGContext ctx);
+		static extern void DrawInContext (CGContext ctx);
 
 		[Export ("renderInContext:")]
-		void RenderInContext (CGContext ctx);
+		static extern void RenderInContext (CGContext ctx);
 
 		[NullAllowed]
 		[Export ("backgroundColor")]
-		CGColor BackgroundColor { get; set; }
+		static extern CGColor BackgroundColor { get; set; }
 
 		[Export ("cornerRadius")]
-		nfloat CornerRadius { get; set; }
+		static extern nfloat CornerRadius { get; set; }
 
 		[Export ("borderWidth")]
-		nfloat BorderWidth { get; set; }
+		static extern nfloat BorderWidth { get; set; }
 
 		[Export ("borderColor")]
 		[NullAllowed]
-		CGColor BorderColor { get; set; }
+		static extern CGColor BorderColor { get; set; }
 
 		[Export ("opacity")]
-		float Opacity { get; set; } /* float, not CGFloat */
+		static extern float Opacity { get; set; } /* float, not CGFloat */
 
-		[Export ("edgeAntialiasingMask")]
-		CAEdgeAntialiasingMask EdgeAntialiasingMask { get; set; }
+		//[Export ("edgeAntialiasingMask")]
+		//CAEdgeAntialiasingMask EdgeAntialiasingMask { get; set; }
 
 		// Layout methods
 
 		[Export ("preferredFrameSize")]
-		CGSize PreferredFrameSize ();
+		static extern CGSize PreferredFrameSize ();
 
 		[Export ("setNeedsLayout")]
-		void SetNeedsLayout ();
+		static extern void SetNeedsLayout ();
 
 		[Export ("needsLayout")]
-		bool NeedsLayout ();
+		static extern bool NeedsLayout ();
 
 		[Export ("layoutIfNeeded")]
-		void LayoutIfNeeded ();
+		static extern void LayoutIfNeeded ();
 
 		[Export ("layoutSublayers")]
-		void LayoutSublayers ();
+		static extern void LayoutSublayers ();
 
 		[Static]
 		[Export ("defaultActionForKey:")]
 		[return: NullAllowed]
-		NSObject DefaultActionForKey (string eventKey);
+		static extern NSObject DefaultActionForKey (string eventKey);
 
 		[Export ("actionForKey:")]
 		[return: NullAllowed]
-		NSObject ActionForKey (string eventKey);
+		static extern NSObject ActionForKey (string eventKey);
 
 		[NullAllowed] // by default this property is null
 		[Export ("actions", ArgumentSemantic.Copy)]
-		NSDictionary Actions { get; set; }
+		static extern NSDictionary Actions { get; set; }
 
 		[Export ("addAnimation:forKey:")]
-		void AddAnimation (CAAnimation animation, [NullAllowed] string key);
+		static extern void AddAnimation (CAAnimation animation, [NullAllowed] string key);
 
 		[Export ("removeAllAnimations")]
-		void RemoveAllAnimations ();
+		static extern void RemoveAllAnimations ();
 
 		[Export ("removeAnimationForKey:")]
-		void RemoveAnimation (string key);
+		static extern void RemoveAnimation (string key);
 
 		[Export ("animationKeys"), NullAllowed]
-		string [] AnimationKeys { get; }
+		static extern string [] AnimationKeys { get; }
 
 		[Export ("animationForKey:")]
 		[return: NullAllowed]
-		CAAnimation AnimationForKey (string key);
+		static extern CAAnimation AnimationForKey (string key);
 
 		[NullAllowed] // by default this property is null
 		[Export ("name", ArgumentSemantic.Copy)]
-		string Name { get; set; }
+		static extern string Name { get; set; }
 
 		[Export ("delegate", ArgumentSemantic.Weak)]
 		[NullAllowed]
-		NSObject WeakDelegate { get; [PostSnippet (@"SetCALayerDelegate (value as CALayerDelegate);", Optimizable = true)] set; }
+		static extern NSObject WeakDelegate { get; [PostSnippet (@"SetCALayerDelegate (value as CALayerDelegate);", Optimizable = true)] set; }
 
 		[Wrap ("WeakDelegate")]
-		ICALayerDelegate Delegate { get; set; }
+		static extern ICALayerDelegate Delegate { get; set; }
 
 		[Export ("shadowColor")]
 		[NullAllowed]
-		CGColor ShadowColor { get; set; }
+		static extern CGColor ShadowColor { get; set; }
 
 		[Export ("shadowOffset")]
-		CGSize ShadowOffset { get; set; }
+		static extern CGSize ShadowOffset { get; set; }
 
 		[Export ("shadowOpacity")]
-		float ShadowOpacity { get; set; } /* float, not CGFloat */
+		static extern float ShadowOpacity { get; set; } /* float, not CGFloat */
 
 		[Export ("shadowRadius")]
-		nfloat ShadowRadius { get; set; }
+		static extern nfloat ShadowRadius { get; set; }
 
 		[Field ("kCATransition")]
-		NSString Transition { get; }
+		static extern NSString Transition { get; }
 
 		[Field ("kCAGravityCenter")]
-		NSString GravityCenter { get; }
+		static extern NSString GravityCenter { get; }
 
 		[Field ("kCAGravityTop")]
-		NSString GravityTop { get; }
+		static extern NSString GravityTop { get; }
 
 		[Field ("kCAGravityBottom")]
-		NSString GravityBottom { get; }
+		static extern NSString GravityBottom { get; }
 
 		[Field ("kCAGravityLeft")]
-		NSString GravityLeft { get; }
+		static extern NSString GravityLeft { get; }
 
 		[Field ("kCAGravityRight")]
-		NSString GravityRight { get; }
+		static extern NSString GravityRight { get; }
 
 		[Field ("kCAGravityTopLeft")]
-		NSString GravityTopLeft { get; }
+		static extern NSString GravityTopLeft { get; }
 
 		[Field ("kCAGravityTopRight")]
-		NSString GravityTopRight { get; }
+		static extern NSString GravityTopRight { get; }
 
 		[Field ("kCAGravityBottomLeft")]
-		NSString GravityBottomLeft { get; }
+		static extern NSString GravityBottomLeft { get; }
 
 		[Field ("kCAGravityBottomRight")]
-		NSString GravityBottomRight { get; }
+		static extern NSString GravityBottomRight { get; }
 
 		[Field ("kCAGravityResize")]
-		NSString GravityResize { get; }
+		static extern 	NSString GravityResize { get; }
 
 		[Field ("kCAGravityResizeAspect")]
-		NSString GravityResizeAspect { get; }
+		static extern NSString GravityResizeAspect { get; }
 
 		[Field ("kCAGravityResizeAspectFill")]
-		NSString GravityResizeAspectFill { get; }
+		static extern NSString GravityResizeAspectFill { get; }
 
 		[Field ("kCAFilterNearest")]
-		NSString FilterNearest { get; }
+		static extern NSString FilterNearest { get; }
 
 		[Field ("kCAFilterLinear")]
-		NSString FilterLinear { get; }
+		static extern NSString FilterLinear { get; }
 
 		[Field ("kCAFilterTrilinear")]
-		NSString FilterTrilinear { get; }
+		static extern NSString FilterTrilinear { get; }
 
 		[Field ("kCAOnOrderIn")]
-		NSString OnOrderIn { get; }
+		static extern NSString OnOrderIn { get; }
 
 		[Field ("kCAOnOrderOut")]
-		NSString OnOrderOut { get; }
+		static extern NSString OnOrderOut { get; }
 
 		[MacCatalyst (13, 1)]
 		[Internal]
 		[Export ("contentsFormat")]
-		NSString _ContentsFormat { get; set; }
+		static extern NSString _ContentsFormat { get; set; }
 
 		[Export ("visibleRect")]
-		CGRect VisibleRect { get; }
+		static extern CGRect VisibleRect { get; }
 
 		[Export ("scrollPoint:")]
-		void ScrollPoint (CGPoint p);
+		static extern void ScrollPoint (CGPoint p);
 
 		[Export ("scrollRectToVisible:")]
-		void ScrollRectToVisible (CGRect r);
+		static extern void ScrollRectToVisible (CGRect r);
 
 		[NullAllowed] // by default this property is null
 		[Export ("filters", ArgumentSemantic.Copy)]
-		CIFilter [] Filters { get; set; }
+		static extern CIFilter [] Filters { get; set; }
 
 		[NullAllowed] // by default this property is null
 		[Export ("backgroundFilters", ArgumentSemantic.Copy)]
-		CIFilter [] BackgroundFilters { get; set; }
+		static extern CIFilter [] BackgroundFilters { get; set; }
 
 		[Export ("style", ArgumentSemantic.Copy), NullAllowed]
-		NSDictionary Style { get; set; }
+		static extern 	NSDictionary Style { get; set; }
 
 		[Export ("minificationFilterBias")]
-		float MinificationFilterBias { get; set; } /* float, not CGFloat */
+		static extern float MinificationFilterBias { get; set; } /* float, not CGFloat */
 
+		/*
 		[NoiOS]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Export ("autoresizingMask")]
 		CAAutoresizingMask AutoresizingMask { get; set; }
+		*/
 
 		[NoiOS]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Export ("resizeSublayersWithOldSize:")]
-		void ResizeSublayers (CGSize oldSize);
+		static extern void ResizeSublayers (CGSize oldSize);
 
 		[NoiOS]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Export ("resizeWithOldSuperlayerSize:")]
-		void Resize (CGSize oldSuperlayerSize);
+		static extern void Resize (CGSize oldSuperlayerSize);
 
 		[NoiOS]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Export ("constraints")]
 		[NullAllowed]
-		CAConstraint [] Constraints { get; set; }
+		static extern CAConstraint [] Constraints { get; set; }
 
 		[NoiOS]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Export ("addConstraint:")]
-		void AddConstraint (CAConstraint c);
+		static extern void AddConstraint (CAConstraint c);
 
 		[Export ("shouldRasterize")]
-		bool ShouldRasterize { get; set; }
+		static extern bool ShouldRasterize { get; set; }
 
 		[NullAllowed]
 		[Export ("shadowPath")]
-		CGPath ShadowPath { get; set; }
+		static extern CGPath ShadowPath { get; set; }
 
 		[Export ("rasterizationScale")]
-		nfloat RasterizationScale { get; set; }
+		static extern nfloat RasterizationScale { get; set; }
 
 		[Export ("drawsAsynchronously")]
-		bool DrawsAsynchronously { get; set; }
+		static extern bool DrawsAsynchronously { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("allowsEdgeAntialiasing")]
-		bool AllowsEdgeAntialiasing { get; set; }
+		static extern bool AllowsEdgeAntialiasing { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("allowsGroupOpacity")]
-		bool AllowsGroupOpacity { get; set; }
+		static extern bool AllowsGroupOpacity { get; set; }
 
 		[NullAllowed] // by default this property is null
 		[Export ("compositingFilter", ArgumentSemantic.Strong)]
-		NSObject CompositingFilter { get; set; }
+		static extern NSObject CompositingFilter { get; set; }
 
-		[MacCatalyst (13, 1)]
-		[Export ("maskedCorners", ArgumentSemantic.Assign)]
-		CACornerMask MaskedCorners { get; set; }
+		//[MacCatalyst (13, 1)]
+		//[Export ("maskedCorners", ArgumentSemantic.Assign)]
+		//CACornerMask MaskedCorners { get; set; }
 
 		[BindAs (typeof (CACornerCurve))]
 		[TV (13, 0)]
 		[iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("cornerCurve")]
-		NSString CornerCurve { get; set; }
+		static extern NSString CornerCurve { get; set; }
 
 		[TV (13, 0)]
 		[iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("cornerCurveExpansionFactor:")]
-		nfloat GetCornerCurveExpansionFactor ([BindAs (typeof (CACornerCurve))] NSString curve);
+		static extern nfloat GetCornerCurveExpansionFactor ([BindAs (typeof (CACornerCurve))] NSString curve);
 
 		[NoTV]
 		[iOS (17, 0)]
 		[MacCatalyst (17, 0)]
 		[Mac (14, 0)]
 		[Export ("wantsExtendedDynamicRangeContent")]
-		bool WantsExtendedDynamicRangeContent { get; set; }
+		static extern bool WantsExtendedDynamicRangeContent { get; set; }
 
 		[Mac (15, 0), iOS (18, 0), TV (18, 0), MacCatalyst (18, 0)]
 		[Export ("toneMapMode")]
 		[BindAs (typeof (CAToneMapMode))]
-		NSString ToneMapMode { get; set; }
+		static extern NSString ToneMapMode { get; set; }
 	}
 
 	[TV (13, 0)]
 	[iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	enum CACornerCurve {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field ("kCACornerCurveCircular")]
 		Circular,
 		[Field ("kCACornerCurveContinuous")]
@@ -683,7 +684,7 @@ namespace CoreAnimation {
 
 	[Mac (15, 0), iOS (18, 0), TV (18, 0), MacCatalyst (18, 0)]
 	enum CAToneMapMode {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field ("CAToneMapModeAutomatic")]
 		Automatic,
 		[Field ("CAToneMapModeNever")]
@@ -697,14 +698,14 @@ namespace CoreAnimation {
 	/// <summary>Interface that defines a protocol for a display buffer at the metal layer.</summary>
 	[Protocol]
 	[MacCatalyst (13, 1)]
-	interface CAMetalDrawable : MTLDrawable {
+	partial class CAMetalDrawable : MTLDrawable {
 		[Abstract]
 		[Export ("texture")]
-		IMTLTexture Texture { get; }
+		extern IMTLTexture Texture { get; }
 
 		[Abstract]
 		[Export ("layer")]
-		CAMetalLayer Layer { get; }
+		extern CAMetalLayer Layer { get; }
 	}
 
 	/// <summary>A <see cref="T:CoreAnimation.CALayer" /> that is rendered using Metal functions.</summary>
@@ -845,37 +846,37 @@ namespace CoreAnimation {
 	///     </remarks>
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CAReplicatorLayer_class/index.html">Apple documentation for <c>CAReplicatorLayer</c></related>
 	[BaseType (typeof (CALayer))]
-	interface CAReplicatorLayer {
+	partial class CAReplicatorLayer:CALayer  {
 		[Export ("layer"), New, Static]
-		CALayer Create ();
+		static extern CALayer Create ();
 
 		[Export ("instanceCount")]
-		nint InstanceCount { get; set; }
+		extern nint InstanceCount { get; set; }
 
 		[Export ("instanceDelay")]
-		double InstanceDelay { get; set; }
+		extern double InstanceDelay { get; set; }
 
-		[Export ("instanceTransform")]
-		CATransform3D InstanceTransform { get; set; }
+		//[Export ("instanceTransform")]
+		//CATransform3D InstanceTransform { get; set; }
 
 		[Export ("preservesDepth")]
-		bool PreservesDepth { get; set; }
+		extern bool PreservesDepth { get; set; }
 
 		[Export ("instanceColor")]
 		[NullAllowed]
-		CGColor InstanceColor { get; set; }
+		extern CGColor InstanceColor { get; set; }
 
 		[Export ("instanceRedOffset")]
-		float InstanceRedOffset { get; set; } /* float, not CGFloat */
+		extern float InstanceRedOffset { get; set; } /* float, not CGFloat */
 
 		[Export ("instanceGreenOffset")]
-		float InstanceGreenOffset { get; set; } /* float, not CGFloat */
+		extern float InstanceGreenOffset { get; set; } /* float, not CGFloat */
 
 		[Export ("instanceBlueOffset")]
-		float InstanceBlueOffset { get; set; } /* float, not CGFloat */
+		extern float InstanceBlueOffset { get; set; } /* float, not CGFloat */
 
 		[Export ("instanceAlphaOffset")]
-		float InstanceAlphaOffset { get; set; } /* float, not CGFloat */
+		extern float InstanceAlphaOffset { get; set; } /* float, not CGFloat */
 	}
 
 
@@ -1304,68 +1305,68 @@ namespace CoreAnimation {
 		, Delegates = new string [] {"WeakDelegate"}, Events = new Type [] { typeof (CAAnimationDelegate) }
 #endif
 	)]
-	public partial class CAAnimation : CAAction, CAMediaTiming, NSSecureCoding, NSMutableCopying, SCNAnimationProtocol {
+	public partial class CAAnimation { //: CAAction, CAMediaTiming, NSSecureCoding, NSMutableCopying, SCNAnimationProtocol {
 		[Export ("animation"), Static]
-		CAAnimation CreateAnimation ();
+		extern CAAnimation CreateAnimation ();
 
 		[Static]
 		[Export ("defaultValueForKey:")]
 		[return: NullAllowed]
-		NSObject DefaultValue (string key);
+		static extern NSObject DefaultValue (string key);
 
 		[NullAllowed] // by default this property is null
 		[Export ("timingFunction", ArgumentSemantic.Strong)]
-		CAMediaTimingFunction TimingFunction { get; set; }
+		extern CAMediaTimingFunction TimingFunction { get; set; }
 
 #if NET
 		// before that we need to be wrap this manually to avoid the BI1110 error
 		[Wrap ("WeakDelegate")]
-		ICAAnimationDelegate Delegate { get; set; }
+		extern ICAAnimationDelegate Delegate { get; set; }
 #endif
 
 		[Export ("delegate", ArgumentSemantic.Strong)]
 		[NullAllowed]
-		NSObject WeakDelegate { get; set; }
+		extern NSObject WeakDelegate { get; set; }
 
 		[Export ("removedOnCompletion")]
-		bool RemovedOnCompletion { [Bind ("isRemovedOnCompletion")] get; set; }
+		extern bool RemovedOnCompletion { [Bind ("isRemovedOnCompletion")] get; set; }
 
 		[Export ("willChangeValueForKey:")]
-		void WillChangeValueForKey (string key);
+		extern void WillChangeValueForKey (string key);
 
 		[Export ("didChangeValueForKey:")]
-		void DidChangeValueForKey (string key);
+		extern void DidChangeValueForKey (string key);
 
 		[Export ("shouldArchiveValueForKey:")]
-		bool ShouldArchiveValueForKey (string key);
+		extern bool ShouldArchiveValueForKey (string key);
 
 		[Field ("kCATransitionFade")]
-		NSString TransitionFade { get; }
+		extern NSString TransitionFade { get; }
 
 		[Field ("kCATransitionMoveIn")]
-		NSString TransitionMoveIn { get; }
+		extern NSString TransitionMoveIn { get; }
 
 		[Field ("kCATransitionPush")]
-		NSString TransitionPush { get; }
+		extern NSString TransitionPush { get; }
 
 		[Field ("kCATransitionReveal")]
-		NSString TransitionReveal { get; }
+		extern NSString TransitionReveal { get; }
 
 		[Field ("kCATransitionFromRight")]
-		NSString TransitionFromRight { get; }
+		extern NSString TransitionFromRight { get; }
 
 		[Field ("kCATransitionFromLeft")]
-		NSString TransitionFromLeft { get; }
+		extern NSString TransitionFromLeft { get; }
 
 		[Field ("kCATransitionFromTop")]
-		NSString TransitionFromTop { get; }
+		extern NSString TransitionFromTop { get; }
 
 		[Field ("kCATransitionFromBottom")]
-		NSString TransitionFromBottom { get; }
+		extern NSString TransitionFromBottom { get; }
 
 		/* 'calculationMode' strings. */
 		[Field ("kCAAnimationLinear")]
-		NSString AnimationLinear { get; }
+		extern NSString AnimationLinear { get; }
 
 #if !NET
 		[Field ("kCAAnimationDiscrete")]
@@ -1373,23 +1374,25 @@ namespace CoreAnimation {
 		NSString AnimationDescrete { get; }
 #endif
 		[Field ("kCAAnimationDiscrete")]
-		NSString AnimationDiscrete { get; }
+		extern NSString AnimationDiscrete { get; }
 
 		[Field ("kCAAnimationPaced")]
-		NSString AnimationPaced { get; }
+		extern NSString AnimationPaced { get; }
 
 		[Field ("kCAAnimationCubic")]
-		NSString AnimationCubic { get; }
+		extern NSString AnimationCubic { get; }
 
 		[Field ("kCAAnimationCubicPaced")]
-		NSString AnimationCubicPaced { get; }
+		extern NSString AnimationCubicPaced { get; }
 
 		/* 'rotationMode' strings. */
 		[Field ("kCAAnimationRotateAuto")]
-		NSString RotateModeAuto { get; }
+		extern NSString RotateModeAuto { get; }
 
 		[Field ("kCAAnimationRotateAutoReverse")]
-		NSString RotateModeAutoReverse { get; }
+		extern NSString RotateModeAutoReverse { get; }
+		
+		/*
 
 		#region SceneKitAdditions
 
@@ -1401,14 +1404,15 @@ namespace CoreAnimation {
 		[MacCatalyst (13, 1)]
 		[Export ("usesSceneTimeBase")]
 		bool UsesSceneTimeBase { get; set; }
+		
 
 		[MacCatalyst (13, 1)]
 		[Export ("fadeInDuration")]
-		nfloat FadeInDuration { get; set; }
+		extern nfloat FadeInDuration { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("fadeOutDuration")]
-		nfloat FadeOutDuration { get; set; }
+		extern nfloat FadeOutDuration { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed] // by default this property is null
@@ -1416,10 +1420,11 @@ namespace CoreAnimation {
 		SCNAnimationEvent [] AnimationEvents { get; set; }
 
 		#endregion
+		*/
 
-		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
-		[Export ("preferredFrameRateRange", ArgumentSemantic.Assign)]
-		CAFrameRateRange PreferredFrameRateRange { get; set; }
+		//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
+		//[Export ("preferredFrameRateRange", ArgumentSemantic.Assign)]
+		//CAFrameRateRange PreferredFrameRateRange { get; set; }
 	}
 
 	interface ICAAnimationDelegate { }
@@ -1471,7 +1476,7 @@ namespace CoreAnimation {
 	[BaseType (typeof (CAPropertyAnimation))]
 	public partial class CABasicAnimation {
 		[Static, New, Export ("animationWithKeyPath:")]
-		CABasicAnimation FromKeyPath ([NullAllowed] string path);
+		static extern CABasicAnimation FromKeyPath ([NullAllowed] string path);
 
 		[Export ("fromValue", ArgumentSemantic.Strong)]
 		[Internal]
@@ -1736,7 +1741,7 @@ namespace CoreAnimation {
 	[BaseType (typeof (CALayer))]
 	public partial class CAGradientLayer {
 		[Export ("layer"), New, Static]
-		CALayer Create ();
+		static extern CALayer Create ();
 
 		[NullAllowed] // by default this property is null
 		[Export ("colors", ArgumentSemantic.Copy)]
@@ -1798,21 +1803,21 @@ namespace CoreAnimation {
 	///     
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/Cocoa/Reference/CAMediaTimingFunction_class/index.html">Apple documentation for <c>CAMediaTimingFunction</c></related>
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface CAMediaTimingFunction : NSSecureCoding {
+	//[DisableDefaultCtor]
+	partial class CAMediaTimingFunction : NSSecureCoding {
 		[Export ("functionWithName:")]
 		[Static]
-		CAMediaTimingFunction FromName (NSString name);
+		static extern CAMediaTimingFunction FromName (NSString name);
 
 		[Static]
 		[Export ("functionWithControlPoints::::")]
-		CAMediaTimingFunction FromControlPoints (float c1x, float c1y, float c2x, float c2y); /* all float, not CGFloat */
+		static extern CAMediaTimingFunction FromControlPoints (float c1x, float c1y, float c2x, float c2y); /* all float, not CGFloat */
 
 		[Export ("initWithControlPoints::::")]
-		NativeHandle Constructor (float c1x, float c1y, float c2x, float c2y); /* all float, not CGFloat */
+		static extern NativeHandle Constructor (float c1x, float c1y, float c2x, float c2y); /* all float, not CGFloat */
 
 		[Export ("getControlPointAtIndex:values:"), Internal]
-		void GetControlPointAtIndex (nint idx, IntPtr /* float[2] */ point);
+		static extern void GetControlPointAtIndex (nint idx, IntPtr /* float[2] */ point);
 
 		[Field ("kCAMediaTimingFunctionLinear")]
 		NSString Linear { get; }
@@ -1834,10 +1839,10 @@ namespace CoreAnimation {
 	///     
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CAValueFunction_class/index.html">Apple documentation for <c>CAValueFunction</c></related>
 	[BaseType (typeof (NSObject))]
-	interface CAValueFunction : NSSecureCoding {
+	partial class CAValueFunction : NSSecureCoding {
 		[Export ("functionWithName:"), Static]
 		[return: NullAllowed]
-		CAValueFunction FromName (string name);
+		static extern CAValueFunction FromName (string name);
 
 		[Export ("name")]
 		string Name { get; }
@@ -1882,14 +1887,14 @@ namespace CoreAnimation {
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'CAMetalLayer' instead.")]
 	[NoMacCatalyst]
 	[BaseType (typeof (CALayer))]
-	interface CAOpenGLLayer {
+	partial class CAOpenGLLayer {
 		[Export ("layer"), New, Static]
-		CALayer Create ();
+		static extern CALayer Create ();
 
 		[Export ("asynchronous")]
 		bool Asynchronous { [Bind ("isAsynchronous")] get; set; }
 
-		[Export ("canDrawInCGLContext:pixelFormat:forLayerTime:displayTime:")]
+		/*[Export ("canDrawInCGLContext:pixelFormat:forLayerTime:displayTime:")]
 		bool CanDrawInCGLContext (CGLContext glContext, CGLPixelFormat pixelFormat, double timeInterval, ref CVTimeStamp timeStamp);
 
 		[Export ("drawInCGLContext:pixelFormat:forLayerTime:displayTime:")]
@@ -1906,13 +1911,14 @@ namespace CoreAnimation {
 
 		[Export ("releaseCGLContext:")]
 		void Release (CGLContext glContext);
+		*/
 	}
 
 	/// <summary>A source of particles emitted by a <see cref="T:CoreAnimation.CAEmitterLayer" /> instance.</summary>
 	///     
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/GraphicsImaging/Reference/CAEmitterCell_class/index.html">Apple documentation for <c>CAEmitterCell</c></related>
 	[BaseType (typeof (NSObject))]
-	interface CAEmitterCell : CAMediaTiming, NSSecureCoding {
+	partial class CAEmitterCell : CAMediaTiming {
 		[NullAllowed] // by default this property is null
 		[Export ("name", ArgumentSemantic.Copy)]
 		string Name { get; set; }
@@ -2015,15 +2021,15 @@ namespace CoreAnimation {
 
 		[Static]
 		[Export ("emitterCell")]
-		CAEmitterCell EmitterCell ();
+		static extern CAEmitterCell EmitterCell ();
 
 		[Static]
 		[Export ("defaultValueForKey:")]
 		[return: NullAllowed]
-		NSObject DefaultValueForKey (string key);
+		static extern NSObject DefaultValueForKey (string key);
 
-		[Export ("shouldArchiveValueForKey:")]
-		bool ShouldArchiveValueForKey (string key);
+		[Export ("shouldArchiveValueForKey:")] 
+		extern bool ShouldArchiveValueForKey (string key);
 
 		[Export ("redRange")]
 		float RedRange { get; set; } /* float, not CGFloat */
@@ -2217,14 +2223,14 @@ namespace CoreAnimation {
 	}
 
 	[BaseType (typeof (NSObject))]
-	interface CARenderer {
+	partial class CARenderer : NSObject {
 		[Static]
 		[Export ("rendererWithMTLTexture:options:")]
-		CARenderer Create (IMTLTexture tex, [NullAllowed] NSDictionary dict);
+		static extern CARenderer Create (IMTLTexture tex, [NullAllowed] NSDictionary dict);
 
 		[Static]
 		[Wrap ("Create (tex, options.GetDictionary ())")]
-		CARenderer Create (IMTLTexture tex, [NullAllowed] CARendererOptions options);
+		static extern CARenderer Create (IMTLTexture tex, [NullAllowed] CARendererOptions options);
 
 		[NullAllowed, Export ("layer", ArgumentSemantic.Strong)]
 		CALayer Layer { get; set; }
@@ -2232,34 +2238,34 @@ namespace CoreAnimation {
 		[Export ("bounds", ArgumentSemantic.Assign)]
 		CGRect Bounds { get; set; }
 
-		[Export ("beginFrameAtTime:timeStamp:")]
-		void BeginFrame (double timeInSeconds, ref CVTimeStamp ts);
+		//[Export ("beginFrameAtTime:timeStamp:")]
+		//void BeginFrame (double timeInSeconds, ref CVTimeStamp ts);
 
 		[Sealed]
 		[Internal] // since the timestamp is nullable
 		[Export ("beginFrameAtTime:timeStamp:")]
-		void BeginFrame (double timeInSeconds, IntPtr ts);
+		static extern void BeginFrame (double timeInSeconds, IntPtr ts);
 
 		[Wrap ("BeginFrame (timeInSeconds, IntPtr.Zero)")]
-		void BeginFrame (double timeInSeconds);
+		static extern void BeginFrame (double timeInSeconds);
 
 		[Export ("updateBounds")]
-		CGRect UpdateBounds ();
+		static extern CGRect UpdateBounds ();
 
 		[Export ("addUpdateRect:")]
-		void AddUpdate (CGRect r);
+		static extern void AddUpdate (CGRect r);
 
 		[Export ("render")]
-		void Render ();
+		static extern void Render ();
 
 		[Export ("nextFrameTime")]
-		double /* CFTimeInterval */ GetNextFrameTime ();
+		static extern double /* CFTimeInterval */ GetNextFrameTime ();
 
 		[Export ("endFrame")]
-		void EndFrame ();
+		static extern void EndFrame ();
 
 		[Export ("setDestination:")]
-		void SetDestination (IMTLTexture tex);
+		static extern void SetDestination (IMTLTexture tex);
 	}
 
 	[iOS (16, 0)]
@@ -2267,30 +2273,30 @@ namespace CoreAnimation {
 	[MacCatalyst (16, 0)]
 	[BaseType (typeof (NSObject), Name = "CAEDRMetadata")]
 	[DisableDefaultCtor]
-	interface CAEdrMetadata : NSCopying, NSSecureCoding {
+	partial class CAEdrMetadata : NSCopying {
 
 		[Static]
 		[Export ("HDR10MetadataWithDisplayInfo:contentInfo:opticalOutputScale:")]
-		CAEdrMetadata GetHdr10Metadata ([NullAllowed] NSData displayData, [NullAllowed] NSData contentData, float scale);
+		static extern CAEdrMetadata GetHdr10Metadata ([NullAllowed] NSData displayData, [NullAllowed] NSData contentData, float scale);
 
 		[Static]
 		[Export ("HDR10MetadataWithMinLuminance:maxLuminance:opticalOutputScale:")]
-		CAEdrMetadata GetHdr10Metadata (float minNits, float maxNits, float scale);
+		static extern CAEdrMetadata GetHdr10Metadata (float minNits, float maxNits, float scale);
 
 		[Static]
 		[Export ("HLGMetadata", ArgumentSemantic.Retain)]
-		CAEdrMetadata HlgMetadata { get; }
+		static extern CAEdrMetadata HlgMetadata { get; }
 
 		[Mac (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("available")]
-		bool Available { [Bind ("isAvailable")] get; }
+		static extern bool Available { [Bind ("isAvailable")] get; }
 
 		[Static]
 		[Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("HLGMetadataWithAmbientViewingEnvironment:")]
-		CAEdrMetadata GetHlgMetadata (NSData ambientViewingEnvironmentData);
+		static extern CAEdrMetadata GetHlgMetadata (NSData ambientViewingEnvironmentData);
 	}
 
 	[BaseType (typeof (NSObject))]
@@ -2321,30 +2327,30 @@ namespace CoreAnimation {
 	[BaseType (typeof (NSObject))]
 	[iOS (17, 0), TV (17, 0), Mac (14, 0), MacCatalyst (17, 0)]
 	[DisableDefaultCtor]
-	interface CAMetalDisplayLink {
+	partial class CAMetalDisplayLink {
 		[Export ("initWithMetalLayer:")]
-		NativeHandle Constructor (CAMetalLayer layer);
+		 extern NativeHandle Constructor (CAMetalLayer layer);
 
 		[Export ("addToRunLoop:forMode:")]
-		void AddToRunLoop (NSRunLoop runloop, NSRunLoopMode mode);
+		 extern void AddToRunLoop (NSRunLoop runloop, NSRunLoopMode mode);
 
 		[Export ("removeFromRunLoop:forMode:")]
-		void RemoveFromRunLoop (NSRunLoop runloop, NSRunLoopMode mode);
+		extern void RemoveFromRunLoop (NSRunLoop runloop, NSRunLoopMode mode);
 
 		[Export ("invalidate")]
-		void Invalidate ();
+		extern void Invalidate ();
 
 		[Export ("delegate", ArgumentSemantic.Weak), NullAllowed]
-		NSObject WeakDelegate { get; set; }
+		extern NSObject WeakDelegate { get; set; }
 
 		[Wrap ("WeakDelegate"), NullAllowed]
-		ICAMetalDisplayLinkDelegate Delegate { get; set; }
+		extern ICAMetalDisplayLinkDelegate Delegate { get; set; }
 
 		[Export ("preferredFrameLatency")]
-		float PreferredFrameLatency { get; set; }
+		extern float PreferredFrameLatency { get; set; }
 
-		[Export ("preferredFrameRateRange")]
-		CAFrameRateRange PreferredFrameRateRange { get; set; }
+		//[Export ("preferredFrameRateRange")]
+		//CAFrameRateRange PreferredFrameRateRange { get; set; }
 
 		[Export ("paused")]
 		bool Paused { [Bind ("isPaused")] get; set; }

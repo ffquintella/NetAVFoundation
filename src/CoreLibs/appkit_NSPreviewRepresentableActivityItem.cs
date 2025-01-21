@@ -10,6 +10,7 @@ using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
 using CoreData;
+using CoreLibs;
 //using Intents;
 //using SharedWithYouCore;
 //using Symbols;
@@ -62,10 +63,10 @@ namespace AppKit
         public extern string? Title { get; }
 
         [NullAllowed, Export ("imageProvider", ArgumentSemantic.Strong)]
-        public extern NSItemProvider? ImageProvider { get; }
+        extern NSItemProvider? ImageProvider { get; }
 
         [NullAllowed, Export ("iconProvider", ArgumentSemantic.Strong)]
-        public extern NSItemProvider? IconProvider { get; }
+        extern NSItemProvider? IconProvider { get; }
     }
 
     //[NoMacCatalyst, Mac (13, 0)]
@@ -79,6 +80,6 @@ namespace AppKit
         [NoiOS]
         [Export ("initWithItem:title:imageProvider:iconProvider:")]
         [DesignatedInitializer]
-        public extern NativeHandle Constructor (NSObject item, [NullAllowed] string title, [NullAllowed] NSItemProvider imageProvider, [NullAllowed] NSItemProvider iconProvider);
+        extern NativeHandle Constructor (NSObject item, [NullAllowed] string title, [NullAllowed] NSItemProvider imageProvider, [NullAllowed] NSItemProvider iconProvider);
     }
 }

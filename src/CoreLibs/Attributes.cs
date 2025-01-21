@@ -601,3 +601,14 @@ public class MarshalDirectiveAttribute : Attribute {
 	public string NativeSuffix { get; set; }
 	public string Library { get; set; }
 }
+
+public class DefaultValueFromArgumentAttribute : Attribute {
+	public DefaultValueFromArgumentAttribute (string s)
+	{
+		Argument = s;
+	}
+	public string Argument { get; set; }
+}
+
+public class NoDefaultValueAttribute : Attribute {
+}

@@ -25,7 +25,7 @@ using UIKit;
 using WebKit;
 #endif
 using ObjCRuntime;
-using WebKit;
+//using WebKit;
 
 #if !COREBUILD
 #if __MACOS__
@@ -132,7 +132,7 @@ namespace Foundation {
 			}
 		}
 #endif // !TVOS && !WATCH
-
+/*
 #if __MACOS__
 #if NET
 		[UnsupportedOSPlatform ("ios")]
@@ -149,7 +149,7 @@ namespace Foundation {
 			}
 		}
 #endif // !__MACOS__
-
+*/
 #if __MACOS__
 #if NET
 		[UnsupportedOSPlatform ("ios")]

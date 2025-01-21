@@ -8,14 +8,15 @@
 // Copyright 2011, 2015 Xamarin Inc.
 //
 using System;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
-using CloudKit;
+//using CloudKit;
 #if MONOMAC
 using AppKit;
 #endif
 #if !WATCH
-using CoreSpotlight;
+//using CoreSpotlight;
 #endif
 
 #if !NET
@@ -74,8 +75,6 @@ namespace CoreData {
 	[NoWatch]
 	[NoTV]
 	[Native] // NUInteger -> NSPersistentStoreCoordinator.h
-	[Deprecated (PlatformName.iOS, 10, 0, message: "Please see the release notes and Core Data documentation.")]
-	[Deprecated (PlatformName.MacOSX, 10, 12, message: "Please see the release notes and Core Data documentation.")]
 	[MacCatalyst (13, 1)]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Please see the release notes and Core Data documentation.")]
 	public enum NSPersistentStoreUbiquitousTransitionType : ulong {
@@ -153,18 +152,18 @@ namespace CoreData {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface NSFetchIndexElementDescription : NSCoding, NSCopying {
-		[Export ("initWithProperty:collationType:")]
-		NativeHandle Constructor (NSPropertyDescription property, NSFetchIndexElementType collationType);
+	class NSFetchIndexElementDescription :  NSCopying {
+		//[Export ("initWithProperty:collationType:")]
+		//NativeHandle Constructor (NSPropertyDescription property, NSFetchIndexElementType collationType);
 
 		[NullAllowed, Export ("property", ArgumentSemantic.Retain)]
-		NSPropertyDescription Property { get; }
+		extern NSPropertyDescription Property { get; }
 
 		[NullAllowed, Export ("propertyName", ArgumentSemantic.Retain)]
 		string PropertyName { get; }
 
-		[Export ("collationType", ArgumentSemantic.Assign)]
-		NSFetchIndexElementType CollationType { get; set; }
+		//[Export ("collationType", ArgumentSemantic.Assign)]
+		//NSFetchIndexElementType CollationType { get; set; }
 
 		[Export ("ascending")]
 		bool IsAscending { [Bind ("isAscending")] get; set; }
@@ -175,9 +174,9 @@ namespace CoreData {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface NSFetchIndexDescription : NSCoding, NSCopying {
+	class NSFetchIndexDescription : NSCopying {
 		[Export ("initWithName:elements:")]
-		NativeHandle Constructor (string name, [NullAllowed] NSFetchIndexElementDescription [] elements);
+		extern NativeHandle Constructor (string name, [NullAllowed] NSFetchIndexElementDescription [] elements);
 
 		[Export ("name")]
 		string Name { get; set; }
@@ -218,6 +217,7 @@ namespace CoreData {
 		void SetValue ([NullAllowed] NSObject value, string key);
 
 	}
+	/*
 	[BaseType (typeof (NSPropertyDescription))]
 	interface NSAttributeDescription {
 
@@ -253,19 +253,20 @@ namespace CoreData {
 		[Export ("allowsCloudEncryption")]
 		bool AllowsCloudEncryption { get; set; }
 	}
+	*/
 
 	[BaseType (typeof (NSObject))]
-	interface NSEntityDescription : NSCoding, NSCopying {
+	class NSEntityDescription :  NSCopying {
 
 		[Static, Export ("entityForName:inManagedObjectContext:")]
 		[return: NullAllowed]
-		NSEntityDescription EntityForName (string entityName, NSManagedObjectContext context);
+		static extern NSEntityDescription EntityForName (string entityName, NSManagedObjectContext context);
 
 		[Static, Export ("insertNewObjectForEntityForName:inManagedObjectContext:")]
 #if !NET
 		NSObject InsertNewObjectForEntityForName (string entityName, NSManagedObjectContext context);
 #else
-		NSManagedObject InsertNewObject (string entityName, NSManagedObjectContext context);
+		extern NSManagedObject InsertNewObject (string entityName, NSManagedObjectContext context);
 #endif
 
 		[Export ("managedObjectModel")]
@@ -326,10 +327,10 @@ namespace CoreData {
 #endif
 
 		[Export ("relationshipsWithDestinationEntity:")]
-		NSRelationshipDescription [] RelationshipsWithDestinationEntity (NSEntityDescription entity);
+		extern NSRelationshipDescription [] RelationshipsWithDestinationEntity (NSEntityDescription entity);
 
 		[Export ("isKindOfEntity:")]
-		bool IsKindOfEntity (NSEntityDescription entity);
+		extern bool IsKindOfEntity (NSEntityDescription entity);
 
 		[Export ("versionHash")]
 		NSData VersionHash { get; }
@@ -339,10 +340,6 @@ namespace CoreData {
 		string VersionHashModifier { get; set; }
 
 		[Export ("compoundIndexes", ArgumentSemantic.Retain)]
-		[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'NSEntityDescription.Indexes' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'NSEntityDescription.Indexes' instead.")]
-		[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'NSEntityDescription.Indexes' instead.")]
-		[Deprecated (PlatformName.WatchOS, 4, 0, message: "Use 'NSEntityDescription.Indexes' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSEntityDescription.Indexes' instead.")]
 		NSPropertyDescription [] CompoundIndexes { get; set; }
 
@@ -361,14 +358,14 @@ namespace CoreData {
 	}
 
 	[BaseType (typeof (NSObject))]
-	interface NSEntityMapping {
+	partial class NSEntityMapping {
 
 		[Export ("name")]
 		[NullAllowed]
 		string Name { get; set; }
 
-		[Export ("mappingType")]
-		NSEntityMappingType MappingType { get; set; }
+		//[Export ("mappingType")]
+		//NSEntityMappingType MappingType { get; set; }
 
 		[NullAllowed] // by default this property is null
 		[Export ("sourceEntityName")]
@@ -438,8 +435,8 @@ namespace CoreData {
 		[NullAllowed, Export ("expression", ArgumentSemantic.Strong)]
 		NSExpression Expression { get; set; }
 
-		[Export ("expressionResultType")]
-		NSAttributeType ResultType { get; set; }
+		//[Export ("expressionResultType")]
+		//NSAttributeType ResultType { get; set; }
 	}
 
 	[BaseType (typeof (NSPropertyDescription))]
@@ -480,11 +477,11 @@ namespace CoreData {
 
 	[DisableDefaultCtor] // designated
 	[BaseType (typeof (NSPersistentStoreRequest))]
-	interface NSFetchRequest : NSCoding {
+	class NSFetchRequest : NSCoding {
 
 		[DesignatedInitializer]
 		[Export ("init")]
-		NativeHandle Constructor ();
+		extern NativeHandle Constructor ();
 
 		[Export ("entity", ArgumentSemantic.Retain)]
 		[NullAllowed]
@@ -508,8 +505,8 @@ namespace CoreData {
 		[NullAllowed]
 		NSPersistentStore [] AffectedStores { get; set; }
 
-		[Export ("resultType")]
-		NSFetchRequestResultType ResultType { get; set; }
+		//[Export ("resultType")]
+		//NSFetchRequestResultType ResultType { get; set; }
 
 		[Export ("returnsDistinctResults")]
 		bool ReturnsDistinctResults { get; set; }
@@ -537,10 +534,10 @@ namespace CoreData {
 		[Static]
 		[Export ("fetchRequestWithEntityName:")]
 		// note: Xcode 6.3 changed the return value type from `NSFetchRequest*` to `instancetype`
-		NSFetchRequest FromEntityName (string entityName);
+		extern NSFetchRequest FromEntityName (string entityName);
 
 		[Export ("initWithEntityName:")]
-		NativeHandle Constructor (string entityName);
+		extern NativeHandle Constructor (string entityName);
 
 		[NullAllowed, Export ("entityName", ArgumentSemantic.Strong)]
 		string EntityName { get; }
@@ -562,7 +559,7 @@ namespace CoreData {
 		[MacCatalyst (13, 1)]
 		[Export ("execute:")]
 		[return: NullAllowed]
-		INSFetchRequestResult [] Execute (out NSError error);
+		extern INSFetchRequestResult [] Execute (out NSError error);
 	}
 
 	[NoMac]
@@ -647,11 +644,11 @@ namespace CoreData {
 		[Export ("controllerWillChangeContent:")]
 		void WillChangeContent (NSFetchedResultsController controller);
 
-		[Export ("controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:")]
-		void DidChangeObject (NSFetchedResultsController controller, NSObject anObject, [NullAllowed] NSIndexPath indexPath, NSFetchedResultsChangeType type, [NullAllowed] NSIndexPath newIndexPath);
+		//[Export ("controller:didChangeObject:atIndexPath:forChangeType:newIndexPath:")]
+		//void DidChangeObject (NSFetchedResultsController controller, NSObject anObject, [NullAllowed] NSIndexPath indexPath, NSFetchedResultsChangeType type, [NullAllowed] NSIndexPath newIndexPath);
 
-		[Export ("controller:didChangeSection:atIndex:forChangeType:")]
-		void DidChangeSection (NSFetchedResultsController controller, INSFetchedResultsSectionInfo sectionInfo, nuint sectionIndex, NSFetchedResultsChangeType type);
+		//[Export ("controller:didChangeSection:atIndex:forChangeType:")]
+		//void DidChangeSection (NSFetchedResultsController controller, INSFetchedResultsSectionInfo sectionInfo, nuint sectionIndex, NSFetchedResultsChangeType type);
 
 		[Export ("controllerDidChangeContent:")]
 		void DidChangeContent (NSFetchedResultsController controller);

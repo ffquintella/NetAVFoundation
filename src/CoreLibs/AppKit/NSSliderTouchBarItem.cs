@@ -1,4 +1,5 @@
 using System;
+using CoreLibs;
 using ObjCRuntime;
 using Foundation;
 
@@ -31,7 +32,7 @@ namespace AppKit {
 	
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSTouchBarItem))]
-	[DisableDefaultCtor]
+	//[DisableDefaultCtor]
 	public partial class NSSliderTouchBarItem: NSTouchBarItem {
 		[Export ("initWithIdentifier:")]
 		[DesignatedInitializer]

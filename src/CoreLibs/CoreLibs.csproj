@@ -10,10 +10,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\bgen\bgen.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
         <EmbeddedResource Include="Errors.resx">
             <Type>Resx</Type>
             <Generator>ResXFileCodeGenerator</Generator>

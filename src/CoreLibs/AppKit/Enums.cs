@@ -23,6 +23,7 @@
 //
 using System;
 using System.ComponentModel;
+using CoreLibs;
 using ObjCRuntime;
 using Foundation;
 
@@ -30,7 +31,7 @@ using Foundation;
 
 namespace AppKit {
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSRunResponse : long {
 		Stopped = -1000,
@@ -38,7 +39,7 @@ namespace AppKit {
 		Continues = -1002
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSApplicationActivationOptions : ulong {
 		Default = 0,
@@ -46,13 +47,13 @@ namespace AppKit {
 		ActivateIgnoringOtherWindows = 2
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSApplicationActivationPolicy : long {
 		Regular, Accessory, Prohibited
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSApplicationPresentationOptions : ulong {
@@ -75,7 +76,7 @@ namespace AppKit {
 		DisableCursorLocationAssistance = (1 << 12),
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSApplicationDelegateReply : ulong {
 		Success,
@@ -83,27 +84,27 @@ namespace AppKit {
 		Failure
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSRequestUserAttentionType : ulong {
 		CriticalRequest = 0,
 		InformationalRequest = 10
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSApplicationTerminateReply : ulong {
 		Cancel, Now, Later
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSApplicationPrintReply : ulong {
 		Cancelled, Success, Failure, ReplyLater
 	}
 
 #if !NET
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSApplicationLayoutDirection : long {
 		LeftToRight = 0,
@@ -111,13 +112,13 @@ namespace AppKit {
 	}
 #endif
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSImageInterpolation : ulong {
 		Default, None, Low, Medium, High
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSComposite : ulong {
 		Clear,
@@ -132,7 +133,7 @@ namespace AppKit {
 		DestinationAtop,
 		XOR,
 		PlusDarker,
-		[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use NSCompositeSourceOver instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use NSCompositeSourceOver instead.")]
 		Highlight,
 		PlusLighter,
 		Multiply,
@@ -152,7 +153,7 @@ namespace AppKit {
 		Luminosity
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSBackingStore : ulong {
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'Buffered' instead.")]
@@ -161,26 +162,27 @@ namespace AppKit {
 		Nonretained,
 		Buffered,
 	}
+	
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSWindowOrderingMode : long {
 		Below = -1, Out, Above,
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSFocusRingPlacement : ulong {
 		RingOnly, RingBelow, RingAbove,
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSFocusRingType : ulong {
 		Default, None, Exterior
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSColorRenderingIntent : long {
 		Default,
@@ -191,20 +193,20 @@ namespace AppKit {
 
 	}
 
-	[MacCatalyst (13, 1)]
+	//[MacCatalyst (13, 1)]
 	[Native]
 	public enum NSRectEdge : ulong {
 		MinXEdge, MinYEdge, MaxXEdge, MaxYEdge
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSUserInterfaceLayoutDirection : long {
 		LeftToRight, RightToLeft
 	}
 
 	#region NSColorSpace
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSColorSpaceModel : long {
 		Unknown = -1,
@@ -222,14 +224,14 @@ namespace AppKit {
 	#endregion
 
 	#region NSParagraphStyle
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSTextTabType : ulong {
 		Left, Right, Center, Decimal
 	}
 
 	[Native]
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	public enum NSLineBreakMode : ulong {
 		ByWordWrapping,
 		CharWrapping,
@@ -244,7 +246,7 @@ namespace AppKit {
 	#region NSCell Defines 
 
 #if !NET
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use formatters instead.")]
 	public enum NSType : ulong {
@@ -258,7 +260,7 @@ namespace AppKit {
 	}
 #endif
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSCellType : ulong {
 		Null,
@@ -266,7 +268,7 @@ namespace AppKit {
 		Image
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSCellAttribute : ulong {
 		CellDisabled,
@@ -288,7 +290,7 @@ namespace AppKit {
 		CellAllowsMixedState,
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSCellImagePosition : ulong {
 		NoImage,
@@ -302,7 +304,7 @@ namespace AppKit {
 		ImageTrailing,
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSImageScale : ulong {
 		ProportionallyDown = 0,
@@ -311,7 +313,7 @@ namespace AppKit {
 		ProportionallyUpOrDown
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSCellStateValue : long {
 		Mixed = -1,
@@ -319,7 +321,7 @@ namespace AppKit {
 		On
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSCellStyleMask : ulong {
@@ -330,7 +332,7 @@ namespace AppKit {
 		ChangeBackgroundCell = 1 << 3
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSCellHit : ulong {
@@ -340,7 +342,7 @@ namespace AppKit {
 		TrackableArae = 4
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSControlTint : ulong {
 		Default = 0,    // system 'default'
@@ -349,7 +351,7 @@ namespace AppKit {
 		Clear = 7
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSControlSize : ulong {
 		Regular = 0,
@@ -358,7 +360,7 @@ namespace AppKit {
 		Large = 3,
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSBackgroundStyle : long {
 		Normal = 0,
@@ -374,7 +376,7 @@ namespace AppKit {
 
 	#region NSImage
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSImageLoadStatus : ulong {
 		Completed,
@@ -384,7 +386,7 @@ namespace AppKit {
 		ReadError
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSImageCacheMode : ulong {
 		Default,
@@ -393,7 +395,7 @@ namespace AppKit {
 		Never
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native (ConvertToNative = "NSImageResizingModeExtensions.ToNative", ConvertToManaged = "NSImageResizingModeExtensions.ToManaged")]
 	public enum NSImageResizingMode : long {
 		Stretch,
@@ -403,13 +405,13 @@ namespace AppKit {
 	#endregion
 
 	#region NSAlert
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSAlertStyle : ulong {
 		Warning, Informational, Critical
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSModalResponse : long {
 		OK = 1,
@@ -421,7 +423,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSEvent
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSEventType : ulong {
 		LeftMouseDown = 1,
@@ -465,7 +467,7 @@ namespace AppKit {
 		ChangeMode = 38,
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Flags]
 	public enum NSEventMask : ulong {
 		LeftMouseDown = 1UL << (int) NSEventType.LeftMouseDown,
@@ -504,7 +506,7 @@ namespace AppKit {
 		AnyEvent = unchecked((ulong) UInt64.MaxValue)
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSEventModifierMask : ulong {
@@ -519,13 +521,13 @@ namespace AppKit {
 		DeviceIndependentModifierFlagsMask = 0xffff0000
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSPointingDeviceType : ulong {
 		Unknown, Pen, Cursor, Eraser
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSEventButtonMask : ulong {
@@ -534,7 +536,7 @@ namespace AppKit {
 
 	// This enum is defined as an untyped enum in MacOSX.sdk/System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/HIToolbox.framework/Versions/A/Headers/Events.h
 	// It represents values that may be returned by NSEvent.KeyCode (which isn't typed as 'NSKey' because it may be many other values as well).
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 #if NET
 	public enum NSKey {
 #else
@@ -663,7 +665,7 @@ namespace AppKit {
 	}
 
 	// This is an untyped enum in AppKit's NSEvent.h
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 #if !NET
 	[Native]
 	public enum NSFunctionKey : ulong {
@@ -744,7 +746,7 @@ namespace AppKit {
 		ModeSwitch = 0xF747
 	}
 
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 #if !NET
 	[Native]
 	public enum NSEventSubtype : ulong {
@@ -774,7 +776,7 @@ namespace AppKit {
 	}
 
 #if !NET
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSSystemDefinedEvents : ulong {
 		[Deprecated (PlatformName.MacOSX, 10, 12, message: "Use 'NSEventSubtype.PowerOff' instead.")]
@@ -783,7 +785,7 @@ namespace AppKit {
 #endif // !NET
 
 #if !NET
-	[NoMacCatalyst]
+	////[NoMacCatalyst]
 	[Native]
 	public enum NSEventMouseSubtype : ulong {
 		[Deprecated (PlatformName.MacOSX, 10, 12, message: "Use 'NSEventSubtype.MouseEvent' instead.")]
@@ -800,7 +802,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSView
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSViewResizingMask : ulong {
@@ -813,19 +815,19 @@ namespace AppKit {
 		MaxYMargin = 32
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBorderType : ulong {
 		NoBorder, LineBorder, BezelBorder, GrooveBorder
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextFieldBezelStyle : ulong {
 		Square, Rounded
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSViewLayerContentsRedrawPolicy : long {
 		Never,
@@ -835,7 +837,7 @@ namespace AppKit {
 		Crossfade = 4,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSViewLayerContentsPlacement : long {
 		ScaleAxesIndependently,
@@ -855,7 +857,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSWindow
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native ("NSWindowStyleMask")]
 	public enum NSWindowStyle : ulong {
@@ -879,7 +881,7 @@ namespace AppKit {
 		FullSizeContentView = 1 << 15
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowSharingType : ulong {
 		None,
@@ -888,13 +890,13 @@ namespace AppKit {
 		ReadWrite,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowBackingLocation : ulong {
 		Default, VideoMemory, MainMemory,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSWindowCollectionBehavior : ulong {
@@ -916,7 +918,7 @@ namespace AppKit {
 		CanJoinAllApplications = 1 << 18,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSWindowNumberListOptions : ulong {
@@ -924,7 +926,7 @@ namespace AppKit {
 		AllSpaces = 1 << 4
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSelectionDirection : ulong {
 		Direct = 0,
@@ -932,7 +934,7 @@ namespace AppKit {
 		Previous
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowButton : ulong {
 		CloseButton, MiniaturizeButton, ZoomButton, ToolbarButton, DocumentIconButton, DocumentVersionsButton = 6,
@@ -940,7 +942,7 @@ namespace AppKit {
 		FullScreenButton
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTouchPhase : ulong {
@@ -956,7 +958,7 @@ namespace AppKit {
 	#endregion
 	#region NSAnimation
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAnimationCurve : ulong {
 		EaseInOut,
@@ -965,7 +967,7 @@ namespace AppKit {
 		Linear
 	};
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAnimationBlockingMode : ulong {
 		Blocking,
@@ -976,7 +978,7 @@ namespace AppKit {
 
 	#region NSBox
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTitlePosition : ulong {
 		NoTitle,
@@ -988,7 +990,7 @@ namespace AppKit {
 		BelowBottom
 	};
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBoxType : ulong {
 		NSBoxPrimary,
@@ -1002,7 +1004,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSButtonCell
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSButtonType : ulong {
 		MomentaryLightButton,
@@ -1017,7 +1019,7 @@ namespace AppKit {
 		MultiLevelAccelerator // 10.10.3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBezelStyle : ulong {
 		Automatic = 0,
@@ -1058,7 +1060,7 @@ namespace AppKit {
 #endif // !XAMCORE_5_0
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 12, message: "The GradientType property is unused, and setting it has no effect.")]
 	public enum NSGradientType : ulong {
@@ -1072,7 +1074,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSGraphics
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	// NSGraphics.h:typedef int NSWindowDepth;
 	public enum NSWindowDepth : int {
 		TwentyfourBitRgb = 0x208,
@@ -1080,7 +1082,7 @@ namespace AppKit {
 		OneHundredTwentyEightBitRgb = 0x220
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSCompositingOperation : ulong {
 		Clear,
@@ -1115,7 +1117,7 @@ namespace AppKit {
 		Luminosity
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAnimationEffect : ulong {
 		DissapearingItemDefault = 0,
@@ -1124,7 +1126,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSMatrix
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSMatrixMode : ulong {
 		Radio, Highlight, List, Track
@@ -1132,13 +1134,13 @@ namespace AppKit {
 	#endregion
 
 	#region NSBrowser
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBrowserColumnResizingType : ulong {
 		None, Auto, User
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBrowserDropOperation : ulong {
 		On, Above
@@ -1146,7 +1148,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSColorPanel
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSColorPanelMode : long {
 		None = -1,
@@ -1160,7 +1162,7 @@ namespace AppKit {
 		Crayon
 	};
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSColorPanelFlags : ulong {
@@ -1179,14 +1181,14 @@ namespace AppKit {
 	#endregion
 	#region NSDocument
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSDocumentChangeType : ulong {
 		Done, Undone, Cleared, ReadOtherContents, Autosaved, Redone,
 		Discardable = 256 /* New in Lion */
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSaveOperationType : ulong {
 		Save, SaveAs, SaveTo,
@@ -1200,25 +1202,25 @@ namespace AppKit {
 
 	#region NSBezelPath
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLineCapStyle : ulong {
 		Butt, Round, Square
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLineJoinStyle : ulong {
 		Miter, Round, Bevel
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindingRule : ulong {
 		NonZero, EvenOdd
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBezierPathElement : ulong {
 		MoveTo,
@@ -1231,7 +1233,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSRulerView
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSRulerOrientation : ulong {
 		Horizontal, Vertical
@@ -1239,7 +1241,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSGestureRecognizer
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSGestureRecognizerState : long {
 		Possible,
@@ -1253,7 +1255,7 @@ namespace AppKit {
 	#endregion
 
 	#region NSStackLayout
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSUserInterfaceLayoutOrientation : long {
 		Horizontal = 0,
@@ -1261,7 +1263,7 @@ namespace AppKit {
 	}
 
 	// NSStackView.h:typedef float NSStackViewVisibilityPriority
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	public enum NSStackViewVisibilityPriority : int {
 		MustHold = 1000,
 #if !NET
@@ -1272,7 +1274,7 @@ namespace AppKit {
 		NotVisible = 0
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSStackViewGravity : long {
 		Top = 1,
@@ -1283,7 +1285,7 @@ namespace AppKit {
 	}
 	#endregion
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSStackViewDistribution : long {
 		GravityAreas = -1,
@@ -1294,7 +1296,7 @@ namespace AppKit {
 		EqualCentering
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSDragOperation : ulong {
@@ -1309,7 +1311,7 @@ namespace AppKit {
 		All = ulong.MaxValue,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native (ConvertToNative = "NSTextAlignmentExtensions.ToNative", ConvertToManaged = "NSTextAlignmentExtensions.ToManaged")]
 	public enum NSTextAlignment : ulong {
 		Left = 0,
@@ -1333,7 +1335,7 @@ namespace AppKit {
 	}
 #endif // !NET && MONOMAC
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextMovement : long {
 		Other = 0,
@@ -1347,7 +1349,7 @@ namespace AppKit {
 		Cancel = 0x17
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSMenuProperty : ulong {
@@ -1359,13 +1361,13 @@ namespace AppKit {
 		AccessibilityDescription = 1 << 5
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSFontRenderingMode : ulong {
 		Default, Antialiased, IntegerAdvancements, AntialiasedIntegerAdvancements
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSPasteboardReadingOptions : ulong {
@@ -1392,7 +1394,7 @@ namespace AppKit {
 #endif
 
 	// Convenience enum, untyped in ObjC
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	public enum NSUnderlinePattern : int {
 		Solid = 0x0000,
 		Dot = 0x0100,
@@ -1401,20 +1403,20 @@ namespace AppKit {
 		DashDotDot = 0x0400
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSelectionAffinity : ulong {
 		Upstream, Downstream
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSelectionGranularity : ulong {
 		Character, Word, Paragraph
 	}
 
 	#region NSTrackingArea
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTrackingAreaOptions : ulong {
@@ -1431,7 +1433,7 @@ namespace AppKit {
 	}
 	#endregion
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLineSweepDirection : ulong {
 		NSLineSweepLeft,
@@ -1440,13 +1442,13 @@ namespace AppKit {
 		NSLineSweepUp
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLineMovementDirection : ulong {
 		None, Left, Right, Down, Up
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTiffCompression : ulong {
 		None = 1,
@@ -1454,16 +1456,16 @@ namespace AppKit {
 		CcittFax4 = 4,
 		Lzw = 5,
 
-		[Deprecated (PlatformName.MacOSX, 10, 7)]
+		//[Deprecated (PlatformName.MacOSX, 10, 7)]
 		Jpeg = 6,
 		Next = 32766,
 		PackBits = 32773,
 
-		[Deprecated (PlatformName.MacOSX, 10, 7)]
+		//[Deprecated (PlatformName.MacOSX, 10, 7)]
 		OldJpeg = 32865
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSBitmapImageFileType : ulong {
 		Tiff,
@@ -1474,7 +1476,7 @@ namespace AppKit {
 		Jpeg2000
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSImageRepLoadStatus : long {
 		UnknownType = -1,
@@ -1485,7 +1487,7 @@ namespace AppKit {
 		Completed = -6
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSBitmapFormat : ulong {
@@ -1499,20 +1501,20 @@ namespace AppKit {
 		BigEndian32Bit = 1 << 11
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPrintingOrientation : ulong {
 		Portrait, Landscape
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPrintingPaginationMode : ulong {
 		Auto, Fit, Clip
 	}
 
 #if !NET
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'NSGlyphProperty' instead.")]
@@ -1524,7 +1526,7 @@ namespace AppKit {
 #endif // !NET
 
 #if !NET
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use NSTextStorageEditActions instead.")]
 	[Flags]
 	[Native]
@@ -1534,13 +1536,13 @@ namespace AppKit {
 	}
 #endif
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPrinterTableStatus : ulong {
 		Ok, NotFound, Error
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 14)]
 	public enum NSScrollArrowPosition : ulong {
@@ -1550,7 +1552,7 @@ namespace AppKit {
 		None = 2,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSUsableScrollerParts : ulong {
 		NoScroller,
@@ -1559,7 +1561,7 @@ namespace AppKit {
 		All,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrollerPart : ulong {
 		None,
@@ -1573,14 +1575,14 @@ namespace AppKit {
 		KnobSlot,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 14)]
 	public enum NSScrollerArrow : ulong {
 		IncrementArrow, DecrementArrow
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPrintingPageOrder : long {
 		Descending = -1,
@@ -1589,7 +1591,7 @@ namespace AppKit {
 		Unknown
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSPrintPanelOptions : long {
@@ -1603,13 +1605,13 @@ namespace AppKit {
 		ShowsPreview = 131072
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextBlockValueType : ulong {
 		Absolute, Percentage
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextBlockDimension : ulong {
 		Width = 0,
@@ -1620,25 +1622,25 @@ namespace AppKit {
 		MaximumHeight = 6,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextBlockLayer : long {
 		Padding = -1, Border, Margin
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextBlockVerticalAlignment : ulong {
 		Top, Middle, Bottom, Baseline
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextTableLayoutAlgorithm : ulong {
 		Automatic, Fixed
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	public enum NSFontSymbolicTraits : int { // uint32_t NSFontSymbolicTraits
 		ItalicTrait = (1 << 0),
@@ -1666,7 +1668,7 @@ namespace AppKit {
 		FamilyClassMask = (int) -268435456,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSFontTraitMask : ulong {
@@ -1684,7 +1686,7 @@ namespace AppKit {
 		Unitalic = 0x1000000
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSPasteboardWritingOptions : ulong {
@@ -1704,7 +1706,7 @@ namespace AppKit {
 	}
 
 #if !NET
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use NSAlertButtonReturn instead.")]
 	[Native]
 	public enum NSAlertType : long {
@@ -1716,7 +1718,7 @@ namespace AppKit {
 #endif // !NET
 
 #if !NET
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use NSModalResponse instead.")]
 	[Native]
 	public enum NSPanelButtonType : long {
@@ -1724,7 +1726,7 @@ namespace AppKit {
 	}
 #endif
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewColumnAutoresizingStyle : ulong {
 		None = 0,
@@ -1735,7 +1737,7 @@ namespace AppKit {
 		FirstColumnOnly
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewSelectionHighlightStyle : long {
 		None = -1,
@@ -1744,7 +1746,7 @@ namespace AppKit {
 		SourceList = 1,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewDraggingDestinationFeedbackStyle : long {
 		None = -1,
@@ -1753,14 +1755,14 @@ namespace AppKit {
 		FeedbackStyleGap = 2,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewDropOperation : ulong {
 		On,
 		Above
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTableColumnResizing : long {
@@ -1769,7 +1771,7 @@ namespace AppKit {
 		UserResizingMask = (1 << 1)
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTableViewGridStyle : ulong {
@@ -1779,7 +1781,7 @@ namespace AppKit {
 		DashedHorizontalGridLine = 1 << 3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSGradientDrawingOptions : ulong {
@@ -1788,7 +1790,7 @@ namespace AppKit {
 		AfterEndingLocation = (1 << 1)
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSImageAlignment : ulong {
 		Center = 0,
@@ -1802,7 +1804,7 @@ namespace AppKit {
 		Right
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSImageFrameStyle : ulong {
 		None = 0,
@@ -1812,7 +1814,7 @@ namespace AppKit {
 		Button
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSpeechBoundary : ulong {
 		Immediate = 0,
@@ -1824,7 +1826,7 @@ namespace AppKit {
 		Sentence
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSplitViewDividerStyle : long {
 		Thick = 1,
@@ -1832,7 +1834,7 @@ namespace AppKit {
 		PaneSplitter = 3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSplitViewItemBehavior : long {
 		Default,
@@ -1842,7 +1844,7 @@ namespace AppKit {
 		Inspector,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSImageScaling : ulong {
 		ProportionallyDown = 0,
@@ -1851,7 +1853,7 @@ namespace AppKit {
 		ProportionallyUpOrDown
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSegmentStyle : long {
 		Automatic = 0,
@@ -1864,7 +1866,7 @@ namespace AppKit {
 		Separated = 8
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSegmentSwitchTracking : ulong {
 		SelectOne = 0,
@@ -1873,7 +1875,7 @@ namespace AppKit {
 		MomentaryAccelerator // 10.10.3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTickMarkPosition : ulong {
 		Below,
@@ -1884,14 +1886,14 @@ namespace AppKit {
 		Trailing = Right
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSliderType : ulong {
 		Linear = 0,
 		Circular = 1
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTokenStyle : ulong {
 		Default,
@@ -1901,7 +1903,7 @@ namespace AppKit {
 		PlainSquared = 4,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 11, 0)]
@@ -1920,7 +1922,7 @@ namespace AppKit {
 		Default = Async | AllowingClassicStartup
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSWorkspaceIconCreationOptions : ulong {
@@ -1928,7 +1930,7 @@ namespace AppKit {
 		NSExclude10_4Elements = 1 << 2
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPathStyle : long {
 		Standard,
@@ -1937,7 +1939,7 @@ namespace AppKit {
 		PopUp
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTabViewType : ulong {
 		NSTopTabsBezelBorder,
@@ -1949,13 +1951,13 @@ namespace AppKit {
 		NSNoTabsNoBorder,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTabState : ulong {
 		Selected, Background, Pressed
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTabViewControllerTabStyle : long {
 		SegmentedControlOnTop = 0,
@@ -1964,13 +1966,13 @@ namespace AppKit {
 		Unspecified = -1
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLevelIndicatorStyle : ulong {
 		Relevancy, ContinuousCapacity, DiscreteCapacity, RatingLevel
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSFontCollectionOptions : long {
@@ -1978,9 +1980,9 @@ namespace AppKit {
 	}
 
 #if XAMCORE_5_0
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 #else
-	[MacCatalyst (13, 1)]
+	//[MacCatalyst (13, 1)]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This enum doesn't exist on this platform.")]
 #if __MACCATALYST__
 	[EditorBrowsable (EditorBrowsableState.Never)]
@@ -1992,9 +1994,9 @@ namespace AppKit {
 	}
 
 #if XAMCORE_5_0
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 #else
-	[MacCatalyst (13, 1)]
+	//[MacCatalyst (13, 1)]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This enum doesn't exist on this platform.")]
 #if __MACCATALYST__
 	[EditorBrowsable (EditorBrowsableState.Never)]
@@ -2009,7 +2011,7 @@ namespace AppKit {
 	}
 
 #if XAMCORE_5_0
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 #else
 	[MacCatalyst (13, 1)]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This enum doesn't exist on this platform.")]
@@ -2042,7 +2044,7 @@ namespace AppKit {
 		InterItemGap
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSCollectionUpdateAction : long {
 		Insert,
@@ -2059,7 +2061,7 @@ namespace AppKit {
 		Horizontal
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSDatePickerStyle : ulong {
 		TextFieldAndStepper,
@@ -2067,13 +2069,13 @@ namespace AppKit {
 		TextField
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSDatePickerMode : ulong {
 		Single, Range
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSDatePickerElementFlags : ulong {
@@ -2086,7 +2088,7 @@ namespace AppKit {
 		Era = 0x100
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSOpenGLContextParameter : ulong {
@@ -2114,13 +2116,13 @@ namespace AppKit {
 		MpsSwapsInFlight = 315
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	public enum NSSurfaceOrder {
 		AboveWindow = 1,
 		BelowWindow = -1
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSOpenGLPixelFormatAttribute : uint { // uint32_t NSOpenGLPixelFormatAttribute
 		AllRenderers = 1,
@@ -2181,7 +2183,7 @@ namespace AppKit {
 		MultiScreen = 81
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSOpenGLProfile : int {
 		VersionLegacy = 0x1000, // Legacy
@@ -2189,7 +2191,7 @@ namespace AppKit {
 		Version4_1Core = 0x4100
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAlertButtonReturn : long {
 		First = 1000,
@@ -2197,7 +2199,7 @@ namespace AppKit {
 		Third = 1002,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSOpenGLGlobalOption : uint {
 		FormatCacheSize = 501,
@@ -2208,7 +2210,7 @@ namespace AppKit {
 		ResetLibrary = 504
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSGLTextureTarget : uint {
 		T2D = 0x0de1,
@@ -2216,7 +2218,7 @@ namespace AppKit {
 		RectangleExt = 0x84F5,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSGLFormat : uint {
 		RGB = 0x1907,
@@ -2224,7 +2226,7 @@ namespace AppKit {
 		DepthComponent = 0x1902,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSGLTextureCubeMap : uint {
 		None = 0,
@@ -2236,7 +2238,7 @@ namespace AppKit {
 		NegativeZ = 0x851A
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	public enum NSGLColorBuffer : uint {
 		Front = 0x0404,
@@ -2244,7 +2246,7 @@ namespace AppKit {
 		Aux0 = 0x0409
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 14)]
 	public enum NSProgressIndicatorThickness : ulong {
@@ -2254,13 +2256,13 @@ namespace AppKit {
 		Large = 18
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSProgressIndicatorStyle : ulong {
 		Bar, Spinning
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPopUpArrowPosition : ulong {
 		None,
@@ -2460,7 +2462,7 @@ namespace AppKit {
 	}
 
 	// These constants specify the possible states of a drawer.
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'NSSplitViewController' instead.")]
 	public enum NSDrawerState : ulong {
@@ -2470,7 +2472,7 @@ namespace AppKit {
 		Closing = 3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowLevel : long {
 		Normal = 0,
@@ -2486,14 +2488,14 @@ namespace AppKit {
 		TornOffMenu = 3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSRuleEditorRowType : ulong {
 		Simple = 0,
 		Compound
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSRuleEditorNestingMode : ulong {
 		Single,
@@ -2502,14 +2504,14 @@ namespace AppKit {
 		Simple
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'NSGlyphProperty' instead.")]
 	public enum NSGlyphInscription : ulong {
 		Base, Below, Above, Overstrike, OverBelow
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTypesetterBehavior : long {
 		Latest = -1,
@@ -2521,7 +2523,7 @@ namespace AppKit {
 
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSRemoteNotificationType : ulong {
@@ -2531,7 +2533,7 @@ namespace AppKit {
 		Alert = 1 << 2
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrollViewFindBarPosition : long {
 		AboveHorizontalRuler = 0,
@@ -2539,14 +2541,14 @@ namespace AppKit {
 		BelowContent
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrollerStyle : long {
 		Legacy = 0,
 		Overlay
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrollElasticity : long {
 		Automatic = 0,
@@ -2554,7 +2556,7 @@ namespace AppKit {
 		Allowed
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrollerKnobStyle : long {
 		Default = 0,
@@ -2562,7 +2564,7 @@ namespace AppKit {
 		Light = 2
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSEventPhase : ulong {
@@ -2575,7 +2577,7 @@ namespace AppKit {
 		MayBegin = 32
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSEventSwipeTrackingOptions : ulong {
@@ -2583,19 +2585,19 @@ namespace AppKit {
 		ClampGestureAmount = 2
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSEventGestureAxis : long {
 		None, Horizontal, Vertical
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLayoutConstraintOrientation : long {
 		Horizontal, Vertical
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	public enum NSLayoutPriority : int /*float*/ {
 		Required = 1000,
 		DefaultHigh = 750,
@@ -2606,19 +2608,19 @@ namespace AppKit {
 		FittingSizeCompression = 50,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPopoverAppearance : long {
 		Minimal, HUD
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPopoverBehavior : long {
 		ApplicationDefined, Transient, Semitransient
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewRowSizeStyle : long {
 		Default = -1,
@@ -2626,21 +2628,21 @@ namespace AppKit {
 		Small, Medium, Large
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableRowActionEdge : long {
 		Leading,
 		Trailing
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewRowActionStyle : long {
 		Regular,
 		Destructive
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTableViewAnimation : ulong {
@@ -2648,7 +2650,7 @@ namespace AppKit {
 		SlideUp = 0x10, SlideDown = 0x20, SlideLeft = 0x30, SlideRight = 0x40
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSDraggingItemEnumerationOptions : ulong {
@@ -2656,25 +2658,25 @@ namespace AppKit {
 		ClearNonenumeratedImages = 1 << 16
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSDraggingFormation : long {
 		Default, None, Pile, List, Stack
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSDraggingContext : long {
 		OutsideApplication, WithinApplication
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowAnimationBehavior : long {
 		Default = 0, None = 2, DocumentWindow, UtilityWindow, AlertPanel
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTextFinderAction : long {
 		ShowFindInterface = 1,
@@ -2692,7 +2694,7 @@ namespace AppKit {
 		HideReplaceInterface = 13
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSFontPanelMode : ulong {
@@ -2709,7 +2711,7 @@ namespace AppKit {
 		AllModesMask = unchecked((ulong) UInt32.MaxValue)
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSFontCollectionVisibility : ulong {
@@ -2718,7 +2720,7 @@ namespace AppKit {
 		Computer = 1 << 2,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSharingContentScope : long {
 		Item,
@@ -2726,7 +2728,7 @@ namespace AppKit {
 		Full
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTypesetterControlCharacterAction : ulong {
@@ -2738,7 +2740,7 @@ namespace AppKit {
 		ContainerBreak = 1 << 5,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPageControllerTransitionStyle : long {
 		StackHistory,
@@ -2746,7 +2748,7 @@ namespace AppKit {
 		HorizontalStrip
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowTitleVisibility : long {
 		Visible = 0,
@@ -2757,7 +2759,7 @@ namespace AppKit {
 #endif
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSViewControllerTransitionOptions : ulong {
@@ -2772,14 +2774,14 @@ namespace AppKit {
 		AllowUserInteraction = 0x1000
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSApplicationOcclusionState : ulong {
 		Visible = 1 << 1
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSWindowOcclusionState : ulong {
@@ -2789,7 +2791,7 @@ namespace AppKit {
 
 
 	#region NSVisualEffectView
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSVisualEffectMaterial : long {
 		[Advice ("Use a specific material instead.")]
@@ -2818,14 +2820,14 @@ namespace AppKit {
 		UnderPageBackground = 22,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSVisualEffectBlendingMode : long {
 		BehindWindow,
 		WithinWindow
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSVisualEffectState : long {
 		FollowsWindowActiveState,
@@ -2834,7 +2836,7 @@ namespace AppKit {
 	}
 	#endregion
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPressureBehavior : long {
 		Unknown = -1,
@@ -2846,7 +2848,7 @@ namespace AppKit {
 		PrimaryDeepDrag = 6
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSHapticFeedbackPattern : long {
 		Generic = 0,
@@ -2854,7 +2856,7 @@ namespace AppKit {
 		LevelChange
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSHapticFeedbackPerformanceTime : ulong {
 		Default = 0,
@@ -2862,7 +2864,7 @@ namespace AppKit {
 		DrawCompleted
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSpringLoadingHighlight : long {
 		None = 0,
@@ -2870,7 +2872,7 @@ namespace AppKit {
 		Emphasized
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSSpringLoadingOptions : ulong {
@@ -2880,21 +2882,21 @@ namespace AppKit {
 		NoHover = 1 << 3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSWindowListOptions : long {
 		OrderedFrontToBack = (1 << 0)
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSStatusItemBehavior : ulong {
 		RemovalAllowed = (1 << 1),
 		TerminationOnRemoval = (1 << 2)
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowTabbingMode : long {
 		Automatic,
@@ -2902,7 +2904,7 @@ namespace AppKit {
 		Disallowed
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowUserTabbingPreference : long {
 		Manual,
@@ -2910,7 +2912,7 @@ namespace AppKit {
 		InFullScreen
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSGridCellPlacement : long {
 		Inherited = 0,
@@ -2923,7 +2925,7 @@ namespace AppKit {
 		Fill
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSGridRowAlignment : long {
 		Inherited = 0,
@@ -2932,7 +2934,7 @@ namespace AppKit {
 		LastBaseline
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSImageLayoutDirection : long {
 		Unspecified = -1,
@@ -2940,7 +2942,7 @@ namespace AppKit {
 		RightToLeft = 3
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Flags]
 	public enum NSCloudKitSharingServiceOptions : ulong {
@@ -2951,14 +2953,14 @@ namespace AppKit {
 		AllowReadWrite = 1 << 5
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSDisplayGamut : long {
 		Srgb = 1,
 		P3,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTabPosition : ulong {
 		None = 0,
@@ -2968,7 +2970,7 @@ namespace AppKit {
 		Right,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTabViewBorderType : ulong {
 		None = 0,
@@ -2976,20 +2978,20 @@ namespace AppKit {
 		Bezel,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSPasteboardContentsOptions : ulong {
 		CurrentHostOnly = 1,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTouchType : long {
 		Direct,
 		Indirect
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Flags]
 	public enum NSTouchTypeMask : ulong {
@@ -2997,14 +2999,14 @@ namespace AppKit {
 		Indirect = (1 << (int) NSTouchType.Indirect)
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrubberMode : long {
 		Fixed = 0,
 		Free
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSScrubberAlignment : long {
 		None = 0,
@@ -3013,14 +3015,14 @@ namespace AppKit {
 		Center
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	public enum NSFontError : int {
 		AssetDownloadError = 66304,
 		ErrorMinimum = 66304,
 		ErrorMaximum = 66335,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAccessibilityAnnotationPosition : long {
 		FullRange,
@@ -3028,14 +3030,14 @@ namespace AppKit {
 		End,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAccessibilityCustomRotorSearchDirection : long {
 		Previous,
 		Next,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSAccessibilityCustomRotorType : long {
 		Custom = 0,
@@ -3062,7 +3064,7 @@ namespace AppKit {
 		Audiograph,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSColorType : long {
 		ComponentBased,
@@ -3070,14 +3072,14 @@ namespace AppKit {
 		Catalog,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Flags]
 	public enum NSFontAssetRequestOptions : ulong {
 		UsesStandardUI = 1 << 0,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	[Flags]
 	public enum NSFontPanelModeMask : ulong {
@@ -3094,7 +3096,7 @@ namespace AppKit {
 		AllModes = (ulong) 0XFFFFFFFF,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSLevelIndicatorPlaceholderVisibility : long {
 		Automatic = 0,
@@ -3102,7 +3104,7 @@ namespace AppKit {
 		WhileEditing = 2,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSSegmentDistribution : long {
 		Fit = 0,
@@ -3111,7 +3113,7 @@ namespace AppKit {
 		FillProportionally,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSColorSystemEffect : long {
 		None,
@@ -3121,7 +3123,7 @@ namespace AppKit {
 		Rollover,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWorkspaceAuthorizationType : long {
 		CreateSymbolicLink,
@@ -3129,7 +3131,7 @@ namespace AppKit {
 		ReplaceFile,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTableViewStyle : long {
 		Automatic,
@@ -3139,7 +3141,7 @@ namespace AppKit {
 		Plain,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSTitlebarSeparatorStyle : long {
 		Automatic,
@@ -3148,7 +3150,7 @@ namespace AppKit {
 		Shadow,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSWindowToolbarStyle : long {
 		Automatic,
@@ -3158,7 +3160,7 @@ namespace AppKit {
 		UnifiedCompact,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Flags]
 	[Native]
 	public enum NSTableViewAnimationOptions : ulong {
@@ -3171,7 +3173,7 @@ namespace AppKit {
 		SlideRight = 0x40,
 	}
 
-	[NoMacCatalyst]
+	//[NoMacCatalyst]
 	[Native]
 	public enum NSImageSymbolScale : long {
 		Small = 1,

@@ -184,8 +184,8 @@ namespace ObjCRuntime {
 			// Note: no need to handle SocketsHandlerValue here because System.Net.Http handles
 			// creating a SocketsHttpHandler when configured to do so.
 			switch (handler_name) {
-			case CFNetworkHandlerValue:
-				return new CFNetworkHandler ();
+			//case CFNetworkHandlerValue:
+			//	return new CFNetworkHandler ();
 			default:
 				if (handler_name is not null && handler_name != NSUrlSessionHandlerValue)
 					Runtime.NSLog ($"{handler_name} is not a valid HttpMessageHandler, defaulting to System.Net.Http.NSUrlSessionHandlerValue");

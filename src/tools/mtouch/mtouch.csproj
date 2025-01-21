@@ -554,6 +554,9 @@
       <ManifestResourceName>Xamarin.Bundler.Errors.zh-Hant</ManifestResourceName>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreLibs\CoreLibs.csproj" />
+  </ItemGroup>
   <Target Name="BuildSdkVersions" Inputs="../common/SdkVersions.in.cs;../common/ProductConstants.in.cs" Outputs="../common/SdkVersions.cs;../common/ProductConstants.cs">
     <Exec Command="make ../common/SdkVersions.cs ../common/ProductConstants.cs" />
   </Target>

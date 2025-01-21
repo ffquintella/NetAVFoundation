@@ -5970,117 +5970,117 @@ namespace Foundation {
 
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	partial class NSBundle {
+	partial class NSBundle: NSObject {
 		[Export ("mainBundle")]
 		[Static]
-		NSBundle MainBundle { get; }
+		public static extern NSBundle MainBundle { get; }
 
 		[Export ("bundleWithPath:")]
 		[Static]
-		NSBundle FromPath (string path);
+		public static extern NSBundle FromPath (string path);
 
 		[DesignatedInitializer]
 		[Export ("initWithPath:")]
-		NativeHandle Constructor (string path);
+		public static extern NativeHandle Constructor (string path);
 
 		[Export ("bundleForClass:")]
 		[Static]
-		NSBundle FromClass (Class c);
+		public static extern NSBundle FromClass (Class c);
 
 		[Export ("bundleWithIdentifier:")]
 		[Static]
-		NSBundle FromIdentifier (string str);
+		public static extern NSBundle FromIdentifier (string str);
 
 #if !XAMCORE_5_0
 		[Internal]
 		[Export ("allBundles")]
 		[Static]
-		NSArray _InternalAllBundles { get; }
+		public static extern NSArray _InternalAllBundles { get; }
 
 		[Obsolete ("Use the 'AllBundles' property instead.")]
 		[Wrap ("_InternalAllBundles")]
 		[Static]
-		NSBundle [] _AllBundles { get; }
+		public static extern NSBundle [] _AllBundles { get; }
 
 		[Wrap ("_InternalAllBundles")]
 		[Static]
-		NSBundle [] AllBundles { get; }
+		public static extern NSBundle [] AllBundles { get; }
 #else
 		[Export ("allBundles")][Static]
-		NSBundle [] AllBundles { get; }
+		public static extern NSBundle [] AllBundles { get; }
 #endif
 
 		[Export ("allFrameworks")]
 		[Static]
-		NSBundle [] AllFrameworks { get; }
+		public static extern NSBundle [] AllFrameworks { get; }
 
 		[Export ("load")]
-		bool Load ();
+		public  extern bool Load ();
 
 		[Export ("isLoaded")]
-		bool IsLoaded { get; }
+		public  extern bool IsLoaded { get; }
 
 		[Export ("unload")]
-		bool Unload ();
+		public  extern bool Unload ();
 
 		[Export ("bundlePath")]
-		string BundlePath { get; }
+		public  extern string BundlePath { get; }
 
 		[Export ("resourcePath")]
-		string ResourcePath { get; }
+		public  extern string ResourcePath { get; }
 
 		[Export ("executablePath")]
-		string ExecutablePath { get; }
+		public  extern string ExecutablePath { get; }
 
 		[Export ("pathForAuxiliaryExecutable:")]
-		string PathForAuxiliaryExecutable (string s);
+		public  extern string PathForAuxiliaryExecutable (string s);
 
 
 		[Export ("privateFrameworksPath")]
-		string PrivateFrameworksPath { get; }
+		public  extern string PrivateFrameworksPath { get; }
 
 		[Export ("sharedFrameworksPath")]
-		string SharedFrameworksPath { get; }
+		public  extern string SharedFrameworksPath { get; }
 
 		[Export ("sharedSupportPath")]
-		string SharedSupportPath { get; }
+		public  extern string SharedSupportPath { get; }
 
 		[Export ("builtInPlugInsPath")]
-		string BuiltinPluginsPath { get; }
+		public  extern string BuiltinPluginsPath { get; }
 
 		[Export ("bundleIdentifier")]
-		string BundleIdentifier { get; }
+		public  extern string BundleIdentifier { get; }
 
 		[Export ("classNamed:")]
-		Class ClassNamed (string className);
+		public  extern Class ClassNamed (string className);
 
 		[Export ("principalClass")]
-		Class PrincipalClass { get; }
+		public  extern Class PrincipalClass { get; }
 
 		[Export ("pathForResource:ofType:inDirectory:")]
 		[Static]
-		string PathForResourceAbsolute (string name, [NullAllowed] string ofType, string bundleDirectory);
+		public static extern string PathForResourceAbsolute (string name, [NullAllowed] string ofType, string bundleDirectory);
 
 		[Export ("pathForResource:ofType:")]
-		string PathForResource (string name, [NullAllowed] string ofType);
+		public  extern string PathForResource (string name, [NullAllowed] string ofType);
 
 		[Export ("pathForResource:ofType:inDirectory:")]
-		string PathForResource (string name, [NullAllowed] string ofType, [NullAllowed] string subpath);
+		public  extern string PathForResource (string name, [NullAllowed] string ofType, [NullAllowed] string subpath);
 
 		[Export ("pathForResource:ofType:inDirectory:forLocalization:")]
-		string PathForResource (string name, [NullAllowed] string ofType, string subpath, string localizationName);
+		public  extern string PathForResource (string name, [NullAllowed] string ofType, string subpath, string localizationName);
 
 		[Export ("localizedStringForKey:value:table:")]
-		NSString GetLocalizedString ([NullAllowed] NSString key, [NullAllowed] NSString value, [NullAllowed] NSString table);
+		public  extern NSString GetLocalizedString ([NullAllowed] NSString key, [NullAllowed] NSString value, [NullAllowed] NSString table);
 
 		[Export ("objectForInfoDictionaryKey:")]
-		NSObject ObjectForInfoDictionary (string key);
+		public  extern NSObject ObjectForInfoDictionary (string key);
 
 		[Export ("developmentLocalization")]
-		string DevelopmentLocalization { get; }
+		public  extern string DevelopmentLocalization { get; }
 
 		[Export ("infoDictionary")]
-		NSDictionary InfoDictionary { get; }
+		public  extern NSDictionary InfoDictionary { get; }
 
 		// Additions from AppKit
 		[NoiOS]
@@ -6088,7 +6088,7 @@ namespace Foundation {
 		[NoWatch]
 		[NoTV]
 		[Export ("loadNibNamed:owner:topLevelObjects:")]
-		bool LoadNibNamed (string nibName, [NullAllowed] NSObject owner, out NSArray topLevelObjects);
+		public  extern bool LoadNibNamed (string nibName, [NullAllowed] NSObject owner, out NSArray topLevelObjects);
 
 		// https://developer.apple.com/library/mac/#documentation/Cocoa/Reference/ApplicationKit/Classes/NSBundle_AppKitAdditions/Reference/Reference.html
 		[NoiOS]
@@ -6098,129 +6098,129 @@ namespace Foundation {
 		[Static]
 		[Deprecated (PlatformName.MacOSX, 10, 8)]
 		[Export ("loadNibNamed:owner:")]
-		bool LoadNib (string nibName, NSObject owner);
+		public  extern bool LoadNib (string nibName, NSObject owner);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("pathForImageResource:")]
-		string PathForImageResource (string resource);
+		public  extern string PathForImageResource (string resource);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("pathForSoundResource:")]
-		string PathForSoundResource (string resource);
+		public  extern string PathForSoundResource (string resource);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("URLForImageResource:")]
-		NSUrl GetUrlForImageResource (string resource);
+		public  extern NSUrl GetUrlForImageResource (string resource);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("contextHelpForKey:")]
-		NSAttributedString GetContextHelp (string key);
+		public  extern NSAttributedString GetContextHelp (string key);
 
 		// http://developer.apple.com/library/ios/#documentation/uikit/reference/NSBundle_UIKitAdditions/Introduction/Introduction.html
 		[NoMac]
 		[NoWatch]
 		[MacCatalyst (13, 1)]
 		[Export ("loadNibNamed:owner:options:")]
-		NSArray LoadNib (string nibName, [NullAllowed] NSObject owner, [NullAllowed] NSDictionary options);
+		public  extern NSArray LoadNib (string nibName, [NullAllowed] NSObject owner, [NullAllowed] NSDictionary options);
 
 		[Export ("bundleURL")]
-		NSUrl BundleUrl { get; }
+		public  extern NSUrl BundleUrl { get; }
 
 		[Export ("resourceURL")]
-		NSUrl ResourceUrl { get; }
+		public  extern NSUrl ResourceUrl { get; }
 
 		[Export ("executableURL")]
-		NSUrl ExecutableUrl { get; }
+		public  extern NSUrl ExecutableUrl { get; }
 
 		[Export ("URLForAuxiliaryExecutable:")]
-		NSUrl UrlForAuxiliaryExecutable (string executable);
+		public  extern NSUrl UrlForAuxiliaryExecutable (string executable);
 
 		[Export ("privateFrameworksURL")]
-		NSUrl PrivateFrameworksUrl { get; }
+		public  extern 	NSUrl PrivateFrameworksUrl { get; }
 
 		[Export ("sharedFrameworksURL")]
-		NSUrl SharedFrameworksUrl { get; }
+		public  extern NSUrl SharedFrameworksUrl { get; }
 
 		[Export ("sharedSupportURL")]
-		NSUrl SharedSupportUrl { get; }
+		public  extern NSUrl SharedSupportUrl { get; }
 
 		[Export ("builtInPlugInsURL")]
-		NSUrl BuiltInPluginsUrl { get; }
+		public  extern NSUrl BuiltInPluginsUrl { get; }
 
 		[Export ("initWithURL:")]
-		NativeHandle Constructor (NSUrl url);
+		public  extern NativeHandle Constructor (NSUrl url);
 
 		[Static, Export ("bundleWithURL:")]
-		NSBundle FromUrl (NSUrl url);
+		public  extern 	NSBundle FromUrl (NSUrl url);
 
 		[Export ("preferredLocalizations")]
-		string [] PreferredLocalizations { get; }
+		public  extern string [] PreferredLocalizations { get; }
 
 		[Export ("localizations")]
-		string [] Localizations { get; }
+		public  extern string [] Localizations { get; }
 
 		[Export ("appStoreReceiptURL")]
-		NSUrl AppStoreReceiptUrl { get; }
+		public  extern NSUrl AppStoreReceiptUrl { get; }
 
 		[Export ("pathsForResourcesOfType:inDirectory:")]
-		string [] PathsForResources (string fileExtension, [NullAllowed] string subDirectory);
+		public  extern string [] PathsForResources (string fileExtension, [NullAllowed] string subDirectory);
 
 		[Export ("pathsForResourcesOfType:inDirectory:forLocalization:")]
-		string [] PathsForResources (string fileExtension, [NullAllowed] string subDirectory, [NullAllowed] string localizationName);
+		public  extern string [] PathsForResources (string fileExtension, [NullAllowed] string subDirectory, [NullAllowed] string localizationName);
 
 		[Static, Export ("pathsForResourcesOfType:inDirectory:")]
-		string [] GetPathsForResources (string fileExtension, string bundlePath);
+		public  extern string [] GetPathsForResources (string fileExtension, string bundlePath);
 
 		[Static, Export ("URLForResource:withExtension:subdirectory:inBundleWithURL:")]
-		NSUrl GetUrlForResource (string name, string fileExtension, [NullAllowed] string subdirectory, NSUrl bundleURL);
+		public  extern NSUrl GetUrlForResource (string name, string fileExtension, [NullAllowed] string subdirectory, NSUrl bundleURL);
 
 		[Static, Export ("URLsForResourcesWithExtension:subdirectory:inBundleWithURL:")]
-		NSUrl [] GetUrlsForResourcesWithExtension (string fileExtension, [NullAllowed] string subdirectory, NSUrl bundleURL);
+		public  extern NSUrl [] GetUrlsForResourcesWithExtension (string fileExtension, [NullAllowed] string subdirectory, NSUrl bundleURL);
 
 		[Export ("URLForResource:withExtension:")]
-		NSUrl GetUrlForResource (string name, string fileExtension);
+		public  extern NSUrl GetUrlForResource (string name, string fileExtension);
 
 		[Export ("URLForResource:withExtension:subdirectory:")]
-		NSUrl GetUrlForResource (string name, string fileExtension, [NullAllowed] string subdirectory);
+		public  extern NSUrl GetUrlForResource (string name, string fileExtension, [NullAllowed] string subdirectory);
 
 		[Export ("URLForResource:withExtension:subdirectory:localization:")]
-		NSUrl GetUrlForResource (string name, string fileExtension, [NullAllowed] string subdirectory, [NullAllowed] string localizationName);
+		public  extern NSUrl GetUrlForResource (string name, string fileExtension, [NullAllowed] string subdirectory, [NullAllowed] string localizationName);
 
 		[Export ("URLsForResourcesWithExtension:subdirectory:")]
-		NSUrl [] GetUrlsForResourcesWithExtension (string fileExtension, [NullAllowed] string subdirectory);
+		public  extern NSUrl [] GetUrlsForResourcesWithExtension (string fileExtension, [NullAllowed] string subdirectory);
 
 		[Export ("URLsForResourcesWithExtension:subdirectory:localization:")]
-		NSUrl [] GetUrlsForResourcesWithExtension (string fileExtension, [NullAllowed] string subdirectory, [NullAllowed] string localizationName);
+		public  extern NSUrl [] GetUrlsForResourcesWithExtension (string fileExtension, [NullAllowed] string subdirectory, [NullAllowed] string localizationName);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("preservationPriorityForTag:")]
-		double GetPreservationPriority (NSString tag);
+		public  extern double GetPreservationPriority (NSString tag);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("setPreservationPriority:forTags:")]
-		void SetPreservationPriority (double priority, NSSet<NSString> tags);
+		public  extern void SetPreservationPriority (double priority, NSSet<NSString> tags);
 
 		[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("localizedAttributedStringForKey:value:table:")]
-		NSAttributedString GetLocalizedAttributedString (string key, [NullAllowed] string value, [NullAllowed] string tableName);
+		public  extern NSAttributedString GetLocalizedAttributedString (string key, [NullAllowed] string value, [NullAllowed] string tableName);
 
 		[Notification]
 		[Field ("NSBundleDidLoadNotification")]
-		NSString BundleDidLoadNotification { get; }
+		public  extern NSString BundleDidLoadNotification { get; }
 	}
 
 	[NoMac]
@@ -7348,153 +7348,149 @@ namespace Foundation {
 	}
 
 	[BaseType (typeof (NSObject))]
-	partial class NSProcessInfo {
+	public partial class NSProcessInfo {
 		[Export ("processInfo", ArgumentSemantic.Strong)]
 		[Static]
-		NSProcessInfo ProcessInfo { get; }
+		public static extern NSProcessInfo ProcessInfo { get; }
 
 		[Export ("arguments")]
-		string [] Arguments { get; }
+		public  extern string [] Arguments { get; }
 
 		[Export ("environment")]
-		NSDictionary Environment { get; }
+		public  extern NSDictionary Environment { get; }
 
 		[Export ("processIdentifier")]
-		int ProcessIdentifier { get; } /* int, not NSInteger */
+		public  extern int ProcessIdentifier { get; } /* int, not NSInteger */
 
 		[Export ("globallyUniqueString")]
-		string GloballyUniqueString { get; }
+		public  extern string GloballyUniqueString { get; }
 
 		[Export ("processName")]
-		string ProcessName { get; set; }
+		public  extern string ProcessName { get; set; }
 
 		[Export ("hostName")]
-		string HostName { get; }
+		public  extern string HostName { get; }
 
-		[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use 'OperatingSystemVersion' or 'IsOperatingSystemAtLeastVersion' instead.")]
-		[Deprecated (PlatformName.iOS, 8, 0, message: "Use 'OperatingSystemVersion' or 'IsOperatingSystemAtLeastVersion' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'OperatingSystemVersion' or 'IsOperatingSystemAtLeastVersion' instead.")]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'OperatingSystemVersion' or 'IsOperatingSystemAtLeastVersion' instead.")]
 		[Export ("operatingSystem")]
 		nint OperatingSystem { get; }
 
-		[Deprecated (PlatformName.MacOSX, 10, 10, message: "Use 'OperatingSystemVersionString' instead.")]
-		[Deprecated (PlatformName.iOS, 8, 0, message: "Use 'OperatingSystemVersionString' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'OperatingSystemVersionString' instead.")]
+
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'OperatingSystemVersionString' instead.")]
 		[Export ("operatingSystemName")]
-		string OperatingSystemName { get; }
+		public  extern string OperatingSystemName { get; }
 
 		[Export ("operatingSystemVersionString")]
-		string OperatingSystemVersionString { get; }
+		public  extern string OperatingSystemVersionString { get; }
 
 		[Export ("physicalMemory")]
-		ulong PhysicalMemory { get; }
+		public  extern ulong PhysicalMemory { get; }
 
 		[Export ("processorCount")]
-		nint ProcessorCount { get; }
+		public  extern nint ProcessorCount { get; }
 
 		[Export ("activeProcessorCount")]
-		nint ActiveProcessorCount { get; }
+		public  extern nint ActiveProcessorCount { get; }
 
 		[Export ("systemUptime")]
-		double SystemUptime { get; }
+		public  extern double SystemUptime { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("beginActivityWithOptions:reason:")]
-		NSObject BeginActivity (NSActivityOptions options, string reason);
+		public  extern NSObject BeginActivity (NSActivityOptions options, string reason);
 
 		[MacCatalyst (13, 1)]
 		[Export ("endActivity:")]
-		void EndActivity (NSObject activity);
+		public  extern void EndActivity (NSObject activity);
 
 		[MacCatalyst (13, 1)]
 		[Export ("performActivityWithOptions:reason:usingBlock:")]
-		void PerformActivity (NSActivityOptions options, string reason, Action runCode);
+		public  extern void PerformActivity (NSActivityOptions options, string reason, Action runCode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("isOperatingSystemAtLeastVersion:")]
-		bool IsOperatingSystemAtLeastVersion (NSOperatingSystemVersion version);
+		public  extern bool IsOperatingSystemAtLeastVersion (NSOperatingSystemVersion version);
 
 		[MacCatalyst (13, 1)]
 		[Export ("operatingSystemVersion")]
-		NSOperatingSystemVersion OperatingSystemVersion { get; }
+		public  extern NSOperatingSystemVersion OperatingSystemVersion { get; }
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("enableSuddenTermination")]
-		void EnableSuddenTermination ();
+		public  extern void EnableSuddenTermination ();
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("disableSuddenTermination")]
-		void DisableSuddenTermination ();
+		public  extern void DisableSuddenTermination ();
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("enableAutomaticTermination:")]
-		void EnableAutomaticTermination (string reason);
+		public  extern void EnableAutomaticTermination (string reason);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("disableAutomaticTermination:")]
-		void DisableAutomaticTermination (string reason);
+		public  extern void DisableAutomaticTermination (string reason);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("automaticTerminationSupportEnabled")]
-		bool AutomaticTerminationSupportEnabled { get; set; }
+		public  extern bool AutomaticTerminationSupportEnabled { get; set; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("performExpiringActivityWithReason:usingBlock:")]
-		void PerformExpiringActivity (string reason, Action<bool> block);
+		public  extern void PerformExpiringActivity (string reason, Action<bool> block);
 
 		[TV (15, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("lowPowerModeEnabled")]
-		bool LowPowerModeEnabled { [Bind ("isLowPowerModeEnabled")] get; }
+		public  extern bool LowPowerModeEnabled { [Bind ("isLowPowerModeEnabled")] get; }
 
 		[MacCatalyst (13, 1)]
 		[Notification]
 		[Field ("NSProcessInfoPowerStateDidChangeNotification")]
-		NSString PowerStateDidChangeNotification { get; }
+		public  extern NSString PowerStateDidChangeNotification { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("thermalState")]
-		NSProcessInfoThermalState ThermalState { get; }
+		public  extern NSProcessInfoThermalState ThermalState { get; }
 
 		[Field ("NSProcessInfoThermalStateDidChangeNotification")]
 		[MacCatalyst (13, 1)]
 		[Notification]
-		NSString ThermalStateDidChangeNotification { get; }
+		public  extern NSString ThermalStateDidChangeNotification { get; }
 
 		#region NSProcessInfoPlatform (NSProcessInfo)
 		[Watch (6, 0), TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("macCatalystApp")]
-		bool IsMacCatalystApplication { [Bind ("isMacCatalystApp")] get; }
+		public  extern bool IsMacCatalystApplication { [Bind ("isMacCatalystApp")] get; }
 
 		[Watch (7, 0), TV (14, 0), iOS (14, 0)]
 		[MacCatalyst (14, 0)]
 		[Export ("iOSAppOnMac")]
-		bool IsiOSApplicationOnMac { [Bind ("isiOSAppOnMac")] get; }
+		public  extern bool IsiOSApplicationOnMac { [Bind ("isiOSAppOnMac")] get; }
 		#endregion
 
 		[Field ("NSProcessInfoPerformanceProfileDidChangeNotification", "Metal")]
 		[Notification]
 		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0), NoWatch]
-		NSString PerformanceProfileDidChangeNotification { get; }
+		public  extern NSString PerformanceProfileDidChangeNotification { get; }
 	}
 
 	[NoWatch]

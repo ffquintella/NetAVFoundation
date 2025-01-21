@@ -6,8 +6,10 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using Foundation;
 using CoreFoundation;
+using CoreLibs;
 using Microsoft.VisualBasic;
 using ObjCRuntime;
+using Constants = ObjCRuntime.Constants;
 
 namespace CoreMedia {
 
@@ -137,5 +139,7 @@ namespace CoreMedia {
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (theAttachments));
 			CMSetAttachments (target.Handle, theAttachments.Handle, attachmentMode);
 		}
+
+		public static NativeHandle Handle { get; }
 	}
 }

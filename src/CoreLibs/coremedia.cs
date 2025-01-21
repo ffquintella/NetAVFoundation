@@ -5,6 +5,7 @@
 //
 
 using System;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -16,11 +17,11 @@ namespace CoreMedia {
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
 	[Partial]
-	interface CMMemoryPool {
+	partial class CMMemoryPool {
 
 		[Internal]
 		[Field ("kCMMemoryPoolOption_AgeOutPeriod")]
-		IntPtr AgeOutPeriodSelector { get; }
+		public extern static IntPtr AgeOutPeriodSelector { get; }
 	}
 
 	[NoWatch, NoTV, Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
@@ -42,194 +43,194 @@ namespace CoreMedia {
 	[Internal]
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
-	interface CMTextMarkupAttributesKeys {
+	internal static class CMTextMarkupAttributesKeys {
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_ForegroundColorARGB")]
-		NSString ForegroundColorARGB { get; }
+		internal static extern NSString ForegroundColorARGB { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_BackgroundColorARGB")]
-		NSString BackgroundColorARGB { get; }
+		internal static extern NSString BackgroundColorARGB { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_BoldStyle")]
-		NSString BoldStyle { get; }
+		internal static extern NSString BoldStyle { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_ItalicStyle")]
-		NSString ItalicStyle { get; }
+		internal static extern NSString ItalicStyle { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_UnderlineStyle")]
-		NSString UnderlineStyle { get; }
+		internal static extern NSString UnderlineStyle { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_FontFamilyName")]
-		NSString FontFamilyName { get; }
+		internal static extern NSString FontFamilyName { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_RelativeFontSize")]
-		NSString RelativeFontSize { get; }
+		internal static extern NSString RelativeFontSize { get; }
 
 		[Internal]
 		[Field ("kCMTextMarkupAttribute_BaseFontSizePercentageRelativeToVideoHeight")]
-		NSString BaseFontSizePercentageRelativeToVideoHeight { get; }
+		internal static extern NSString BaseFontSizePercentageRelativeToVideoHeight { get; }
 	}
 
 	[Static]
 	[Internal]
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
-	interface CMSampleAttachmentKey {
+	internal static class CMSampleAttachmentKey {
 		[Field ("kCMSampleAttachmentKey_NotSync")]
-		NSString NotSync { get; }
+		public static extern NSString NotSync { get; }
 
 		[Field ("kCMSampleAttachmentKey_PartialSync")]
-		NSString PartialSync { get; }
+		public static extern NSString PartialSync { get; }
 
 		[Field ("kCMSampleAttachmentKey_HasRedundantCoding")]
-		NSString HasRedundantCoding { get; }
+		public static extern NSString HasRedundantCoding { get; }
 
 		[Field ("kCMSampleAttachmentKey_IsDependedOnByOthers")]
-		NSString IsDependedOnByOthers { get; }
+		public static extern NSString IsDependedOnByOthers { get; }
 
 		[Field ("kCMSampleAttachmentKey_DependsOnOthers")]
-		NSString DependsOnOthers { get; }
+		public static extern NSString DependsOnOthers { get; }
 
 		[Field ("kCMSampleAttachmentKey_EarlierDisplayTimesAllowed")]
-		NSString EarlierDisplayTimesAllowed { get; }
+		public static extern NSString EarlierDisplayTimesAllowed { get; }
 
 		[Field ("kCMSampleAttachmentKey_DisplayImmediately")]
-		NSString DisplayImmediately { get; }
+		public static extern NSString DisplayImmediately { get; }
 
 		[Field ("kCMSampleAttachmentKey_DoNotDisplay")]
-		NSString DoNotDisplay { get; }
+		public static extern NSString DoNotDisplay { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_ResetDecoderBeforeDecoding")]
-		NSString ResetDecoderBeforeDecoding { get; }
+		public static extern NSString ResetDecoderBeforeDecoding { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_DrainAfterDecoding")]
-		NSString DrainAfterDecoding { get; }
+		public static extern NSString DrainAfterDecoding { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_PostNotificationWhenConsumed")]
-		NSString PostNotificationWhenConsumedKey { get; }
+		public static extern NSString PostNotificationWhenConsumedKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_ResumeOutput")]
-		NSString ResumeOutputKey { get; }
+		public static extern NSString ResumeOutputKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_TransitionID")]
-		NSString TransitionIdKey { get; }
+		public static extern NSString TransitionIdKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_TrimDurationAtStart")]
-		NSString TrimDurationAtStartKey { get; }
+		public static extern NSString TrimDurationAtStartKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_TrimDurationAtEnd")]
-		NSString TrimDurationAtEndKey { get; }
+		public static extern NSString TrimDurationAtEndKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_SpeedMultiplier")]
-		NSString SpeedMultiplierKey { get; }
+		public static extern NSString SpeedMultiplierKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_Reverse")]
-		NSString Reverse { get; }
+		public static extern NSString Reverse { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_FillDiscontinuitiesWithSilence")]
-		NSString FillDiscontinuitiesWithSilence { get; }
+		public static extern NSString FillDiscontinuitiesWithSilence { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_EmptyMedia")]
-		NSString EmptyMedia { get; }
+		public static extern NSString EmptyMedia { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_PermanentEmptyMedia")]
-		NSString PermanentEmptyMedia { get; }
+		public static extern NSString PermanentEmptyMedia { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_DisplayEmptyMediaImmediately")]
-		NSString DisplayEmptyMediaImmediately { get; }
+		public static extern NSString DisplayEmptyMediaImmediately { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_EndsPreviousSampleDuration")]
-		NSString EndsPreviousSampleDuration { get; }
+		public static extern NSString EndsPreviousSampleDuration { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_SampleReferenceURL")]
-		NSString SampleReferenceUrlKey { get; }
+		public static extern NSString SampleReferenceUrlKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_SampleReferenceByteOffset")]
-		NSString SampleReferenceByteOffsetKey { get; }
+		public static extern NSString SampleReferenceByteOffsetKey { get; }
 
 		[Field ("kCMSampleBufferAttachmentKey_GradualDecoderRefresh")]
-		NSString GradualDecoderRefreshKey { get; }
+		public static extern NSString GradualDecoderRefreshKey { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferAttachmentKey_DroppedFrameReason")]
-		NSString DroppedFrameReason { get; }
+		public static extern NSString DroppedFrameReason { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferAttachmentKey_StillImageLensStabilizationInfo")]
-		NSString StillImageLensStabilizationInfo { get; }
+		public static extern NSString StillImageLensStabilizationInfo { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferLensStabilizationInfo_Active")]
-		NSString BufferLensStabilizationInfo_Active { get; }
+		public static extern NSString BufferLensStabilizationInfo_Active { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferLensStabilizationInfo_OutOfRange")]
-		NSString BufferLensStabilizationInfo_OutOfRange { get; }
+		public static extern NSString BufferLensStabilizationInfo_OutOfRange { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferLensStabilizationInfo_Unavailable")]
-		NSString BufferLensStabilizationInfo_Unavailable { get; }
+		public static extern NSString BufferLensStabilizationInfo_Unavailable { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferLensStabilizationInfo_Off")]
-		NSString BufferLensStabilizationInfo_Off { get; }
+		public static extern NSString BufferLensStabilizationInfo_Off { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleAttachmentKey_HEVCTemporalLevelInfo")]
-		NSString HevcTemporalLevelInfoKey { get; }
+		public static extern NSString HevcTemporalLevelInfoKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess")]
-		NSString HevcTemporalSubLayerAccessKey { get; }
+		public static extern NSString HevcTemporalSubLayerAccessKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess")]
-		NSString HevcStepwiseTemporalSubLayerAccessKey { get; }
+		public static extern NSString HevcStepwiseTemporalSubLayerAccessKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType")]
-		NSString HevcSyncSampleNalUnitTypeKey { get; }
+		public static extern NSString HevcSyncSampleNalUnitTypeKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix")]
-		NSString CameraIntrinsicMatrixKey { get; }
+		public static extern NSString CameraIntrinsicMatrixKey { get; }
 
 		[iOS (13, 0), TV (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleAttachmentKey_AudioIndependentSampleDecoderRefreshCount")]
-		NSString AudioIndependentSampleDecoderRefreshCountKey { get; }
+		public static extern NSString AudioIndependentSampleDecoderRefreshCountKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCMSampleBufferAttachmentKey_ForceKeyFrame")]
-		NSString ForceKeyFrameKey { get; }
+		public static extern NSString ForceKeyFrameKey { get; }
 
 		[Watch (9, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[MacCatalyst (16, 0)]
 		[Field ("kCMSampleAttachmentKey_HDR10PlusPerFrameData")]
-		NSString Hdr10PlusPerFrameDataKey { get; }
+		public static extern NSString Hdr10PlusPerFrameDataKey { get; }
 
 		[NoWatch, NoTV, NoiOS, NoMacCatalyst, Mac (15, 0)]
 		[Field ("kCMSampleAttachmentKey_PostDecodeProcessingMetadata")]
-		NSString PostDecodeProcessingMetadataKey { get; }
+		public static extern NSString PostDecodeProcessingMetadataKey { get; }
 	}
 
 	/// <summary>The keys for <see cref="T:CoreMedia.CMSampleBuffer" /> attachments.</summary>
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
-	[StrongDictionary ("CMSampleAttachmentKey")]
-	interface CMSampleBufferAttachmentSettings {
+	//[StrongDictionary ("CMSampleAttachmentKey")]
+	partial class CMSampleBufferAttachmentSettings: DictionaryContainer {
 
 		NSDictionary PostNotificationWhenConsumed { get; set; }
 		bool ResumeOutput { get; set; }

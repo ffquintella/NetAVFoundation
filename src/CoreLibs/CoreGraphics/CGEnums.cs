@@ -11,6 +11,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using CoreLibs;
 using ObjCRuntime;
 
 namespace CoreGraphics {
@@ -63,10 +64,11 @@ namespace CoreGraphics {
 
 	// untyped enum -> CGContext.h
 	/// <summary>Text encoding, this enumeration is deprecated, use CoreText APIs instead.</summary>
-	[Deprecated (PlatformName.iOS, 7, 0)]
-	[Deprecated (PlatformName.TvOS, 9, 0)]
-	[Deprecated (PlatformName.MacOSX, 10, 9)]
-	[Deprecated (PlatformName.MacCatalyst, 13, 1)]
+	//[Deprecated (PlatformName.iOS, 7, 0)]
+	//[Deprecated (PlatformName.TvOS, 9, 0)]
+	//[Deprecated (PlatformName.MacOSX, 10, 9)]
+	//[Deprecated (PlatformName.MacCatalyst, 13, 1)]
+	[Obsolete ("Use CoreText APIs instead.")]
 	public enum CGTextEncoding {
 		FontSpecific,
 		MacRoman,

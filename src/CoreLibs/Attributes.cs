@@ -281,3 +281,121 @@ public class DefaultCtorVisibilityAttribute : Attribute {
 	public Visibility Visibility { get; set; }
 }
 
+public sealed class TVAttribute : IntroducedAttribute {
+	public TVAttribute (byte major, byte minor)
+		: base (PlatformName.TvOS, (int) major, (int) minor)
+	{
+	}
+
+	public TVAttribute (byte major, byte minor, byte subminor)
+		: base (PlatformName.TvOS, (int) major, (int) minor, subminor)
+	{
+	}
+}
+
+public sealed class WatchAttribute : IntroducedAttribute {
+	public WatchAttribute (byte major, byte minor)
+		: base (PlatformName.WatchOS, (int) major, (int) minor)
+	{
+	}
+
+	public WatchAttribute (byte major, byte minor, byte subminor)
+		: base (PlatformName.WatchOS, (int) major, (int) minor, subminor)
+	{
+	}
+}
+
+public sealed class NoiOSAttribute : UnavailableAttribute {
+	public NoiOSAttribute ()
+		: base (PlatformName.iOS)
+	{
+	}
+}
+
+public sealed class NoWatchAttribute : UnavailableAttribute {
+	public NoWatchAttribute ()
+		: base (PlatformName.WatchOS)
+	{
+	}
+}
+
+public sealed class NoTVAttribute : UnavailableAttribute {
+	public NoTVAttribute ()
+		: base (PlatformName.TvOS)
+	{
+	}
+}
+
+sealed class MacAttribute : IntroducedAttribute {
+	public MacAttribute (byte major, byte minor)
+		: base (PlatformName.MacOSX, (int) major, (int) minor)
+	{
+	}
+
+	
+
+	public MacAttribute (byte major, byte minor, byte subminor)
+		: base (PlatformName.MacOSX, (int) major, (int) minor, subminor)
+	{
+	}
+	
+}
+
+sealed class iOSAttribute : IntroducedAttribute {
+	public iOSAttribute (byte major, byte minor)
+		: base (PlatformName.iOS, (int) major, (int) minor)
+	{
+	}
+	
+	public iOSAttribute (byte major, byte minor, byte subminor)
+		: base (PlatformName.iOS, (int) major, (int) minor, subminor)
+	{
+	}
+
+
+}
+
+public class PartialAttribute : Attribute {
+	public PartialAttribute () { }
+}
+
+public class StaticAttribute : Attribute {
+	public StaticAttribute () { }
+}
+
+public class WrapAttribute : Attribute {
+	public WrapAttribute (string methodname, bool isVirtual = false)
+	{
+		MethodName = methodname;
+		IsVirtual = isVirtual;
+	}
+
+	public string MethodName { get; set; }
+	public bool IsVirtual { get; set; }
+}
+
+public class InternalAttribute : Attribute {
+	public InternalAttribute () { }
+}
+
+public sealed class NoMacAttribute : UnavailableAttribute {
+	public NoMacAttribute ()
+		: base (PlatformName.MacOSX)
+	{
+	}
+}
+
+[AttributeUsage (AttributeTargets.Interface | AttributeTargets.Property, AllowMultiple = false)]
+public class StrongDictionaryAttribute : Attribute {
+	public StrongDictionaryAttribute ()
+	{
+	}
+	public StrongDictionaryAttribute (string typeWithKeys)
+	{
+		TypeWithKeys = typeWithKeys;
+		Suffix = "Key";
+	}
+	public string TypeWithKeys;
+	public string Suffix;
+}
+

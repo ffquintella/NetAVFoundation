@@ -8,6 +8,6 @@ namespace CoreMedia {
 #if !NET
 	[Watch (6, 0)]
 #endif
-	public partial class ICMAttachmentBearer : INativeObject { }
+	public partial interface ICMAttachmentBearer : INativeObject { }
 
 }

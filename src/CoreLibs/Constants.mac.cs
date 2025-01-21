@@ -48,7 +48,7 @@ namespace ObjCRuntime {
 		public const string AccessibilityLibrary = "/System/Library/Frameworks/MediaAccessibility.framework/MediaAccessibility";
 		public const string CoreTextLibrary = "/System/Library/Frameworks/CoreText.framework/CoreText";
 		public const string CoreMediaLibrary = "/System/Library/Frameworks/CoreMedia.framework/CoreMedia";
-		
+		public const string CoreVideoLibrary = "/System/Library/Frameworks/CoreVideo.framework/CoreVideo";
 		
 
 		

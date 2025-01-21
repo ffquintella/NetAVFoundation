@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -9,7 +10,7 @@ namespace CoreMedia {
 	// keys names got changed at some point, but they all refer to a CMSampleBuffer (there is not CMSample obj)
 	[Watch (6, 0)]
 	[MacCatalyst (13, 1)]
-	enum CMSampleBufferAttachmentKey {
+	public enum CMSampleBufferAttachmentKey {
 		[Field ("kCMSampleAttachmentKey_NotSync")]
 		NotSync,
 		[Field ("kCMSampleAttachmentKey_PartialSync")]

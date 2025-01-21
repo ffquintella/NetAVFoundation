@@ -50,7 +50,7 @@ namespace Foundation {
 		public NSError Error { get; private set; }
 	}
 
-	public partial class NSError : NSObject {
+	public partial class NSError : NSCopying {
 #if !COREBUILD
 		[Advice ("Always specify a domain and error code when creating an NSError instance")]
 		public NSError () : this (new NSString ("Invalid .ctor used"), 0, null)
@@ -83,7 +83,8 @@ namespace Foundation {
 		}
 		public override string ToString ()
 		{
-			return LocalizedDescription;
+			return Description;
+			//return LocalizedDescription;
 		}
 
 #if __IOS__ && !NET

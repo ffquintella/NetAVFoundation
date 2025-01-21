@@ -23,7 +23,7 @@ using CoreFoundation;
 using CoreGraphics;
 using ObjCRuntime;
 using CoreVideo;
-using AudioToolbox;
+using CoreLibs.AudioToolbox;
 
 #if !NET
 using NativeHandle = System.IntPtr;
@@ -80,9 +80,9 @@ namespace CoreMedia {
 			}
 		}
 
-		public AudioFormatType AudioFormatType {
+		public AudioType.AudioFormatType AudioFormatType {
 			get {
-				return MediaType == CMMediaType.Audio ? (AudioFormatType) MediaSubType : 0;
+				return MediaType == CMMediaType.Audio ? (AudioType.AudioFormatType) MediaSubType : 0;
 			}
 		}
 
@@ -182,12 +182,12 @@ namespace CoreMedia {
 		[DllImport (Constants.CoreMediaLibrary)]
 		extern static /* AudioStreamBasicDescription */ IntPtr CMAudioFormatDescriptionGetStreamBasicDescription (/* CMAudioFormatDescriptionRef */ IntPtr desc);
 
-		public AudioStreamBasicDescription? AudioStreamBasicDescription {
+		public AudioType.AudioStreamBasicDescription? AudioStreamBasicDescription {
 			get {
 				var ret = CMAudioFormatDescriptionGetStreamBasicDescription (Handle);
 				if (ret != IntPtr.Zero) {
 					unsafe {
-						return *((AudioStreamBasicDescription*) ret);
+						return *((AudioType.AudioStreamBasicDescription*) ret);
 					}
 				}
 				return null;
@@ -197,7 +197,7 @@ namespace CoreMedia {
 		[DllImport (Constants.CoreMediaLibrary)]
 		unsafe extern static /* AudioChannelLayout* */ IntPtr CMAudioFormatDescriptionGetChannelLayout (/* CMAudioFormatDescriptionRef */ IntPtr desc, /* size_t* */ nint* size);
 
-		public AudioChannelLayout? AudioChannelLayout {
+		public AudioType.AudioChannelLayout? AudioChannelLayout {
 			get {
 				nint size;
 				IntPtr res;
@@ -206,7 +206,7 @@ namespace CoreMedia {
 				}
 				if (res == IntPtr.Zero || size == 0)
 					return null;
-				return AudioChannelLayout.FromHandle (res);
+				return AudioType.AudioChannelLayout.FromHandle (res);
 			}
 		}
 

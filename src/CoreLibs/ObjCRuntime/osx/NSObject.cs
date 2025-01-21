@@ -6,12 +6,13 @@
 }*/
 
 using System.ComponentModel;
+using CoreLibs;
 using ObjCRuntime;
 
 namespace Foundation
 {
 	[Protocol(Name = "NSObject")] // exists both as a type and a protocol in ObjC, Swift uses NSObjectProtocol
-	public partial class NSObject
+	public partial class NSObject: INativeObject
 	{
 		//NSObjectProtocol
 
@@ -44,7 +45,7 @@ namespace Foundation
 		[Abstract]
 		[EditorBrowsable(EditorBrowsableState.Never)]
 		[Export("self")]
-		[Transient]
+		//[Transient]
 		public extern NSObject Self { get; }
 
 		[Abstract]

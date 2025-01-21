@@ -10,6 +10,7 @@
 using System;
 
 using CoreGraphics;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -17,82 +18,82 @@ namespace CoreText {
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTFontFeatures" />.</summary>
 	[Static]
-	interface CTFontFeatureKey {
+	public static class CTFontFeatureKey {
 		[Field ("kCTFontFeatureTypeIdentifierKey")]
-		NSString Identifier { get; }
+		public static extern NSString Identifier { get; }
 
 		[Field ("kCTFontFeatureTypeNameKey")]
-		NSString Name { get; }
+		public static extern NSString Name { get; }
 
 		[Field ("kCTFontFeatureTypeExclusiveKey")]
-		NSString Exclusive { get; }
+		public static extern NSString Exclusive { get; }
 
 		[Field ("kCTFontFeatureTypeSelectorsKey")]
-		NSString Selectors { get; }
+		public static extern NSString Selectors { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTFontFeatureSelectors" />.</summary>
 	[Static]
-	interface CTFontFeatureSelectorKey {
+	public static class CTFontFeatureSelectorKey {
 		[Field ("kCTFontFeatureSelectorIdentifierKey")]
-		NSString Identifier { get; }
+		public static extern NSString Identifier { get; }
 
 		[Field ("kCTFontFeatureSelectorNameKey")]
-		NSString Name { get; }
+		public static extern NSString Name { get; }
 
 		[Field ("kCTFontFeatureSelectorDefaultKey")]
-		NSString Default { get; }
+		public static extern NSString Default { get; }
 
 		[Field ("kCTFontFeatureSelectorSettingKey")]
-		NSString Setting { get; }
+		public static extern NSString Setting { get; }
 
 		[iOS (13, 0), TV (13, 0), Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCTFontFeatureSampleTextKey")]
-		NSString SampleText { get; }
+		public static extern NSString SampleText { get; }
 
 		[iOS (13, 0), TV (13, 0), Watch (6, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCTFontFeatureTooltipTextKey")]
-		NSString TooltipText { get; }
+		public static extern NSString TooltipText { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTFontVariationAxes" />.</summary>
 	[Static]
-	interface CTFontVariationAxisKey {
+	public static class CTFontVariationAxisKey {
 
 		[Field ("kCTFontVariationAxisIdentifierKey")]
-		NSString Identifier { get; }
+		public static extern NSString Identifier { get; }
 
 		[Field ("kCTFontVariationAxisMinimumValueKey")]
-		NSString MinimumValue { get; }
+		public static extern NSString MinimumValue { get; }
 
 		[Field ("kCTFontVariationAxisMaximumValueKey")]
-		NSString MaximumValue { get; }
+		public static extern NSString MaximumValue { get; }
 
 		[Field ("kCTFontVariationAxisDefaultValueKey")]
-		NSString DefaultValue { get; }
+		public static extern NSString DefaultValue { get; }
 
 		[Field ("kCTFontVariationAxisNameKey")]
-		NSString Name { get; }
+		public static extern NSString Name { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("kCTFontVariationAxisHiddenKey")]
-		NSString Hidden { get; }
+		public static extern NSString Hidden { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTTypesetterOptions" />.</summary>
 	[Static]
-	interface CTTypesetterOptionKey {
+	public static class CTTypesetterOptionKey {
 
-		[Deprecated (PlatformName.iOS, 6, 0)]
+		//[Deprecated (PlatformName.iOS, 6, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Field ("kCTTypesetterOptionDisableBidiProcessing")]
 #if !NET
 		[Internal]
 		NSString _DisableBidiProcessing { get; }
 #else
-		NSString DisableBidiProcessing { get; }
+		public static extern NSString DisableBidiProcessing { get; }
 #endif
 
 		[Field ("kCTTypesetterOptionForcedEmbeddingLevel")]
@@ -100,13 +101,13 @@ namespace CoreText {
 		[Internal]
 		NSString _ForceEmbeddingLevel { get; }
 #else
-		NSString ForceEmbeddingLevel { get; }
+		public static extern NSString ForceEmbeddingLevel { get; }
 #endif
 
 		[Watch (5, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCTTypesetterOptionAllowUnboundedLayout")]
-		NSString AllowUnboundedLayout { get; }
+		public static extern NSString AllowUnboundedLayout { get; }
 	}
 
 	[Static]
@@ -128,215 +129,215 @@ namespace CoreText {
 #if NET
 	[Internal]
 	[Static][Partial]
-	interface CTBaselineClassID {
+	internal static partial class CTBaselineClassID {
 		[Field ("kCTBaselineClassRoman")]
-		NSString Roman { get; }
+		public static extern NSString Roman { get; }
 
 		[Field ("kCTBaselineClassIdeographicCentered")]
-		NSString IdeographicCentered { get; }
+		public static extern NSString IdeographicCentered { get; }
 
 		[Field ("kCTBaselineClassIdeographicLow")]
-		NSString IdeographicLow { get; }
+		public static extern NSString IdeographicLow { get; }
 
 		[Field ("kCTBaselineClassIdeographicHigh")]
-		NSString IdeographicHigh { get; }
+		public static extern NSString IdeographicHigh { get; }
 
 		[Field ("kCTBaselineClassHanging")]
-		NSString Hanging { get; }
+		public static extern NSString Hanging { get; }
 
 		[Field ("kCTBaselineClassMath")]
-		NSString Math { get; }
+		public static extern NSString Math { get; }
 	}
 
 	[Internal]
 	[Static][Partial]
-	interface CTBaselineFontID {
+	internal static partial class CTBaselineFontID {
 		[Field ("kCTBaselineReferenceFont")]
-		NSString Reference { get; }
+		public static extern NSString Reference { get; }
 
 		[Field ("kCTBaselineOriginalFont")]
-		NSString Original { get; }
+		public static extern NSString Original { get; }
 	}
 
 	/// <summary>A valid key for use with <see cref="T:CoreText.CTFontDescriptor" /> attribute properties.</summary>
 	[Static]
-	interface CTFontDescriptorAttributeKey {
+	public static class CTFontDescriptorAttributeKey {
 		[Field ("kCTFontURLAttribute")]
-		NSString Url { get; }
+		public static extern NSString Url { get; }
 
 		[Field ("kCTFontNameAttribute")]
-		NSString Name { get; }
+		public static extern NSString Name { get; }
 
 		[Field ("kCTFontDisplayNameAttribute")]
-		NSString DisplayName { get; }
+		public static extern NSString DisplayName { get; }
 
 		[Field ("kCTFontFamilyNameAttribute")]
-		NSString FamilyName { get; }
+		public static extern NSString FamilyName { get; }
 
 		[Field ("kCTFontStyleNameAttribute")]
-		NSString StyleName { get; }
+		public static extern NSString StyleName { get; }
 
 		[Field ("kCTFontTraitsAttribute")]
-		NSString Traits { get; }
+		public static extern NSString Traits { get; }
 
 		[Field ("kCTFontVariationAttribute")]
-		NSString Variation { get; }
+		public static extern NSString Variation { get; }
 
 		[Field ("kCTFontSizeAttribute")]
-		NSString Size { get; }
+		public static extern NSString Size { get; }
 
 		[Field ("kCTFontMatrixAttribute")]
-		NSString Matrix { get; }
+		public static extern NSString Matrix { get; }
 
 		[Field ("kCTFontCascadeListAttribute")]
-		NSString CascadeList { get; }
+		public static extern NSString CascadeList { get; }
 
 		[Field ("kCTFontCharacterSetAttribute")]
-		NSString CharacterSet { get; }
+		public static extern NSString CharacterSet { get; }
 
 		[Field ("kCTFontLanguagesAttribute")]
-		NSString Languages { get; }
+		public static extern NSString Languages { get; }
 
 		[Field ("kCTFontBaselineAdjustAttribute")]
-		NSString BaselineAdjust { get; }
+		public static extern NSString BaselineAdjust { get; }
 
 		[Field ("kCTFontMacintoshEncodingsAttribute")]
-		NSString MacintoshEncodings { get; }
+		public static extern NSString MacintoshEncodings { get; }
 
 		[Field ("kCTFontFeaturesAttribute")]
-		NSString Features { get; }
+		public static extern NSString Features { get; }
 
 		[Field ("kCTFontFeatureSettingsAttribute")]
-		NSString FeatureSettings { get; }
+		public static extern NSString FeatureSettings { get; }
 
 		[Field ("kCTFontFixedAdvanceAttribute")]
-		NSString FixedAdvance { get; }
+		public static extern NSString FixedAdvance { get; }
 
 		[Field ("kCTFontOrientationAttribute")]
-		NSString FontOrientation { get; }
+		public static extern NSString FontOrientation { get; }
 
 		[Field ("kCTFontFormatAttribute")]
-		NSString FontFormat { get; }
+		public static extern NSString FontFormat { get; }
 
 		[Field ("kCTFontRegistrationScopeAttribute")]
-		NSString RegistrationScope { get; }
+		public static extern NSString RegistrationScope { get; }
 
 		[Field ("kCTFontPriorityAttribute")]
-		NSString Priority { get; }
+		public static extern NSString Priority { get; }
 
 		[Field ("kCTFontEnabledAttribute")]
-		NSString Enabled { get; }
+		public static extern NSString Enabled { get; }
 
 		[iOS (13, 0), NoTV, NoWatch, MacCatalyst (13, 1), NoMac]
 		[Field ("kCTFontRegistrationUserInfoAttribute")]
-		NSString RegistrationUserInfo { get; }
+		public static extern NSString RegistrationUserInfo { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTTextTabOptions" />.</summary>
 	[Static]
-	interface CTTextTabOptionKey {
+	public static class CTTextTabOptionKey {
 		[Field ("kCTTabColumnTerminatorsAttributeName")]
-		NSString ColumnTerminators { get; }
+		public static extern NSString ColumnTerminators { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTFrameAttributes" />.</summary>
 	[Static]
-	interface CTFrameAttributeKey {
+	public static class CTFrameAttributeKey {
 		[Field ("kCTFrameProgressionAttributeName")]
-		NSString Progression { get; }
+		public static extern NSString Progression { get; }
 
 		[Field ("kCTFramePathFillRuleAttributeName")]
-		NSString PathFillRule { get; }
+		public static extern NSString PathFillRule { get; }
 
 		[Field ("kCTFramePathWidthAttributeName")]
-		NSString PathWidth { get; }
+		public static extern NSString PathWidth { get; }
 
 		[Field ("kCTFrameClippingPathsAttributeName")]
-		NSString ClippingPaths { get; }
+		public static extern NSString ClippingPaths { get; }
 
 		[Field ("kCTFramePathClippingPathAttributeName")]
-		NSString PathClippingPath { get; }
+		public static extern NSString PathClippingPath { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTFontTraits" />.</summary>
 	[Static]
-	interface CTFontTraitKey {
+	public static class  CTFontTraitKey {
 		[Field ("kCTFontSymbolicTrait")]
-		NSString Symbolic { get; }
+		public static extern NSString Symbolic { get; }
 
 		[Field ("kCTFontWeightTrait")]
-		NSString Weight { get; }
+		public static extern NSString Weight { get; }
 
 		[Field ("kCTFontWidthTrait")]
-		NSString Width { get; }
+		public static extern NSString Width { get; }
 
 		[Field ("kCTFontSlantTrait")]
-		NSString Slant { get; }
+		public static extern NSString Slant { get; }
 	}
 
 	[Internal]
 	[Static][Partial]
-	interface CTFontNameKeyId {
+	internal static partial class CTFontNameKeyId {
 		[Field ("kCTFontCopyrightNameKey")]
-		NSString Copyright { get; }
+		internal static extern NSString Copyright { get; }
 
 		[Field ("kCTFontFamilyNameKey")]
-		NSString Family { get; }
+		internal static extern NSString Family { get; }
 
 		[Field ("kCTFontSubFamilyNameKey")]
-		NSString SubFamily { get; }
+		internal static extern NSString SubFamily { get; }
 
 		[Field ("kCTFontStyleNameKey")]
-		NSString Style { get; }
+		internal static extern NSString Style { get; }
 
 		[Field ("kCTFontUniqueNameKey")]
-		NSString Unique { get; }
+		internal static extern NSString Unique { get; }
 
 		[Field ("kCTFontFullNameKey")]
-		NSString Full { get; }
+		internal static extern NSString Full { get; }
 
 		[Field ("kCTFontVersionNameKey")]
-		NSString Version { get; }
+		internal static extern NSString Version { get; }
 
 		[Field ("kCTFontPostScriptNameKey")]
-		NSString PostScript { get; }
+		internal static extern NSString PostScript { get; }
 
 		[Field ("kCTFontTrademarkNameKey")]
-		NSString Trademark { get; }
+		internal static extern NSString Trademark { get; }
 
 		[Field ("kCTFontManufacturerNameKey")]
-		NSString Manufacturer { get; }
+		internal static extern NSString Manufacturer { get; }
 
 		[Field ("kCTFontDesignerNameKey")]
-		NSString Designer { get; }
+		internal static extern NSString Designer { get; }
 
 		[Field ("kCTFontDescriptionNameKey")]
-		NSString Description { get; }
+		internal static extern NSString Description { get; }
 
 		[Field ("kCTFontVendorURLNameKey")]
-		NSString VendorUrl { get; }
+		internal static extern NSString VendorUrl { get; }
 
 		[Field ("kCTFontDesignerURLNameKey")]
-		NSString DesignerUrl { get; }
+		internal static extern NSString DesignerUrl { get; }
 
 		[Field ("kCTFontLicenseNameKey")]
-		NSString License { get; }
+		internal static extern NSString License { get; }
 
 		[Field ("kCTFontLicenseURLNameKey")]
-		NSString LicenseUrl { get; }
+		internal static extern NSString LicenseUrl { get; }
 
 		[Field ("kCTFontSampleTextNameKey")]
-		NSString SampleText { get; }
+		internal static extern NSString SampleText { get; }
 
 		[Field ("kCTFontPostScriptCIDNameKey")]
-		NSString PostscriptCid { get; }
+		internal static extern NSString PostscriptCid { get; }
 	}
 
 	/// <summary>A class whose static property can be used as a key for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTFontCollectionOptions" />.</summary>
 	[Static]
-	interface CTFontCollectionOptionKey {
+	public static class CTFontCollectionOptionKey {
 		[Field ("kCTFontCollectionRemoveDuplicatesOption")]
-		NSString RemoveDuplicates { get; }
+		public static extern NSString RemoveDuplicates { get; }
 	}
 #endif
 
@@ -368,101 +369,105 @@ namespace CoreText {
 		NSString ErrorKey { get; }
 	}
 
-	[StrongDictionary ("CTFontDescriptorMatchingKeys")]
-	interface CTFontDescriptorMatchingProgress {
-		CTFontDescriptor SourceDescriptor { get; }
-		CTFontDescriptor [] Descriptors { get; }
-		CTFontDescriptor [] Result { get; }
-		double Percentage { get; }
-		long CurrentAssetSize { get; }
-		long TotalDownloadedSize { get; }
-		long TotalAssetSize { get; }
-		NSError Error { get; }
+	//[StrongDictionary ("CTFontDescriptorMatchingKeys")]
+	public class  CTFontDescriptorMatchingProgress: DictionaryContainer {
+		
+		public CTFontDescriptorMatchingProgress(): base(){}
+		public CTFontDescriptorMatchingProgress (NSDictionary dictionary) : base (dictionary) {}
+		
+		public CTFontDescriptor SourceDescriptor { get; }
+		public CTFontDescriptor [] Descriptors { get; }
+		public CTFontDescriptor [] Result { get; }
+		public double Percentage { get; }
+		public long CurrentAssetSize { get; }
+		public long TotalDownloadedSize { get; }
+		public long TotalAssetSize { get; }
+		public NSError Error { get; }
 	}
 
 	/// <summary>A class whose static properties can be used as keys for the <see cref="T:Foundation.NSDictionary" /> used by <see cref="T:CoreText.CTStringAttributes" />.</summary>
 	[Static]
 	[Partial]
-	interface CTStringAttributeKey {
+	public static partial class  CTStringAttributeKey {
 #if NET
 		[Field ("kCTFontAttributeName")]
-		NSString Font { get; }
+		public static extern NSString Font { get; }
 
 		[Field ("kCTForegroundColorFromContextAttributeName")]
-		NSString ForegroundColorFromContext { get; }
+		public static extern NSString ForegroundColorFromContext { get; }
 
 		[Field ("kCTKernAttributeName")]
-		NSString KerningAdjustment { get; }
+		public static extern NSString KerningAdjustment { get; }
 
 		[Field ("kCTLigatureAttributeName")]
-		NSString LigatureFormation { get; }
+		public static extern NSString LigatureFormation { get; }
 
 		[Field ("kCTForegroundColorAttributeName")]
-		NSString ForegroundColor { get; }
+		public static extern NSString ForegroundColor { get; }
 
 		[Field ("kCTBackgroundColorAttributeName")]
-		NSString BackgroundColor { get; }
+		public static extern NSString BackgroundColor { get; }
 
 		[Field ("kCTParagraphStyleAttributeName")]
-		NSString ParagraphStyle { get; }
+		public static extern NSString ParagraphStyle { get; }
 
 		[Field ("kCTStrokeWidthAttributeName")]
-		NSString StrokeWidth { get; }
+		public static extern NSString StrokeWidth { get; }
 
 		[Field ("kCTStrokeColorAttributeName")]
-		NSString StrokeColor { get; }
+		public static extern NSString StrokeColor { get; }
 
 		[Field ("kCTUnderlineStyleAttributeName")]
-		NSString UnderlineStyle { get; }
+		public static extern NSString UnderlineStyle { get; }
 
 		[Field ("kCTSuperscriptAttributeName")]
-		NSString Superscript { get; }
+		public static extern NSString Superscript { get; }
 
 		[Field ("kCTUnderlineColorAttributeName")]
-		NSString UnderlineColor { get; }
+		public static extern NSString UnderlineColor { get; }
 
 		[Field ("kCTVerticalFormsAttributeName")]
-		NSString VerticalForms { get; }
+		public static extern NSString VerticalForms { get; }
 
 		[Field ("kCTHorizontalInVerticalFormsAttributeName")]
-		NSString HorizontalInVerticalForms { get; }
+		public static extern NSString HorizontalInVerticalForms { get; }
 
 		[Field ("kCTGlyphInfoAttributeName")]
-		NSString GlyphInfo { get; }
+		public static extern NSString GlyphInfo { get; }
 
 		[Field ("kCTCharacterShapeAttributeName")]
-		NSString CharacterShape { get; }
+		public static extern NSString CharacterShape { get; }
 
 		[Field ("kCTRunDelegateAttributeName")]
-		NSString RunDelegate { get; }
+		public static extern NSString RunDelegate { get; }
 
 		[Field ("kCTBaselineOffsetAttributeName")]
-		NSString BaselineOffset { get; }
+		public static extern NSString BaselineOffset { get; }
 
 		[Field ("kCTBaselineClassAttributeName")]
-		NSString BaselineClass { get; }
+		public static extern NSString BaselineClass { get; }
 
 		[Field ("kCTBaselineInfoAttributeName")]
-		NSString BaselineInfo { get; }
+		public static extern NSString BaselineInfo { get; }
 
 		[Field ("kCTBaselineReferenceInfoAttributeName")]
-		NSString BaselineReferenceInfo { get; }
+		public static extern NSString BaselineReferenceInfo { get; }
 
 		[Field ("kCTWritingDirectionAttributeName")]
-		NSString WritingDirection { get; }
+		public static extern NSString WritingDirection { get; }
 
 		[Field ("kCTRubyAnnotationAttributeName")]
-		NSString RubyAnnotation { get; }
+		public static extern NSString RubyAnnotation { get; }
 
 		[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Field ("kCTAdaptiveImageProviderAttributeName")]
-		NSString AdaptiveImageProvider { get; }
+		public static extern NSString AdaptiveImageProvider { get; }
 #endif
 
 		[Watch (6, 0), TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("kCTTrackingAttributeName")]
-		NSString TrackingAttributeName { get; }
+		public static extern NSString TrackingAttributeName { get; }
 	}
 
 	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]

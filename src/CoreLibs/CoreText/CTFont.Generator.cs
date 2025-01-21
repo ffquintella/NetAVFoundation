@@ -28,6 +28,7 @@
 #nullable enable
 
 using CoreFoundation;
+using Foundation;
 
 namespace CoreText {
 	public partial class CTFont : NativeObject {

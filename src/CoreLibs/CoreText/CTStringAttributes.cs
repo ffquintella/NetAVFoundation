@@ -430,10 +430,10 @@ namespace CoreText {
 		[SupportedOSPlatform ("macos15.0")]
 		[SupportedOSPlatform ("tvos18.0")]
 		// The attribute value must be an object conforming to the CTAdaptiveImageProviding protocol.
-		public ICTAdaptiveImageProviding? AdaptiveImageProvider {
+		public INativeObject? AdaptiveImageProvider {
 			get {
 				var h = CFDictionary.GetValue (Dictionary.Handle, CTStringAttributeKey.AdaptiveImageProvider.GetHandle ());
-				return Runtime.GetINativeObject<ICTAdaptiveImageProviding> (h, owns: false);
+				return Runtime.GetINativeObject<INativeObject> (h, owns: false);
 			}
 			set {
 				Adapter.SetNativeValue (Dictionary, CTStringAttributeKey.AdaptiveImageProvider!, value);

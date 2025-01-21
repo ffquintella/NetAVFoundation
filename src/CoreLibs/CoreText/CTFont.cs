@@ -307,7 +307,7 @@ namespace CoreText {
 					return;
 				}
 				Adapter.SetValue (Dictionary, CTFontFeatureKey.Selectors,
-						NSArray.FromNSObjects ((IList<NSObject>) v.ConvertAll (e => (NSObject) e.Dictionary)));
+						NSArray.FromNSObjects ((INativeObject)(IList<NSObject>) v.ConvertAll (e => (NSObject) e.Dictionary)));
 			}
 		}
 	}
@@ -2686,7 +2686,7 @@ namespace CoreText {
 #else
 		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 #endif
-		public CGRect GetTypographicBoundsForAdaptiveImageProvider (ICTAdaptiveImageProviding? provider)
+		public CGRect GetTypographicBoundsForAdaptiveImageProvider (INativeObject? provider)
 		{
 			return CTFontGetTypographicBoundsForAdaptiveImageProvider (Handle, provider.GetHandle ());
 		}
@@ -2718,7 +2718,7 @@ namespace CoreText {
 #else
 		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 #endif
-		public void DrawImage (ICTAdaptiveImageProviding provider, CGPoint point, CGContext context)
+		public void DrawImage (INativeObject provider, CGPoint point, CGContext context)
 		{
 			CTFontDrawImageFromAdaptiveImageProviderAtPoint (Handle, provider.GetNonNullHandle (nameof (provider)), point, context.GetNonNullHandle (nameof (context)));
 		}

@@ -26,7 +26,7 @@ namespace ObjCRuntime {
 	// It provides the common boilerplate for this kind of objects and the Dispose
 	// pattern.
 	//
-	public abstract class DisposableObject : Object, INativeObject, IDisposable {
+	public abstract class DisposableObject : NSObject, INativeObject, IDisposable {
 		NativeHandle handle;
 		readonly bool owns;
 

@@ -93,7 +93,7 @@ namespace Foundation {
 	[SupportedOSPlatform ("tvos")]
 #endif
 	[StructLayout (LayoutKind.Sequential)]
-	public partial class NSObject : NativeObject, INativeObject
+	public partial class NSObject :  INativeObject //NativeObject,
 #if !COREBUILD
 		, IEquatable<NSObject>
 		, IDisposable

@@ -138,7 +138,7 @@ namespace CoreText {
 			}
 		}
 
-		static NSArray EnsureNonNullArray (object [] items, string name)
+		static NSArray EnsureNonNullArray (NSObject [] items, string name)
 		{
 			if (items is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (name));
@@ -586,6 +586,13 @@ namespace CoreText {
 		[BindingImpl (BindingImplOptions.Optimizable)]
 		public unsafe static void RegisterFontDescriptors (CTFontDescriptor [] fontDescriptors, CTFontManagerScope scope, bool enabled, CTFontRegistrationHandler registrationHandler)
 		{
+			var array = new List<NSObject>();
+
+			Parallel.ForEach(fontDescriptors, fontDescriptor =>
+			{
+				array.Add((NSObject) fontDescriptor);
+			});
+			
 			using (var arr = EnsureNonNullArray (fontDescriptors, nameof (fontDescriptors))) {
 				if (registrationHandler is null) {
 					CTFontManagerRegisterFontDescriptors (arr.Handle, scope, enabled.AsByte (), null);

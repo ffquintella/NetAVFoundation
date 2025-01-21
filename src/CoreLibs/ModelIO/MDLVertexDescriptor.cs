@@ -9,7 +9,7 @@ using Metal;
 #nullable enable
 
 namespace ModelIO {
-	public partial class MDLVertexDescriptor: NSObject {
+	public partial class MDLVertexDescriptor {
 		[DllImport (Constants.MetalKitLibrary)]
 		static extern  /* MDLVertexDescriptor __nonnull */ IntPtr MTKModelIOVertexDescriptorFromMetal (/* MTLVertexDescriptor __nonnull */ IntPtr mtlDescriptor);
 

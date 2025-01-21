@@ -594,3 +594,10 @@ public class ParamsAttribute : Attribute {
 public class AutoreleaseAttribute : Attribute {
 	public AutoreleaseAttribute () { }
 }
+
+[AttributeUsage (AttributeTargets.Method)]
+public class MarshalDirectiveAttribute : Attribute {
+	public string NativePrefix { get; set; }
+	public string NativeSuffix { get; set; }
+	public string Library { get; set; }
+}

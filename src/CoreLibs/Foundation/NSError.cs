@@ -28,7 +28,7 @@ using System;
 using System.Diagnostics;
 using ObjCRuntime;
 using System.Runtime.Versioning;
-using CoreData;
+//using CoreData;
 
 // Disable until we get around to enable + fix any issues.
 #nullable disable

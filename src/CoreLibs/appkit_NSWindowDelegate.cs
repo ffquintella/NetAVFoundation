@@ -9,7 +9,7 @@ using CoreGraphics;
 using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 using CoreLibs;
 //using CoreLibs.AppKit;
 //using Intents;

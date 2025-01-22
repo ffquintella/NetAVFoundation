@@ -4,7 +4,7 @@
 #define DOUBLE_BLOCKS
 using ObjCRuntime;
 
-using CoreData;
+//using CoreData;
 using CoreFoundation;
 using Foundation;
 using CoreGraphics;

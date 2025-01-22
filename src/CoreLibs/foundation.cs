@@ -10487,7 +10487,7 @@ namespace Foundation {
 	[Watch (9, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 	[MacCatalyst (16, 0)]
 	[BaseType (typeof (NSObject))]
-	partial class NSAttributedStringMarkdownSourcePosition : NSCopying, NSSecureCoding {
+	partial class NSAttributedStringMarkdownSourcePosition : NSCopying {
 		[Export ("startLine")]
 		nint StartLine { get; }
 

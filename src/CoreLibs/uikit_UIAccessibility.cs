@@ -25,7 +25,7 @@ using CNContact = System.Object;
 //using MediaPlayer;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 //using UserNotifications;
 using UniformTypeIdentifiers;
 //using Symbols;
@@ -62,6 +62,7 @@ using NSWritingDirection = UIKit.UITextWritingDirection;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 #if !NET
 using NativeHandle = System.IntPtr;
@@ -269,8 +270,8 @@ namespace UIKit
 		[Notification (typeof (UIAccessibilityAnnouncementFinishedEventArgs))]
 		public extern NSString AnnouncementDidFinishNotification { get; }
 
-		[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'VoiceOverStatusDidChangeNotification' instead.")]
-		[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'VoiceOverStatusDidChangeNotification' instead.")]
+		//[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'VoiceOverStatusDidChangeNotification' instead.")]
+		//[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'VoiceOverStatusDidChangeNotification' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'VoiceOverStatusDidChangeNotification' instead.")]
 		[Field ("UIAccessibilityVoiceOverStatusChanged")]
 		public extern NSString VoiceOverStatusChanged { get; }

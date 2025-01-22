@@ -31,6 +31,7 @@ using Foundation;
 using CoreFoundation;
 using CoreGraphics;
 using System;
+using CoreLibs;
 
 namespace ImageIO {
 

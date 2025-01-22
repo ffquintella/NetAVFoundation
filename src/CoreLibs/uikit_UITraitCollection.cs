@@ -25,7 +25,7 @@ using CNContact = System.Object;
 //using MediaPlayer;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 //using UserNotifications;
 using UniformTypeIdentifiers;
 //using Symbols;
@@ -62,6 +62,7 @@ using NSWritingDirection = UIKit.UITextWritingDirection;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 #if !NET
 using NativeHandle = System.IntPtr;
@@ -84,8 +85,8 @@ namespace UIKit
 		[Export ("traitCollection")]
 		public extern UITraitCollection TraitCollection { get; }
 
-		[Deprecated (PlatformName.iOS, 17, 0, message: "Use the 'UITraitChangeObservable' protocol instead.")]
-		[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "Use the 'UITraitChangeObservable' protocol instead.")]
+		//[Deprecated (PlatformName.iOS, 17, 0, message: "Use the 'UITraitChangeObservable' protocol instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "Use the 'UITraitChangeObservable' protocol instead.")]
 		[Deprecated (PlatformName.TvOS, 17, 0, message: "Use the 'UITraitChangeObservable' protocol instead.")]
 		[Abstract]
 		[Export ("traitCollectionDidChange:")]

@@ -35,10 +35,10 @@ namespace DeviceDiscoveryExtension {
 	[Mac (15, 0), iOS (16, 0), MacCatalyst (18, 0), NoWatch, NoTV]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface DDDevice {
+	public partial class DDDevice: NSObject {
 		[Export ("initWithDisplayName:category:protocolType:identifier:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string displayName, DDDeviceCategory category, UTType protocolType, string identifier);
+		extern NativeHandle Constructor (string displayName, DDDeviceCategory category, UTType protocolType, string identifier);
 
 		[NullAllowed, Export ("bluetoothIdentifier", ArgumentSemantic.Strong)]
 		NSUuid BluetoothIdentifier { get; set; }

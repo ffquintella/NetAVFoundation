@@ -25,7 +25,7 @@ using CNContact = System.Object;
 //using MediaPlayer;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 //using UserNotifications;
 using UniformTypeIdentifiers;
 //using Symbols;
@@ -62,7 +62,7 @@ using NSWritingDirection = UIKit.UITextWritingDirection;
 
 using System;
 using System.ComponentModel;
-
+using CoreLibs;
 using UICollectionLayoutListConfiguration=System.Object;
 using UIContentInsetsReference=System.Object;
 using UIEdgeInsets=System.Object;

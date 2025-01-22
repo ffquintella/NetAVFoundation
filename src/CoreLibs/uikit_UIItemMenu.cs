@@ -26,7 +26,7 @@ using CNContact = System.Object;
 //using MediaPlayer;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 //using UserNotifications;
 using UniformTypeIdentifiers;
 //using Symbols;
@@ -63,6 +63,7 @@ using NSWritingDirection = UIKit.UITextWritingDirection;
 
 using System;
 using System.ComponentModel;
+using CoreLibs;
 
 #if !NET
 using NativeHandle = System.IntPtr;
@@ -78,7 +79,7 @@ namespace UIKit
    // [iOS (13, 0), TV (13, 0)]
 	[MacCatalyst (13, 1)]
 	public enum UIMenuIdentifier {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field (null)]
 		None,
 		[Field ("UIMenuApplication")]

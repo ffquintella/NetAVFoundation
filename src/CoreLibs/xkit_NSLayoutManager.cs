@@ -9,7 +9,8 @@ using CoreGraphics;
 using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
+using CoreLibs;
 //using Intents;
 //using SharedWithYouCore;
 //using Symbols;
@@ -253,9 +254,9 @@ namespace AppKit
 #endif
 
 		[Export ("glyphAtIndex:isValidIndex:")]
-		[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'GetCGGlyph' instead).")]
-		[Deprecated (PlatformName.iOS, 9, 0, message: "Use 'GetGlyph' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'GetGlyph' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'GetCGGlyph' instead).")]
+		//[Deprecated (PlatformName.iOS, 9, 0, message: "Use 'GetGlyph' instead.")]
+		//[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'GetGlyph' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'GetGlyph' instead.")]
 #if MONOMAC
 #if NET
@@ -268,9 +269,9 @@ namespace AppKit
 #endif // MONOMAC
 
 		[Export ("glyphAtIndex:")]
-		[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'GetCGGlyph' instead).")]
-		[Deprecated (PlatformName.iOS, 9, 0, message: "Use 'GetGlyph' instead.")]
-		[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'GetGlyph' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 11, message: "Use 'GetCGGlyph' instead).")]
+		//[Deprecated (PlatformName.iOS, 9, 0, message: "Use 'GetGlyph' instead.")]
+		//[Deprecated (PlatformName.TvOS, 9, 0, message: "Use 'GetGlyph' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'GetGlyph' instead.")]
 #if MONOMAC
 #if NET
@@ -995,9 +996,9 @@ namespace AppKit
 		[Export ("showsControlCharacters")]
 		public extern bool ShowsControlCharacters { get; set; }
 
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
+	//	[Deprecated (PlatformName.TvOS, 13, 0, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
 		[NoMacCatalyst]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Please use 'UsesDefaultHyphenation' or 'NSParagraphStyle.HyphenationFactor' instead.")]
 		[Export ("hyphenationFactor")]
@@ -1121,9 +1122,9 @@ namespace AppKit
 		[Export ("enumerateEnclosingRectsForGlyphRange:withinSelectedGlyphRange:inTextContainer:usingBlock:")]
 		public extern void EnumerateEnclosingRects (NSRange glyphRange, NSRange selectedRange, NSTextContainer textContainer, NSTextLayoutEnumerateEnclosingRects callback);
 
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use the overload that takes 'nint glyphCount' instead.")]
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Use the overload that takes 'nint glyphCount' instead.")]
-		[Deprecated (PlatformName.TvOS, 13, 0, message: "Use the overload that takes 'nint glyphCount' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use the overload that takes 'nint glyphCount' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Use the overload that takes 'nint glyphCount' instead.")]
+		//[Deprecated (PlatformName.TvOS, 13, 0, message: "Use the overload that takes 'nint glyphCount' instead.")]
 		[NoMacCatalyst]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use the overload that takes 'nint glyphCount' instead.")]
 		[Protected] // Can be overridden

@@ -25,7 +25,7 @@ using CNContact = System.Object;
 //using MediaPlayer;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 //using UserNotifications;
 using UniformTypeIdentifiers;
 //using Symbols;
@@ -62,7 +62,7 @@ using NSWritingDirection = UIKit.UITextWritingDirection;
 
 using System;
 using System.ComponentModel;
-
+using CoreLibs;
 using UICollectionLayoutListConfiguration=System.Object;
 using UIContentInsetsReference=System.Object;
 using UIEdgeInsets=System.Object;
@@ -365,7 +365,7 @@ namespace UIKit
 	[MacCatalyst (13, 1)]
 	/* NS_TYPED_ENUM */
 	public enum UIFontDescriptorSystemDesign {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field ("UIFontDescriptorSystemDesignDefault")]
 		Default,
 		[Field ("UIFontDescriptorSystemDesignRounded")]
@@ -676,7 +676,7 @@ namespace UIKit
 	[BaseType (typeof (NSObject))]
 	public class UIColorPickerViewControllerDelegate: NSObject {
 
-		[Deprecated (PlatformName.iOS, 15, 0, message: "Use the 'DidSelectColor (UIColorPickerViewController, UIColor, bool)' overload instead.")]
+		//[Deprecated (PlatformName.iOS, 15, 0, message: "Use the 'DidSelectColor (UIColorPickerViewController, UIColor, bool)' overload instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use the 'DidSelectColor (UIColorPickerViewController, UIColor, bool)' overload instead.")]
 		[Export ("colorPickerViewControllerDidSelectColor:")]
 		public extern void DidSelectColor (UIColorPickerViewController viewController);
@@ -718,8 +718,8 @@ namespace UIKit
 		[Export ("opaque")]
 		public extern bool Opaque { get; set; }
 
-		[Deprecated (PlatformName.iOS, 12, 0, message: "Use the 'PreferredRange' property instead.")]
-		[Deprecated (PlatformName.TvOS, 12, 0, message: "Use the 'PreferredRange' property instead.")]
+		//[Deprecated (PlatformName.iOS, 12, 0, message: "Use the 'PreferredRange' property instead.")]
+		//[Deprecated (PlatformName.TvOS, 12, 0, message: "Use the 'PreferredRange' property instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use the 'PreferredRange' property instead.")]
 		[Export ("prefersExtendedRange")]
 		public extern bool PrefersExtendedRange { get; set; }

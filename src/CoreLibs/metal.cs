@@ -16,7 +16,7 @@ using System;
 using System.ComponentModel;
 
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 using CoreGraphics;
 using CoreImage;
 //using CoreLocation;

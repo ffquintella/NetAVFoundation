@@ -27,6 +27,7 @@
 // imagekit.cs: Bindings for the Image Kit API
 //
 using System;
+using System.ComponentModel;
 using AppKit;
 using Foundation;
 using ObjCRuntime;
@@ -34,6 +35,7 @@ using CoreImage;
 using ImageCaptureCore;
 using CoreGraphics;
 using CoreAnimation;
+using CoreLibs;
 
 #if !NET
 using NativeHandle = System.IntPtr;

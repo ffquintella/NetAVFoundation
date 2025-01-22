@@ -25,7 +25,7 @@ using CNContact = System.Object;
 //using MediaPlayer;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
+//using CoreData;
 //using UserNotifications;
 using UniformTypeIdentifiers;
 //using Symbols;
@@ -68,6 +68,7 @@ using NativeHandle = System.IntPtr;
 #endif
 
 #nullable enable
+using CoreLibs;
 using UIEdgeInsets=System.Object;
 #endregion
 
@@ -265,7 +266,7 @@ namespace UIKit
 		public static extern UIColor GroupTableViewBackgroundColor { get; }
 #endif
 
-		[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'SystemGroupedBackground' instead.")]
+		//[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'SystemGroupedBackground' instead.")]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'SystemGroupedBackground' instead.")]
@@ -282,7 +283,7 @@ namespace UIKit
 		public static extern UIColor ViewFlipsideBackgroundColor { get; }
 #endif
 
-		[Deprecated (PlatformName.iOS, 7, 0)]
+		//[Deprecated (PlatformName.iOS, 7, 0)]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
@@ -299,7 +300,7 @@ namespace UIKit
 		public static extern UIColor ScrollViewTexturedBackgroundColor { get; }
 #endif
 
-		[Deprecated (PlatformName.iOS, 7, 0)]
+		//[Deprecated (PlatformName.iOS, 7, 0)]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
@@ -315,7 +316,7 @@ namespace UIKit
 		public static extern UIColor UnderPageBackgroundColor { get; }
 #endif
 
-		[Deprecated (PlatformName.iOS, 7, 0)]
+		//[Deprecated (PlatformName.iOS, 7, 0)]
 		[NoTV]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]

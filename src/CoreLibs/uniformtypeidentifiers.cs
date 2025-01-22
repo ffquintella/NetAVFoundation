@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -582,7 +583,7 @@ namespace UniformTypeIdentifiers {
 
 	[Introduced (PlatformName.MacCatalyst, 14, 0)]
 	///[TV (14, 0), iOS (14, 0)]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSString))]
 	interface NSString_UTAdditions {
 
@@ -595,7 +596,7 @@ namespace UniformTypeIdentifiers {
 
 	[Introduced (PlatformName.MacCatalyst, 14, 0)]
 	//[TV (14, 0), iOS (14, 0)]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSUrl))]
 	interface NSUrl_UTAdditions {
 

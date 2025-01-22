@@ -472,10 +472,10 @@ namespace CoreText {
 
 	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	[Protocol (BackwardsCompatibleCodeGeneration = false)]
-	interface CTAdaptiveImageProviding {
+	public partial class CTAdaptiveImageProviding : NSCopying {
 		[Abstract]
 		[Export ("imageForProposedSize:scaleFactor:imageOffset:imageSize:")]
 		[return: NullAllowed]
-		CGImage GetImage (CGSize proposedSize, nfloat scaleFactor, out CGPoint imageOffset, out CGSize imageSize);
+		extern CGImage GetImage (CGSize proposedSize, nfloat scaleFactor, out CGPoint imageOffset, out CGSize imageSize);
 	}
 }

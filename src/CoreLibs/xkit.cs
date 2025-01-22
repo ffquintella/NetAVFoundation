@@ -7,6 +7,7 @@ using Foundation;
 using ObjCRuntime;
 using CoreAnimation;
 using CoreGraphics;
+using CoreLibs;
 using CoreText;
 using UniformTypeIdentifiers;
 
@@ -342,7 +343,7 @@ namespace UIKit {
 	[NoiOS]
 	[NoTV]
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSLayoutManager))]
 	interface NSLayoutManager_NSTextViewSupport {
 		[Export ("rulerMarkersForTextView:paragraphStyle:ruler:")]
@@ -477,7 +478,7 @@ namespace UIKit {
 	[TV (13, 0), iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> : NSCopying
+	partial class NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> : NSCopying
 		where SectionIdentifierType : NSObject
 		where ItemIdentifierType : NSObject {
 
@@ -506,72 +507,72 @@ namespace UIKit {
 		ItemIdentifierType [] ItemIdentifiers { get; }
 
 		[Export ("numberOfItemsInSection:")]
-		nint GetNumberOfItems (SectionIdentifierType sectionIdentifier);
+		extern nint GetNumberOfItems (SectionIdentifierType sectionIdentifier);
 
 		[Export ("itemIdentifiersInSectionWithIdentifier:")]
-		ItemIdentifierType [] GetItemIdentifiersInSection (SectionIdentifierType sectionIdentifier);
+		extern ItemIdentifierType [] GetItemIdentifiersInSection (SectionIdentifierType sectionIdentifier);
 
 		[Export ("sectionIdentifierForSectionContainingItemIdentifier:")]
 		[return: NullAllowed]
-		SectionIdentifierType GetSectionIdentifierForSection (ItemIdentifierType itemIdentifier);
+		extern SectionIdentifierType GetSectionIdentifierForSection (ItemIdentifierType itemIdentifier);
 
 		[Export ("indexOfItemIdentifier:")]
-		nint GetIndex (ItemIdentifierType itemIdentifier);
+		extern nint GetIndex (ItemIdentifierType itemIdentifier);
 
 		[Export ("indexOfSectionIdentifier:")]
-		nint GetIndex (SectionIdentifierType sectionIdentifier);
+		extern nint GetIndex (SectionIdentifierType sectionIdentifier);
 
 		[Export ("appendItemsWithIdentifiers:")]
-		void AppendItems (ItemIdentifierType [] identifiers);
+		extern void AppendItems (ItemIdentifierType [] identifiers);
 
 		[Export ("appendItemsWithIdentifiers:intoSectionWithIdentifier:")]
-		void AppendItems (ItemIdentifierType [] identifiers, SectionIdentifierType sectionIdentifier);
+		extern void AppendItems (ItemIdentifierType [] identifiers, SectionIdentifierType sectionIdentifier);
 
 		[Export ("insertItemsWithIdentifiers:beforeItemWithIdentifier:")]
-		void InsertItemsBefore (ItemIdentifierType [] identifiers, ItemIdentifierType itemIdentifier);
+		extern void InsertItemsBefore (ItemIdentifierType [] identifiers, ItemIdentifierType itemIdentifier);
 
 		[Export ("insertItemsWithIdentifiers:afterItemWithIdentifier:")]
-		void InsertItemsAfter (ItemIdentifierType [] identifiers, ItemIdentifierType itemIdentifier);
+		extern void InsertItemsAfter (ItemIdentifierType [] identifiers, ItemIdentifierType itemIdentifier);
 
 		[Export ("deleteItemsWithIdentifiers:")]
-		void DeleteItems (ItemIdentifierType [] identifiers);
+		extern void DeleteItems (ItemIdentifierType [] identifiers);
 
 		[Export ("deleteAllItems")]
-		void DeleteAllItems ();
+		extern void DeleteAllItems ();
 
 		[Export ("moveItemWithIdentifier:beforeItemWithIdentifier:")]
-		void MoveItemBefore (ItemIdentifierType fromIdentifier, ItemIdentifierType toIdentifier);
+		extern void MoveItemBefore (ItemIdentifierType fromIdentifier, ItemIdentifierType toIdentifier);
 
 		[Export ("moveItemWithIdentifier:afterItemWithIdentifier:")]
-		void MoveItemAfter (ItemIdentifierType fromIdentifier, ItemIdentifierType toIdentifier);
+		extern void MoveItemAfter (ItemIdentifierType fromIdentifier, ItemIdentifierType toIdentifier);
 
 		[Export ("reloadItemsWithIdentifiers:")]
-		void ReloadItems (ItemIdentifierType [] identifiers);
+		extern void ReloadItems (ItemIdentifierType [] identifiers);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("reconfigureItemsWithIdentifiers:")]
-		void ReconfigureItems (ItemIdentifierType [] identifiers);
+		extern void ReconfigureItems (ItemIdentifierType [] identifiers);
 
 		[Export ("appendSectionsWithIdentifiers:")]
-		void AppendSections (SectionIdentifierType [] sectionIdentifiers);
+		extern void AppendSections (SectionIdentifierType [] sectionIdentifiers);
 
 		[Export ("insertSectionsWithIdentifiers:beforeSectionWithIdentifier:")]
-		void InsertSectionsBefore (SectionIdentifierType [] sectionIdentifiers, SectionIdentifierType toSectionIdentifier);
+		extern void InsertSectionsBefore (SectionIdentifierType [] sectionIdentifiers, SectionIdentifierType toSectionIdentifier);
 
 		[Export ("insertSectionsWithIdentifiers:afterSectionWithIdentifier:")]
-		void InsertSectionsAfter (SectionIdentifierType [] sectionIdentifiers, SectionIdentifierType toSectionIdentifier);
+		extern void InsertSectionsAfter (SectionIdentifierType [] sectionIdentifiers, SectionIdentifierType toSectionIdentifier);
 
 		[Export ("deleteSectionsWithIdentifiers:")]
-		void DeleteSections (SectionIdentifierType [] sectionIdentifiers);
+		extern void DeleteSections (SectionIdentifierType [] sectionIdentifiers);
 
 		[Export ("moveSectionWithIdentifier:beforeSectionWithIdentifier:")]
-		void MoveSectionBefore (SectionIdentifierType fromSectionIdentifier, SectionIdentifierType toSectionIdentifier);
+		extern void MoveSectionBefore (SectionIdentifierType fromSectionIdentifier, SectionIdentifierType toSectionIdentifier);
 
 		[Export ("moveSectionWithIdentifier:afterSectionWithIdentifier:")]
-		void MoveSectionAfter (SectionIdentifierType fromSectionIdentifier, SectionIdentifierType toSectionIdentifier);
+		extern void MoveSectionAfter (SectionIdentifierType fromSectionIdentifier, SectionIdentifierType toSectionIdentifier);
 
 		[Export ("reloadSectionsWithIdentifiers:")]
-		void ReloadSections (SectionIdentifierType [] sectionIdentifiers);
+		extern void ReloadSections (SectionIdentifierType [] sectionIdentifiers);
 	}
 
 	/// <summary>A class that specifies paragraph-relevant attributes of an <see cref="T:Foundation.NSAttributedString" />.</summary>
@@ -631,7 +632,7 @@ namespace UIKit {
 
 		[Static]
 		[Export ("defaultWritingDirectionForLanguage:")]
-		public NSWritingDirection GetDefaultWritingDirection ([NullAllowed] string languageName);
+		static extern public NSWritingDirection GetDefaultWritingDirection ([NullAllowed] string languageName);
 
 #if MONOMAC && !NET
 		[Obsolete ("Use the 'GetDefaultWritingDirection' method instead.")]
@@ -672,8 +673,8 @@ namespace UIKit {
 #endif
 
 		[MacCatalyst (13, 1)]
-		[Export ("textLists")]
-		public NSTextList [] TextLists { get; [NotImplemented] set; }
+		[Export ("textLists")] 
+		NSTextList [] TextLists { get; [NotImplemented] set; }
 
 		[NoiOS, NoTV]
 		[NoMacCatalyst]
@@ -824,14 +825,14 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSCollectionLayoutItem))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutGroup : NSCopying {
+	partial class NSCollectionLayoutGroup : NSCopying {
 
 		[Static]
 		[Export ("horizontalGroupWithLayoutSize:subitem:count:")]
 #if MONOMAC && !NET
 		NSCollectionLayoutGroup CreateHorizontalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem subitem, nint count);
 #else
-		NSCollectionLayoutGroup CreateHorizontal (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem subitem, nint count);
+		static extern NSCollectionLayoutGroup CreateHorizontal (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem subitem, nint count);
 #endif
 
 		[Static]
@@ -839,7 +840,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutGroup CreateHorizontalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem [] subitems);
 #else
-		NSCollectionLayoutGroup CreateHorizontal (NSCollectionLayoutSize layoutSize, params NSCollectionLayoutItem [] subitems);
+		static extern NSCollectionLayoutGroup CreateHorizontal (NSCollectionLayoutSize layoutSize, params NSCollectionLayoutItem [] subitems);
 #endif
 
 		[Static]
@@ -847,7 +848,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutGroup CreateVerticalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem subitem, nint count);
 #else
-		NSCollectionLayoutGroup CreateVertical (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem subitem, nint count);
+		static extern NSCollectionLayoutGroup CreateVertical (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem subitem, nint count);
 #endif
 
 		[Static]
@@ -855,7 +856,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutGroup CreateVerticalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem [] subitems);
 #else
-		NSCollectionLayoutGroup CreateVertical (NSCollectionLayoutSize layoutSize, params NSCollectionLayoutItem [] subitems);
+		static extern NSCollectionLayoutGroup CreateVertical (NSCollectionLayoutSize layoutSize, params NSCollectionLayoutItem [] subitems);
 #endif
 
 		[Static]
@@ -863,7 +864,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutGroup CreateCustomGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutGroupCustomItemProvider itemProvider);
 #else
-		NSCollectionLayoutGroup CreateCustom (NSCollectionLayoutSize layoutSize, NSCollectionLayoutGroupCustomItemProvider itemProvider);
+		static extern NSCollectionLayoutGroup CreateCustom (NSCollectionLayoutSize layoutSize, NSCollectionLayoutGroupCustomItemProvider itemProvider);
 #endif
 
 		[Export ("supplementaryItems", ArgumentSemantic.Copy)]
@@ -881,12 +882,12 @@ namespace UIKit {
 		[TV (16, 0), iOS (16, 0), MacCatalyst (16, 0), Mac (13, 0)]
 		[Static]
 		[Export ("horizontalGroupWithLayoutSize:repeatingSubitem:count:")]
-		NSCollectionLayoutGroup GetHorizontalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem repeatingSubitem, nint count);
+		static extern NSCollectionLayoutGroup GetHorizontalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem repeatingSubitem, nint count);
 
 		[TV (16, 0), iOS (16, 0), MacCatalyst (16, 0), Mac (13, 0)]
 		[Static]
 		[Export ("verticalGroupWithLayoutSize:repeatingSubitem:count:")]
-		NSCollectionLayoutGroup GetVerticalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem repeatingSubitem, nint count);
+		static extern NSCollectionLayoutGroup GetVerticalGroup (NSCollectionLayoutSize layoutSize, NSCollectionLayoutItem repeatingSubitem, nint count);
 	}
 
 	[TV (13, 0), iOS (13, 0)]
@@ -897,14 +898,14 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutSection : NSCopying {
+	partial class NSCollectionLayoutSection : NSCopying {
 
 		[Static]
 		[Export ("sectionWithGroup:")]
-		NSCollectionLayoutSection Create (NSCollectionLayoutGroup group);
+		static extern NSCollectionLayoutSection Create (NSCollectionLayoutGroup group);
 
-		[Export ("contentInsets", ArgumentSemantic.Assign)]
-		NSDirectionalEdgeInsets ContentInsets { get; set; }
+		//[Export ("contentInsets", ArgumentSemantic.Assign)]
+		//NSDirectionalEdgeInsets ContentInsets { get; set; }
 
 		[Export ("interGroupSpacing")]
 		nfloat InterGroupSpacing { get; set; }
@@ -921,8 +922,8 @@ namespace UIKit {
 		[Export ("boundarySupplementaryItems", ArgumentSemantic.Copy)]
 		NSCollectionLayoutBoundarySupplementaryItem [] BoundarySupplementaryItems { get; set; }
 
-		[Deprecated (PlatformName.iOS, 16, 0)]
-		[Deprecated (PlatformName.TvOS, 16, 0)]
+		//[Deprecated (PlatformName.iOS, 16, 0)]
+		//[Deprecated (PlatformName.TvOS, 16, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 16, 0)]
 		[Export ("supplementariesFollowContentInsets")]
 		bool SupplementariesFollowContentInsets { get; set; }
@@ -939,13 +940,13 @@ namespace UIKit {
 		[TV (14, 0), iOS (14, 0)]
 		[Static]
 		[Export ("sectionWithListConfiguration:layoutEnvironment:")]
-		NSCollectionLayoutSection GetSection (UICollectionLayoutListConfiguration listConfiguration, INSCollectionLayoutEnvironment layoutEnvironment);
+		static extern NSCollectionLayoutSection GetSection (UICollectionLayoutListConfiguration listConfiguration, INSCollectionLayoutEnvironment layoutEnvironment);
 
 		// NSCollectionLayoutSection (TVMediaItemContentConfiguration) category
 		[TV (15, 0), NoMac, NoiOS, NoMacCatalyst]
 		[Static]
 		[Export ("orthogonalLayoutSectionForMediaItems")]
-		NSCollectionLayoutSection GetOrthogonalLayoutSectionForMediaItems ();
+		static extern NSCollectionLayoutSection GetOrthogonalLayoutSectionForMediaItems ();
 
 		[TV (16, 0), iOS (16, 0), NoMac]
 		[MacCatalyst (16, 0)]
@@ -961,14 +962,14 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutGroupCustomItem : NSCopying {
+	partial class NSCollectionLayoutGroupCustomItem : NSCopying {
 		[Static]
 		[Export ("customItemWithFrame:")]
-		NSCollectionLayoutGroupCustomItem Create (CGRect frame);
+		static extern NSCollectionLayoutGroupCustomItem Create (CGRect frame);
 
 		[Static]
 		[Export ("customItemWithFrame:zIndex:")]
-		NSCollectionLayoutGroupCustomItem Create (CGRect frame, nint zIndex);
+		static extern NSCollectionLayoutGroupCustomItem Create (CGRect frame, nint zIndex);
 
 		[Export ("frame")]
 		CGRect Frame { get; }
@@ -982,7 +983,7 @@ namespace UIKit {
 	[TV (13, 0), iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	[Protocol]
-	interface NSCollectionLayoutContainer {
+	partial class NSCollectionLayoutContainer {
 		[Abstract]
 		[Export ("contentSize")]
 		CGSize ContentSize { get; }
@@ -991,6 +992,7 @@ namespace UIKit {
 		[Export ("effectiveContentSize")]
 		CGSize EffectiveContentSize { get; }
 
+		/*
 		[Abstract]
 		[Export ("contentInsets")]
 		NSDirectionalEdgeInsets ContentInsets { get; }
@@ -998,6 +1000,7 @@ namespace UIKit {
 		[Abstract]
 		[Export ("effectiveContentInsets")]
 		NSDirectionalEdgeInsets EffectiveContentInsets { get; }
+		*/
 	}
 
 	interface INSCollectionLayoutEnvironment { }
@@ -1005,7 +1008,7 @@ namespace UIKit {
 	[TV (13, 0), iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	[Protocol]
-	interface NSCollectionLayoutEnvironment {
+	partial class NSCollectionLayoutEnvironment {
 
 		[Abstract]
 		[Export ("container")]
@@ -1023,7 +1026,7 @@ namespace UIKit {
 	[TV (13, 0), iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	[Protocol]
-	interface NSCollectionLayoutVisibleItem
+	partial class NSCollectionLayoutVisibleItem
 #if !MONOMAC
 	: UIDynamicItem
 #endif
@@ -1060,11 +1063,13 @@ namespace UIKit {
 		new CGRect Bounds { get; }
 #pragma warning restore
 
+		/*
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Abstract]
 		[Export ("transform3D", ArgumentSemantic.Assign)]
 		CATransform3D Transform3D { get; set; }
+		*/
 
 		[Abstract]
 		[Export ("name")]
@@ -1398,7 +1403,7 @@ namespace UIKit {
 	///     
 	///     
 	///     <related type="externalDocumentation" href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/NSTextAttachment_Class_TextKit/index.html">Apple documentation for <c>NSTextAttachment</c></related>
-	[MacCatalyst (13, 1)]
+	//[MacCatalyst (13, 1)]
 	public partial class NSTextAttachment : NSTextAttachmentContainer
 #if !MONOMAC
 	, UIAccessibilityContentSizeCategoryImageAdjusting
@@ -1417,7 +1422,7 @@ namespace UIKit {
 		[DesignatedInitializer]
 		[Export ("initWithData:ofType:")]
 		[PostGet ("Contents")]
-		public NativeHandle Constructor ([NullAllowed] NSData contentData, [NullAllowed] string uti);
+		public extern NativeHandle Constructor ([NullAllowed] NSData contentData, [NullAllowed] string uti);
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed]
@@ -1453,7 +1458,7 @@ namespace UIKit {
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("textAttachmentWithImage:")]
-		public static NSTextAttachment Create (Image image);
+		public static extern NSTextAttachment Create (Image image);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("lineLayoutPadding")]
@@ -1463,12 +1468,12 @@ namespace UIKit {
 		[Static]
 		[Export ("textAttachmentViewProviderClassForFileType:")]
 		[return: NullAllowed]
-		public Class GetTextAttachmentViewProviderClass (string fileType);
+		public extern Class GetTextAttachmentViewProviderClass (string fileType);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Static]
 		[Export ("registerTextAttachmentViewProviderClass:forFileType:")]
-		public static void RegisterViewProviderClass (Class textAttachmentViewProviderClass, string fileType);
+		public static extern void RegisterViewProviderClass (Class textAttachmentViewProviderClass, string fileType);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("allowsTextAttachmentView")]
@@ -1508,18 +1513,18 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutAnchor : NSCopying, INSCopying {
+	partial class NSCollectionLayoutAnchor : NSCopying {
 		[Static]
 		[Export ("layoutAnchorWithEdges:")]
-		NSCollectionLayoutAnchor Create (NSDirectionalRectEdge edges);
+		static extern NSCollectionLayoutAnchor Create (NSDirectionalRectEdge edges);
 
 		[Static]
 		[Export ("layoutAnchorWithEdges:absoluteOffset:")]
-		NSCollectionLayoutAnchor CreateFromAbsoluteOffset (NSDirectionalRectEdge edges, CGPoint absoluteOffset);
+		static extern NSCollectionLayoutAnchor CreateFromAbsoluteOffset (NSDirectionalRectEdge edges, CGPoint absoluteOffset);
 
 		[Static]
 		[Export ("layoutAnchorWithEdges:fractionalOffset:")]
-		NSCollectionLayoutAnchor CreateFromFractionalOffset (NSDirectionalRectEdge edges, CGPoint fractionalOffset);
+		static extern NSCollectionLayoutAnchor CreateFromFractionalOffset (NSDirectionalRectEdge edges, CGPoint fractionalOffset);
 
 		[Export ("edges")]
 		NSDirectionalRectEdge Edges { get; }
@@ -1538,13 +1543,13 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutDimension : NSCopying {
+	partial class NSCollectionLayoutDimension : NSCopying {
 		[Static]
 		[Export ("fractionalWidthDimension:")]
 #if MONOMAC && !NET
 		NSCollectionLayoutDimension CreateFractionalWidthDimension (nfloat fractionalWidth);
 #else
-		NSCollectionLayoutDimension CreateFractionalWidth (nfloat fractionalWidth);
+		static extern NSCollectionLayoutDimension CreateFractionalWidth (nfloat fractionalWidth);
 #endif
 
 		[Static]
@@ -1552,7 +1557,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutDimension CreateFractionalHeightDimension (nfloat fractionalHeight);
 #else
-		NSCollectionLayoutDimension CreateFractionalHeight (nfloat fractionalHeight);
+		static extern NSCollectionLayoutDimension CreateFractionalHeight (nfloat fractionalHeight);
 #endif
 
 		[Static]
@@ -1560,7 +1565,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutDimension CreateAbsoluteDimension (nfloat absoluteDimension);
 #else
-		NSCollectionLayoutDimension CreateAbsolute (nfloat absoluteDimension);
+		static extern NSCollectionLayoutDimension CreateAbsolute (nfloat absoluteDimension);
 #endif
 
 		[Static]
@@ -1568,7 +1573,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutDimension CreateEstimatedDimension (nfloat estimatedDimension);
 #else
-		NSCollectionLayoutDimension CreateEstimated (nfloat estimatedDimension);
+		static extern NSCollectionLayoutDimension CreateEstimated (nfloat estimatedDimension);
 #endif
 
 		[Export ("isFractionalWidth")]
@@ -1589,7 +1594,7 @@ namespace UIKit {
 		[TV (17, 0), iOS (17, 0), NoMac, MacCatalyst (17, 0)]
 		[Static]
 		[Export ("uniformAcrossSiblingsWithEstimate:")]
-		NSCollectionLayoutDimension CreateUniformAcrossSiblings (nfloat estimatedDimension);
+		static extern NSCollectionLayoutDimension CreateUniformAcrossSiblings (nfloat estimatedDimension);
 
 		[TV (17, 0), iOS (17, 0), MacCatalyst (17, 0), NoMac]
 		[Export ("isUniformAcrossSiblings")]
@@ -1601,10 +1606,10 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutSize : NSCopying {
+	partial class NSCollectionLayoutSize : NSCopying {
 		[Static]
 		[Export ("sizeWithWidthDimension:heightDimension:")]
-		NSCollectionLayoutSize Create (NSCollectionLayoutDimension width, NSCollectionLayoutDimension height);
+		static extern NSCollectionLayoutSize Create (NSCollectionLayoutDimension width, NSCollectionLayoutDimension height);
 
 		[Export ("widthDimension")]
 		NSCollectionLayoutDimension WidthDimension { get; }
@@ -1617,13 +1622,13 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutSpacing : NSCopying {
+	partial class NSCollectionLayoutSpacing : NSCopying {
 		[Static]
 		[Export ("flexibleSpacing:")]
 #if MONOMAC && !NET
 		NSCollectionLayoutSpacing CreateFlexibleSpacing (nfloat flexibleSpacing);
 #else
-		NSCollectionLayoutSpacing CreateFlexible (nfloat flexibleSpacing);
+		static extern NSCollectionLayoutSpacing CreateFlexible (nfloat flexibleSpacing);
 #endif
 
 		[Static]
@@ -1631,7 +1636,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		NSCollectionLayoutSpacing CreateFixedSpacing (nfloat fixedSpacing);
 #else
-		NSCollectionLayoutSpacing CreateFixed (nfloat fixedSpacing);
+		static extern NSCollectionLayoutSpacing CreateFixed (nfloat fixedSpacing);
 #endif
 
 		[Export ("spacing")]
@@ -1648,13 +1653,13 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutEdgeSpacing : NSCopying {
+	partial class NSCollectionLayoutEdgeSpacing : NSCopying {
 		[Static]
 		[Export ("spacingForLeading:top:trailing:bottom:")]
 #if MONOMAC && !NET
 		NSCollectionLayoutEdgeSpacing CreateSpacing ([NullAllowed] NSCollectionLayoutSpacing leading, [NullAllowed] NSCollectionLayoutSpacing top, [NullAllowed] NSCollectionLayoutSpacing trailing, [NullAllowed] NSCollectionLayoutSpacing bottom);
 #else
-		NSCollectionLayoutEdgeSpacing Create ([NullAllowed] NSCollectionLayoutSpacing leading, [NullAllowed] NSCollectionLayoutSpacing top, [NullAllowed] NSCollectionLayoutSpacing trailing, [NullAllowed] NSCollectionLayoutSpacing bottom);
+		static extern NSCollectionLayoutEdgeSpacing Create ([NullAllowed] NSCollectionLayoutSpacing leading, [NullAllowed] NSCollectionLayoutSpacing top, [NullAllowed] NSCollectionLayoutSpacing trailing, [NullAllowed] NSCollectionLayoutSpacing bottom);
 #endif
 
 		[NullAllowed, Export ("leading")]
@@ -1674,14 +1679,14 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSCollectionLayoutItem))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutSupplementaryItem : NSCopying {
+	partial class NSCollectionLayoutSupplementaryItem : NSCopying {
 		[Static]
 		[Export ("supplementaryItemWithLayoutSize:elementKind:containerAnchor:")]
-		NSCollectionLayoutSupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSCollectionLayoutAnchor containerAnchor);
+		static extern NSCollectionLayoutSupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSCollectionLayoutAnchor containerAnchor);
 
 		[Static]
 		[Export ("supplementaryItemWithLayoutSize:elementKind:containerAnchor:itemAnchor:")]
-		NSCollectionLayoutSupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSCollectionLayoutAnchor containerAnchor, NSCollectionLayoutAnchor itemAnchor);
+		static extern NSCollectionLayoutSupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSCollectionLayoutAnchor containerAnchor, NSCollectionLayoutAnchor itemAnchor);
 
 		[Export ("zIndex")]
 		nint ZIndex { get; set; }
@@ -1700,17 +1705,17 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutItem : NSCopying {
+	partial class NSCollectionLayoutItem : NSCopying {
 		[Static]
 		[Export ("itemWithLayoutSize:")]
-		NSCollectionLayoutItem Create (NSCollectionLayoutSize layoutSize);
+		static extern NSCollectionLayoutItem Create (NSCollectionLayoutSize layoutSize);
 
 		[Static]
 		[Export ("itemWithLayoutSize:supplementaryItems:")]
-		NSCollectionLayoutItem Create (NSCollectionLayoutSize layoutSize, params NSCollectionLayoutSupplementaryItem [] supplementaryItems);
+		static extern NSCollectionLayoutItem Create (NSCollectionLayoutSize layoutSize, params NSCollectionLayoutSupplementaryItem [] supplementaryItems);
 
-		[Export ("contentInsets", ArgumentSemantic.Assign)]
-		NSDirectionalEdgeInsets ContentInsets { get; set; }
+		//[Export ("contentInsets", ArgumentSemantic.Assign)]
+		//NSDirectionalEdgeInsets ContentInsets { get; set; }
 
 		[NullAllowed, Export ("edgeSpacing", ArgumentSemantic.Copy)]
 		NSCollectionLayoutEdgeSpacing EdgeSpacing { get; set; }
@@ -1726,14 +1731,14 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSCollectionLayoutSupplementaryItem))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutBoundarySupplementaryItem : NSCopying {
+	partial class NSCollectionLayoutBoundarySupplementaryItem : NSCopying {
 		[Static]
 		[Export ("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:")]
-		NSCollectionLayoutBoundarySupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSRectAlignment alignment);
+		static extern NSCollectionLayoutBoundarySupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSRectAlignment alignment);
 
 		[Static]
 		[Export ("boundarySupplementaryItemWithLayoutSize:elementKind:alignment:absoluteOffset:")]
-		NSCollectionLayoutBoundarySupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSRectAlignment alignment, CGPoint absoluteOffset);
+		static extern NSCollectionLayoutBoundarySupplementaryItem Create (NSCollectionLayoutSize layoutSize, string elementKind, NSRectAlignment alignment, CGPoint absoluteOffset);
 
 		[Export ("extendsBoundary")]
 		bool ExtendsBoundary { get; set; }
@@ -1752,10 +1757,10 @@ namespace UIKit {
 	[TV (13, 0), iOS (13, 0)]
 	[BaseType (typeof (NSCollectionLayoutItem))]
 	[DisableDefaultCtor]
-	interface NSCollectionLayoutDecorationItem : NSCopying {
+	partial class NSCollectionLayoutDecorationItem : NSCopying {
 		[Static]
 		[Export ("backgroundDecorationItemWithElementKind:")]
-		NSCollectionLayoutDecorationItem Create (string elementKind);
+		static extern NSCollectionLayoutDecorationItem Create (string elementKind);
 
 		[Export ("zIndex")]
 		nint ZIndex { get; set; }
@@ -1768,13 +1773,13 @@ namespace UIKit {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // - (instancetype)init NS_UNAVAILABLE;
-	interface NSDataAsset : NSCopying {
+	partial class NSDataAsset : NSCopying {
 		[Export ("initWithName:")]
-		NativeHandle Constructor (string name);
+		static extern NativeHandle Constructor (string name);
 
 		[Export ("initWithName:bundle:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string name, NSBundle bundle);
+		static extern NativeHandle Constructor (string name, NSBundle bundle);
 
 		[Export ("name")]
 		string Name { get; }
@@ -1852,7 +1857,7 @@ namespace UIKit {
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("columnTerminatorsForLocale:")]
-		public static NSCharacterSet GetColumnTerminators ([NullAllowed] NSLocale locale);
+		public static extern NSCharacterSet GetColumnTerminators ([NullAllowed] NSLocale locale);
 
 		[Field ("NSTabColumnTerminatorsAttributeName")]
 		public NSString ColumnTerminatorsAttributeName { get; }
@@ -1862,7 +1867,7 @@ namespace UIKit {
 	[Protocol]
 	// no [Model] since it's not exposed in any API
 	// only NSTextContainer conforms to it but it's only queried by iOS itself
-	interface NSTextLayoutOrientationProvider {
+	public partial class NSTextLayoutOrientationProvider {
 		[Abstract]
 		[Export ("layoutOrientation")]
 		NSTextLayoutOrientation LayoutOrientation {
@@ -1873,26 +1878,26 @@ namespace UIKit {
 	/// <include file="../docs/api/UIKit/NSTextContainer.xml" path="/Documentation/Docs[@DocId='T:UIKit.NSTextContainer']/*" />
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	public partial interface NSTextContainer : NSTextLayoutOrientationProvider {
+	public partial class NSTextContainer : NSTextLayoutOrientationProvider {
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[DesignatedInitializer]
 		[Export ("initWithSize:")]
-		NativeHandle Constructor (CGSize size);
+		 extern NativeHandle Constructor (CGSize size);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoTV]
 		[Export ("initWithContainerSize:"), Internal]
 		[Sealed]
-		IntPtr InitWithContainerSize (CGSize size);
+		 extern IntPtr InitWithContainerSize (CGSize size);
 
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoTV]
 		[Export ("initWithSize:"), Internal]
 		[Sealed]
-		IntPtr InitWithSize (CGSize size);
+		 extern IntPtr InitWithSize (CGSize size);
 
 		[NullAllowed] // by default this property is null
 		[Export ("layoutManager", ArgumentSemantic.Assign)]
@@ -1922,7 +1927,7 @@ namespace UIKit {
 #if MONOMAC && !NET
 		CGRect GetLineFragmentRect (CGRect proposedRect, nuint characterIndex, NSWritingDirection baseWritingDirection, ref CGRect remainingRect);
 #else
-		CGRect GetLineFragmentRect (CGRect proposedRect, nuint characterIndex, NSWritingDirection baseWritingDirection, out CGRect remainingRect);
+		 extern CGRect GetLineFragmentRect (CGRect proposedRect, nuint characterIndex, NSWritingDirection baseWritingDirection, out CGRect remainingRect);
 #endif
 
 		[Export ("widthTracksTextView")]
@@ -1933,7 +1938,7 @@ namespace UIKit {
 
 		[MacCatalyst (13, 1)]
 		[Export ("replaceLayoutManager:")]
-		void ReplaceLayoutManager (NSLayoutManager newLayoutManager);
+		 extern void ReplaceLayoutManager (NSLayoutManager newLayoutManager);
 
 		[MacCatalyst (13, 1)]
 		[Export ("simpleRectangularTextContainer")]
@@ -1944,7 +1949,7 @@ namespace UIKit {
 		[NoTV]
 		[Deprecated (PlatformName.MacOSX, 10, 11)]
 		[Export ("containsPoint:")]
-		bool ContainsPoint (CGPoint point);
+		 extern bool ContainsPoint (CGPoint point);
 
 		[NoiOS]
 		[NoMacCatalyst]
@@ -1966,23 +1971,23 @@ namespace UIKit {
 
 	/// <summary>String drawing extension methods for <see cref="T:Foundation.NSString" />.</summary>
 	[ThreadSafe]
-	[Category, BaseType (typeof (NSString))]
-	interface NSExtendedStringDrawing {
+	//[Category, BaseType (typeof (NSString))]
+	partial class NSExtendedStringDrawing: NSString {
 		[MacCatalyst (13, 1)]
 		[Export ("drawWithRect:options:attributes:context:")]
-		void WeakDrawString (CGRect rect, NSStringDrawingOptions options, [NullAllowed] NSDictionary attributes, [NullAllowed] NSStringDrawingContext context);
+		extern void WeakDrawString (CGRect rect, NSStringDrawingOptions options, [NullAllowed] NSDictionary attributes, [NullAllowed] NSStringDrawingContext context);
 
 		[MacCatalyst (13, 1)]
 		[Wrap ("WeakDrawString (This, rect, options, attributes.GetDictionary (), context)")]
-		void DrawString (CGRect rect, NSStringDrawingOptions options, StringAttributes attributes, [NullAllowed] NSStringDrawingContext context);
+		extern void DrawString (CGRect rect, NSStringDrawingOptions options, StringAttributes attributes, [NullAllowed] NSStringDrawingContext context);
 
 		[MacCatalyst (13, 1)]
 		[Export ("boundingRectWithSize:options:attributes:context:")]
-		CGRect WeakGetBoundingRect (CGSize size, NSStringDrawingOptions options, [NullAllowed] NSDictionary attributes, [NullAllowed] NSStringDrawingContext context);
+		extern CGRect WeakGetBoundingRect (CGSize size, NSStringDrawingOptions options, [NullAllowed] NSDictionary attributes, [NullAllowed] NSStringDrawingContext context);
 
 		[MacCatalyst (13, 1)]
 		[Wrap ("WeakGetBoundingRect (This, size, options, attributes.GetDictionary (), context)")]
-		CGRect GetBoundingRect (CGSize size, NSStringDrawingOptions options, StringAttributes attributes, [NullAllowed] NSStringDrawingContext context);
+		extern CGRect GetBoundingRect (CGSize size, NSStringDrawingOptions options, StringAttributes attributes, [NullAllowed] NSStringDrawingContext context);
 	}
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -2044,9 +2049,9 @@ namespace UIKit {
 	delegate bool NSTextLayoutManagerEnumerateTextSegmentsDelegate (NSTextRange textSegmentRange, CGRect textSegmentFrame, nfloat baselinePosition, NSTextContainer textContainer);
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
-	[DesignatedDefaultCtor]
+	//[DesignatedDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	public interface NSTextLayoutManager :  NSTextSelectionDataSource {
+	public partial class NSTextLayoutManager :  NSTextSelectionDataSource {
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
 		INSTextLayoutManagerDelegate Delegate { get; set; }
@@ -2067,7 +2072,7 @@ namespace UIKit {
 		NSTextContentManager TextContentManager { get; }
 
 		[Export ("replaceTextContentManager:")]
-		void Replace (NSTextContentManager textContentManager);
+		extern void Replace (NSTextContentManager textContentManager);
 
 		[NullAllowed, Export ("textContainer", ArgumentSemantic.Strong)]
 		NSTextContainer TextContainer { get; set; }
@@ -2082,25 +2087,25 @@ namespace UIKit {
 		NSOperationQueue LayoutQueue { get; set; }
 
 		[Export ("ensureLayoutForRange:")]
-		void EnsureLayout (NSTextRange range);
+		extern void EnsureLayout (NSTextRange range);
 
 		[Export ("ensureLayoutForBounds:")]
-		void EnsureLayout (CGRect bounds);
+		extern void EnsureLayout (CGRect bounds);
 
 		[Export ("invalidateLayoutForRange:")]
-		void InvalidateLayout (NSTextRange range);
+		extern void InvalidateLayout (NSTextRange range);
 
 		[Export ("textLayoutFragmentForPosition:")]
 		[return: NullAllowed]
-		NSTextLayoutFragment GetTextLayoutFragment (CGPoint position);
+		extern NSTextLayoutFragment GetTextLayoutFragment (CGPoint position);
 
 		[Export ("textLayoutFragmentForLocation:")]
 		[return: NullAllowed]
-		NSTextLayoutFragment GetTextLayoutFragment (INSTextLocation location);
+		extern NSTextLayoutFragment GetTextLayoutFragment (INSTextLocation location);
 
 		[Export ("enumerateTextLayoutFragmentsFromLocation:options:usingBlock:")]
 		[return: NullAllowed]
-		INSTextLocation EnumerateTextLayoutFragments ([NullAllowed] INSTextLocation location, NSTextLayoutFragmentEnumerationOptions options, Func<NSTextLayoutFragment, bool> handler);
+		extern INSTextLocation EnumerateTextLayoutFragments ([NullAllowed] INSTextLocation location, NSTextLayoutFragmentEnumerationOptions options, Func<NSTextLayoutFragment, bool> handler);
 
 		[Export ("textSelections", ArgumentSemantic.Strong)]
 		NSTextSelection [] TextSelections { get; set; }
@@ -2109,19 +2114,19 @@ namespace UIKit {
 		NSTextSelectionNavigation TextSelectionNavigation { get; set; }
 
 		[Export ("enumerateRenderingAttributesFromLocation:reverse:usingBlock:")]
-		void EnumerateRenderingAttributes (INSTextLocation location, bool reverse, NSTextLayoutManagerEnumerateRenderingAttributesDelegate handler);
+		extern void EnumerateRenderingAttributes (INSTextLocation location, bool reverse, NSTextLayoutManagerEnumerateRenderingAttributesDelegate handler);
 
 		[Export ("setRenderingAttributes:forTextRange:")]
-		void SetRenderingAttributes (NSDictionary<NSString, NSObject> renderingAttributes, NSTextRange textRange);
+		extern void SetRenderingAttributes (NSDictionary<NSString, NSObject> renderingAttributes, NSTextRange textRange);
 
 		[Export ("addRenderingAttribute:value:forTextRange:")]
-		void AddRenderingAttribute (string renderingAttribute, [NullAllowed] NSObject value, NSTextRange textRange);
+		extern void AddRenderingAttribute (string renderingAttribute, [NullAllowed] NSObject value, NSTextRange textRange);
 
 		[Export ("removeRenderingAttribute:forTextRange:")]
-		void RemoveRenderingAttribute (string renderingAttribute, NSTextRange textRange);
+		extern void RemoveRenderingAttribute (string renderingAttribute, NSTextRange textRange);
 
 		[Export ("invalidateRenderingAttributesForTextRange:")]
-		void InvalidateRenderingAttributes (NSTextRange textRange);
+		extern void InvalidateRenderingAttributes (NSTextRange textRange);
 
 		[NullAllowed, Export ("renderingAttributesValidator", ArgumentSemantic.Copy)]
 		Action<NSTextLayoutManager, NSTextLayoutFragment> RenderingAttributesValidator { get; set; }
@@ -2131,16 +2136,16 @@ namespace UIKit {
 		NSDictionary<NSString, NSObject> LinkRenderingAttributes { get; }
 
 		[Export ("renderingAttributesForLink:atLocation:")]
-		NSDictionary<NSString, NSObject> GetRenderingAttributes (NSObject link, INSTextLocation location);
+		extern NSDictionary<NSString, NSObject> GetRenderingAttributes (NSObject link, INSTextLocation location);
 
 		[Export ("enumerateTextSegmentsInRange:type:options:usingBlock:")]
-		void EnumerateTextSegments (NSTextRange textRange, NSTextLayoutManagerSegmentType type, NSTextLayoutManagerSegmentOptions options, NSTextLayoutManagerEnumerateTextSegmentsDelegate handler);
+		extern void EnumerateTextSegments (NSTextRange textRange, NSTextLayoutManagerSegmentType type, NSTextLayoutManagerSegmentOptions options, NSTextLayoutManagerEnumerateTextSegmentsDelegate handler);
 
 		[Export ("replaceContentsInRange:withTextElements:")]
-		void ReplaceContents (NSTextRange range, NSTextElement [] textElements);
+		extern void ReplaceContents (NSTextRange range, NSTextElement [] textElements);
 
 		[Export ("replaceContentsInRange:withAttributedString:")]
-		void ReplaceContents (NSTextRange range, NSAttributedString attributedString);
+		extern void ReplaceContents (NSTextRange range, NSAttributedString attributedString);
 	}
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -2169,7 +2174,7 @@ namespace UIKit {
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[Protocol]
-	interface NSTextElementProvider {
+	partial class NSTextElementProvider {
 		[Abstract]
 		[Export ("documentRange", ArgumentSemantic.Strong)]
 		NSTextRange DocumentRange { get; }
@@ -2177,26 +2182,26 @@ namespace UIKit {
 		[Abstract]
 		[Export ("enumerateTextElementsFromLocation:options:usingBlock:")]
 		[return: NullAllowed]
-		INSTextLocation EnumerateTextElements ([NullAllowed] INSTextLocation textLocation, NSTextContentManagerEnumerationOptions options, Func<NSTextElement, bool> handler);
+		extern INSTextLocation? EnumerateTextElements ([NullAllowed] INSTextLocation textLocation, NSTextContentManagerEnumerationOptions options, Func<NSTextElement, bool> handler);
 
 		[Abstract]
 		[Export ("replaceContentsInRange:withTextElements:")]
-		void ReplaceContents (NSTextRange range, [NullAllowed] NSTextElement [] textElements);
+		extern void ReplaceContents (NSTextRange range, [NullAllowed] NSTextElement [] textElements);
 
 		[Abstract]
 		[Export ("synchronizeToBackingStore:")]
-		void Synchronize ([NullAllowed] Action<NSError> completionHandler);
+		extern void Synchronize ([NullAllowed] Action<NSError> completionHandler);
 
 		[Export ("locationFromLocation:withOffset:")]
 		[return: NullAllowed]
-		INSTextLocation GetLocation (INSTextLocation location, nint offset);
+		extern INSTextLocation GetLocation (INSTextLocation location, nint offset);
 
 		[Export ("offsetFromLocation:toLocation:")]
-		nint GetOffset (INSTextLocation from, INSTextLocation to);
+		extern nint GetOffset (INSTextLocation from, INSTextLocation to);
 
 		[Export ("adjustedRangeFromRange:forEditingTextSelection:")]
 		[return: NullAllowed]
-		NSTextRange AdjustedRange (NSTextRange textRange, bool forEditingTextSelection);
+		extern NSTextRange AdjustedRange (NSTextRange textRange, bool forEditingTextSelection);
 	}
 
 	interface INSTextContentManagerDelegate { }
@@ -2204,14 +2209,14 @@ namespace UIKit {
 	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSTextContentManager : NSTextElementProvider, NSSecureCoding {
+	partial class NSTextContentManager : NSTextElementProvider {
 		[Notification]
 		[Field ("NSTextContentStorageUnsupportedAttributeAddedNotification")]
 		NSString StorageUnsupportedAttributeAddedNotification { get; }
 
 		[DesignatedInitializer]
 		[Export ("init")]
-		NativeHandle Constructor ();
+		extern NativeHandle Constructor ();
 
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
@@ -2224,30 +2229,30 @@ namespace UIKit {
 		NSTextLayoutManager [] TextLayoutManagers { get; }
 
 		[Export ("addTextLayoutManager:")]
-		void Add (NSTextLayoutManager textLayoutManager);
+		extern void Add (NSTextLayoutManager textLayoutManager);
 
 		[Export ("removeTextLayoutManager:")]
-		void Remove (NSTextLayoutManager textLayoutManager);
+		extern void Remove (NSTextLayoutManager textLayoutManager);
 
 		[NullAllowed, Export ("primaryTextLayoutManager", ArgumentSemantic.Strong)]
 		NSTextLayoutManager PrimaryTextLayoutManager { get; set; }
 
 		[Async]
 		[Export ("synchronizeTextLayoutManagers:")]
-		void SynchronizeTextLayoutManagers ([NullAllowed] Action<NSError> completionHandler);
+		extern void SynchronizeTextLayoutManagers ([NullAllowed] Action<NSError> completionHandler);
 
 		[Export ("textElementsForRange:")]
-		NSTextElement [] GetTextElements (NSTextRange range);
+		extern NSTextElement [] GetTextElements (NSTextRange range);
 
 		[Export ("hasEditingTransaction")]
 		bool HasEditingTransaction { get; }
 
 		[Async]
 		[Export ("performEditingTransactionUsingBlock:")]
-		void PerformEditingTransaction (Action transaction);
+		extern void PerformEditingTransaction (Action transaction);
 
 		[Export ("recordEditActionInRange:newTextRange:")]
-		void RecordEditAction (NSTextRange originalTextRange, NSTextRange newTextRange);
+		extern void RecordEditAction (NSTextRange originalTextRange, NSTextRange newTextRange);
 
 		[Export ("automaticallySynchronizesTextLayoutManagers")]
 		bool AutomaticallySynchronizesTextLayoutManagers { get; set; }
@@ -2268,10 +2273,10 @@ namespace UIKit {
 
 	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
-	interface NSTextElement {
+	partial class NSTextElement: NSObject {
 		[Export ("initWithTextContentManager:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor ([NullAllowed] NSTextContentManager textContentManager);
+		extern NativeHandle Constructor ([NullAllowed] NSTextContentManager textContentManager);
 
 		[NullAllowed, Export ("textContentManager", ArgumentSemantic.Weak)]
 		NSTextContentManager TextContentManager { get; set; }
@@ -2316,13 +2321,13 @@ namespace UIKit {
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSTextLineFragment : NSSecureCoding {
+	partial class NSTextLineFragment : NSSecureCoding {
 		[Export ("initWithAttributedString:range:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSAttributedString attributedString, NSRange range);
+		extern NativeHandle Constructor (NSAttributedString attributedString, NSRange range);
 
 		[Export ("initWithString:attributes:range:")]
-		NativeHandle Constructor (string @string, NSDictionary<NSString, NSObject> attributes, NSRange range);
+		extern NativeHandle Constructor (string @string, NSDictionary<NSString, NSObject> attributes, NSRange range);
 
 		[Export ("attributedString", ArgumentSemantic.Strong)]
 		NSAttributedString AttributedString { get; }
@@ -2337,16 +2342,16 @@ namespace UIKit {
 		CGPoint GlyphOrigin { get; }
 
 		[Export ("drawAtPoint:inContext:")]
-		void Draw (CGPoint point, CGContext context);
+		extern void Draw (CGPoint point, CGContext context);
 
 		[Export ("locationForCharacterAtIndex:")]
-		CGPoint GetLocation (nint characterIndex);
+		extern CGPoint GetLocation (nint characterIndex);
 
 		[Export ("characterIndexForPoint:")]
-		nint GetCharacterIndex (CGPoint point);
+		extern nint GetCharacterIndex (CGPoint point);
 
 		[Export ("fractionOfDistanceThroughGlyphForPoint:")]
-		nfloat GetFractionOfDistanceThroughGlyph (CGPoint point);
+		extern nfloat GetFractionOfDistanceThroughGlyph (CGPoint point);
 	}
 
 	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -2391,10 +2396,10 @@ namespace UIKit {
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSTextLayoutFragment : NSSecureCoding {
+	partial class NSTextLayoutFragment : NSSecureCoding {
 		[Export ("initWithTextElement:range:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSTextElement textElement, [NullAllowed] NSTextRange rangeInElement);
+		extern NativeHandle Constructor (NSTextElement textElement, [NullAllowed] NSTextRange rangeInElement);
 
 		[NullAllowed, Export ("textLayoutManager", ArgumentSemantic.Weak)]
 		NSTextLayoutManager TextLayoutManager { get; }
@@ -2415,7 +2420,7 @@ namespace UIKit {
 		NSTextLayoutFragmentState State { get; }
 
 		[Export ("invalidateLayout")]
-		void InvalidateLayout ();
+		extern void InvalidateLayout ();
 
 		[Export ("layoutFragmentFrame")]
 		CGRect LayoutFragmentFrame { get; }
@@ -2436,23 +2441,23 @@ namespace UIKit {
 		nfloat BottomMargin { get; }
 
 		[Export ("drawAtPoint:inContext:")]
-		void Draw (CGPoint point, CGContext context);
+		extern void Draw (CGPoint point, CGContext context);
 
 		[Export ("textAttachmentViewProviders", ArgumentSemantic.Copy)]
 		NSTextAttachmentViewProvider [] TextAttachmentViewProviders { get; }
 
 		[Export ("frameForTextAttachmentAtLocation:")]
-		CGRect GetFrameForTextAttachment (INSTextLocation location);
+		extern CGRect GetFrameForTextAttachment (INSTextLocation location);
 
 		[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("textLineFragmentForVerticalOffset:requiresExactMatch:")]
 		[return: NullAllowed]
-		NSTextLineFragment GetTextLineFragment (nfloat verticalOffset, bool requiresExactMatch);
+		extern NSTextLineFragment GetTextLineFragment (nfloat verticalOffset, bool requiresExactMatch);
 
 		[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("textLineFragmentForTextLocation:isUpstreamAffinity:")]
 		[return: NullAllowed]
-		NSTextLineFragment GetTextLineFragment (INSTextLocation textLocation, bool isUpstreamAffinity);
+		extern NSTextLineFragment GetTextLineFragment (INSTextLocation textLocation, bool isUpstreamAffinity);
 	}
 
 	//[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -2576,16 +2581,16 @@ namespace UIKit {
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSTextSelection : NSSecureCoding {
+	partial class NSTextSelection : NSSecureCoding {
 		[Export ("initWithRanges:affinity:granularity:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSTextRange [] textRanges, NSTextSelectionAffinity affinity, NSTextSelectionGranularity granularity);
+		extern NativeHandle Constructor (NSTextRange [] textRanges, NSTextSelectionAffinity affinity, NSTextSelectionGranularity granularity);
 
 		[Export ("initWithRange:affinity:granularity:")]
-		NativeHandle Constructor (NSTextRange range, NSTextSelectionAffinity affinity, NSTextSelectionGranularity granularity);
+		extern NativeHandle Constructor (NSTextRange range, NSTextSelectionAffinity affinity, NSTextSelectionGranularity granularity);
 
 		[Export ("initWithLocation:affinity:")]
-		NativeHandle Constructor (INSTextLocation location, NSTextSelectionAffinity affinity);
+		extern NativeHandle Constructor (INSTextLocation location, NSTextSelectionAffinity affinity);
 
 		[Export ("textRanges", ArgumentSemantic.Copy)]
 		NSTextRange [] TextRanges { get; }
@@ -2612,7 +2617,7 @@ namespace UIKit {
 		NSDictionary<NSString, NSObject> TypingAttributes { get; set; }
 
 		[Export ("textSelectionWithTextRanges:")]
-		NSTextSelection GetTextSelection (NSTextRange [] textRanges);
+		extern NSTextSelection GetTextSelection (NSTextRange [] textRanges);
 	}
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -2645,47 +2650,47 @@ namespace UIKit {
 	[Protocol, Model (AutoGeneratedName = true)]
 #endif
 	[BaseType (typeof (NSObject))]
-	public interface NSTextSelectionDataSource {
+	public partial class NSTextSelectionDataSource: NSObject {
 		[Abstract]
 		[Export ("documentRange", ArgumentSemantic.Strong)]
 		NSTextRange DocumentRange { get; }
 
 		[Abstract]
 		[Export ("enumerateSubstringsFromLocation:options:usingBlock:")]
-		void EnumerateSubstrings (INSTextLocation location, NSStringEnumerationOptions options, NSTextSelectionDataSourceEnumerateSubstringsDelegate handler);
+		extern void EnumerateSubstrings (INSTextLocation location, NSStringEnumerationOptions options, NSTextSelectionDataSourceEnumerateSubstringsDelegate handler);
 
 		[Abstract]
 		[Export ("textRangeForSelectionGranularity:enclosingLocation:")]
 		[return: NullAllowed]
-		NSTextRange GetTextRange (NSTextSelectionGranularity selectionGranularity, INSTextLocation location);
+		extern NSTextRange GetTextRange (NSTextSelectionGranularity selectionGranularity, INSTextLocation location);
 
 		[Abstract]
 		[Export ("locationFromLocation:withOffset:")]
 		[return: NullAllowed]
-		INSTextLocation GetLocation (INSTextLocation location, nint offset);
+		extern INSTextLocation GetLocation (INSTextLocation location, nint offset);
 
 		[Abstract]
 		[Export ("offsetFromLocation:toLocation:")]
-		nint GetOffsetFromLocation (INSTextLocation from, INSTextLocation to);
+		extern  nint GetOffsetFromLocation (INSTextLocation from, INSTextLocation to);
 
 		[Abstract]
 		[Export ("baseWritingDirectionAtLocation:")]
-		NSTextSelectionNavigationWritingDirection GetBaseWritingDirection (INSTextLocation location);
+		extern NSTextSelectionNavigationWritingDirection GetBaseWritingDirection (INSTextLocation location);
 
 		[Abstract]
 		[Export ("enumerateCaretOffsetsInLineFragmentAtLocation:usingBlock:")]
-		void EnumerateCaretOffsets (INSTextLocation location, NSTextSelectionDataSourceEnumerateCaretOffsetsDelegate handler);
+		extern void EnumerateCaretOffsets (INSTextLocation location, NSTextSelectionDataSourceEnumerateCaretOffsetsDelegate handler);
 
 		[Abstract]
 		[Export ("lineFragmentRangeForPoint:inContainerAtLocation:")]
 		[return: NullAllowed]
-		NSTextRange GetLineFragmentRange (CGPoint point, INSTextLocation location);
+		extern NSTextRange GetLineFragmentRange (CGPoint point, INSTextLocation location);
 
 		[Export ("enumerateContainerBoundariesFromLocation:reverse:usingBlock:")]
-		void EnumerateContainerBoundaries (INSTextLocation location, bool reverse, NSTextSelectionDataSourceEnumerateContainerBoundariesDelegate handler);
+		extern void EnumerateContainerBoundaries (INSTextLocation location, bool reverse, NSTextSelectionDataSourceEnumerateContainerBoundariesDelegate handler);
 
 		[Export ("textLayoutOrientationAtLocation:")]
-		NSTextSelectionNavigationLayoutOrientation GetTextLayoutOrientation (INSTextLocation location);
+		extern NSTextSelectionNavigationLayoutOrientation GetTextLayoutOrientation (INSTextLocation location);
 	}
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -2787,7 +2792,7 @@ namespace UIKit {
 
 	//[TV (16, 0), iOS (16, 0), MacCatalyst (16, 0)]
 	enum NSTextListMarkerFormats {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field (null)]
 		CustomString = -1,
 
@@ -2883,11 +2888,11 @@ namespace UIKit {
 
 		[Export ("attributedStringForTextElement:")]
 		[return: NullAllowed]
-		public extern NSAttributedString? GetAttributedString (NSTextElement textElement);
+		extern NSAttributedString? GetAttributedString (NSTextElement textElement);
 
 		[Export ("textElementForAttributedString:")]
 		[return: NullAllowed]
-		public extern NSTextElement? GetTextElement (NSAttributedString attributedString);
+		extern NSTextElement? GetTextElement (NSAttributedString attributedString);
 
 		[Export ("locationFromLocation:withOffset:")]
 		[return: NullAllowed]
@@ -2903,18 +2908,18 @@ namespace UIKit {
 
 	[MacCatalyst (13, 0)]
 	[BaseType (typeof (NSObject))]
-	interface NSTextList : NSCoding, NSCopying, NSSecureCoding {
+	partial class NSTextList : NSCopying {
 		[Export ("initWithMarkerFormat:options:")]
-		NativeHandle Constructor (string format, NSTextListOptions mask);
+		extern NativeHandle Constructor (string format, NSTextListOptions mask);
 
 		[Wrap ("this (format, NSTextListOptions.None)")]
-		NativeHandle Constructor (string format);
+		extern NativeHandle Constructor (string format);
 
 		[Wrap ("this (format.GetConstant(), mask)")]
-		NativeHandle Constructor (NSTextListMarkerFormats format, NSTextListOptions mask);
+		extern NativeHandle Constructor (NSTextListMarkerFormats format, NSTextListOptions mask);
 
 		[Wrap ("this (format.GetConstant(), NSTextListOptions.None)")]
-		NativeHandle Constructor (NSTextListMarkerFormats format);
+		extern NativeHandle Constructor (NSTextListMarkerFormats format);
 
 #if NET
 		[BindAs (typeof (NSTextListMarkerFormats))] 
@@ -2935,13 +2940,13 @@ namespace UIKit {
 		[TV (16, 0), Mac (13, 0), iOS (16, 0), MacCatalyst (16, 0)]
 		[Export ("initWithMarkerFormat:options:startingItemNumber:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string markerFormat, NSTextListOptions options, nint startingItemNumber);
+		extern NativeHandle Constructor (string markerFormat, NSTextListOptions options, nint startingItemNumber);
 
 		[Export ("listOptions")]
 		NSTextListOptions ListOptions { get; }
 
 		[Export ("markerForItemNumber:")]
-		string GetMarker (nint itemNum);
+		extern string GetMarker (nint itemNum);
 
 		//Detected properties
 		[Export ("startingItemNumber")]
@@ -2997,7 +3002,7 @@ namespace UIKit {
 	}
 
 	enum NSAttributedStringDocumentType {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field (null)]
 		Unknown = NSDocumentType.Unknown,
 
@@ -3296,10 +3301,10 @@ namespace UIKit {
 	//[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	public class NSAdaptiveImageGlyph : NSObject, NSCopying,  CTAdaptiveImageProviding {
+	public class NSAdaptiveImageGlyph :  CTAdaptiveImageProviding {
 		[DesignatedInitializer]
 		[Export ("initWithImageContent:")]
-		NativeHandle Constructor (NSData imageContent);
+		extern NativeHandle Constructor (NSData imageContent);
 
 		[Export ("imageContent")]
 		NSData ImageContent { get; }
@@ -3317,14 +3322,14 @@ namespace UIKit {
 
 	[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	enum NSTextHighlightStyle {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field ("NSTextHighlightStyleDefault")]
 		Default,
 	}
 
 	[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	enum NSTextHighlightColorScheme {
-		[DefaultEnumValue]
+		//[DefaultEnumValue]
 		[Field ("NSTextHighlightColorSchemeDefault")]
 		Default,
 		[Field ("NSTextHighlightColorSchemePurple")]

@@ -8463,14 +8463,14 @@ namespace Foundation {
 	// Placeholer, just so we can start flagging things
 	partial interface INSFastEnumeration { }
 
-	partial class NSBundle {
+	public partial class NSBundle {
 		// - (NSImage *)imageForResource:(NSString *)name NS_AVAILABLE_MAC(10_7);
 		[NoiOS]
 		[NoMacCatalyst]
 		[NoWatch]
 		[NoTV]
 		[Export ("imageForResource:")]
-		NSImage ImageForResource (string name);
+		extern NSImage ImageForResource (string name);
 	}
 
 	[MacCatalyst (13, 1)]

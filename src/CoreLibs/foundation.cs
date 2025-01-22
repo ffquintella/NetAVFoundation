@@ -9639,10 +9639,10 @@ namespace Foundation {
 		NSNumberFormatter NumberFormatter { get; set; }
 
 		[Export ("stringFromMeasurement:")]
-		string ToString (NSMeasurement<NSUnit> measurement);
+		extern string ToString (NSMeasurement<NSUnit> measurement);
 
 		[Export ("stringFromUnit:")]
-		string ToString (NSUnit unit);
+		extern string ToString (NSUnit unit);
 	}
 
 	
@@ -9984,11 +9984,11 @@ namespace Foundation {
 
 		[Export ("initWithData:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSData data);
+		extern NativeHandle Constructor (NSData data);
 
 		[Export ("initWithString:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string @string);
+		extern NativeHandle Constructor (string @string);
 
 		[Export ("type")]
 		NSUrlSessionWebSocketMessageType Type { get; }
@@ -10027,18 +10027,18 @@ namespace Foundation {
 
 		[Export ("sendMessage:completionHandler:")]
 		[Async]
-		void SendMessage (NSUrlSessionWebSocketMessage message, Action<NSError> completionHandler);
+		extern void SendMessage (NSUrlSessionWebSocketMessage message, Action<NSError> completionHandler);
 
 		[Export ("receiveMessageWithCompletionHandler:")]
 		[Async]
-		void ReceiveMessage (Action<NSUrlSessionWebSocketMessage, NSError> completionHandler);
+		extern void ReceiveMessage (Action<NSUrlSessionWebSocketMessage, NSError> completionHandler);
 
 		[Export ("sendPingWithPongReceiveHandler:")]
 		[Async]
-		void SendPing (Action<NSError> pongReceiveHandler);
+		extern void SendPing (Action<NSError> pongReceiveHandler);
 
 		[Export ("cancelWithCloseCode:reason:")]
-		void Cancel (NSUrlSessionWebSocketCloseCode closeCode, [NullAllowed] NSData reason);
+		extern void Cancel (NSUrlSessionWebSocketCloseCode closeCode, [NullAllowed] NSData reason);
 
 		[Export ("maximumMessageSize")]
 		nint MaximumMessageSize { get; set; }
@@ -10062,10 +10062,10 @@ namespace Foundation {
 	partial class NSUrlSessionWebSocketDelegate {
 
 		[Export ("URLSession:webSocketTask:didOpenWithProtocol:")]
-		void DidOpen (NSUrlSession session, NSUrlSessionWebSocketTask webSocketTask, [NullAllowed] string protocol);
+		extern void DidOpen (NSUrlSession session, NSUrlSessionWebSocketTask webSocketTask, [NullAllowed] string protocol);
 
 		[Export ("URLSession:webSocketTask:didCloseWithCode:reason:")]
-		void DidClose (NSUrlSession session, NSUrlSessionWebSocketTask webSocketTask, NSUrlSessionWebSocketCloseCode closeCode, [NullAllowed] NSData reason);
+		extern 	void DidClose (NSUrlSession session, NSUrlSessionWebSocketTask webSocketTask, NSUrlSessionWebSocketCloseCode closeCode, [NullAllowed] NSData reason);
 	}
 
 	[Watch (6, 0), TV (13, 0), iOS (13, 0)]
@@ -10096,7 +10096,7 @@ namespace Foundation {
 	partial class NSBackgroundActivityScheduler {
 		[Export ("initWithIdentifier:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string identifier);
+		extern NativeHandle Constructor (string identifier);
 
 		[Export ("identifier")]
 		string Identifier { get; }
@@ -10114,10 +10114,10 @@ namespace Foundation {
 		double Tolerance { get; set; }
 
 		[Export ("scheduleWithBlock:")]
-		void Schedule (NSBackgroundActivityCompletionAction action);
+		extern void Schedule (NSBackgroundActivityCompletionAction action);
 
 		[Export ("invalidate")]
-		void Invalidate ();
+		extern void Invalidate ();
 
 		[Export ("shouldDefer")]
 		bool ShouldDefer { get; }
@@ -10171,7 +10171,7 @@ namespace Foundation {
 	[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	partial class NSPresentationIntent : NSCopying, NSSecureCoding {
+	partial class NSPresentationIntent : NSCopying{
 		[Export ("intentKind")]
 		NSPresentationIntentKind IntentKind { get; }
 
@@ -10180,51 +10180,51 @@ namespace Foundation {
 
 		[Static]
 		[Export ("paragraphIntentWithIdentity:nestedInsideIntent:")]
-		NSPresentationIntent CreateParagraphIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateParagraphIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("headerIntentWithIdentity:level:nestedInsideIntent:")]
-		NSPresentationIntent CreateHeaderIntent (nint identity, nint level, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateHeaderIntent (nint identity, nint level, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("codeBlockIntentWithIdentity:languageHint:nestedInsideIntent:")]
-		NSPresentationIntent CreateCodeBlockIntent (nint identity, [NullAllowed] string languageHint, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateCodeBlockIntent (nint identity, [NullAllowed] string languageHint, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("thematicBreakIntentWithIdentity:nestedInsideIntent:")]
-		NSPresentationIntent CreateThematicBreakIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateThematicBreakIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("orderedListIntentWithIdentity:nestedInsideIntent:")]
-		NSPresentationIntent CreateOrderedListIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateOrderedListIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("unorderedListIntentWithIdentity:nestedInsideIntent:")]
-		NSPresentationIntent CreateUnorderedListIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateUnorderedListIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("listItemIntentWithIdentity:ordinal:nestedInsideIntent:")]
-		NSPresentationIntent CreateListItemIntent (nint identity, nint ordinal, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateListItemIntent (nint identity, nint ordinal, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("blockQuoteIntentWithIdentity:nestedInsideIntent:")]
-		NSPresentationIntent CreateBlockQuoteIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateBlockQuoteIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("tableIntentWithIdentity:columnCount:alignments:nestedInsideIntent:")]
-		NSPresentationIntent CreateTableIntent (nint identity, nint columnCount, NSNumber [] alignments, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateTableIntent (nint identity, nint columnCount, NSNumber [] alignments, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("tableHeaderRowIntentWithIdentity:nestedInsideIntent:")]
-		NSPresentationIntent CreateTableHeaderRowIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateTableHeaderRowIntent (nint identity, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("tableRowIntentWithIdentity:row:nestedInsideIntent:")]
-		NSPresentationIntent CreateTableRowIntent (nint identity, nint row, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateTableRowIntent (nint identity, nint row, [NullAllowed] NSPresentationIntent parent);
 
 		[Static]
 		[Export ("tableCellIntentWithIdentity:column:nestedInsideIntent:")]
-		NSPresentationIntent CreateTableCellIntent (nint identity, nint column, [NullAllowed] NSPresentationIntent parent);
+		extern static NSPresentationIntent CreateTableCellIntent (nint identity, nint column, [NullAllowed] NSPresentationIntent parent);
 
 		[Export ("identity")]
 		nint Identity { get; }
@@ -10254,7 +10254,7 @@ namespace Foundation {
 		nint IndentationLevel { get; }
 
 		[Export ("isEquivalentToPresentationIntent:")]
-		bool IsEquivalent (NSPresentationIntent other);
+		extern bool IsEquivalent (NSPresentationIntent other);
 	}
 
 	[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -10281,22 +10281,22 @@ namespace Foundation {
 	[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	partial class NSInflectionRule : NSCopying, NSSecureCoding {
+	partial class NSInflectionRule : NSCopying {
 		[Static]
 		[Export ("automaticRule")]
-		NSInflectionRule AutomaticRule { get; }
+		static NSInflectionRule AutomaticRule { get; }
 
 		[Watch (8, 0), TV (15, 0), iOS (15, 0)]
 		[MacCatalyst (15, 0)]
 		[Static]
 		[Export ("canInflectLanguage:")]
-		bool CanInflectLanguage (string language);
+		extern static bool CanInflectLanguage (string language);
 
 		[Watch (8, 0), TV (15, 0), iOS (15, 0)]
 		[MacCatalyst (15, 0)]
 		[Static]
 		[Export ("canInflectPreferredLocalization")]
-		bool CanInflectPreferredLocalization { get; }
+		static bool CanInflectPreferredLocalization { get; }
 	}
 
 	[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
@@ -10304,7 +10304,7 @@ namespace Foundation {
 	partial class NSInflectionRuleExplicit {
 		[Export ("initWithMorphology:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSMorphology morphology);
+		extern NativeHandle Constructor (NSMorphology morphology);
 
 		[Export ("morphology", ArgumentSemantic.Copy)]
 		NSMorphology Morphology { get; }
@@ -10312,7 +10312,7 @@ namespace Foundation {
 
 	[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
-	partial class NSMorphology : NSCopying, NSSecureCoding {
+	partial class NSMorphology : NSCopying {
 		[Export ("grammaticalGender", ArgumentSemantic.Assign)]
 		NSGrammaticalGender GrammaticalGender { get; set; }
 
@@ -10322,22 +10322,16 @@ namespace Foundation {
 		[Export ("number", ArgumentSemantic.Assign)]
 		NSGrammaticalNumber Number { get; set; }
 
-		[Obsoleted (PlatformName.MacOSX, 14, 0, message: "Use 'NSTermOfAddress' instead.")]
-		[Obsoleted (PlatformName.iOS, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
-		[Obsoleted (PlatformName.MacCatalyst, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
-		[Obsoleted (PlatformName.TvOS, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
+	
 		[Obsoleted (PlatformName.WatchOS, 10, 0, message: "Use 'NSTermOfAddress' instead.")]
 		[Export ("customPronounForLanguage:")]
 		[return: NullAllowed]
-		NSMorphologyCustomPronoun GetCustomPronoun (string language);
+		extern NSMorphologyCustomPronoun GetCustomPronoun (string language);
 
-		[Obsoleted (PlatformName.MacOSX, 14, 0, message: "Use 'NSTermOfAddress' instead.")]
-		[Obsoleted (PlatformName.iOS, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
-		[Obsoleted (PlatformName.MacCatalyst, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
-		[Obsoleted (PlatformName.TvOS, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
+		
 		[Obsoleted (PlatformName.WatchOS, 10, 0, message: "Use 'NSTermOfAddress' instead.")]
 		[Export ("setCustomPronoun:forLanguage:error:")]
-		bool SetCustomPronoun ([NullAllowed] NSMorphologyCustomPronoun features, string language, [NullAllowed] out NSError error);
+		extern bool SetCustomPronoun ([NullAllowed] NSMorphologyCustomPronoun features, string language, [NullAllowed] out NSError error);
 
 		[Export ("unspecified")]
 		bool Unspecified { [Bind ("isUnspecified")] get; }
@@ -10367,21 +10361,18 @@ namespace Foundation {
 		NSGrammaticalDefiniteness Definiteness { get; set; }
 	}
 
-	[Obsoleted (PlatformName.MacOSX, 14, 0, message: "Use 'NSTermOfAddress' instead.")]
-	[Obsoleted (PlatformName.iOS, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
-	[Obsoleted (PlatformName.MacCatalyst, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
-	[Obsoleted (PlatformName.TvOS, 17, 0, message: "Use 'NSTermOfAddress' instead.")]
+	
 	[Obsoleted (PlatformName.WatchOS, 10, 0, message: "Use 'NSTermOfAddress' instead.")]
 	[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
-	partial class NSMorphologyCustomPronoun : NSCopying, NSSecureCoding {
+	partial class NSMorphologyCustomPronoun : NSCopying {
 		[Static]
 		[Export ("isSupportedForLanguage:")]
-		bool IsSupported (string language);
+		static extern bool IsSupported (string language);
 
 		[Static]
 		[Export ("requiredKeysForLanguage:")]
-		string [] GetRequiredKeysForLanguage (string language);
+		static extern string [] GetRequiredKeysForLanguage (string language);
 
 		[NullAllowed, Export ("subjectForm")]
 		string SubjectForm { get; set; }
@@ -10510,16 +10501,16 @@ namespace Foundation {
 		nint EndColumn { get; }
 
 		[Export ("initWithStartLine:startColumn:endLine:endColumn:")]
-		NativeHandle Constructor (nint startLine, nint startColumn, nint endLine, nint endColumn);
+		extern NativeHandle Constructor (nint startLine, nint startColumn, nint endLine, nint endColumn);
 
 		[Export ("rangeInString:")]
-		NSRange RangeInString (string @string);
+		extern NSRange RangeInString (string @string);
 	}
 
 	[Watch (10, 0), TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	partial class NSTermOfAddress : NSCopying, NSSecureCoding {
+	partial class NSTermOfAddress : NSCopying {
 		[Static]
 		[Export ("neutral")]
 		NSTermOfAddress Neutral { get; }
@@ -10534,7 +10525,7 @@ namespace Foundation {
 
 		[Static]
 		[Export ("localizedForLanguageIdentifier:withPronouns:")]
-		NSTermOfAddress GetLocalized (string language, NSMorphologyPronoun [] pronouns);
+		extern static NSTermOfAddress GetLocalized (string language, NSMorphologyPronoun [] pronouns);
 
 		[NullAllowed, Export ("languageIdentifier")]
 		string LanguageIdentifier { get; }
@@ -10551,9 +10542,9 @@ namespace Foundation {
 	[Watch (10, 0), TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	partial class NSMorphologyPronoun : NSCopying, NSSecureCoding {
+	partial class NSMorphologyPronoun : NSCopying {
 		[Export ("initWithPronoun:morphology:dependentMorphology:")]
-		NativeHandle Constructor (string pronoun, NSMorphology morphology, [NullAllowed] NSMorphology dependentMorphology);
+		extern NativeHandle Constructor (string pronoun, NSMorphology morphology, [NullAllowed] NSMorphology dependentMorphology);
 
 		[Export ("pronoun")]
 		string Pronoun { get; }
@@ -10578,29 +10569,29 @@ namespace Foundation {
 	[DisableDefaultCtor]
 	partial class NSKeyValueSharedObservers {
 		[Export ("initWithObservableClass:")]
-		NativeHandle Constructor (Class observableClass);
+		extern NativeHandle Constructor (Class observableClass);
 
 		[Wrap ("this (new Class (observableType))")]
-		NativeHandle Constructor (Type observableType);
+		extern NativeHandle Constructor (Type observableType);
 
 		[Export ("addSharedObserver:forKey:options:context:")]
-		void AddSharedObserver (NSObject observer, string forKey, NSKeyValueObservingOptions options, IntPtr context);
+		extern void AddSharedObserver (NSObject observer, string forKey, NSKeyValueObservingOptions options, IntPtr context);
 
 		[Export ("snapshot")]
-		NSKeyValueSharedObserversSnapshot GetSnapshot ();
+		extern NSKeyValueSharedObserversSnapshot GetSnapshot ();
 	}
 
-	[Category, BaseType (typeof (NSObject))]
+	//[Category, BaseType (typeof (NSObject))]
 	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	partial class NSKeyValueSharedObserverRegistration_NSObject {
 		[Export ("setSharedObservers:")]
-		void SetSharedObservers ([NullAllowed] NSKeyValueSharedObserversSnapshot sharedObservers);
+		extern void SetSharedObservers ([NullAllowed] NSKeyValueSharedObserversSnapshot sharedObservers);
 	}
 
 	[BaseType (typeof (NSObject))]
 	[Watch (11, 0), TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	[DisableDefaultCtor]
-	partial class NSLocalizedNumberFormatRule : NSCopying, NSSecureCoding {
+	partial class NSLocalizedNumberFormatRule : NSCopying {
 		[Static]
 		[Export ("automatic")]
 		NSLocalizedNumberFormatRule Automatic { get; }

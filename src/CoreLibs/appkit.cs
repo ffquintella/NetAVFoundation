@@ -38,6 +38,7 @@ using CoreGraphics;
 using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
+using CoreData;
 using CoreLibs;
 //using CoreData;
 //using Intents;
@@ -87,7 +88,7 @@ namespace AppKit {
 
 	[Native]
 	[Mac (15, 0), MacCatalyst (18, 0)]
-	enum NSCursorFrameResizePosition : ulong {
+	public enum NSCursorFrameResizePosition : ulong {
 		Top = (1 << 0),
 		Left = (1 << 1),
 		Bottom = (1 << 2),
@@ -100,7 +101,7 @@ namespace AppKit {
 
 	[Native]
 	[Mac (15, 0), MacCatalyst (18, 0)]
-	enum NSCursorFrameResizeDirections : ulong {
+	public enum NSCursorFrameResizeDirections : ulong {
 		Inward = (1 << 0),
 		Outward = (1 << 1),
 		All = (Inward | Outward),
@@ -108,7 +109,7 @@ namespace AppKit {
 
 	[Native]
 	[Mac (15, 0), MacCatalyst (18, 0)]
-	enum NSHorizontalDirections : ulong {
+	public enum NSHorizontalDirections : ulong {
 		Left = (1 << 0),
 		Right = (1 << 1),
 		All = (Left | Right),
@@ -116,7 +117,7 @@ namespace AppKit {
 
 	[Native]
 	[Mac (15, 0), MacCatalyst (18, 0)]
-	enum NSVerticalDirections : ulong {
+	public enum NSVerticalDirections : ulong {
 		Up = (1 << 0),
 		Down = (1 << 1),
 		All = (Up | Down),
@@ -124,7 +125,7 @@ namespace AppKit {
 
 	[Native]
 	[Mac (15, 0), NoMacCatalyst]
-	enum NSSharingCollaborationMode : long {
+	public enum NSSharingCollaborationMode : long {
 		SendCopy,
 		Collaborate,
 	}
@@ -219,7 +220,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject), Delegates = new string [] { "WeakDelegate" }, Events = new Type [] { typeof (NSAnimationDelegate) })]
-	interface NSAnimation : NSCoding, NSCopying {
+	public partial class NSAnimation :  NSCopying {
 #if NET
 		[DesignatedInitializer]
 #endif
@@ -227,7 +228,7 @@ namespace AppKit {
 #if !NET
 		[Sealed] // Just to avoid the duplicate selector error
 #endif
-		NativeHandle Constructor (double duration, NSAnimationCurve animationCurve);
+		extern NativeHandle Constructor (double duration, NSAnimationCurve animationCurve);
 
 #if !NET
 		[Obsolete ("Use the constructor instead.")]
@@ -236,13 +237,13 @@ namespace AppKit {
 #endif
 
 		[Export ("startAnimation")]
-		void StartAnimation ();
+		extern void StartAnimation ();
 
 		[Export ("stopAnimation")]
-		void StopAnimation ();
+		extern void StopAnimation ();
 
 		[Export ("isAnimating")]
-		bool IsAnimating ();
+		extern bool IsAnimating ();
 
 		[Export ("currentProgress")]
 		float CurrentProgress { get; set; } /* NSAnimationProgress = float */
@@ -272,22 +273,22 @@ namespace AppKit {
 		NSNumber [] ProgressMarks { get; set; }
 
 		[Export ("addProgressMark:")]
-		void AddProgressMark (float /* NSAnimationProgress = float */ progressMark);
+		extern void AddProgressMark (float /* NSAnimationProgress = float */ progressMark);
 
 		[Export ("removeProgressMark:")]
-		void RemoveProgressMark (float /* NSAnimationProgress = float */ progressMark);
+		extern void RemoveProgressMark (float /* NSAnimationProgress = float */ progressMark);
 
 		[Export ("startWhenAnimation:reachesProgress:")]
-		void StartWhenAnimationReaches (NSAnimation animation, float /* NSAnimationProgress = float */ startProgress);
+		extern void StartWhenAnimationReaches (NSAnimation animation, float /* NSAnimationProgress = float */ startProgress);
 
 		[Export ("stopWhenAnimation:reachesProgress:")]
-		void StopWhenAnimationReaches (NSAnimation animation, float /* NSAnimationProgress = float */ stopProgress);
+		extern  void StopWhenAnimationReaches (NSAnimation animation, float /* NSAnimationProgress = float */ stopProgress);
 
 		[Export ("clearStartAnimation")]
-		void ClearStartAnimation ();
+		extern  void ClearStartAnimation ();
 
 		[Export ("clearStopAnimation")]
-		void ClearStopAnimation ();
+		extern  void ClearStopAnimation ();
 
 		[Export ("runLoopModesForAnimating")]
 		NSString [] RunLoopModesForAnimating { get; }
@@ -441,7 +442,7 @@ namespace AppKit {
 	[Protocol]
 	partial class NSAlertDelegate {
 		[Export ("alertShowHelp:"), DelegateName ("NSAlertPredicate"), DefaultValue (false)]
-		bool ShowHelp (NSAlert alert);
+		extern bool ShowHelp (NSAlert alert);
 	}
 
 	[NoMacCatalyst]
@@ -455,10 +456,10 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	partial class NSAppearance : NSSecureCoding {
+	public partial class NSAppearance : NSSecureCoding {
 		[DesignatedInitializer]
 		[Export ("initWithAppearanceNamed:bundle:")]
-		NativeHandle Constructor (string name, [NullAllowed] NSBundle bundle);
+		extern NativeHandle Constructor (string name, [NullAllowed] NSBundle bundle);
 
 		[Export ("name")]
 		string Name { get; }
@@ -475,11 +476,11 @@ namespace AppKit {
 		NSAppearance CurrentDrawingAppearance { get; }
 
 		[Export ("performAsCurrentDrawingAppearance:")]
-		void PerformAsCurrentDrawingAppearance (Action receiver);
+		extern void PerformAsCurrentDrawingAppearance (Action receiver);
 
 
 		[Static, Export ("appearanceNamed:")]
-		NSAppearance GetAppearance (NSString name);
+		static extern NSAppearance GetAppearance (NSString name);
 
 		[Field ("NSAppearanceNameAqua")]
 		NSString NameAqua { get; }
@@ -511,7 +512,7 @@ namespace AppKit {
 
 		[Export ("bestMatchFromAppearancesWithNames:")]
 		[return: NullAllowed]
-		string FindBestMatch (string [] appearances);
+		extern string FindBestMatch (string [] appearances);
 	}
 
 	interface INSAppearanceCustomization { }
@@ -928,11 +929,11 @@ namespace AppKit {
 		void YieldActivation (string toApplicationWithBundleIdentifier);
 
 		// From the NSUserInterfaceItemSearching category
-		[Export ("registerUserInterfaceItemSearchHandler:")]
-		void RegisterUserInterfaceItemSearchHandler (INSUserInterfaceItemSearching handler);
+		//[Export ("registerUserInterfaceItemSearchHandler:")]
+		//void RegisterUserInterfaceItemSearchHandler (INSUserInterfaceItemSearching handler);
 
-		[Export ("unregisterUserInterfaceItemSearchHandler:")]
-		void UnregisterUserInterfaceItemSearchHandler (INSUserInterfaceItemSearching handler);
+		//[Export ("unregisterUserInterfaceItemSearchHandler:")]
+		//void UnregisterUserInterfaceItemSearchHandler (INSUserInterfaceItemSearching handler);
 
 		[Export ("searchString:inUserInterfaceItemString:searchRange:foundRange:")]
 		bool SearchStringInUserInterface (string searchString, string stringToSearch, NSRange searchRange, out NSRange foundRange);
@@ -946,7 +947,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSApplication))]
 	interface NSApplication_NSServicesMenu {
 		[Export ("registerServicesMenuSendTypes:returnTypes:")]
@@ -954,7 +955,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSApplication))]
 	interface NSApplication_NSStandardAboutPanel {
 		[Export ("orderFrontStandardAboutPanel:")]
@@ -1132,8 +1133,8 @@ namespace AppKit {
 		[Export ("application:didUpdateUserActivity:"), EventArgs ("NSApplicationUpdatedUserActivity"), DefaultValue (false)]
 		void UpdatedUserActivity (NSApplication application, NSUserActivity userActivity);
 
-		[Export ("application:userDidAcceptCloudKitShareWithMetadata:"), EventArgs ("NSApplicationUserAcceptedCloudKitShare")]
-		void UserDidAcceptCloudKitShare (NSApplication application, CKShareMetadata metadata);
+		//[Export ("application:userDidAcceptCloudKitShareWithMetadata:"), EventArgs ("NSApplicationUserAcceptedCloudKitShare")]
+		//void UserDidAcceptCloudKitShare (NSApplication application, CKShareMetadata metadata);
 
 		[EventArgs ("NSApplicationOpenUrls")]
 		[Export ("application:openURLs:")]
@@ -1314,91 +1315,91 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[ThreadSafe]
 	[BaseType (typeof (NSObject))]
-	interface NSBezierPath : NSSecureCoding, NSCopying {
+	partial class NSBezierPath :  NSCopying {
 
 		[Static]
 		[Export ("bezierPathWithRect:")]
-		NSBezierPath FromRect (CGRect rect);
+		static extern NSBezierPath FromRect (CGRect rect);
 
 		[Static]
 		[Export ("bezierPathWithOvalInRect:")]
-		NSBezierPath FromOvalInRect (CGRect rect);
+		static extern NSBezierPath FromOvalInRect (CGRect rect);
 
 		[Static]
 		[Export ("bezierPathWithRoundedRect:xRadius:yRadius:")]
-		NSBezierPath FromRoundedRect (CGRect rect, nfloat xRadius, nfloat yRadius);
+		static extern NSBezierPath FromRoundedRect (CGRect rect, nfloat xRadius, nfloat yRadius);
 
 		[Static]
 		[Export ("fillRect:")]
-		void FillRect (CGRect rect);
+		static extern void FillRect (CGRect rect);
 
 		[Static]
 		[Export ("strokeRect:")]
-		void StrokeRect (CGRect rect);
+		static extern void StrokeRect (CGRect rect);
 
 		[Static]
 		[Export ("clipRect:")]
-		void ClipRect (CGRect rect);
+		static extern void ClipRect (CGRect rect);
 
 		[Static]
 		[Export ("strokeLineFromPoint:toPoint:")]
-		void StrokeLine (CGPoint point1, CGPoint point2);
+		static extern void StrokeLine (CGPoint point1, CGPoint point2);
 
 		//IntPtr is exposed because the packedGlyphs should be treated as a "black box"
 		[Static]
 		[Export ("drawPackedGlyphs:atPoint:")]
-		void DrawPackedGlyphsAtPoint (IntPtr packedGlyphs, CGPoint point);
+		static extern void DrawPackedGlyphsAtPoint (IntPtr packedGlyphs, CGPoint point);
 
 		[Export ("moveToPoint:")]
-		void MoveTo (CGPoint point);
+		extern void MoveTo (CGPoint point);
 
 		[Export ("lineToPoint:")]
-		void LineTo (CGPoint point);
+		extern void LineTo (CGPoint point);
 
 		[Export ("curveToPoint:controlPoint1:controlPoint2:")]
-		void CurveTo (CGPoint endPoint, CGPoint controlPoint1, CGPoint controlPoint2);
+		extern void CurveTo (CGPoint endPoint, CGPoint controlPoint1, CGPoint controlPoint2);
 
 		[Export ("closePath")]
-		void ClosePath ();
+		extern void ClosePath ();
 
 		[Export ("removeAllPoints")]
-		void RemoveAllPoints ();
+		extern void RemoveAllPoints ();
 
 		[Export ("relativeMoveToPoint:")]
-		void RelativeMoveTo (CGPoint point);
+		extern void RelativeMoveTo (CGPoint point);
 
 		[Export ("relativeLineToPoint:")]
-		void RelativeLineTo (CGPoint point);
+		extern void RelativeLineTo (CGPoint point);
 
 		[Export ("relativeCurveToPoint:controlPoint1:controlPoint2:")]
-		void RelativeCurveTo (CGPoint endPoint, CGPoint controlPoint1, CGPoint controlPoint2);
+		extern void RelativeCurveTo (CGPoint endPoint, CGPoint controlPoint1, CGPoint controlPoint2);
 
 		[Export ("getLineDash:count:phase:"), Internal]
-		void _GetLineDash (IntPtr pattern, out nint count, out nfloat phase);
+		extern void _GetLineDash (IntPtr pattern, out nint count, out nfloat phase);
 
 		[Export ("setLineDash:count:phase:"), Internal]
-		void _SetLineDash (IntPtr pattern, nint count, nfloat phase);
+		extern void _SetLineDash (IntPtr pattern, nint count, nfloat phase);
 
 		[Export ("stroke")]
-		void Stroke ();
+		extern void Stroke ();
 
 		[Export ("fill")]
-		void Fill ();
+		extern void Fill ();
 
 		[Export ("addClip")]
-		void AddClip ();
+		extern void AddClip ();
 
 		[Export ("setClip")]
-		void SetClip ();
+		extern void SetClip ();
 
 		[Export ("bezierPathByFlatteningPath")]
-		NSBezierPath BezierPathByFlatteningPath ();
+		extern NSBezierPath BezierPathByFlatteningPath ();
 
 		[Export ("bezierPathByReversingPath")]
-		NSBezierPath BezierPathByReversingPath ();
+		extern NSBezierPath BezierPathByReversingPath ();
 
 		[Export ("transformUsingAffineTransform:")]
-		void TransformUsingAffineTransform (NSAffineTransform transform);
+		extern void TransformUsingAffineTransform (NSAffineTransform transform);
 
 		[Export ("isEmpty")]
 		bool IsEmpty { get; }
@@ -1416,52 +1417,52 @@ namespace AppKit {
 		nint ElementCount { get; }
 
 		[Export ("elementAtIndex:associatedPoints:"), Internal]
-		NSBezierPathElement _ElementAt (nint index, IntPtr points);
+		extern NSBezierPathElement _ElementAt (nint index, IntPtr points);
 
 		[Export ("elementAtIndex:")]
-		NSBezierPathElement ElementAt (nint index);
+		extern NSBezierPathElement ElementAt (nint index);
 
 		[Export ("setAssociatedPoints:atIndex:"), Internal]
-		void _SetAssociatedPointsAtIndex (IntPtr points, nint index);
+		extern void _SetAssociatedPointsAtIndex (IntPtr points, nint index);
 
 		[Export ("appendBezierPath:")]
-		void AppendPath (NSBezierPath path);
+		extern void AppendPath (NSBezierPath path);
 
 		[Export ("appendBezierPathWithRect:")]
-		void AppendPathWithRect (CGRect rect);
+		extern void AppendPathWithRect (CGRect rect);
 
 		[Export ("appendBezierPathWithPoints:count:"), Internal]
-		void _AppendPathWithPoints (IntPtr points, nint count);
+		extern void _AppendPathWithPoints (IntPtr points, nint count);
 
 		[Export ("appendBezierPathWithOvalInRect:")]
-		void AppendPathWithOvalInRect (CGRect rect);
+		extern void AppendPathWithOvalInRect (CGRect rect);
 
 		[Export ("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:clockwise:")]
-		void AppendPathWithArc (CGPoint center, nfloat radius, nfloat startAngle, nfloat endAngle, bool clockwise);
+		extern void AppendPathWithArc (CGPoint center, nfloat radius, nfloat startAngle, nfloat endAngle, bool clockwise);
 
 		[Export ("appendBezierPathWithArcWithCenter:radius:startAngle:endAngle:")]
-		void AppendPathWithArc (CGPoint center, nfloat radius, nfloat startAngle, nfloat endAngle);
+		extern void AppendPathWithArc (CGPoint center, nfloat radius, nfloat startAngle, nfloat endAngle);
 
 		[Export ("appendBezierPathWithArcFromPoint:toPoint:radius:")]
-		void AppendPathWithArc (CGPoint point1, CGPoint point2, nfloat radius);
+		extern void AppendPathWithArc (CGPoint point1, CGPoint point2, nfloat radius);
 
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AppendPathWithCGGlyph (CGGlyph, NSFont)' instead.")]
 		[Export ("appendBezierPathWithGlyph:inFont:")]
-		void AppendPathWithGlyph (uint /* NSGlyph = unsigned int */ glyph, NSFont font);
+		extern void AppendPathWithGlyph (uint /* NSGlyph = unsigned int */ glyph, NSFont font);
 
 		[Export ("appendBezierPathWithGlyphs:count:inFont:"), Internal]
-		void _AppendPathWithGlyphs (IntPtr glyphs, nint count, NSFont font);
+		extern void _AppendPathWithGlyphs (IntPtr glyphs, nint count, NSFont font);
 
 		//IntPtr is exposed because the packedGlyphs should be treated as a "black box"
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'Append (uint[], NSFont)' instead.")]
 		[Export ("appendBezierPathWithPackedGlyphs:")]
-		void AppendPathWithPackedGlyphs (IntPtr packedGlyphs);
+		extern void AppendPathWithPackedGlyphs (IntPtr packedGlyphs);
 
 		[Export ("appendBezierPathWithRoundedRect:xRadius:yRadius:")]
-		void AppendPathWithRoundedRect (CGRect rect, nfloat xRadius, nfloat yRadius);
+		extern void AppendPathWithRoundedRect (CGRect rect, nfloat xRadius, nfloat yRadius);
 
 		[Export ("containsPoint:")]
-		bool Contains (CGPoint point);
+		extern bool Contains (CGPoint point);
 
 		//Detected properties
 		[Static]
@@ -1507,14 +1508,14 @@ namespace AppKit {
 		nfloat Flatness { get; set; }
 
 		[Export ("appendBezierPathWithCGGlyph:inFont:")]
-		void AppendPathWithCGGlyph (CGGlyph glyph, NSFont font);
+		extern void AppendPathWithCGGlyph (CGGlyph glyph, NSFont font);
 
 		[Export ("appendBezierPathWithCGGlyphs:count:inFont:")]
 		[Internal]
-		void _AppendBezierPathWithCGGlyphs (IntPtr glyphs, nint count, NSFont font);
+		extern void _AppendBezierPathWithCGGlyphs (IntPtr glyphs, nint count, NSFont font);
 
 		[Wrap ("AppendPath (path)")]
-		void Append (NSBezierPath path);
+		extern void Append (NSBezierPath path);
 
 		[Mac (14, 0)]
 		[Export ("CGPath", ArgumentSemantic.Assign)]
@@ -1522,56 +1523,56 @@ namespace AppKit {
 
 		[Mac (14, 0)]
 		[Export ("curveToPoint:controlPoint:")]
-		void CurveTo (CGPoint endPoint, CGPoint controlPoint);
+		extern void CurveTo (CGPoint endPoint, CGPoint controlPoint);
 
 		[Mac (14, 0)]
 		[Export ("relativeCurveToPoint:controlPoint:")]
-		void RelativeCurveTo (CGPoint endPoint, CGPoint controlPoint);
+		extern void RelativeCurveTo (CGPoint endPoint, CGPoint controlPoint);
 
 		[Mac (14, 0)]
 		[Static]
 		[Export ("bezierPathWithCGPath:")]
-		NSBezierPath FromCGPath (CGPath cgPath);
+		extern NSBezierPath FromCGPath (CGPath cgPath);
 	}
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSImageRep))]
 	[DisableDefaultCtor] // An uncaught exception was raised: -[NSBitmapImageRep init]: unrecognized selector sent to instance 0x686880
-	partial interface NSBitmapImageRep : NSSecureCoding {
+	public partial class NSBitmapImageRep : NSSecureCoding {
 		[Export ("initWithFocusedViewRect:")]
 		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'NSView.CacheDisplay()' instead.")]
-		NativeHandle Constructor (CGRect rect);
+		extern NativeHandle Constructor (CGRect rect);
 
 		[Export ("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bytesPerRow:bitsPerPixel:")]
-		NativeHandle Constructor (IntPtr planes, nint width, nint height, nint bps, nint spp, bool alpha, bool isPlanar,
+		extern NativeHandle Constructor (IntPtr planes, nint width, nint height, nint bps, nint spp, bool alpha, bool isPlanar,
 					string colorSpaceName, nint rBytes, nint pBits);
 
 		[Export ("initWithBitmapDataPlanes:pixelsWide:pixelsHigh:bitsPerSample:samplesPerPixel:hasAlpha:isPlanar:colorSpaceName:bitmapFormat:bytesPerRow:bitsPerPixel:")]
-		NativeHandle Constructor (IntPtr planes, nint width, nint height, nint bps, nint spp, bool alpha, bool isPlanar, string colorSpaceName,
+		extern NativeHandle Constructor (IntPtr planes, nint width, nint height, nint bps, nint spp, bool alpha, bool isPlanar, string colorSpaceName,
 					NSBitmapFormat bitmapFormat, nint rBytes, nint pBits);
 
 		[Export ("initWithCGImage:")]
-		NativeHandle Constructor (CGImage cgImage);
+		extern NativeHandle Constructor (CGImage cgImage);
 
 		[Export ("initWithCIImage:")]
-		NativeHandle Constructor (CIImage ciImage);
+		extern NativeHandle Constructor (CIImage ciImage);
 
 		[Static]
 		[Export ("imageRepsWithData:")]
-		NSImageRep [] ImageRepsWithData (NSData data);
+		extern NSImageRep [] ImageRepsWithData (NSData data);
 
 		[Static]
 		[Export ("imageRepWithData:")]
-		NSImageRep ImageRepFromData (NSData data);
+		static extern NSImageRep ImageRepFromData (NSData data);
 
 		[Export ("initWithData:")]
-		NativeHandle Constructor (NSData data);
+		extern NativeHandle Constructor (NSData data);
 
 		[Export ("bitmapData")]
 		IntPtr BitmapData { get; }
 
 		[Export ("getBitmapDataPlanes:")]
-		void GetBitmapDataPlanes (IntPtr data);
+		extern void GetBitmapDataPlanes (IntPtr data);
 
 		[Export ("isPlanar")]
 		bool IsPlanar { get; }
@@ -1595,24 +1596,24 @@ namespace AppKit {
 		NSBitmapFormat BitmapFormat { get; }
 
 		[Export ("getCompression:factor:")]
-		void GetCompressionFactor (out NSTiffCompression compression, out float /* float, not CGFloat */ factor);
+		extern void GetCompressionFactor (out NSTiffCompression compression, out float /* float, not CGFloat */ factor);
 
 		[Export ("setCompression:factor:")]
-		void SetCompressionFactor (NSTiffCompression compression, float /* float, not CGFloat */ factor);
+		extern void SetCompressionFactor (NSTiffCompression compression, float /* float, not CGFloat */ factor);
 
 		[Export ("TIFFRepresentation")]
-		NSData TiffRepresentation { get; }
+		extern NSData TiffRepresentation { get; }
 
 		[Export ("TIFFRepresentationUsingCompression:factor:")]
-		NSData TiffRepresentationUsingCompressionFactor (NSTiffCompression comp, float /* float, not CGFloat */ factor);
+		extern NSData TiffRepresentationUsingCompressionFactor (NSTiffCompression comp, float /* float, not CGFloat */ factor);
 
 		[Static]
 		[Export ("TIFFRepresentationOfImageRepsInArray:")]
-		NSData ImagesAsTiff (NSImageRep [] imageReps);
+		extern NSData ImagesAsTiff (NSImageRep [] imageReps);
 
 		[Static]
 		[Export ("TIFFRepresentationOfImageRepsInArray:usingCompression:factor:")]
-		NSData ImagesAsTiff (NSImageRep [] imageReps, NSTiffCompression comp, float /* float, not CGFloat */ factor);
+		extern NSData ImagesAsTiff (NSImageRep [] imageReps, NSTiffCompression comp, float /* float, not CGFloat */ factor);
 
 		// FIXME: binding
 		//[Static]
@@ -1621,22 +1622,22 @@ namespace AppKit {
 
 		[Static]
 		[Export ("localizedNameForTIFFCompressionType:")]
-		string LocalizedNameForTiffCompressionType (NSTiffCompression compression);
+		extern string LocalizedNameForTiffCompressionType (NSTiffCompression compression);
 
 		[Export ("canBeCompressedUsing:")]
-		bool CanBeCompressedUsing (NSTiffCompression compression);
+		extern bool CanBeCompressedUsing (NSTiffCompression compression);
 
 		[Export ("colorizeByMappingGray:toColor:blackMapping:whiteMapping:")]
-		void Colorize (nfloat midPoint, NSColor midPointColor, NSColor shadowColor, NSColor lightColor);
+		extern void Colorize (nfloat midPoint, NSColor midPointColor, NSColor shadowColor, NSColor lightColor);
 
 		[Export ("incrementalLoadFromData:complete:")]
-		nint IncrementalLoad (NSData data, bool complete);
+		extern nint IncrementalLoad (NSData data, bool complete);
 
 		[Export ("setColor:atX:y:")]
-		void SetColorAt (NSColor color, nint x, nint y);
+		extern void SetColorAt (NSColor color, nint x, nint y);
 
 		[Export ("colorAtX:y:")]
-		NSColor ColorAt (nint x, nint y);
+		extern NSColor ColorAt (nint x, nint y);
 
 		// FIXME: BINDING
 		//[Export ("getPixel:atX:y:")]
@@ -1651,13 +1652,13 @@ namespace AppKit {
 		NSColorSpace ColorSpace { get; }
 
 		[Export ("bitmapImageRepByConvertingToColorSpace:renderingIntent:")]
-		NSBitmapImageRep ConvertingToColorSpace (NSColorSpace targetSpace, NSColorRenderingIntent renderingIntent);
+		extern NSBitmapImageRep ConvertingToColorSpace (NSColorSpace targetSpace, NSColorRenderingIntent renderingIntent);
 
 		[Export ("bitmapImageRepByRetaggingWithColorSpace:")]
-		NSBitmapImageRep RetaggedWithColorSpace (NSColorSpace newSpace);
+		extern NSBitmapImageRep RetaggedWithColorSpace (NSColorSpace newSpace);
 
 		[Export ("representationUsingType:properties:")]
-		NSData RepresentationUsingTypeProperties (NSBitmapImageFileType storageType, [NullAllowed] NSDictionary properties);
+		extern NSData RepresentationUsingTypeProperties (NSBitmapImageFileType storageType, [NullAllowed] NSDictionary properties);
 
 		[Field ("NSImageCompressionMethod")]
 		NSString CompressionMethod { get; }
@@ -2336,7 +2337,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSControl))]
 	[Dispose ("dispatcher = null;", Optimizable = true)]
-	interface NSButton : NSAccessibilityButton, NSUserInterfaceCompression, NSUserInterfaceValidations {
+	interface NSButton {//}: NSAccessibilityButton, NSUserInterfaceCompression, NSUserInterfaceValidations {
 		[Export ("initWithFrame:")]
 		NativeHandle Constructor (CGRect frameRect);
 
@@ -2444,9 +2445,9 @@ namespace AppKit {
 		[Export ("imageHugsTitle")]
 		bool ImageHugsTitle { get; set; }
 
-		[NullAllowed]
-		[Export ("symbolConfiguration", ArgumentSemantic.Copy)]
-		NSImageSymbolConfiguration SymbolConfiguration { get; set; }
+		//[NullAllowed]
+		//[Export ("symbolConfiguration", ArgumentSemantic.Copy)]
+		//NSImageSymbolConfiguration SymbolConfiguration { get; set; }
 
 		[Export ("imageScaling")]
 		NSImageScale ImageScaling { get; set; }
@@ -2502,9 +2503,9 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSGestureRecognizer))]
-	interface NSClickGestureRecognizer : NSCoding {
+	partial class NSClickGestureRecognizer : NSCoding {
 		[Export ("initWithTarget:action:")]
-		NativeHandle Constructor (NSObject target, Selector action);
+		extern NativeHandle Constructor (NSObject target, Selector action);
 
 		[Export ("buttonMask")]
 		nuint ButtonMask { get; set; }
@@ -2574,7 +2575,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSCoder))]
+	//[Category, BaseType (typeof (NSCoder))]
 	partial interface NSCoderAppKitAddons {
 		[Deprecated (PlatformName.MacOSX, 10, 9)]
 		[Export ("decodeNXColor")]
@@ -2583,9 +2584,9 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSViewController))]
-	interface NSCollectionViewItem : NSCopying {
+	partial class NSCollectionViewItem : NSCopying {
 		[Export ("initWithNibName:bundle:")]
-		NativeHandle Constructor ([NullAllowed] string nibNameOrNull, [NullAllowed] NSBundle nibBundleOrNull);
+		extern NativeHandle Constructor ([NullAllowed] string nibNameOrNull, [NullAllowed] NSBundle nibBundleOrNull);
 
 		[Export ("collectionView")]
 		[NullAllowed]
@@ -2994,7 +2995,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSCollectionViewLayoutAttributes : NSCopying {
+	partial class NSCollectionViewLayoutAttributes : NSCopying {
 		[Export ("frame", ArgumentSemantic.Assign)]
 		CGRect Frame { get; set; }
 
@@ -3021,19 +3022,19 @@ namespace AppKit {
 
 		[Static]
 		[Export ("layoutAttributesForItemWithIndexPath:")]
-		NSCollectionViewLayoutAttributes CreateForItem (NSIndexPath indexPath);
+		static extern NSCollectionViewLayoutAttributes CreateForItem (NSIndexPath indexPath);
 
 		[Static]
 		[Export ("layoutAttributesForInterItemGapBeforeIndexPath:")]
-		NSCollectionViewLayoutAttributes CreateForInterItemGap (NSIndexPath indexPath);
+		static extern NSCollectionViewLayoutAttributes CreateForInterItemGap (NSIndexPath indexPath);
 
 		[Static]
 		[Export ("layoutAttributesForSupplementaryViewOfKind:withIndexPath:")]
-		NSCollectionViewLayoutAttributes CreateForSupplementaryView (NSString elementKind, NSIndexPath indexPath);
+		static extern NSCollectionViewLayoutAttributes CreateForSupplementaryView (NSString elementKind, NSIndexPath indexPath);
 
 		[Static]
 		[Export ("layoutAttributesForDecorationViewOfKind:withIndexPath:")]
-		NSCollectionViewLayoutAttributes CreateForDecorationView (NSString decorationViewKind, NSIndexPath indexPath);
+		static extern NSCollectionViewLayoutAttributes CreateForDecorationView (NSString decorationViewKind, NSIndexPath indexPath);
 	}
 
 	[NoMacCatalyst]
@@ -3085,21 +3086,21 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSCollectionViewLayout : NSCoding {
+	partial class NSCollectionViewLayout : NSCoding {
 		[NullAllowed, Export ("collectionView", ArgumentSemantic.Weak)]
 		NSCollectionView CollectionView { get; }
 
 		[Export ("invalidateLayout")]
-		void InvalidateLayout ();
+		extern void InvalidateLayout ();
 
 		[Export ("invalidateLayoutWithContext:")]
-		void InvalidateLayout (NSCollectionViewLayoutInvalidationContext context);
+		extern void InvalidateLayout (NSCollectionViewLayoutInvalidationContext context);
 
 		[Export ("registerClass:forDecorationViewOfKind:"), Internal]
-		void _RegisterClassForDecorationView ([NullAllowed] IntPtr viewClass, NSString elementKind);
+		extern void _RegisterClassForDecorationView ([NullAllowed] IntPtr viewClass, NSString elementKind);
 
 		[Export ("registerNib:forDecorationViewOfKind:")]
-		void RegisterNib ([NullAllowed] NSNib nib, NSString elementKind);
+		extern void RegisterNib ([NullAllowed] NSNib nib, NSString elementKind);
 
 		//
 		// NSSubclassingHooks
@@ -3109,59 +3110,59 @@ namespace AppKit {
 		[Static]
 		[Export ("layoutAttributesClass")]
 		// [Verify (MethodToProperty)]
-		Class LayoutAttributesClass { get; }
+		static extern Class LayoutAttributesClass { get; }
 
 		// +(__nonnull Class)invalidationContextClass;
 		[Static]
 		[Export ("invalidationContextClass")]
 		// [Verify (MethodToProperty)]
-		Class InvalidationContextClass { get; }
+		static extern Class InvalidationContextClass { get; }
 
 		[Export ("prepareLayout")]
-		void PrepareLayout ();
+		extern void PrepareLayout ();
 
 		// -(__nonnull NSArray *)layoutAttributesForElementsInRect:(NSRect)rect;
 		[Export ("layoutAttributesForElementsInRect:")]
 		// [Verify (StronglyTypedNSArray)]
-		NSCollectionViewLayoutAttributes [] GetLayoutAttributesForElements (CGRect rect);
+		extern NSCollectionViewLayoutAttributes [] GetLayoutAttributesForElements (CGRect rect);
 
 		[Export ("layoutAttributesForItemAtIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetLayoutAttributesForItem (NSIndexPath indexPath);
+		extern NSCollectionViewLayoutAttributes GetLayoutAttributesForItem (NSIndexPath indexPath);
 
 		[Export ("layoutAttributesForSupplementaryViewOfKind:atIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetLayoutAttributesForSupplementaryView (NSString elementKind, NSIndexPath indexPath);
+		extern NSCollectionViewLayoutAttributes GetLayoutAttributesForSupplementaryView (NSString elementKind, NSIndexPath indexPath);
 
 		[Export ("layoutAttributesForDecorationViewOfKind:atIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetLayoutAttributesForDecorationView (NSString elementKind, NSIndexPath indexPath);
+		extern NSCollectionViewLayoutAttributes GetLayoutAttributesForDecorationView (NSString elementKind, NSIndexPath indexPath);
 
 		[Export ("layoutAttributesForDropTargetAtPoint:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetLayoutAttributesForDropTarget (CGPoint pointInCollectionView);
+		extern NSCollectionViewLayoutAttributes GetLayoutAttributesForDropTarget (CGPoint pointInCollectionView);
 
 		[Export ("layoutAttributesForInterItemGapBeforeIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetLayoutAttributesForInterItemGap (NSIndexPath indexPath);
+		extern NSCollectionViewLayoutAttributes GetLayoutAttributesForInterItemGap (NSIndexPath indexPath);
 
 		[Export ("shouldInvalidateLayoutForBoundsChange:")]
-		bool ShouldInvalidateLayout (CGRect newBounds);
+		extern bool ShouldInvalidateLayout (CGRect newBounds);
 
 		[Export ("invalidationContextForBoundsChange:")]
-		NSCollectionViewLayoutInvalidationContext GetInvalidationContext (CGRect newBounds);
+		extern NSCollectionViewLayoutInvalidationContext GetInvalidationContext (CGRect newBounds);
 
 		[Export ("shouldInvalidateLayoutForPreferredLayoutAttributes:withOriginalAttributes:")]
-		bool ShouldInvalidateLayout (NSCollectionViewLayoutAttributes preferredAttributes, NSCollectionViewLayoutAttributes originalAttributes);
+		extern bool ShouldInvalidateLayout (NSCollectionViewLayoutAttributes preferredAttributes, NSCollectionViewLayoutAttributes originalAttributes);
 
 		[Export ("invalidationContextForPreferredLayoutAttributes:withOriginalAttributes:")]
-		NSCollectionViewLayoutInvalidationContext GetInvalidationContext (NSCollectionViewLayoutAttributes preferredAttributes, NSCollectionViewLayoutAttributes originalAttributes);
+		extern NSCollectionViewLayoutInvalidationContext GetInvalidationContext (NSCollectionViewLayoutAttributes preferredAttributes, NSCollectionViewLayoutAttributes originalAttributes);
 
 		[Export ("targetContentOffsetForProposedContentOffset:withScrollingVelocity:")]
-		CGPoint GetTargetContentOffset (CGPoint proposedContentOffset, CGPoint velocity);
+		extern CGPoint GetTargetContentOffset (CGPoint proposedContentOffset, CGPoint velocity);
 
 		[Export ("targetContentOffsetForProposedContentOffset:")]
-		CGPoint GetTargetContentOffset (CGPoint proposedContentOffset);
+		extern CGPoint GetTargetContentOffset (CGPoint proposedContentOffset);
 
 		[Export ("collectionViewContentSize")]
 		// [Verify (MethodToProperty)]
@@ -3172,61 +3173,61 @@ namespace AppKit {
 		//
 
 		[Export ("prepareForCollectionViewUpdates:")]
-		void PrepareForCollectionViewUpdates (NSCollectionViewUpdateItem [] updateItems);
+		extern void PrepareForCollectionViewUpdates (NSCollectionViewUpdateItem [] updateItems);
 
 		[Export ("finalizeCollectionViewUpdates")]
-		void FinalizeCollectionViewUpdates ();
+		extern void FinalizeCollectionViewUpdates ();
 
 		[Export ("prepareForAnimatedBoundsChange:")]
-		void PrepareForAnimatedBoundsChange (CGRect oldBounds);
+		extern void PrepareForAnimatedBoundsChange (CGRect oldBounds);
 
 		[Export ("finalizeAnimatedBoundsChange")]
-		void FinalizeAnimatedBoundsChange ();
+		extern void FinalizeAnimatedBoundsChange ();
 
 		[Export ("prepareForTransitionToLayout:")]
-		void PrepareForTransitionToLayout (NSCollectionViewLayout newLayout);
+		extern void PrepareForTransitionToLayout (NSCollectionViewLayout newLayout);
 
 		[Export ("prepareForTransitionFromLayout:")]
-		void PrepareForTransitionFromLayout (NSCollectionViewLayout oldLayout);
+		extern void PrepareForTransitionFromLayout (NSCollectionViewLayout oldLayout);
 
 		[Export ("finalizeLayoutTransition")]
-		void FinalizeLayoutTransition ();
+		extern void FinalizeLayoutTransition ();
 
 		[Export ("initialLayoutAttributesForAppearingItemAtIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetInitialLayoutAttributesForAppearingItem (NSIndexPath itemIndexPath);
+		extern NSCollectionViewLayoutAttributes GetInitialLayoutAttributesForAppearingItem (NSIndexPath itemIndexPath);
 
 		[Export ("finalLayoutAttributesForDisappearingItemAtIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetFinalLayoutAttributesForDisappearingItem (NSIndexPath itemIndexPath);
+		extern NSCollectionViewLayoutAttributes GetFinalLayoutAttributesForDisappearingItem (NSIndexPath itemIndexPath);
 
 		[Export ("initialLayoutAttributesForAppearingSupplementaryElementOfKind:atIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetInitialLayoutAttributesForAppearingSupplementaryElement (NSString elementKind, NSIndexPath elementIndexPath);
+		extern NSCollectionViewLayoutAttributes GetInitialLayoutAttributesForAppearingSupplementaryElement (NSString elementKind, NSIndexPath elementIndexPath);
 
 		[Export ("finalLayoutAttributesForDisappearingSupplementaryElementOfKind:atIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetFinalLayoutAttributesForDisappearingSupplementaryElement (NSString elementKind, NSIndexPath elementIndexPath);
+		extern NSCollectionViewLayoutAttributes GetFinalLayoutAttributesForDisappearingSupplementaryElement (NSString elementKind, NSIndexPath elementIndexPath);
 
 		[Export ("initialLayoutAttributesForAppearingDecorationElementOfKind:atIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetInitialLayoutAttributesForAppearingDecorationElement (NSString elementKind, NSIndexPath decorationIndexPath);
+		extern NSCollectionViewLayoutAttributes GetInitialLayoutAttributesForAppearingDecorationElement (NSString elementKind, NSIndexPath decorationIndexPath);
 
 		[Export ("finalLayoutAttributesForDisappearingDecorationElementOfKind:atIndexPath:")]
 		[return: NullAllowed]
-		NSCollectionViewLayoutAttributes GetFinalLayoutAttributesForDisappearingDecorationElement (NSString elementKind, NSIndexPath decorationIndexPath);
+		extern NSCollectionViewLayoutAttributes GetFinalLayoutAttributesForDisappearingDecorationElement (NSString elementKind, NSIndexPath decorationIndexPath);
 
 		[Export ("indexPathsToDeleteForSupplementaryViewOfKind:")]
-		NSSet GetIndexPathsToDeleteForSupplementaryView (NSString elementKind);
+		extern NSSet GetIndexPathsToDeleteForSupplementaryView (NSString elementKind);
 
 		[Export ("indexPathsToDeleteForDecorationViewOfKind:")]
-		NSSet GetIndexPathsToDeleteForDecorationView (NSString elementKind);
+		extern NSSet GetIndexPathsToDeleteForDecorationView (NSString elementKind);
 
 		[Export ("indexPathsToInsertForSupplementaryViewOfKind:")]
-		NSSet GetIndexPathsToInsertForSupplementaryView (NSString elementKind);
+		extern NSSet GetIndexPathsToInsertForSupplementaryView (NSString elementKind);
 
 		[Export ("indexPathsToInsertForDecorationViewOfKind:")]
-		NSSet GetIndexPathsToInsertForDecorationView (NSString elementKind);
+		extern NSSet GetIndexPathsToInsertForDecorationView (NSString elementKind);
 	}
 
 	[NoMacCatalyst]
@@ -3366,55 +3367,55 @@ namespace AppKit {
 	[ThreadSafe]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // -colorSpaceName not valid for the NSColor <NSColor: 0x1b94780>; need to first convert colorspace.
-	public partial class NSColor : NSObject, NSCopying, NSPasteboardReading, NSPasteboardWriting, NSAccessibilityColor
+	public partial class NSColor :  NSCopying//, NSPasteboardReading, NSPasteboardWriting, NSAccessibilityColor
 	{
 
-		public NSColor(IntPtr handle) : base(handle);
+		public NSColor(IntPtr handle) : base(handle){}
 		
 		[Static]
 		[Export ("colorWithCalibratedWhite:alpha:")]
-		public static NSColor FromCalibratedWhite (nfloat white, nfloat alpha);
+		extern public static NSColor FromCalibratedWhite (nfloat white, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithCalibratedHue:saturation:brightness:alpha:")]
-		public static NSColor FromCalibratedHsba (nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
+		extern public static NSColor FromCalibratedHsba (nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithCalibratedRed:green:blue:alpha:")]
-		public static NSColor FromCalibratedRgba (nfloat red, nfloat green, nfloat blue, nfloat alpha);
+		extern public static NSColor FromCalibratedRgba (nfloat red, nfloat green, nfloat blue, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithDeviceWhite:alpha:")]
-		public static NSColor FromDeviceWhite (nfloat white, nfloat alpha);
+		 extern public static NSColor FromDeviceWhite (nfloat white, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithDeviceHue:saturation:brightness:alpha:")]
-		public static NSColor FromDeviceHsba (nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
+		public static extern NSColor FromDeviceHsba (nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithDeviceRed:green:blue:alpha:")]
-		public static NSColor FromDeviceRgba (nfloat red, nfloat green, nfloat blue, nfloat alpha);
+		public static extern NSColor FromDeviceRgba (nfloat red, nfloat green, nfloat blue, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithDeviceCyan:magenta:yellow:black:alpha:")]
-		public static NSColor FromDeviceCymka (nfloat cyan, nfloat magenta, nfloat yellow, nfloat black, nfloat alpha);
+		public static extern NSColor FromDeviceCymka (nfloat cyan, nfloat magenta, nfloat yellow, nfloat black, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithCatalogName:colorName:")]
-		public static NSColor FromCatalogName (string listName, string colorName);
+		public static extern NSColor FromCatalogName (string listName, string colorName);
 
 		[Static]
 		[Export ("colorWithColorSpace:components:count:"), Internal]
-		public static NSColor _FromColorSpace (NSColorSpace space, IntPtr components, nint numberOfComponents);
+		public static extern NSColor _FromColorSpace (NSColorSpace space, IntPtr components, nint numberOfComponents);
 
 		[Static, Export ("colorWithWhite:alpha:")]
-		public static NSColor FromWhite (nfloat white, nfloat alpha);
+		public static extern NSColor FromWhite (nfloat white, nfloat alpha);
 
 		[Static, Export ("colorWithRed:green:blue:alpha:")]
-		public static NSColor FromRgba (nfloat red, nfloat green, nfloat blue, nfloat alpha);
+		public static extern NSColor FromRgba (nfloat red, nfloat green, nfloat blue, nfloat alpha);
 
 		[Static, Export ("colorWithHue:saturation:brightness:alpha:")]
-		public static NSColor FromHsba (nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
+		public static extern NSColor FromHsba (nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
 
 		[Static]
 		[Export ("blackColor")]
@@ -3615,31 +3616,31 @@ namespace AppKit {
 		[Static]
 		[Advice ("Use 'AlternatingContentBackgroundColors' instead.")]
 		[Export ("controlAlternatingRowBackgroundColors")]
-		public static NSColor [] ControlAlternatingRowBackgroundColors ();
+		public static extern NSColor [] ControlAlternatingRowBackgroundColors ();
 
 		[Export ("highlightWithLevel:")]
-		public static NSColor HighlightWithLevel (nfloat highlightLevel);
+		public static extern NSColor HighlightWithLevel (nfloat highlightLevel);
 
 		[Export ("shadowWithLevel:")]
-		public static NSColor ShadowWithLevel (nfloat shadowLevel);
+		public static extern NSColor ShadowWithLevel (nfloat shadowLevel);
 
 		[Static]
 		[Export ("colorForControlTint:")]
 		[Advice ("Use 'NSColor.ControlAccentColor' instead.")]
-		public static NSColor FromControlTint (NSControlTint controlTint);
+		public static extern NSColor FromControlTint (NSControlTint controlTint);
 
 		[Static]
 		[Export ("currentControlTint")]
 		public static NSControlTint CurrentControlTint { get; }
 
 		[Export ("set")]
-		public void Set ();
+		public extern void Set ();
 
 		[Export ("setFill")]
-		public void SetFill ();
+		public extern void SetFill ();
 
 		[Export ("setStroke")]
-		public void SetStroke ();
+		public extern void SetStroke ();
 
 		[Export ("colorSpaceName")]
 		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Type' and 'NSColorType' instead.")]
@@ -3647,20 +3648,20 @@ namespace AppKit {
 
 		[Export ("colorUsingColorSpaceName:")]
 		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'GetColor' or 'UsingColorSpace' instead.")]
-		public NSColor UsingColorSpace ([NullAllowed] string colorSpaceName);
+		public extern NSColor UsingColorSpace ([NullAllowed] string colorSpaceName);
 
 		[Export ("colorUsingColorSpaceName:device:")]
 		[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'GetColor' or 'UsingColorSpace' instead.")]
-		public NSColor UsingColorSpace ([NullAllowed] string colorSpaceName, [NullAllowed] NSDictionary deviceDescription);
+		public extern NSColor UsingColorSpace ([NullAllowed] string colorSpaceName, [NullAllowed] NSDictionary deviceDescription);
 
 		[Export ("colorUsingColorSpace:")]
-		public NSColor UsingColorSpace (NSColorSpace colorSpace);
+		public extern NSColor UsingColorSpace (NSColorSpace colorSpace);
 
 		[Export ("blendedColorWithFraction:ofColor:")]
-		public NSColor BlendedColor (nfloat fraction, NSColor color);
+		public extern NSColor BlendedColor (nfloat fraction, NSColor color);
 
 		[Export ("colorWithAlphaComponent:")]
-		public NSColor ColorWithAlphaComponent (nfloat alpha);
+		public extern NSColor ColorWithAlphaComponent (nfloat alpha);
 
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
 		[Export ("catalogNameComponent")]
@@ -3688,7 +3689,7 @@ namespace AppKit {
 		public nfloat BlueComponent { [MarshalNativeExceptions] get; }
 
 		[Export ("getRed:green:blue:alpha:")]
-		public void GetRgba (out nfloat red, out nfloat green, out nfloat blue, out nfloat alpha);
+		public extern void GetRgba (out nfloat red, out nfloat green, out nfloat blue, out nfloat alpha);
 
 		[Export ("hueComponent")]
 		public nfloat HueComponent { [MarshalNativeExceptions] get; }
@@ -3700,13 +3701,13 @@ namespace AppKit {
 		public nfloat BrightnessComponent { [MarshalNativeExceptions] get; }
 
 		[Export ("getHue:saturation:brightness:alpha:")]
-		public void GetHsba (out nfloat hue, out nfloat saturation, out nfloat brightness, out nfloat alpha);
+		public extern void GetHsba (out nfloat hue, out nfloat saturation, out nfloat brightness, out nfloat alpha);
 
 		[Export ("whiteComponent")]
 		public nfloat WhiteComponent { [MarshalNativeExceptions] get; }
 
 		[Export ("getWhite:alpha:")]
-		public void GetWhiteAlpha (out nfloat white, out nfloat alpha);
+		public extern void GetWhiteAlpha (out nfloat white, out nfloat alpha);
 
 		[Export ("cyanComponent")]
 		public nfloat CyanComponent { [MarshalNativeExceptions] get; }
@@ -3721,7 +3722,7 @@ namespace AppKit {
 		public nfloat BlackComponent { [MarshalNativeExceptions] get; }
 
 		[Export ("getCyan:magenta:yellow:black:alpha:")]
-		public void GetCmyka (out nfloat cyan, out nfloat magenta, out nfloat yellow, out nfloat black, out nfloat alpha);
+		public extern void GetCmyka (out nfloat cyan, out nfloat magenta, out nfloat yellow, out nfloat black, out nfloat alpha);
 
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
 		[Export ("colorSpace")]
@@ -3732,21 +3733,21 @@ namespace AppKit {
 		public nint ComponentCount { get; }
 
 		[Export ("getComponents:"), Internal]
-		public void _GetComponents (IntPtr components);
+		public extern void _GetComponents (IntPtr components);
 
 		[Export ("alphaComponent")]
 		public nfloat AlphaComponent { [MarshalNativeExceptions] get; }
 
 		[Static]
 		[Export ("colorFromPasteboard:")]
-		public NSColor FromPasteboard (NSPasteboard pasteBoard);
+		public static extern NSColor FromPasteboard (NSPasteboard pasteBoard);
 
 		[Export ("writeToPasteboard:")]
-		public void WriteToPasteboard (NSPasteboard pasteBoard);
+		public extern void WriteToPasteboard (NSPasteboard pasteBoard);
 
 		[Static]
 		[Export ("colorWithPatternImage:")]
-		public NSColor FromPatternImage (NSImage image);
+		public extern NSColor FromPatternImage (NSImage image);
 
 		[DebuggerBrowsable (DebuggerBrowsableState.Never)]
 		[Export ("patternImage")]
@@ -3756,7 +3757,7 @@ namespace AppKit {
 		public CGColor CGColor { get; }
 
 		[Export ("drawSwatchInRect:")]
-		public void DrawSwatchInRect (CGRect rect);
+		public extern void DrawSwatchInRect (CGRect rect);
 
 		[Static]
 		[Export ("ignoresAlpha")]
@@ -3764,7 +3765,7 @@ namespace AppKit {
 
 		[Static]
 		[Export ("colorWithCIColor:")]
-		public NSColor FromCIColor (CIColor color);
+		public static extern NSColor FromCIColor (CIColor color);
 
 #if !NET
 		[Obsolete ("Use 'Label' instead.")]
@@ -3813,11 +3814,11 @@ namespace AppKit {
 
 		[Static]
 		[Export ("colorWithDisplayP3Red:green:blue:alpha:")]
-		public static NSColor FromDisplayP3 (nfloat red, nfloat green, nfloat blue, nfloat alpha);
+		public static extern NSColor FromDisplayP3 (nfloat red, nfloat green, nfloat blue, nfloat alpha);
 
 		[Static]
 		[Export ("colorWithColorSpace:hue:saturation:brightness:alpha:")]
-		public static NSColor FromColor (NSColorSpace space, nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
+		public static extern NSColor FromColor (NSColorSpace space, nfloat hue, nfloat saturation, nfloat brightness, nfloat alpha);
 
 #if !NET
 		[Obsolete ("Use 'ScrubberTexturedBackground' instead.")]
@@ -3833,19 +3834,19 @@ namespace AppKit {
 		[Static]
 		[Export ("colorNamed:bundle:")]
 		[return: NullAllowed]
-		public static NSColor FromName (string name, [NullAllowed] NSBundle bundle);
+		public static extern NSColor FromName (string name, [NullAllowed] NSBundle bundle);
 
 		[Static]
 		[Export ("colorNamed:")]
 		[return: NullAllowed]
-		public static NSColor FromName (string name);
+		public static extern NSColor FromName (string name);
 
 		[Export ("type")]
 		public NSColorType Type { get; }
 
 		[Export ("colorUsingType:")]
 		[return: NullAllowed]
-		public NSColor GetColor (NSColorType type);
+		public extern NSColor GetColor (NSColorType type);
 
 #if !NET
 		[Obsolete ("Use 'SystemRed' instead.")]
@@ -4061,7 +4062,7 @@ namespace AppKit {
 		public static NSColor ControlAccent { get; }
 
 		[Export ("colorWithSystemEffect:")]
-		public NSColor FromSystemEffect (NSColorSystemEffect systemEffect);
+		public extern NSColor FromSystemEffect (NSColorSystemEffect systemEffect);
 
 #if !NET
 		[Obsolete ("Use 'FindHighlight' instead.")]
@@ -4087,7 +4088,7 @@ namespace AppKit {
 
 		[Static]
 		[Export ("colorWithName:dynamicProvider:")]
-		public static NSColor GetColor ([NullAllowed] string colorName, Func<NSAppearance, NSColor> dynamicProvider);
+		public static extern NSColor GetColor ([NullAllowed] string colorName, Func<NSAppearance, NSColor> dynamicProvider);
 
 		[Mac (14, 0)]
 		[Static]
@@ -4720,7 +4721,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSObject))]
 	interface NSObject_NSEditorRegistration {
 		[Export ("objectDidBeginEditing:")]
@@ -4757,7 +4758,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[DesignatedDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	interface NSController : NSCoding, NSEditorRegistration
+	interface NSController :  NSEditorRegistration
 #if NET
 	, NSEditor // Conflict over if CommitEditing is a property or a method. NSViewController has it right so can't "fix" NSEditor to match existing API
 #endif
@@ -4817,7 +4818,7 @@ namespace AppKit {
 		[Export ("currentCursor")]
 		public static NSCursor CurrentCursor { get; }
 
-		[Deprecated (PlatformName.MacOSX, 15, 0, message: "If using ScreenCaptureKit to capture the screen, use the 'SCStreamConfiguration.ShowsCursor' to control whether or not to include the cursor in the capture. Use 'NSCursor.CurrentCursor' to get the current cursor for this application.")]
+		//[Deprecated (PlatformName.MacOSX, 15, 0, message: "If using ScreenCaptureKit to capture the screen, use the 'SCStreamConfiguration.ShowsCursor' to control whether or not to include the cursor in the capture. Use 'NSCursor.CurrentCursor' to get the current cursor for this application.")]
 		[Deprecated (PlatformName.MacCatalyst, 18, 0, message: "If using ScreenCaptureKit to capture the screen, use the 'SCStreamConfiguration.ShowsCursor' to control whether or not to include the cursor in the capture. Use 'NSCursor.CurrentCursor' to get the current cursor for this application.")]
 		[Static]
 		[Export ("currentSystemCursor")]
@@ -4914,7 +4915,7 @@ namespace AppKit {
 		[Mac (15, 0), MacCatalyst (18, 0)]
 		[Static]
 		[Export ("columnResizeCursorInDirections:")]
-		public static NSCursor GetColumnResizeCursor (NSHorizontalDirections directions);
+		public static extern NSCursor GetColumnResizeCursor (NSHorizontalDirections directions);
 
 		[Mac (15, 0), MacCatalyst (18, 0)]
 		[Static]
@@ -4924,33 +4925,33 @@ namespace AppKit {
 		[Mac (15, 0), MacCatalyst (18, 0)]
 		[Static]
 		[Export ("rowResizeCursorInDirections:")]
-		public static NSCursor GetRowResizeCursor (NSVerticalDirections directions);
+		public static extern NSCursor GetRowResizeCursor (NSVerticalDirections directions);
 
 		[Mac (15, 0), MacCatalyst (18, 0)]
 		[Static]
 		[Export ("frameResizeCursorFromPosition:inDirections:")]
-		public static NSCursor GetFrameResizeCursor (NSCursorFrameResizePosition position, NSCursorFrameResizeDirections directions);
+		public static extern NSCursor GetFrameResizeCursor (NSCursorFrameResizePosition position, NSCursorFrameResizeDirections directions);
 
 		[DesignatedInitializer]
 		[Export ("initWithImage:hotSpot:")]
-		public static NativeHandle Constructor (NSImage newImage, CGPoint aPoint);
+		public static extern NativeHandle Constructor (NSImage newImage, CGPoint aPoint);
 
 		[NoMacCatalyst]
 		[Deprecated (PlatformName.MacOSX, 10, 12, message: "Color hints are ignored. Use NSCursor (NSImage newImage, CGPoint aPoint) instead.")]
 		[Export ("initWithImage:foregroundColorHint:backgroundColorHint:hotSpot:")]
-		public static NativeHandle Constructor (NSImage newImage, NSColor fg, NSColor bg, CGPoint hotSpot);
+		public static extern NativeHandle Constructor (NSImage newImage, NSColor fg, NSColor bg, CGPoint hotSpot);
 
 		[Static]
 		[Export ("hide")]
-		public static void Hide ();
+		public static extern void Hide ();
 
 		[Static]
 		[Export ("unhide")]
-		public static void Unhide ();
+		public static extern void Unhide ();
 
 		[Static]
 		[Export ("setHiddenUntilMouseMoves:")]
-		public static void SetHiddenUntilMouseMoves (bool flag);
+		public static extern void SetHiddenUntilMouseMoves (bool flag);
 
 		//[Static]
 		//[Export ("pop")]
@@ -4963,13 +4964,13 @@ namespace AppKit {
 		public CGPoint HotSpot { get; }
 
 		[Export ("push")]
-		public 	void Push ();
+		public 	extern void Push ();
 
 		[Export ("pop")]
-		public void Pop ();
+		public extern void Pop ();
 
 		[Export ("set")]
-		public void Set ();
+		public extern void Set ();
 
 #if XAMCORE_5_0
 		[NoMacCatalyst]
@@ -4978,7 +4979,7 @@ namespace AppKit {
 #endif
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
 		[Export ("setOnMouseExited:")]
-		public 	void SetOnMouseExited (bool flag);
+		public extern 	void SetOnMouseExited (bool flag);
 
 #if XAMCORE_5_0
 		[NoMacCatalyst]
@@ -4987,7 +4988,7 @@ namespace AppKit {
 #endif
 		[Export ("setOnMouseEntered:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
-		public 	void SetOnMouseEntered (bool flag);
+		public 	extern void SetOnMouseEntered (bool flag);
 
 #if XAMCORE_5_0
 		[NoMacCatalyst]
@@ -4996,7 +4997,7 @@ namespace AppKit {
 #endif
 		[Export ("isSetOnMouseExited")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
-		public 	bool IsSetOnMouseExited ();
+		public 	extern bool IsSetOnMouseExited ();
 
 #if XAMCORE_5_0
 		[NoMacCatalyst]
@@ -5005,7 +5006,7 @@ namespace AppKit {
 #endif
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
 		[Export ("isSetOnMouseEntered")]
-		public 	bool IsSetOnMouseEntered ();
+		public extern 	bool IsSetOnMouseEntered ();
 
 #if XAMCORE_5_0
 		[NoMacCatalyst]
@@ -5015,7 +5016,7 @@ namespace AppKit {
 		[Export ("mouseEntered:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
 		[NoMacCatalyst]
-		public 	void MouseEntered (NSEvent theEvent);
+		public 	extern void MouseEntered (NSEvent theEvent);
 
 #if XAMCORE_5_0
 		[NoMacCatalyst]
@@ -5025,7 +5026,7 @@ namespace AppKit {
 		[Export ("mouseExited:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
 		[NoMacCatalyst]
-		public 	void MouseExited (NSEvent theEvent);
+		public 	extern void MouseExited (NSEvent theEvent);
 	}
 
 	[NoMacCatalyst]
@@ -5643,7 +5644,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[DesignatedDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	partial interface NSDocumentController : NSWindowRestoration, NSCoding {
+	partial interface NSDocumentController : NSWindowRestoration {//}, NSCoding {
 		[Static, Export ("sharedDocumentController")]
 		NSDocumentController SharedDocumentController { get; }
 
@@ -6164,12 +6165,12 @@ namespace AppKit {
 		NSFontPanelModeMask GetValidModes (NSFontPanel fontPanel);
 	}
 	
-	public partial class NSFont : NSObject, NSCopying {
+	public partial class NSFont :  NSCopying {
 
 		public NSFont(IntPtr handle) : base(handle) {}
 		
 		[Export ("fontWithName:size:")]
-		internal static IntPtr _FromFontName (string fontName, nfloat fontSize);
+		internal static extern IntPtr _FromFontName (string fontName, nfloat fontSize);
 
 		//[Static]
 		//[Export ("fontWithName:matrix:")]
@@ -6178,80 +6179,80 @@ namespace AppKit {
 		[Static]
 		[Internal]
 		[Export ("fontWithDescriptor:size:")]
-		internal static IntPtr _FromDescription (NSFontDescriptor fontDescriptor, nfloat fontSize);
+		internal static extern IntPtr _FromDescription (NSFontDescriptor fontDescriptor, nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("fontWithDescriptor:textTransform:")]
-		internal static IntPtr _FromDescription (NSFontDescriptor fontDescriptor, [NullAllowed] NSAffineTransform textTransform);
+		internal static extern IntPtr _FromDescription (NSFontDescriptor fontDescriptor, [NullAllowed] NSAffineTransform textTransform);
 
 		[Static]
 		[Internal]
 		[Export ("userFontOfSize:")]
-		internal static IntPtr _UserFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _UserFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("userFixedPitchFontOfSize:")]
-		internal static IntPtr _UserFixedPitchFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _UserFixedPitchFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Export ("setUserFont:")]
-		public static void SetUserFont ([NullAllowed] NSFont aFont);
+		public static extern void SetUserFont ([NullAllowed] NSFont aFont);
 
 		[Static]
 		[Export ("setUserFixedPitchFont:")]
-		public static void SetUserFixedPitchFont ([NullAllowed] NSFont aFont);
+		public static extern  void SetUserFixedPitchFont ([NullAllowed] NSFont aFont);
 
 		[Static]
 		[Internal]
 		[Export ("systemFontOfSize:")]
-		internal static IntPtr _SystemFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _SystemFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("boldSystemFontOfSize:")]
-		internal static IntPtr _BoldSystemFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _BoldSystemFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("labelFontOfSize:")]
-		internal static IntPtr _LabelFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _LabelFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("titleBarFontOfSize:")]
-		internal static IntPtr _TitleBarFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _TitleBarFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("menuFontOfSize:")]
-		internal static IntPtr _MenuFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _MenuFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("menuBarFontOfSize:")]
-		internal static IntPtr _MenuBarFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _MenuBarFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("messageFontOfSize:")]
-		internal static IntPtr _MessageFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _MessageFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("paletteFontOfSize:")]
-		internal static IntPtr _PaletteFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _PaletteFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("toolTipsFontOfSize:")]
-		internal static IntPtr _ToolTipsFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _ToolTipsFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Internal]
 		[Export ("controlContentFontOfSize:")]
-		internal static IntPtr _ControlContentFontOfSize (nfloat fontSize);
+		internal static extern IntPtr _ControlContentFontOfSize (nfloat fontSize);
 
 		[Static]
 		[Export ("systemFontSize")]
@@ -6267,7 +6268,7 @@ namespace AppKit {
 
 		[Static]
 		[Export ("systemFontSizeForControlSize:")]
-		public static nfloat SystemFontSizeForControlSize (NSControlSize controlSize);
+		public static extern nfloat SystemFontSizeForControlSize (NSControlSize controlSize);
 
 		[Export ("fontName")]
 		public string FontName { get; }
@@ -6299,7 +6300,7 @@ namespace AppKit {
 
 		[Export ("glyphWithName:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use the 'CGGlyph' APIs instead.")]
-		public uint GlyphWithName (string aName); /* NSGlyph = unsigned int */
+		public extern uint GlyphWithName (string aName); /* NSGlyph = unsigned int */
 
 		[Export ("coveredCharacterSet")]
 		public NSCharacterSet CoveredCharacterSet { get; }
@@ -6339,17 +6340,17 @@ namespace AppKit {
 
 		[Export ("boundingRectForGlyph:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use the 'CGGlyph' APIs instead.")]
-		public CGRect BoundingRectForGlyph (uint /* NSGlyph = unsigned int */ aGlyph);
+		public extern CGRect BoundingRectForGlyph (uint /* NSGlyph = unsigned int */ aGlyph);
 
 		[Export ("advancementForGlyph:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use the 'CGGlyph' APIs instead.")]
-		public CGSize AdvancementForGlyph (uint /* NSGlyph = unsigned int */ aGlyph);
+		public extern CGSize AdvancementForGlyph (uint /* NSGlyph = unsigned int */ aGlyph);
 
 		[Export ("set")]
-		public void Set ();
+		public extern void Set ();
 
 		[Export ("setInContext:")]
-		public void SetInContext (NSGraphicsContext graphicsContext);
+		public extern void SetInContext (NSGraphicsContext graphicsContext);
 
 		[Export ("printerFont")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
@@ -6364,7 +6365,7 @@ namespace AppKit {
 		[Export ("screenFontWithRenderingMode:")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
 		[Internal]
-		public IntPtr _ScreenFontWithRenderingMode (NSFontRenderingMode renderingMode);
+		public extern IntPtr _ScreenFontWithRenderingMode (NSFontRenderingMode renderingMode);
 
 		[Export ("renderingMode")]
 		[Deprecated (PlatformName.MacOSX, 10, 13)]
@@ -6378,7 +6379,7 @@ namespace AppKit {
 		//
 		[Export ("verticalFont")]
 		[Internal]
-		public IntPtr _GetVerticalFont ();
+		public extern IntPtr _GetVerticalFont ();
 
 		[Field ("NSFontFamilyAttribute")]
 		public NSString FamilyAttribute { get; }
@@ -6452,44 +6453,44 @@ namespace AppKit {
 		[Static]
 		[Export ("systemFontOfSize:weight:")]
 		[Internal]
-		public static IntPtr _SystemFontOfSize (nfloat fontSize, nfloat weight);
+		public static extern IntPtr _SystemFontOfSize (nfloat fontSize, nfloat weight);
 
 		[Mac (13, 0)]
 		[Static]
 		[Export ("systemFontOfSize:weight:width:")]
 		[Internal]
-		public static IntPtr _SystemFontOfSize (nfloat fontSize, nfloat weight, nfloat width);
+		public static extern IntPtr _SystemFontOfSize (nfloat fontSize, nfloat weight, nfloat width);
 
 		[Static]
 		[Export ("monospacedDigitSystemFontOfSize:weight:")]
 		[Internal]
-		public static IntPtr _MonospacedDigitSystemFontOfSize (nfloat fontSize, nfloat weight);
+		public static extern IntPtr _MonospacedDigitSystemFontOfSize (nfloat fontSize, nfloat weight);
 
 		[Export ("boundingRectForCGGlyph:")]
-		public CGRect GetBoundingRect (CGGlyph glyph);
+		public extern CGRect GetBoundingRect (CGGlyph glyph);
 
 		[Export ("advancementForCGGlyph:")]
-		public CGSize GetAdvancement (CGGlyph glyph);
+		public extern CGSize GetAdvancement (CGGlyph glyph);
 
 		[Internal]
 		[Export ("getBoundingRects:forCGGlyphs:count:")]
-		public void _GetBoundingRects (IntPtr bounds, IntPtr glyphs, nuint glyphCount);
+		public extern void _GetBoundingRects (IntPtr bounds, IntPtr glyphs, nuint glyphCount);
 
 		[Internal]
 		[Export ("getAdvancements:forCGGlyphs:count:")]
-		public void _GetAdvancements (IntPtr advancements, IntPtr glyphs, nuint glyphCount);
+		public extern void _GetAdvancements (IntPtr advancements, IntPtr glyphs, nuint glyphCount);
 
 		[Static]
 		[Export ("monospacedSystemFontOfSize:weight:")]
 		[Internal]
-		public IntPtr _MonospacedSystemFont (nfloat fontSize, nfloat weight);
+		public extern IntPtr _MonospacedSystemFont (nfloat fontSize, nfloat weight);
 
 		[Static]
 		[Export ("preferredFontForTextStyle:options:")]
-		public NSFont GetPreferredFont (string textStyle, NSDictionary options);
+		public extern NSFont GetPreferredFont (string textStyle, NSDictionary options);
 
 		[Export ("fontWithSize:")]
-		public NSFont GetFont (nfloat fontSize);
+		public extern NSFont GetFont (nfloat fontSize);
 	}
 
 	[NoMacCatalyst]
@@ -6509,60 +6510,60 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSFontCollection : NSSecureCoding, NSMutableCopying {
+	public partial class NSFontCollection :  NSMutableCopying {
 		[Static]
 		[Export ("fontCollectionWithDescriptors:")]
-		NSFontCollection FromDescriptors (NSFontDescriptor [] queryDescriptors);
+		static extern NSFontCollection FromDescriptors (NSFontDescriptor [] queryDescriptors);
 
 		[Static]
 		[Export ("fontCollectionWithAllAvailableDescriptors", ArgumentSemantic.Copy)]
-		NSFontCollection GetAllAvailableFonts ();
+		static extern NSFontCollection GetAllAvailableFonts ();
 
 		[Static]
 		[Export ("fontCollectionWithLocale:")]
-		NSFontCollection FromLocale (NSLocale locale);
+		static extern NSFontCollection FromLocale (NSLocale locale);
 
 		[Static]
 		[Export ("showFontCollection:withName:visibility:error:")]
-		bool ShowFontCollection (NSFontCollection fontCollection, string name, NSFontCollectionVisibility visibility, out NSError error);
+		static extern bool ShowFontCollection (NSFontCollection fontCollection, string name, NSFontCollectionVisibility visibility, out NSError error);
 
 		[Static]
 		[Export ("hideFontCollectionWithName:visibility:error:")]
-		bool HideFontCollection (string name, NSFontCollectionVisibility visibility, out NSError error);
+		static extern bool HideFontCollection (string name, NSFontCollectionVisibility visibility, out NSError error);
 
 		[Static]
 		[Export ("renameFontCollectionWithName:visibility:toName:error:")]
-		bool RenameFontCollection (string fromName, NSFontCollectionVisibility visibility, string toName, out NSError error);
+		static extern bool RenameFontCollection (string fromName, NSFontCollectionVisibility visibility, string toName, out NSError error);
 
 		[Static]
 		[Export ("allFontCollectionNames", ArgumentSemantic.Copy)]
-		string [] AllFontCollectionNames { get; }
+		static extern string [] AllFontCollectionNames { get; }
 
 		[Static]
 		[Export ("fontCollectionWithName:")]
-		NSFontCollection FromName (string name);
+		static extern NSFontCollection FromName (string name);
 
 		[Static]
 		[Export ("fontCollectionWithName:visibility:")]
-		NSFontCollection FromName (string name, NSFontCollectionVisibility visibility);
+		static extern NSFontCollection FromName (string name, NSFontCollectionVisibility visibility);
 
 		[Export ("queryDescriptors")]
-		NSFontDescriptor [] GetQueryDescriptors ();
+		extern NSFontDescriptor [] GetQueryDescriptors ();
 
 		[Export ("exclusionDescriptors")]
-		NSFontDescriptor [] GetExclusionDescriptors ();
+		extern NSFontDescriptor [] GetExclusionDescriptors ();
 
 		[Export ("matchingDescriptors")]
-		NSFontDescriptor [] GetMatchingDescriptors ();
+		extern NSFontDescriptor [] GetMatchingDescriptors ();
 
 		[Export ("matchingDescriptorsWithOptions:")]
-		NSFontDescriptor [] GetMatchingDescriptors (NSDictionary options);
+		extern NSFontDescriptor [] GetMatchingDescriptors (NSDictionary options);
 
 		[Export ("matchingDescriptorsForFamily:")]
-		NSFontDescriptor [] GetMatchingDescriptors (string family);
+		extern NSFontDescriptor [] GetMatchingDescriptors (string family);
 
 		[Export ("matchingDescriptorsForFamily:options:")]
-		NSFontDescriptor [] GetMatchingDescriptors (string family, NSDictionary options);
+		extern NSFontDescriptor [] GetMatchingDescriptors (string family, NSDictionary options);
 
 		[Field ("NSFontCollectionIncludeDisabledFontsOption")]
 		NSString IncludeDisabledFontsOption { get; }
@@ -6650,7 +6651,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSFontDescriptor : NSSecureCoding, NSCopying {
+	public partial class NSFontDescriptor :  NSCopying {
 		[Export ("postscriptName")]
 		string PostscriptName { get; }
 
@@ -6664,49 +6665,49 @@ namespace AppKit {
 		NSFontSymbolicTraits SymbolicTraits { get; }
 
 		[Export ("objectForKey:")]
-		NSObject ObjectForKey (string key);
+		extern NSObject ObjectForKey (string key);
 
 		[Export ("fontAttributes")]
-		NSDictionary FontAttributes { get; }
+		extern NSDictionary FontAttributes { get; }
 
 		[Static]
 		[Export ("fontDescriptorWithFontAttributes:")]
-		NSFontDescriptor FromAttributes (NSDictionary attributes);
+		static extern NSFontDescriptor FromAttributes (NSDictionary attributes);
 
 		[Static]
 		[Export ("fontDescriptorWithName:size:")]
-		NSFontDescriptor FromNameSize (string fontName, nfloat size);
+		static extern NSFontDescriptor FromNameSize (string fontName, nfloat size);
 
 		[Static]
 		[Export ("fontDescriptorWithName:matrix:")]
-		NSFontDescriptor FromNameMatrix (string fontName, NSAffineTransform matrix);
+		static extern NSFontDescriptor FromNameMatrix (string fontName, NSAffineTransform matrix);
 
 		[Export ("initWithFontAttributes:")]
-		NativeHandle Constructor ([NullAllowed] NSDictionary attributes);
+		extern NativeHandle Constructor ([NullAllowed] NSDictionary attributes);
 
 		[Export ("matchingFontDescriptorsWithMandatoryKeys:")]
-		NSFontDescriptor [] MatchingFontDescriptors (NSSet mandatoryKeys);
+		extern NSFontDescriptor [] MatchingFontDescriptors (NSSet mandatoryKeys);
 
 		[Export ("matchingFontDescriptorWithMandatoryKeys:")]
-		NSFontDescriptor MatchingFontDescriptorWithMandatoryKeys (NSSet mandatoryKeys);
+		extern NSFontDescriptor MatchingFontDescriptorWithMandatoryKeys (NSSet mandatoryKeys);
 
 		[Export ("fontDescriptorByAddingAttributes:")]
-		NSFontDescriptor FontDescriptorByAddingAttributes (NSDictionary attributes);
+		extern NSFontDescriptor FontDescriptorByAddingAttributes (NSDictionary attributes);
 
 		[Export ("fontDescriptorWithSymbolicTraits:")]
-		NSFontDescriptor FontDescriptorWithSymbolicTraits (NSFontSymbolicTraits symbolicTraits);
+		extern NSFontDescriptor FontDescriptorWithSymbolicTraits (NSFontSymbolicTraits symbolicTraits);
 
 		[Export ("fontDescriptorWithSize:")]
-		NSFontDescriptor FontDescriptorWithSize (nfloat newPointSize);
+		extern NSFontDescriptor FontDescriptorWithSize (nfloat newPointSize);
 
 		[Export ("fontDescriptorWithMatrix:")]
-		NSFontDescriptor FontDescriptorWithMatrix (NSAffineTransform matrix);
+		extern NSFontDescriptor FontDescriptorWithMatrix (NSAffineTransform matrix);
 
 		[Export ("fontDescriptorWithFace:")]
-		NSFontDescriptor FontDescriptorWithFace (string newFace);
+		extern NSFontDescriptor FontDescriptorWithFace (string newFace);
 
 		[Export ("fontDescriptorWithFamily:")]
-		NSFontDescriptor FontDescriptorWithFamily (string newFamily);
+		extern NSFontDescriptor FontDescriptorWithFamily (string newFamily);
 
 		[Export ("requiresFontAssetRequest")]
 		bool RequiresFontAssetRequest { get; }
@@ -6716,16 +6717,16 @@ namespace AppKit {
 #else
 		[Wrap ("Create (design.GetConstant ()!)", IsVirtual = true)]
 #endif
-		[return: NullAllowed]
-		NSFontDescriptor Create (NSFontDescriptorSystemDesign design);
+		//[return: NullAllowed]
+		//extern NSFontDescriptor Create (NSFontDescriptorSystemDesign design);
 
 		[Export ("fontDescriptorWithDesign:")]
 		[return: NullAllowed]
-		NSFontDescriptor Create (NSString design);
+		extern NSFontDescriptor Create (NSString design);
 
 		[Static]
 		[Export ("preferredFontDescriptorForTextStyle:options:")]
-		NSFontDescriptor GetPreferredFont (string textStyle, NSDictionary options);
+		static extern NSFontDescriptor GetPreferredFont (string textStyle, NSDictionary options);
 	}
 
 	[NoMacCatalyst]
@@ -7082,34 +7083,34 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSGradient : NSSecureCoding, NSCopying {
+	partial class NSGradient :  NSCopying {
 		[Export ("initWithStartingColor:endingColor:")]
-		NativeHandle Constructor (NSColor startingColor, NSColor endingColor);
+		extern NativeHandle Constructor (NSColor startingColor, NSColor endingColor);
 
 		[Export ("initWithColors:")]
-		NativeHandle Constructor (NSColor [] colorArray);
+		extern NativeHandle Constructor (NSColor [] colorArray);
 
 		// See AppKit/NSGradiant.cs
 		//[Export ("initWithColorsAndLocations:")]
 		//[Export ("initWithColors:atLocations:colorSpace:")]
 
 		[Export ("drawFromPoint:toPoint:options:")]
-		void DrawFromPoint (CGPoint startingPoint, CGPoint endingPoint, NSGradientDrawingOptions options);
+		extern void DrawFromPoint (CGPoint startingPoint, CGPoint endingPoint, NSGradientDrawingOptions options);
 
 		[Export ("drawInRect:angle:")]
-		void DrawInRect (CGRect rect, nfloat angle);
+		extern void DrawInRect (CGRect rect, nfloat angle);
 
 		[Export ("drawInBezierPath:angle:")]
-		void DrawInBezierPath (NSBezierPath path, nfloat angle);
+		extern void DrawInBezierPath (NSBezierPath path, nfloat angle);
 
 		[Export ("drawFromCenter:radius:toCenter:radius:options:")]
-		void DrawFromCenterRadius (CGPoint startCenter, nfloat startRadius, CGPoint endCenter, nfloat endRadius, NSGradientDrawingOptions options);
+		extern void DrawFromCenterRadius (CGPoint startCenter, nfloat startRadius, CGPoint endCenter, nfloat endRadius, NSGradientDrawingOptions options);
 
 		[Export ("drawInRect:relativeCenterPosition:")]
-		void DrawInRect (CGRect rect, CGPoint relativeCenterPosition);
+		extern void DrawInRect (CGRect rect, CGPoint relativeCenterPosition);
 
 		[Export ("drawInBezierPath:relativeCenterPosition:")]
-		void DrawInBezierPath (NSBezierPath path, CGPoint relativeCenterPosition);
+		extern void DrawInBezierPath (NSBezierPath path, CGPoint relativeCenterPosition);
 
 		[Export ("colorSpace")]
 		NSColorSpace ColorSpace { get; }
@@ -7118,16 +7119,16 @@ namespace AppKit {
 		nint ColorStopsCount { get; }
 
 		[Export ("getColor:location:atIndex:")]
-		void GetColor (out NSColor color, out nfloat location, nint index);
+		extern void GetColor (out NSColor color, out nfloat location, nint index);
 
 		[Export ("interpolatedColorAtLocation:")]
-		NSColor GetInterpolatedColor (nfloat location);
+		extern NSColor GetInterpolatedColor (nfloat location);
 	}
 
 	[NoMacCatalyst]
 	[ThreadSafe] // CurrentContext returns a context that can be used from the current thread
 	[BaseType (typeof (NSObject))]
-	interface NSGraphicsContext {
+	public interface NSGraphicsContext {
 		[Static, Export ("graphicsContextWithAttributes:")]
 		NSGraphicsContext FromAttributes (NSDictionary attributes);
 
@@ -7308,7 +7309,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSGridRow : NSCoding {
+	interface NSGridRow  {//}: NSCoding {
 		[NullAllowed, Export ("gridView", ArgumentSemantic.Weak)]
 		NSGridView GridView { get; }
 
@@ -7343,7 +7344,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSGridColumn : NSCoding {
+	interface NSGridColumn { //}: NSCoding {
 		[NullAllowed, Export ("gridView", ArgumentSemantic.Weak)]
 		NSGridView GridView { get; }
 
@@ -7375,7 +7376,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSGridCell : NSCoding {
+	interface NSGridCell {// : NSCoding {
 		[Export ("contentView", ArgumentSemantic.Strong), NullAllowed]
 		NSView ContentView { get; set; }
 
@@ -7457,7 +7458,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject), Delegates = new string [] { "WeakDelegate" }, Events = new Type [] { typeof (NSGestureRecognizerDelegate) })]
-	interface NSGestureRecognizer : NSCoding {
+	interface NSGestureRecognizer {//}: NSCoding {
 		[DesignatedInitializer]
 		[Export ("initWithTarget:action:")]
 		NativeHandle Constructor ([NullAllowed] NSObject target, [NullAllowed] Selector action);
@@ -7856,7 +7857,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[ThreadSafe] // Not documented anywhere, but their Finder extension sample uses it on non-ui thread
-	interface NSMenuItem : NSCoding, NSCopying, NSAccessibility, NSAccessibilityElement, NSUserInterfaceItemIdentification, NSValidatedUserInterfaceItem {
+	interface NSMenuItem {//}: NSCoding, NSCopying, NSAccessibility, NSAccessibilityElement, NSUserInterfaceItemIdentification, NSValidatedUserInterfaceItem {
 		[Static]
 		[Export ("separatorItem")]
 		NSMenuItem SeparatorItem { get; }
@@ -7968,10 +7969,10 @@ namespace AppKit {
 		[Export ("allowsAutomaticKeyEquivalentMirroring")]
 		bool AllowsAutomaticKeyEquivalentMirroring { get; set; }
 
-		[Mac (14, 0)]
-		[NullAllowed]
-		[Export ("badge", ArgumentSemantic.Copy)]
-		NSMenuItemBadge Badge { get; set; }
+		//[Mac (14, 0)]
+		//[NullAllowed]
+		//[Export ("badge", ArgumentSemantic.Copy)]
+		//NSMenuItemBadge Badge { get; set; }
 
 		[Mac (14, 0)]
 		[Export ("sectionHeader")]
@@ -8192,7 +8193,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	partial interface NSNib : NSCoding {
+	partial interface NSNib {//}: NSCoding {
 		[Export ("initWithContentsOfURL:")]
 		[Deprecated (PlatformName.MacOSX, 10, 8)]
 		NativeHandle Constructor (NSUrl nibFileUrl);
@@ -8289,7 +8290,7 @@ namespace AppKit {
 	[BaseType (typeof (NSObject))]
 	[Deprecated (PlatformName.MacOSX, 10, 14, message: "Use 'Metal' Framework instead.")]
 	[NoMacCatalyst]
-	interface NSOpenGLPixelFormat : NSCoding {
+	interface NSOpenGLPixelFormat {//}: NSCoding {
 		[Export ("initWithData:")]
 		NativeHandle Constructor (NSData attribs);
 
@@ -8470,7 +8471,7 @@ namespace AppKit {
 	interface NSOpenPanel {
 		[Static]
 		[Export ("openPanel")]
-		[ForcedType] // different type used inside a sandbox
+		//[ForcedType] // different type used inside a sandbox
 		NSOpenPanel OpenPanel { get; }
 
 #if !XAMCORE_5_0
@@ -8797,9 +8798,9 @@ namespace AppKit {
 		[Export ("outlineView:didRemoveRowView:forRow:")]
 		void DidRemoveRowView (NSOutlineView outlineView, NSTableRowView rowView, nint row);
 
-		[Export ("outlineView:tintConfigurationForItem:")]
-		[return: NullAllowed]
-		NSTintConfiguration GetTintConfiguration (NSOutlineView outlineView, NSObject item);
+		//[Export ("outlineView:tintConfigurationForItem:")]
+		//[return: NullAllowed]
+		//NSTintConfiguration GetTintConfiguration (NSOutlineView outlineView, NSObject item);
 
 		[Mac (14, 0)]
 		[Export ("outlineView:userCanChangeVisibilityOfTableColumn:"), DelegateName ("NSOutlineViewUserCanChangeColumnVisibility"), DefaultValue (false)]
@@ -8924,7 +8925,7 @@ namespace AppKit {
 #endif
 	)]
 	[ThreadSafe]
-	public partial class NSImage : NSCopying, NSPasteboardReading, NSPasteboardWriting {
+	public partial class NSImage : NSCopying {//}, NSPasteboardReading, NSPasteboardWriting {
 		[return: NullAllowed]
 		[Static]
 		[Export ("imageNamed:")]
@@ -8947,7 +8948,7 @@ namespace AppKit {
 		//NativeHandle Constructor (NSUrl url);
 
 		[Sealed, Export ("initWithContentsOfFile:"), Internal]
-		sealed extern IntPtr InitWithContentsOfFile (string fileName);
+		public extern IntPtr InitWithContentsOfFile (string fileName);
 
 		[Export ("initByReferencingFile:"), Internal]
 		public extern IntPtr InitByReferencingFile (string name);
@@ -9013,17 +9014,17 @@ namespace AppKit {
 		[Export ("isValid")]
 		public extern bool IsValid { get; }
 
-		[Obsoleted (PlatformName.MacOSX, 14, 0, message: "'ImageWithSize' should be used instead.")]
+		//[Obsoleted (PlatformName.MacOSX, 14, 0, message: "'ImageWithSize' should be used instead.")]
 		[Obsoleted (PlatformName.MacCatalyst, 17, 0, message: "'ImageWithSize' should be used instead.")]
 		[Export ("lockFocus")]
 		public extern void LockFocus ();
 
-		[Obsoleted (PlatformName.MacOSX, 14, 0, message: "'ImageWithSize' should be used instead.")]
+		//[Obsoleted (PlatformName.MacOSX, 14, 0, message: "'ImageWithSize' should be used instead.")]
 		[Obsoleted (PlatformName.MacCatalyst, 17, 0, message: "'ImageWithSize' should be used instead.")]
 		[Export ("lockFocusFlipped:")]
 		public extern void LockFocusFlipped (bool flipped);
 
-		[Obsoleted (PlatformName.MacOSX, 14, 0, message: "'ImageWithSize' should be used instead.")]
+		//[Obsoleted (PlatformName.MacOSX, 14, 0, message: "'ImageWithSize' should be used instead.")]
 		[Obsoleted (PlatformName.MacCatalyst, 17, 0, message: "'ImageWithSize' should be used instead.")]
 		[Export ("unlockFocus")]
 		public extern void UnlockFocus ();
@@ -9179,14 +9180,14 @@ namespace AppKit {
 		[return: NullAllowed]
 		public static extern NSImage GetSystemSymbol (string symbolName, [NullAllowed] string accessibilityDescription);
 
-		[NoMacCatalyst]
-		[Export ("imageWithSymbolConfiguration:")]
-		[return: NullAllowed]
-		public extern NSImage GetImage (NSImageSymbolConfiguration configuration);
+		//[NoMacCatalyst]
+		//[Export ("imageWithSymbolConfiguration:")]
+		//[return: NullAllowed]
+		//public extern NSImage GetImage (NSImageSymbolConfiguration configuration);
 
-		[NoMacCatalyst]
-		[Export ("symbolConfiguration", ArgumentSemantic.Copy)]
-		public extern NSImageSymbolConfiguration SymbolConfiguration { get; }
+		//[NoMacCatalyst]
+		//[Export ("symbolConfiguration", ArgumentSemantic.Copy)]
+		//public extern NSImageSymbolConfiguration SymbolConfiguration { get; }
 
 		[NoMacCatalyst, Mac (13, 0)]
 		[Static]
@@ -9691,29 +9692,29 @@ namespace AppKit {
 
 	[NoMacCatalyst] // Also defined in uikit.cs, use that declaration instead
 	[ThreadSafe]
-	[Category, BaseType (typeof (NSString))]
-	interface NSStringDrawing_NSString {
+	//[Category, BaseType (typeof (NSString))]
+	public partial class NSStringDrawing_NSString : NSString {
 		[Export ("sizeWithAttributes:")]
-		CGSize StringSize ([NullAllowed] NSDictionary attributes);
+		extern CGSize StringSize ([NullAllowed] NSDictionary attributes);
 
 		[Wrap ("This.StringSize (attributes.GetDictionary ()!)")]
-		CGSize StringSize ([NullAllowed] AppKit.NSStringAttributes attributes);
+		extern CGSize StringSize ([NullAllowed] AppKit.NSStringAttributes attributes);
 
 		[Export ("drawAtPoint:withAttributes:")]
-		void DrawAtPoint (CGPoint point, [NullAllowed] NSDictionary attributes);
+		extern void DrawAtPoint (CGPoint point, [NullAllowed] NSDictionary attributes);
 
 		[Wrap ("This.DrawAtPoint (point, attributes.GetDictionary ()!)")]
-		void DrawAtPoint (CGPoint point, [NullAllowed] AppKit.NSStringAttributes attributes);
+		extern void DrawAtPoint (CGPoint point, [NullAllowed] AppKit.NSStringAttributes attributes);
 
 		[Export ("drawInRect:withAttributes:")]
-		void DrawInRect (CGRect rect, [NullAllowed] NSDictionary attributes);
+		extern void DrawInRect (CGRect rect, [NullAllowed] NSDictionary attributes);
 
 		[Wrap ("This.DrawInRect (rect, attributes.GetDictionary ()!)")]
-		void DrawInRect (CGRect rect, [NullAllowed] AppKit.NSStringAttributes attributes);
+		extern void DrawInRect (CGRect rect, [NullAllowed] AppKit.NSStringAttributes attributes);
 	}
 
 	[ThreadSafe]
-	[Category, BaseType (typeof (NSAttributedString))]
+	//[Category, BaseType (typeof (NSAttributedString))]
 	interface NSStringDrawing_NSAttributedString {
 		[Export ("size")]
 		CGSize GetSize ();
@@ -9728,7 +9729,7 @@ namespace AppKit {
 	// @interface NSExtendedStringDrawing (NSAttributedString)
 	[NoMacCatalyst]
 	[ThreadSafe]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSAttributedString))]
 	interface NSAttributedString_NSExtendedStringDrawing {
 		[Export ("drawWithRect:options:context:")]
@@ -9741,7 +9742,7 @@ namespace AppKit {
 	// Pending: @interface NSAttributedString (NSExtendedStringDrawing)
 
 	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSMutableAttributedString))]
+	//[Category, BaseType (typeof (NSMutableAttributedString))]
 	interface NSMutableAttributedStringAppKitAddons {
 		[Export ("readFromURL:options:documentAttributes:error:")]
 		bool ReadFromURL (NSUrl url, NSDictionary options, out NSDictionary returnOptions, out NSError error);
@@ -9798,7 +9799,7 @@ namespace AppKit {
 		void UpdateAttachmentsFromPath (string path);
 	}
 
-	interface INSImageDelegate { }
+	public interface INSImageDelegate { }
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
@@ -9856,65 +9857,65 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[DesignatedDefaultCtor]
+	//[DesignatedDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	partial interface NSImageRep : NSCoding, NSCopying {
+	public partial class NSImageRep : NSCopying {
 		[Export ("draw")]
-		bool Draw ();
+		extern bool Draw ();
 
 		[Export ("drawAtPoint:")]
-		bool DrawAtPoint (CGPoint point);
+		extern bool DrawAtPoint (CGPoint point);
 
 		[Export ("drawInRect:")]
-		bool DrawInRect (CGRect rect);
+		extern bool DrawInRect (CGRect rect);
 
 		[Export ("drawInRect:fromRect:operation:fraction:respectFlipped:hints:")]
-		bool DrawInRect (CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, NSCompositingOperation op, nfloat requestedAlpha, bool respectContextIsFlipped, [NullAllowed] NSDictionary hints);
+		extern bool DrawInRect (CGRect dstSpacePortionRect, CGRect srcSpacePortionRect, NSCompositingOperation op, nfloat requestedAlpha, bool respectContextIsFlipped, [NullAllowed] NSDictionary hints);
 
 		[Export ("setAlpha:")]
-		void SetAlpha (bool alpha);
+		extern void SetAlpha (bool alpha);
 
 		[Export ("hasAlpha")]
 		bool HasAlpha { get; }
 
 		[Static]
 		[Export ("registerImageRepClass:")]
-		void RegisterImageRepClass (Class imageRepClass);
+		static extern void RegisterImageRepClass (Class imageRepClass);
 
 		[Static]
 		[Export ("unregisterImageRepClass:")]
-		void UnregisterImageRepClass (Class imageRepClass);
+		static extern void UnregisterImageRepClass (Class imageRepClass);
 
 		[Static]
 		[Export ("registeredImageRepClasses")]
-		Class [] GetRegisteredImageRepClasses ();
+		static extern Class [] GetRegisteredImageRepClasses ();
 
 		[Deprecated (PlatformName.MacOSX, 10, 10)]
 		[Static]
 		[Export ("imageRepClassForFileType:")]
-		Class ImageRepClassForFileType (string type);
+		static extern Class ImageRepClassForFileType (string type);
 
 		[Deprecated (PlatformName.MacOSX, 10, 10)]
 		[Static]
 		[Export ("imageRepClassForPasteboardType:")]
-		Class ImageRepClassForPasteboardType (string type);
+		static extern Class ImageRepClassForPasteboardType (string type);
 
 		[Static]
 		[Export ("imageRepClassForType:")]
-		Class ImageRepClassForType (string type);
+		static extern Class ImageRepClassForType (string type);
 
 		[Static]
 		[Export ("imageRepClassForData:")]
-		Class ImageRepClassForData (NSData data);
+		static extern Class ImageRepClassForData (NSData data);
 
 		[Static]
 		[Export ("canInitWithData:")]
-		bool CanInitWithData (NSData data);
+		static extern bool CanInitWithData (NSData data);
 
 		[Deprecated (PlatformName.MacOSX, 10, 10)]
 		[Static]
 		[Export ("imageUnfilteredFileTypes")]
-		string [] ImageUnfilteredFileTypes { get; }
+		static extern string [] ImageUnfilteredFileTypes { get; }
 
 		[Deprecated (PlatformName.MacOSX, 10, 10)]
 		[Static]
@@ -9924,51 +9925,51 @@ namespace AppKit {
 		[Deprecated (PlatformName.MacOSX, 10, 10)]
 		[Static]
 		[Export ("imageFileTypes")]
-		string [] ImageFileTypes { get; }
+		static extern string [] ImageFileTypes { get; }
 
 		[Deprecated (PlatformName.MacOSX, 10, 10)]
 		[Static]
 		[Export ("imagePasteboardTypes")]
-		string [] ImagePasteboardTypes { get; }
+		static extern string [] ImagePasteboardTypes { get; }
 
 		[Static]
 		[Export ("imageUnfilteredTypes", ArgumentSemantic.Copy)]
-		string [] ImageUnfilteredTypes { get; }
+		static extern string [] ImageUnfilteredTypes { get; }
 
 		[Static]
 		[Export ("imageTypes", ArgumentSemantic.Copy)]
-		string [] ImageTypes { get; }
+		static extern string [] ImageTypes { get; }
 
 		[Static]
 		[Export ("canInitWithPasteboard:")]
-		bool CanInitWithPasteboard (NSPasteboard pasteboard);
+		static extern bool CanInitWithPasteboard (NSPasteboard pasteboard);
 
 		[Static]
 		[Export ("imageRepsWithContentsOfFile:")]
-		NSImageRep [] ImageRepsFromFile (string filename);
+		static extern NSImageRep [] ImageRepsFromFile (string filename);
 
 		[Static]
 		[Export ("imageRepWithContentsOfFile:")]
-		NSImageRep ImageRepFromFile (string filename);
+		static extern NSImageRep ImageRepFromFile (string filename);
 
 		[Static]
 		[Export ("imageRepsWithContentsOfURL:")]
-		NSImageRep [] ImageRepsFromUrl (NSUrl url);
+		static extern NSImageRep [] ImageRepsFromUrl (NSUrl url);
 
 		[Static]
 		[Export ("imageRepWithContentsOfURL:")]
-		NSImageRep ImageRepFromUrl (NSUrl url);
+		static extern NSImageRep ImageRepFromUrl (NSUrl url);
 
 		[Static]
 		[Export ("imageRepsWithPasteboard:")]
-		NSImageRep [] ImageRepsFromPasteboard (NSPasteboard pasteboard);
+		static extern NSImageRep [] ImageRepsFromPasteboard (NSPasteboard pasteboard);
 
 		[Static]
 		[Export ("imageRepWithPasteboard:")]
-		NSImageRep ImageRepFromPasteboard (NSPasteboard pasteboard);
+		static extern NSImageRep ImageRepFromPasteboard (NSPasteboard pasteboard);
 
-		[Export ("CGImageForProposedRect:context:hints:")]
-		CGImage AsCGImage (ref CGRect proposedDestRect, [NullAllowed] NSGraphicsContext context, [NullAllowed] NSDictionary hints);
+		[Export ("CGImageForProposedRect:context:hints:")] 
+		extern CGImage AsCGImage (ref CGRect proposedDestRect, [NullAllowed] NSGraphicsContext context, [NullAllowed] NSDictionary hints);
 
 		//Detected properties
 		[Export ("size")]
@@ -10030,12 +10031,12 @@ namespace AppKit {
 		[NullAllowed, Export ("contentTintColor", ArgumentSemantic.Copy)]
 		NSColor ContentTintColor { get; set; }
 
-		[NullAllowed]
-		[Export ("symbolConfiguration", ArgumentSemantic.Copy)]
-		NSImageSymbolConfiguration SymbolConfiguration { get; set; }
+		//[NullAllowed]
+		//[Export ("symbolConfiguration", ArgumentSemantic.Copy)]
+		//NSImageSymbolConfiguration SymbolConfiguration { get; set; }
 
 		// from the category NSSymbolEffect (NSImageView)
-
+/*
 		[Mac (14, 0)]
 		[Export ("addSymbolEffect:")]
 		void AddSymbolEffect (NSSymbolEffect symbolEffect);
@@ -10079,7 +10080,7 @@ namespace AppKit {
 		[Mac (14, 0)]
 		[Export ("setSymbolImage:withContentTransition:options:")]
 		void SetSymbolImage (NSImage symbolImage, NSSymbolContentTransition contentTransition, NSSymbolEffectOptions options);
-
+*/
 		[Mac (14, 0)]
 		[Static]
 		[Export ("defaultPreferredImageDynamicRange", ArgumentSemantic.Assign)]
@@ -10458,7 +10459,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSLayoutGuide : NSCoding, NSUserInterfaceItemIdentification {
+	interface NSLayoutGuide :  NSUserInterfaceItemIdentification {
 		[Export ("frame")]
 		CGRect Frame { get; }
 
@@ -10611,7 +10612,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSGestureRecognizer))]
-	interface NSPanGestureRecognizer : NSCoding {
+	interface NSPanGestureRecognizer { //}: NSCoding {
 		[Export ("initWithTarget:action:")]
 		NativeHandle Constructor (NSObject target, Selector action);
 
@@ -11111,9 +11112,9 @@ namespace AppKit {
 
 		// @interface SWCollaborationMetadata (NSPasteboardItem)
 
-		[Mac (13, 0)]
-		[NullAllowed, Export ("collaborationMetadata", ArgumentSemantic.Copy)]
-		SWCollaborationMetadata CollaborationMetadata { get; set; }
+		//[Mac (13, 0)]
+		//[NullAllowed, Export ("collaborationMetadata", ArgumentSemantic.Copy)]
+		//SWCollaborationMetadata CollaborationMetadata { get; set; }
 
 	}
 
@@ -11750,7 +11751,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSPrinter : NSCoding, NSCopying {
+	interface NSPrinter { //}: NSCoding, NSCopying {
 		[Static]
 		[Export ("printerNames", ArgumentSemantic.Copy)]
 		string [] PrinterNames { get; }
@@ -11821,7 +11822,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSPrintInfo : NSCoding, NSCopying {
+	interface NSPrintInfo { //}: NSCoding, NSCopying {
 		[DesignatedInitializer]
 		[Export ("initWithDictionary:")]
 		NativeHandle Constructor (NSDictionary attributes);
@@ -12435,7 +12436,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[DesignatedDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	partial interface NSResponder : NSCoding, NSTouchBarProvider, NSUserActivityRestoring {
+	partial interface NSResponder { //}: NSCoding, NSTouchBarProvider, NSUserActivityRestoring {
 		[Export ("tryToPerform:with:")]
 		bool TryToPerformwith (Selector anAction, [NullAllowed] NSObject anObject);
 
@@ -12634,7 +12635,7 @@ namespace AppKit {
 	interface INSUserActivityRestoring { }
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSResponder))]
 	interface NSResponder_NSTouchBarProvider : INSTouchBarProvider {
 		[Export ("touchBar")]
@@ -12817,7 +12818,7 @@ namespace AppKit {
 	interface NSSavePanel {
 		[Static]
 		[Export ("savePanel")]
-		[ForcedType] // different type used inside a sandbox
+		//[ForcedType] // different type used inside a sandbox
 		NSSavePanel SavePanel { get; }
 
 #if !XAMCORE_5_0
@@ -13354,7 +13355,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSControl))]
-	interface NSSegmentedControl : NSUserInterfaceCompression {
+	interface NSSegmentedControl {//}: NSUserInterfaceCompression {
 		[Export ("initWithFrame:")]
 		NativeHandle Constructor (CGRect frameRect);
 
@@ -14082,7 +14083,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject), Delegates = new string [] { "WeakDelegate" }, Events = new Type [] { typeof (NSSoundDelegate) })]
 	[DisableDefaultCtor] // no valid handle is returned
-	partial interface NSSound : NSSecureCoding, NSCopying, NSPasteboardReading, NSPasteboardWriting {
+	partial interface NSSound {//} : NSSecureCoding, NSCopying, NSPasteboardReading, NSPasteboardWriting {
 		[Static]
 		[Export ("soundNamed:")]
 		NSSound FromName (string name);
@@ -14312,7 +14313,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSSplitViewItem : NSAnimatablePropertyContainer, NSCoding {
+	interface NSSplitViewItem { //}: NSAnimatablePropertyContainer, NSCoding {
 		[Export ("viewController", ArgumentSemantic.Strong)]
 		NSViewController ViewController { get; set; }
 
@@ -14608,7 +14609,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	[PrivateDefaultCtor]
+	//[PrivateDefaultCtor]
 	partial interface NSStatusItem {
 		[Export ("statusBar")]
 		NSStatusBar StatusBar { get; }
@@ -14694,7 +14695,7 @@ namespace AppKit {
 
 	[Static]
 	[NoMacCatalyst]
-	public partial static class NSStringAttributeKey {
+	public static partial  class NSStringAttributeKey {
 		[Field ("NSFontAttributeName")]
 		public static NSString Font { get; }
 
@@ -15078,17 +15079,17 @@ namespace AppKit {
 		[Export ("contentView")]
 		NSView ContentView { get; }
 	}
-	8/
+	*/
 
 	[NoMacCatalyst]
-	[DesignatedDefaultCtor]
+	//[DesignatedDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	partial interface NSTextFinder : NSCoding {
+	partial class NSTextFinder : NSCoding {
 		[Export ("client", ArgumentSemantic.Assign)]
-		INSTextFinderClient Client { set; }
+		extern INSTextFinderClient Client { set; }
 
 		[Export ("findBarContainer", ArgumentSemantic.Assign)]
-		INSTextFinderBarContainer FindBarContainer { set; }
+		extern INSTextFinderBarContainer FindBarContainer { set; }
 
 		[Export ("findIndicatorNeedsUpdate")]
 		bool FindIndicatorNeedsUpdate { get; set; }
@@ -15100,20 +15101,20 @@ namespace AppKit {
 		NSArray IncrementalMatchRanges { get; }
 
 		[Export ("performAction:")]
-		void PerformAction (NSTextFinderAction op);
+		extern void PerformAction (NSTextFinderAction op);
 
 		[Export ("validateAction:")]
-		bool ValidateAction (NSTextFinderAction op);
+		extern bool ValidateAction (NSTextFinderAction op);
 
 		[Export ("cancelFindIndicator")]
-		void CancelFindIndicator ();
+		extern void CancelFindIndicator ();
 
 		[Static]
 		[Export ("drawIncrementalMatchHighlightInRect:")]
-		void DrawIncrementalMatchHighlightInRect (CGRect rect);
+		extern static void DrawIncrementalMatchHighlightInRect (CGRect rect);
 
 		[Export ("noteClientStringWillChange")]
-		void NoteClientStringWillChange ();
+		extern void NoteClientStringWillChange ();
 	}
 
 	
@@ -15132,7 +15133,7 @@ namespace AppKit {
 		NSDictionary [] ViewAnimations { get; set; }
 
 		[Export ("animator")]
-		NSObject Animator { [return: Proxy] get; }
+		NSObject Animator {  get; }
 
 		[Export ("animations")]
 		NSDictionary Animations { get; set; }
@@ -15164,7 +15165,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSView))]
 	interface NSView_NSTouchBar {
 		[Export ("allowedTouchTypes")]
@@ -15176,7 +15177,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSResponder))]
-	interface NSViewController : NSResponder, NSUserInterfaceItemIdentification, NSEditor, NSSeguePerforming, NSExtensionRequestHandling {
+	interface NSViewController : NSResponder, NSUserInterfaceItemIdentification, NSEditor, NSSeguePerforming {//}, NSExtensionRequestHandling {
 		[DesignatedInitializer]
 		[Export ("initWithNibName:bundle:")]
 		NativeHandle Constructor ([NullAllowed] string nibNameOrNull, [NullAllowed] NSBundle nibBundleOrNull);
@@ -15425,7 +15426,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	partial interface NSTableColumn : NSUserInterfaceItemIdentification, NSCoding {
+	partial interface NSTableColumn : NSUserInterfaceItemIdentification {//}, NSCoding {
 		[Export ("initWithIdentifier:")]
 		[Sealed]
 		NativeHandle Constructor (string identifier);
@@ -16116,7 +16117,7 @@ namespace AppKit {
 	//
 	[NoMacCatalyst]
 	[Model]
-	[Synthetic]
+	//[Synthetic]
 	[BaseType (typeof (NSObject))]
 	interface NSTableViewSource {
 		//
@@ -16303,7 +16304,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSTableViewRowAction : NSCopying {
+	interface NSTableViewRowAction {//}: NSCopying {
 		[Static]
 		[Export ("rowActionWithStyle:title:handler:")]
 		NSTableViewRowAction FromStyle (NSTableViewRowActionStyle style, string title, Action<NSTableViewRowAction, nint> handler);
@@ -16529,7 +16530,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSTabViewItem : NSCoding {
+	interface NSTabViewItem { //}: NSCoding {
 		[Export ("initWithIdentifier:")]
 		NativeHandle Constructor (NSObject identifier);
 
@@ -16641,7 +16642,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSControl), Delegates = new string [] { "Delegate" }, Events = new Type [] { typeof (NSTextFieldDelegate) })]
-	partial interface NSTextField : NSAccessibilityNavigableStaticText, NSUserInterfaceValidations, NSTextContent {
+	partial interface NSTextField { //}: NSAccessibilityNavigableStaticText, NSUserInterfaceValidations, NSTextContent {
 		[Export ("initWithFrame:")]
 		NativeHandle Constructor (CGRect frameRect);
 
@@ -16754,7 +16755,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSTextField))]
 	interface NSTextField_NSTouchBar {
 		[Export ("isAutomaticTextCompletionEnabled")]
@@ -16975,7 +16976,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSTextBlock))]
 	[DisableDefaultCtor]
-	interface NSTextTableBlock {
+	public interface NSTextTableBlock {
 		[DesignatedInitializer]
 		[Export ("initWithTable:startingRow:rowSpan:startingColumn:columnSpan:")]
 		NativeHandle Constructor (NSTextTable table, nint row, nint rowSpan, nint col, nint colSpan);
@@ -17284,12 +17285,12 @@ namespace AppKit {
 		[Export ("visibleItems")]
 		NSToolbarItem [] VisibleItems { get; }
 
-		[Deprecated (PlatformName.MacOSX, 15, 0, message: "Use the 'ItemIdentifiers' and 'DisplayMode' properties instead.")]
+		//[Deprecated (PlatformName.MacOSX, 15, 0, message: "Use the 'ItemIdentifiers' and 'DisplayMode' properties instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 18, 0, message: "Use the 'ItemIdentifiers' and 'DisplayMode' properties instead.")]
 		[Export ("setConfigurationFromDictionary:")]
 		void SetConfigurationFromDictionary (NSDictionary configDict);
 
-		[Deprecated (PlatformName.MacOSX, 15, 0, message: "Use the 'ItemIdentifiers' and 'DisplayMode' properties instead.")]
+		//[Deprecated (PlatformName.MacOSX, 15, 0, message: "Use the 'ItemIdentifiers' and 'DisplayMode' properties instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 18, 0, message: "Use the 'ItemIdentifiers' and 'DisplayMode' properties instead.")]
 		[Export ("configurationDictionary")]
 		NSDictionary ConfigurationDictionary { get; }
@@ -17313,12 +17314,12 @@ namespace AppKit {
 		[Export ("selectedItemIdentifier"), NullAllowed]
 		string SelectedItemIdentifier { get; set; }
 
-		[Deprecated (PlatformName.MacOSX, 14, 0)]
+		//[Deprecated (PlatformName.MacOSX, 14, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 17, 0)]
 		[Export ("sizeMode")]
 		NSToolbarSizeMode SizeMode { get; set; }
 
-		[Deprecated (PlatformName.MacOSX, 15, 0, message: "No longer supported.")]
+		//[Deprecated (PlatformName.MacOSX, 15, 0, message: "No longer supported.")]
 		[Deprecated (PlatformName.MacCatalyst, 18, 0, message: "No longer supported.")]
 		[Export ("showsBaselineSeparator")]
 		bool ShowsBaselineSeparator { get; set; }
@@ -17366,7 +17367,7 @@ namespace AppKit {
 		[Field ("NSToolbarCloudSharingItemIdentifier")]
 		NSString NSToolbarCloudSharingItemIdentifier { get; }
 
-		[Deprecated (PlatformName.MacOSX, 14, 0, message: "'CenteredItemIdentifiers' should be used instead.")]
+		//[Deprecated (PlatformName.MacOSX, 14, 0, message: "'CenteredItemIdentifiers' should be used instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "'CenteredItemIdentifiers' should be used instead.")]
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("centeredItemIdentifier")]
@@ -17467,7 +17468,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSObject))]
 	interface NSObject_NSToolbarItemValidation {
 		[Export ("validateToolbarItem:")]
@@ -17643,7 +17644,7 @@ namespace AppKit {
 
 		[Export ("subitems", ArgumentSemantic.Copy)]
 		NSToolbarItem [] Subitems { get; set; }
-
+/*
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("groupWithItemIdentifier:titles:selectionMode:labels:target:action:")]
@@ -17661,7 +17662,7 @@ namespace AppKit {
 		[MacCatalyst (13, 1)]
 		[Export ("selectionMode", ArgumentSemantic.Assign)]
 		NSToolbarItemGroupSelectionMode SelectionMode { get; set; }
-
+*/
 		[MacCatalyst (13, 1)]
 		[Export ("selectedIndex")]
 		nint SelectedIndex { get; set; }
@@ -17678,7 +17679,7 @@ namespace AppKit {
 
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSTouch))]
 	interface NSTouch_NSTouchBar {
 		[Export ("type")]
@@ -17694,7 +17695,7 @@ namespace AppKit {
 	[DesignatedDefaultCtor]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Delegates = new string [] { "Delegate" }, Events = new Type [] { typeof (NSTouchBarDelegate) })]
-	interface NSTouchBar : NSCoding {
+	interface NSTouchBar {//} : NSCoding {
 		[NullAllowed, Export ("customizationIdentifier")]
 		string CustomizationIdentifier { get; set; }
 
@@ -17836,7 +17837,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSTrackingArea : NSCoding, NSCopying {
+	interface NSTrackingArea { //}: NSCoding, NSCopying {
 		[Export ("initWithRect:options:owner:userInfo:")]
 		NativeHandle Constructor (CGRect rect, NSTrackingAreaOptions options, NSObject owner, [NullAllowed] NSDictionary userInfo);
 
@@ -18089,7 +18090,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSResponder))]
-	interface NSWindowController : NSCoding, NSSeguePerforming {
+	interface NSWindowController { //}: NSCoding, NSSeguePerforming {
 		[DesignatedInitializer]
 		[Export ("initWithWindow:")]
 		NativeHandle Constructor (NSWindow window);
@@ -18560,7 +18561,7 @@ namespace AppKit {
 
 		[Export ("requestAuthorizationOfType:completionHandler:")]
 		void RequestAuthorization (NSWorkspaceAuthorizationType type, Action<NSWorkspaceAuthorization, NSError> completionHandler);
-
+/*
 		[Async]
 		[Export ("openApplicationAtURL:configuration:completionHandler:")]
 		void OpenApplication (NSUrl applicationUrl, NSWorkspaceOpenConfiguration configuration, [NullAllowed] Action<NSRunningApplication, NSError> completionHandler);
@@ -18572,7 +18573,7 @@ namespace AppKit {
 		[Async]
 		[Export ("openURLs:withApplicationAtURL:configuration:completionHandler:")]
 		void OpenUrls (NSUrl [] urls, NSUrl applicationUrl, NSWorkspaceOpenConfiguration configuration, [NullAllowed] Action<NSRunningApplication, NSError> completionHandler);
-
+*/
 		[Export ("iconForContentType:")]
 		NSImage GetIcon (UTType contentType);
 	}
@@ -18709,7 +18710,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSPredicateEditorRowTemplate : NSCoding, NSCopying {
+	interface NSPredicateEditorRowTemplate { //}: NSCoding, NSCopying {
 		[Export ("matchForPredicate:")]
 		double MatchForPredicate (NSPredicate predicate);
 
@@ -19116,11 +19117,11 @@ namespace AppKit {
 		[Export ("optionsForSharingService:shareProvider:")]
 		NSCloudKitSharingServiceOptions Options (NSSharingService cloudKitSharingService, NSItemProvider provider);
 
-		[Export ("sharingService:didSaveShare:")]
-		void Saved (NSSharingService sharingService, CKShare share);
+		//[Export ("sharingService:didSaveShare:")]
+		//void Saved (NSSharingService sharingService, CKShare share);
 
-		[Export ("sharingService:didStopSharing:")]
-		void Stopped (NSSharingService sharingService, CKShare share);
+		//[Export ("sharingService:didStopSharing:")]
+		//void Stopped (NSSharingService sharingService, CKShare share);
 	}
 
 	[NoMacCatalyst]
@@ -19167,11 +19168,12 @@ namespace AppKit {
 
 		[Export ("sharingServicePicker:didChooseSharingService:"), EventArgs ("NSSharingServicePickerDidChooseSharingService")]
 		void DidChooseSharingService (NSSharingServicePicker sharingServicePicker, NSSharingService service);
-
+/*
 		[Mac (15, 0)]
 		[Export ("sharingServicePickerCollaborationModeRestrictions:"), DelegateName ("NSSharingServicePickerDelegateCollaborationModeRestrictions"), DefaultValue (null)]
 		[return: NullAllowed]
 		NSSharingCollaborationModeRestriction [] GetCollaborationModeRestrictions (NSSharingServicePicker sharingServicePicker);
+		*/
 	}
 
 	
@@ -19198,10 +19200,10 @@ namespace AppKit {
 
 	public partial class NSColor {
 		[Static, Export ("colorWithGenericGamma22White:alpha:")]
-		public static NSColor FromGamma22White (nfloat white, nfloat alpha);
+		public static extern NSColor FromGamma22White (nfloat white, nfloat alpha);
 
 		[Static, Export ("colorWithSRGBRed:green:blue:alpha:")]
-		public static NSColor FromSrgb (nfloat red, nfloat green, nfloat blue, nfloat alpha);
+		public static extern NSColor FromSrgb (nfloat red, nfloat green, nfloat blue, nfloat alpha);
 
 		[Notification, Field ("NSSystemColorsDidChangeNotification")]
 		public NSString SystemColorsChanged { get; }
@@ -19368,14 +19370,14 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSResponder))]
+	//[Category, BaseType (typeof (NSResponder))]
 	partial interface NSStandardKeyBindingMethods {
 		[Export ("quickLookPreviewItems:")]
 		void QuickLookPreviewItems (NSObject sender);
 	}
 
 	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSView))]
+	//[Category, BaseType (typeof (NSView))]
 	partial interface NSRulerMarkerClientViewDelegation {
 		[Export ("rulerView:locationForPoint:")]
 		nfloat RulerViewLocation (NSRulerView ruler, CGPoint locationForPoint);
@@ -19385,7 +19387,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSResponder))]
+	//[Category, BaseType (typeof (NSResponder))]
 	partial interface NSTextFinderSupport {
 		[Export ("performTextFinderAction:")]
 		void PerformTextFinderAction ([NullAllowed] NSObject sender);
@@ -19559,10 +19561,10 @@ namespace AppKit {
 		public static NSColor UnderPageBackground { get; }
 
 		[Static, Export ("colorWithCGColor:")]
-		public static NSColor FromCGColor (CGColor cgColor);
+		public static extern NSColor FromCGColor (CGColor cgColor);
 	}
 
-	delegate bool NSCustomImageRepDrawingHandler (CGRect dstRect);
+	public delegate bool NSCustomImageRepDrawingHandler (CGRect dstRect);
 
 	partial interface NSCustomImageRep {
 
@@ -19580,7 +19582,7 @@ namespace AppKit {
 	delegate void NSDocumentLockCompletionHandler (NSError error);
 	delegate void NSDocumentUnlockCompletionHandler (NSError error);
 
-	partial interface NSDocument : NSEditorRegistration, NSFilePresenter, NSMenuItemValidation
+	partial interface NSDocument : NSEditorRegistration,  NSMenuItemValidation //NSFilePresenter,
 #if NET
 	, NSUserInterfaceValidations // ValidateUserInterfaceItem was bound with NSObject and fix would break API compat  
 #endif
@@ -19671,7 +19673,7 @@ namespace AppKit {
 	public partial class NSImage {
 
 		[Static, Export ("imageWithSize:flipped:drawingHandler:")]
-		public NSImage ImageWithSize (CGSize size, bool flipped, NSCustomImageRepDrawingHandler drawingHandler);
+		public static extern NSImage ImageWithSize (CGSize size, bool flipped, NSCustomImageRepDrawingHandler drawingHandler);
 	}
 
 	partial interface NSSplitViewDividerIndexEventArgs {
@@ -19687,7 +19689,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category, BaseType (typeof (NSSegmentedCell))]
+	//[Category, BaseType (typeof (NSSegmentedCell))]
 	partial interface NSSegmentBackgroundStyle_NSSegmentedCell {
 
 		[Field ("NSSharingServiceNamePostOnFacebook")]
@@ -19757,7 +19759,7 @@ namespace AppKit {
 		public NSTextAlternatives (NativeHandle handle) : base (handle) {}
 
 		[Export ("initWithPrimaryString:alternativeStrings:")]
-		public NativeHandle Constructor (string primaryString, NSArray alternativeStrings);
+		public extern NativeHandle Constructor (string primaryString, NSArray alternativeStrings);
 
 		[Export ("primaryString", ArgumentSemantic.Copy)]
 		public string PrimaryString { get; }
@@ -19766,7 +19768,7 @@ namespace AppKit {
 		public NSArray AlternativeStrings { get; }
 
 		[Export ("noteSelectedAlternativeString:")]
-		public void NoteSelectedAlternativeString (string alternativeString);
+		public extern void NoteSelectedAlternativeString (string alternativeString);
 
 		[Notification (typeof (NSTextAlternativesSelectedAlternativeStringEventArgs)),
 			Field ("NSTextAlternativesSelectedAlternativeStringNotification")]
@@ -19775,18 +19777,18 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	public partial class NSGlyphInfo : NSObject, NSCoding, NSCopying {
+	public partial class NSGlyphInfo:  NSCopying {
 		
 		public NSGlyphInfo (NativeHandle handle) : base (handle) {}
 
 		[Static, Export ("glyphInfoWithGlyphName:forFont:baseString:")]
-		public static NSGlyphInfo Get (string glyphName, NSFont forFont, string baseString);
+		public static extern NSGlyphInfo Get (string glyphName, NSFont forFont, string baseString);
 
 		[Static, Export ("glyphInfoWithGlyph:forFont:baseString:")]
-		public static NSGlyphInfo Get (uint /* NSGlyph = unsigned int */ glyph, NSFont forFont, string baseString);
+		public static extern NSGlyphInfo Get (uint /* NSGlyph = unsigned int */ glyph, NSFont forFont, string baseString);
 
 		[Static, Export ("glyphInfoWithCharacterIdentifier:collection:baseString:")]
-		public static 	NSGlyphInfo Get (nuint characterIdentifier, NSCharacterCollection characterCollection, string baseString);
+		public static extern NSGlyphInfo Get (nuint characterIdentifier, NSCharacterCollection characterCollection, string baseString);
 
 		[Export ("glyphName")]
 		public string GlyphName { get; }
@@ -19800,7 +19802,7 @@ namespace AppKit {
 		[Static]
 		[Export ("glyphInfoWithCGGlyph:forFont:baseString:")]
 		[return: NullAllowed]
-		public static NSGlyphInfo GetGlyphInfo (ushort glyph, NSFont font, string @string);
+		public static extern NSGlyphInfo GetGlyphInfo (ushort glyph, NSFont font, string @string);
 
 		[Export ("glyphID")]
 		public ushort GlyphId { get; }
@@ -19928,7 +19930,7 @@ namespace AppKit {
 		NSString NSToolbarDidRemoveItemNotification { get; }
 	}
 
-	partial interface NSImageRep {
+	public partial class NSImageRep {
 		[Notification, Field ("NSImageRepRegistryDidChangeNotification")]
 		NSString RegistryDidChangeNotification { get; }
 	}
@@ -22157,10 +22159,10 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[Protocol]
 	interface NSCloudSharingValidation {
-		[Abstract]
-		[Export ("cloudShareForUserInterfaceItem:")]
-		[return: NullAllowed]
-		CKShare GetCloudShare (INSValidatedUserInterfaceItem item);
+		//[Abstract]
+		//[Export ("cloudShareForUserInterfaceItem:")]
+		//[return: NullAllowed]
+		//CKShare GetCloudShare (INSValidatedUserInterfaceItem item);
 	}
 
 	[NoMacCatalyst]
@@ -22182,11 +22184,11 @@ namespace AppKit {
 		[Export ("openGLContextForPixelFormat:")]
 		NSOpenGLContext GetOpenGLContext (NSOpenGLPixelFormat pixelFormat);
 
-		[Export ("canDrawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")]
-		bool CanDraw (NSOpenGLContext context, NSOpenGLPixelFormat pixelFormat, double t, ref CVTimeStamp ts);
+		//[Export ("canDrawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")]
+		//bool CanDraw (NSOpenGLContext context, NSOpenGLPixelFormat pixelFormat, double t, ref CVTimeStamp ts);
 
-		[Export ("drawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")]
-		void Draw (NSOpenGLContext context, NSOpenGLPixelFormat pixelFormat, double t, ref CVTimeStamp ts);
+		//[Export ("drawInOpenGLContext:pixelFormat:forLayerTime:displayTime:")]
+		//void Draw (NSOpenGLContext context, NSOpenGLPixelFormat pixelFormat, double t, ref CVTimeStamp ts);
 	}
 
 	[NoMacCatalyst]
@@ -22293,7 +22295,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSView))]
 	interface NSView_NSCandidateListTouchBarItem {
 		[Export ("candidateListTouchBarItem")]
@@ -22322,7 +22324,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSGestureRecognizer))]
 	interface NSGestureRecognizer_NSTouchBar {
 		[Export ("allowedTouchTypes", ArgumentSemantic.Assign)]
@@ -22351,11 +22353,12 @@ namespace AppKit {
 		[Export ("customizationLabel")]
 		string CustomizationLabel { get; set; }
 
+		/*
 		[NoMacCatalyst]
 		[Static]
 		[Export ("groupItemWithIdentifier:items:allowedCompressionOptions:")]
 		NSGroupTouchBarItem CreateGroupItem (string identifier, NSTouchBarItem [] items, NSUserInterfaceCompressionOptions allowedCompressionOptions);
-
+*/
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("alertStyleGroupItemWithIdentifier:")]
@@ -22373,6 +22376,7 @@ namespace AppKit {
 		[Export ("preferredItemWidth")]
 		nfloat PreferredItemWidth { get; set; }
 
+		/*
 		[NoMacCatalyst]
 		[Export ("effectiveCompressionOptions")]
 		NSUserInterfaceCompressionOptions EffectiveCompressionOptions { get; }
@@ -22380,6 +22384,7 @@ namespace AppKit {
 		[NoMacCatalyst]
 		[Export ("prioritizedCompressionOptions", ArgumentSemantic.Copy)]
 		NSUserInterfaceCompressionOptions [] PrioritizedCompressionOptions { get; set; }
+		*/
 	}
 
 	[MacCatalyst (13, 1)]
@@ -22466,7 +22471,7 @@ namespace AppKit {
 	[DesignatedDefaultCtor]
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSScrubberSelectionStyle : NSCoding {
+	interface NSScrubberSelectionStyle { //}: NSCoding {
 		[Static]
 		[Export ("outlineOverlayStyle", ArgumentSemantic.Strong)]
 		NSScrubberSelectionStyle OutlineOverlayStyle { get; }
@@ -22621,7 +22626,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSScrubberLayoutAttributes : NSCopying {
+	public interface NSScrubberLayoutAttributes: INativeObject { //}: NSCopying {
 		[Export ("itemIndex")]
 		nint ItemIndex { get; set; }
 
@@ -22639,7 +22644,7 @@ namespace AppKit {
 	[DesignatedDefaultCtor]
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSScrubberLayout : NSCoding {
+	interface NSScrubberLayout { //}: NSCoding {
 		[Static]
 		[Export ("layoutAttributesClass")]
 		Class LayoutAttributesClass { get; }
@@ -22744,15 +22749,15 @@ namespace AppKit {
 		NSImage ButtonImage { get; set; }
 
 		// defined in the NSSharingServicePickerTouchBarItem (UIActivityItemsConfiguration) category in UIKit
-		[NoMac]
-		[Export ("activityItemsConfiguration", ArgumentSemantic.Strong), NullAllowed]
-		IUIActivityItemsConfigurationReading ActivityItemsConfiguration { get; set; }
+		//[NoMac]
+		//[Export ("activityItemsConfiguration", ArgumentSemantic.Strong), NullAllowed]
+		//IUIActivityItemsConfigurationReading ActivityItemsConfiguration { get; set; }
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSSliderAccessory : NSCoding, NSAccessibility, NSAccessibilityElementProtocol {
+	interface NSSliderAccessory :  NSAccessibility, NSAccessibilityElementProtocol {
 		[Static]
 		[Export ("accessoryWithImage:")]
 		NSSliderAccessory CreateAccessory (NSImage image);
@@ -22774,7 +22779,7 @@ namespace AppKit {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface NSSliderAccessoryBehavior : NSCoding, NSCopying {
+	interface NSSliderAccessoryBehavior { //}: NSCoding, NSCopying {
 		[Static]
 		[Export ("automaticBehavior", ArgumentSemantic.Copy)]
 		NSSliderAccessoryBehavior AutomaticBehavior { get; }
@@ -22927,29 +22932,29 @@ namespace AppKit {
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
 #if NET
-	interface NSFontAssetRequest : NSProgressReporting
+	partial class NSFontAssetRequest //{ //}: NSProgressReporting
 #else
 	interface NSFontAssetRequest : INSProgressReporting
 #endif
 	{
 		[Export ("initWithFontDescriptors:options:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSFontDescriptor [] fontDescriptors, NSFontAssetRequestOptions options);
+		extern NativeHandle Constructor (NSFontDescriptor [] fontDescriptors, NSFontAssetRequestOptions options);
 
 		[Export ("downloadedFontDescriptors", ArgumentSemantic.Copy)]
-		NSFontDescriptor [] DownloadedFontDescriptors { get; }
+		extern NSFontDescriptor [] DownloadedFontDescriptors { get; }
 
 #pragma warning disable 0108 // warning CS0108: 'NSFontAssetRequest.Progress' hides inherited member 'NSProgressReporting.Progress'. Use the new keyword if hiding was intended.
 		[Export ("progress", ArgumentSemantic.Strong)]
-		NSProgress Progress { get; }
+		extern NSProgress Progress { get; }
 #pragma warning restore
 
 		[Export ("downloadFontAssetsWithCompletionHandler:")]
-		void DownloadFontAssets (DownloadFontAssetsRequestCompletionHandler completionHandler);
+		extern void DownloadFontAssets (DownloadFontAssetsRequestCompletionHandler completionHandler);
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSObject))]
 	interface NSObject_NSFontPanelValidationAdditions {
 		[Export ("validModesForFontPanel:")]
@@ -22959,7 +22964,7 @@ namespace AppKit {
 	[DesignatedDefaultCtor]
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSUserInterfaceCompressionOptions : NSCopying, NSCoding {
+	interface NSUserInterfaceCompressionOptions: INativeObject { //}: NSCopying, NSCoding {
 		[Export ("initWithIdentifier:")]
 		[DesignatedInitializer]
 		NativeHandle Constructor (string identifier);
@@ -23189,7 +23194,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSCollectionViewCompositionalLayoutConfiguration : NSCopying {
+	interface NSCollectionViewCompositionalLayoutConfiguration { //}: NSCopying {
 		[Export ("scrollDirection", ArgumentSemantic.Assign)]
 		NSCollectionViewScrollDirection ScrollDirection { get; set; }
 
@@ -23369,7 +23374,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSWorkspaceOpenConfiguration : NSCopying {
+	interface NSWorkspaceOpenConfiguration { //}: NSCopying {
 		[Static]
 		[Export ("configuration")]
 		NSWorkspaceOpenConfiguration Create ();
@@ -23595,9 +23600,9 @@ namespace AppKit {
 		NSObject WeakDelegate { get; set; }
 
 		// Defined in the NSSharingServicePickerToolbarItem (UIActivityItemsConfiguration) category in UIKIt
-		[NoMac]
-		[Export ("activityItemsConfiguration", ArgumentSemantic.Strong), NullAllowed]
-		IUIActivityItemsConfigurationReading ActivityItemsConfiguration { get; set; }
+		//[NoMac]
+		//[Export ("activityItemsConfiguration", ArgumentSemantic.Strong), NullAllowed]
+		//IUIActivityItemsConfigurationReading ActivityItemsConfiguration { get; set; }
 	}
 
 	public interface INSSharingServicePickerToolbarItemDelegate { }
@@ -23707,7 +23712,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSTintConfiguration : NSCopying, NSSecureCoding {
+	interface NSTintConfiguration { //}: NSCopying, NSSecureCoding {
 		[Static]
 		[Export ("defaultTintConfiguration", ArgumentSemantic.Strong)]
 		NSTintConfiguration DefaultTintConfiguration { get; }
@@ -23756,7 +23761,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSImageSymbolConfiguration : NSCopying, NSSecureCoding {
+	public interface NSImageSymbolConfiguration {//}: NSCopying, NSSecureCoding {
 		[Static]
 		[Export ("configurationWithPointSize:weight:scale:")]
 		NSImageSymbolConfiguration Create (nfloat pointSize, double weight, NSImageSymbolScale scale);
@@ -23842,7 +23847,7 @@ namespace AppKit {
 
 	[NoMacCatalyst, Mac (14, 0)]
 	[BaseType (typeof (NSObject))]
-	interface NSNibConnector : NSCoding {
+	interface NSNibConnector { //}: NSCoding {
 		[NullAllowed, Export ("source", ArgumentSemantic.Weak)]
 		NSObject Source { get; set; }
 
@@ -23890,7 +23895,7 @@ namespace AppKit {
 	[NoMacCatalyst, Mac (14, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSMenuItemBadge : NSCopying {
+	interface NSMenuItemBadge { //}: NSCopying {
 		[Static]
 		[Export ("updatesWithCount:")]
 		NSMenuItemBadge CreateUpdates (nint itemCount);
@@ -23965,7 +23970,7 @@ namespace AppKit {
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface NSSharingCollaborationModeRestriction : NSSecureCoding, NSCopying {
+	interface NSSharingCollaborationModeRestriction { //}: NSSecureCoding, NSCopying {
 		[Export ("disabledMode")]
 		NSSharingCollaborationMode DisabledMode { get; }
 
@@ -24020,7 +24025,7 @@ namespace AppKit {
 		User = 2000,
 	}
 
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSResponder))]
 	[Mac (15, 2), NoMacCatalyst]
 	interface NSResponder_NSWritingToolsSupport {
@@ -24049,4 +24054,5 @@ namespace AppKit {
 		[BindAs (typeof (CGRect []))]
 		NSValue [] CandidateRects { get; }
 	}
+
 }

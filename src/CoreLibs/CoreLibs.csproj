@@ -78,6 +78,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="CoreData\" />
       <Folder Include="CoreVideo\" />
       <Folder Include="UiKit\" />
     </ItemGroup>

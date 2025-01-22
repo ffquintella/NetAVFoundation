@@ -51,7 +51,7 @@ namespace AppKit
 {
 	delegate void NSWindowTrackEventsMatchingCompletionHandler (NSEvent evt, ref bool stop);
 
-	public partial class NSWindow {
+	public partial class NSWindow: NSObject {
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("allowsAutomaticWindowTabbing")]

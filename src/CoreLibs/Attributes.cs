@@ -615,3 +615,54 @@ public class NoDefaultValueAttribute : Attribute {
 
 public class IgnoredInDelegateAttribute : Attribute {
 }
+
+//
+// Apply this attribute to a class to add methods that in Objective-C
+// are added as categories
+//
+// Use the BaseType attribute to reference which class this is extending
+//
+// Like this:
+//   [Category]
+//   [BaseType (typeof (UIView))]
+//   interface UIViewExtensions {
+//     [Export ("method_in_the_objective_c_category")]
+//     void ThisWillBecome_a_c_sharp_extension_method_in_class_UIViewExtensions ();
+// }
+[AttributeUsage (AttributeTargets.Interface, AllowMultiple = false)]
+public class CategoryAttribute : Attribute {
+#if !NET
+	public bool AllowStaticMembers;
+#endif
+	public CategoryAttribute () { }
+#if !NET
+	[Obsolete ("Inline the static members in this category in the category's class (and remove this obsolete once fixed)")]
+	public CategoryAttribute (bool allowStaticMembers)
+	{
+		AllowStaticMembers = allowStaticMembers;
+	}
+#endif
+}
+
+//
+// Apple this attribute to ObjC types where the default `init` selector 
+// is decorated with `NS_DESIGNATED_INITIALIZER`
+//
+// The generator will produce a `[DesignatedInitializer]` when generating the
+// default constructor when `[DesignatedDefaultCtor]` is present on the type
+//
+[AttributeUsage (AttributeTargets.Interface, AllowMultiple = false)]
+public class DesignatedDefaultCtorAttribute : Attribute {
+	public DesignatedDefaultCtorAttribute ()
+	{
+	}
+}
+
+//
+// Code to run from a generated Dispose method, before any generated code is executed
+// Adding this attribute will, by default, make the method non-optimizable by the SDK tools
+//
+[AttributeUsage (AttributeTargets.Interface, AllowMultiple = true)]
+public class DisposeAttribute : SnippetAttribute {
+	public DisposeAttribute (string s) : base (s) { }
+}

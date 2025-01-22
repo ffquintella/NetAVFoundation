@@ -7813,7 +7813,7 @@ namespace Foundation {
 	[NoiOS, NoTV, NoWatch]
 	[BaseType (typeof (NSObject))]
 	[MacCatalyst (13, 1)]
-	partial class NSAffineTransform : NSCopying {
+	public partial class NSAffineTransform : NSCopying {
 		[Export ("initWithTransform:")]
 		extern NativeHandle Constructor (NSAffineTransform transform);
 

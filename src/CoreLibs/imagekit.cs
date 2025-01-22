@@ -341,7 +341,7 @@ namespace ImageKit {
 	}
 
 	[BaseType (typeof (NSView))]
-	interface IKFilterUIView {
+	public interface IKFilterUIView {
 		[Export ("initWithFrame:")]
 		NativeHandle Constructor (CGRect frameRect);
 

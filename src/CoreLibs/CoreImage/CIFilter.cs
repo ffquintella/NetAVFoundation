@@ -130,6 +130,10 @@ namespace CoreImage {
 		protected CIFilter () : base ()
 		{
 		}
+		
+		public  CIFilter (NativeHandle handle) : base (handle)
+		{
+		}
 
 		internal CIFilter (string name)
 			: base (CreateFilter (name))

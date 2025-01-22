@@ -8214,7 +8214,7 @@ namespace AppKit {
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSController))]
-	interface NSObjectController {
+	public interface NSObjectController {
 		[DesignatedInitializer]
 		[Export ("initWithContent:")]
 		NativeHandle Constructor (NSObject content);

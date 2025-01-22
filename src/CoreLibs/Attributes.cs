@@ -666,3 +666,9 @@ public class DesignatedDefaultCtorAttribute : Attribute {
 public class DisposeAttribute : SnippetAttribute {
 	public DisposeAttribute (string s) : base (s) { }
 }
+
+
+[AttributeUsage(AttributeTargets.Interface)]
+public class CoreImageFilterAttribute : Attribute
+{
+}

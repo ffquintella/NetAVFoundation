@@ -29,12 +29,13 @@ using CoreFoundation;
 using AudioToolbox;
 using ObjCRuntime;
 using System;
+using System.Runtime.Versioning;
 
 #nullable enable
 
 namespace AVFoundation {
 #if !TVOS
-	public partial class AVAudioRecorder {
+	public partial class AVAudioRecorder : NSObject {
 		AVAudioRecorder (NSUrl url, AudioSettings settings, out NSError error)
 		{
 			// We use this method because it allows us to out NSError but, as a side effect, it is possible for the handle to be null and we will need to check this manually (on the Create method).

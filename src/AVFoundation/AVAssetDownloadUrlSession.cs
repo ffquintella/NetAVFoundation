@@ -46,77 +46,77 @@ namespace AVFoundation {
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDataTask CreateDataTask (NSUrlRequest request)
+		public  NSUrlSessionDataTask CreateDataTask (NSUrlRequest request)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDataTask CreateDataTask (NSUrl url)
+		public  NSUrlSessionDataTask CreateDataTask (NSUrl url)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL)
+		public  NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData)
+		public  NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request)
+		public  NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request)
+		public  NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url)
+		public  NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDownloadTask CreateDownloadTask (NSData resumeData)
+		public  NSUrlSessionDownloadTask CreateDownloadTask (NSData resumeData)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDataTask CreateDataTask (NSUrlRequest request, NSUrlSessionResponse? completionHandler)
+		public  NSUrlSessionDataTask CreateDataTask (NSUrlRequest request, NSUrlSessionResponse? completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDataTask CreateDataTask (NSUrl url, NSUrlSessionResponse? completionHandler)
+		public  NSUrlSessionDataTask CreateDataTask (NSUrl url, NSUrlSessionResponse? completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL, NSUrlSessionResponse completionHandler)
+		public  NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL, NSUrlSessionResponse completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData, NSUrlSessionResponse completionHandler)
+		public  NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData, NSUrlSessionResponse completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request, NSUrlDownloadSessionResponse? completionHandler)
+		public  NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request, NSUrlDownloadSessionResponse? completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url, NSUrlDownloadSessionResponse? completionHandler)
+		public  NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url, NSUrlDownloadSessionResponse? completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}
 
-		public override NSUrlSessionDownloadTask CreateDownloadTaskFromResumeData (NSData resumeData, NSUrlDownloadSessionResponse? completionHandler)
+		public  NSUrlSessionDownloadTask CreateDownloadTaskFromResumeData (NSData resumeData, NSUrlDownloadSessionResponse? completionHandler)
 		{
 			throw new NotSupportedException ("NS_UNAVAILABLE");
 		}

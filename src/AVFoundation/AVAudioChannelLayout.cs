@@ -18,12 +18,19 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using CoreLibs.AudioToolbox;
 
 #nullable enable
 
 namespace AVFoundation {
-	public partial class AVAudioChannelLayout {
-		static IntPtr CreateLayoutPtr (AudioChannelLayout layout, out IntPtr handleToLayout)
+	public partial class AVAudioChannelLayout: NSObject {
+		
+		public AVAudioChannelLayout (IntPtr handle)
+			: base (handle)
+		{
+		}
+		
+		static IntPtr CreateLayoutPtr (AudioType.AudioChannelLayout layout, out IntPtr handleToLayout)
 		{
 			int size;
 			handleToLayout = layout.ToBlock (out size);
@@ -31,9 +38,9 @@ namespace AVFoundation {
 		}
 
 		[DesignatedInitializer]
-		public AVAudioChannelLayout (AudioChannelLayout layout)
+		public AVAudioChannelLayout (AudioType.AudioChannelLayout layout)
 #if NET
-			: this (CreateLayoutPtr (layout, out var handleToLayout))
+			: this (CreateLayoutPtr (layout, out  IntPtr handleToLayout))
 #else
 			: this ((nint) CreateLayoutPtr (layout, out var handleToLayout))
 #endif
@@ -41,9 +48,9 @@ namespace AVFoundation {
 			Marshal.FreeHGlobal (handleToLayout);
 		}
 
-		public AudioChannelLayout? Layout {
+		public AudioType.AudioChannelLayout? Layout {
 			get {
-				return AudioChannelLayout.FromHandle (_Layout);
+				return AudioType.AudioChannelLayout.FromHandle (_Layout);
 			}
 		}
 

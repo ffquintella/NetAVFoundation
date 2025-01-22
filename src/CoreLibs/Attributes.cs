@@ -341,7 +341,7 @@ sealed class MacAttribute : IntroducedAttribute {
 	
 }
 
-sealed class iOSAttribute : IntroducedAttribute {
+public class iOSAttribute : IntroducedAttribute {
 	public iOSAttribute (byte major, byte minor)
 		: base (PlatformName.iOS, (int) major, (int) minor)
 	{

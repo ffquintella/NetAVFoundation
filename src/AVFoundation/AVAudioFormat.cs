@@ -17,6 +17,8 @@ using ObjCRuntime;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Runtime.Versioning;
+using CoreLibs.AudioToolbox;
 
 #nullable enable
 
@@ -43,7 +45,8 @@ namespace AVFoundation {
 		[SupportedOSPlatform ("tvos")]
 		[SupportedOSPlatform ("maccatalyst")]
 #endif
-		public virtual AudioStreamBasicDescription StreamDescription {
+		
+		 public unsafe virtual AudioType.AudioStreamBasicDescription StreamDescription {
 #if NET
 			[SupportedOSPlatform ("ios")]
 			[SupportedOSPlatform ("macos")]
@@ -53,11 +56,11 @@ namespace AVFoundation {
 			get {
 				var ptr = _StreamDescription;
 				if (ptr == IntPtr.Zero)
-					return default (AudioStreamBasicDescription);
-				unsafe {
-					AudioStreamBasicDescription* p = (AudioStreamBasicDescription*) ptr;
-					return *p;
-				}
+					return default (AudioType.AudioStreamBasicDescription);
+				
+				AudioType.AudioStreamBasicDescription* p = (AudioType.AudioStreamBasicDescription*) ptr;
+				return *p;
+				
 			}
 		}
 	}

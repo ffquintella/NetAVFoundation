@@ -2,16 +2,24 @@ using System;
 using System.ComponentModel;
 
 using AudioToolbox;
+using CoreLibs.AudioToolbox;
+using Foundation;
 
 namespace AVFoundation {
 #if XAMCORE_5_0
 	public delegate int AVAudioSinkNodeReceiverHandler (AudioTimeStamp timestamp, uint frameCount, AudioBuffers inputData);
 #else
-	public delegate int AVAudioSinkNodeReceiverHandler (AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers inputData);
-	public delegate int AVAudioSinkNodeReceiverHandler2 (AudioTimeStamp timestamp, uint frameCount, AudioBuffers inputData);
+	public delegate int AVAudioSinkNodeReceiverHandler (AudioType.AudioChannelLayout.AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers inputData);
+	public delegate int AVAudioSinkNodeReceiverHandler2 (AudioType.AudioChannelLayout.AudioTimeStamp timestamp, uint frameCount, AudioBuffers inputData);
 #endif // XAMCORE_5_0
 
-	public partial class AVAudioSinkNode {
+	public partial class AVAudioSinkNode : NSObject {
+		
+		public AVAudioSinkNode (AVAudioSinkNodeReceiverHandlerRaw receiverHandler)
+		{
+			this.Handle = Constructor(receiverHandler);
+		}
+		
 #if !XAMCORE_5_0
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[Obsolete ("Use the overload that takes a delegate that does not take a 'ref AudioBuffers' instead. Assigning a value to the 'inputData' parameter in the callback has no effect.")]
@@ -32,7 +40,7 @@ namespace AVFoundation {
 		{
 			AVAudioSinkNodeReceiverHandlerRaw rv = (timestamp, frameCount, inputData) => {
 				unsafe {
-					var ts = *(AudioTimeStamp*) timestamp;
+					var ts = *(AudioType.AudioChannelLayout.AudioTimeStamp*) timestamp;
 					var abuffers = new AudioBuffers (inputData);
 #if XAMCORE_5_0
 					return receiverHandler (ts, frameCount, abuffers);
@@ -49,7 +57,7 @@ namespace AVFoundation {
 		{
 			AVAudioSinkNodeReceiverHandlerRaw rv = (timestamp, frameCount, inputData) => {
 				unsafe {
-					var ts = *(AudioTimeStamp*) timestamp;
+					var ts = *(AudioType.AudioChannelLayout.AudioTimeStamp*) timestamp;
 					var abuffers = new AudioBuffers (inputData);
 					return receiverHandler (ts, frameCount, abuffers);
 				}

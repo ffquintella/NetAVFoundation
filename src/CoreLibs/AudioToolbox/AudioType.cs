@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using CoreFoundation;
 using Foundation;
 using ObjCRuntime;
@@ -774,7 +775,141 @@ public class AudioType
 			return layout;
 		}
 
-		internal static AudioChannelLayout? FromHandle (IntPtr handle)
+		[Flags]
+		public enum SmpteTimeFlags : uint { // UInt32
+			Unknown = 0,
+			TimeValid = 1 << 0,
+			TimeRunning = 1 << 1
+		}		
+		
+#if NET
+		[SupportedOSPlatform ("ios")]
+		[SupportedOSPlatform ("maccatalyst")]
+		[SupportedOSPlatform ("macos")]
+		[SupportedOSPlatform ("tvos")]
+#endif
+		[StructLayout (LayoutKind.Sequential)]
+		public struct SmpteTime { // CoreAudio.framework - CoreAudioTypes.h
+			public short Subframes;
+			public short SubframeDivisor;
+			public uint Counter;
+			public uint Type;
+			public uint Flags;
+			public short Hours;
+			public short Minutes;
+			public short Seconds;
+			public short Frames;
+
+			public SmpteTimeFlags FlagsStrong {
+				get {
+					return (SmpteTimeFlags) Flags;
+				}
+				set {
+					Flags = (uint) value;
+				}
+			}
+			public SmpteTimeType TypeStrong {
+				get {
+					return (SmpteTimeType) Type;
+				}
+				set {
+					Type = (uint) value;
+				}
+			}
+
+			public override string ToString ()
+			{
+				return String.Format ("[Subframes={0},Divisor={1},Counter={2},Type={3},Flags={4},Hours={5},Minutes={6},Seconds={7},Frames={8}]",
+					Subframes, SubframeDivisor, Counter, Type, Flags, Hours, Minutes, Seconds, Frames);
+			}
+		}
+
+		
+		public enum SmpteTimeType : uint // UInt32 in AudioFileRegionList
+		{
+#if !NET
+		[Obsolete ("Value is not to be used with any API.")]
+		None = uint.MaxValue,
+#endif
+			Type24 = 0,
+			Type25 = 1,
+			Type30Drop = 2,
+			Type30 = 3,
+			Type2997 = 4,
+			Type2997Drop = 5,
+			Type60 = 6,
+			Type5994 = 7,
+			Type60Drop = 8,
+			Type5994Drop = 9,
+			Type50 = 10,
+			Type2398 = 11,
+		}
+		
+#if NET
+		[SupportedOSPlatform ("ios")]
+		[SupportedOSPlatform ("maccatalyst")]
+		[SupportedOSPlatform ("macos")]
+		[SupportedOSPlatform ("tvos")]
+#endif
+		[StructLayout (LayoutKind.Sequential)]
+		public struct AudioTimeStamp {
+
+			[Flags]
+			public enum AtsFlags : uint { // UInt32 in AudioTimeStamp
+				NothingValid = 0,
+				SampleTimeValid = (1 << 0),
+				HostTimeValid = (1 << 1),
+				RateScalarValid = (1 << 2),
+				WordClockTimeValid = (1 << 3),
+				SmpteTimeValid = (1 << 4),
+				SampleHostTimeValid = SampleTimeValid | HostTimeValid
+			}
+
+			public double SampleTime;
+			public ulong HostTime;
+			public double RateScalar;
+			public ulong WordClockTime;
+			public SmpteTime SMPTETime;
+			public AtsFlags Flags;
+			public uint Reserved;
+
+			public override string ToString ()
+			{
+				var sb = new StringBuilder ("{");
+				if ((Flags & AtsFlags.SampleTimeValid) != 0)
+					sb.Append ("SampleTime=" + SampleTime.ToString ());
+
+				if ((Flags & AtsFlags.HostTimeValid) != 0) {
+					if (sb.Length > 0)
+						sb.Append (',');
+					sb.Append ("HostTime=" + HostTime.ToString ());
+				}
+
+				if ((Flags & AtsFlags.RateScalarValid) != 0) {
+					if (sb.Length > 0)
+						sb.Append (',');
+
+					sb.Append ("RateScalar=" + RateScalar.ToString ());
+				}
+
+				if ((Flags & AtsFlags.WordClockTimeValid) != 0) {
+					if (sb.Length > 0)
+						sb.Append (',');
+					sb.Append ("WordClock=" + HostTime.ToString () + ",");
+				}
+
+				if ((Flags & AtsFlags.SmpteTimeValid) != 0) {
+					if (sb.Length > 0)
+						sb.Append (',');
+					sb.Append ("SmpteTime=" + SMPTETime.ToString ());
+				}
+				sb.Append ("}");
+
+				return sb.ToString ();
+			}
+		}
+		
+		public  static AudioChannelLayout? FromHandle (IntPtr handle)
 		{
 			if (handle == IntPtr.Zero)
 				return null;
@@ -788,7 +923,7 @@ public class AudioType
 		}
 
 		// The returned block must be released with FreeHGlobal
-		internal unsafe IntPtr ToBlock (out int size)
+		public  unsafe IntPtr ToBlock (out int size)
 		{
 			if (Channels is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (Channels));

@@ -3889,14 +3889,14 @@ namespace Foundation {
 
 	}
 
-	delegate void NSUrlSessionPendingTasks (NSUrlSessionTask [] dataTasks, NSUrlSessionTask [] uploadTasks, NSUrlSessionTask [] downloadTasks);
-	delegate void NSUrlSessionAllPendingTasks (NSUrlSessionTask [] tasks);
-	delegate void NSUrlSessionResponse (NSData data, NSUrlResponse response, NSError error);
-	delegate void NSUrlSessionDownloadResponse (NSUrl data, NSUrlResponse response, NSError error);
+	public delegate void NSUrlSessionPendingTasks (NSUrlSessionTask [] dataTasks, NSUrlSessionTask [] uploadTasks, NSUrlSessionTask [] downloadTasks);
+	public delegate void NSUrlSessionAllPendingTasks (NSUrlSessionTask [] tasks);
+	public delegate void NSUrlSessionResponse (NSData data, NSUrlResponse response, NSError error);
+	public delegate void NSUrlSessionDownloadResponse (NSUrl data, NSUrlResponse response, NSError error);
 
-	delegate void NSUrlDownloadSessionResponse (NSUrl location, NSUrlResponse response, NSError error);
+	public delegate void NSUrlDownloadSessionResponse (NSUrl location, NSUrlResponse response, NSError error);
 
-	partial class INSUrlSessionDelegate { }
+	public partial class INSUrlSessionDelegate { }
 
 	//
 	// Some of the XxxTaskWith methods that take a completion were flagged as allowing a null in
@@ -3913,16 +3913,16 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Name = "NSURLSession")]
 	[DisableDefaultCtorAttribute]
-	partial class NSUrlSession {
+	public partial class NSUrlSession {
 
 		[Static, Export ("sharedSession", ArgumentSemantic.Strong)]
-		NSUrlSession SharedSession { get; }
+		public static NSUrlSession SharedSession { get; }
 
 		[Static, Export ("sessionWithConfiguration:")]
-		extern NSUrlSession FromConfiguration (NSUrlSessionConfiguration configuration);
+		public static extern NSUrlSession FromConfiguration (NSUrlSessionConfiguration configuration);
 
 		[Static, Export ("sessionWithConfiguration:delegate:delegateQueue:")]
-		extern NSUrlSession FromWeakConfiguration (NSUrlSessionConfiguration configuration, [NullAllowed] NSObject weakDelegate, [NullAllowed] NSOperationQueue delegateQueue);
+		public static extern NSUrlSession FromWeakConfiguration (NSUrlSessionConfiguration configuration, [NullAllowed] NSObject weakDelegate, [NullAllowed] NSOperationQueue delegateQueue);
 
 #if !NET
 		[Obsolete ("Use the overload with a 'INSUrlSessionDelegate' parameter.")]
@@ -3930,42 +3930,42 @@ namespace Foundation {
 		NSUrlSession FromConfiguration (NSUrlSessionConfiguration configuration, NSUrlSessionDelegate sessionDelegate, [NullAllowed] NSOperationQueue delegateQueue);
 #endif
 		[Static, Wrap ("FromWeakConfiguration (configuration, (NSObject) sessionDelegate, delegateQueue);")]
-		static extern NSUrlSession FromConfiguration (NSUrlSessionConfiguration configuration, INSUrlSessionDelegate sessionDelegate, [NullAllowed] NSOperationQueue delegateQueue);
+		public static extern NSUrlSession FromConfiguration (NSUrlSessionConfiguration configuration, INSUrlSessionDelegate sessionDelegate, [NullAllowed] NSOperationQueue delegateQueue);
 
 		[Export ("delegateQueue", ArgumentSemantic.Retain)]
-		NSOperationQueue DelegateQueue { get; }
+		public NSOperationQueue DelegateQueue { get; }
 
 		[Export ("delegate", ArgumentSemantic.Retain), NullAllowed]
-		NSObject WeakDelegate { get; }
+		public NSObject WeakDelegate { get; }
 
 		[Wrap ("WeakDelegate")]
-		INSUrlSessionDelegate Delegate { get; }
+		public INSUrlSessionDelegate Delegate { get; }
 
 		[Export ("configuration", ArgumentSemantic.Copy)]
-		NSUrlSessionConfiguration Configuration { get; }
+		public NSUrlSessionConfiguration Configuration { get; }
 
 		[NullAllowed]
 		[Export ("sessionDescription", ArgumentSemantic.Copy)]
-		string SessionDescription { get; set; }
+		public string? SessionDescription { get; set; }
 
 		[Export ("finishTasksAndInvalidate")]
-		extern void FinishTasksAndInvalidate ();
+		public extern void FinishTasksAndInvalidate ();
 
 		[Export ("invalidateAndCancel")]
-		extern void InvalidateAndCancel ();
+		public extern void InvalidateAndCancel ();
 
 		[Export ("resetWithCompletionHandler:")]
 		[Async]
-		extern void Reset (Action completionHandler);
+		public extern void Reset (Action completionHandler);
 
 		[Export ("flushWithCompletionHandler:")]
 		[Async]
-		extern void Flush (Action completionHandler);
+		public extern void Flush (Action completionHandler);
 
 		// Fixed version (breaking change) only for NET
 		[Export ("getTasksWithCompletionHandler:")]
 		[Async (ResultTypeName = "NSUrlSessionActiveTasks")]
-		extern void GetTasks (NSUrlSessionPendingTasks completionHandler);
+		public extern void GetTasks (NSUrlSessionPendingTasks completionHandler);
 
 #if !NET
 		// Workaround, not needed for NET+
@@ -3977,113 +3977,113 @@ namespace Foundation {
 
 		[Export ("dataTaskWithRequest:")]
 		//[return: ForcedType]
-		extern NSUrlSessionDataTask CreateDataTask (NSUrlRequest request);
+		public extern NSUrlSessionDataTask CreateDataTask (NSUrlRequest request);
 
 		[Export ("dataTaskWithURL:")]
 		//[return: ForcedType]
-		extern NSUrlSessionDataTask CreateDataTask (NSUrl url);
+		public extern NSUrlSessionDataTask CreateDataTask (NSUrl url);
 
 		[Export ("uploadTaskWithRequest:fromFile:")]
 		//[return: ForcedType]
-		extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL);
+		public extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL);
 
 		[Export ("uploadTaskWithRequest:fromData:")]
 		//[return: ForcedType]
-		extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData);
+		public extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData);
 
 		[Export ("uploadTaskWithStreamedRequest:")]
 		//[return: ForcedType]
-		extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request);
+		public extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request);
 
 		[Export ("downloadTaskWithRequest:")]
 		//[return: ForcedType]
-		extern 	NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request);
+		public extern 	NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request);
 
 		[Export ("downloadTaskWithURL:")]
 		//[return: ForcedType]
-		extern NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url);
+		public extern NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url);
 
 		[Export ("downloadTaskWithResumeData:")]
 		//[return: ForcedType]
-		extern NSUrlSessionDownloadTask CreateDownloadTask (NSData resumeData);
+		public extern NSUrlSessionDownloadTask CreateDownloadTask (NSData resumeData);
 
 		[Export ("dataTaskWithRequest:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDataTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern NSUrlSessionDataTask CreateDataTask (NSUrlRequest request, [NullAllowed] NSUrlSessionResponse completionHandler);
+		public extern NSUrlSessionDataTask CreateDataTask (NSUrlRequest request, [NullAllowed] NSUrlSessionResponse completionHandler);
 
 		[Export ("dataTaskWithURL:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDataTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern NSUrlSessionDataTask CreateDataTask (NSUrl url, [NullAllowed] NSUrlSessionResponse completionHandler);
+		public extern NSUrlSessionDataTask CreateDataTask (NSUrl url, [NullAllowed] NSUrlSessionResponse completionHandler);
 
 		[Export ("uploadTaskWithRequest:fromFile:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDataTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL, NSUrlSessionResponse completionHandler);
+		public extern NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSUrl fileURL, NSUrlSessionResponse completionHandler);
 
 		[Export ("uploadTaskWithRequest:fromData:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDataTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern 	NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData, NSUrlSessionResponse completionHandler);
+		public extern 	NSUrlSessionUploadTask CreateUploadTask (NSUrlRequest request, NSData bodyData, NSUrlSessionResponse completionHandler);
 
 		[Export ("downloadTaskWithRequest:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDownloadTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request, [NullAllowed] NSUrlDownloadSessionResponse completionHandler);
+		public extern NSUrlSessionDownloadTask CreateDownloadTask (NSUrlRequest request, [NullAllowed] NSUrlDownloadSessionResponse completionHandler);
 
 		[Export ("downloadTaskWithURL:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDownloadTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url, [NullAllowed] NSUrlDownloadSessionResponse completionHandler);
+		public extern NSUrlSessionDownloadTask CreateDownloadTask (NSUrl url, [NullAllowed] NSUrlDownloadSessionResponse completionHandler);
 
 		[Export ("downloadTaskWithResumeData:completionHandler:")]
 		//[return: ForcedType]
 		[Async (ResultTypeName = "NSUrlSessionDownloadTaskRequest", PostNonResultSnippet = "result.Resume ();")]
-		extern NSUrlSessionDownloadTask CreateDownloadTaskFromResumeData (NSData resumeData, [NullAllowed] NSUrlDownloadSessionResponse completionHandler);
+		public extern NSUrlSessionDownloadTask CreateDownloadTaskFromResumeData (NSData resumeData, [NullAllowed] NSUrlDownloadSessionResponse completionHandler);
 
 
 		[MacCatalyst (13, 1)]
 		[Export ("getAllTasksWithCompletionHandler:")]
 		[Async (ResultTypeName = "NSUrlSessionCombinedTasks")]
-		extern void GetAllTasks (NSUrlSessionAllPendingTasks completionHandler);
+		public extern void GetAllTasks (NSUrlSessionAllPendingTasks completionHandler);
 
 		[MacCatalyst (13, 1)]
 		[Export ("streamTaskWithHostName:port:")]
-		extern NSUrlSessionStreamTask CreateBidirectionalStream (string hostname, nint port);
+		public extern NSUrlSessionStreamTask CreateBidirectionalStream (string hostname, nint port);
 
 		
 		[NoWatch]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 15, 0, message: "Use the Network.framework instead.")]
 		[Export ("streamTaskWithNetService:")]
-		extern NSUrlSessionStreamTask CreateBidirectionalStream (NSNetService service);
+		public extern NSUrlSessionStreamTask CreateBidirectionalStream (NSNetService service);
 
 		[Watch (6, 0), TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("webSocketTaskWithURL:")]
-		extern 	NSUrlSessionWebSocketTask CreateWebSocketTask (NSUrl url);
+		public extern NSUrlSessionWebSocketTask CreateWebSocketTask (NSUrl url);
 
 		[Watch (6, 0), TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("webSocketTaskWithURL:protocols:")]
-		extern NSUrlSessionWebSocketTask CreateWebSocketTask (NSUrl url, string [] protocols);
+		public extern NSUrlSessionWebSocketTask CreateWebSocketTask (NSUrl url, string [] protocols);
 
 		[Watch (6, 0), TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("webSocketTaskWithRequest:")]
-		extern NSUrlSessionWebSocketTask CreateWebSocketTask (NSUrlRequest request);
+		public extern NSUrlSessionWebSocketTask CreateWebSocketTask (NSUrlRequest request);
 
 		[Watch (10, 0), TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("uploadTaskWithResumeData:")]
 		//[return: ForcedType]
-		extern NSUrlSessionUploadTask CreateUploadTask (NSData resumeData);
+		public extern NSUrlSessionUploadTask CreateUploadTask (NSData resumeData);
 
 		[Async (ResultTypeName = "NSUrlSessionUploadTaskResumeRequest")]
 		[Watch (10, 0), TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("uploadTaskWithResumeData:completionHandler:")]
 		//[return: ForcedType]
-		extern NSUrlSessionUploadTask CreateUploadTask (NSData resumeData, Action<NSData, NSUrlResponse, NSError> completionHandler);
+		public extern NSUrlSessionUploadTask CreateUploadTask (NSData resumeData, Action<NSData, NSUrlResponse, NSError> completionHandler);
 	}
 
 	[MacCatalyst (13, 1)]
@@ -4108,120 +4108,120 @@ namespace Foundation {
 		extern void CompletedTaskCaptureStreams (NSUrlSession session, NSUrlSessionStreamTask streamTask, NSInputStream inputStream, NSOutputStream outputStream);
 	}
 
-	delegate void NSUrlSessionDataRead (NSData data, bool atEof, NSError error);
+	public delegate void NSUrlSessionDataRead (NSData data, bool atEof, NSError error);
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSUrlSessionTask), Name = "NSURLSessionStreamTask")]
 	[DisableDefaultCtor] // now (xcode11) marked as deprecated
-	partial class NSUrlSessionStreamTask {
+	public partial class NSUrlSessionStreamTask {
 		[Export ("readDataOfMinLength:maxLength:timeout:completionHandler:")]
 		[Async (ResultTypeName = "NSUrlSessionStreamDataRead")]
-		extern void ReadData (nuint minBytes, nuint maxBytes, double timeout, NSUrlSessionDataRead completionHandler);
+		public extern void ReadData (nuint minBytes, nuint maxBytes, double timeout, NSUrlSessionDataRead completionHandler);
 
 		[Export ("writeData:timeout:completionHandler:")]
 		[Async]
-		extern void WriteData (NSData data, double timeout, Action<NSError> completionHandler);
+		public extern void WriteData (NSData data, double timeout, Action<NSError> completionHandler);
 
 		[Export ("captureStreams")]
-		extern void CaptureStreams ();
+		public extern void CaptureStreams ();
 
 		[Export ("closeWrite")]
-		extern void CloseWrite ();
+		public extern void CloseWrite ();
 
 		[Export ("closeRead")]
-		extern void CloseRead ();
+		public extern void CloseRead ();
 
 		[Export ("startSecureConnection")]
-		extern void StartSecureConnection ();
+		public extern void StartSecureConnection ();
 
 	
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "A secure (TLS) connection cannot become drop back to insecure (non-TLS).")]
 		[Export ("stopSecureConnection")]
-		extern void StopSecureConnection ();
+		public extern void StopSecureConnection ();
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Name = "NSURLSessionTask")]
-	[DisableDefaultCtor]
-	partial class NSUrlSessionTask :  NSProgressReporting {
+	//[DisableDefaultCtor]
+	public partial class NSUrlSessionTask :  NSProgressReporting {
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This type is not meant to be user created.")]
 		[Export ("init")]
-		extern NativeHandle Constructor ();
+		public extern NativeHandle Constructor ();
 
 		[Export ("taskIdentifier")]
-		nuint TaskIdentifier { get; }
+		public nuint TaskIdentifier { get; }
 
 		[Export ("originalRequest", ArgumentSemantic.Copy), NullAllowed]
-		NSUrlRequest OriginalRequest { get; }
+		public extern NSUrlRequest OriginalRequest { get; }
 
 		[Export ("currentRequest", ArgumentSemantic.Copy), NullAllowed]
-		NSUrlRequest CurrentRequest { get; }
+		public extern  NSUrlRequest CurrentRequest { get; }
 
 		[Export ("response", ArgumentSemantic.Copy), NullAllowed]
-		NSUrlResponse Response { get; }
+		public extern  NSUrlResponse? Response { get; }
 
 		[Export ("countOfBytesReceived")]
-		long BytesReceived { get; }
+		public long BytesReceived { get; }
 
 		[Export ("countOfBytesSent")]
-		long BytesSent { get; }
+		public long BytesSent { get; }
 
 		[Export ("countOfBytesExpectedToSend")]
-		long BytesExpectedToSend { get; }
+		public long BytesExpectedToSend { get; }
 
 		[Export ("countOfBytesExpectedToReceive")]
-		long BytesExpectedToReceive { get; }
+		public long BytesExpectedToReceive { get; }
 
 		[NullAllowed] // by default this property is null
 		[Export ("taskDescription", ArgumentSemantic.Copy)]
-		string TaskDescription { get; set; }
+		public string TaskDescription { get; set; }
 
 		[Export ("cancel")]
-		extern void Cancel ();
+		public extern void Cancel ();
 
 		[Export ("state")]
-		NSUrlSessionTaskState State { get; }
+		public NSUrlSessionTaskState State { get; }
 
 		[Export ("error", ArgumentSemantic.Copy), NullAllowed]
-		NSError Error { get; }
+		public NSError Error { get; }
 
 		[Export ("suspend")]
-		extern void Suspend ();
+		public extern void Suspend ();
 
 		[Export ("resume")]
-		extern void Resume ();
+		public extern void Resume ();
 
 		[Field ("NSURLSessionTransferSizeUnknown")]
-		long TransferSizeUnknown { get; }
+		public long TransferSizeUnknown { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("priority")]
-		float Priority { get; set; } /* float, not CGFloat */
+		public float Priority { get; set; } /* float, not CGFloat */
 
 		[Watch (7, 4), TV (14, 5), iOS (14, 5)]
 		[MacCatalyst (14, 5)]
 		[Export ("prefersIncrementalDelivery")]
-		bool PrefersIncrementalDelivery { get; set; }
+		public bool PrefersIncrementalDelivery { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("earliestBeginDate", ArgumentSemantic.Copy)]
-		NSDate EarliestBeginDate { get; set; }
+		public NSDate EarliestBeginDate { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("countOfBytesClientExpectsToSend")]
-		long CountOfBytesClientExpectsToSend { get; set; }
+		public long CountOfBytesClientExpectsToSend { get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("countOfBytesClientExpectsToReceive")]
-		long CountOfBytesClientExpectsToReceive { get; set; }
+		public long CountOfBytesClientExpectsToReceive { get; set; }
 
 		[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Retain)]
-		NSObject WeakDelegate { get; set; }
+		public NSObject WeakDelegate { get; set; }
 
 		[Watch (8, 0), TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
-		INSUrlSessionTaskDelegate Delegate { get; set; }
+		public INSUrlSessionTaskDelegate Delegate { get; set; }
 	}
 
 	[Static]
@@ -4272,7 +4272,7 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSUrlSessionTask), Name = "NSURLSessionDownloadTask")]
 	[DisableDefaultCtor]
-	partial class NSUrlSessionDownloadTask {
+	public partial class NSUrlSessionDownloadTask {
 	
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSURLSession.CreateDownloadTask' instead.")]
 		[Export ("init")]
@@ -4452,7 +4452,7 @@ namespace Foundation {
 	
 
 	[BaseType (typeof (NSObject), Name = "NSURLResponse")]
-	partial class NSUrlResponse :  NSCopying {
+	public partial class NSUrlResponse :  NSCopying {
 		[DesignatedInitializer]
 		[Export ("initWithURL:MIMEType:expectedContentLength:textEncodingName:")]
 		extern NativeHandle Constructor (NSUrl url, string mimetype, nint expectedContentLength, [NullAllowed] string textEncodingName);
@@ -9980,7 +9980,7 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Name = "NSURLSessionWebSocketMessage")]
 	[DisableDefaultCtor]
-	partial class NSUrlSessionWebSocketMessage {
+	public partial class NSUrlSessionWebSocketMessage {
 
 		[Export ("initWithData:")]
 		[DesignatedInitializer]
@@ -10003,7 +10003,7 @@ namespace Foundation {
 	[Watch (6, 0), TV (13, 0), iOS (13, 0)]
 	[MacCatalyst (13, 1)]
 	[Native]
-	enum NSUrlSessionWebSocketCloseCode : long {
+	public enum NSUrlSessionWebSocketCloseCode : long {
 		Invalid = 0,
 		NormalClosure = 1000,
 		GoingAway = 1001,
@@ -10023,31 +10023,31 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSUrlSessionTask), Name = "NSURLSessionWebSocketTask")]
 	[DisableDefaultCtor]
-	partial class NSUrlSessionWebSocketTask {
+	public partial class NSUrlSessionWebSocketTask {
 
 		[Export ("sendMessage:completionHandler:")]
 		[Async]
-		extern void SendMessage (NSUrlSessionWebSocketMessage message, Action<NSError> completionHandler);
+		public extern void SendMessage (NSUrlSessionWebSocketMessage message, Action<NSError> completionHandler);
 
 		[Export ("receiveMessageWithCompletionHandler:")]
 		[Async]
-		extern void ReceiveMessage (Action<NSUrlSessionWebSocketMessage, NSError> completionHandler);
+		public extern void ReceiveMessage (Action<NSUrlSessionWebSocketMessage, NSError> completionHandler);
 
 		[Export ("sendPingWithPongReceiveHandler:")]
 		[Async]
-		extern void SendPing (Action<NSError> pongReceiveHandler);
+		public extern void SendPing (Action<NSError> pongReceiveHandler);
 
 		[Export ("cancelWithCloseCode:reason:")]
-		extern void Cancel (NSUrlSessionWebSocketCloseCode closeCode, [NullAllowed] NSData reason);
+		public extern void Cancel (NSUrlSessionWebSocketCloseCode closeCode, [NullAllowed] NSData reason);
 
 		[Export ("maximumMessageSize")]
-		nint MaximumMessageSize { get; set; }
+		public nint MaximumMessageSize { get; set; }
 
 		[Export ("closeCode")]
-		NSUrlSessionWebSocketCloseCode CloseCode { get; }
+		public NSUrlSessionWebSocketCloseCode CloseCode { get; }
 
 		[NullAllowed, Export ("closeReason", ArgumentSemantic.Copy)]
-		NSData CloseReason { get; }
+		public NSData CloseReason { get; }
 	}
 
 	[Watch (6, 0), TV (13, 0), iOS (13, 0)]

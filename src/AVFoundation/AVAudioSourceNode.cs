@@ -3,7 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 using AudioToolbox;
+using CoreLibs.AudioToolbox;
+using Foundation;
 using ObjCRuntime;
+
 
 namespace AVFoundation {
 
@@ -35,13 +38,13 @@ namespace AVFoundation {
 #if XAMCORE_5_0
 	public delegate /* OSStatus */ int AVAudioSourceNodeRenderHandler (ref bool isSilence, ref AudioTimeStamp timestamp, uint frameCount, AudioBuffers outputData);
 #else
-	public delegate /* OSStatus */ int AVAudioSourceNodeRenderHandler3 (ref bool isSilence, ref AudioTimeStamp timestamp, uint frameCount, AudioBuffers outputData);
+	public delegate /* OSStatus */ int AVAudioSourceNodeRenderHandler3 (ref bool isSilence, ref AudioType.AudioChannelLayout.AudioTimeStamp timestamp, uint frameCount, AudioBuffers outputData);
 #endif
 
 #if !XAMCORE_5_0
 #if NET
 	[EditorBrowsable (EditorBrowsableState.Never)]
-	public delegate /* OSStatus */ int AVAudioSourceNodeRenderHandler (ref bool isSilence, ref AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers outputData);
+	public delegate /* OSStatus */ int AVAudioSourceNodeRenderHandler (ref bool isSilence, ref AudioType.AudioChannelLayout.AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers outputData);
 #else
 	[EditorBrowsable (EditorBrowsableState.Never)]
 	public delegate /* OSStatus */ int AVAudioSourceNodeRenderHandler (bool isSilence, AudioToolbox.AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers outputData);
@@ -50,7 +53,20 @@ namespace AVFoundation {
 #endif // NET
 #endif // XAMCORE_5_0
 
-	public partial class AVAudioSourceNode {
+	public partial class AVAudioSourceNode: AVAudioMixing {
+
+		public AVAudioSourceNode(AVAudioSourceNodeRenderHandlerRaw handlerRaw)
+		{
+			this.Handle = Constructor(handlerRaw);
+		}
+		
+		public AVAudioSourceNode(AVAudioFormat format, AVAudioSourceNodeRenderHandlerRaw handlerRaw)
+		{
+			
+			this.Handle = Constructor(format, handlerRaw);
+		}
+		
+		
 #if !XAMCORE_5_0 && NET
 		[EditorBrowsable (EditorBrowsableState.Never)]
 		[Obsolete ("Use the overload that takes a delegate that does not take a 'ref AudioBuffers' instead. Assigning a value to the 'inputData' parameter in the callback has no effect.")]
@@ -134,7 +150,7 @@ namespace AVFoundation {
 					byte* isSilencePtr = (byte*) isSilence;
 					bool isSilenceBool = (*isSilencePtr) != 0;
 					var buffers = new AudioBuffers (outputData);
-					var rv = renderHandler (ref isSilenceBool, ref Unsafe.AsRef<AudioTimeStamp> ((void*) timestamp), frameCount, ref buffers);
+					var rv = renderHandler (ref isSilenceBool, ref Unsafe.AsRef<AudioType.AudioChannelLayout.AudioTimeStamp> ((void*) timestamp), frameCount, ref buffers);
 					*isSilencePtr = isSilenceBool.AsByte ();
 					return rv;
 				}
@@ -154,7 +170,7 @@ namespace AVFoundation {
 					byte* isSilencePtr = (byte*) isSilence;
 					bool isSilenceBool = (*isSilencePtr) != 0;
 					var buffers = new AudioBuffers (outputData);
-					var rv = renderHandler (ref isSilenceBool, ref Unsafe.AsRef<AudioTimeStamp> ((void*) timestamp), frameCount, buffers);
+					var rv = renderHandler (ref isSilenceBool, ref Unsafe.AsRef<AudioType.AudioChannelLayout.AudioTimeStamp> ((void*) timestamp), frameCount, buffers);
 					*isSilencePtr = isSilenceBool.AsByte ();
 					return rv;
 				}

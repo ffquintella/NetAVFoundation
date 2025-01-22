@@ -26,11 +26,12 @@
 //
 
 using System;
-
+using System.Runtime.Versioning;
 using Foundation;
 using CoreFoundation;
 using ObjCRuntime;
 using AudioToolbox;
+using CoreLibs.AudioToolbox;
 
 #nullable enable
 
@@ -56,12 +57,12 @@ namespace AVFoundation {
 		{
 		}
 
-		public AudioFormatType? Format {
+		public AudioType.AudioFormatType? Format {
 			set {
 				SetNumberValue (AVAudioSettings.AVFormatIDKey, (int?) value);
 			}
 			get {
-				return (AudioFormatType?) GetInt32Value (AVAudioSettings.AVFormatIDKey);
+				return (AudioType.AudioFormatType?) GetInt32Value (AVAudioSettings.AVFormatIDKey);
 			}
 		}
 
@@ -261,7 +262,7 @@ namespace AVFoundation {
 			}
 		}
 
-		public AudioChannelLayout ChannelLayout {
+		public AudioType.AudioChannelLayout ChannelLayout {
 			set {
 				SetNativeValue (AVAudioSettings.AVChannelLayoutKey, value is null ? null : value.AsData ());
 			}

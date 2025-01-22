@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 
 namespace AVFoundation {
 #if !WATCH
-	public partial class AVAudioPlayer {
+	public partial class AVAudioPlayer: NSObject {
 
 		[DllImport (Constants.ObjectiveCLibrary, EntryPoint = "objc_msgSend")]
 		unsafe static extern IntPtr objc_msgSend (IntPtr receiver, IntPtr selector, IntPtr arg1, IntPtr* arg2);

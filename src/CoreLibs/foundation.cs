@@ -7720,7 +7720,7 @@ namespace Foundation {
 	[DisableDefaultCtor]
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	partial class NSUnit : NSCopying {
+	public partial class NSUnit : NSCopying {
 		[Export ("symbol")]
 		string Symbol { get; }
 
@@ -9597,7 +9597,7 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	partial class NSMeasurement<UnitType> : NSCopying
+	public partial class NSMeasurement<UnitType> : NSCopying
 		where UnitType : NSUnit {
 		[Export ("unit", ArgumentSemantic.Copy)]
 		NSUnit Unit { get; }

@@ -38,15 +38,17 @@ using CoreGraphics;
 using CoreFoundation;
 using CoreImage;
 using CoreAnimation;
-using CoreData;
-using Intents;
-using SharedWithYouCore;
-using Symbols;
+using CoreLibs;
+//using CoreData;
+//using Intents;
+//using SharedWithYouCore;
+//using Symbols;
 #if !__MACCATALYST__
 using OpenGL;
 #endif
 using CoreVideo;
-using CloudKit;
+using Intents;
+//using CloudKit;
 using UniformTypeIdentifiers;
 
 #if __MACCATALYST__
@@ -193,8 +195,12 @@ namespace AppKit {
 	// Inlined, not really an object implementation
 	//
 	interface NSAnimatablePropertyContainer {
-		[Export ("animator")]
-		NSObject Animator { [return: Proxy] get; }
+		[Export("animator")]
+		NSObject Animator
+		{
+			//[return: Proxy] 
+			get;
+		}
 
 		[Export ("animations")]
 		NSDictionary Animations { get; set; }
@@ -433,23 +439,23 @@ namespace AppKit {
 	[BaseType (typeof (NSObject))]
 	[Model]
 	[Protocol]
-	interface NSAlertDelegate {
+	partial class NSAlertDelegate {
 		[Export ("alertShowHelp:"), DelegateName ("NSAlertPredicate"), DefaultValue (false)]
 		bool ShowHelp (NSAlert alert);
 	}
 
 	[NoMacCatalyst]
-	interface NSApplicationDidFinishLaunchingEventArgs {
+	public partial class NSApplicationDidFinishLaunchingEventArgs {
 		[Export ("NSApplicationLaunchIsDefaultLaunchKey")]
 		bool IsLaunchDefault { get; }
 
-		[ProbePresence, Export ("NSApplicationLaunchUserNotificationKey")]
+		//[ProbePresence, Export ("NSApplicationLaunchUserNotificationKey")]
 		bool IsLaunchFromUserNotification { get; }
 	}
 
 	[NoMacCatalyst]
 	[BaseType (typeof (NSObject))]
-	interface NSAppearance : NSSecureCoding {
+	partial class NSAppearance : NSSecureCoding {
 		[DesignatedInitializer]
 		[Export ("initWithAppearanceNamed:bundle:")]
 		NativeHandle Constructor (string name, [NullAllowed] NSBundle bundle);
@@ -1168,7 +1174,7 @@ namespace AppKit {
 	}
 
 	[NoMacCatalyst]
-	[Category]
+	//[Category]
 	[BaseType (typeof (NSApplication))]
 	interface NSApplication_NSTouchBarCustomization {
 		[Export ("isAutomaticCustomizeTouchBarMenuItemEnabled")]

@@ -1683,7 +1683,7 @@ namespace CoreImage {
 
 	[Internal]
 	[Static]
-	Internal static class CIImageInitializationOptionsKeys {
+	internal static class CIImageInitializationOptionsKeys {
 		[Field ("kCIImageColorSpace")]
 		public static extern NSString ColorSpaceKey { get; }
 

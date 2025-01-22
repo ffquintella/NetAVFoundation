@@ -612,3 +612,6 @@ public class DefaultValueFromArgumentAttribute : Attribute {
 
 public class NoDefaultValueAttribute : Attribute {
 }
+
+public class IgnoredInDelegateAttribute : Attribute {
+}

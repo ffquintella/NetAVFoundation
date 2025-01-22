@@ -10117,7 +10117,7 @@ namespace AVFoundation {
 	[TV (17, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVCaptureInputPort {
+	public partial class AVCaptureInputPort {
 		[Export ("mediaType")]
 		string MediaType { get; }
 
@@ -10200,16 +10200,16 @@ namespace AVFoundation {
 	[BaseType (typeof (AVCaptureInput))]
 	// crash application if 'init' is called
 	[DisableDefaultCtor]
-	interface AVCaptureDeviceInput {
+	public partial class AVCaptureDeviceInput {
 		[Export ("device")]
 		AVCaptureDevice Device { get; }
 
 		[Static, Export ("deviceInputWithDevice:error:")]
 		[return: NullAllowed]
-		AVCaptureDeviceInput FromDevice (AVCaptureDevice device, out NSError error);
+		public static extern AVCaptureDeviceInput FromDevice (AVCaptureDevice device, out NSError error);
 
 		[Export ("initWithDevice:error:")]
-		NativeHandle Constructor (AVCaptureDevice device, out NSError error);
+		public static extern NativeHandle Constructor (AVCaptureDevice device, out NSError error);
 
 		[NoMac]
 		[MacCatalyst (14, 0)]
@@ -10219,7 +10219,7 @@ namespace AVFoundation {
 		[NoMac, iOS (13, 0)]
 		[MacCatalyst (14, 0)]
 		[Export ("portsWithMediaType:sourceDeviceType:sourceDevicePosition:")]
-		AVCaptureInputPort [] GetPorts ([BindAs (typeof (AVMediaTypes))][NullAllowed] NSString mediaType, [BindAs (typeof (AVCaptureDeviceType))][NullAllowed] NSString sourceDeviceType, AVCaptureDevicePosition sourceDevicePosition);
+		public static extern AVCaptureInputPort [] GetPorts ([BindAs (typeof (AVMediaTypes))][NullAllowed] NSString mediaType, [BindAs (typeof (AVCaptureDeviceType))][NullAllowed] NSString sourceDeviceType, AVCaptureDevicePosition sourceDevicePosition);
 
 		[NoMac, iOS (13, 0)]
 		[MacCatalyst (14, 0)]
@@ -10228,7 +10228,7 @@ namespace AVFoundation {
 
 		[TV (18, 0), MacCatalyst (18, 0), Mac (15, 0), iOS (18, 0)]
 		[Export ("isMultichannelAudioModeSupported:")]
-		bool IsMultichannelAudioModeSupported (AVCaptureMultichannelAudioMode multichannelAudioMode);
+		public static extern bool IsMultichannelAudioModeSupported (AVCaptureMultichannelAudioMode multichannelAudioMode);
 
 		[TV (18, 0), MacCatalyst (18, 0), Mac (15, 0), iOS (18, 0)]
 		[Export ("multichannelAudioMode", ArgumentSemantic.Assign)]
@@ -11963,7 +11963,7 @@ namespace AVFoundation {
 	[BaseType (typeof (NSObject))]
 	// Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: Cannot instantiate a AVCaptureDevice directly.
 	[DisableDefaultCtor]
-	interface AVCaptureDevice {
+	public partial class AVCaptureDevice {
 		[MacCatalyst (13, 1)]
 		[Export ("uniqueID")]
 		string UniqueID { get; }
@@ -11980,34 +11980,34 @@ namespace AVFoundation {
 		[Export ("connected")]
 		bool Connected { [Bind ("isConnected")] get; }
 
-		[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
+		//[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
 		[MacCatalyst (13, 1)]
-		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
 		[Deprecated (PlatformName.TvOS, 10, 0, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
 		[Static, Export ("devices")]
 		AVCaptureDevice [] Devices { get; }
 
-		[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
+		//[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
 		[MacCatalyst (13, 1)]
-		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
 		[Deprecated (PlatformName.TvOS, 10, 0, message: "Use 'AVCaptureDeviceDiscoverySession' instead.")]
 		[Static]
 		[Export ("devicesWithMediaType:")]
-		AVCaptureDevice [] DevicesWithMediaType (string mediaType);
+		public extern AVCaptureDevice [] DevicesWithMediaType (string mediaType);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("defaultDeviceWithMediaType:")]
 		[return: NullAllowed]
-		AVCaptureDevice GetDefaultDevice (NSString mediaType);
+		public extern AVCaptureDevice GetDefaultDevice (NSString mediaType);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Wrap ("GetDefaultDevice (mediaType.GetConstant ()!)")]
 		[return: NullAllowed]
-		AVCaptureDevice GetDefaultDevice (AVMediaTypes mediaType);
+		public extern AVCaptureDevice GetDefaultDevice (AVMediaTypes mediaType);
 
 #if !NET
 		[Obsolete ("Use 'GetDefaultDevice (AVMediaTypes)'.")]
@@ -12021,41 +12021,41 @@ namespace AVFoundation {
 		[Static]
 		[Export ("deviceWithUniqueID:")]
 		[return: NullAllowed]
-		AVCaptureDevice DeviceWithUniqueID (string deviceUniqueID);
+		public static extern AVCaptureDevice DeviceWithUniqueID (string deviceUniqueID);
 
 		[MacCatalyst (13, 1)]
 		[Export ("hasMediaType:")]
-		bool HasMediaType (string mediaType);
+		public extern bool HasMediaType (string mediaType);
 
 		[MacCatalyst (13, 1)]
 		[Wrap ("HasMediaType ((string) mediaType.GetConstant ())")]
-		bool HasMediaType (AVMediaTypes mediaType);
+		public extern bool HasMediaType (AVMediaTypes mediaType);
 
 		[MacCatalyst (13, 1)]
 		[Export ("lockForConfiguration:")]
-		bool LockForConfiguration (out NSError error);
+		public extern bool LockForConfiguration (out NSError error);
 
 		[MacCatalyst (13, 1)]
 		[Export ("unlockForConfiguration")]
-		void UnlockForConfiguration ();
+		public extern void UnlockForConfiguration ();
 
 		[MacCatalyst (13, 1)]
 		[Export ("supportsAVCaptureSessionPreset:")]
-		bool SupportsAVCaptureSessionPreset (string preset);
+		public extern bool SupportsAVCaptureSessionPreset (string preset);
 
-		[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCapturePhotoSettings.FlashMode' instead.")]
+		//[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCapturePhotoSettings.FlashMode' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCapturePhotoSettings.FlashMode' instead.")]
 		[NoTV]
 		[Export ("flashMode")]
 		AVCaptureFlashMode FlashMode { get; set; }
 
-		[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCapturePhotoOutput.SupportedFlashModes' instead.")]
+		//[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCapturePhotoOutput.SupportedFlashModes' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCapturePhotoOutput.SupportedFlashModes' instead.")]
 		[NoTV]
 		[Export ("isFlashModeSupported:")]
-		bool IsFlashModeSupported (AVCaptureFlashMode flashMode);
+		public extern bool IsFlashModeSupported (AVCaptureFlashMode flashMode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("torchMode", ArgumentSemantic.Assign)]
@@ -12063,11 +12063,11 @@ namespace AVFoundation {
 
 		[MacCatalyst (13, 1)]
 		[Export ("isTorchModeSupported:")]
-		bool IsTorchModeSupported (AVCaptureTorchMode torchMode);
+		public extern bool IsTorchModeSupported (AVCaptureTorchMode torchMode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("isFocusModeSupported:")]
-		bool IsFocusModeSupported (AVCaptureFocusMode focusMode);
+		public extern bool IsFocusModeSupported (AVCaptureFocusMode focusMode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("focusMode", ArgumentSemantic.Assign)]
@@ -12091,7 +12091,7 @@ namespace AVFoundation {
 
 		[MacCatalyst (13, 1)]
 		[Export ("isExposureModeSupported:")]
-		bool IsExposureModeSupported (AVCaptureExposureMode exposureMode);
+		public extern bool IsExposureModeSupported (AVCaptureExposureMode exposureMode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("exposurePointOfInterestSupported")]
@@ -12115,7 +12115,7 @@ namespace AVFoundation {
 
 		[MacCatalyst (13, 1)]
 		[Export ("isWhiteBalanceModeSupported:")]
-		bool IsWhiteBalanceModeSupported (AVCaptureWhiteBalanceMode whiteBalanceMode);
+		public extern bool IsWhiteBalanceModeSupported (AVCaptureWhiteBalanceMode whiteBalanceMode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("whiteBalanceMode", ArgumentSemantic.Assign)]
@@ -12159,9 +12159,9 @@ namespace AVFoundation {
 		bool FlashAvailable { get; }
 
 		[NoMac]
-		[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCapturePhotoOutput.IsFlashScene' instead.")]
+		//[Deprecated (PlatformName.iOS, 10, 0, message: "Use 'AVCapturePhotoOutput.IsFlashScene' instead.")]
 		[MacCatalyst (13, 1)]
-		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCapturePhotoOutput.IsFlashScene' instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCapturePhotoOutput.IsFlashScene' instead.")]
 		[Deprecated (PlatformName.TvOS, 10, 0, message: "Use 'AVCapturePhotoOutput.IsFlashScene' instead.")]
 		[Export ("isFlashActive")]
 		bool FlashActive { get; }
@@ -12181,7 +12181,7 @@ namespace AVFoundation {
 
 		[MacCatalyst (13, 1)]
 		[Export ("setTorchModeOnWithLevel:error:")]
-		bool SetTorchModeLevel (float /* defined as 'float' */ torchLevel, out NSError outError);
+		public extern bool SetTorchModeLevel (float /* defined as 'float' */ torchLevel, out NSError outError);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]

@@ -281,7 +281,7 @@ public class DefaultCtorVisibilityAttribute : Attribute {
 	public Visibility Visibility { get; set; }
 }
 
-public sealed class TVAttribute : IntroducedAttribute {
+public  class TVAttribute : IntroducedAttribute {
 	public TVAttribute (byte major, byte minor)
 		: base (PlatformName.TvOS, (int) major, (int) minor)
 	{
@@ -293,7 +293,7 @@ public sealed class TVAttribute : IntroducedAttribute {
 	}
 }
 
-public sealed class WatchAttribute : IntroducedAttribute {
+public  class WatchAttribute : IntroducedAttribute {
 	public WatchAttribute (byte major, byte minor)
 		: base (PlatformName.WatchOS, (int) major, (int) minor)
 	{
@@ -305,28 +305,28 @@ public sealed class WatchAttribute : IntroducedAttribute {
 	}
 }
 
-public sealed class NoiOSAttribute : UnavailableAttribute {
+public  class NoiOSAttribute : UnavailableAttribute {
 	public NoiOSAttribute ()
 		: base (PlatformName.iOS)
 	{
 	}
 }
 
-public sealed class NoWatchAttribute : UnavailableAttribute {
+public  class NoWatchAttribute : UnavailableAttribute {
 	public NoWatchAttribute ()
 		: base (PlatformName.WatchOS)
 	{
 	}
 }
 
-public sealed class NoTVAttribute : UnavailableAttribute {
+public  class NoTVAttribute : UnavailableAttribute {
 	public NoTVAttribute ()
 		: base (PlatformName.TvOS)
 	{
 	}
 }
 
-sealed class MacAttribute : IntroducedAttribute {
+public  class MacAttribute : IntroducedAttribute {
 	public MacAttribute (byte major, byte minor)
 		: base (PlatformName.MacOSX, (int) major, (int) minor)
 	{

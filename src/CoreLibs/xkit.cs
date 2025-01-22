@@ -2908,7 +2908,7 @@ namespace UIKit {
 
 	[MacCatalyst (13, 0)]
 	[BaseType (typeof (NSObject))]
-	partial class NSTextList : NSCopying {
+	public partial class NSTextList : NSCopying {
 		[Export ("initWithMarkerFormat:options:")]
 		extern NativeHandle Constructor (string format, NSTextListOptions mask);
 

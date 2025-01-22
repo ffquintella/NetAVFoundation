@@ -16,8 +16,10 @@ using ObjCRuntime;
 
 namespace Foundation
 {
-	public partial class NSNumber
+	public partial class NSNumber: NSValue
 	{
+		
+		public NSNumber(){}
 #if !COREBUILD
 		public static NSNumber FromObject (object value)
 		{

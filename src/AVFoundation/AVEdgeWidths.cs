@@ -30,6 +30,8 @@ using System.Runtime.Versioning;
 
 #nullable enable
 
+using nfloat = System.Runtime.InteropServices.NFloat;
+
 namespace AVFoundation {
 
 #if NET

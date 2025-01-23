@@ -1,4 +1,5 @@
 using AVFoundation;
+using NetAVFoundation;
 using UIKit;
 
 namespace ConsoleLab;
@@ -17,7 +18,7 @@ public class CameraTest
 
     public void CaptureSS()
     {
-        device = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video);
+        device = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video.GetConstant());
         input = AVCaptureDeviceInput.FromDevice(device, out var error);
        
         if (error == null)

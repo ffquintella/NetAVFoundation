@@ -12005,13 +12005,14 @@ namespace AVFoundation {
 		[Static]
 		[Export ("defaultDeviceWithMediaType:")]
 		[return: NullAllowed]
-		public extern AVCaptureDevice GetDefaultDevice (NSString mediaType);
+		public static extern AVCaptureDevice GetDefaultDevice (NSString mediaType);
 
 		[MacCatalyst (13, 1)]
 		[Static]
-		[Wrap ("GetDefaultDevice (mediaType.GetConstant ()!)")]
+		//[Wrap ("GetDefaultDevice (mediaType.GetConstant ()!)")]
 		[return: NullAllowed]
-		public static extern AVCaptureDevice GetDefaultDevice (AVMediaTypes mediaType);
+		public static extern AVCaptureDevice? GetDefaultDevice (AVMediaTypes mediaType);
+		//public static extern AVCaptureDevice? GetDefaultDevice (NSString mediaType);
 
 #if !NET
 		[Obsolete ("Use 'GetDefaultDevice (AVMediaTypes)'.")]

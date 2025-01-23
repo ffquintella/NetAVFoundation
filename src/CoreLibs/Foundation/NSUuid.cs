@@ -50,7 +50,7 @@ namespace Foundation {
 	
 	[BaseType (typeof (NSObject), Name = "NSUUID")]
 	//[DesignatedDefaultCtor]
-	partial class NSUuid :  NSCopying {
+	public partial class NSUuid :  NSCopying {
 		[Export ("initWithUUIDString:")]
 		public extern NativeHandle Constructor (string str);
 

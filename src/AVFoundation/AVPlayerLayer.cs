@@ -9,6 +9,7 @@
 
 #if !WATCH
 
+using System.Runtime.Versioning;
 using ObjCRuntime;
 using CoreVideo;
 

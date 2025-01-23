@@ -4514,25 +4514,25 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // no valid handle, docs now says "You do not create resource loader objects yourself."
-	interface AVAssetResourceLoader {
+	public partial class AVAssetResourceLoader: NSObject {
 		[Export ("delegate", ArgumentSemantic.Weak), NullAllowed]
-		IAVAssetResourceLoaderDelegate Delegate { get; }
+		public IAVAssetResourceLoaderDelegate Delegate { get; }
 
 		[Export ("delegateQueue"), NullAllowed]
-		DispatchQueue DelegateQueue { get; }
+		public DispatchQueue DelegateQueue { get; }
 
 		[Export ("setDelegate:queue:")]
-		void SetDelegate ([NullAllowed] IAVAssetResourceLoaderDelegate resourceLoaderDelegate, [NullAllowed] DispatchQueue delegateQueue);
+		public void SetDelegate ([NullAllowed] IAVAssetResourceLoaderDelegate resourceLoaderDelegate, [NullAllowed] DispatchQueue delegateQueue);
 
 		// AVAssetResourceLoader (AVAssetResourceLoaderContentKeySupport) Category
 		[MacCatalyst (13, 1)]
 		[Export ("preloadsEligibleContentKeys")]
-		bool PreloadsEligibleContentKeys { get; set; }
+		public bool PreloadsEligibleContentKeys { get; set; }
 
 		// From the AVAssetResourceLoaderCommonMediaClientDataSupport (AVAssetResourceLoader) category
 		[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 		[Export ("sendsCommonMediaClientDataAsHTTPHeaders")]
-		bool SendsCommonMediaClientDataAsHttpHeaders { get; set; }
+		public bool SendsCommonMediaClientDataAsHttpHeaders { get; set; }
 	}
 
 	interface IAVAssetResourceLoaderDelegate { }
@@ -5124,122 +5124,122 @@ namespace AVFoundation {
 	[BaseType (typeof (AVAsset), Name = "AVURLAsset")]
 	// 'init' returns NIL
 	[DisableDefaultCtor]
-	public interface AVUrlAsset
+	public partial class AVUrlAsset
 		: AVContentKeyRecipient {
 
 		[Export ("URL", ArgumentSemantic.Copy)]
-		NSUrl Url { get; }
+		public NSUrl Url { get; }
 
 		[Internal]
 		[Advice ("Use constructor or 'Create' method instead.")]
 		[Static, Export ("URLAssetWithURL:options:")]
-		AVUrlAsset FromUrl (NSUrl url, [NullAllowed] NSDictionary options);
+		internal static extern AVUrlAsset FromUrl (NSUrl url, [NullAllowed] NSDictionary options);
 
 		[Static]
 		[Wrap ("FromUrl (url, options.GetDictionary ())")]
-		AVUrlAsset Create (NSUrl url, [NullAllowed] AVUrlAssetOptions options);
+		public static extern AVUrlAsset Create (NSUrl url, [NullAllowed] AVUrlAssetOptions options);
 
 		[Static]
 		[Wrap ("FromUrl (url, (NSDictionary) null!)")]
-		AVUrlAsset Create (NSUrl url);
+		public static extern AVUrlAsset Create (NSUrl url);
 
 		[DesignatedInitializer]
 		[Export ("initWithURL:options:")]
-		NativeHandle Constructor (NSUrl url, [NullAllowed] NSDictionary options);
+		public extern NativeHandle Constructor (NSUrl url, [NullAllowed] NSDictionary options);
 
 		[Wrap ("this (url, options.GetDictionary ())")]
-		NativeHandle Constructor (NSUrl url, [NullAllowed] AVUrlAssetOptions options);
+		public extern NativeHandle Constructor (NSUrl url, [NullAllowed] AVUrlAssetOptions options);
 
 		[Wrap ("this (url, (NSDictionary) null!)")]
-		NativeHandle Constructor (NSUrl url);
+		public extern NativeHandle Constructor (NSUrl url);
 
-		[Deprecated (PlatformName.MacOSX, 15, 0)]
-		[Deprecated (PlatformName.iOS, 18, 0)]
-		[Deprecated (PlatformName.TvOS, 18, 0)]
+		//[Deprecated (PlatformName.MacOSX, 15, 0)]
+		//[Deprecated (PlatformName.iOS, 18, 0)]
+		//[Deprecated (PlatformName.TvOS, 18, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 18, 0)]
 		[return: NullAllowed]
 		[Export ("compatibleTrackForCompositionTrack:")]
-		AVAssetTrack CompatibleTrack (AVCompositionTrack forCompositionTrack);
+		public extern AVAssetTrack? CompatibleTrack (AVCompositionTrack forCompositionTrack);
 
 		[Field ("AVURLAssetPreferPreciseDurationAndTimingKey")]
-		NSString PreferPreciseDurationAndTimingKey { get; }
+		public static NSString PreferPreciseDurationAndTimingKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVURLAssetReferenceRestrictionsKey")]
-		NSString ReferenceRestrictionsKey { get; }
+		public static NSString ReferenceRestrictionsKey { get; }
 
 		[Static, Export ("audiovisualMIMETypes")]
-		string [] AudiovisualMimeTypes { get; }
+		public static string [] AudiovisualMimeTypes { get; }
 
 		[Static, Export ("audiovisualTypes")]
-		string [] AudiovisualTypes { get; }
+		public static string [] AudiovisualTypes { get; }
 
 		[Static, Export ("isPlayableExtendedMIMEType:")]
-		bool IsPlayable (string extendedMimeType);
+		public static extern bool IsPlayable (string extendedMimeType);
 
 		[MacCatalyst (13, 1)]
 		[Export ("resourceLoader")]
-		AVAssetResourceLoader ResourceLoader { get; }
+		public AVAssetResourceLoader ResourceLoader { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVURLAssetHTTPCookiesKey")]
-		NSString HttpCookiesKey { get; }
+		public NSString HttpCookiesKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("assetCache")]
-		AVAssetCache Cache { get; }
+		public AVAssetCache? Cache { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVURLAssetAllowsCellularAccessKey")]
-		NSString AllowsCellularAccessKey { get; }
+		public static extern NSString AllowsCellularAccessKey { get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("AVURLAssetAllowsExpensiveNetworkAccessKey")]
-		NSString AllowsExpensiveNetworkAccessKey { get; }
+		public static extern NSString AllowsExpensiveNetworkAccessKey { get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Field ("AVURLAssetAllowsConstrainedNetworkAccessKey")]
-		NSString AllowsConstrainedNetworkAccessKey { get; }
+		public static extern NSString AllowsConstrainedNetworkAccessKey { get; }
 
 		[NoTV, NoiOS, NoMacCatalyst]
 		[Field ("AVURLAssetShouldSupportAliasDataReferencesKey")]
-		NSString ShouldSupportAliasDataReferencesKey { get; }
+		public static extern NSString ShouldSupportAliasDataReferencesKey { get; }
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("variants")]
-		AVAssetVariant [] Variants { get; }
+		public AVAssetVariant [] Variants { get; }
 
 		[Async]
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("findCompatibleTrackForCompositionTrack:completionHandler:")]
-		void FindCompatibleTrack (AVCompositionTrack compositionTrack, Action<AVAssetTrack, NSError> completionHandler);
+		public extern void FindCompatibleTrack (AVCompositionTrack compositionTrack, Action<AVAssetTrack, NSError> completionHandler);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Field ("AVURLAssetURLRequestAttributionKey")]
-		NSString RequestAttributionKey { get; }
+		public static extern NSString RequestAttributionKey { get; }
 
 		[MacCatalyst (16, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[Field ("AVURLAssetHTTPUserAgentKey")]
-		NSString HttpUserAgentKey { get; }
+		public static extern NSString HttpUserAgentKey { get; }
 
 		[MacCatalyst (16, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[Field ("AVURLAssetPrimarySessionIdentifierKey")]
-		NSString PrimarySessionIdentifierKey { get; }
+		public static extern NSString PrimarySessionIdentifierKey { get; }
 
 		[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
 		[Field ("AVURLAssetOverrideMIMETypeKey")]
-		NSString OverrideMimeTypeKey { get; }
+		public static extern NSString OverrideMimeTypeKey { get; }
 
 		[MacCatalyst (16, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[Export ("httpSessionIdentifier")]
-		NSUuid HttpSessionIdentifier { get; }
+		public static extern NSUuid HttpSessionIdentifier { get; }
 
 		// From the AVMediaExtension (AVURLAsset) category
 		[NoTV, NoiOS, Mac (15, 0), NoMacCatalyst]
 		[NullAllowed, Export ("mediaExtensionProperties")]
-		AVMediaExtensionProperties MediaExtensionProperties { get; }
+		public static extern AVMediaExtensionProperties MediaExtensionProperties { get; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -6581,10 +6581,10 @@ namespace AVFoundation {
 		NSString InfoKey { get; }
 	}
 
-	class AVMetadataIdentifiers {
+	public partial class AVMetadataIdentifiers {
 		[MacCatalyst (13, 1)]
 		[Static]
-		interface CommonIdentifier {
+		public interface CommonIdentifier {
 			[Field ("AVMetadataCommonIdentifierTitle")]
 			NSString Title { get; }
 
@@ -8504,30 +8504,30 @@ namespace AVFoundation {
 	[BaseType (typeof (AVAssetTrack))]
 	// 'init' returns NIL
 	[DisableDefaultCtor]
-	interface AVCompositionTrack {
+	public partial class AVCompositionTrack : AVAssetTrack {
 		[Export ("segments", ArgumentSemantic.Copy)]
-		AVCompositionTrackSegment [] Segments { get; }
+		public AVCompositionTrackSegment [] Segments { get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("formatDescriptionReplacements")]
-		AVCompositionTrackFormatDescriptionReplacement [] FormatDescriptionReplacements { get; }
+		public AVCompositionTrackFormatDescriptionReplacement [] FormatDescriptionReplacements { get; }
 
 		// inlined from the SynchronousTrackInterface (AVCompositionTrack) category
 		[Export ("hasMediaCharacteristic:")]
-		bool HasMediaCharacteristic (string mediaCharacteristic);
+		public bool HasMediaCharacteristic (string mediaCharacteristic);
 
 		// inlined from the SynchronousTrackInterface (AVCompositionTrack) category
 		[Export ("samplePresentationTimeForTrackTime:")]
-		CMTime GetSamplePresentationTime (CMTime trackTime);
+		public extern CMTime GetSamplePresentationTime (CMTime trackTime);
 
 		// inlined from the SynchronousTrackInterface (AVCompositionTrack) category
 		[Export ("metadataForFormat:")]
-		AVMetadataItem [] GetMetadata (string format);
+		public extern AVMetadataItem [] GetMetadata (string format);
 
 		// inlined from the SynchronousTrackInterface (AVCompositionTrack) category
 		[Export ("associatedTracksOfType:")]
-		AVAssetTrack [] GetAssociatedTracks (string trackAssociationType);
+		public extern AVAssetTrack [] GetAssociatedTracks (string trackAssociationType);
 	}
 
 	[MacCatalyst (13, 1)]
@@ -8645,50 +8645,50 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVAssetTrackSegment {
+	public partial class AVAssetTrackSegment : NSObject {
 		[Export ("empty")]
-		bool Empty { [Bind ("isEmpty")] get; }
+		public bool Empty { [Bind ("isEmpty")] get; }
 
 		[Export ("timeMapping")]
-		CMTimeMapping TimeMapping { get; }
+		public CMTimeMapping TimeMapping { get; }
 
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAsset))]
-	interface AVComposition : NSMutableCopying {
+	public partial class AVComposition : AVAsset {
 		[Export ("tracks")]
 		[New]
-		AVCompositionTrack [] Tracks { get; }
+		public AVCompositionTrack [] Tracks { get; }
 
 		[Export ("naturalSize")]
 		[New]
-		CGSize NaturalSize { get; [NotImplemented] set; }
+		public CGSize NaturalSize { get; [NotImplemented] set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("URLAssetInitializationOptions", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> UrlAssetInitializationOptions { get; }
+		public NSDictionary<NSString, NSObject> UrlAssetInitializationOptions { get; }
 
 		// Inlined from the AVComposition (SynchronousAssetInterface) category
 		[Export ("metadataForFormat:")]
-		AVMetadataItem [] GetMetadata (string format);
+		public extern AVMetadataItem [] GetMetadata (string format);
 
 		// Inlined from the AVComposition (SynchronousAssetInterface) category
 		[Export ("chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:")]
-		AVTimedMetadataGroup [] GetChapterMetadataGroups (NSLocale titleLocale, [NullAllowed] string [] commonKeys);
+		public extern AVTimedMetadataGroup [] GetChapterMetadataGroups (NSLocale titleLocale, [NullAllowed] string [] commonKeys);
 
 		// Inlined from the AVComposition (SynchronousAssetInterface) category
 		[Export ("chapterMetadataGroupsBestMatchingPreferredLanguages:")]
-		AVTimedMetadataGroup [] GetChapterMetadataGroups (string [] bestMatchingPreferredLanguages);
+		public extern AVTimedMetadataGroup [] GetChapterMetadataGroups (string [] bestMatchingPreferredLanguages);
 
 		// Inlined from the AVComposition (SynchronousAssetInterface) category
 		[Export ("mediaSelectionGroupForMediaCharacteristic:")]
 		[return: NullAllowed]
-		AVMediaSelectionGroup GetMediaSelectionGroup (string mediaCharacteristic);
+		public extern AVMediaSelectionGroup? GetMediaSelectionGroup (string mediaCharacteristic);
 
 		// Inlined from the AVComposition (SynchronousAssetInterface) category
 		[Export ("unusedTrackID")]
-		int GetUnusedTrackId ();
+		public int GetUnusedTrackId ();
 	}
 
 	[MacCatalyst (13, 1)]
@@ -8824,31 +8824,31 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAssetTrackSegment))]
-	interface AVCompositionTrackSegment {
+	public partial class AVCompositionTrackSegment : AVAssetTrackSegment {
 		[Export ("sourceURL"), NullAllowed]
-		NSUrl SourceUrl { get; }
+		public NSUrl SourceUrl { get; }
 
 		[Export ("sourceTrackID")]
-		int SourceTrackID { get; } /* CMPersistentTrackID = int32_t */
+		public int SourceTrackID { get; } /* CMPersistentTrackID = int32_t */
 
 		[Static]
 		[Export ("compositionTrackSegmentWithURL:trackID:sourceTimeRange:targetTimeRange:")]
-		IntPtr FromUrl (NSUrl url, int /* CMPersistentTrackID = int32_t */ trackID, CMTimeRange sourceTimeRange, CMTimeRange targetTimeRange);
+		public static extern IntPtr FromUrl (NSUrl url, int /* CMPersistentTrackID = int32_t */ trackID, CMTimeRange sourceTimeRange, CMTimeRange targetTimeRange);
 
 		[Static]
 		[Export ("compositionTrackSegmentWithTimeRange:")]
-		IntPtr FromTimeRange (CMTimeRange timeRange);
+		public static extern IntPtr FromTimeRange (CMTimeRange timeRange);
 
 		[DesignatedInitializer]
 		[Export ("initWithURL:trackID:sourceTimeRange:targetTimeRange:")]
-		NativeHandle Constructor (NSUrl URL, int trackID /* CMPersistentTrackID = int32_t */, CMTimeRange sourceTimeRange, CMTimeRange targetTimeRange);
+		public static extern NativeHandle Constructor (NSUrl URL, int trackID /* CMPersistentTrackID = int32_t */, CMTimeRange sourceTimeRange, CMTimeRange targetTimeRange);
 
 		[DesignatedInitializer]
 		[Export ("initWithTimeRange:")]
-		NativeHandle Constructor (CMTimeRange timeRange);
+		public static extern NativeHandle Constructor (CMTimeRange timeRange);
 
 		[Export ("empty")]
-		bool Empty { [Bind ("isEmpty")] get; }
+		public bool Empty { [Bind ("isEmpty")] get; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -13486,100 +13486,100 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // NSGenericException *** -[AVTextStyleRule init] Not available.  Use initWithTextMarkupAttributes:textSelector: instead
-	interface AVTextStyleRule : NSCopying {
+	public partial class AVTextStyleRule : NSCopying {
 		[Export ("textMarkupAttributes")]
 		[Protected]
-		NSDictionary WeakTextMarkupAttributes { get; }
+		public NSDictionary WeakTextMarkupAttributes { get; }
 
 		[Wrap ("WeakTextMarkupAttributes")]
-		CMTextMarkupAttributes TextMarkupAttributes { get; }
+		public CMTextMarkupAttributes TextMarkupAttributes { get; }
 
 		[Export ("textSelector"), NullAllowed]
-		string TextSelector { get; }
+		public string TextSelector { get; }
 
 		[Static]
 		[Export ("propertyListForTextStyleRules:")]
-		NSObject ToPropertyList (AVTextStyleRule [] textStyleRules);
+		public static extern NSObject ToPropertyList (AVTextStyleRule [] textStyleRules);
 
 		[return: NullAllowed]
 		[Static]
 		[Export ("textStyleRulesFromPropertyList:")]
-		AVTextStyleRule [] FromPropertyList (NSObject plist);
+		public static extern AVTextStyleRule []? FromPropertyList (NSObject plist);
 
 		[return: NullAllowed]
 		[Static]
 		[Internal]
 		[Export ("textStyleRuleWithTextMarkupAttributes:")]
-		AVTextStyleRule FromTextMarkupAttributes (NSDictionary textMarkupAttributes);
+		public static extern AVTextStyleRule? FromTextMarkupAttributes (NSDictionary textMarkupAttributes);
 
 		[return: NullAllowed]
 		[Static]
 		[Wrap ("FromTextMarkupAttributes (textMarkupAttributes.GetDictionary ()!)")]
-		AVTextStyleRule FromTextMarkupAttributes (CMTextMarkupAttributes textMarkupAttributes);
+		public static extern AVTextStyleRule? FromTextMarkupAttributes (CMTextMarkupAttributes textMarkupAttributes);
 
 		[return: NullAllowed]
 		[Static]
 		[Internal]
 		[Export ("textStyleRuleWithTextMarkupAttributes:textSelector:")]
-		AVTextStyleRule FromTextMarkupAttributes (NSDictionary textMarkupAttributes, [NullAllowed] string textSelector);
+		public static extern AVTextStyleRule? FromTextMarkupAttributes (NSDictionary textMarkupAttributes, [NullAllowed] string textSelector);
 
 		[return: NullAllowed]
 		[Static]
 		[Wrap ("FromTextMarkupAttributes (textMarkupAttributes.GetDictionary ()!, textSelector)")]
-		AVTextStyleRule FromTextMarkupAttributes (CMTextMarkupAttributes textMarkupAttributes, [NullAllowed] string textSelector);
+		public static extern AVTextStyleRule? FromTextMarkupAttributes (CMTextMarkupAttributes textMarkupAttributes, [NullAllowed] string textSelector);
 
 		[Export ("initWithTextMarkupAttributes:")]
 		[Protected]
-		NativeHandle Constructor (NSDictionary textMarkupAttributes);
+		public extern NativeHandle Constructor (NSDictionary textMarkupAttributes);
 
 		[Wrap ("this (attributes.GetDictionary ()!)")]
-		NativeHandle Constructor (CMTextMarkupAttributes attributes);
+		public  extern NativeHandle Constructor (CMTextMarkupAttributes attributes);
 
 		[DesignatedInitializer]
 		[Export ("initWithTextMarkupAttributes:textSelector:")]
 		[Protected]
-		NativeHandle Constructor (NSDictionary textMarkupAttributes, [NullAllowed] string textSelector);
+		public  extern NativeHandle Constructor (NSDictionary textMarkupAttributes, [NullAllowed] string textSelector);
 
 		[Wrap ("this (attributes.GetDictionary ()!, textSelector)")]
-		NativeHandle Constructor (CMTextMarkupAttributes attributes, string textSelector);
+		public  extern NativeHandle Constructor (CMTextMarkupAttributes attributes, string textSelector);
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVMetadataGroup {
+	public partial class AVMetadataGroup : NSMutableCopying {
 
 		[Export ("items", ArgumentSemantic.Copy)]
-		AVMetadataItem [] Items { get; }
+		public AVMetadataItem [] Items { get; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("classifyingLabel")]
-		string ClassifyingLabel { get; }
+		public string ClassifyingLabel { get; }
 
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("uniqueID")]
-		string UniqueID { get; }
+		public string UniqueID { get; }
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVMetadataGroup))]
-	interface AVTimedMetadataGroup : NSMutableCopying {
+	public partial class AVTimedMetadataGroup : AVMetadataGroup {
 		[Export ("timeRange")]
-		CMTimeRange TimeRange { get; [NotImplemented] set; }
+		public CMTimeRange TimeRange { get; [NotImplemented] set; }
 
 		[Export ("items", ArgumentSemantic.Copy)]
-		AVMetadataItem [] Items { get; [NotImplemented] set; }
+		public AVMetadataItem [] Items { get; [NotImplemented] set; }
 
 		[Export ("initWithItems:timeRange:")]
-		NativeHandle Constructor (AVMetadataItem [] items, CMTimeRange timeRange);
+		public extern NativeHandle Constructor (AVMetadataItem [] items, CMTimeRange timeRange);
 
 		[return: NullAllowed]
 		[MacCatalyst (13, 1)]
 		[Export ("copyFormatDescription")]
-		CMFormatDescription CopyFormatDescription ();
+		public CMFormatDescription CopyFormatDescription ();
 
 		[MacCatalyst (13, 1)]
 		[Export ("initWithSampleBuffer:")]
-		NativeHandle Constructor (CMSampleBuffer sampleBuffer);
+		public extern NativeHandle Constructor (CMSampleBuffer sampleBuffer);
 	}
 
 	[MacCatalyst (13, 1)]
@@ -14065,6 +14065,11 @@ namespace AVFoundation {
 	// Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: *** initialization method -init cannot be sent to an abstract object of class AVPlayerItemOutput: Create a concrete instance!
 	[DisableDefaultCtor]
 	public partial class AVPlayerItemOutput: NSObject {
+
+		public AVPlayerItemOutput (NSObjectFlag f) : base(f)
+		{
+		}
+
 		[Export ("itemTimeForHostTime:")]
 		public extern CMTime GetItemTime (double hostTimeInSeconds);
 
@@ -14343,41 +14348,41 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVPlayerItemOutput))]
-	interface AVPlayerItemVideoOutput {
+	public partial class AVPlayerItemVideoOutput : AVPlayerItemOutput {
 		[Export ("delegate", ArgumentSemantic.Weak), NullAllowed]
-		NSObject WeakDelegate { get; }
+		public NSObject WeakDelegate { get; }
 
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
-		IAVPlayerItemOutputPullDelegate Delegate { get; }
+		public IAVPlayerItemOutputPullDelegate? Delegate { get; }
 
 		[Export ("delegateQueue"), NullAllowed]
-		DispatchQueue DelegateQueue { get; }
+		public DispatchQueue? DelegateQueue { get; }
 
 		[Internal]
 		[Export ("initWithPixelBufferAttributes:")]
-		IntPtr _FromPixelBufferAttributes ([NullAllowed] NSDictionary pixelBufferAttributes);
+		internal extern IntPtr _FromPixelBufferAttributes ([NullAllowed] NSDictionary pixelBufferAttributes);
 
 		[Internal]
 		[Export ("initWithOutputSettings:")]
-		IntPtr _FromOutputSettings ([NullAllowed] NSDictionary outputSettings);
+		internal extern IntPtr _FromOutputSettings ([NullAllowed] NSDictionary outputSettings);
 
 		[DesignatedInitializer]
 		[Wrap ("this (attributes.GetDictionary (), AVPlayerItemVideoOutput.InitMode.PixelAttributes)")]
-		NativeHandle Constructor (CVPixelBufferAttributes attributes);
+		public extern NativeHandle Constructor (CVPixelBufferAttributes attributes);
 
 		[DesignatedInitializer]
 		[MacCatalyst (13, 1)]
 		[Wrap ("this (settings.GetDictionary (), AVPlayerItemVideoOutput.InitMode.OutputSettings)")]
-		NativeHandle Constructor (AVPlayerItemVideoOutputSettings settings);
+		public extern NativeHandle Constructor (AVPlayerItemVideoOutputSettings settings);
 
 		[Export ("hasNewPixelBufferForItemTime:")]
-		bool HasNewPixelBufferForItemTime (CMTime itemTime);
+		public extern bool HasNewPixelBufferForItemTime (CMTime itemTime);
 
 #if !XAMCORE_5_0
 		[Protected]
 		[Export ("copyPixelBufferForItemTime:itemTimeForDisplay:")]
-		IntPtr WeakCopyPixelBuffer (CMTime itemTime, ref CMTime outItemTimeForDisplay);
+		public extern IntPtr WeakCopyPixelBuffer (CMTime itemTime, ref CMTime outItemTimeForDisplay);
 #endif
 
 #if !XAMCORE_5_0
@@ -14385,16 +14390,16 @@ namespace AVFoundation {
 #endif
 		[Export ("copyPixelBufferForItemTime:itemTimeForDisplay:")]
 		[return: Release]
-		CVPixelBuffer CopyPixelBuffer (CMTime itemTime, ref CMTime outItemTimeForDisplay);
+		public extern CVPixelBuffer CopyPixelBuffer (CMTime itemTime, ref CMTime outItemTimeForDisplay);
 
 		[Export ("setDelegate:queue:")]
-		void SetDelegate ([NullAllowed] IAVPlayerItemOutputPullDelegate delegateClass, [NullAllowed] DispatchQueue delegateQueue);
+		public extern void SetDelegate ([NullAllowed] IAVPlayerItemOutputPullDelegate delegateClass, [NullAllowed] DispatchQueue delegateQueue);
 
 		[Export ("requestNotificationOfMediaDataChangeWithAdvanceInterval:")]
-		void RequestNotificationOfMediaDataChange (double advanceInterval);
+		public extern void RequestNotificationOfMediaDataChange (double advanceInterval);
 	}
 
-	interface IAVPlayerItemOutputPullDelegate { }
+	public interface IAVPlayerItemOutputPullDelegate { }
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
@@ -14703,37 +14708,37 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVPlayerLooper {
+	public partial class AVPlayerLooper {
 		[Static]
 		[Export ("playerLooperWithPlayer:templateItem:timeRange:")]
-		AVPlayerLooper FromPlayer (AVQueuePlayer player, AVPlayerItem itemToLoop, CMTimeRange loopRange);
+		public static extern AVPlayerLooper FromPlayer (AVQueuePlayer player, AVPlayerItem itemToLoop, CMTimeRange loopRange);
 
 		[Static]
 		[Export ("playerLooperWithPlayer:templateItem:")]
-		AVPlayerLooper FromPlayer (AVQueuePlayer player, AVPlayerItem itemToLoop);
+		public static extern AVPlayerLooper FromPlayer (AVQueuePlayer player, AVPlayerItem itemToLoop);
 
 		[Export ("initWithPlayer:templateItem:timeRange:")]
-		NativeHandle Constructor (AVQueuePlayer player, AVPlayerItem itemToLoop, CMTimeRange loopRange);
+		public extern NativeHandle Constructor (AVQueuePlayer player, AVPlayerItem itemToLoop, CMTimeRange loopRange);
 
 		[TV (17, 0), MacCatalyst (17, 0), Mac (14, 0), iOS (17, 0)]
 		[Export ("initWithPlayer:templateItem:timeRange:existingItemsOrdering:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (AVQueuePlayer player, AVPlayerItem itemToLoop, CMTimeRange loopRange, AVPlayerLooperItemOrdering itemOrdering);
+		public extern NativeHandle Constructor (AVQueuePlayer player, AVPlayerItem itemToLoop, CMTimeRange loopRange, AVPlayerLooperItemOrdering itemOrdering);
 
 		[Export ("disableLooping")]
-		void DisableLooping ();
+		public extern void DisableLooping ();
 
 		[Export ("loopCount")]
-		nint LoopCount { get; }
+		public nint LoopCount { get; }
 
 		[Export ("loopingPlayerItems")]
-		AVPlayerItem [] LoopingPlayerItems { get; }
+		public AVPlayerItem [] LoopingPlayerItems { get; }
 
 		[Export ("status")]
-		AVPlayerLooperStatus Status { get; }
+		public AVPlayerLooperStatus Status { get; }
 
 		[NullAllowed, Export ("error")]
-		NSError Error { get; }
+		public NSError? Error { get; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -15022,31 +15027,31 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVPlayer))]
-	interface AVQueuePlayer {
+	public partial class AVQueuePlayer {
 
 		[Static, Export ("queuePlayerWithItems:")]
-		AVQueuePlayer FromItems (AVPlayerItem [] items);
+		public static extern AVQueuePlayer FromItems (AVPlayerItem [] items);
 
 		[Export ("initWithItems:")]
-		NativeHandle Constructor (AVPlayerItem [] items);
+		public static extern NativeHandle Constructor (AVPlayerItem [] items);
 
 		[Export ("items")]
-		AVPlayerItem [] Items { get; }
+		public AVPlayerItem [] Items { get; }
 
 		[Export ("advanceToNextItem")]
-		void AdvanceToNextItem ();
+		public extern void AdvanceToNextItem ();
 
 		[Export ("canInsertItem:afterItem:")]
-		bool CanInsert (AVPlayerItem item, [NullAllowed] AVPlayerItem afterItem);
+		public extern bool CanInsert (AVPlayerItem item, [NullAllowed] AVPlayerItem afterItem);
 
 		[Export ("insertItem:afterItem:")]
-		void InsertItem (AVPlayerItem item, [NullAllowed] AVPlayerItem afterItem);
+		public extern void InsertItem (AVPlayerItem item, [NullAllowed] AVPlayerItem afterItem);
 
 		[Export ("removeItem:")]
-		void RemoveItem (AVPlayerItem item);
+		public extern void RemoveItem (AVPlayerItem item);
 
 		[Export ("removeAllItems")]
-		void RemoveAllItems ();
+		public extern void RemoveAllItems ();
 	}
 
 	[MacCatalyst (13, 1)]
@@ -15300,55 +15305,55 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVSpeechSynthesisVoice : NSSecureCoding {
+	public partial class AVSpeechSynthesisVoice : NSSecureCoding {
 
 		[Static, Export ("speechVoices")]
-		AVSpeechSynthesisVoice [] GetSpeechVoices ();
+		public static extern AVSpeechSynthesisVoice [] GetSpeechVoices ();
 
 		[Static, Export ("currentLanguageCode")]
-		string CurrentLanguageCode { get; }
+		public static string CurrentLanguageCode { get; }
 
 		[return: NullAllowed]
 		[Static, Export ("voiceWithLanguage:")]
-		AVSpeechSynthesisVoice FromLanguage ([NullAllowed] string language);
+		public static extern AVSpeechSynthesisVoice FromLanguage ([NullAllowed] string language);
 
 		[MacCatalyst (13, 1)]
 		[return: NullAllowed]
 		[Static, Export ("voiceWithIdentifier:")]
-		AVSpeechSynthesisVoice FromIdentifier (string identifier);
+		public static extern AVSpeechSynthesisVoice FromIdentifier (string identifier);
 
 		[Export ("language", ArgumentSemantic.Copy)]
-		string Language { get; }
+		public string Language { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("identifier")]
-		string Identifier { get; }
+		public string Identifier { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("name")]
-		string Name { get; }
+		public string Name { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("quality")]
-		AVSpeechSynthesisVoiceQuality Quality { get; }
+		public AVSpeechSynthesisVoiceQuality Quality { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVSpeechSynthesisVoiceIdentifierAlex")]
-		NSString IdentifierAlex { get; }
+		public NSString IdentifierAlex { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVSpeechSynthesisIPANotationAttribute")]
-		NSString IpaNotationAttribute { get; }
+		public NSString IpaNotationAttribute { get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("gender")]
-		AVSpeechSynthesisVoiceGender Gender { get; }
+		public AVSpeechSynthesisVoiceGender Gender { get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("audioFileSettings")]
-		NSDictionary<NSString, NSObject> AudioFileSettings { get; }
+		public NSDictionary<NSString, NSObject> AudioFileSettings { get; }
 
 		[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("voiceTraits")]
@@ -15362,41 +15367,41 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVSpeechUtterance : NSCopying, NSSecureCoding {
+	public partial class AVSpeechUtterance : NSCopying {
 
 		[Static, Export ("speechUtteranceWithString:")]
-		AVSpeechUtterance FromString (string speechString);
+		public static extern AVSpeechUtterance FromString (string speechString);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("speechUtteranceWithAttributedString:")]
-		AVSpeechUtterance FromString (NSAttributedString speechString);
+		public static extern AVSpeechUtterance FromString (NSAttributedString speechString);
 
 		[MacCatalyst (16, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[Static]
 		[Export ("speechUtteranceWithSSMLRepresentation:")]
 		[return: NullAllowed]
-		AVSpeechUtterance FromSsmlRepresentation (string @string);
+		public static extern AVSpeechUtterance? FromSsmlRepresentation (string @string);
 
 		[Internal]
 		[Export ("initWithString:")]
-		NativeHandle _InitWithString (string speechString);
+		internal extern NativeHandle _InitWithString (string speechString);
 
 		[MacCatalyst (13, 1)]
 		[Export ("initWithAttributedString:")]
-		NativeHandle Constructor (NSAttributedString speechString);
+		public extern NativeHandle Constructor (NSAttributedString speechString);
 
 		[MacCatalyst (16, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[Export ("initWithSSMLRepresentation:")]
 		[Internal]
-		NativeHandle _InitWithSsmlRepresentation (string @string);
+		internal extern NativeHandle _InitWithSsmlRepresentation (string @string);
 
 		[NullAllowed] // by default this property is null
 		[Export ("voice", ArgumentSemantic.Retain)]
-		AVSpeechSynthesisVoice Voice { get; set; }
+		public AVSpeechSynthesisVoice? Voice { get; set; }
 
 		[Export ("speechString", ArgumentSemantic.Copy)]
-		string SpeechString { get; }
+		public string SpeechString { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("attributedSpeechString")]
@@ -15437,61 +15442,61 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Delegates = new string [] { "WeakDelegate" }, Events = new Type [] { typeof (AVSpeechSynthesizerDelegate) })]
-	interface AVSpeechSynthesizer {
+	public partial class AVSpeechSynthesizer: NSObject {
 
 		[Export ("delegate", ArgumentSemantic.Assign), NullAllowed]
-		NSObject WeakDelegate { get; set; }
+		public NSObject WeakDelegate { get; set; }
 
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
-		IAVSpeechSynthesizerDelegate Delegate { get; set; }
+		public IAVSpeechSynthesizerDelegate? Delegate { get; set; }
 
 		[Export ("speaking")]
-		bool Speaking { [Bind ("isSpeaking")] get; }
+		public bool Speaking { [Bind ("isSpeaking")] get; }
 
 		[Export ("paused")]
-		bool Paused { [Bind ("isPaused")] get; }
+		public bool Paused { [Bind ("isPaused")] get; }
 
 		[TV (13, 0), iOS (13, 0), MacCatalyst (15, 0)]
 		[Export ("usesApplicationAudioSession")]
-		bool UsesApplicationAudioSession { get; set; }
+		public bool UsesApplicationAudioSession { get; set; }
 
 		[NoTV, NoMac, iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("mixToTelephonyUplink")]
-		bool MixToTelephonyUplink { get; set; }
+		public bool MixToTelephonyUplink { get; set; }
 
 		[Export ("speakUtterance:")]
-		void SpeakUtterance (AVSpeechUtterance utterance);
+		public extern void SpeakUtterance (AVSpeechUtterance utterance);
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("writeUtterance:toBufferCallback:")]
-		void WriteUtterance (AVSpeechUtterance utterance, Action<AVAudioBuffer> bufferCallback);
+		public extern void WriteUtterance (AVSpeechUtterance utterance, Action<AVAudioBuffer> bufferCallback);
 
 		[MacCatalyst (16, 0), TV (16, 0), Mac (13, 0), iOS (16, 0)]
 		[Export ("writeUtterance:toBufferCallback:toMarkerCallback:")]
-		void WriteUtterance (AVSpeechUtterance utterance, AVSpeechSynthesizerBufferCallback bufferCallback, AVSpeechSynthesizerMarkerCallback markerCallback);
+		public extern void WriteUtterance (AVSpeechUtterance utterance, AVSpeechSynthesizerBufferCallback bufferCallback, AVSpeechSynthesizerMarkerCallback markerCallback);
 
 		[Export ("stopSpeakingAtBoundary:")]
-		bool StopSpeaking (AVSpeechBoundary boundary);
+		public extern bool StopSpeaking (AVSpeechBoundary boundary);
 
 		[Export ("pauseSpeakingAtBoundary:")]
-		bool PauseSpeaking (AVSpeechBoundary boundary);
+		public extern bool PauseSpeaking (AVSpeechBoundary boundary);
 
 		[Export ("continueSpeaking")]
-		bool ContinueSpeaking ();
+		public extern bool ContinueSpeaking ();
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[NullAllowed, Export ("outputChannels", ArgumentSemantic.Retain)]
-		AVAudioSessionChannelDescription [] OutputChannels { get; set; }
+		public AVAudioSessionChannelDescription []? OutputChannels { get; set; }
 
 		[Async]
 		[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Static]
 		[Export ("requestPersonalVoiceAuthorizationWithCompletionHandler:")]
-		void RequestPersonalVoiceAuthorization (AVSpeechSynthesizerRequestPersonalVoiceAuthorizationCallback handler);
+		public static extern void RequestPersonalVoiceAuthorization (AVSpeechSynthesizerRequestPersonalVoiceAuthorizationCallback handler);
 
 		[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Static]
@@ -15499,9 +15504,9 @@ namespace AVFoundation {
 		AVSpeechSynthesisPersonalVoiceAuthorizationStatus PersonalVoiceAuthorizationStatus { get; }
 	}
 
-	delegate void AVSpeechSynthesizerRequestPersonalVoiceAuthorizationCallback (AVSpeechSynthesisPersonalVoiceAuthorizationStatus status);
+	public delegate void AVSpeechSynthesizerRequestPersonalVoiceAuthorizationCallback (AVSpeechSynthesisPersonalVoiceAuthorizationStatus status);
 
-	interface IAVSpeechSynthesizerDelegate { }
+	public interface IAVSpeechSynthesizerDelegate { }
 
 	[MacCatalyst (13, 1)]
 	[Model]

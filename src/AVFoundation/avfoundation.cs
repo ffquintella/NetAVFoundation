@@ -66,8 +66,9 @@ using UniformTypeIdentifiers;
 using ImageIO;
 //using MediaPlayer;
 using System;
+using AudioUnit;
 using CoreLibs;
-using CoreLibs.AudioToolbox;
+
 
 #if MONOMAC
 using AppKit;
@@ -915,7 +916,7 @@ namespace AVFoundation {
 		IntPtr Data { get; }
 
 		[NullAllowed, Export ("packetDescriptions")]
-		AudioType.AudioStreamPacketDescription PacketDescriptions { get; }
+		AudioStreamPacketDescription PacketDescriptions { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("byteCapacity")]
@@ -929,184 +930,184 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // fails (nil handle on iOS 10)
-	interface AVAudioConnectionPoint {
+	public partial class AVAudioConnectionPoint {
 		[Export ("initWithNode:bus:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (AVAudioNode node, nuint bus);
+		public extern NativeHandle Constructor (AVAudioNode node, nuint bus);
 
 		[NullAllowed, Export ("node", ArgumentSemantic.Weak)]
-		AVAudioNode Node { get; }
+		public AVAudioNode? Node { get; }
 
 		[Export ("bus")]
-		nuint Bus { get; }
+		public nuint Bus { get; }
 	}
 
 	[MacCatalyst (13, 1)]
-	delegate AVAudioEngineManualRenderingStatus AVAudioEngineManualRenderingBlock (/* AVAudioFrameCount = uint */ uint numberOfFrames, AudioBuffers outBuffer, [NullAllowed] /* OSStatus */ ref int outError);
+	public delegate AVAudioEngineManualRenderingStatus AVAudioEngineManualRenderingBlock (/* AVAudioFrameCount = uint */ uint numberOfFrames, AudioBuffers outBuffer, [NullAllowed] /* OSStatus */ ref int outError);
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVAudioEngine {
+	public partial class AVAudioEngine: NSObject {
 
 		[MacCatalyst (13, 1)]
 		[Export ("musicSequence"), NullAllowed]
-		MusicSequence MusicSequence { get; set; }
+		public MusicSequence MusicSequence { get; set; }
 
 		[Export ("outputNode")]
-		AVAudioOutputNode OutputNode { get; }
+		public AVAudioOutputNode OutputNode { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("inputNode")]
-		AVAudioInputNode InputNode { get; }
+		public AVAudioInputNode InputNode { get; }
 
 		[Export ("mainMixerNode")]
-		AVAudioMixerNode MainMixerNode { get; }
+		public AVAudioMixerNode MainMixerNode { get; }
 
 		[Export ("running")]
-		bool Running { [Bind ("isRunning")] get; }
+		public bool Running { [Bind ("isRunning")] get; }
 
 		[Export ("attachNode:")]
-		void AttachNode (AVAudioNode node);
+		public extern void AttachNode (AVAudioNode node);
 
 		[Export ("detachNode:")]
-		void DetachNode (AVAudioNode node);
+		public extern  void DetachNode (AVAudioNode node);
 
 		[Export ("connect:to:fromBus:toBus:format:")]
-		void Connect (AVAudioNode sourceNode, AVAudioNode targetNode, nuint sourceBus, nuint targetBus, [NullAllowed] AVAudioFormat format);
+		public extern void Connect (AVAudioNode sourceNode, AVAudioNode targetNode, nuint sourceBus, nuint targetBus, [NullAllowed] AVAudioFormat format);
 
 		[Export ("connect:to:format:")]
-		void Connect (AVAudioNode sourceNode, AVAudioNode targetNode, [NullAllowed] AVAudioFormat format);
+		public extern void Connect (AVAudioNode sourceNode, AVAudioNode targetNode, [NullAllowed] AVAudioFormat format);
 
 		[MacCatalyst (13, 1)]
 		[Export ("connect:toConnectionPoints:fromBus:format:")]
-		void Connect (AVAudioNode sourceNode, AVAudioConnectionPoint [] destNodes, nuint sourceBus, [NullAllowed] AVAudioFormat format);
+		public extern void Connect (AVAudioNode sourceNode, AVAudioConnectionPoint [] destNodes, nuint sourceBus, [NullAllowed] AVAudioFormat format);
 
 		[Export ("disconnectNodeInput:bus:")]
-		void DisconnectNodeInput (AVAudioNode node, nuint bus);
+		public extern void DisconnectNodeInput (AVAudioNode node, nuint bus);
 
 		[Export ("disconnectNodeInput:")]
-		void DisconnectNodeInput (AVAudioNode node);
+		public extern void DisconnectNodeInput (AVAudioNode node);
 
 		[Export ("disconnectNodeOutput:bus:")]
-		void DisconnectNodeOutput (AVAudioNode node, nuint bus);
+		public extern void DisconnectNodeOutput (AVAudioNode node, nuint bus);
 
 		[Export ("disconnectNodeOutput:")]
-		void DisconnectNodeOutput (AVAudioNode node);
+		public extern void DisconnectNodeOutput (AVAudioNode node);
 
 		[Export ("prepare")]
-		void Prepare ();
+		public extern void Prepare ();
 
 		[Export ("startAndReturnError:")]
-		bool StartAndReturnError (out NSError outError);
+		public extern bool StartAndReturnError (out NSError outError);
 
 		[Export ("pause")]
-		void Pause ();
+		public extern void Pause ();
 
 		[Export ("reset")]
-		void Reset ();
+		public extern void Reset ();
 
 		[Export ("stop")]
-		void Stop ();
+		public extern void Stop ();
 
 		[MacCatalyst (13, 1)]
 		[return: NullAllowed]
 		[Export ("inputConnectionPointForNode:inputBus:")]
-		AVAudioConnectionPoint InputConnectionPoint (AVAudioNode node, nuint bus);
+		public extern AVAudioConnectionPoint? InputConnectionPoint (AVAudioNode node, nuint bus);
 
 		[MacCatalyst (13, 1)]
 		[Export ("outputConnectionPointsForNode:outputBus:")]
-		AVAudioConnectionPoint [] OutputConnectionPoints (AVAudioNode node, nuint bus);
+		public extern AVAudioConnectionPoint [] OutputConnectionPoints (AVAudioNode node, nuint bus);
 
 		[Notification]
 		[Field ("AVAudioEngineConfigurationChangeNotification")]
-		NSString ConfigurationChangeNotification { get; }
+		public static  NSString ConfigurationChangeNotification { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("autoShutdownEnabled")]
-		bool AutoShutdownEnabled { [Bind ("isAutoShutdownEnabled")] get; set; }
+		public bool AutoShutdownEnabled { [Bind ("isAutoShutdownEnabled")] get; set; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("enableManualRenderingMode:format:maximumFrameCount:error:")]
-		bool EnableManualRenderingMode (AVAudioEngineManualRenderingMode mode, AVAudioFormat pcmFormat, uint maximumFrameCount, out NSError outError);
+		public extern bool EnableManualRenderingMode (AVAudioEngineManualRenderingMode mode, AVAudioFormat pcmFormat, uint maximumFrameCount, out NSError outError);
 
 		[MacCatalyst (13, 1)]
 		[Export ("renderOffline:toBuffer:error:")]
-		AVAudioEngineManualRenderingStatus RenderOffline (uint numberOfFrames, AVAudioPcmBuffer buffer, [NullAllowed] out NSError outError);
+		public extern AVAudioEngineManualRenderingStatus RenderOffline (uint numberOfFrames, AVAudioPcmBuffer buffer, [NullAllowed] out NSError outError);
 
 		[MacCatalyst (13, 1)]
 		[Export ("manualRenderingBlock")]
-		AVAudioEngineManualRenderingBlock ManualRenderingBlock { get; }
+		public AVAudioEngineManualRenderingBlock ManualRenderingBlock { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("isInManualRenderingMode")]
-		bool InManualRenderingMode { get; }
+		public bool InManualRenderingMode { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("manualRenderingMode")]
-		AVAudioEngineManualRenderingMode ManualRenderingMode { get; }
+		public AVAudioEngineManualRenderingMode ManualRenderingMode { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("manualRenderingFormat")]
-		AVAudioFormat ManualRenderingFormat { get; }
+		public AVAudioFormat ManualRenderingFormat { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("manualRenderingMaximumFrameCount")]
-		uint ManualRenderingMaximumFrameCount { get; }
+		public uint ManualRenderingMaximumFrameCount { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("manualRenderingSampleTime")]
-		long ManualRenderingSampleTime { get; }
+		public long ManualRenderingSampleTime { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("disableManualRenderingMode")]
-		void DisableManualRenderingMode ();
+		public extern void DisableManualRenderingMode ();
 
-		[Deprecated (PlatformName.MacOSX, 13, 0)]
-		[Deprecated (PlatformName.iOS, 16, 0)]
-		[Deprecated (PlatformName.MacCatalyst, 13, 0)]
+		//[Deprecated (PlatformName.MacOSX, 13, 0)]
+		//[Deprecated (PlatformName.iOS, 16, 0)]
+		//[Deprecated (PlatformName.MacCatalyst, 13, 0)]
 		[Deprecated (PlatformName.TvOS, 16, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("connectMIDI:to:format:block:")]
-		void ConnectMidi (AVAudioNode sourceNode, AVAudioNode destinationNode, [NullAllowed] AVAudioFormat format, [NullAllowed] AUMidiOutputEventBlock tapHandler);
+		public extern void ConnectMidi (AVAudioNode sourceNode, AVAudioNode destinationNode, [NullAllowed] AVAudioFormat format, [NullAllowed] AUMidiOutputEventBlock? tapHandler);
 
-		[Deprecated (PlatformName.MacOSX, 13, 0)]
-		[Deprecated (PlatformName.iOS, 16, 0)]
-		[Deprecated (PlatformName.MacCatalyst, 9, 0)]
+		//[Deprecated (PlatformName.MacOSX, 13, 0)]
+		//[Deprecated (PlatformName.iOS, 16, 0)]
+		//[Deprecated (PlatformName.MacCatalyst, 9, 0)]
 		[Deprecated (PlatformName.TvOS, 16, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("connectMIDI:toNodes:format:block:")]
-		void ConnectMidi (AVAudioNode sourceNode, AVAudioNode [] destinationNodes, [NullAllowed] AVAudioFormat format, [NullAllowed] AUMidiOutputEventBlock tapHandler);
+		public extern void ConnectMidi (AVAudioNode sourceNode, AVAudioNode [] destinationNodes, [NullAllowed] AVAudioFormat format, [NullAllowed] AUMidiOutputEventBlock? tapHandler);
 
 		[MacCatalyst (13, 1)]
 		[Export ("disconnectMIDI:from:")]
-		void DisconnectMidi (AVAudioNode sourceNode, AVAudioNode destinationNode);
+		public extern void DisconnectMidi (AVAudioNode sourceNode, AVAudioNode destinationNode);
 
 		[MacCatalyst (13, 1)]
 		[Export ("disconnectMIDI:fromNodes:")]
-		void DisconnectMidi (AVAudioNode sourceNode, AVAudioNode [] destinationNodes);
+		public extern void DisconnectMidi (AVAudioNode sourceNode, AVAudioNode [] destinationNodes);
 
 		[MacCatalyst (13, 1)]
 		[Export ("disconnectMIDIInput:")]
-		void DisconnectMidiInput (AVAudioNode node);
+		public extern void DisconnectMidiInput (AVAudioNode node);
 
 		[MacCatalyst (13, 1)]
 		[Export ("disconnectMIDIOutput:")]
-		void DisconnectMidiOutput (AVAudioNode node);
+		public extern void DisconnectMidiOutput (AVAudioNode node);
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("attachedNodes", ArgumentSemantic.Copy)]
-		NSSet<AVAudioNode> AttachedNodes { get; }
+		public NSSet<AVAudioNode> AttachedNodes { get; }
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioNode))]
 	[DisableDefaultCtor] // designated
-	interface AVAudioEnvironmentNode : AVAudioMixing {
+	public partial class AVAudioEnvironmentNode : AVAudioNode { //}AVAudioMixing {
 
 		[DesignatedInitializer]
 		[Export ("init")]
-		NativeHandle Constructor ();
+		public extern NativeHandle Constructor ();
 
 		[Export ("nextAvailableInputBus")]
 		nuint NextAvailableInputBus { get; }
@@ -1186,66 +1187,66 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVAudioFile {
+	public partial class AVAudioFile {
 		[Export ("initForReading:error:")]
-		NativeHandle Constructor (NSUrl fileUrl, out NSError outError);
+		public extern NativeHandle Constructor (NSUrl fileUrl, out NSError outError);
 
 		[Export ("initForReading:commonFormat:interleaved:error:")]
-		NativeHandle Constructor (NSUrl fileUrl, AVAudioCommonFormat format, bool interleaved, out NSError outError);
+		public extern NativeHandle Constructor (NSUrl fileUrl, AVAudioCommonFormat format, bool interleaved, out NSError outError);
 
 		[Export ("initForWriting:settings:error:"), Internal]
-		NativeHandle Constructor (NSUrl fileUrl, NSDictionary settings, out NSError outError);
+		public extern NativeHandle Constructor (NSUrl fileUrl, NSDictionary settings, out NSError outError);
 
 		[Wrap ("this (fileUrl, settings.GetDictionary ()!, out outError)")]
-		NativeHandle Constructor (NSUrl fileUrl, AudioSettings settings, out NSError outError);
+		public extern NativeHandle Constructor (NSUrl fileUrl, AudioSettings settings, out NSError outError);
 
 		[Export ("initForWriting:settings:commonFormat:interleaved:error:"), Internal]
-		NativeHandle Constructor (NSUrl fileUrl, NSDictionary settings, AVAudioCommonFormat format, bool interleaved, out NSError outError);
+		public extern NativeHandle Constructor (NSUrl fileUrl, NSDictionary settings, AVAudioCommonFormat format, bool interleaved, out NSError outError);
 
 		[Wrap ("this (fileUrl, settings.GetDictionary ()!, format, interleaved, out outError)")]
-		NativeHandle Constructor (NSUrl fileUrl, AudioSettings settings, AVAudioCommonFormat format, bool interleaved, out NSError outError);
+		public extern NativeHandle Constructor (NSUrl fileUrl, AudioSettings settings, AVAudioCommonFormat format, bool interleaved, out NSError outError);
 
 		[Export ("url")]
-		NSUrl Url { get; }
+		public NSUrl Url { get; }
 
 		[Export ("fileFormat")]
-		AVAudioFormat FileFormat { get; }
+		public AVAudioFormat FileFormat { get; }
 
 		[Export ("processingFormat")]
-		AVAudioFormat ProcessingFormat { get; }
+		public AVAudioFormat ProcessingFormat { get; }
 
 		[Export ("length")]
-		long Length { get; }
+		public long Length { get; }
 
 		[Export ("framePosition")]
-		long FramePosition { get; set; }
+		public long FramePosition { get; set; }
 
 		[Export ("readIntoBuffer:error:")]
-		bool ReadIntoBuffer (AVAudioPcmBuffer buffer, out NSError outError);
+		public extern bool ReadIntoBuffer (AVAudioPcmBuffer buffer, out NSError outError);
 
 		[Export ("readIntoBuffer:frameCount:error:")]
-		bool ReadIntoBuffer (AVAudioPcmBuffer buffer, uint /* AVAudioFrameCount = uint32_t */ frames, out NSError outError);
+		public extern bool ReadIntoBuffer (AVAudioPcmBuffer buffer, uint /* AVAudioFrameCount = uint32_t */ frames, out NSError outError);
 
 		[Export ("writeFromBuffer:error:")]
-		bool WriteFromBuffer (AVAudioPcmBuffer buffer, out NSError outError);
+		public extern bool WriteFromBuffer (AVAudioPcmBuffer buffer, out NSError outError);
 
 		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Export ("close")]
-		void Close ();
+		public extern void Close ();
 
 		[TV (18, 0), Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 		[Export ("isOpen")]
-		bool IsOpen { get; }
+		public bool IsOpen { get; }
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	public partial class AVAudioFormat : NSSecureCoding {
 		[Export ("initWithStreamDescription:")]
-		public extern NativeHandle Constructor (ref AudioType.AudioStreamBasicDescription description);
+		public extern NativeHandle Constructor (ref AudioStreamBasicDescription description);
 
 		[Export ("initWithStreamDescription:channelLayout:")]
-		public extern NativeHandle Constructor (ref AudioType.AudioStreamBasicDescription description, [NullAllowed] AVAudioChannelLayout layout);
+		public extern NativeHandle Constructor (ref AudioStreamBasicDescription description, [NullAllowed] AVAudioChannelLayout layout);
 
 		[Export ("initStandardFormatWithSampleRate:channels:")]
 		public extern NativeHandle Constructor (double sampleRate, uint /* AVAudioChannelCount = uint32_t */ channels);
@@ -1406,50 +1407,50 @@ namespace AVFoundation {
 		float Pan { get; set; } /* float, not CGFloat */
 	}
 
-	delegate void AVAudioNodeTapBlock (AVAudioPcmBuffer buffer, AVAudioTime when);
+	public delegate void AVAudioNodeTapBlock (AVAudioPcmBuffer buffer, AVAudioTime when);
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor] // documented as an abstract class, returned Handle is nil
-	interface AVAudioNode {
+	public partial class AVAudioNode: NSObject {
 		[Export ("engine"), NullAllowed]
-		AVAudioEngine Engine { get; }
+		public AVAudioEngine? Engine { get; }
 
 		[Export ("numberOfInputs")]
-		nuint NumberOfInputs { get; }
+		public nuint NumberOfInputs { get; }
 
 		[Export ("numberOfOutputs")]
-		nuint NumberOfOutputs { get; }
+		public nuint NumberOfOutputs { get; }
 
 		[Export ("lastRenderTime"), NullAllowed]
-		AVAudioTime LastRenderTime { get; }
+		public AVAudioTime LastRenderTime { get; }
 
 		[Export ("reset")]
-		void Reset ();
+		public extern void Reset ();
 
 		[Export ("inputFormatForBus:")]
-		AVAudioFormat GetBusInputFormat (nuint bus);
+		public extern AVAudioFormat GetBusInputFormat (nuint bus);
 
 		[Export ("outputFormatForBus:")]
-		AVAudioFormat GetBusOutputFormat (nuint bus);
+		public extern AVAudioFormat GetBusOutputFormat (nuint bus);
 
 		[Export ("nameForInputBus:")]
 		[return: NullAllowed]
-		string GetNameForInputBus (nuint bus);
+		public extern string? GetNameForInputBus (nuint bus);
 
 		[Export ("nameForOutputBus:")]
 		[return: NullAllowed]
-		string GetNameForOutputBus (nuint bus);
+		public extern string? GetNameForOutputBus (nuint bus);
 
 		[Export ("installTapOnBus:bufferSize:format:block:")]
-		void InstallTapOnBus (nuint bus, uint /* AVAudioFrameCount = uint32_t */ bufferSize, [NullAllowed] AVAudioFormat format, AVAudioNodeTapBlock tapBlock);
+		public extern void InstallTapOnBus (nuint bus, uint /* AVAudioFrameCount = uint32_t */ bufferSize, [NullAllowed] AVAudioFormat format, AVAudioNodeTapBlock tapBlock);
 
 		[Export ("removeTapOnBus:")]
-		void RemoveTapOnBus (nuint bus);
+		public extern void RemoveTapOnBus (nuint bus);
 
 		[MacCatalyst (13, 1)]
 		[Export ("AUAudioUnit")]
-		AUAudioUnit AUAudioUnit { get; }
+		public AUAudioUnit AUAudioUnit { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("latency")]
@@ -1463,121 +1464,121 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioNode))]
 	[DisableDefaultCtor] // documented as a base class - returned Handle is nil
-	interface AVAudioIONode {
+	public partial class AVAudioIONode : AVAudioNode {
 		[Export ("presentationLatency")]
-		double PresentationLatency { get; }
+		public double PresentationLatency { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("audioUnit"), NullAllowed]
-		global::AudioUnit.AudioUnit AudioUnit { get; }
+		public global::AudioUnit.AudioUnit AudioUnit { get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("voiceProcessingEnabled")]
-		bool VoiceProcessingEnabled { [Bind ("isVoiceProcessingEnabled")] get; }
+		public bool VoiceProcessingEnabled { [Bind ("isVoiceProcessingEnabled")] get; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("setVoiceProcessingEnabled:error:")]
-		bool SetVoiceProcessingEnabled (bool enabled, out NSError outError);
+		public extern bool SetVoiceProcessingEnabled (bool enabled, out NSError outError);
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioNode))]
 	[DisableDefaultCtor] // designated
-	interface AVAudioMixerNode : AVAudioMixing {
+	public partial class AVAudioMixerNode : AVAudioMixing {
 
 		[DesignatedInitializer]
 		[Export ("init")]
-		NativeHandle Constructor ();
+		public extern NativeHandle Constructor ();
 
 		[Export ("outputVolume")]
-		float OutputVolume { get; set; } /* float, not CGFloat */
+		public float OutputVolume { get; set; } /* float, not CGFloat */
 
 		[Export ("nextAvailableInputBus")]
-		nuint NextAvailableInputBus { get; }
+		public nuint NextAvailableInputBus { get; }
 	}
 
 	[MacCatalyst (13, 1)]
 	[DisableDefaultCtor] // returned Handle is nil
 						 // note: sample source (header) suggest it comes from AVAudioEngine properties
 	[BaseType (typeof (AVAudioIONode))]
-	interface AVAudioOutputNode {
+	public partial class AVAudioOutputNode : AVAudioIONode {
 
 	}
 
 	[MacCatalyst (13, 1)]
-	delegate AudioBuffers AVAudioIONodeInputBlock (uint frameCount);
+	public delegate AudioBuffers AVAudioIONodeInputBlock (uint frameCount);
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioIONode))]
 	[DisableDefaultCtor] // returned Handle is nil
 						 // note: sample source (header) suggest it comes from AVAudioEngine properties
-	interface AVAudioInputNode : AVAudioMixing {
+	public partial class AVAudioInputNode : AVAudioIONode {//AVAudioMixing {
 
 		[MacCatalyst (13, 1)]
 		[Export ("setManualRenderingInputPCMFormat:inputBlock:")]
-		bool SetManualRenderingInputPcmFormat (AVAudioFormat format, AVAudioIONodeInputBlock block);
+		public extern bool SetManualRenderingInputPcmFormat (AVAudioFormat format, AVAudioIONodeInputBlock block);
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("voiceProcessingBypassed")]
-		bool VoiceProcessingBypassed { [Bind ("isVoiceProcessingBypassed")] get; set; }
+		public bool VoiceProcessingBypassed { [Bind ("isVoiceProcessingBypassed")] get; set; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("voiceProcessingAGCEnabled")]
-		bool VoiceProcessingAgcEnabled { [Bind ("isVoiceProcessingAGCEnabled")] get; set; }
+		public bool VoiceProcessingAgcEnabled { [Bind ("isVoiceProcessingAGCEnabled")] get; set; }
 
 		[TV (13, 0), iOS (13, 0)]
 		[MacCatalyst (13, 1)]
 		[Export ("voiceProcessingInputMuted")]
-		bool VoiceProcessingInputMuted { [Bind ("isVoiceProcessingInputMuted")] get; set; }
+		public bool VoiceProcessingInputMuted { [Bind ("isVoiceProcessingInputMuted")] get; set; }
 
 		[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
 		[Export ("setMutedSpeechActivityEventListener:")]
-		bool SetMutedSpeechActivityEventListener ([NullAllowed] AVAudioInputNodeMutedSpeechEventListener listenerAction);
+		public extern bool SetMutedSpeechActivityEventListener ([NullAllowed] AVAudioInputNodeMutedSpeechEventListener? listenerAction);
 
 #if !TVOS
-		[NoTV, Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
-		[Export ("voiceProcessingOtherAudioDuckingConfiguration", ArgumentSemantic.Assign)]
-		AVAudioVoiceProcessingOtherAudioDuckingConfiguration VoiceProcessingOtherAudioDuckingConfiguration { get; set; }
+		//[NoTV, Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
+		//[Export ("voiceProcessingOtherAudioDuckingConfiguration", ArgumentSemantic.Assign)]
+		//AVAudioVoiceProcessingOtherAudioDuckingConfiguration VoiceProcessingOtherAudioDuckingConfiguration { get; set; }
 #endif
 	}
 
-	delegate void AVAudioInputNodeMutedSpeechEventListener (AVAudioVoiceProcessingSpeechActivityEvent @event);
+	public delegate void AVAudioInputNodeMutedSpeechEventListener (AVAudioVoiceProcessingSpeechActivityEvent @event);
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioBuffer), Name = "AVAudioPCMBuffer")]
-	[DisableDefaultCtor] // crash in tests
-	interface AVAudioPcmBuffer {
+	//[DisableDefaultCtor] // crash in tests
+	public partial class AVAudioPcmBuffer : AVAudioBuffer {
 
 		[DesignatedInitializer]
 		[Export ("initWithPCMFormat:frameCapacity:")]
-		NativeHandle Constructor (AVAudioFormat format, uint /* AVAudioFrameCount = uint32_t */ frameCapacity);
+		public extern NativeHandle Constructor (AVAudioFormat format, uint /* AVAudioFrameCount = uint32_t */ frameCapacity);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("initWithPCMFormat:bufferListNoCopy:deallocator:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (AVAudioFormat format, AudioBuffers bufferList, [NullAllowed] Action<AudioBuffers> deallocator);
+		public extern NativeHandle Constructor (AVAudioFormat format, AudioBuffers bufferList, [NullAllowed] Action<AudioBuffers> deallocator);
 
 		[Export ("frameCapacity")]
-		uint FrameCapacity { get; } /* AVAudioFrameCount = uint32_t */
+		public uint FrameCapacity { get; } /* AVAudioFrameCount = uint32_t */
 
 		[Export ("frameLength")]
-		uint FrameLength { get; set; } /* AVAudioFrameCount = uint32_t */
+		public uint FrameLength { get; set; } /* AVAudioFrameCount = uint32_t */
 
 		[Export ("stride")]
-		nuint Stride { get; }
+		public nuint Stride { get; }
 
 		[Export ("floatChannelData")]
-		IntPtr FloatChannelData { get; }
+		public IntPtr FloatChannelData { get; }
 
 		[Export ("int16ChannelData")]
-		IntPtr Int16ChannelData { get; }
+		public IntPtr Int16ChannelData { get; }
 
 		[Export ("int32ChannelData")]
-		IntPtr Int32ChannelData { get; }
+		public IntPtr Int32ChannelData { get; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -1755,74 +1756,74 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioNode))]
-	[DisableDefaultCtor] // designated
-	interface AVAudioPlayerNode : AVAudioMixing {
+	//[DisableDefaultCtor] // designated
+	public partial class AVAudioPlayerNode : AVAudioMixing {
 
 		[DesignatedInitializer]
 		[Export ("init")]
-		NativeHandle Constructor ();
+		public extern NativeHandle Constructor ();
 
 		[Export ("playing")]
 		bool Playing { [Bind ("isPlaying")] get; }
 
 		[Async]
 		[Export ("scheduleBuffer:completionHandler:")]
-		void ScheduleBuffer (AVAudioPcmBuffer buffer, [NullAllowed] Action completionHandler);
+		public extern void ScheduleBuffer (AVAudioPcmBuffer buffer, [NullAllowed] Action completionHandler);
 
 		[Async]
 		[Export ("scheduleBuffer:atTime:options:completionHandler:")]
-		void ScheduleBuffer (AVAudioPcmBuffer buffer, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeBufferOptions options, [NullAllowed] Action completionHandler);
+		public extern void ScheduleBuffer (AVAudioPcmBuffer buffer, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeBufferOptions options, [NullAllowed] Action completionHandler);
 
 		[Async]
 		[MacCatalyst (13, 1)]
 		[Export ("scheduleBuffer:completionCallbackType:completionHandler:")]
-		void ScheduleBuffer (AVAudioPcmBuffer buffer, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
+		public extern void ScheduleBuffer (AVAudioPcmBuffer buffer, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
 
 		[Async]
 		[MacCatalyst (13, 1)]
 		[Export ("scheduleBuffer:atTime:options:completionCallbackType:completionHandler:")]
-		void ScheduleBuffer (AVAudioPcmBuffer buffer, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeBufferOptions options, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
+		public extern void ScheduleBuffer (AVAudioPcmBuffer buffer, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeBufferOptions options, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
 
 		[Async]
 		[Export ("scheduleFile:atTime:completionHandler:")]
-		void ScheduleFile (AVAudioFile file, [NullAllowed] AVAudioTime when, [NullAllowed] Action completionHandler);
+		public extern void ScheduleFile (AVAudioFile file, [NullAllowed] AVAudioTime when, [NullAllowed] Action completionHandler);
 
 		[Async]
 		[MacCatalyst (13, 1)]
 		[Export ("scheduleFile:atTime:completionCallbackType:completionHandler:")]
-		void ScheduleFile (AVAudioFile file, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
+		public extern void ScheduleFile (AVAudioFile file, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
 
 		[Async]
 		[Export ("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:")]
-		void ScheduleSegment (AVAudioFile file, long startFrame, uint /* AVAudioFrameCount = uint32_t */ numberFrames, [NullAllowed] AVAudioTime when, [NullAllowed] Action completionHandler);
+		public extern void ScheduleSegment (AVAudioFile file, long startFrame, uint /* AVAudioFrameCount = uint32_t */ numberFrames, [NullAllowed] AVAudioTime when, [NullAllowed] Action completionHandler);
 
 		[Async]
 		[MacCatalyst (13, 1)]
 		[Export ("scheduleSegment:startingFrame:frameCount:atTime:completionCallbackType:completionHandler:")]
-		void ScheduleSegment (AVAudioFile file, long startFrame, uint numberFrames, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
+		public extern void ScheduleSegment (AVAudioFile file, long startFrame, uint numberFrames, [NullAllowed] AVAudioTime when, AVAudioPlayerNodeCompletionCallbackType callbackType, [NullAllowed] Action<AVAudioPlayerNodeCompletionCallbackType> completionHandler);
 
 		[Export ("stop")]
-		void Stop ();
+		public extern void Stop ();
 
 		[Export ("prepareWithFrameCount:")]
-		void PrepareWithFrameCount (uint /* AVAudioFrameCount = uint32_t */ frameCount);
+		public extern void PrepareWithFrameCount (uint /* AVAudioFrameCount = uint32_t */ frameCount);
 
 		[Export ("play")]
-		void Play ();
+		public extern void Play ();
 
 		[Export ("playAtTime:")]
-		void PlayAtTime ([NullAllowed] AVAudioTime when);
+		public extern void PlayAtTime ([NullAllowed] AVAudioTime when);
 
 		[Export ("pause")]
-		void Pause ();
+		public extern void Pause ();
 
 		[return: NullAllowed]
 		[Export ("nodeTimeForPlayerTime:")]
-		AVAudioTime GetNodeTimeFromPlayerTime (AVAudioTime playerTime);
+		public extern AVAudioTime? GetNodeTimeFromPlayerTime (AVAudioTime playerTime);
 
 		[return: NullAllowed]
 		[Export ("playerTimeForNodeTime:")]
-		AVAudioTime GetPlayerTimeFromNodeTime (AVAudioTime nodeTime);
+		public extern AVAudioTime? GetPlayerTimeFromNodeTime (AVAudioTime nodeTime);
 	}
 
 	/// <include file="../docs/api/AVFoundation/AVAudioRecorder.xml" path="/Documentation/Docs[@DocId='T:AVFoundation.AVAudioRecorder']/*" />
@@ -1985,9 +1986,9 @@ namespace AVFoundation {
 	[Native]
 	public enum AVAudioSessionInterruptionReason : ulong {
 		Default = 0,
-		[Deprecated (PlatformName.MacCatalyst, 16, 0, message: "Not reported anymore.")]
-		[Deprecated (PlatformName.iOS, 16, 0, message: "Not reported anymore.")]
-		[Deprecated (PlatformName.TvOS, 16, 0, message: "Not reported anymore.")]
+		///[Deprecated (PlatformName.MacCatalyst, 16, 0, message: "Not reported anymore.")]
+		//[Deprecated (PlatformName.iOS, 16, 0, message: "Not reported anymore.")]
+		//[Deprecated (PlatformName.TvOS, 16, 0, message: "Not reported anymore.")]
 		[Deprecated (PlatformName.MacOSX, 11, 3, message: "Not reported anymore.")]
 		AppWasSuspended = 1,
 		BuiltInMicMuted = 2,
@@ -2844,7 +2845,7 @@ namespace AVFoundation {
 		PlayAndRecord,
 
 		[NoTV]
-		[Deprecated (PlatformName.iOS, 10, 0)]
+		//[Deprecated (PlatformName.iOS, 10, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Field ("AVAudioSessionCategoryAudioProcessing")]
 		AudioProcessing,
@@ -3076,34 +3077,34 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioNode))]
 	[DisableDefaultCtor] // returns a nil handle
-	interface AVAudioUnit {
+	public partial class AVAudioUnit : AVAudioNode {
 		[Export ("audioComponentDescription"), Internal]
-		AudioComponentDescription AudioComponentDescription { get; }
+		public AudioComponentDescription AudioComponentDescription { get; }
 
 		[Export ("audioUnit")]
-		global::AudioUnit.AudioUnit AudioUnit { get; }
+		public global::AudioUnit.AudioUnit AudioUnit { get; }
 
 		[Export ("name")]
-		string Name { get; }
+		public string Name { get; }
 
 		[Export ("manufacturerName")]
-		string ManufacturerName { get; }
+		public string ManufacturerName { get; }
 
 		[Export ("version")]
-		nuint Version { get; }
+		public nuint Version { get; }
 
 		[Export ("loadAudioUnitPresetAtURL:error:")]
-		bool LoadAudioUnitPreset (NSUrl url, out NSError error);
+		public extern bool LoadAudioUnitPreset (NSUrl url, out NSError error);
 
 		[MacCatalyst (13, 1)]
 		[Static]
 		[Export ("instantiateWithComponentDescription:options:completionHandler:")]
 		[Async]
-		void FromComponentDescription (AudioComponentDescription audioComponentDescription, AudioComponentInstantiationOptions options, Action<AVAudioUnit, NSError> completionHandler);
+		public static  extern void FromComponentDescription (AudioComponentDescription audioComponentDescription, AudioComponentInstantiationOptions options, Action<AVAudioUnit, NSError> completionHandler);
 
 		[MacCatalyst (13, 1)]
 		[Export ("AUAudioUnit")]
-		AUAudioUnit AUAudioUnit { get; }
+		public AUAudioUnit AUAudioUnit { get; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -3182,53 +3183,53 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioUnit))]
 	[DisableDefaultCtor] // returns a nil handle
-	interface AVAudioUnitGenerator : AVAudioMixing {
+	public partial class AVAudioUnitGenerator : AVAudioMixing {
 		[Export ("initWithAudioComponentDescription:")]
-		NativeHandle Constructor (AudioComponentDescription audioComponentDescription);
+		public extern NativeHandle Constructor (AudioComponentDescription audioComponentDescription);
 
 		[Export ("bypass")]
-		bool Bypass { get; set; }
+		public bool Bypass { get; set; }
 	}
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVAudioUnit), Name = "AVAudioUnitMIDIInstrument")]
-	[DisableDefaultCtor] // returns a nil handle
-	interface AVAudioUnitMidiInstrument : AVAudioMixing {
+	//[DisableDefaultCtor] // returns a nil handle
+	public partial class AVAudioUnitMidiInstrument : AVAudioUnit {//}AVAudioMixing {
 		[Export ("initWithAudioComponentDescription:")]
-		NativeHandle Constructor (AudioComponentDescription audioComponentDescription);
+		public extern NativeHandle Constructor (AudioComponentDescription audioComponentDescription);
 
 		[Export ("startNote:withVelocity:onChannel:")]
-		void StartNote (byte note, byte velocity, byte channel);
+		public extern  void StartNote (byte note, byte velocity, byte channel);
 
 		[Export ("stopNote:onChannel:")]
-		void StopNote (byte note, byte channel);
+		public extern  void StopNote (byte note, byte channel);
 
 		[Export ("sendController:withValue:onChannel:")]
-		void SendController (byte controller, byte value, byte channel);
+		public extern void SendController (byte controller, byte value, byte channel);
 
 		[Export ("sendPitchBend:onChannel:")]
-		void SendPitchBend (ushort pitchbend, byte channel);
+		public extern void SendPitchBend (ushort pitchbend, byte channel);
 
 		[Export ("sendPressure:onChannel:")]
-		void SendPressure (byte pressure, byte channel);
+		public extern void SendPressure (byte pressure, byte channel);
 
 		[Export ("sendPressureForKey:withValue:onChannel:")]
-		void SendPressureForKey (byte key, byte value, byte channel);
+		public extern void SendPressureForKey (byte key, byte value, byte channel);
 
 		[Export ("sendProgramChange:onChannel:")]
-		void SendProgramChange (byte program, byte channel);
+		public extern void SendProgramChange (byte program, byte channel);
 
 		[Export ("sendProgramChange:bankMSB:bankLSB:onChannel:")]
-		void SendProgramChange (byte program, byte bankMSB, byte bankLSB, byte channel);
+		public extern void SendProgramChange (byte program, byte bankMSB, byte bankLSB, byte channel);
 
 		[Export ("sendMIDIEvent:data1:data2:")]
-		void SendMidiEvent (byte midiStatus, byte data1, byte data2);
+		public extern void SendMidiEvent (byte midiStatus, byte data1, byte data2);
 
 		[Export ("sendMIDIEvent:data1:")]
-		void SendMidiEvent (byte midiStatus, byte data1);
+		public extern void SendMidiEvent (byte midiStatus, byte data1);
 
 		[Export ("sendMIDISysExEvent:")]
-		void SendMidiSysExEvent (NSData midiData);
+		public extern void SendMidiSysExEvent (NSData midiData);
 	}
 
 	[MacCatalyst (13, 1)]
@@ -3313,58 +3314,58 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVAudioTime {
+	public partial class AVAudioTime : NSObject {
 		[Export ("initWithAudioTimeStamp:sampleRate:")]
-		NativeHandle Constructor (ref AudioTimeStamp timestamp, double sampleRate);
+		public extern NativeHandle Constructor (ref AudioTimeStamp timestamp, double sampleRate);
 
 		[Export ("initWithHostTime:")]
-		NativeHandle Constructor (ulong hostTime);
+		public extern NativeHandle Constructor (ulong hostTime);
 
 		[Export ("initWithSampleTime:atRate:")]
-		NativeHandle Constructor (long sampleTime, double sampleRate);
+		public extern NativeHandle Constructor (long sampleTime, double sampleRate);
 
 		[Export ("initWithHostTime:sampleTime:atRate:")]
-		NativeHandle Constructor (ulong hostTime, long sampleTime, double sampleRate);
+		public extern NativeHandle Constructor (ulong hostTime, long sampleTime, double sampleRate);
 
 		[Export ("hostTimeValid")]
-		bool HostTimeValid { [Bind ("isHostTimeValid")] get; }
+		public bool HostTimeValid { [Bind ("isHostTimeValid")] get; }
 
 		[Export ("hostTime")]
-		ulong HostTime { get; }
+		public ulong HostTime { get; }
 
 		[Export ("sampleTimeValid")]
-		bool SampleTimeValid { [Bind ("isSampleTimeValid")] get; }
+		public bool SampleTimeValid { [Bind ("isSampleTimeValid")] get; }
 
 		[Export ("sampleTime")]
-		long SampleTime { get; }
+		public long SampleTime { get; }
 
 		[Export ("sampleRate")]
-		double SampleRate { get; }
+		public double SampleRate { get; }
 
 		[Export ("audioTimeStamp")]
-		AudioTimeStamp AudioTimeStamp { get; }
+		public AudioTimeStamp AudioTimeStamp { get; }
 
 		[Static, Export ("timeWithAudioTimeStamp:sampleRate:")]
-		AVAudioTime FromAudioTimeStamp (ref AudioTimeStamp timestamp, double sampleRate);
+		public extern AVAudioTime FromAudioTimeStamp (ref AudioTimeStamp timestamp, double sampleRate);
 
 		[Static, Export ("timeWithHostTime:")]
-		AVAudioTime FromHostTime (ulong hostTime);
+		public static extern AVAudioTime FromHostTime (ulong hostTime);
 
 		[Static, Export ("timeWithSampleTime:atRate:")]
-		AVAudioTime FromSampleTime (long sampleTime, double sampleRate);
+		public static extern AVAudioTime FromSampleTime (long sampleTime, double sampleRate);
 
 		[Static, Export ("timeWithHostTime:sampleTime:atRate:")]
-		AVAudioTime FromHostTime (ulong hostTime, long sampleTime, double sampleRate);
+		public static extern AVAudioTime FromHostTime (ulong hostTime, long sampleTime, double sampleRate);
 
 		[Static, Export ("hostTimeForSeconds:")]
-		ulong HostTimeForSeconds (double seconds);
+		public static extern ulong HostTimeForSeconds (double seconds);
 
 		[Static, Export ("secondsForHostTime:")]
-		double SecondsForHostTime (ulong hostTime);
+		public static extern double SecondsForHostTime (ulong hostTime);
 
 		[Export ("extrapolateTimeFromAnchor:")]
 		[return: NullAllowed]
-		AVAudioTime ExtrapolateTimeFromAnchor (AVAudioTime anchorTime);
+		public extern AVAudioTime? ExtrapolateTimeFromAnchor (AVAudioTime anchorTime);
 	}
 
 	[MacCatalyst (13, 1)]

@@ -7669,7 +7669,7 @@ namespace Foundation {
 	//	}
 
 	// Placeholer, just so we can start flagging things
-	partial interface INSFastEnumeration { }
+	public partial interface INSFastEnumeration { }
 
 	public partial class NSBundle {
 		// - (NSImage *)imageForResource:(NSString *)name NS_AVAILABLE_MAC(10_7);

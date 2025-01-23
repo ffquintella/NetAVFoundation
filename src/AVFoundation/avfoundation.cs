@@ -668,186 +668,186 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[Static]
-	interface AVVideo {
+	public static partial class AVVideo {
 		[Field ("AVVideoCodecKey")]
-		NSString CodecKey { get; }
+		public static NSString CodecKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoMaxKeyFrameIntervalDurationKey")]
-		NSString MaxKeyFrameIntervalDurationKey { get; }
+		public static NSString MaxKeyFrameIntervalDurationKey { get; }
 
 		[TV (14, 3), iOS (14, 3)]
 		[MacCatalyst (14, 3)]
 		[Field ("AVVideoAppleProRAWBitDepthKey")]
-		NSString AppleProRawBitDepthKey { get; }
+		public static NSString AppleProRawBitDepthKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoAllowFrameReorderingKey")]
-		NSString AllowFrameReorderingKey { get; }
+		public static NSString AllowFrameReorderingKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoAverageNonDroppableFrameRateKey")]
-		NSString AverageNonDroppableFrameRateKey { get; }
+		public static NSString AverageNonDroppableFrameRateKey { get; }
 
 		[NoiOS, NoTV]
 		[NoMacCatalyst]
 		[Field ("AVVideoEncoderSpecificationKey")]
-		NSString EncoderSpecificationKey { get; }
+		public static NSString EncoderSpecificationKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoExpectedSourceFrameRateKey")]
-		NSString ExpectedSourceFrameRateKey { get; }
+		public static NSString ExpectedSourceFrameRateKey { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoH264EntropyModeCABAC")]
-		NSString H264EntropyModeCABAC { get; }
+		public static NSString H264EntropyModeCABAC { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoH264EntropyModeCAVLC")]
-		NSString H264EntropyModeCAVLC { get; }
+		public static NSString H264EntropyModeCAVLC { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoH264EntropyModeKey")]
-		NSString H264EntropyModeKey { get; }
+		public static NSString H264EntropyModeKey { get; }
 
-		[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
-		[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVVideoCodecType' enum instead.")]
 		[Field ("AVVideoCodecH264")]
-		NSString CodecH264 { get; }
+		public static NSString CodecH264 { get; }
 
-		[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
-		[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVVideoCodecType' enum instead.")]
 		[Field ("AVVideoCodecJPEG")]
-		NSString CodecJPEG { get; }
+		public static NSString CodecJPEG { get; }
 
-		[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
-		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
-		[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.iOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
+		//[Deprecated (PlatformName.TvOS, 11, 0, message: "Use 'AVVideoCodecType' enum instead.")]
 		[NoiOS, NoTV]
 		[NoMacCatalyst]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVVideoCodecType' enum instead.")]
 		[Field ("AVVideoCodecAppleProRes4444")]
-		NSString AppleProRes4444 { get; }
+		public static NSString AppleProRes4444 { get; }
 
 		[Deprecated (PlatformName.MacOSX, 10, 13, message: "Use 'AVVideoCodecType' enum instead.")]
 		[NoiOS, NoTV]
 		[NoMacCatalyst]
 		[Field ("AVVideoCodecAppleProRes422")]
-		NSString AppleProRes422 { get; }
+		public static NSString AppleProRes422 { get; }
 
 		[Field ("AVVideoWidthKey")]
-		NSString WidthKey { get; }
+		public static NSString WidthKey { get; }
 
 		[Field ("AVVideoHeightKey")]
-		NSString HeightKey { get; }
+		public static NSString HeightKey { get; }
 
 		[Field ("AVVideoScalingModeKey")]
-		NSString ScalingModeKey { get; }
+		public static NSString ScalingModeKey { get; }
 
 		[Field ("AVVideoCompressionPropertiesKey")]
-		NSString CompressionPropertiesKey { get; }
+		public static NSString CompressionPropertiesKey { get; }
 
 		[Field ("AVVideoAverageBitRateKey")]
-		NSString AverageBitRateKey { get; }
+		public static NSString AverageBitRateKey { get; }
 
 		[Field ("AVVideoMaxKeyFrameIntervalKey")]
-		NSString MaxKeyFrameIntervalKey { get; }
+		public static NSString MaxKeyFrameIntervalKey { get; }
 
 		[Field ("AVVideoProfileLevelKey")]
-		NSString ProfileLevelKey { get; }
+		public static NSString ProfileLevelKey { get; }
 
 		[Field ("AVVideoQualityKey")]
-		NSString QualityKey { get; }
+		public static NSString QualityKey { get; }
 
 		[Field ("AVVideoProfileLevelH264Baseline30")]
-		NSString ProfileLevelH264Baseline30 { get; }
+		public static NSString ProfileLevelH264Baseline30 { get; }
 
 		[Field ("AVVideoProfileLevelH264Baseline31")]
-		NSString ProfileLevelH264Baseline31 { get; }
+		public static NSString ProfileLevelH264Baseline31 { get; }
 
 		[Field ("AVVideoProfileLevelH264Main30")]
-		NSString ProfileLevelH264Main30 { get; }
+		public static NSString ProfileLevelH264Main30 { get; }
 
 		[Field ("AVVideoProfileLevelH264Main31")]
-		NSString ProfileLevelH264Main31 { get; }
+		public static NSString ProfileLevelH264Main31 { get; }
 
 		[Field ("AVVideoProfileLevelH264Baseline41")]
-		NSString ProfileLevelH264Baseline41 { get; }
+		public static NSString ProfileLevelH264Baseline41 { get; }
 
 		[Field ("AVVideoProfileLevelH264Main32")]
-		NSString ProfileLevelH264Main32 { get; }
+		public static NSString ProfileLevelH264Main32 { get; }
 
 		[Field ("AVVideoProfileLevelH264Main41")]
-		NSString ProfileLevelH264Main41 { get; }
+		public static NSString ProfileLevelH264Main41 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoProfileLevelH264High40")]
-		NSString ProfileLevelH264High40 { get; }
+		public static NSString ProfileLevelH264High40 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoProfileLevelH264High41")]
-		NSString ProfileLevelH264High41 { get; }
+		public static NSString ProfileLevelH264High41 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoProfileLevelH264BaselineAutoLevel")]
-		NSString ProfileLevelH264BaselineAutoLevel { get; }
+		public static NSString ProfileLevelH264BaselineAutoLevel { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoProfileLevelH264MainAutoLevel")]
-		NSString ProfileLevelH264MainAutoLevel { get; }
+		public static NSString ProfileLevelH264MainAutoLevel { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVVideoProfileLevelH264HighAutoLevel")]
-		NSString ProfileLevelH264HighAutoLevel { get; }
+		public static NSString ProfileLevelH264HighAutoLevel { get; }
 
 		[Field ("AVVideoPixelAspectRatioKey")]
-		NSString PixelAspectRatioKey { get; }
+		public static NSString PixelAspectRatioKey { get; }
 
 		[Field ("AVVideoPixelAspectRatioHorizontalSpacingKey")]
-		NSString PixelAspectRatioHorizontalSpacingKey { get; }
+		public static NSString PixelAspectRatioHorizontalSpacingKey { get; }
 
 		[Field ("AVVideoPixelAspectRatioVerticalSpacingKey")]
-		NSString PixelAspectRatioVerticalSpacingKey { get; }
+		public static NSString PixelAspectRatioVerticalSpacingKey { get; }
 
 		[Field ("AVVideoCleanApertureKey")]
-		NSString CleanApertureKey { get; }
+		public static NSString CleanApertureKey { get; }
 
 		[Field ("AVVideoCleanApertureWidthKey")]
-		NSString CleanApertureWidthKey { get; }
+		public static NSString CleanApertureWidthKey { get; }
 
 		[Field ("AVVideoCleanApertureHeightKey")]
-		NSString CleanApertureHeightKey { get; }
+		public static NSString CleanApertureHeightKey { get; }
 
 		[Field ("AVVideoCleanApertureHorizontalOffsetKey")]
-		NSString CleanApertureHorizontalOffsetKey { get; }
+		public static NSString CleanApertureHorizontalOffsetKey { get; }
 
 		[Field ("AVVideoCleanApertureVerticalOffsetKey")]
-		NSString CleanApertureVerticalOffsetKey { get; }
+		public static NSString CleanApertureVerticalOffsetKey { get; }
 
 		[MacCatalyst (17, 0), NoTV, Mac (10, 13), iOS (17, 0)]
 		[Field ("AVVideoDecompressionPropertiesKey")]
-		NSString DecompressionPropertiesKey { get; }
+		public static NSString DecompressionPropertiesKey { get; }
 
 	}
 
 	[MacCatalyst (13, 1)]
 	[Static]
-	interface AVVideoScalingModeKey {
+	public static class AVVideoScalingModeKey {
 		[Field ("AVVideoScalingModeFit")]
-		NSString Fit { get; }
+		public static NSString Fit { get; }
 
 		[Field ("AVVideoScalingModeResize")]
-		NSString Resize { get; }
+		public static NSString Resize { get; }
 
 		[Field ("AVVideoScalingModeResizeAspect")]
-		NSString ResizeAspect { get; }
+		public static NSString ResizeAspect { get; }
 
 		[Field ("AVVideoScalingModeResizeAspectFill")]
-		NSString ResizeAspectFill { get; }
+		public static NSString ResizeAspectFill { get; }
 	}
 
 	[MacCatalyst (13, 1)]
@@ -1711,43 +1711,43 @@ namespace AVFoundation {
 		public extern string CurrentDevice { get; set; }
 	}
 
-	interface IAVAudioPlayerDelegate { }
+	public interface IAVAudioPlayerDelegate { }
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
 	[Model]
 	[Protocol]
-	interface AVAudioPlayerDelegate {
+	public partial class AVAudioPlayerDelegate : NSObject {
 		[Export ("audioPlayerDidFinishPlaying:successfully:"), CheckDisposed]
-		void FinishedPlaying (AVAudioPlayer player, bool flag);
+		public extern void FinishedPlaying (AVAudioPlayer player, bool flag);
 
 		[Export ("audioPlayerDecodeErrorDidOccur:error:")]
-		void DecoderError (AVAudioPlayer player, [NullAllowed] NSError error);
+		public extern void DecoderError (AVAudioPlayer player, [NullAllowed] NSError error);
 
 		[NoMac]
-		[Deprecated (PlatformName.iOS, 8, 0)]
-		[Deprecated (PlatformName.TvOS, 9, 0)]
+		//[Deprecated (PlatformName.iOS, 8, 0)]
+		//[Deprecated (PlatformName.TvOS, 9, 0)]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Export ("audioPlayerBeginInterruption:")]
-		void BeginInterruption (AVAudioPlayer player);
+		public extern void BeginInterruption (AVAudioPlayer player);
 
 		[NoMac]
 		[Export ("audioPlayerEndInterruption:")]
-		[Deprecated (PlatformName.iOS, 6, 0)]
-		[Deprecated (PlatformName.TvOS, 9, 0)]
+		//[Deprecated (PlatformName.iOS, 6, 0)]
+		//[Deprecated (PlatformName.TvOS, 9, 0)]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
-		void EndInterruption (AVAudioPlayer player);
+		public extern void EndInterruption (AVAudioPlayer player);
 
 		[NoMac]
-		[Deprecated (PlatformName.iOS, 8, 0)]
-		[Deprecated (PlatformName.TvOS, 9, 0)]
+		//[Deprecated (PlatformName.iOS, 8, 0)]
+		//[Deprecated (PlatformName.TvOS, 9, 0)]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Export ("audioPlayerEndInterruption:withOptions:")]
 #if NET
-		void EndInterruption (AVAudioPlayer player, AVAudioSessionInterruptionOptions flags);
+		public extern void EndInterruption (AVAudioPlayer player, AVAudioSessionInterruptionOptions flags);
 #else
 		void EndInterruption (AVAudioPlayer player, AVAudioSessionInterruptionFlags flags);
 #endif
@@ -1924,7 +1924,7 @@ namespace AVFoundation {
 	///       <para>If developers create classes that implement this interface, the implementation methods will automatically be exported to Objective-C with the matching signature from the method defined in the <see cref="T:AVFoundation.AVAudioRecorderDelegate" /> protocol.</para>
 	///       <para>Optional methods (if any) are provided by the <see cref="T:AVFoundation.AVAudioRecorderDelegate_Extensions" /> class as extension methods to the interface, allowing developers to invoke any optional methods on the protocol.</para>
 	///     </remarks>
-	interface IAVAudioRecorderDelegate { }
+	public interface IAVAudioRecorderDelegate { }
 
 	/// <summary>Delegate for the AVAudioRecorder class.</summary>
 	///     
@@ -1934,37 +1934,37 @@ namespace AVFoundation {
 	[Protocol]
 	[TV (17, 0)]
 	[MacCatalyst (13, 1)]
-	interface AVAudioRecorderDelegate {
+	public partial class AVAudioRecorderDelegate : NSObject {
 		[Export ("audioRecorderDidFinishRecording:successfully:"), CheckDisposed]
-		void FinishedRecording (AVAudioRecorder recorder, bool flag);
+		public extern void FinishedRecording (AVAudioRecorder recorder, bool flag);
 
 		[Export ("audioRecorderEncodeErrorDidOccur:error:")]
-		void EncoderError (AVAudioRecorder recorder, [NullAllowed] NSError error);
+		public extern void EncoderError (AVAudioRecorder recorder, [NullAllowed] NSError error);
 
 		[NoMac]
-		[Deprecated (PlatformName.iOS, 8, 0)]
+		//[Deprecated (PlatformName.iOS, 8, 0)]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Export ("audioRecorderBeginInterruption:")]
 		[NoTV]
-		void BeginInterruption (AVAudioRecorder recorder);
+		public extern void BeginInterruption (AVAudioRecorder recorder);
 
 		[NoMac]
-		[Deprecated (PlatformName.iOS, 6, 0)]
+		//[Deprecated (PlatformName.iOS, 6, 0)]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[Export ("audioRecorderEndInterruption:")]
 		[NoTV]
-		void EndInterruption (AVAudioRecorder recorder);
+		public extern void EndInterruption (AVAudioRecorder recorder);
 
 		// Deprecated in iOS 6.0 but we have same C# signature as a method that was deprecated in iOS 8.0
-		[Deprecated (PlatformName.iOS, 8, 0)]
+		//[Deprecated (PlatformName.iOS, 8, 0)]
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1)]
 		[NoTV]
 		[Export ("audioRecorderEndInterruption:withOptions:")]
-		void EndInterruption (AVAudioRecorder recorder, AVAudioSessionInterruptionOptions flags);
+		public extern void EndInterruption (AVAudioRecorder recorder, AVAudioSessionInterruptionOptions flags);
 	}
 
 	[NoMac]
@@ -2969,7 +2969,7 @@ namespace AVFoundation {
 	///       <para>If developers create classes that implement this interface, the implementation methods will automatically be exported to Objective-C with the matching signature from the method defined in the <see cref="T:AVFoundation.AVAudioSessionDelegate" /> protocol.</para>
 	///       <para>Optional methods (if any) are provided by the <see cref="T:AVFoundation.AVAudioSessionDelegate_Extensions" /> class as extension methods to the interface, allowing developers to invoke any optional methods on the protocol.</para>
 	///     </remarks>
-	interface IAVAudioSessionDelegate { }
+	public interface IAVAudioSessionDelegate { }
 
 	/// <summary>Delegate for the AVAudioSession class.</summary>
 	///     
@@ -2982,19 +2982,19 @@ namespace AVFoundation {
 	[NoTV]
 	[MacCatalyst (13, 1)]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1)]
-	interface AVAudioSessionDelegate {
+	public partial class AVAudioSessionDelegate : NSObject {
 		[Export ("beginInterruption")]
-		void BeginInterruption ();
+		public extern void BeginInterruption ();
 
 		[Export ("endInterruption")]
-		void EndInterruption ();
+		public extern void EndInterruption ();
 
 		[Export ("inputIsAvailableChanged:")]
-		void InputIsAvailableChanged (bool isInputAvailable);
+		public extern void InputIsAvailableChanged (bool isInputAvailable);
 
 		[Export ("endInterruptionWithFlags:")]
 #if NET
-		void EndInterruption (AVAudioSessionInterruptionOptions flags);
+		public extern void EndInterruption (AVAudioSessionInterruptionOptions flags);
 #else
 		void EndInterruption (AVAudioSessionInterruptionFlags flags);
 #endif

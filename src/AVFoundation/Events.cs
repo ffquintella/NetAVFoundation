@@ -31,6 +31,7 @@
 #if !WATCH
 
 using System;
+using System.Runtime.Versioning;
 using Foundation;
 using ObjCRuntime;
 
@@ -80,7 +81,7 @@ namespace AVFoundation {
 		}
 
 		[Preserve (Conditional = true)]
-		public override void FinishedPlaying (AVAudioPlayer player, bool flag)
+		public  void FinishedPlaying (AVAudioPlayer player, bool flag)
 		{
 			if (cbFinishedPlaying is not null)
 				cbFinishedPlaying (player, new AVStatusEventArgs (flag));
@@ -89,21 +90,21 @@ namespace AVFoundation {
 		}
 
 		[Preserve (Conditional = true)]
-		public override void DecoderError (AVAudioPlayer player, NSError? error)
+		public  void DecoderError (AVAudioPlayer player, NSError? error)
 		{
 			if (cbDecoderError is not null)
 				cbDecoderError (player, error is not null ? new AVErrorEventArgs (error) : null);
 		}
 #if !MONOMAC
 		[Preserve (Conditional = true)]
-		public override void BeginInterruption (AVAudioPlayer player)
+		public  void BeginInterruption (AVAudioPlayer player)
 		{
 			if (cbBeginInterruption is not null)
 				cbBeginInterruption (player, EventArgs.Empty);
 		}
 
 		[Preserve (Conditional = true)]
-		public override void EndInterruption (AVAudioPlayer player)
+		public  void EndInterruption (AVAudioPlayer player)
 		{
 			if (cbEndInterruption is not null)
 				cbEndInterruption (player, EventArgs.Empty);
@@ -180,28 +181,28 @@ namespace AVFoundation {
 		}
 
 		[Preserve (Conditional = true)]
-		public override void FinishedRecording (AVAudioRecorder recorder, bool flag)
+		public  void FinishedRecording (AVAudioRecorder recorder, bool flag)
 		{
 			if (cbFinishedRecording is not null)
 				cbFinishedRecording (recorder, new AVStatusEventArgs (flag));
 		}
 
 		[Preserve (Conditional = true)]
-		public override void EncoderError (AVAudioRecorder recorder, NSError? error)
+		public  void EncoderError (AVAudioRecorder recorder, NSError? error)
 		{
 			if (cbEncoderError is not null)
 				cbEncoderError (recorder, error is not null ? new AVErrorEventArgs (error) : null);
 		}
 #if !MONOMAC
 		[Preserve (Conditional = true)]
-		public override void BeginInterruption (AVAudioRecorder recorder)
+		public  void BeginInterruption (AVAudioRecorder recorder)
 		{
 			if (cbBeginInterruption is not null)
 				cbBeginInterruption (recorder, EventArgs.Empty);
 		}
 
 		[Preserve (Conditional = true)]
-		public override void EndInterruption (AVAudioRecorder recorder)
+		public  void EndInterruption (AVAudioRecorder recorder)
 		{
 			if (cbEndInterruption is not null)
 				cbEndInterruption (recorder, EventArgs.Empty);
@@ -327,21 +328,21 @@ namespace AVFoundation {
 		}
 
 		[Preserve (Conditional = true)]
-		public override void BeginInterruption ()
+		public  void BeginInterruption ()
 		{
 			if (cbBeginInterruption is not null)
 				cbBeginInterruption (session, EventArgs.Empty);
 		}
 
 		[Preserve (Conditional = true)]
-		public override void EndInterruption ()
+		public  void EndInterruption ()
 		{
 			if (cbEndInterruption is not null)
 				cbEndInterruption (session, EventArgs.Empty);
 		}
 
 		[Preserve (Conditional = true)]
-		public override void InputIsAvailableChanged (bool isInputAvailable)
+		public  void InputIsAvailableChanged (bool isInputAvailable)
 		{
 			if (cbInputAvailabilityChanged is not null)
 				cbInputAvailabilityChanged (session, new AVStatusEventArgs (isInputAvailable));

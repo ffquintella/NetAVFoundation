@@ -7683,38 +7683,38 @@ namespace Foundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	partial class NSDateInterval : NSCopying {
+	public partial class NSDateInterval : NSCopying {
 		[Export ("startDate", ArgumentSemantic.Copy)]
-		NSDate StartDate { get; }
+		public NSDate StartDate { get; }
 
 		[Export ("endDate", ArgumentSemantic.Copy)]
-		NSDate EndDate { get; }
+		public NSDate EndDate { get; }
 
 		[Export ("duration")]
-		double Duration { get; }
+		public double Duration { get; }
 
 		[Export ("initWithStartDate:duration:")]
 		[DesignatedInitializer]
-		extern NativeHandle Constructor (NSDate startDate, double duration);
+		public extern NativeHandle Constructor (NSDate startDate, double duration);
 
 		[Export ("initWithStartDate:endDate:")]
-		extern NativeHandle Constructor (NSDate startDate, NSDate endDate);
+		public extern NativeHandle Constructor (NSDate startDate, NSDate endDate);
 
 		[Export ("compare:")]
-		extern NSComparisonResult Compare (NSDateInterval dateInterval);
+		public extern NSComparisonResult Compare (NSDateInterval dateInterval);
 
 		[Export ("isEqualToDateInterval:")]
-		extern bool IsEqualTo (NSDateInterval dateInterval);
+		public extern bool IsEqualTo (NSDateInterval dateInterval);
 
 		[Export ("intersectsDateInterval:")]
-		extern bool Intersects (NSDateInterval dateInterval);
+		public extern bool Intersects (NSDateInterval dateInterval);
 
 		[Export ("intersectionWithDateInterval:")]
 		[return: NullAllowed]
-		extern NSDateInterval GetIntersection (NSDateInterval dateInterval);
+		public extern NSDateInterval GetIntersection (NSDateInterval dateInterval);
 
 		[Export ("containsDate:")]
-		extern bool ContainsDate (NSDate date);
+		public extern bool ContainsDate (NSDate date);
 	}
 
 	[DisableDefaultCtor]
@@ -8445,7 +8445,7 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Name = "NSURLSessionTaskTransactionMetrics")]
 	[DisableDefaultCtor]
-	partial class NSUrlSessionTaskTransactionMetrics {
+	public partial class NSUrlSessionTaskTransactionMetrics {
 		
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This type is not meant to be user created.")]
 		[Export ("init")]
@@ -8603,21 +8603,20 @@ namespace Foundation {
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject), Name = "NSURLSessionTaskMetrics")]
 	[DisableDefaultCtor]
-	partial class NSUrlSessionTaskMetrics {
-
-	
+	public partial class NSUrlSessionTaskMetrics : NSObject {
+		
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "This type is not meant to be user created.")]
 		[Export ("init")]
-		extern NativeHandle Constructor ();
+		public extern NativeHandle Constructor ();
 
 		[Export ("transactionMetrics", ArgumentSemantic.Copy)]
-		NSUrlSessionTaskTransactionMetrics [] TransactionMetrics { get; }
+		public NSUrlSessionTaskTransactionMetrics [] TransactionMetrics { get; }
 
 		[Export ("taskInterval", ArgumentSemantic.Copy)]
-		NSDateInterval TaskInterval { get; }
+		public NSDateInterval TaskInterval { get; }
 
 		[Export ("redirectCount")]
-		nuint RedirectCount { get; }
+		public nuint RedirectCount { get; }
 	}
 
 	[DisableDefaultCtor] // -init should never be called on NSUnit!

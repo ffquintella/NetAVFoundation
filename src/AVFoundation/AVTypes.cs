@@ -15,6 +15,8 @@ using Vector3 = global::OpenTK.Vector3;
 using CoreGraphics;
 using ObjCRuntime;
 
+using nfloat = System.Runtime.InteropServices.NFloat;
+
 #nullable enable
 
 namespace AVFoundation {
@@ -675,6 +677,53 @@ namespace AVFoundation {
 	}
 #endif // !XAMCORE_5_0 && !__IOS__ && !__TVOS__
 
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AVCaptionPoint {
+		public AVCaptionDimension X;
+		public AVCaptionDimension Y;
+
+		[DllImport (Constants.AVFoundationLibrary)]
+		static extern AVCaptionPoint AVCaptionPointMake (AVCaptionDimension x, AVCaptionDimension y);
+
+		public static AVCaptionPoint Create (AVCaptionDimension x, AVCaptionDimension y)
+			=> AVCaptionPointMake (x,y);
+	}
+	
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AVCaptionDimension {
+		public nfloat Value;
+		nuint units;
+
+		public AVCaptionUnitsType Units {
+			get => (AVCaptionUnitsType) (long) units;
+			set => units = (nuint) (long) value;
+		}
+
+		[DllImport (Constants.AVFoundationLibrary)]
+		static extern AVCaptionDimension AVCaptionDimensionMake (nfloat dimension, /* AVCaptionUnitsType */ nuint units);
+
+		public static AVCaptionDimension Create (nfloat dimension, AVCaptionUnitsType units)
+			=> AVCaptionDimensionMake (dimension, (nuint) (long)units);
+	}
+	
+	public enum AVCaptionUnitsType : long {
+		Unspecified = 0,
+		Cells,
+		Percent,
+	}
+	
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AVCaptionSize {
+		public AVCaptionDimension Width;
+		public AVCaptionDimension Height;
+
+		[DllImport (Constants.AVFoundationLibrary)]
+		static extern AVCaptionSize AVCaptionSizeMake (AVCaptionDimension width, AVCaptionDimension height);
+
+		public static AVCaptionSize Create (AVCaptionDimension width, AVCaptionDimension height)
+			=> AVCaptionSizeMake (width, height);
+	}
+	
 #if MONOMAC
 
 #if NET

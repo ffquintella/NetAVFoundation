@@ -14132,11 +14132,11 @@ namespace AVFoundation {
 	[BaseType (typeof (NSObject))]
 	[MacCatalyst (13, 1)]
 	[Protocol, Model]
-	interface AVPlayerItemMetadataOutputPushDelegate : AVPlayerItemOutputPushDelegate {
+	public class AVPlayerItemMetadataOutputPushDelegate : AVPlayerItemOutputPushDelegate {
 
 		[MacCatalyst (13, 1)]
 		[Export ("metadataOutput:didOutputTimedMetadataGroups:fromPlayerItemTrack:")]
-		void DidOutputTimedMetadataGroups (AVPlayerItemMetadataOutput output, AVTimedMetadataGroup [] groups, [NullAllowed] AVPlayerItemTrack track);
+		public extern void DidOutputTimedMetadataGroups (AVPlayerItemMetadataOutput output, AVTimedMetadataGroup [] groups, [NullAllowed] AVPlayerItemTrack track);
 	}
 
 	[MacCatalyst (13, 1)]
@@ -14426,9 +14426,9 @@ namespace AVFoundation {
 	[BaseType (typeof (NSObject))]
 	[Model]
 	[Protocol]
-	interface AVPlayerItemOutputPushDelegate {
+	public class AVPlayerItemOutputPushDelegate : NSObject {
 		[Export ("outputSequenceWasFlushed:")]
-		void OutputSequenceWasFlushed (AVPlayerItemOutput output);
+		public extern void OutputSequenceWasFlushed (AVPlayerItemOutput output);
 	}
 
 	interface IAVPlayerItemLegibleOutputPushDelegate { }
@@ -17247,32 +17247,32 @@ namespace AVFoundation {
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
-	interface AVCoordinatedPlaybackParticipant {
+	public class AVCoordinatedPlaybackParticipant : NSObject{
 		[Export ("suspensionReasons")]
-		string [] SuspensionReasons { get; }
+		public string [] SuspensionReasons { get; }
 
 		[Export ("readyToPlay")]
-		bool ReadyToPlay { [Bind ("isReadyToPlay")] get; }
+		public bool ReadyToPlay { [Bind ("isReadyToPlay")] get; }
 
 		[Export ("identifier")]
-		NSUuid Identifier { get; }
+		public NSUuid Identifier { get; }
 	}
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVCoordinatedPlaybackSuspension {
+	public class AVCoordinatedPlaybackSuspension : NSObject {
 		[Export ("reason")]
-		string Reason { get; }
+		public string Reason { get; }
 
 		[Export ("beginDate")]
-		NSDate BeginDate { get; }
+		public NSDate BeginDate { get; }
 
 		[Export ("end")]
-		void End ();
+		public extern void End ();
 
 		[Export ("endProposingNewTime:")]
-		void EndProposingNewTime (CMTime time);
+		public extern void EndProposingNewTime (CMTime time);
 	}
 
 	interface IAVPlaybackCoordinatorPlaybackControlDelegate { }
@@ -17400,43 +17400,43 @@ namespace AVFoundation {
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVPlaybackCoordinator {
+	public class AVPlaybackCoordinator : NSObject {
 
 		[Notification]
 		[Field ("AVPlaybackCoordinatorOtherParticipantsDidChangeNotification")]
-		NSString OtherParticipantsDidChangeNotification { get; }
+		public static extern NSString OtherParticipantsDidChangeNotification { get; }
 
 		[Notification]
 		[Field ("AVPlaybackCoordinatorSuspensionReasonsDidChangeNotification")]
-		NSString SuspensionReasonsDidChangeNotification { get; }
+		public static extern NSString SuspensionReasonsDidChangeNotification { get; }
 
 		[Export ("otherParticipants")]
-		AVCoordinatedPlaybackParticipant [] OtherParticipants { get; }
+		public AVCoordinatedPlaybackParticipant [] OtherParticipants { get; }
 
 		[Export ("suspensionReasons")]
-		string [] SuspensionReasons { get; }
+		public string [] SuspensionReasons { get; }
 
 		[Export ("beginSuspensionForReason:")]
-		AVCoordinatedPlaybackSuspension BeginSuspension (string suspensionReason);
+		public extern AVCoordinatedPlaybackSuspension BeginSuspension (string suspensionReason);
 
 		[Export ("expectedItemTimeAtHostTime:")]
-		CMTime GetExpectedItemTime (CMTime hostClockTime);
+		public extern CMTime GetExpectedItemTime (CMTime hostClockTime);
 
 		// AVPlaybackCoordinator_AVCoordinatedPlaybackPolicies
 		[Export ("setParticipantLimit:forWaitingOutSuspensionsWithReason:")]
-		void SetParticipantLimit (nint participantLimit, string reason);
+		public extern void SetParticipantLimit (nint participantLimit, string reason);
 
 		[Export ("participantLimitForWaitingOutSuspensionsWithReason:")]
-		nint GetParticipantLimit (string reason);
+		public extern nint GetParticipantLimit (string reason);
 
 		[Export ("suspensionReasonsThatTriggerWaiting", ArgumentSemantic.Copy)]
-		string [] SuspensionReasonsThatTriggerWaiting { get; set; }
+		public string [] SuspensionReasonsThatTriggerWaiting { get; set; }
 
 		[Export ("pauseSnapsToMediaTimeOfOriginator")]
-		bool PauseSnapsToMediaTimeOfOriginator { get; set; }
+		public bool PauseSnapsToMediaTimeOfOriginator { get; set; }
 	}
 
-	interface IAVPlayerPlaybackCoordinatorDelegate { }
+	public interface IAVPlayerPlaybackCoordinatorDelegate { }
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 #if NET
@@ -17551,53 +17551,53 @@ namespace AVFoundation {
 	[NoTV, MacCatalyst (15, 0), Mac (12, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVCaption : NSCopying, NSMutableCopying, NSSecureCoding {
+	public class AVCaption : NSMutableCopying {
 		[Export ("initWithText:timeRange:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string text, CMTimeRange timeRange);
+		public extern NativeHandle Constructor (string text, CMTimeRange timeRange);
 
 		[Export ("text")]
-		string Text { get; }
+		public string Text { get; }
 
 		[Export ("timeRange")]
-		CMTimeRange TimeRange { get; }
+		public CMTimeRange TimeRange { get; }
 
 		//	interface AVCaption_Region
 		[NullAllowed, Export ("region")]
-		AVCaptionRegion Region { get; }
+		public AVCaptionRegion Region { get; }
 
 		[Export ("textAlignment")]
-		AVCaptionTextAlignment TextAlignment { get; }
+		public AVCaptionTextAlignment TextAlignment { get; }
 
 		// interface AVCaption_Animation
 		[Export ("animation")]
-		AVCaptionAnimation Animation { get; }
+		public AVCaptionAnimation Animation { get; }
 
 		// interface AVCaption_Styling
 
 		[Export ("textColorAtIndex:range:")]
 		[return: NullAllowed]
-		CGColor GetTextColor (nint index, [NullAllowed] out NSRange outRange);
+		public extern CGColor? GetTextColor (nint index, [NullAllowed] out NSRange outRange);
 
 		[Export ("backgroundColorAtIndex:range:")]
 		[return: NullAllowed]
-		CGColor GetBackgroundColor (nint index, [NullAllowed] out NSRange outRange);
+		public extern CGColor? GetBackgroundColor (nint index, [NullAllowed] out NSRange outRange);
 
 		[Export ("fontWeightAtIndex:range:")]
-		AVCaptionFontWeight GetFontWeight (nint index, [NullAllowed] out NSRange outRange);
+		public extern AVCaptionFontWeight GetFontWeight (nint index, [NullAllowed] out NSRange outRange);
 
 		[Export ("fontStyleAtIndex:range:")]
-		AVCaptionFontStyle GetFontStyle (nint index, [NullAllowed] out NSRange outRange);
+		public extern AVCaptionFontStyle GetFontStyle (nint index, [NullAllowed] out NSRange outRange);
 
 		[Export ("decorationAtIndex:range:")]
-		AVCaptionDecoration GetDecoration (nint index, [NullAllowed] out NSRange outRange);
+		public extern AVCaptionDecoration GetDecoration (nint index, [NullAllowed] out NSRange outRange);
 
 		[Export ("textCombineAtIndex:range:")]
-		AVCaptionTextCombine GetTextCombine (nint index, [NullAllowed] out NSRange outRange);
+		public extern AVCaptionTextCombine GetTextCombine (nint index, [NullAllowed] out NSRange outRange);
 
 		[Export ("rubyAtIndex:range:")]
 		[return: NullAllowed]
-		AVCaptionRuby GetRuby (nint index, [NullAllowed] out NSRange outRange);
+		public extern AVCaptionRuby GetRuby (nint index, [NullAllowed] out NSRange outRange);
 	}
 
 	[NoTV, MacCatalyst (15, 0), Mac (12, 0), iOS (18, 0)]
@@ -17672,29 +17672,29 @@ namespace AVFoundation {
 
 	[NoTV, MacCatalyst (15, 0), Mac (12, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
-	interface AVCaptionRegion : NSCopying, NSMutableCopying, NSSecureCoding {
+	public class AVCaptionRegion :  NSMutableCopying{
 		[Static]
 		[Export ("appleITTTopRegion")]
-		AVCaptionRegion AppleIttTopRegion { get; }
+		public static AVCaptionRegion AppleIttTopRegion { get; }
 
 		[Static]
 		[Export ("appleITTBottomRegion")]
-		AVCaptionRegion AppleIttBottomRegion { get; }
+		public static AVCaptionRegion AppleIttBottomRegion { get; }
 
 		[Static]
 		[Export ("appleITTLeftRegion")]
-		AVCaptionRegion AppleIttLeftRegion { get; }
+		public static AVCaptionRegion AppleIttLeftRegion { get; }
 
 		[Static]
 		[Export ("appleITTRightRegion")]
-		AVCaptionRegion AppleIttRightRegion { get; }
+		public static AVCaptionRegion AppleIttRightRegion { get; }
 
 		[Static]
 		[Export ("subRipTextBottomRegion")]
-		AVCaptionRegion SubRipTextBottomRegion { get; }
+		public static AVCaptionRegion SubRipTextBottomRegion { get; }
 
 		[NullAllowed, Export ("identifier")]
-		string Identifier { get; }
+		public string? Identifier { get; }
 
 #if !TVOS
 		[Export ("origin")]
@@ -17740,37 +17740,37 @@ namespace AVFoundation {
 
 	[NoTV, MacCatalyst (15, 0), Mac (12, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
-	[DisableDefaultCtor]
-	interface AVCaptionRuby : NSCopying, NSSecureCoding {
+	//[DisableDefaultCtor]
+	public class AVCaptionRuby : NSCopying {
 		[Export ("initWithText:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (string text);
+		public extern NativeHandle Constructor (string text);
 
 		[Export ("initWithText:position:alignment:")]
-		NativeHandle Constructor (string text, AVCaptionRubyPosition position, AVCaptionRubyAlignment alignment);
+		public extern NativeHandle Constructor (string text, AVCaptionRubyPosition position, AVCaptionRubyAlignment alignment);
 
 		[Export ("text")]
-		string Text { get; }
+		public string Text { get; }
 
 		[Export ("position")]
-		AVCaptionRubyPosition Position { get; }
+		public AVCaptionRubyPosition Position { get; }
 
 		[Export ("alignment")]
-		AVCaptionRubyAlignment Alignment { get; }
+		public AVCaptionRubyAlignment Alignment { get; }
 	}
 
 	[NoTV, MacCatalyst (15, 0), Mac (12, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVCaptionRendererScene : NSCopying {
+	public class AVCaptionRendererScene : NSCopying {
 		[Export ("timeRange")]
-		CMTimeRange TimeRange { get; }
+		public CMTimeRange TimeRange { get; }
 
 		[Export ("hasActiveCaptions")]
-		bool HasActiveCaptions { get; }
+		public bool HasActiveCaptions { get; }
 
 		[Export ("needsPeriodicRefresh")]
-		bool NeedsPeriodicRefresh { get; }
+		public bool NeedsPeriodicRefresh { get; }
 	}
 
 	[NoTV, MacCatalyst (15, 0), Mac (12, 0), iOS (18, 0)]
@@ -18123,19 +18123,19 @@ namespace AVFoundation {
 	[TV (17, 2), Mac (14, 2), iOS (17, 2), MacCatalyst (17, 2)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVPlayerVideoOutputConfiguration {
+	public class AVPlayerVideoOutputConfiguration {
 		[NullAllowed, Export ("sourcePlayerItem", ArgumentSemantic.Weak)]
-		AVPlayerItem SourcePlayerItem { get; }
+		public AVPlayerItem SourcePlayerItem { get; }
 
 		[Export ("dataChannelDescriptions", ArgumentSemantic.Copy)]
-		NSObject [] DataChannelDescriptions { get; }
+		public NSObject [] DataChannelDescriptions { get; }
 
 		[Export ("activationTime")]
-		CMTime ActivationTime { get; }
+		public CMTime ActivationTime { get; }
 
 		[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 		[Export ("preferredTransform")]
-		CGAffineTransform PreferredTransform { get; }
+		public CGAffineTransform PreferredTransform { get; }
 	}
 
 	[TV (17, 2), Mac (14, 2), iOS (17, 2), MacCatalyst (17, 2)]
@@ -18148,7 +18148,7 @@ namespace AVFoundation {
 		[Export ("copyTaggedBufferGroupForHostTime:presentationTimeStamp:activeConfiguration:")]
 		[return: NullAllowed]
 		[return: Release]
-		public CMTaggedBufferGroup? CopyTaggedBufferGroup (CMTime hostTime, [NullAllowed] out CMTime presentationTimeStamp, [NullAllowed] out AVPlayerVideoOutputConfiguration activeConfiguration);
+		public extern CMTaggedBufferGroup? CopyTaggedBufferGroup (CMTime hostTime, [NullAllowed] out CMTime presentationTimeStamp, [NullAllowed] out AVPlayerVideoOutputConfiguration activeConfiguration);
 	}
 
 	[TV (17, 2), MacCatalyst (17, 2), Mac (14, 2), iOS (17, 2)]
@@ -18168,28 +18168,28 @@ namespace AVFoundation {
 	[TV (17, 2), Mac (14, 2), iOS (17, 2), MacCatalyst (17, 2)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVVideoOutputSpecification : NSCopying {
+	public class AVVideoOutputSpecification : NSCopying {
 		[Export ("initWithTagCollections:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor (NSObject [] tagCollections);
+		public extern NativeHandle Constructor (NSObject [] tagCollections);
 
 		[Export ("preferredTagCollections", ArgumentSemantic.Copy)]
-		NSObject [] PreferredTagCollections { get; }
+		public NSObject [] PreferredTagCollections { get; }
 
-		[Deprecated (PlatformName.MacOSX, 15, 2)]
-		[Deprecated (PlatformName.iOS, 18, 2)]
-		[Deprecated (PlatformName.TvOS, 18, 2)]
+		//[Deprecated (PlatformName.MacOSX, 15, 2)]
+		//[Deprecated (PlatformName.iOS, 18, 2)]
+		//[Deprecated (PlatformName.TvOS, 18, 2)]
 		[Deprecated (PlatformName.MacCatalyst, 18, 2)]
 		[NullAllowed, Export ("defaultPixelBufferAttributes", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> DefaultPixelBufferAttributes { get; set; }
+		public NSDictionary<NSString, NSObject> DefaultPixelBufferAttributes { get; set; }
 
 		[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 		[NullAllowed, Export ("defaultOutputSettings", ArgumentSemantic.Copy)]
-		NSDictionary<NSString, NSObject> DefaultOutputSettings { get; set; }
+		public NSDictionary<NSString, NSObject> DefaultOutputSettings { get; set; }
 
 		[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 		[Export ("setOutputSettings:forTagCollection:")]
-		void SetOutputSettings ([NullAllowed] NSDictionary<NSString, NSObject> outputSettings, CMTagCollection tagCollection);
+		public extern void SetOutputSettings ([NullAllowed] NSDictionary<NSString, NSObject> outputSettings, CMTagCollection tagCollection);
 	}
 
 	[TV (16, 0), Mac (13, 0), iOS (16, 0), MacCatalyst (16, 0)]
@@ -18481,51 +18481,51 @@ namespace AVFoundation {
 	[TV (16, 0), Mac (13, 0), iOS (16, 0), MacCatalyst (16, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVSpeechSynthesisProviderRequest : NSSecureCoding, NSCopying {
+	public class AVSpeechSynthesisProviderRequest :  NSCopying {
 		[Export ("ssmlRepresentation")]
-		string SsmlRepresentation { get; }
+		public string SsmlRepresentation { get; }
 
 		[Export ("voice")]
-		AVSpeechSynthesisProviderVoice Voice { get; }
+		public AVSpeechSynthesisProviderVoice Voice { get; }
 
 		[Export ("initWithSSMLRepresentation:voice:")]
-		NativeHandle Constructor (string ssmlRepresentation, AVSpeechSynthesisProviderVoice voice);
+		public extern NativeHandle Constructor (string ssmlRepresentation, AVSpeechSynthesisProviderVoice voice);
 	}
 
 	[TV (16, 0), Mac (13, 0), iOS (16, 0), MacCatalyst (16, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVSpeechSynthesisProviderVoice : NSSecureCoding, NSCopying {
+	public class AVSpeechSynthesisProviderVoice :  NSCopying {
 		[Export ("name")]
-		string Name { get; }
+		public string Name { get; }
 
 		[Export ("identifier")]
-		string Identifier { get; }
+		public string Identifier { get; }
 
 		[Export ("primaryLanguages")]
-		string [] PrimaryLanguages { get; }
+		public string [] PrimaryLanguages { get; }
 
 		[Export ("supportedLanguages")]
-		string [] SupportedLanguages { get; }
+		public string [] SupportedLanguages { get; }
 
 		[Export ("voiceSize")]
-		long VoiceSize { get; set; }
+		public long VoiceSize { get; set; }
 
 		[Export ("version", ArgumentSemantic.Strong)]
-		string Version { get; set; }
+		public string Version { get; set; }
 
 		[Export ("gender", ArgumentSemantic.Assign)]
-		AVSpeechSynthesisVoiceGender Gender { get; set; }
+		public AVSpeechSynthesisVoiceGender Gender { get; set; }
 
 		[Export ("age")]
-		nint Age { get; set; }
+		public nint Age { get; set; }
 
 		[Export ("initWithName:identifier:primaryLanguages:supportedLanguages:")]
-		NativeHandle Constructor (string name, string identifier, string [] primaryLanguages, string [] supportedLanguages);
+		public extern NativeHandle Constructor (string name, string identifier, string [] primaryLanguages, string [] supportedLanguages);
 
 		[Static]
 		[Export ("updateSpeechVoices")]
-		void UpdateSpeechVoices ();
+		public static extern void UpdateSpeechVoices ();
 	}
 
 	[TV (17, 0), MacCatalyst (17, 0), Mac (14, 0), iOS (17, 0)]
@@ -18909,70 +18909,70 @@ namespace AVFoundation {
 	[NoTV, Mac (15, 0), iOS (18, 0), MacCatalyst (18, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVRenderedCaptionImage {
+	public class AVRenderedCaptionImage : NSObject{
 		[Export ("pixelBuffer")]
-		CVPixelBuffer PixelBuffer { get; }
+		public CVPixelBuffer PixelBuffer { get; }
 
 		[Export ("position")]
-		CGPoint Position { get; }
+		public CGPoint Position { get; }
 	}
 
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVPlayerItemSegment {
+	public class AVPlayerItemSegment : NSObject {
 		[Export ("segmentType")]
-		AVPlayerItemSegmentType SegmentType { get; }
+		public AVPlayerItemSegmentType SegmentType { get; }
 
 		[Export ("timeMapping")]
-		CMTimeMapping TimeMapping { get; }
+		public CMTimeMapping TimeMapping { get; }
 
 		[Export ("loadedTimeRanges")]
 		[BindAs (typeof (CMTimeRange []))]
-		NSValue [] LoadedTimeRanges { get; }
+		public NSValue [] LoadedTimeRanges { get; }
 
 		[NullAllowed, Export ("startDate")]
-		NSDate StartDate { get; }
+		public NSDate StartDate { get; }
 
 		[NullAllowed, Export ("interstitialEvent")]
-		AVPlayerInterstitialEvent InterstitialEvent { get; }
+		public AVPlayerInterstitialEvent InterstitialEvent { get; }
 	}
 
 	[MacCatalyst (18, 0), NoTV, Mac (15, 0), iOS (18, 0)]
 	[Protocol (BackwardsCompatibleCodeGeneration = false), Model]
 	[BaseType (typeof (NSObject))]
-	interface AVPlayerItemRenderedLegibleOutputPushDelegate : AVPlayerItemOutputPushDelegate {
+	public class AVPlayerItemRenderedLegibleOutputPushDelegate : AVPlayerItemOutputPushDelegate {
 		[Export ("renderedLegibleOutput:didOutputRenderedCaptionImages:forItemTime:")]
-		void DidOutputRenderedCaptionImages (AVPlayerItemRenderedLegibleOutput output, AVRenderedCaptionImage [] captionImages, CMTime itemTime);
+		public extern void DidOutputRenderedCaptionImages (AVPlayerItemRenderedLegibleOutput output, AVRenderedCaptionImage [] captionImages, CMTime itemTime);
 	}
 
-	interface IAVPlayerItemRenderedLegibleOutputPushDelegate { }
+	public interface IAVPlayerItemRenderedLegibleOutputPushDelegate { }
 
 	[MacCatalyst (18, 0), NoTV, Mac (15, 0), iOS (18, 0)]
 	[BaseType (typeof (AVPlayerItemOutput))]
 	[DisableDefaultCtor]
-	interface AVPlayerItemRenderedLegibleOutput {
+	public class AVPlayerItemRenderedLegibleOutput : AVPlayerItemOutput {
 		[Export ("initWithVideoDisplaySize:")]
-		NativeHandle Constructor (CGSize videoDisplaySize);
+		public extern NativeHandle Constructor (CGSize videoDisplaySize);
 
 		[Export ("setDelegate:queue:")]
-		void SetDelegate ([NullAllowed] IAVPlayerItemRenderedLegibleOutputPushDelegate @delegate, [NullAllowed] DispatchQueue delegateQueue);
+		public extern void SetDelegate ([NullAllowed] IAVPlayerItemRenderedLegibleOutputPushDelegate @delegate, [NullAllowed] DispatchQueue delegateQueue);
 
 		[Wrap ("WeakDelegate")]
 		[NullAllowed]
-		IAVPlayerItemRenderedLegibleOutputPushDelegate Delegate { get; }
+		public IAVPlayerItemRenderedLegibleOutputPushDelegate? Delegate { get; }
 
 		[NullAllowed, Export ("delegate", ArgumentSemantic.Weak)]
-		NSObject WeakDelegate { get; }
+		public NSObject WeakDelegate { get; }
 
 		[NullAllowed, Export ("delegateQueue")]
-		DispatchQueue DelegateQueue { get; }
+		public DispatchQueue DelegateQueue { get; }
 
 		[Export ("advanceIntervalForDelegateInvocation")]
-		double AdvanceIntervalForDelegateInvocation { get; set; }
+		public double AdvanceIntervalForDelegateInvocation { get; set; }
 
 		[Export ("videoDisplaySize", ArgumentSemantic.Assign)]
-		CGSize VideoDisplaySize { get; set; }
+		public CGSize VideoDisplaySize { get; set; }
 	}
 
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
@@ -19007,9 +19007,9 @@ namespace AVFoundation {
 		public NSString SnapshotsOutOfSyncReasonKey { get; }
 	}
 
-	delegate void AVPlayerItemIntegratedTimelineSeekCallback (bool success);
-	delegate void AVPlayerItemIntegratedTimelineAddPeriodicTimeObserverCallback (CMTime time);
-	delegate void AVPlayerItemIntegratedTimelineAddBoundaryTimeObserverCallback (bool success);
+	public delegate void AVPlayerItemIntegratedTimelineSeekCallback (bool success);
+	public delegate void AVPlayerItemIntegratedTimelineAddPeriodicTimeObserverCallback (CMTime time);
+	public delegate void AVPlayerItemIntegratedTimelineAddBoundaryTimeObserverCallback (bool success);
 
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
@@ -19166,36 +19166,36 @@ namespace AVFoundation {
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 	[BaseType (typeof (AVMetricEvent))]
 	[DisableDefaultCtor]
-	interface AVMetricMediaResourceRequestEvent {
+	public class AVMetricMediaResourceRequestEvent {
 		[NullAllowed, Export ("url")]
-		NSUrl Url { get; }
+		public NSUrl Url { get; }
 
 		[NullAllowed, Export ("serverAddress")]
-		string ServerAddress { get; }
+		public string ServerAddress { get; }
 
 		[Export ("requestStartTime")]
-		NSDate RequestStartTime { get; }
+		public NSDate RequestStartTime { get; }
 
 		[Export ("requestEndTime")]
-		NSDate RequestEndTime { get; }
+		public NSDate RequestEndTime { get; }
 
 		[Export ("responseStartTime")]
-		NSDate ResponseStartTime { get; }
+		public NSDate ResponseStartTime { get; }
 
 		[Export ("responseEndTime")]
-		NSDate ResponseEndTime { get; }
+		public NSDate ResponseEndTime { get; }
 
 		[Export ("byteRange")]
-		NSRange ByteRange { get; }
+		public NSRange ByteRange { get; }
 
 		[Export ("readFromCache")]
-		bool ReadFromCache { [Bind ("wasReadFromCache")] get; }
+		public bool ReadFromCache { [Bind ("wasReadFromCache")] get; }
 
 		[NullAllowed, Export ("errorEvent")]
-		AVMetricErrorEvent ErrorEvent { get; }
+		public AVMetricErrorEvent ErrorEvent { get; }
 
 		[NullAllowed, Export ("networkTransactionMetrics")]
-		NSUrlSessionTaskMetrics NetworkTransactionMetrics { get; }
+		public NSUrlSessionTaskMetrics NetworkTransactionMetrics { get; }
 	}
 
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
@@ -19271,26 +19271,26 @@ namespace AVFoundation {
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	interface AVMetricEvent : NSSecureCoding {
+	public class AVMetricEvent : NSSecureCoding {
 		[Export ("date")]
-		NSDate Date { get; }
+		public NSDate Date { get; }
 
 		[Export ("mediaTime")]
-		CMTime MediaTime { get; }
+		public CMTime MediaTime { get; }
 
 		[NullAllowed, Export ("sessionID")]
-		string SessionId { get; }
+		public string SessionId { get; }
 	}
 
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
 	[BaseType (typeof (AVMetricEvent))]
 	[DisableDefaultCtor]
-	interface AVMetricErrorEvent {
+	public class AVMetricErrorEvent : AVMetricEvent {
 		[Export ("didRecover")]
-		bool DidRecover { get; }
+		public bool DidRecover { get; }
 
 		[Export ("error")]
-		NSError Error { get; }
+		public NSError Error { get; }
 	}
 
 	[MacCatalyst (18, 0), TV (18, 0), Mac (15, 0), iOS (18, 0)]
@@ -19312,7 +19312,7 @@ namespace AVFoundation {
 
 	[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
 	[BaseType (typeof (AVMetadataBodyObject))]
-	interface AVMetadataHumanFullBodyObject : NSCopying {
+	public class AVMetadataHumanFullBodyObject : NSCopying {
 	}
 
 	[NoMac, NoTV, NoMacCatalyst, iOS (17, 0)]

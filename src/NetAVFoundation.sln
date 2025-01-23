@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVFoundation", "AVFoundatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLibs", "CoreLibs\CoreLibs.csproj", "{52E77B14-4B82-48AB-AEDE-6B52C79F0226}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleLab", "ConsoleLab\ConsoleLab.csproj", "{482296E5-335C-4F8B-ACD2-9886558ABCCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{52E77B14-4B82-48AB-AEDE-6B52C79F0226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52E77B14-4B82-48AB-AEDE-6B52C79F0226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52E77B14-4B82-48AB-AEDE-6B52C79F0226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482296E5-335C-4F8B-ACD2-9886558ABCCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482296E5-335C-4F8B-ACD2-9886558ABCCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482296E5-335C-4F8B-ACD2-9886558ABCCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482296E5-335C-4F8B-ACD2-9886558ABCCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

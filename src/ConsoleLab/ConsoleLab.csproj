@@ -7,4 +7,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AVFoundation\AVFoundation.csproj" />
+      <ProjectReference Include="..\CoreLibs\CoreLibs.csproj" />
+    </ItemGroup>
+
 </Project>

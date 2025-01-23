@@ -285,22 +285,22 @@ namespace CoreAnimation {
 		//CATransform3D Transform { get; set; }
 
 		[Export ("affineTransform")]
-		public static extern CGAffineTransform AffineTransform { get; set; }
+		public  extern CGAffineTransform AffineTransform { get; set; }
 
 		[Export ("frame")]
-		public static extern CGRect Frame { get; set; }
+		public  extern CGRect Frame { get; set; }
 
 		[Export ("hidden")] // Setter needs setHidden instead
-		public static extern bool Hidden { [Bind ("isHidden")] get; set; }
+		public  extern bool Hidden { [Bind ("isHidden")] get; set; }
 
 		[Export ("doubleSided")]  // Setter needs setDoubleSided
-		public static extern bool DoubleSided { [Bind ("isDoubleSided")] get; set; }
+		public  extern bool DoubleSided { [Bind ("isDoubleSided")] get; set; }
 
 		[Export ("geometryFlipped")]
-		public static extern bool GeometryFlipped { [Bind ("isGeometryFlipped")] get; set; }
+		public  extern bool GeometryFlipped { [Bind ("isGeometryFlipped")] get; set; }
 
 		[Export ("contentsAreFlipped")]
-		public static extern bool ContentsAreFlipped { get; }
+		public  extern bool ContentsAreFlipped { get; }
 
 		[Export ("superlayer")]
 		[NullAllowed]

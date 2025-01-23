@@ -9664,21 +9664,21 @@ namespace AVFoundation {
 	public partial class AVCaptureSession : NSObject {
 
 		[Export ("sessionPreset", ArgumentSemantic.Copy)]
-		NSString SessionPreset { get; set; }
+		public NSString SessionPreset { get; set; }
 
 		[Export ("inputs")]
-		AVCaptureInput [] Inputs { get; }
+		public AVCaptureInput [] Inputs { get; }
 
 		[Export ("outputs")]
-		AVCaptureOutput [] Outputs { get; }
+		public AVCaptureOutput [] Outputs { get; }
 
 		[Export ("running")]
-		bool Running { [Bind ("isRunning")] get; }
+		public bool Running { [Bind ("isRunning")] get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("interrupted")]
-		bool Interrupted { [Bind ("isInterrupted")] get; }
+		public bool Interrupted { [Bind ("isInterrupted")] get; }
 
 		[Export ("canSetSessionPreset:")]
 		public extern bool CanSetSessionPreset (NSString preset);
@@ -9714,115 +9714,115 @@ namespace AVFoundation {
 		public extern void StopRunning ();
 
 		[Field ("AVCaptureSessionPresetPhoto")]
-		NSString PresetPhoto { get; }
+		public static extern NSString PresetPhoto { get; }
 
 		[Field ("AVCaptureSessionPresetHigh")]
-		NSString PresetHigh { get; }
+		public static extern NSString PresetHigh { get; }
 
 		[Field ("AVCaptureSessionPresetMedium")]
-		NSString PresetMedium { get; }
+		public static extern NSString PresetMedium { get; }
 
 		[Field ("AVCaptureSessionPresetLow")]
-		NSString PresetLow { get; }
+		public static extern NSString PresetLow { get; }
 
 		[Field ("AVCaptureSessionPreset640x480")]
-		NSString Preset640x480 { get; }
+		public static extern NSString Preset640x480 { get; }
 
 		[Field ("AVCaptureSessionPreset1280x720")]
-		NSString Preset1280x720 { get; }
+		public static extern NSString Preset1280x720 { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVCaptureSessionPreset1920x1080")]
-		NSString Preset1920x1080 { get; }
+		public static extern NSString Preset1920x1080 { get; }
 
 		[MacCatalyst (14, 0)]
 		[Field ("AVCaptureSessionPreset3840x2160")]
-		NSString Preset3840x2160 { get; }
+		public static extern NSString Preset3840x2160 { get; }
 
 		[MacCatalyst (14, 0)]
 		[Field ("AVCaptureSessionPresetiFrame960x540")]
-		NSString PresetiFrame960x540 { get; }
+		public static extern NSString PresetiFrame960x540 { get; }
 
 		[Field ("AVCaptureSessionPresetiFrame1280x720")]
-		NSString PresetiFrame1280x720 { get; }
+		public static extern NSString PresetiFrame1280x720 { get; }
 
 		[Field ("AVCaptureSessionPreset352x288")]
-		NSString Preset352x288 { get; }
+		public static extern NSString Preset352x288 { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Field ("AVCaptureSessionPresetInputPriority")]
-		NSString PresetInputPriority { get; }
+		public static extern NSString PresetInputPriority { get; }
 
 		[NoiOS, NoMacCatalyst, NoTV]
 		[Field ("AVCaptureSessionPreset320x240")]
-		NSString Preset320x240 { get; }
+		public static extern NSString Preset320x240 { get; }
 
 		[NoiOS, NoMacCatalyst, NoTV]
 		[Field ("AVCaptureSessionPreset960x540")]
-		NSString Preset960x540 { get; }
+		public static extern NSString Preset960x540 { get; }
 
 		[Field ("AVCaptureSessionRuntimeErrorNotification")]
 		[Notification (typeof (AVCaptureSessionRuntimeErrorEventArgs))]
-		NSString RuntimeErrorNotification { get; }
+		public static extern NSString RuntimeErrorNotification { get; }
 
 		[Field ("AVCaptureSessionErrorKey")]
-		NSString ErrorKey { get; }
+		public static extern NSString ErrorKey { get; }
 
 		[Field ("AVCaptureSessionDidStartRunningNotification")]
 		[Notification]
-		NSString DidStartRunningNotification { get; }
+		public static extern NSString DidStartRunningNotification { get; }
 
 		[Field ("AVCaptureSessionDidStopRunningNotification")]
 		[Notification]
-		NSString DidStopRunningNotification { get; }
+		public static extern NSString DidStopRunningNotification { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVCaptureSessionInterruptionEndedNotification")]
 		[Notification]
-		NSString InterruptionEndedNotification { get; }
+		public static extern NSString InterruptionEndedNotification { get; }
 
 		[MacCatalyst (13, 1)]
 		[Field ("AVCaptureSessionWasInterruptedNotification")]
 		[Notification]
-		NSString WasInterruptedNotification { get; }
+		public static extern NSString WasInterruptedNotification { get; }
 
 		[NoMac]
 		[MacCatalyst (14, 0)]
 		[Field ("AVCaptureSessionInterruptionReasonKey")]
-		NSString InterruptionReasonKey { get; }
+		public static extern NSString InterruptionReasonKey { get; }
 
 		[NoMac]
 		[MacCatalyst (14, 0)]
 		[Export ("usesApplicationAudioSession")]
-		bool UsesApplicationAudioSession { get; set; }
+		public bool UsesApplicationAudioSession { get; set; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("automaticallyConfiguresApplicationAudioSession")]
-		bool AutomaticallyConfiguresApplicationAudioSession { get; set; }
+		public bool AutomaticallyConfiguresApplicationAudioSession { get; set; }
 
 		[NoMac]
 		[MacCatalyst (14, 0)]
 		[Export ("automaticallyConfiguresCaptureDeviceForWideColor")]
-		bool AutomaticallyConfiguresCaptureDeviceForWideColor { get; set; }
+		public bool AutomaticallyConfiguresCaptureDeviceForWideColor { get; set; }
 
 		[NoMac]
 		[MacCatalyst (14, 0)]
 		[Field ("AVCaptureSessionInterruptionSystemPressureStateKey")]
-		NSString InterruptionSystemPressureStateKey { get; }
+		public NSString InterruptionSystemPressureStateKey { get; }
 
 		[NullAllowed]
 		[MacCatalyst (15, 4), Mac (12, 3), iOS (15, 4)]
 		[Export ("synchronizationClock")]
-		CMClock SynchronizationClock { get; }
+		public CMClock SynchronizationClock { get; }
 
 		[NoTV]
 		//[Deprecated (PlatformName.MacOSX, 12, 3, message: "Use 'SynchronizationClock' instead.")]
 		//[Deprecated (PlatformName.iOS, 15, 4, message: "Use 'SynchronizationClock' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 15, 4, message: "Use 'SynchronizationClock' instead.")]
 		[Export ("masterClock"), NullAllowed]
-		CMClock MasterClock { get; }
+		public CMClock MasterClock { get; }
 
 		//
 		// iOS 8
@@ -10698,8 +10698,8 @@ namespace AVFoundation {
 	[TV (17, 0)]
 	[BaseType (typeof (NSObject))]
 	[DisableDefaultCtor]
-	[Abstract]
-	interface AVCaptureBracketedStillImageSettings {
+	//[Abstract]
+	public abstract class AVCaptureBracketedStillImageSettings : NSObject {
 		// Abstract class in obJC
 	}
 
@@ -11770,83 +11770,83 @@ namespace AVFoundation {
 	//[Deprecated (PlatformName.TvOS, 10, 0, message: "Use 'AVCapturePhotoOutput' instead.")]
 	[Deprecated (PlatformName.MacOSX, 10, 15, message: "Use 'AVCapturePhotoOutput' instead.")]
 	[BaseType (typeof (AVCaptureOutput))]
-	interface AVCaptureStillImageOutput {
+	public class AVCaptureStillImageOutput : AVCaptureOutput {
 		[Export ("availableImageDataCVPixelFormatTypes")]
-		NSNumber [] AvailableImageDataCVPixelFormatTypes { get; }
+		public NSNumber [] AvailableImageDataCVPixelFormatTypes { get; }
 
 		[Export ("availableImageDataCodecTypes")]
-		string [] AvailableImageDataCodecTypes { get; }
+		public string [] AvailableImageDataCodecTypes { get; }
 
 		[Export ("outputSettings", ArgumentSemantic.Copy)]
-		NSDictionary OutputSettings { get; set; }
+		public NSDictionary OutputSettings { get; set; }
 
 		[Wrap ("OutputSettings")]
-		AVVideoSettingsUncompressed UncompressedVideoSetting { get; set; }
+		public AVVideoSettingsUncompressed UncompressedVideoSetting { get; set; }
 
 		[Wrap ("OutputSettings")]
-		AVVideoSettingsCompressed CompressedVideoSetting { get; set; }
+		public AVVideoSettingsCompressed CompressedVideoSetting { get; set; }
 
 		[Export ("captureStillImageAsynchronouslyFromConnection:completionHandler:")]
 		[Async ("CaptureStillImageTaskAsync")]
-		void CaptureStillImageAsynchronously (AVCaptureConnection connection, AVCaptureCompletionHandler completionHandler);
+		public extern void CaptureStillImageAsynchronously (AVCaptureConnection connection, AVCaptureCompletionHandler completionHandler);
 
 		[Static, Export ("jpegStillImageNSDataRepresentation:")]
 		[return: NullAllowed]
-		NSData JpegStillToNSData (CMSampleBuffer buffer);
+		public extern NSData? JpegStillToNSData (CMSampleBuffer buffer);
 
 		[Introduced (PlatformName.MacCatalyst, 14, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		// 5.0
 		[Export ("capturingStillImage")]
-		bool CapturingStillImage { [Bind ("isCapturingStillImage")] get; }
+		public  bool CapturingStillImage { [Bind ("isCapturingStillImage")] get; }
 
 		[NoMac]
 		[Introduced (PlatformName.MacCatalyst, 14, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("automaticallyEnablesStillImageStabilizationWhenAvailable")]
-		bool AutomaticallyEnablesStillImageStabilizationWhenAvailable { get; set; }
+		public bool AutomaticallyEnablesStillImageStabilizationWhenAvailable { get; set; }
 
 		[NoMac]
 		[Introduced (PlatformName.MacCatalyst, 14, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("stillImageStabilizationActive")]
-		bool IsStillImageStabilizationActive { [Bind ("isStillImageStabilizationActive")] get; }
+		public bool IsStillImageStabilizationActive { [Bind ("isStillImageStabilizationActive")] get; }
 
 		[NoMac]
 		[Introduced (PlatformName.MacCatalyst, 14, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("stillImageStabilizationSupported")]
-		bool IsStillImageStabilizationSupported { [Bind ("isStillImageStabilizationSupported")] get; }
+		public bool IsStillImageStabilizationSupported { [Bind ("isStillImageStabilizationSupported")] get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("captureStillImageBracketAsynchronouslyFromConnection:withSettingsArray:completionHandler:")]
-		void CaptureStillImageBracket (AVCaptureConnection connection, AVCaptureBracketedStillImageSettings [] settings, Action<CMSampleBuffer, AVCaptureBracketedStillImageSettings, NSError> imageHandler);
+		public extern void CaptureStillImageBracket (AVCaptureConnection connection, AVCaptureBracketedStillImageSettings [] settings, Action<CMSampleBuffer, AVCaptureBracketedStillImageSettings, NSError> imageHandler);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("maxBracketedCaptureStillImageCount")]
-		nuint MaxBracketedCaptureStillImageCount { get; }
+		public nuint MaxBracketedCaptureStillImageCount { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("prepareToCaptureStillImageBracketFromConnection:withSettingsArray:completionHandler:")]
-		void PrepareToCaptureStillImageBracket (AVCaptureConnection connection, AVCaptureBracketedStillImageSettings [] settings, Action<bool, NSError> handler);
+		public extern void PrepareToCaptureStillImageBracket (AVCaptureConnection connection, AVCaptureBracketedStillImageSettings [] settings, Action<bool, NSError> handler);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("lensStabilizationDuringBracketedCaptureSupported")]
-		bool LensStabilizationDuringBracketedCaptureSupported { [Bind ("isLensStabilizationDuringBracketedCaptureSupported")] get; }
+		public bool LensStabilizationDuringBracketedCaptureSupported { [Bind ("isLensStabilizationDuringBracketedCaptureSupported")] get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("lensStabilizationDuringBracketedCaptureEnabled")]
-		bool LensStabilizationDuringBracketedCaptureEnabled { [Bind ("isLensStabilizationDuringBracketedCaptureEnabled")] get; set; }
+		public bool LensStabilizationDuringBracketedCaptureEnabled { [Bind ("isLensStabilizationDuringBracketedCaptureEnabled")] get; set; }
 
 		[Introduced (PlatformName.MacCatalyst, 14, 0)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("highResolutionStillImageOutputEnabled")]
-		bool HighResolutionStillImageOutputEnabled { [Bind ("isHighResolutionStillImageOutputEnabled")] get; set; }
+		public bool HighResolutionStillImageOutputEnabled { [Bind ("isHighResolutionStillImageOutputEnabled")] get; set; }
 	}
 
 	[Introduced (PlatformName.MacCatalyst, 14, 0)]
@@ -12011,7 +12011,7 @@ namespace AVFoundation {
 		[Static]
 		[Wrap ("GetDefaultDevice (mediaType.GetConstant ()!)")]
 		[return: NullAllowed]
-		public extern AVCaptureDevice GetDefaultDevice (AVMediaTypes mediaType);
+		public static extern AVCaptureDevice GetDefaultDevice (AVMediaTypes mediaType);
 
 #if !NET
 		[Obsolete ("Use 'GetDefaultDevice (AVMediaTypes)'.")]
@@ -13120,7 +13120,7 @@ namespace AVFoundation {
 	}
 
 	/// <summary>A delegate for the completion handler of <see cref="M:AVFoundation.AVCaptureStillImageOutput.CaptureStillImageAsynchronously(AVFoundation.AVCaptureConnection,AVFoundation.AVCaptureCompletionHandler)" />.</summary>
-	delegate void AVCaptureCompletionHandler (CMSampleBuffer imageDataSampleBuffer, NSError error);
+	public delegate void AVCaptureCompletionHandler (CMSampleBuffer imageDataSampleBuffer, NSError error);
 
 	[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 	enum AVPlayerRateDidChangeReason {

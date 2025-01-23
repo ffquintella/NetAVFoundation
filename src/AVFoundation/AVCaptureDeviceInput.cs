@@ -37,7 +37,7 @@ using ObjCRuntime;
 #nullable enable
 
 namespace AVFoundation {
-	public partial class AVCaptureDeviceInput {
+	public partial class AVCaptureDeviceInput : AVCaptureInput {
 		static public AVCaptureDeviceInput? FromDevice (AVCaptureDevice device)
 		{
 			return FromDevice (device, out var error);

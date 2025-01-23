@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVFoundation", "AVFoundatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreLibs", "CoreLibs\CoreLibs.csproj", "{52E77B14-4B82-48AB-AEDE-6B52C79F0226}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mtouch", "tools\mtouch\mtouch.csproj", "{7CE72348-07E1-4401-8B81-7C05A26D77B2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{52E77B14-4B82-48AB-AEDE-6B52C79F0226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52E77B14-4B82-48AB-AEDE-6B52C79F0226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52E77B14-4B82-48AB-AEDE-6B52C79F0226}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CE72348-07E1-4401-8B81-7C05A26D77B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CE72348-07E1-4401-8B81-7C05A26D77B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CE72348-07E1-4401-8B81-7C05A26D77B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CE72348-07E1-4401-8B81-7C05A26D77B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

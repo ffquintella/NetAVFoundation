@@ -18,7 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using CoreLibs.AudioToolbox;
+
 
 #nullable enable
 
@@ -30,7 +30,7 @@ namespace AVFoundation {
 		{
 		}
 		
-		static IntPtr CreateLayoutPtr (AudioType.AudioChannelLayout layout, out IntPtr handleToLayout)
+		static IntPtr CreateLayoutPtr (AudioChannelLayout layout, out IntPtr handleToLayout)
 		{
 			int size;
 			handleToLayout = layout.ToBlock (out size);
@@ -38,7 +38,7 @@ namespace AVFoundation {
 		}
 
 		[DesignatedInitializer]
-		public AVAudioChannelLayout (AudioType.AudioChannelLayout layout)
+		public AVAudioChannelLayout (AudioChannelLayout layout)
 #if NET
 			: this (CreateLayoutPtr (layout, out  IntPtr handleToLayout))
 #else
@@ -48,9 +48,9 @@ namespace AVFoundation {
 			Marshal.FreeHGlobal (handleToLayout);
 		}
 
-		public AudioType.AudioChannelLayout? Layout {
+		public AudioChannelLayout? Layout {
 			get {
-				return AudioType.AudioChannelLayout.FromHandle (_Layout);
+				return AudioChannelLayout.FromHandle (_Layout);
 			}
 		}
 

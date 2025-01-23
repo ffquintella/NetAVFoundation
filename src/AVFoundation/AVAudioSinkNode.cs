@@ -2,15 +2,15 @@ using System;
 using System.ComponentModel;
 
 using AudioToolbox;
-using CoreLibs.AudioToolbox;
+
 using Foundation;
 
 namespace AVFoundation {
 #if XAMCORE_5_0
 	public delegate int AVAudioSinkNodeReceiverHandler (AudioTimeStamp timestamp, uint frameCount, AudioBuffers inputData);
 #else
-	public delegate int AVAudioSinkNodeReceiverHandler (AudioType.AudioChannelLayout.AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers inputData);
-	public delegate int AVAudioSinkNodeReceiverHandler2 (AudioType.AudioChannelLayout.AudioTimeStamp timestamp, uint frameCount, AudioBuffers inputData);
+	public delegate int AVAudioSinkNodeReceiverHandler (AudioTimeStamp timestamp, uint frameCount, ref AudioBuffers inputData);
+	public delegate int AVAudioSinkNodeReceiverHandler2 (AudioTimeStamp timestamp, uint frameCount, AudioBuffers inputData);
 #endif // XAMCORE_5_0
 
 	public partial class AVAudioSinkNode : NSObject {
@@ -40,7 +40,7 @@ namespace AVFoundation {
 		{
 			AVAudioSinkNodeReceiverHandlerRaw rv = (timestamp, frameCount, inputData) => {
 				unsafe {
-					var ts = *(AudioType.AudioChannelLayout.AudioTimeStamp*) timestamp;
+					var ts = *(AudioTimeStamp*) timestamp;
 					var abuffers = new AudioBuffers (inputData);
 #if XAMCORE_5_0
 					return receiverHandler (ts, frameCount, abuffers);
@@ -57,7 +57,7 @@ namespace AVFoundation {
 		{
 			AVAudioSinkNodeReceiverHandlerRaw rv = (timestamp, frameCount, inputData) => {
 				unsafe {
-					var ts = *(AudioType.AudioChannelLayout.AudioTimeStamp*) timestamp;
+					var ts = *(AudioTimeStamp*) timestamp;
 					var abuffers = new AudioBuffers (inputData);
 					return receiverHandler (ts, frameCount, abuffers);
 				}

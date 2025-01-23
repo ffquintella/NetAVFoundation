@@ -1,19 +1,286 @@
+// 
+// AudioFormat.cs:
+//
+// Authors:
+//    Miguel de Icaza (miguel@xamarin.com)
+//    Marek Safar (marek.safar@gmail.com)
+//     
+// Copyright 2012 Xamarin Inc
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+
+#nullable enable
+
+using System;
+using System.IO;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using CoreFoundation;
+using CoreLibs;
+using Foundation;
 using ObjCRuntime;
 
-namespace CoreLibs.AudioToolbox;
+using AudioFileID = System.IntPtr;
 
-static partial class AudioFormatPropertyNative {
+namespace AudioToolbox {
+
+	// AudioFormatListItem
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AudioFormat {
+		public AudioStreamBasicDescription AudioStreamBasicDescription;
+		public AudioChannelLayoutTag AudioChannelLayoutTag;
+
+		public unsafe static AudioFormat? GetFirstPlayableFormat (AudioFormat [] formatList)
+		{
+			if (formatList is null)
+				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (formatList));
+			if (formatList.Length < 2)
+				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (formatList));
+
+			fixed (AudioFormat* item = formatList) {
+				uint index;
+				int size = sizeof (uint);
+				var ptr_size = sizeof (AudioFormat) * formatList.Length;
+				if (AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.FirstPlayableFormatFromList, ptr_size, item, &size, &index) != 0)
+					return null;
+				return formatList [index];
+			}
+		}
+
+		public override string ToString ()
+		{
+			return AudioChannelLayoutTag + ":" + AudioStreamBasicDescription.ToString ();
+		}
+	}
+
+	public enum AudioFormatError : int // Implictly cast to OSType
+	{
+		None = 0,
+		Unspecified = 0x77686174,   // 'what'
+		UnsupportedProperty = 0x70726f70,   // 'prop'
+		BadPropertySize = 0x2173697a,   // '!siz'
+		BadSpecifierSize = 0x21737063,  // '!spc'
+		UnsupportedDataFormat = 0x666d743f, // 'fmt?'
+		UnknownFormat = 0x21666d74  // '!fmt'
+
+		// TODO: Not documented
+		// '!dat'
+	}
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AudioValueRange {
+		public double Minimum;
+		public double Maximum;
+	}
+
+	public enum AudioBalanceFadeType : uint // UInt32 in AudioBalanceFades
+	{
+		MaxUnityGain = 0,
+		EqualPower = 1
+	}
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	public class AudioBalanceFade {
+#if !COREBUILD
+		[StructLayout (LayoutKind.Sequential)]
+		struct Layout {
+			public float LeftRightBalance;
+			public float BackFrontFade;
+			public AudioBalanceFadeType Type;
+			public IntPtr ChannelLayoutWeak;
+		}
+
+		public AudioBalanceFade (AudioChannelLayout channelLayout)
+		{
+			if (channelLayout is null)
+				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (channelLayout));
+
+			this.ChannelLayout = channelLayout;
+		}
+
+		public float LeftRightBalance { get; set; }
+		public float BackFrontFade { get; set; }
+		public AudioBalanceFadeType Type { get; set; }
+		public AudioChannelLayout ChannelLayout { get; private set; }
+
+		public unsafe float []? GetBalanceFade ()
+		{
+			var type_size = sizeof (Layout);
+
+			var str = ToStruct ();
+			var ptr = Marshal.AllocHGlobal (type_size);
+			(*(Layout*) ptr) = str;
+
+			int size;
+			if (AudioFormatPropertyNative.AudioFormatGetPropertyInfo (AudioFormatProperty.BalanceFade, type_size, ptr, &size) != 0)
+				return null;
+
+			AudioFormatError res;
+			var data = new float [size / sizeof (float)];
+			fixed (float* data_ptr = data) {
+				res = AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.BalanceFade, type_size, ptr, &size, data_ptr);
+			}
+
+			Marshal.FreeHGlobal (str.ChannelLayoutWeak);
+			Marshal.FreeHGlobal (ptr);
+
+			return res == 0 ? data : null;
+		}
+
+		Layout ToStruct ()
+		{
+			var l = new Layout () {
+				LeftRightBalance = LeftRightBalance,
+				BackFrontFade = BackFrontFade,
+				Type = Type,
+			};
+
+			if (ChannelLayout is not null) {
+				int temp;
+				l.ChannelLayoutWeak = ChannelLayout.ToBlock (out temp);
+			}
+
+			return l;
+		}
+#endif // !COREBUILD
+	}
+
+	public enum PanningMode : uint // UInt32 in AudioPanningInfo
+	{
+		SoundField = 3,
+		VectorBasedPanning = 4
+	}
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	public class AudioPanningInfo {
+#if !COREBUILD
+		[StructLayout (LayoutKind.Sequential)]
+		struct Layout {
+			public PanningMode PanningMode;
+			public AudioChannelFlags CoordinateFlags;
+			public float Coord0;
+			public float Coord1;
+			public float Coord2;
+			public float GainScale;
+			public IntPtr OutputChannelMapWeak;
+		}
+
+		public AudioPanningInfo (AudioChannelLayout outputChannelMap)
+		{
+			if (outputChannelMap is null)
+				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (outputChannelMap));
+
+			this.OutputChannelMap = outputChannelMap;
+		}
+
+		public PanningMode PanningMode { get; set; }
+		public AudioChannelFlags CoordinateFlags { get; set; }
+		public float [] Coordinates { get; private set; } = Array.Empty<float> ();
+		public float GainScale { get; set; }
+		public AudioChannelLayout OutputChannelMap { get; private set; }
+
+		public unsafe float []? GetPanningMatrix ()
+		{
+			var type_size = sizeof (Layout);
+
+			var str = ToStruct ();
+			var ptr = Marshal.AllocHGlobal (type_size);
+			*((Layout*) ptr) = str;
+
+			int size;
+			if (AudioFormatPropertyNative.AudioFormatGetPropertyInfo (AudioFormatProperty.PanningMatrix, type_size, ptr, &size) != 0)
+				return null;
+
+			AudioFormatError res;
+			var data = new float [size / sizeof (float)];
+			fixed (float* data_ptr = data) {
+				res = AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.PanningMatrix, type_size, ptr, &size, data_ptr);
+			}
+
+			Marshal.FreeHGlobal (str.OutputChannelMapWeak);
+			Marshal.FreeHGlobal (ptr);
+
+			return res == 0 ? data : null;
+		}
+
+		Layout ToStruct ()
+		{
+			var l = new Layout () {
+				PanningMode = PanningMode,
+				CoordinateFlags = CoordinateFlags,
+				Coord0 = Coordinates [0],
+				Coord1 = Coordinates [1],
+				Coord2 = Coordinates [2],
+				GainScale = GainScale
+			};
+
+			if (OutputChannelMap is not null) {
+				int temp;
+				l.OutputChannelMapWeak = OutputChannelMap.ToBlock (out temp);
+			}
+
+			return l;
+		}
+#endif // !COREBUILD
+	}
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	static partial class AudioFormatPropertyNative {
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetPropertyInfo (AudioFormatProperty propertyID, int inSpecifierSize, AudioType.AudioFormatType* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetPropertyInfo (AudioFormatProperty propertyID, int inSpecifierSize, AudioFormatType* inSpecifier,
 			uint* outPropertyDataSize);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetPropertyInfo (AudioFormatProperty propertyID, int inSpecifierSize, AudioType.AudioStreamBasicDescription* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetPropertyInfo (AudioFormatProperty propertyID, int inSpecifierSize, AudioStreamBasicDescription* inSpecifier,
 			uint* outPropertyDataSize);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetPropertyInfo (AudioFormatProperty propertyID, int inSpecifierSize, AudioType.AudioFormatInfo* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetPropertyInfo (AudioFormatProperty propertyID, int inSpecifierSize, AudioFormatInfo* inSpecifier,
 			uint* outPropertyDataSize);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
@@ -25,7 +292,7 @@ static partial class AudioFormatPropertyNative {
 			int* outPropertyDataSize);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty propertyID, int inSpecifierSize, AudioType.AudioFormatType* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty propertyID, int inSpecifierSize, AudioFormatType* inSpecifier,
 			uint* ioDataSize, IntPtr outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
@@ -53,11 +320,11 @@ static partial class AudioFormatPropertyNative {
 			IntPtr ioDataSize, IntPtr outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty propertyID, int inSpecifierSize, AudioType.AudioFormatInfo* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty propertyID, int inSpecifierSize, AudioFormatInfo* inSpecifier,
 			uint* ioDataSize, AudioFormat* outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty propertyID, int inSpecifierSize, AudioType.AudioStreamBasicDescription* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty propertyID, int inSpecifierSize, AudioStreamBasicDescription* inSpecifier,
 			uint* ioDataSize, int* outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
@@ -73,16 +340,16 @@ static partial class AudioFormatPropertyNative {
 			int* ioDataSize, float* outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty inPropertyID, int inSpecifierSize, AudioType.AudioStreamBasicDescription* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty inPropertyID, int inSpecifierSize, AudioStreamBasicDescription* inSpecifier,
 			int* ioPropertyDataSize, IntPtr* outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
-		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty inPropertyID, int inSpecifierSize, AudioType.AudioStreamBasicDescription* inSpecifier,
+		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty inPropertyID, int inSpecifierSize, AudioStreamBasicDescription* inSpecifier,
 			int* ioPropertyDataSize, uint* outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
 		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty inPropertyID, int inSpecifierSize, IntPtr inSpecifier, int* ioPropertyDataSize,
-			AudioType.AudioStreamBasicDescription* outPropertyData);
+			AudioStreamBasicDescription* outPropertyData);
 
 		[DllImport (Constants.AudioToolboxLibrary)]
 		public unsafe extern static AudioFormatError AudioFormatGetProperty (AudioFormatProperty inPropertyID, int inSpecifierSize, AudioFormat* inSpecifier, int* ioPropertyDataSize,
@@ -148,45 +415,4 @@ static partial class AudioFormatPropertyNative {
 		HardwareCodecCapabilities = 0x68776363, // 'hwcc'
 #endif
 	}
-	
-	public enum AudioFormatError : int // Implictly cast to OSType
-	{
-		None = 0,
-		Unspecified = 0x77686174,   // 'what'
-		UnsupportedProperty = 0x70726f70,   // 'prop'
-		BadPropertySize = 0x2173697a,   // '!siz'
-		BadSpecifierSize = 0x21737063,  // '!spc'
-		UnsupportedDataFormat = 0x666d743f, // 'fmt?'
-		UnknownFormat = 0x21666d74  // '!fmt'
-
-		// TODO: Not documented
-		// '!dat'
-	}
-	
-	[StructLayout (LayoutKind.Sequential)]
-	public struct AudioFormat {
-		public AudioType.AudioStreamBasicDescription AudioStreamBasicDescription;
-		public AudioType.AudioChannelLayoutTag AudioChannelLayoutTag;
-
-		public unsafe static AudioFormat? GetFirstPlayableFormat (AudioFormat [] formatList)
-		{
-			if (formatList is null)
-				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (formatList));
-			if (formatList.Length < 2)
-				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (formatList));
-
-			fixed (AudioFormat* item = formatList) {
-				uint index;
-				int size = sizeof (uint);
-				var ptr_size = sizeof (AudioFormat) * formatList.Length;
-				if (AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.FirstPlayableFormatFromList, ptr_size, item, &size, &index) != 0)
-					return null;
-				return formatList [index];
-			}
-		}
-
-		public override string ToString ()
-		{
-			return AudioChannelLayoutTag + ":" + AudioStreamBasicDescription.ToString ();
-		}
-	}
+}

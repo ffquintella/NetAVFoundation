@@ -17,7 +17,6 @@ using System.Collections.Generic;
 
 using Foundation;
 using CoreFoundation;
-using CoreLibs.AudioToolbox;
 using ObjCRuntime;
 
 #if NET
@@ -77,11 +76,11 @@ namespace CoreMedia {
 			/* CMFormatDescriptionRef */ IntPtr formatDescription,
 			/* CMItemCount */ nint numSamples,
 			CMTime sbufPTS,
-			/* AudioStreamPacketDescription* */ AudioType.AudioStreamPacketDescription* packetDescriptions,
+			/* AudioStreamPacketDescription* */ AudioStreamPacketDescription* packetDescriptions,
 			/* CMSampleBufferRef* */ IntPtr* sBufOut);
 
 		public static CMSampleBuffer? CreateWithPacketDescriptions (CMBlockBuffer? dataBuffer, CMFormatDescription formatDescription, int samplesCount,
-			CMTime sampleTimestamp, AudioType.AudioStreamPacketDescription [] packetDescriptions, out CMSampleBufferError error)
+			CMTime sampleTimestamp, AudioStreamPacketDescription [] packetDescriptions, out CMSampleBufferError error)
 		{
 			if (formatDescription is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (formatDescription));
@@ -90,7 +89,7 @@ namespace CoreMedia {
 
 			IntPtr buffer;
 			unsafe {
-				fixed (AudioType.AudioStreamPacketDescription* packetDescriptionsPtr = packetDescriptions) {
+				fixed (AudioStreamPacketDescription* packetDescriptionsPtr = packetDescriptions) {
 					error = CMAudioSampleBufferCreateWithPacketDescriptions (
 								IntPtr.Zero,
 								dataBuffer.GetHandle (),
@@ -695,7 +694,7 @@ namespace CoreMedia {
 			/* CMFormatDescriptionRef */ IntPtr formatDescription,
 			/* CMItemCount */ nint numSamples,
 			CMTime sbufPTS,
-			/* AudioStreamPacketDescription* */ AudioType.AudioStreamPacketDescription* packetDescriptions,
+			/* AudioStreamPacketDescription* */ AudioStreamPacketDescription* packetDescriptions,
 			/* CMSampleBufferRef* */ IntPtr* sBufOut);
 
 #if NET
@@ -705,7 +704,7 @@ namespace CoreMedia {
 		[SupportedOSPlatform ("tvos")]
 #endif
 		public static CMSampleBuffer? CreateReadyWithPacketDescriptions (CMBlockBuffer dataBuffer, CMFormatDescription formatDescription, int samplesCount,
-			CMTime sampleTimestamp, AudioType.AudioStreamPacketDescription []? packetDescriptions, out CMSampleBufferError error)
+			CMTime sampleTimestamp, AudioStreamPacketDescription []? packetDescriptions, out CMSampleBufferError error)
 		{
 			if (dataBuffer is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (dataBuffer));
@@ -716,7 +715,7 @@ namespace CoreMedia {
 
 			IntPtr buffer;
 			unsafe {
-				fixed (AudioType.AudioStreamPacketDescription* packetDescriptionsPtr = packetDescriptions) {
+				fixed (AudioStreamPacketDescription* packetDescriptionsPtr = packetDescriptions) {
 					error = CMAudioSampleBufferCreateReadyWithPacketDescriptions (
 								IntPtr.Zero,
 								dataBuffer.Handle,

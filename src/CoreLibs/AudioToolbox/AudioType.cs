@@ -1,17 +1,50 @@
+// 
+// AudioType.cs:
+//
+// Authors:
+//    Miguel de Icaza (miguel@novell.com)
+//    AKIHIRO Uehara (u-akihiro@reinforce-lab.com)
+//    Marek Safar (marek.safar@gmail.com)
+//     
+// Copyright 2009, 2010 Novell, Inc
+// Copyright 2010, Reinforce Lab.
+// Copyright 2011, 2012 Xamarin Inc.
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to
+// permit persons to whom the Software is furnished to do so, subject to
+// the following conditions:
+// 
+// The above copyright notice and this permission notice shall be
+// included in all copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+//
+
+#nullable enable
+
+using System;
+using System.Text;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Diagnostics;
 using CoreFoundation;
-using Foundation;
 using ObjCRuntime;
+using Foundation;
 
-namespace CoreLibs.AudioToolbox;
-
-public class AudioType
-{
-    public enum AudioFormatType : uint { // UInt32 in AudioStreamBasicDescription -- CoreAudio.framework CoreAudioTypes.h
+namespace AudioToolbox {
+	public enum AudioFormatType : uint { // UInt32 in AudioStreamBasicDescription -- CoreAudio.framework CoreAudioTypes.h
 		LinearPCM = 0x6c70636d,
 		AC3 = 0x61632d33,
 		CAC3 = 0x63616333,
@@ -112,8 +145,15 @@ public class AudioType
 		CafIsFloat = (1 << 0),
 		CafIsLittleEndian = (1 << 1)
 	}
-	
-	#if NET
+
+	[StructLayout (LayoutKind.Sequential)]
+	unsafe struct AudioFormatInfo {
+		public AudioStreamBasicDescription AudioStreamBasicDescription;
+		public byte* MagicCookieWeak;
+		public int MagicCookieSize;
+	}
+
+#if NET
 	[SupportedOSPlatform ("ios")]
 	[SupportedOSPlatform ("maccatalyst")]
 	[SupportedOSPlatform ("macos")]
@@ -338,7 +378,276 @@ public class AudioType
 		}
 #endif // !COREBUILD
 	}
-	
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AudioStreamPacketDescription {
+		public long StartOffset;
+		public int VariableFramesInPacket;
+		public int DataByteSize;
+
+		public override string ToString ()
+		{
+			return String.Format ("StartOffset={0} VariableFramesInPacket={1} DataByteSize={2}", StartOffset, VariableFramesInPacket, DataByteSize);
+		}
+	}
+
+	[Flags]
+	public enum AudioChannelFlags : uint { // UInt32 in AudioPanningInfo -- AudioFormat.h
+		AllOff = 0,
+		RectangularCoordinates = 1 << 0,
+		SphericalCoordinates = 1 << 1,
+		Meters = 1 << 2
+	}
+
+	public enum AudioChannelLabel : int { // UInt32 AudioChannelLabel
+		Unknown = -1,
+		Unused = 0,
+		UseCoordinates = 100,
+
+		Left = 1,
+		Right = 2,
+		Center = 3,
+		LFEScreen = 4,
+		LeftSurround = 5,
+		RightSurround = 6,
+		LeftCenter = 7,
+		RightCenter = 8,
+		CenterSurround = 9,
+		LeftSurroundDirect = 10,
+		RightSurroundDirect = 11,
+		TopCenterSurround = 12,
+		VerticalHeightLeft = 13,
+		VerticalHeightCenter = 14,
+		VerticalHeightRight = 15,
+		TopBackLeft = 16,
+		TopBackCenter = 17,
+		TopBackRight = 18,
+		RearSurroundLeft = 33,
+		RearSurroundRight = 34,
+		LeftWide = 35,
+		RightWide = 36,
+		LFE2 = 37,
+		LeftTotal = 38,
+		RightTotal = 39,
+		HearingImpaired = 40,
+		Narration = 41,
+		Mono = 42,
+		DialogCentricMix = 43,
+		CenterSurroundDirect = 44,
+		Haptic = 45,
+
+		LeftTopFront = VerticalHeightLeft,
+		CenterTopFront = VerticalHeightCenter,
+		RightTopFront = VerticalHeightRight,
+		LeftTopMiddle = 49,
+		CenterTopMiddle = TopCenterSurround,
+
+		RightTopMiddle = 51,
+		LeftTopRear = 52,
+		CenterTopRear = 53,
+		RightTopRear = 54,
+
+		// first order ambisonic channels
+		Ambisonic_W = 200,
+		Ambisonic_X = 201,
+		Ambisonic_Y = 202,
+		Ambisonic_Z = 203,
+
+		// Mid/Side Recording
+		MS_Mid = 204,
+		MS_Side = 205,
+
+		// X-Y Recording
+		XY_X = 206,
+		XY_Y = 207,
+
+		// Binaural Recording
+		BinauralLeft = 208,
+		BinauralRight = 209,
+
+		// other
+		HeadphonesLeft = 301,
+		HeadphonesRight = 302,
+		ClickTrack = 304,
+		ForeignLanguage = 305,
+
+		// generic discrete channel
+		Discrete = 400,
+
+		// numbered discrete channel
+		Discrete_0 = (1 << 16) | 0,
+		Discrete_1 = (1 << 16) | 1,
+		Discrete_2 = (1 << 16) | 2,
+		Discrete_3 = (1 << 16) | 3,
+		Discrete_4 = (1 << 16) | 4,
+		Discrete_5 = (1 << 16) | 5,
+		Discrete_6 = (1 << 16) | 6,
+		Discrete_7 = (1 << 16) | 7,
+		Discrete_8 = (1 << 16) | 8,
+		Discrete_9 = (1 << 16) | 9,
+		Discrete_10 = (1 << 16) | 10,
+		Discrete_11 = (1 << 16) | 11,
+		Discrete_12 = (1 << 16) | 12,
+		Discrete_13 = (1 << 16) | 13,
+		Discrete_14 = (1 << 16) | 14,
+		Discrete_15 = (1 << 16) | 15,
+		Discrete_65535 = (1 << 16) | 65535,
+
+		// HOA ACN channels
+
+		// generic
+		HoaAcn = 500,
+
+		// numbered
+		HoaAcn0 = (2 << 16) | 0,
+		HoaAcn1 = (2 << 16) | 1,
+		HoaAcn2 = (2 << 16) | 2,
+		HoaAcn3 = (2 << 16) | 3,
+		HoaAcn4 = (2 << 16) | 4,
+		HoaAcn5 = (2 << 16) | 5,
+		HoaAcn6 = (2 << 16) | 6,
+		HoaAcn7 = (2 << 16) | 7,
+		HoaAcn8 = (2 << 16) | 8,
+		HoaAcn9 = (2 << 16) | 9,
+		HoaAcn10 = (2 << 16) | 10,
+		HoaAcn11 = (2 << 16) | 11,
+		HoaAcn12 = (2 << 16) | 12,
+		HoaAcn13 = (2 << 16) | 13,
+		HoaAcn14 = (2 << 16) | 14,
+		HoaAcn15 = (2 << 16) | 15,
+		HoaAcn65024 = (2 << 16) | 65024,
+		HoaSn3d = HoaAcn0,
+		HoaN3d = (3 << 16),
+	}
+
+#if !COREBUILD
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	public static class AudioChannelLabelExtensions {
+		public static bool IsReserved (this AudioChannelLabel value)
+		{
+			return (uint) value >= 0xF0000000 && (uint) value <= 0xFFFFFFFE;
+		}
+	}
+#endif
+
+	[Flags]
+	[NativeName ("AudioChannelBitmap")]
+	public enum AudioChannelBit : uint // UInt32 mChannelBitmap in AudioChannelLayout
+	{
+		Left = 1 << 0,
+		Right = 1 << 1,
+		Center = 1 << 2,
+		LFEScreen = 1 << 3,
+		LeftSurround = 1 << 4,
+		RightSurround = 1 << 5,
+		LeftCenter = 1 << 6,
+		RightCenter = 1 << 7,
+		CenterSurround = 1 << 8,
+		LeftSurroundDirect = 1 << 9,
+		RightSurroundDirect = 1 << 10,
+		TopCenterSurround = 1 << 11,
+		VerticalHeightLeft = 1 << 12,
+		VerticalHeightCenter = 1 << 13,
+		VerticalHeightRight = 1 << 14,
+		TopBackLeft = 1 << 15,
+		TopBackCenter = 1 << 16,
+		TopBackRight = 1 << 17,
+
+		LeftTopFront = VerticalHeightLeft,
+		CenterTopFront = VerticalHeightCenter,
+		RightTopFront = VerticalHeightRight,
+		LeftTopMiddle = 1 << 21,
+		CenterTopMiddle = TopCenterSurround,
+
+		RightTopMiddle = 1 << 23,
+		LeftTopRear = 1 << 24,
+		CenterTopRear = 1 << 25,
+		RightTopRear = 1 << 26,
+	}
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public struct AudioChannelDescription {
+		public AudioChannelLabel Label;
+		public AudioChannelFlags Flags;
+		float Coord0, Coord1, Coord2;
+#if !COREBUILD
+
+		public float [] Coords {
+			get {
+				return new float [3] { Coord0, Coord1, Coord2 };
+			}
+			set {
+				if (value.Length != 3)
+					throw new ArgumentException ("Must contain three floats");
+				Coord0 = value [0];
+				Coord1 = value [1];
+				Coord2 = value [2];
+			}
+		}
+
+		public unsafe string? Name {
+			get {
+				IntPtr sptr;
+				int size = sizeof (IntPtr);
+				int ptr_size = sizeof (AudioChannelDescription);
+				var ptr = ToPointer ();
+
+				var res = AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.ChannelName, ptr_size, ptr, &size, &sptr);
+				Marshal.FreeHGlobal (ptr);
+				if (res != 0)
+					return null;
+
+				return new CFString (sptr, true);
+			}
+		}
+
+		public unsafe string? ShortName {
+			get {
+				IntPtr sptr;
+				int size = sizeof (IntPtr);
+				int ptr_size = sizeof (AudioChannelDescription);
+				var ptr = ToPointer ();
+
+				var res = AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.ChannelShortName, ptr_size, ptr, &size, &sptr);
+				Marshal.FreeHGlobal (ptr);
+				if (res != 0)
+					return null;
+
+				return new CFString (sptr, true);
+			}
+		}
+
+		internal unsafe IntPtr ToPointer ()
+		{
+			var ptr = (AudioChannelDescription*) Marshal.AllocHGlobal (sizeof (AudioChannelLabel) + sizeof (AudioChannelFlags) + 3 * sizeof (float));
+			*ptr = this;
+			return (IntPtr) ptr;
+		}
+
+		public override string ToString ()
+		{
+			return String.Format ("[id={0} {1} - {2},{3},{4}", Label, Flags, Coords [0], Coords [1], Coords [2]);
+		}
+#endif // !COREBUILD
+	}
+
 	// CoreAudioTypes.framework/Headers/CoreAudioBaseTypes.h
 	public enum AudioChannelLayoutTag : uint { // UInt32 AudioChannelLayoutTag
 		UseChannelDescriptions = (0 << 16) | 0,
@@ -658,14 +967,47 @@ public class AudioType
 
 		Unknown = 0xFFFF0000                           // needs to be ORed with the actual number of channels  
 	}
-	
-	[StructLayout (LayoutKind.Sequential)]
-	public unsafe struct AudioFormatInfo {
-		public AudioStreamBasicDescription AudioStreamBasicDescription;
-		public byte* MagicCookieWeak;
-		public int MagicCookieSize;
+
+#if !COREBUILD
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	public static class AudioChannelLayoutTagExtensions {
+		public static AudioChannelBit? ToAudioChannel (this AudioChannelLayoutTag layoutTag)
+		{
+			int value;
+			int size = sizeof (uint);
+			int layout = (int) layoutTag;
+
+			unsafe {
+				if (AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.BitmapForLayoutTag, sizeof (AudioChannelLayoutTag), &layout, &size, &value) != 0)
+					return null;
+			}
+
+			return (AudioChannelBit) value;
+		}
+
+		public static uint GetNumberOfChannels (this AudioChannelLayoutTag inLayoutTag)
+		{
+			return (uint) inLayoutTag & 0x0000FFFF;
+		}
+
+		public static bool IsReserved (this AudioChannelLayoutTag value)
+		{
+			return (uint) value >= 0xF0000000 && (uint) value <= 0xFFFFFFFE;
+		}
 	}
-	
+#endif // !COREBUILD
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
 	[DebuggerDisplay ("{Name}")]
 	public class AudioChannelLayout {
 #if !COREBUILD
@@ -775,141 +1117,7 @@ public class AudioType
 			return layout;
 		}
 
-		[Flags]
-		public enum SmpteTimeFlags : uint { // UInt32
-			Unknown = 0,
-			TimeValid = 1 << 0,
-			TimeRunning = 1 << 1
-		}		
-		
-#if NET
-		[SupportedOSPlatform ("ios")]
-		[SupportedOSPlatform ("maccatalyst")]
-		[SupportedOSPlatform ("macos")]
-		[SupportedOSPlatform ("tvos")]
-#endif
-		[StructLayout (LayoutKind.Sequential)]
-		public struct SmpteTime { // CoreAudio.framework - CoreAudioTypes.h
-			public short Subframes;
-			public short SubframeDivisor;
-			public uint Counter;
-			public uint Type;
-			public uint Flags;
-			public short Hours;
-			public short Minutes;
-			public short Seconds;
-			public short Frames;
-
-			public SmpteTimeFlags FlagsStrong {
-				get {
-					return (SmpteTimeFlags) Flags;
-				}
-				set {
-					Flags = (uint) value;
-				}
-			}
-			public SmpteTimeType TypeStrong {
-				get {
-					return (SmpteTimeType) Type;
-				}
-				set {
-					Type = (uint) value;
-				}
-			}
-
-			public override string ToString ()
-			{
-				return String.Format ("[Subframes={0},Divisor={1},Counter={2},Type={3},Flags={4},Hours={5},Minutes={6},Seconds={7},Frames={8}]",
-					Subframes, SubframeDivisor, Counter, Type, Flags, Hours, Minutes, Seconds, Frames);
-			}
-		}
-
-		
-		public enum SmpteTimeType : uint // UInt32 in AudioFileRegionList
-		{
-#if !NET
-		[Obsolete ("Value is not to be used with any API.")]
-		None = uint.MaxValue,
-#endif
-			Type24 = 0,
-			Type25 = 1,
-			Type30Drop = 2,
-			Type30 = 3,
-			Type2997 = 4,
-			Type2997Drop = 5,
-			Type60 = 6,
-			Type5994 = 7,
-			Type60Drop = 8,
-			Type5994Drop = 9,
-			Type50 = 10,
-			Type2398 = 11,
-		}
-		
-#if NET
-		[SupportedOSPlatform ("ios")]
-		[SupportedOSPlatform ("maccatalyst")]
-		[SupportedOSPlatform ("macos")]
-		[SupportedOSPlatform ("tvos")]
-#endif
-		[StructLayout (LayoutKind.Sequential)]
-		public struct AudioTimeStamp {
-
-			[Flags]
-			public enum AtsFlags : uint { // UInt32 in AudioTimeStamp
-				NothingValid = 0,
-				SampleTimeValid = (1 << 0),
-				HostTimeValid = (1 << 1),
-				RateScalarValid = (1 << 2),
-				WordClockTimeValid = (1 << 3),
-				SmpteTimeValid = (1 << 4),
-				SampleHostTimeValid = SampleTimeValid | HostTimeValid
-			}
-
-			public double SampleTime;
-			public ulong HostTime;
-			public double RateScalar;
-			public ulong WordClockTime;
-			public SmpteTime SMPTETime;
-			public AtsFlags Flags;
-			public uint Reserved;
-
-			public override string ToString ()
-			{
-				var sb = new StringBuilder ("{");
-				if ((Flags & AtsFlags.SampleTimeValid) != 0)
-					sb.Append ("SampleTime=" + SampleTime.ToString ());
-
-				if ((Flags & AtsFlags.HostTimeValid) != 0) {
-					if (sb.Length > 0)
-						sb.Append (',');
-					sb.Append ("HostTime=" + HostTime.ToString ());
-				}
-
-				if ((Flags & AtsFlags.RateScalarValid) != 0) {
-					if (sb.Length > 0)
-						sb.Append (',');
-
-					sb.Append ("RateScalar=" + RateScalar.ToString ());
-				}
-
-				if ((Flags & AtsFlags.WordClockTimeValid) != 0) {
-					if (sb.Length > 0)
-						sb.Append (',');
-					sb.Append ("WordClock=" + HostTime.ToString () + ",");
-				}
-
-				if ((Flags & AtsFlags.SmpteTimeValid) != 0) {
-					if (sb.Length > 0)
-						sb.Append (',');
-					sb.Append ("SmpteTime=" + SMPTETime.ToString ());
-				}
-				sb.Append ("}");
-
-				return sb.ToString ();
-			}
-		}
-		
-		public  static AudioChannelLayout? FromHandle (IntPtr handle)
+		public static AudioChannelLayout? FromHandle (IntPtr handle)
 		{
 			if (handle == IntPtr.Zero)
 				return null;
@@ -923,7 +1131,7 @@ public class AudioType
 		}
 
 		// The returned block must be released with FreeHGlobal
-		public  unsafe IntPtr ToBlock (out int size)
+		public unsafe IntPtr ToBlock (out int size)
 		{
 			if (Channels is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (Channels));
@@ -1093,248 +1301,158 @@ public class AudioType
 		}
 #endif // !COREBUILD
 	}
-	
+
 	[Flags]
-	[NativeName ("AudioChannelBitmap")]
-	public enum AudioChannelBit : uint // UInt32 mChannelBitmap in AudioChannelLayout
-	{
-		Left = 1 << 0,
-		Right = 1 << 1,
-		Center = 1 << 2,
-		LFEScreen = 1 << 3,
-		LeftSurround = 1 << 4,
-		RightSurround = 1 << 5,
-		LeftCenter = 1 << 6,
-		RightCenter = 1 << 7,
-		CenterSurround = 1 << 8,
-		LeftSurroundDirect = 1 << 9,
-		RightSurroundDirect = 1 << 10,
-		TopCenterSurround = 1 << 11,
-		VerticalHeightLeft = 1 << 12,
-		VerticalHeightCenter = 1 << 13,
-		VerticalHeightRight = 1 << 14,
-		TopBackLeft = 1 << 15,
-		TopBackCenter = 1 << 16,
-		TopBackRight = 1 << 17,
-
-		LeftTopFront = VerticalHeightLeft,
-		CenterTopFront = VerticalHeightCenter,
-		RightTopFront = VerticalHeightRight,
-		LeftTopMiddle = 1 << 21,
-		CenterTopMiddle = TopCenterSurround,
-
-		RightTopMiddle = 1 << 23,
-		LeftTopRear = 1 << 24,
-		CenterTopRear = 1 << 25,
-		RightTopRear = 1 << 26,
+	public enum SmpteTimeFlags : uint { // UInt32
+		Unknown = 0,
+		TimeValid = 1 << 0,
+		TimeRunning = 1 << 1
 	}
-	
-	public struct AudioChannelDescription {
-		public AudioChannelLabel Label;
-		public AudioChannelFlags Flags;
-		float Coord0, Coord1, Coord2;
-#if !COREBUILD
 
-		public float [] Coords {
+	public enum MPEG4ObjectID { // long
+		AacMain = 1,
+		AacLc = 2,
+		AacSsr = 3,
+		AacLtp = 4,
+		AacSbr = 5,
+		AacScalable = 6,
+		TwinVq = 7,
+		Celp = 8,
+		Hvxc = 9
+	}
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public struct SmpteTime { // CoreAudio.framework - CoreAudioTypes.h
+		public short Subframes;
+		public short SubframeDivisor;
+		public uint Counter;
+		public uint Type;
+		public uint Flags;
+		public short Hours;
+		public short Minutes;
+		public short Seconds;
+		public short Frames;
+
+		public SmpteTimeFlags FlagsStrong {
 			get {
-				return new float [3] { Coord0, Coord1, Coord2 };
+				return (SmpteTimeFlags) Flags;
 			}
 			set {
-				if (value.Length != 3)
-					throw new ArgumentException ("Must contain three floats");
-				Coord0 = value [0];
-				Coord1 = value [1];
-				Coord2 = value [2];
+				Flags = (uint) value;
 			}
 		}
-
-		public unsafe string? Name {
+		public SmpteTimeType TypeStrong {
 			get {
-				IntPtr sptr;
-				int size = sizeof (IntPtr);
-				int ptr_size = sizeof (AudioChannelDescription);
-				var ptr = ToPointer ();
-
-				var res = AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.ChannelName, ptr_size, ptr, &size, &sptr);
-				Marshal.FreeHGlobal (ptr);
-				if (res != 0)
-					return null;
-
-				return new CFString (sptr, true);
+				return (SmpteTimeType) Type;
 			}
-		}
-
-		public unsafe string? ShortName {
-			get {
-				IntPtr sptr;
-				int size = sizeof (IntPtr);
-				int ptr_size = sizeof (AudioChannelDescription);
-				var ptr = ToPointer ();
-
-				var res = AudioFormatPropertyNative.AudioFormatGetProperty (AudioFormatProperty.ChannelShortName, ptr_size, ptr, &size, &sptr);
-				Marshal.FreeHGlobal (ptr);
-				if (res != 0)
-					return null;
-
-				return new CFString (sptr, true);
+			set {
+				Type = (uint) value;
 			}
-		}
-
-		internal unsafe IntPtr ToPointer ()
-		{
-			var ptr = (AudioChannelDescription*) Marshal.AllocHGlobal (sizeof (AudioChannelLabel) + sizeof (AudioChannelFlags) + 3 * sizeof (float));
-			*ptr = this;
-			return (IntPtr) ptr;
 		}
 
 		public override string ToString ()
 		{
-			return String.Format ("[id={0} {1} - {2},{3},{4}", Label, Flags, Coords [0], Coords [1], Coords [2]);
+			return String.Format ("[Subframes={0},Divisor={1},Counter={2},Type={3},Flags={4},Hours={5},Minutes={6},Seconds={7},Frames={8}]",
+						  Subframes, SubframeDivisor, Counter, Type, Flags, Hours, Minutes, Seconds, Frames);
 		}
-#endif // !COREBUILD
-	}
-	
-	[Flags]
-	public enum AudioChannelFlags : uint { // UInt32 in AudioPanningInfo -- AudioFormat.h
-		AllOff = 0,
-		RectangularCoordinates = 1 << 0,
-		SphericalCoordinates = 1 << 1,
-		Meters = 1 << 2
 	}
 
-	public enum AudioChannelLabel : int { // UInt32 AudioChannelLabel
-		Unknown = -1,
-		Unused = 0,
-		UseCoordinates = 100,
-
-		Left = 1,
-		Right = 2,
-		Center = 3,
-		LFEScreen = 4,
-		LeftSurround = 5,
-		RightSurround = 6,
-		LeftCenter = 7,
-		RightCenter = 8,
-		CenterSurround = 9,
-		LeftSurroundDirect = 10,
-		RightSurroundDirect = 11,
-		TopCenterSurround = 12,
-		VerticalHeightLeft = 13,
-		VerticalHeightCenter = 14,
-		VerticalHeightRight = 15,
-		TopBackLeft = 16,
-		TopBackCenter = 17,
-		TopBackRight = 18,
-		RearSurroundLeft = 33,
-		RearSurroundRight = 34,
-		LeftWide = 35,
-		RightWide = 36,
-		LFE2 = 37,
-		LeftTotal = 38,
-		RightTotal = 39,
-		HearingImpaired = 40,
-		Narration = 41,
-		Mono = 42,
-		DialogCentricMix = 43,
-		CenterSurroundDirect = 44,
-		Haptic = 45,
-
-		LeftTopFront = VerticalHeightLeft,
-		CenterTopFront = VerticalHeightCenter,
-		RightTopFront = VerticalHeightRight,
-		LeftTopMiddle = 49,
-		CenterTopMiddle = TopCenterSurround,
-
-		RightTopMiddle = 51,
-		LeftTopRear = 52,
-		CenterTopRear = 53,
-		RightTopRear = 54,
-
-		// first order ambisonic channels
-		Ambisonic_W = 200,
-		Ambisonic_X = 201,
-		Ambisonic_Y = 202,
-		Ambisonic_Z = 203,
-
-		// Mid/Side Recording
-		MS_Mid = 204,
-		MS_Side = 205,
-
-		// X-Y Recording
-		XY_X = 206,
-		XY_Y = 207,
-
-		// Binaural Recording
-		BinauralLeft = 208,
-		BinauralRight = 209,
-
-		// other
-		HeadphonesLeft = 301,
-		HeadphonesRight = 302,
-		ClickTrack = 304,
-		ForeignLanguage = 305,
-
-		// generic discrete channel
-		Discrete = 400,
-
-		// numbered discrete channel
-		Discrete_0 = (1 << 16) | 0,
-		Discrete_1 = (1 << 16) | 1,
-		Discrete_2 = (1 << 16) | 2,
-		Discrete_3 = (1 << 16) | 3,
-		Discrete_4 = (1 << 16) | 4,
-		Discrete_5 = (1 << 16) | 5,
-		Discrete_6 = (1 << 16) | 6,
-		Discrete_7 = (1 << 16) | 7,
-		Discrete_8 = (1 << 16) | 8,
-		Discrete_9 = (1 << 16) | 9,
-		Discrete_10 = (1 << 16) | 10,
-		Discrete_11 = (1 << 16) | 11,
-		Discrete_12 = (1 << 16) | 12,
-		Discrete_13 = (1 << 16) | 13,
-		Discrete_14 = (1 << 16) | 14,
-		Discrete_15 = (1 << 16) | 15,
-		Discrete_65535 = (1 << 16) | 65535,
-
-		// HOA ACN channels
-
-		// generic
-		HoaAcn = 500,
-
-		// numbered
-		HoaAcn0 = (2 << 16) | 0,
-		HoaAcn1 = (2 << 16) | 1,
-		HoaAcn2 = (2 << 16) | 2,
-		HoaAcn3 = (2 << 16) | 3,
-		HoaAcn4 = (2 << 16) | 4,
-		HoaAcn5 = (2 << 16) | 5,
-		HoaAcn6 = (2 << 16) | 6,
-		HoaAcn7 = (2 << 16) | 7,
-		HoaAcn8 = (2 << 16) | 8,
-		HoaAcn9 = (2 << 16) | 9,
-		HoaAcn10 = (2 << 16) | 10,
-		HoaAcn11 = (2 << 16) | 11,
-		HoaAcn12 = (2 << 16) | 12,
-		HoaAcn13 = (2 << 16) | 13,
-		HoaAcn14 = (2 << 16) | 14,
-		HoaAcn15 = (2 << 16) | 15,
-		HoaAcn65024 = (2 << 16) | 65024,
-		HoaSn3d = HoaAcn0,
-		HoaN3d = (3 << 16),
+	public enum SmpteTimeType : uint // UInt32 in AudioFileRegionList
+	{
+#if !NET
+		[Obsolete ("Value is not to be used with any API.")]
+		None = uint.MaxValue,
+#endif
+		Type24 = 0,
+		Type25 = 1,
+		Type30Drop = 2,
+		Type30 = 3,
+		Type2997 = 4,
+		Type2997Drop = 5,
+		Type60 = 6,
+		Type5994 = 7,
+		Type60Drop = 8,
+		Type5994Drop = 9,
+		Type50 = 10,
+		Type2398 = 11,
 	}
-	
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
 	[StructLayout (LayoutKind.Sequential)]
-	public struct AudioStreamPacketDescription {
-		public long StartOffset;
-		public int VariableFramesInPacket;
-		public int DataByteSize;
+	public struct AudioTimeStamp {
+
+		[Flags]
+		public enum AtsFlags : uint { // UInt32 in AudioTimeStamp
+			NothingValid = 0,
+			SampleTimeValid = (1 << 0),
+			HostTimeValid = (1 << 1),
+			RateScalarValid = (1 << 2),
+			WordClockTimeValid = (1 << 3),
+			SmpteTimeValid = (1 << 4),
+			SampleHostTimeValid = SampleTimeValid | HostTimeValid
+		}
+
+		public double SampleTime;
+		public ulong HostTime;
+		public double RateScalar;
+		public ulong WordClockTime;
+		public SmpteTime SMPTETime;
+		public AtsFlags Flags;
+		public uint Reserved;
 
 		public override string ToString ()
 		{
-			return String.Format ("StartOffset={0} VariableFramesInPacket={1} DataByteSize={2}", StartOffset, VariableFramesInPacket, DataByteSize);
+			var sb = new StringBuilder ("{");
+			if ((Flags & AtsFlags.SampleTimeValid) != 0)
+				sb.Append ("SampleTime=" + SampleTime.ToString ());
+
+			if ((Flags & AtsFlags.HostTimeValid) != 0) {
+				if (sb.Length > 0)
+					sb.Append (',');
+				sb.Append ("HostTime=" + HostTime.ToString ());
+			}
+
+			if ((Flags & AtsFlags.RateScalarValid) != 0) {
+				if (sb.Length > 0)
+					sb.Append (',');
+
+				sb.Append ("RateScalar=" + RateScalar.ToString ());
+			}
+
+			if ((Flags & AtsFlags.WordClockTimeValid) != 0) {
+				if (sb.Length > 0)
+					sb.Append (',');
+				sb.Append ("WordClock=" + HostTime.ToString () + ",");
+			}
+
+			if ((Flags & AtsFlags.SmpteTimeValid) != 0) {
+				if (sb.Length > 0)
+					sb.Append (',');
+				sb.Append ("SmpteTime=" + SMPTETime.ToString ());
+			}
+			sb.Append ("}");
+
+			return sb.ToString ();
 		}
 	}
-	
+
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
 	[StructLayout (LayoutKind.Sequential)]
 	public struct AudioBuffer {
 		public int NumberChannels;
@@ -1346,4 +1464,87 @@ public class AudioType
 			return string.Format ("[channels={0},dataByteSize={1},ptrData=0x{2:x}]", NumberChannels, DataByteSize, Data);
 		}
 	}
+
+	/// <summary>This struct represents the native <see href="https://developer.apple.com/documentation/coreaudiotypes/audiobufferlist">AudioBufferList</see> struct.</summary>
+	/// <remarks>
+	///   <para>
+	///     Typically it's better to use the <see cref="AudioBuffers" /> class to wrap a pointer to a native AudioBufferList,
+	///     but some audio code needs to minimize memory allocations due to being executed in a realtime thread. In that case,
+	///     using this struct is better, because it's possible to use it without incurring any memory allocations.
+	///   </para>
+	///
+	///   <para>
+	///     Note that this struct should never be created in C#, the only valid way to use it is to cast a pointer (<see cref="IntPtr" />)
+	///     to a pointer of this struct:
+	///   </para>
+	///
+	///   <example>
+	///     <code lang="csharp lang-csharp"><![CDATA[
+	/// public unsafe static void Callback (IntPtr audioBufferListPtr) {
+	///     AudioBufferList* audioBufferList = (AudioBufferList* ) audioBufferListPtr;
+	///     for (var i = 0; i < audioBufferList->Count; i++) {
+	///         AudioBuffer* buffer = audioBufferList->GetBuffer (index),
+	///         // Use the buffer for something
+	///     }
+	/// }
+	///   ]]></code>
+	///   </example>
+	/// </remarks>
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public unsafe readonly ref struct AudioBufferList {
+		readonly uint mNumberOfBuffers;
+
+		/// <summary>Returns the number of audio buffers in this list.</summary>
+		public uint Count { get => mNumberOfBuffers; }
+
+		/// <summary>Return a pointer to the <see cref="AudioBuffer" /> at the specified index.</summary>
+		/// <param name="index">The index of the <see cref="AudioBuffer" /> to retrieve.</param>
+		/// <returns>A pointer to the <see cref="AudioBuffer" /> at the specified index.</returns>
+		public AudioBuffer* GetBuffer (int index)
+		{
+			if (index < 0 || index >= Count)
+				throw new ArgumentOutOfRangeException (nameof (index));
+
+			//
+			// Decodes
+			//
+			// struct AudioBufferList
+			// {
+			//    UInt32      mNumberBuffers;
+			//    AudioBuffer mBuffers[1]; // this is a variable length array of mNumberBuffers elements
+			// }
+			//
+			fixed (uint* bufferPtr = &mNumberOfBuffers) {
+				byte* baddress = (byte*) bufferPtr;
+
+				var ptr = baddress + IntPtr.Size + index * sizeof (AudioBuffer);
+				return (AudioBuffer*) ptr;
+			}
+		}
+	}
+
+	// CoreAudioClock.h (inside AudioToolbox)
+	// It was a confusion between CA (CoreAudio) and CA (CoreAnimation)
+#if NET
+	[SupportedOSPlatform ("ios")]
+	[SupportedOSPlatform ("maccatalyst")]
+	[SupportedOSPlatform ("macos")]
+	[SupportedOSPlatform ("tvos")]
+#endif
+	[StructLayout (LayoutKind.Sequential)]
+	public struct CABarBeatTime {
+		public /* SInt32 */ int Bar;
+		public /* UInt16 */ ushort Beat;
+		public /* UInt16 */ ushort Subbeat;
+		public /* UInt16 */ ushort SubbeatDivisor;
+		public /* UInt16 */ ushort Reserved;
+	}
+	
+	
 }

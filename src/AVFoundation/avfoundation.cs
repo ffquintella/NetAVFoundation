@@ -96,7 +96,7 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (NSObject))]
-	interface AVAsynchronousVideoCompositionRequest : NSCopying {
+	partial class AVAsynchronousVideoCompositionRequest : NSCopying {
 		[Export ("renderContext", ArgumentSemantic.Copy)]
 		AVVideoCompositionRenderContext RenderContext { get; }
 
@@ -111,26 +111,26 @@ namespace AVFoundation {
 
 		[return: NullAllowed]
 		[Export ("sourceFrameByTrackID:")]
-		CVPixelBuffer SourceFrameByTrackID (int /* CMPersistentTrackID = int32_t */ trackID);
+		extern CVPixelBuffer SourceFrameByTrackID (int /* CMPersistentTrackID = int32_t */ trackID);
 
 		[Export ("finishWithComposedVideoFrame:")]
-		void FinishWithComposedVideoFrame (CVPixelBuffer composedVideoFrame);
+		extern void FinishWithComposedVideoFrame (CVPixelBuffer composedVideoFrame);
 
 		[Export ("finishWithError:")]
-		void FinishWithError (NSError error);
+		extern void FinishWithError (NSError error);
 
 		[Export ("finishCancelledRequest")]
-		void FinishCancelledRequest ();
+		extern void FinishCancelledRequest ();
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("sourceSampleBufferByTrackID:")]
 		[return: NullAllowed]
-		CMSampleBuffer GetSourceSampleBuffer (int trackId);
+		extern CMSampleBuffer GetSourceSampleBuffer (int trackId);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("sourceTimedMetadataByTrackID:")]
 		[return: NullAllowed]
-		AVTimedMetadataGroup GetSourceTimedMetadata (int trackId);
+		extern AVTimedMetadataGroup GetSourceTimedMetadata (int trackId);
 
 		[TV (15, 0), iOS (15, 0), MacCatalyst (15, 0)]
 		[Export ("sourceSampleDataTrackIDs")]
@@ -239,9 +239,9 @@ namespace AVFoundation {
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (AVMetadataGroup))]
-	interface AVDateRangeMetadataGroup : NSCopying, NSMutableCopying {
+	partial class AVDateRangeMetadataGroup : AVMetadataGroup {
 		[Export ("initWithItems:startDate:endDate:")]
-		NativeHandle Constructor (AVMetadataItem [] items, NSDate startDate, [NullAllowed] NSDate endDate);
+		extern NativeHandle Constructor (AVMetadataItem [] items, NSDate startDate, [NullAllowed] NSDate endDate);
 
 		[Export ("startDate", ArgumentSemantic.Copy)]
 		NSDate StartDate { get; [NotImplemented] set; }

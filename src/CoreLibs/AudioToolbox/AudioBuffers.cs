@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 using Foundation;
 using ObjCRuntime;
 using System.Runtime.Versioning;
-using CoreLibs.AudioToolbox;
+
 
 #if !NET
 using NativeHandle = System.IntPtr;
@@ -79,12 +79,12 @@ namespace AudioToolbox {
 			// in order to calculate the total size / position of the AudioBuffer elements.
 			//
 
-			var size = IntPtr.Size + count * sizeof (AudioType.AudioBuffer);
+			var size = IntPtr.Size + count * sizeof (AudioBuffer);
 			address = Marshal.AllocHGlobal (size);
 			owns = true;
 
 			Marshal.WriteInt32 (address, 0, count);
-			AudioType.AudioBuffer* ptr = (AudioType.AudioBuffer*) (((byte*) address) + IntPtr.Size);
+			AudioBuffer* ptr = (AudioBuffer*) (((byte*) address) + IntPtr.Size);
 			for (int i = 0; i < count; i++) {
 				ptr->NumberChannels = 0;
 				ptr->DataByteSize = 0;
@@ -104,7 +104,7 @@ namespace AudioToolbox {
 			}
 		}
 
-		public AudioType.AudioBuffer this [int index] {
+		public AudioBuffer this [int index] {
 			get {
 				if (index >= Count)
 					throw new ArgumentOutOfRangeException (nameof (index));
@@ -121,8 +121,8 @@ namespace AudioToolbox {
 				unsafe {
 					byte* baddress = (byte*) address;
 
-					var ptr = baddress + IntPtr.Size + index * sizeof (AudioType.AudioBuffer);
-					return *(AudioType.AudioBuffer*) ptr;
+					var ptr = baddress + IntPtr.Size + index * sizeof (AudioBuffer);
+					return *(AudioBuffer*) ptr;
 				}
 			}
 			set {
@@ -131,7 +131,7 @@ namespace AudioToolbox {
 
 				unsafe {
 					byte* baddress = (byte*) address;
-					var ptr = (AudioType.AudioBuffer*) (baddress + IntPtr.Size + index * sizeof (AudioType.AudioBuffer));
+					var ptr = (AudioBuffer*) (baddress + IntPtr.Size + index * sizeof (AudioBuffer));
 					*ptr = value;
 				}
 			}
@@ -153,7 +153,7 @@ namespace AudioToolbox {
 
 			unsafe {
 				byte* baddress = (byte*) address;
-				var ptr = (IntPtr*) (baddress + IntPtr.Size + index * sizeof (AudioType.AudioBuffer) + sizeof (int) + sizeof (int));
+				var ptr = (IntPtr*) (baddress + IntPtr.Size + index * sizeof (AudioBuffer) + sizeof (int) + sizeof (int));
 				*ptr = data;
 			}
 		}
@@ -165,7 +165,7 @@ namespace AudioToolbox {
 
 			unsafe {
 				byte* baddress = (byte*) address;
-				var ptr = (int*) (baddress + IntPtr.Size + index * sizeof (AudioType.AudioBuffer) + sizeof (int));
+				var ptr = (int*) (baddress + IntPtr.Size + index * sizeof (AudioBuffer) + sizeof (int));
 				*ptr = dataByteSize;
 				ptr++;
 				IntPtr* iptr = (IntPtr*) ptr;

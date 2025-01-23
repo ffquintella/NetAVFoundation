@@ -54,6 +54,10 @@ namespace ObjCRuntime {
 		public const string MetalKitLibrary = "/System/Library/Frameworks/MetalKit.framework/MetalKit";
 		public const string MetalLibrary = "/System/Library/Frameworks/Metal.framework/Metal";
 		
+		public const string AudioUnitLibrary = "/System/Library/Frameworks/AudioUnit.framework/AudioUnit";
+		
+		public const string CoreAudioLibrary = "/System/Library/Frameworks/CoreAudio.framework/CoreAudio";
+		
 		
 		
 		

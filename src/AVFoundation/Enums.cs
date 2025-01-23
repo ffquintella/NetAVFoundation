@@ -27,6 +27,7 @@ using System.ComponentModel;
 using Foundation;
 using ObjCRuntime;
 using System.Runtime.InteropServices;
+using CoreLibs;
 
 namespace AVFoundation {
 

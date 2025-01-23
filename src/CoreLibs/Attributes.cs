@@ -672,3 +672,7 @@ public class DisposeAttribute : SnippetAttribute {
 public class CoreImageFilterAttribute : Attribute
 {
 }
+
+public class CheckDisposedAttribute : Attribute {
+	public CheckDisposedAttribute () { }
+}

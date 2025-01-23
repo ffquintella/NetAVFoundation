@@ -79,6 +79,7 @@ using UIKit;
 #if !NET
 using NativeHandle = System.IntPtr;
 #endif
+using nfloat = System.Runtime.InteropServices.NFloat;
 
 namespace AVFoundation {
 #if XAMCORE_5_0
@@ -3825,23 +3826,23 @@ namespace AVFoundation {
 	[MacCatalyst (13, 1)]
 	[DisableDefaultCtor]
 	[BaseType (typeof (AVAssetTrack))]
-	interface AVFragmentedAssetTrack {
+	public interface AVFragmentedAssetTrack {
 	}
 
-	interface IAVCaptureFileOutputDelegate { }
+	public interface IAVCaptureFileOutputDelegate { }
 
 	[NoiOS]
 	[NoTV]
 	[Unavailable (PlatformName.MacCatalyst)]
 	[Protocol, Model]
 	[BaseType (typeof (NSObject))]
-	interface AVCaptureFileOutputDelegate {
+	public  partial class AVCaptureFileOutputDelegate : NSObject {
 		[Abstract]
 		[Export ("captureOutputShouldProvideSampleAccurateRecordingStart:")]
-		bool ShouldProvideSampleAccurateRecordingStart (AVCaptureOutput captureOutput);
+		public extern bool ShouldProvideSampleAccurateRecordingStart (AVCaptureOutput captureOutput);
 
 		[Export ("captureOutput:didOutputSampleBuffer:fromConnection:")]
-		void DidOutputSampleBuffer (AVCaptureOutput captureOutput, CMSampleBuffer sampleBuffer, AVCaptureConnection connection);
+		public extern void DidOutputSampleBuffer (AVCaptureOutput captureOutput, CMSampleBuffer sampleBuffer, AVCaptureConnection connection);
 	}
 
 #if NET
@@ -7617,7 +7618,7 @@ namespace AVFoundation {
 	[BaseType (typeof (NSObject))]
 	// Objective-C exception thrown.  Name: NSGenericException Reason: Cannot instantiate AVMetadataObject because it is an abstract superclass.
 	[DisableDefaultCtor]
-	interface AVMetadataObject {
+	public partial class AVMetadataObject: NSObject {
 		[Export ("duration")]
 		CMTime Duration { get; }
 
@@ -9657,7 +9658,7 @@ namespace AVFoundation {
 	[Introduced (PlatformName.MacCatalyst, 14, 0)]
 	[TV (17, 0)]
 	[BaseType (typeof (NSObject))]
-	interface AVCaptureSession {
+	public partial class AVCaptureSession : NSObject {
 
 		[Export ("sessionPreset", ArgumentSemantic.Copy)]
 		NSString SessionPreset { get; set; }
@@ -9677,37 +9678,37 @@ namespace AVFoundation {
 		bool Interrupted { [Bind ("isInterrupted")] get; }
 
 		[Export ("canSetSessionPreset:")]
-		bool CanSetSessionPreset (NSString preset);
+		public extern bool CanSetSessionPreset (NSString preset);
 
 		[Export ("canAddInput:")]
-		bool CanAddInput (AVCaptureInput input);
+		public extern bool CanAddInput (AVCaptureInput input);
 
 		[Export ("addInput:")]
-		void AddInput (AVCaptureInput input);
+		public extern void AddInput (AVCaptureInput input);
 
 		[Export ("removeInput:")]
-		void RemoveInput (AVCaptureInput input);
+		public extern void RemoveInput (AVCaptureInput input);
 
 		[Export ("canAddOutput:")]
-		bool CanAddOutput (AVCaptureOutput output);
+		public extern bool CanAddOutput (AVCaptureOutput output);
 
 		[Export ("addOutput:")]
-		void AddOutput (AVCaptureOutput output);
+		public extern void AddOutput (AVCaptureOutput output);
 
 		[Export ("removeOutput:")]
-		void RemoveOutput (AVCaptureOutput output);
+		public extern void RemoveOutput (AVCaptureOutput output);
 
 		[Export ("beginConfiguration")]
-		void BeginConfiguration ();
+		public extern void BeginConfiguration ();
 
 		[Export ("commitConfiguration")]
-		void CommitConfiguration ();
+		public extern void CommitConfiguration ();
 
 		[Export ("startRunning")]
-		void StartRunning ();
+		public extern void StartRunning ();
 
 		[Export ("stopRunning")]
-		void StopRunning ();
+		public extern void StopRunning ();
 
 		[Field ("AVCaptureSessionPresetPhoto")]
 		NSString PresetPhoto { get; }
@@ -9814,8 +9815,8 @@ namespace AVFoundation {
 		CMClock SynchronizationClock { get; }
 
 		[NoTV]
-		[Deprecated (PlatformName.MacOSX, 12, 3, message: "Use 'SynchronizationClock' instead.")]
-		[Deprecated (PlatformName.iOS, 15, 4, message: "Use 'SynchronizationClock' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 12, 3, message: "Use 'SynchronizationClock' instead.")]
+		//[Deprecated (PlatformName.iOS, 15, 4, message: "Use 'SynchronizationClock' instead.")]
 		[Deprecated (PlatformName.MacCatalyst, 15, 4, message: "Use 'SynchronizationClock' instead.")]
 		[Export ("masterClock"), NullAllowed]
 		CMClock MasterClock { get; }
@@ -9912,25 +9913,25 @@ namespace AVFoundation {
 	[Introduced (PlatformName.MacCatalyst, 14, 0)]
 	[TV (17, 0)]
 	[BaseType (typeof (NSObject))]
-	interface AVCaptureConnection {
+	public partial class AVCaptureConnection {
 
 		[MacCatalyst (14, 0)]
 		[Static]
 		[Export ("connectionWithInputPorts:output:")]
-		AVCaptureConnection FromInputPorts (AVCaptureInputPort [] ports, AVCaptureOutput output);
+		public static extern AVCaptureConnection FromInputPorts (AVCaptureInputPort [] ports, AVCaptureOutput output);
 
 		[MacCatalyst (14, 0)]
 		[Static]
 		[Export ("connectionWithInputPort:videoPreviewLayer:")]
-		AVCaptureConnection FromInputPort (AVCaptureInputPort port, AVCaptureVideoPreviewLayer layer);
+		public static extern AVCaptureConnection FromInputPort (AVCaptureInputPort port, AVCaptureVideoPreviewLayer layer);
 
 		[MacCatalyst (14, 0)]
 		[Export ("initWithInputPorts:output:")]
-		NativeHandle Constructor (AVCaptureInputPort [] inputPorts, AVCaptureOutput output);
+		public  extern NativeHandle Constructor (AVCaptureInputPort [] inputPorts, AVCaptureOutput output);
 
 		[MacCatalyst (14, 0)]
 		[Export ("initWithInputPort:videoPreviewLayer:")]
-		NativeHandle Constructor (AVCaptureInputPort inputPort, AVCaptureVideoPreviewLayer layer);
+		public  extern NativeHandle Constructor (AVCaptureInputPort inputPort, AVCaptureVideoPreviewLayer layer);
 
 		[NullAllowed]
 		[Export ("output")]
@@ -9947,8 +9948,8 @@ namespace AVFoundation {
 
 		[NoTV]
 		[Export ("videoOrientation", ArgumentSemantic.Assign)]
-		[Deprecated (PlatformName.iOS, 17, 0, message: "Use VideoRotationAngle instead.")]
-		[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "Use VideoRotationAngle instead.")]
+		//[Deprecated (PlatformName.iOS, 17, 0, message: "Use VideoRotationAngle instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "Use VideoRotationAngle instead.")]
 		[Deprecated (PlatformName.MacOSX, 14, 0, message: "Use VideoRotationAngle instead.")]
 		AVCaptureVideoOrientation VideoOrientation { get; set; }
 
@@ -9961,34 +9962,34 @@ namespace AVFoundation {
 		[Export ("isVideoMirroringSupported")]
 		bool SupportsVideoMirroring { get; }
 
-		[Deprecated (PlatformName.MacOSX, 14, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
-		[Deprecated (PlatformName.iOS, 17, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
-		[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
+		//[Deprecated (PlatformName.MacOSX, 14, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
+		//[Deprecated (PlatformName.iOS, 17, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
+		//[Deprecated (PlatformName.MacCatalyst, 17, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
 		[Deprecated (PlatformName.TvOS, 17, 0, message: "Use 'IsVideoRotationAngleSupported' instead.")]
 		[Export ("isVideoOrientationSupported")]
 		bool SupportsVideoOrientation { get; }
 
 		[NoTV]
-		[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
+		//[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("supportsVideoMinFrameDuration")]
 		bool SupportsVideoMinFrameDuration { [Bind ("isVideoMinFrameDurationSupported")] get; }
 
 		[NoTV]
-		[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
+		//[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("videoMinFrameDuration")]
 		CMTime VideoMinFrameDuration { get; set; }
 
 		[NoTV]
-		[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
+		//[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		[Export ("supportsVideoMaxFrameDuration")]
 		bool SupportsVideoMaxFrameDuration { [Bind ("isVideoMaxFrameDurationSupported")] get; }
 
 		[NoTV]
 		[Export ("videoMaxFrameDuration")]
-		[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
+		//[Deprecated (PlatformName.iOS, 7, 0 /* Only deprecated on iOS */)]
 		[Deprecated (PlatformName.MacCatalyst, 14, 0)]
 		CMTime VideoMaxFrameDuration { get; set; }
 
@@ -10340,26 +10341,26 @@ namespace AVFoundation {
 #endif
 	// Objective-C exception thrown.  Name: NSGenericException Reason: Cannot instantiate AVCaptureOutput because it is an abstract superclass.
 	[DisableDefaultCtor]
-	interface AVCaptureOutput {
+	public partial class AVCaptureOutput : NSObject {
 		[Export ("connections")]
 		AVCaptureConnection [] Connections { get; }
 
 		[Export ("connectionWithMediaType:")]
 		[return: NullAllowed]
-		AVCaptureConnection ConnectionFromMediaType (NSString avMediaType);
+		public extern AVCaptureConnection? ConnectionFromMediaType (NSString avMediaType);
 
 		[MacCatalyst (13, 1)]
 		[Export ("metadataOutputRectOfInterestForRect:")]
-		CGRect GetMetadataOutputRectOfInterestForRect (CGRect rectInOutputCoordinates);
+		public extern CGRect GetMetadataOutputRectOfInterestForRect (CGRect rectInOutputCoordinates);
 
 		[MacCatalyst (13, 1)]
 		[Export ("rectForMetadataOutputRectOfInterest:")]
-		CGRect GetRectForMetadataOutputRectOfInterest (CGRect rectInMetadataOutputCoordinates);
+		public extern CGRect GetRectForMetadataOutputRectOfInterest (CGRect rectInMetadataOutputCoordinates);
 
 		[MacCatalyst (13, 1)]
 		[Export ("transformedMetadataObjectForMetadataObject:connection:")]
 		[return: NullAllowed]
-		AVMetadataObject GetTransformedMetadataObject (AVMetadataObject metadataObject, AVCaptureConnection connection);
+		public extern AVMetadataObject GetTransformedMetadataObject (AVMetadataObject metadataObject, AVCaptureConnection connection);
 	}
 
 	[NoiOS, NoTV, NoMacCatalyst]
@@ -10394,31 +10395,31 @@ namespace AVFoundation {
 	[Introduced (PlatformName.MacCatalyst, 14, 0)]
 	[TV (17, 0)]
 	[BaseType (typeof (CALayer))]
-	interface AVCaptureVideoPreviewLayer {
+	public partial class AVCaptureVideoPreviewLayer : CALayer {
 		[NullAllowed] // by default this property is null
 		[Export ("session", ArgumentSemantic.Retain)]
-		AVCaptureSession Session { get; set; }
+		public AVCaptureSession? Session { get; set; }
 
 		[MacCatalyst (14, 0)]
 		[Export ("setSessionWithNoConnection:")]
-		void SetSessionWithNoConnection (AVCaptureSession session);
+		public extern void SetSessionWithNoConnection (AVCaptureSession session);
 
 		[Export ("videoGravity", ArgumentSemantic.Copy)]
 		[Protected]
-		NSString WeakVideoGravity { get; set; }
+		protected NSString WeakVideoGravity { get; set; }
 
 		[NoMac]
 		[NoTV]
 		[Export ("orientation")]
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.VideoOrientation' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.VideoOrientation' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureConnection.VideoOrientation' instead.")]
-		AVCaptureVideoOrientation Orientation { get; set; }
+		public AVCaptureVideoOrientation Orientation { get; set; }
 
 		[NoMac]
 		[NoTV]
 		[Export ("automaticallyAdjustsMirroring")]
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.AutomaticallyAdjustsVideoMirroring' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.AutomaticallyAdjustsVideoMirroring' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureConnection.AutomaticallyAdjustsVideoMirroring' instead.")]
 		bool AutomaticallyAdjustsMirroring { get; set; }
@@ -10426,7 +10427,7 @@ namespace AVFoundation {
 		[NoMac]
 		[NoTV]
 		[Export ("mirrored")]
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.VideoMirrored' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.VideoMirrored' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureConnection.VideoMirrored' instead.")]
 		bool Mirrored { [Bind ("isMirrored")] get; set; }
@@ -10434,7 +10435,7 @@ namespace AVFoundation {
 		[NoMac]
 		[NoTV]
 		[Export ("isMirroringSupported")]
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.IsVideoMirroringSupported' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.IsVideoMirroringSupported' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureConnection.IsVideoMirroringSupported' instead.")]
 		bool MirroringSupported { get; }
@@ -10442,51 +10443,51 @@ namespace AVFoundation {
 		[NoMac]
 		[NoTV]
 		[Export ("isOrientationSupported")]
-		[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.IsVideoOrientationSupported' instead.")]
+		//[Deprecated (PlatformName.iOS, 6, 0, message: "Use 'AVCaptureConnection.IsVideoOrientationSupported' instead.")]
 		[MacCatalyst (13, 1)]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AVCaptureConnection.IsVideoOrientationSupported' instead.")]
 		bool OrientationSupported { get; }
 
 		[Static, Export ("layerWithSession:")]
-		AVCaptureVideoPreviewLayer FromSession (AVCaptureSession session);
+		public static extern AVCaptureVideoPreviewLayer FromSession (AVCaptureSession session);
 
 		[Export ("initWithSession:")]
 		[Internal]
-		IntPtr InitWithConnection (AVCaptureSession session);
+		extern IntPtr InitWithConnection (AVCaptureSession session);
 
 		[MacCatalyst (14, 0)]
 		[Internal]
 		[Export ("initWithSessionWithNoConnection:")]
-		IntPtr InitWithNoConnection (AVCaptureSession session);
+		extern IntPtr InitWithNoConnection (AVCaptureSession session);
 
 		[NullAllowed, Export ("connection")]
-		AVCaptureConnection Connection { get; }
+		public extern AVCaptureConnection? Connection { get; }
 
 		[MacCatalyst (13, 1)]
 		[Export ("captureDevicePointOfInterestForPoint:")]
-		CGPoint CaptureDevicePointOfInterestForPoint (CGPoint pointInLayer);
+		public extern CGPoint CaptureDevicePointOfInterestForPoint (CGPoint pointInLayer);
 
 		[MacCatalyst (13, 1)]
 		[Export ("pointForCaptureDevicePointOfInterest:")]
-		CGPoint PointForCaptureDevicePointOfInterest (CGPoint captureDevicePointOfInterest);
+		public extern CGPoint PointForCaptureDevicePointOfInterest (CGPoint captureDevicePointOfInterest);
 
 		[MacCatalyst (13, 1)]
 		[Export ("transformedMetadataObjectForMetadataObject:")]
 		[return: NullAllowed]
-		AVMetadataObject GetTransformedMetadataObject (AVMetadataObject metadataObject);
+		public extern AVMetadataObject? GetTransformedMetadataObject (AVMetadataObject metadataObject);
 
 		[MacCatalyst (13, 1)]
 		[Export ("metadataOutputRectOfInterestForRect:")]
-		CGRect MapToMetadataOutputCoordinates (CGRect rectInLayerCoordinates);
+		public extern CGRect MapToMetadataOutputCoordinates (CGRect rectInLayerCoordinates);
 
 		[MacCatalyst (13, 1)]
 		[Export ("rectForMetadataOutputRectOfInterest:")]
-		CGRect MapToLayerCoordinates (CGRect rectInMetadataOutputCoordinates);
+		public extern CGRect MapToLayerCoordinates (CGRect rectInMetadataOutputCoordinates);
 
 		[MacCatalyst (14, 0)]
 		[Static]
 		[Export ("layerWithSessionWithNoConnection:")]
-		AVCaptureVideoPreviewLayer CreateWithNoConnection (AVCaptureSession session);
+		public static extern AVCaptureVideoPreviewLayer CreateWithNoConnection (AVCaptureSession session);
 
 		[NoMac, iOS (13, 0)]
 		[MacCatalyst (14, 0)]
@@ -10740,7 +10741,7 @@ namespace AVFoundation {
 	///       <para>If developers create classes that implement this interface, the implementation methods will automatically be exported to Objective-C with the matching signature from the method defined in the <see cref="T:AVFoundation.AVCaptureAudioDataOutputSampleBufferDelegate" /> protocol.</para>
 	///       <para>Optional methods (if any) are provided by the <see cref="T:AVFoundation.AVCaptureAudioDataOutputSampleBufferDelegate_Extensions" /> class as extension methods to the interface, allowing developers to invoke any optional methods on the protocol.</para>
 	///     </remarks>
-	interface IAVCaptureAudioDataOutputSampleBufferDelegate { }
+	public interface IAVCaptureAudioDataOutputSampleBufferDelegate { }
 
 	/// <summary>Interface representing the required methods (if any) of the protocol <see cref="T:AVFoundation.AVCaptureFileOutputRecordingDelegate" />.</summary>
 	///     <remarks>
@@ -10748,7 +10749,7 @@ namespace AVFoundation {
 	///       <para>If developers create classes that implement this interface, the implementation methods will automatically be exported to Objective-C with the matching signature from the method defined in the <see cref="T:AVFoundation.AVCaptureFileOutputRecordingDelegate" /> protocol.</para>
 	///       <para>Optional methods (if any) are provided by the <see cref="T:AVFoundation.AVCaptureFileOutputRecordingDelegate_Extensions" /> class as extension methods to the interface, allowing developers to invoke any optional methods on the protocol.</para>
 	///     </remarks>
-	interface IAVCaptureFileOutputRecordingDelegate { }
+	public interface IAVCaptureFileOutputRecordingDelegate { }
 
 	/// <summary>A class that represents a file-based <see cref="T:AVFoundation.AVCaptureOutput" />. Application developers should use concrete subtypes <see cref="T:AVFoundation.AVCaptureMovieFileOutput" /> or <see cref="T:AVFoundation.AVCaptureAudioDataOutput" />.</summary>
 	///     
@@ -10758,7 +10759,7 @@ namespace AVFoundation {
 	// Objective-C exception thrown.  Name: NSGenericException Reason: Cannot instantiate AVCaptureFileOutput because it is an abstract superclass.
 	[DisableDefaultCtor]
 	[TV (17, 0)]
-	interface AVCaptureFileOutput {
+	public partial class AVCaptureFileOutput: AVCaptureOutput {
 		[Export ("recordedDuration")]
 		CMTime RecordedDuration { get; }
 
@@ -10781,28 +10782,28 @@ namespace AVFoundation {
 		NSUrl OutputFileURL { get; } // FIXME: should have been Url.
 
 		[Export ("startRecordingToOutputFileURL:recordingDelegate:")]
-		void StartRecordingToOutputFile (NSUrl outputFileUrl, IAVCaptureFileOutputRecordingDelegate recordingDelegate);
+		public extern void StartRecordingToOutputFile (NSUrl outputFileUrl, IAVCaptureFileOutputRecordingDelegate recordingDelegate);
 
 		[Export ("stopRecording")]
-		void StopRecording ();
+		public extern void StopRecording ();
 
 		[iOS (18, 0), MacCatalyst (15, 0), TV (18, 0)]
 		[Export ("pauseRecording")]
-		void PauseRecording ();
+		public extern void PauseRecording ();
 
 		[iOS (18, 0), MacCatalyst (15, 0), TV (18, 0)]
 		[Export ("resumeRecording")]
-		void ResumeRecording ();
+		public extern void ResumeRecording ();
 
 		[NoiOS]
 		[NoTV]
 		[NoMacCatalyst]
 		[Export ("delegate", ArgumentSemantic.Assign), NullAllowed]
-		IAVCaptureFileOutputDelegate Delegate { get; set; }
+		public IAVCaptureFileOutputDelegate Delegate { get; set; }
 
 		[iOS (18, 0), MacCatalyst (15, 0), TV (18, 0)]
 		[Export ("recordingPaused")]
-		bool RecordingPaused { [Bind ("isRecordingPaused")] get; }
+		public bool RecordingPaused { [Bind ("isRecordingPaused")] get; }
 	}
 
 	/// <summary>A delegate object that allows the application developer to respond to events in a <see cref="T:AVFoundation.AVCaptureFileOutput" /> object.</summary>
@@ -10815,29 +10816,29 @@ namespace AVFoundation {
 	[Protocol]
 	[TV (17, 0)]
 	[MacCatalyst (13, 1)]
-	interface AVCaptureFileOutputRecordingDelegate {
+	public partial class AVCaptureFileOutputRecordingDelegate : NSObject, IAVCaptureFileOutputRecordingDelegate {
 		[Export ("captureOutput:didStartRecordingToOutputFileAtURL:fromConnections:")]
-		void DidStartRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections);
+		public extern void DidStartRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections);
 
 		[iOS (18, 2), Mac (15, 2), MacCatalyst (18, 2), TV (18, 2)]
 		[Export ("captureOutput:didStartRecordingToOutputFileAtURL:startPTS:fromConnections:")]
-		void DidStartRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, CMTime startPts, NSObject [] connections);
+		public extern void DidStartRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, CMTime startPts, NSObject [] connections);
 
 		[Abstract]
 		[Export ("captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:"), CheckDisposed]
-		void FinishedRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections, [NullAllowed] NSError error);
+		public extern void FinishedRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections, [NullAllowed] NSError error);
 
 		[MacCatalyst (18, 0), iOS (18, 0), TV (18, 0)]
 		[Export ("captureOutput:didPauseRecordingToOutputFileAtURL:fromConnections:")]
-		void DidPauseRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, AVCaptureConnection [] connections);
+		public extern void DidPauseRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, AVCaptureConnection [] connections);
 
 		[MacCatalyst (18, 0), iOS (18, 0), TV (18, 0)]
 		[Export ("captureOutput:didResumeRecordingToOutputFileAtURL:fromConnections:")]
-		void DidResumeRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, AVCaptureConnection [] connections);
+		public extern void DidResumeRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, AVCaptureConnection [] connections);
 
 		[NoMacCatalyst, NoiOS, NoTV]
 		[Export ("captureOutput:willFinishRecordingToOutputFileAtURL:fromConnections:error:")]
-		void WillFinishRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, AVCaptureConnection [] connections, [NullAllowed] NSError error);
+		public extern void WillFinishRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, AVCaptureConnection [] connections, [NullAllowed] NSError error);
 	}
 
 	/// <summary>An object that intercepts metadata objects produced by a capture connection.</summary>

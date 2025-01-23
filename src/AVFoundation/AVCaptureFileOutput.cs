@@ -27,12 +27,12 @@ namespace AVFoundation {
 				this.finishedRecording = finishedRecording;
 			}
 
-			public override void DidStartRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections)
+			public  void DidStartRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections)
 			{
 				startRecordingFromConnections (connections);
 			}
 
-			public override void FinishedRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections, NSError? error)
+			public  void FinishedRecording (AVCaptureFileOutput captureOutput, NSUrl outputFileUrl, NSObject [] connections, NSError? error)
 			{
 				finishedRecording (connections, error);
 			}

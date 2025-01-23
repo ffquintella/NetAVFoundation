@@ -3621,35 +3621,35 @@ namespace Foundation {
 	[BaseType (typeof (NSObject), Name = "NSURLAuthenticationChallenge")]
 	// 'init' returns NIL
 	[DisableDefaultCtor]
-	partial class NSUrlAuthenticationChallenge : NSSecureCoding {
+	public partial class NSUrlAuthenticationChallenge : NSSecureCoding {
 		[Export ("initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error:sender:")]
-		extern NativeHandle Constructor (NSUrlProtectionSpace space, NSUrlCredential credential, nint previousFailureCount, [NullAllowed] NSUrlResponse response, [NullAllowed] NSError error, NSUrlConnection sender);
+		public extern NativeHandle Constructor (NSUrlProtectionSpace space, NSUrlCredential credential, nint previousFailureCount, [NullAllowed] NSUrlResponse response, [NullAllowed] NSError error, NSUrlConnection sender);
 
 		[Export ("initWithAuthenticationChallenge:sender:")]
-		extern NativeHandle Constructor (NSUrlAuthenticationChallenge challenge, NSUrlConnection sender);
+		public extern NativeHandle Constructor (NSUrlAuthenticationChallenge challenge, NSUrlConnection sender);
 
 		[Export ("protectionSpace")]
-		NSUrlProtectionSpace ProtectionSpace { get; }
+		public NSUrlProtectionSpace ProtectionSpace { get; }
 
 		[Export ("proposedCredential")]
-		NSUrlCredential ProposedCredential { get; }
+		public NSUrlCredential ProposedCredential { get; }
 
 		[Export ("previousFailureCount")]
-		nint PreviousFailureCount { get; }
+		public nint PreviousFailureCount { get; }
 
 		[Export ("failureResponse")]
-		NSUrlResponse FailureResponse { get; }
+		public NSUrlResponse FailureResponse { get; }
 
 		[Export ("error")]
-		NSError Error { get; }
+		public NSError Error { get; }
 
 		[Export ("sender")]
-		NSUrlConnection Sender { get; }
+		public NSUrlConnection Sender { get; }
 	}
 
 	[Protocol (Name = "NSURLAuthenticationChallengeSender")]
 #if NET
-	partial class NSUrlAuthenticationChallengeSender {
+	public partial class NSUrlAuthenticationChallengeSender {
 #else
 	[Model]
 	[BaseType (typeof (NSObject))]
@@ -3657,28 +3657,28 @@ namespace Foundation {
 #endif
 		[Abstract]
 		[Export ("useCredential:forAuthenticationChallenge:")]
-		extern void UseCredential (NSUrlCredential credential, NSUrlAuthenticationChallenge challenge);
+		public extern void UseCredential (NSUrlCredential credential, NSUrlAuthenticationChallenge challenge);
 
 		[Abstract]
 		[Export ("continueWithoutCredentialForAuthenticationChallenge:")]
-		extern void ContinueWithoutCredential (NSUrlAuthenticationChallenge challenge);
+		public extern void ContinueWithoutCredential (NSUrlAuthenticationChallenge challenge);
 
 		[Abstract]
 		[Export ("cancelAuthenticationChallenge:")]
-		extern void CancelAuthenticationChallenge (NSUrlAuthenticationChallenge challenge);
+		public extern void CancelAuthenticationChallenge (NSUrlAuthenticationChallenge challenge);
 
 		[Export ("performDefaultHandlingForAuthenticationChallenge:")]
-		extern void PerformDefaultHandling (NSUrlAuthenticationChallenge challenge);
+		public extern void PerformDefaultHandling (NSUrlAuthenticationChallenge challenge);
 
 		[Export ("rejectProtectionSpaceAndContinueWithChallenge:")]
-		extern void RejectProtectionSpaceAndContinue (NSUrlAuthenticationChallenge challenge);
+		public extern void RejectProtectionSpaceAndContinue (NSUrlAuthenticationChallenge challenge);
 	}
 
 
-	delegate void NSUrlConnectionDataResponse (NSUrlResponse response, NSData data, NSError error);
+	public delegate void NSUrlConnectionDataResponse (NSUrlResponse response, NSData data, NSError error);
 
 	[BaseType (typeof (NSObject), Name = "NSURLConnection")]
-	partial class NSUrlConnection :
+	public partial class NSUrlConnection :
 #if NET
 		NSUrlAuthenticationChallengeSender
 #else
@@ -3687,7 +3687,7 @@ namespace Foundation {
 	{
 		[Export ("canHandleRequest:")]
 		[Static]
-		static extern bool CanHandleRequest (NSUrlRequest request);
+		public static extern bool CanHandleRequest (NSUrlRequest request);
 
 		[return: NullAllowed]
 		[NoWatch]
@@ -3695,47 +3695,47 @@ namespace Foundation {
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSUrlSession' instead.")]
 		[Export ("connectionWithRequest:delegate:")]
 		[Static]
-		extern NSUrlConnection FromRequest (NSUrlRequest request, [NullAllowed] INSUrlConnectionDelegate connectionDelegate);
+		public extern NSUrlConnection? FromRequest (NSUrlRequest request, [NullAllowed] INSUrlConnectionDelegate connectionDelegate);
 
 	
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSUrlSession' instead.")]
 		[Export ("initWithRequest:delegate:")]
-		extern NativeHandle Constructor (NSUrlRequest request, [NullAllowed] INSUrlConnectionDelegate connectionDelegate);
+		public extern NativeHandle Constructor (NSUrlRequest request, [NullAllowed] INSUrlConnectionDelegate connectionDelegate);
 
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'NSUrlSession' instead.")]
 		[Export ("initWithRequest:delegate:startImmediately:")]
-		extern NativeHandle Constructor (NSUrlRequest request, [NullAllowed] INSUrlConnectionDelegate connectionDelegate, bool startImmediately);
+		public extern NativeHandle Constructor (NSUrlRequest request, [NullAllowed] INSUrlConnectionDelegate connectionDelegate, bool startImmediately);
 
 		[Export ("start")]
-		extern void Start ();
+		public extern void Start ();
 
 		[Export ("cancel")]
-		extern void Cancel ();
+		public extern void Cancel ();
 
 		[Export ("scheduleInRunLoop:forMode:")]
-		extern void Schedule (NSRunLoop aRunLoop, NSString forMode);
+		public extern void Schedule (NSRunLoop aRunLoop, NSString forMode);
 
 		[Wrap ("Schedule (aRunLoop, forMode.GetConstant ()!)")]
-		extern void Schedule (NSRunLoop aRunLoop, NSRunLoopMode forMode);
+		public extern void Schedule (NSRunLoop aRunLoop, NSRunLoopMode forMode);
 
 		[Export ("unscheduleFromRunLoop:forMode:")]
-		extern void Unschedule (NSRunLoop aRunLoop, NSString forMode);
+		public extern void Unschedule (NSRunLoop aRunLoop, NSString forMode);
 
 		[Wrap ("Unschedule (aRunLoop, forMode.GetConstant ()!)")]
-		extern void Unschedule (NSRunLoop aRunLoop, NSRunLoopMode forMode);
+		public extern void Unschedule (NSRunLoop aRunLoop, NSRunLoopMode forMode);
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("originalRequest")]
-		NSUrlRequest OriginalRequest { get; }
+		public NSUrlRequest OriginalRequest { get; }
 
 		[NoMac]
 		[MacCatalyst (13, 1)]
 		[Export ("currentRequest")]
-		NSUrlRequest CurrentRequest { get; }
+		public NSUrlRequest CurrentRequest { get; }
 
 		[Export ("setDelegateQueue:")]
-		extern void SetDelegateQueue (NSOperationQueue queue);
+		public extern void SetDelegateQueue (NSOperationQueue queue);
 
 	
 		[NoWatch]
@@ -3744,7 +3744,7 @@ namespace Foundation {
 		[Static]
 		[Export ("sendSynchronousRequest:returningResponse:error:")]
 		[return: NullAllowed]
-		static extern NSData SendSynchronousRequest (NSUrlRequest request, out NSUrlResponse response, out NSError error);
+		public static extern NSData? SendSynchronousRequest (NSUrlRequest request, out NSUrlResponse response, out NSError error);
 		
 		[NoWatch]
 		[MacCatalyst (13, 1)]
@@ -3752,36 +3752,36 @@ namespace Foundation {
 		[Static]
 		[Export ("sendAsynchronousRequest:queue:completionHandler:")]
 		[Async (ResultTypeName = "NSUrlAsyncResult", MethodName = "SendRequestAsync")]
-		extern void SendAsynchronousRequest (NSUrlRequest request, NSOperationQueue queue, NSUrlConnectionDataResponse completionHandler);
+		public extern void SendAsynchronousRequest (NSUrlRequest request, NSOperationQueue queue, NSUrlConnectionDataResponse completionHandler);
 	}
 
-	partial class INSUrlConnectionDelegate { }
+	public partial class INSUrlConnectionDelegate { }
 
 	[BaseType (typeof (NSObject), Name = "NSURLConnectionDelegate")]
 	[Model]
 	[Protocol]
-	partial class NSUrlConnectionDelegate {
+	public partial class NSUrlConnectionDelegate {
 		[Export ("connection:canAuthenticateAgainstProtectionSpace:")]
 
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'WillSendRequestForAuthenticationChallenge' instead.")]
-		extern bool CanAuthenticateAgainstProtectionSpace (NSUrlConnection connection, NSUrlProtectionSpace protectionSpace);
+		public extern bool CanAuthenticateAgainstProtectionSpace (NSUrlConnection connection, NSUrlProtectionSpace protectionSpace);
 
 		[Export ("connection:didReceiveAuthenticationChallenge:")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'WillSendRequestForAuthenticationChallenge' instead.")]
-		extern void ReceivedAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge);
+		public extern void ReceivedAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge);
 
 		[Export ("connection:didCancelAuthenticationChallenge:")]
 		[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'WillSendRequestForAuthenticationChallenge' instead.")]
-		extern void CanceledAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge);
+		public extern void CanceledAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge);
 
 		[Export ("connectionShouldUseCredentialStorage:")]
-		extern bool ConnectionShouldUseCredentialStorage (NSUrlConnection connection);
+		public extern bool ConnectionShouldUseCredentialStorage (NSUrlConnection connection);
 
 		[Export ("connection:didFailWithError:")]
-		extern void FailedWithError (NSUrlConnection connection, NSError error);
+		public extern void FailedWithError (NSUrlConnection connection, NSError error);
 
 		[Export ("connection:willSendRequestForAuthenticationChallenge:")]
-		extern void WillSendRequestForAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge);
+		public extern void WillSendRequestForAuthenticationChallenge (NSUrlConnection connection, NSUrlAuthenticationChallenge challenge);
 	}
 
 	[BaseType (typeof (NSUrlConnectionDelegate), Name = "NSURLConnectionDataDelegate")]
@@ -4345,7 +4345,7 @@ namespace Foundation {
 	[Model]
 	[BaseType (typeof (NSUrlSessionDelegate), Name = "NSURLSessionTaskDelegate")]
 	[Protocol]
-	partial class NSUrlSessionTaskDelegate {
+	public partial class NSUrlSessionTaskDelegate : NSUrlSessionDelegate {
 
 		[Export ("URLSession:task:willPerformHTTPRedirection:newRequest:completionHandler:")]
 		extern void WillPerformHttpRedirection (NSUrlSession session, NSUrlSessionTask task, NSHttpUrlResponse response, NSUrlRequest newRequest, Action<NSUrlRequest> completionHandler);

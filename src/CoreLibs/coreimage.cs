@@ -6006,9 +6006,9 @@ namespace CoreImage {
 
 	/// <summary>Base class for barcode descriptions. Subclasses for specific schemes define relevant properties.</summary>
 	[MacCatalyst (13, 1)]
-	[Abstract]
+	//[Abstract]
 	[BaseType (typeof (NSObject))]
-	interface CIBarcodeDescriptor { //}: NSSecureCoding, NSCopying {
+	public abstract class CIBarcodeDescriptor : NSObject { //}: NSSecureCoding, NSCopying {
 		// empty
 	}
 

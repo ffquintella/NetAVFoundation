@@ -55,7 +55,7 @@ namespace ObjCRuntime {
 		static IntPtr NSObjectClass;
 		static bool initialized;
 
-		internal static IntPtrEqualityComparer IntPtrEqualityComparer;
+		public static IntPtrEqualityComparer IntPtrEqualityComparer;
 		internal static TypeEqualityComparer TypeEqualityComparer;
 		internal static UInt64EqualityComparer UInt64EqualityComparer;
 
@@ -2799,7 +2799,7 @@ namespace ObjCRuntime {
 	}
 
 
-	internal class IntPtrEqualityComparer : IEqualityComparer<IntPtr> {
+	public class IntPtrEqualityComparer : IEqualityComparer<IntPtr> {
 		public bool Equals (IntPtr x, IntPtr y)
 		{
 			return x == y;

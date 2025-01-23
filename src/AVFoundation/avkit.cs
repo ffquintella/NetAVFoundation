@@ -790,25 +790,25 @@ namespace AVKit {
 	[NoiOS]
 	[NoMac]
 	[NoMacCatalyst]
-	[DisableDefaultCtor]
+	//[DisableDefaultCtor]
 	[BaseType (typeof (NSObject))]
-	interface AVNavigationMarkersGroup {
+	public class AVNavigationMarkersGroup : NSObject {
 		[Export ("initWithTitle:timedNavigationMarkers:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor ([NullAllowed] string title, AVTimedMetadataGroup [] navigationMarkers);
+		public extern NativeHandle Constructor ([NullAllowed] string title, AVTimedMetadataGroup [] navigationMarkers);
 
 		[Export ("initWithTitle:dateRangeNavigationMarkers:")]
 		[DesignatedInitializer]
-		NativeHandle Constructor ([NullAllowed] string title, AVDateRangeMetadataGroup [] navigationMarkers);
+		public extern NativeHandle Constructor ([NullAllowed] string title, AVDateRangeMetadataGroup [] navigationMarkers);
 
 		[NullAllowed, Export ("title")]
-		string Title { get; }
+		public string Title { get; }
 
 		[NullAllowed, Export ("timedNavigationMarkers")]
-		AVTimedMetadataGroup [] TimedNavigationMarkers { get; }
+		public AVTimedMetadataGroup []? TimedNavigationMarkers { get; }
 
 		[NullAllowed, Export ("dateRangeNavigationMarkers")]
-		AVDateRangeMetadataGroup [] DateRangeNavigationMarkers { get; }
+		public AVDateRangeMetadataGroup []? DateRangeNavigationMarkers { get; }
 	}
 
 	[NoMac]

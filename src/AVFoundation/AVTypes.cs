@@ -355,7 +355,7 @@ namespace AVFoundation {
 #if COREBUILD
 	public
 #endif
-	struct AVSampleCursorSyncInfo_Blittable {
+	public struct AVSampleCursorSyncInfo_Blittable {
 		byte isFullSync;
 		public bool IsFullSync {
 			get => isFullSync != 0;
@@ -462,7 +462,7 @@ namespace AVFoundation {
 #if COREBUILD
 	public
 #endif
-	struct AVSampleCursorDependencyInfo_Blittable {
+	public struct AVSampleCursorDependencyInfo_Blittable {
 		byte indicatesWhetherItHasDependentSamples;
 		byte hasDependentSamples;
 		byte indicatesWhetherItDependsOnOthers;
@@ -592,7 +592,7 @@ namespace AVFoundation {
 #if COREBUILD
 	public
 #endif
-	struct AVSampleCursorChunkInfo_Blittable {
+	public struct AVSampleCursorChunkInfo_Blittable {
 		public long SampleCount;
 
 		byte hasUniformSampleSizes;
@@ -658,7 +658,7 @@ namespace AVFoundation {
 #if COREBUILD
 	public
 #endif
-	struct AVSampleCursorAudioDependencyInfo_Blittable {
+	public struct AVSampleCursorAudioDependencyInfo_Blittable {
 		byte isIndependentlyDecodable;
 		public bool IsIndependentlyDecodable {
 			get => isIndependentlyDecodable != 0;

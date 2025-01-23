@@ -520,12 +520,12 @@ namespace CoreVideo {
 
 	/// <summary>A reusable set of <see cref="T:CoreVideo.CVPixelBuffer" />s.</summary>
 	[Partial]
-	interface CVPixelBufferPool {
+	public partial class CVPixelBufferPool {
 		[Field ("kCVPixelBufferPoolMinimumBufferCountKey")]
-		NSString MinimumBufferCountKey { get; }
+		public NSString MinimumBufferCountKey { get; }
 
 		[Field ("kCVPixelBufferPoolMaximumBufferAgeKey")]
-		NSString MaximumBufferAgeKey { get; }
+		public NSString MaximumBufferAgeKey { get; }
 	}
 
 	/// <summary>Cache to manage CVMetalTexture objects.</summary>

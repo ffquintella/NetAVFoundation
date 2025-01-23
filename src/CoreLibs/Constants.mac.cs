@@ -58,6 +58,8 @@ namespace ObjCRuntime {
 		
 		public const string CoreAudioLibrary = "/System/Library/Frameworks/CoreAudio.framework/CoreAudio";
 		
+		public const string MediaToolboxLibrary = "/System/Library/Frameworks/MediaToolbox.framework/MediaToolbox";
+		
 		
 		
 		

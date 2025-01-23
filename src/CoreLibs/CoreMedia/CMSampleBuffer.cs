@@ -58,6 +58,13 @@ namespace CoreMedia {
 		{
 		}
 
+		internal static CMSampleBuffer? Create (IntPtr handle, bool owns)
+		{
+			if (handle == IntPtr.Zero)
+				return null;
+			return new CMSampleBuffer (handle, owns);
+		}
+		
 		protected override void Dispose (bool disposing)
 		{
 			if (invalidate.IsAllocated)

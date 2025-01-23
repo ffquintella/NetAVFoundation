@@ -314,6 +314,135 @@ namespace CoreMedia {
 		NSData ConstraintIndicatorFlags { get; set; }
 		int LevelIndex { get; set; }
 	}
+	
+	[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
+	public enum CMTaggedBufferGroupError {
+		Success = 0,
+		ParamErr = -15780,
+		AllocationFailed = -15781,
+		InternalError = -15782,
+	}
+	
+	[Internal]
+	//[Partial]
+	[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
+	public class CMTagConstants {
+		[Field ("kCMTagInvalid")]
+		public static extern CMTag Invalid { get; }
+
+		[Field ("kCMTagMediaTypeVideo")]
+		public static extern CMTag MediaTypeVideo { get; }
+
+		[Field ("kCMTagMediaSubTypeMebx")]
+		public static extern CMTag MediaSubTypeMebx { get; }
+
+		[Field ("kCMTagMediaTypeAudio")]
+		public static extern CMTag MediaTypeAudio { get; }
+
+		[Field ("kCMTagMediaTypeMetadata")]
+		public static extern CMTag MediaTypeMetadata { get; }
+
+		[Field ("kCMTagStereoLeftEye")]
+		public static extern CMTag StereoLeftEye { get; }
+
+		[Field ("kCMTagStereoRightEye")]
+		public static extern CMTag StereoRightEye { get; }
+
+		[Field ("kCMTagStereoLeftAndRightEye")]
+		public static extern CMTag StereoLeftAndRightEye { get; }
+
+		[Field ("kCMTagStereoNone")]
+		public static extern CMTag StereoNone { get; }
+
+		[Field ("kCMTagStereoInterpretationOrderReversed")]
+		public static extern CMTag StereoInterpretationOrderReversed { get; }
+
+		[Field ("kCMTagProjectionTypeRectangular")]
+		public static extern CMTag ProjectionTypeRectangular { get; }
+
+		[Field ("kCMTagProjectionTypeEquirectangular")]
+		public static extern CMTag ProjectionTypeEquirectangular { get; }
+
+		[iOS (18, 0), TV (18, 0), MacCatalyst (18, 0), Mac (15, 0)]
+		[Field ("kCMTagProjectionTypeHalfEquirectangular")]
+		public static extern CMTag ProjectionTypeHalfEquirectangular { get; }
+
+		[Field ("kCMTagProjectionTypeFisheye")]
+		public static extern CMTag ProjectionTypeFisheye { get; }
+
+		[Field ("kCMTagPackingTypeNone")]
+		public static extern CMTag PackingTypeNone { get; }
+
+		[Field ("kCMTagPackingTypeSideBySide")]
+		public static extern CMTag PackingTypeSideBySide { get; }
+
+		[Field ("kCMTagPackingTypeOverUnder")]
+		public static extern CMTag PackingTypeOverUnder { get; }
+
+		[Field ("kCMTagValueKey")]
+		public static extern NSString ValueKey { get; }
+
+		[Field ("kCMTagCategoryKey")]
+		public static extern NSString CategoryKey { get; }
+
+		[Field ("kCMTagDataTypeKey")]
+		public static extern NSString DataTypeKey { get; }
+	}
+	
+	[Internal]
+	[Partial]
+	interface CMTagCollectionConstants {
+		[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
+		[Field ("kCMTagCollectionTagsArrayKey")]
+		NSString ArrayKey { get; }
+	}
+	
+	[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
+	public enum CMTagCollectionError {
+		Success = 0,
+		ParamErr = -15740,
+		AllocationFailed = -15741,
+		InternalError = -15742,
+		InvalidTag = -15743,
+		InvalidTagCollectionDictionary = -15744,
+		InvalidTagCollectionData = -15745,
+		TagNotFound = -15746,
+		InvalidTagCollectionDataVersion = -15747,
+		ExhaustedBufferSize = -15748,
+		NotYetImplemented = -15749,
+	}
+	
+	[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
+	public enum CMTagDataType : uint {
+		Invalid = 0,
+		SInt64 = 2,
+		Float64 = 3,
+		OSType = 5,
+		Flags = 7,
+	}
+	
+	[MacCatalyst (17, 0), TV (17, 0), Mac (14, 0), iOS (17, 0)]
+	public enum CMTagCategory : uint {
+		Undefined = 0,
+		MediaType = ('m' << 24) + ('d' << 16) + ('i' << 8) + 'a', // 'mdia'
+		MediaSubType = ('m' << 24) + ('s' << 16) + ('u' << 8) + 'b', // 'msub'
+		TrackId = ('t' << 24) + ('r' << 16) + ('a' << 8) + 'k', // 'trak'
+		ChannelId = ('v' << 24) + ('c' << 16) + ('h' << 8) + 'n', // 'vchn'
+		VideoLayerId = ('v' << 24) + ('l' << 16) + ('a' << 8) + 'y', // 'vlay'
+		PixelFormat = ('p' << 24) + ('i' << 16) + ('x' << 8) + 'f', // 'pixf'
+		PackingType = ('p' << 24) + ('a' << 16) + ('c' << 8) + 'k', // 'pack'
+		ProjectionType = ('p' << 24) + ('r' << 16) + ('o' << 8) + 'j', // 'proj'
+		StereoView = ('e' << 24) + ('y' << 16) + ('e' << 8) + 's', // 'eyes'
+		StereoViewInterpretation = ('e' << 24) + ('y' << 16) + ('i' << 8) + 'p', // 'eyip'
+	}
+	
+	[Flags]
+	[TV (17, 0), Mac (14, 0), iOS (17, 0), MacCatalyst (17, 0)]
+	public enum CMStereoViewComponents : ulong {
+		None = 0x0,
+		LeftEye = 1uL << 0,
+		RightEye = 1uL << 1,
+	}
 
 #if false
 	// right now the generator can't add fields in a partial struct

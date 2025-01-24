@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
-        <DefineConstants>__MACCATALYST__,MONOMAC,__MACOS__</DefineConstants>
+        <DefineConstants>__MACCATALYST__,__MACOS__</DefineConstants>
     </PropertyGroup>
 
     <ItemGroup>

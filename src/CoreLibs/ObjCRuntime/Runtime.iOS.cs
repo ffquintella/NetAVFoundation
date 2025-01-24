@@ -29,7 +29,7 @@ namespace ObjCRuntime {
 #elif IOS
 		internal const string ProductName = "Microsoft.iOS";
 #else
-#error Unknown platform
+//#error Unknown platform
 #endif
 #if WATCH
 		internal const string AssemblyName = "Microsoft.watchOS.dll";
@@ -38,7 +38,7 @@ namespace ObjCRuntime {
 #elif IOS
 		internal const string AssemblyName = "Microsoft.iOS.dll";
 #else
-#error Unknown platform
+//#error Unknown platform
 #endif
 #else
 #if WATCH
@@ -75,8 +75,8 @@ namespace ObjCRuntime {
 			if (options->IsSimulator)
 				Arch = Arch.SIMULATOR;
 #endif
-
-			UIApplication.Initialize ();
+			//TODO: ERROR
+			//UIApplication.Initialize ();
 		}
 
 #if NET && !__MACCATALYST__

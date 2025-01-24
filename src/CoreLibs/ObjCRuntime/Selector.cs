@@ -24,6 +24,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 using Foundation;
 using ObjCRuntime;
 
@@ -153,7 +154,7 @@ namespace ObjCRuntime {
 
 		// objc/runtime.h
 		// Selector.GetHandle is optimized by the AOT compiler, and the current implementation only supports IntPtr, so we can't switch to NativeHandle quite yet (the AOT compiler crashes).
-		public static IntPtr GetHandle (string name)
+		/*public static IntPtr GetHandle (string name)
 		{
 			var ptr = Marshal.StringToHGlobalAnsi (name);
 			try {
@@ -161,6 +162,41 @@ namespace ObjCRuntime {
 			} finally {
 				Marshal.FreeHGlobal (ptr);
 			}
+		}*/
+		
+		public static IntPtr GetHandle(string name)
+		{
+			IntPtr cfstrSelector = CreateCFString(name);
+			IntPtr selector = NSSelectorFromString(cfstrSelector);
+			CFRelease(cfstrSelector);
+			return selector;
+		}
+		
+		[DllImport(Constants.AppKitLibrary)]
+		public static extern IntPtr NSSelectorFromString(IntPtr cfstr);
+		
+		public unsafe static IntPtr CreateCFString(string aString)
+		{
+			var bytes = Encoding.Unicode.GetBytes(aString);
+			fixed (byte* b = bytes) {
+				var cfStr = CFStringCreateWithBytes(IntPtr.Zero, (IntPtr)b, bytes.Length, CFStringEncoding.UTF16, false);
+				return cfStr;
+			}
+		}
+		
+		[DllImport(Constants.FoundationLibrary)]
+		public static extern IntPtr CFStringCreateWithBytes(IntPtr allocator, IntPtr buffer, long bufferLength, CFStringEncoding encoding, bool isExternalRepresentation);
+
+		
+		[DllImport(Constants.FoundationLibrary)]
+		public static extern void CFRelease(IntPtr handle);
+		
+		public enum CFStringEncoding : uint
+		{
+			UTF16 = 0x0100,
+			UTF16BE = 0x10000100,
+			UTF16LE = 0x14000100,
+			ASCII = 0x0600
 		}
 
 		// objc/objc.h

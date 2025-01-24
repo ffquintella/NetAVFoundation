@@ -122,9 +122,18 @@ namespace Foundation {
 
 #if __MACOS__
 		public NSAttributedString (string str, NSStringAttributes? attributes)
-			: this (str, attributes?.Dictionary)
+			//: this (str, attributes?.Dictionary)
 		{
+			Handle = Constructor(str, attributes?.Dictionary);
 		}
+		
+		public NSAttributedString (string str)
+			//: this (str, attributes?.Dictionary)
+		{
+			Handle = Constructor(str, null);
+		}
+		
+		//public extern NativeHandle Constructor (string str, [NullAllowed] NSDictionary attributes);
 		
 		public NSAttributedString (NSObjectFlag flag)
 		{
@@ -157,7 +166,7 @@ namespace Foundation {
 #endif
 
 		public NSAttributedString (string str, CTStringAttributes? attributes)
-			: this (str, attributes?.Dictionary)
+			//: this (str, attributes?.Dictionary)
 		{
 		}
 
@@ -179,10 +188,13 @@ namespace Foundation {
 		}
 
 #if !MONOMAC
+		
+		/*
 		public NSAttributedString (string str, UIStringAttributes? attributes)
 			: this (str, attributes?.Dictionary)
 		{
 		}
+		*/
 
 		public UIStringAttributes? GetUIKitAttributes (nint location, out NSRange effectiveRange)
 		{
@@ -251,6 +263,7 @@ namespace Foundation {
 			return dict.Count == 0 ? null : dict;
 		}
 
+		/*
 		public NSAttributedString (string str,
 					   UIFont? font = null,
 					   UIColor? foregroundColor = null,
@@ -272,6 +285,8 @@ namespace Foundation {
 			strokeWidth, strikethroughStyle))
 		{
 		}
+		*/
 #endif
+
 	}
 }

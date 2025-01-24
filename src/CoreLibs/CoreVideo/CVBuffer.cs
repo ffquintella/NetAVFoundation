@@ -146,7 +146,7 @@ namespace CoreVideo {
 			if (key is null)
 				ObjCRuntime.ThrowHelper.ThrowArgumentNullException (nameof (key));
 #if IOS || __MACCATALYST__ || TVOS
-			if (SystemVersion.CheckiOS (15, 0))
+			//if (SystemVersion.CheckiOS (15, 0))
 #endif
 			return Runtime.GetINativeObject<T> (CVBufferCopyAttachment (Handle, key.Handle, out attachmentMode), true);
 			return Runtime.GetINativeObject<T> (CVBufferGetAttachment (Handle, key.Handle, out attachmentMode), false);

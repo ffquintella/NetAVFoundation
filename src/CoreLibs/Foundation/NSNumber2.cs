@@ -209,6 +209,9 @@ namespace Foundation {
 	[BaseType (typeof (NSValue))]
 	public partial class NSNumber : NSValue //, CKRecordValue, NSFetchRequestResult {
 	{
+		public NSNumber() : base()
+		{
+		}
 		[Export ("charValue")]
 		public extern sbyte SByteValue { get; }
 

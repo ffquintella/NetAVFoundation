@@ -111,9 +111,9 @@ namespace Foundation {
 	[DisableDefaultCtor]
 	public partial class NSValue : NSCopying
 	{
-		public NSValue()
+		public NSValue() : base()
 		{
-			Handle = IntPtr.Zero;
+			//Handle = IntPtr.Zero;
 		}
 		
 		public NSValue(NativeHandle handle) : base(handle)

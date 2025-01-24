@@ -60,7 +60,7 @@ using UIPreferredPresentationStyle = Foundation.NSObject;
 using NSPasteboard = Foundation.NSObject;
 using NSWorkspaceAuthorization = Foundation.NSObject;
 
-using NSStringAttributes = UIKit.UIStringAttributes;
+//using NSStringAttributes = UIKit.UIStringAttributes;
 #endif
 
 #if IOS && !__MACCATALYST__
@@ -128,6 +128,6 @@ namespace Foundation
         
         public NSCopying (NSObjectFlag t) : base (t) {}
 		
-        public NSCopying () : base (IntPtr.Zero) {}
+        public NSCopying () : base () {}
     }
 }

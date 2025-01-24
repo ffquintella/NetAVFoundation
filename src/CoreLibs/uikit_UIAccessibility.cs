@@ -74,7 +74,7 @@ using NativeHandle = System.IntPtr;
 
 namespace UIKit
 {
-	
+	/*
 	[Flags]
 	public enum UIAccessibilityTrait : long {
 		None = 0,
@@ -95,7 +95,9 @@ namespace UIKit
 		CausesPageTurn = 16384,
 		Header = 65536,
 	}
+	*/
 	
+	/*
 	[MacCatalyst (13, 1)]
 	[Native]
 	public enum UIAccessibilityNavigationStyle : long {
@@ -104,6 +106,7 @@ namespace UIKit
 		Separate = 1,
 		Combined = 2
 	}
+	*/
 	
 	// This protocol is supposed to be an aggregate to existing classes,
 	// at the moment there is no API that require a specific UIAccessibilityIdentification
@@ -119,7 +122,7 @@ namespace UIKit
 
 	public interface IUIAccessibilityIdentification { }
 	
-	public class UIAccessibility {
+	public class UIAccessibility : NSObject {
 		[Export ("isAccessibilityElement")]
 		public extern bool IsAccessibilityElement { get; set; }
 
@@ -547,6 +550,7 @@ namespace UIKit
 		public extern UIAccessibilityContainerType AccessibilityContainerType { get; set; }
 	}
 
+	/*
 	[MacCatalyst (13, 1)]
 	[Native]
 	public enum UIAccessibilityContainerType : long {
@@ -558,6 +562,7 @@ namespace UIKit
 		[MacCatalyst (13, 1)]
 		SemanticGroup,
 	}
+	*/
 	
 	public class IUIAccessibilityContainerDataTableCell { }
 
@@ -710,7 +715,7 @@ namespace UIKit
 		[Export ("systemRotorType")]
 		public extern UIAccessibilityCustomSystemRotorType SystemRotorType { get; }
 	}
-	
+	/*
 	[MacCatalyst (13, 1)]
 	[Native]
 	public enum UIAccessibilityCustomSystemRotorType : long {
@@ -734,7 +739,7 @@ namespace UIKit
 		List,
 		Landmark
 	}
-
+*/
 	[MacCatalyst (13, 1)]
 	//[Category]
 	[BaseType (typeof (NSObject))]
@@ -790,13 +795,14 @@ namespace UIKit
 		[Export ("searchDirection", ArgumentSemantic.Assign)]
 		public extern UIAccessibilityCustomRotorDirection SearchDirection { get; set; }
 	}
-	
+	/*
 	[MacCatalyst (13, 1)]
 	[Native]
 	public enum UIAccessibilityCustomRotorDirection : long {
 		Previous,
 		Next
 	}
+	*/
 
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (UIResponder))]
@@ -874,7 +880,7 @@ namespace UIKit
 		[Export ("accessibilityCustomActions"), NullAllowed]
 		public extern UIAccessibilityCustomAction [] AccessibilityCustomActions { get; set; }
 	}
-	
+	/*
 	// NSInteger -> UIAccessibility.h
 	[Native]
 	[MacCatalyst (13, 1)]
@@ -886,7 +892,7 @@ namespace UIKit
 		Next,
 		Previous
 	}
-
+*/
 	[NoTV]
 	[MacCatalyst (13, 1)]
 	// NSObject category inlined in UIResponder

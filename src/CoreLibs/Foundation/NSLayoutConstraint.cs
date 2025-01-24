@@ -10,6 +10,7 @@
 #if !WATCH
 
 using System;
+using CoreLibs;
 using Foundation;
 using ObjCRuntime;
 
@@ -81,7 +82,7 @@ namespace UIKit
 					}
 #if !MONOMAC
 					// This requires UILayoutSupport class which is not exist on Mac
-					else if (value is INativeObject && Messaging.bool_objc_msgSend_IntPtr (((INativeObject) value).Handle, Selector.GetHandle ("conformsToProtocol:"), Protocol.GetHandle (typeof (UILayoutSupport).Name)) != 0) {
+					else if (value is INativeObject && Messaging.bool_objc_msgSend_IntPtr (((INativeObject) value).Handle, Selector.GetHandle ("conformsToProtocol:"), Protocol.GetHandle (typeof (UILayoutSupport).Name)) != false) {
 						if (views is null)
 							views = new NSMutableDictionary ();
 						views.LowlevelSetObject (((INativeObject) value).Handle, nskey.Handle);
@@ -143,6 +144,41 @@ namespace UIKit
 			return Runtime.GetNSObject<NSLayoutAnchor<AnchorType>> (_SecondAnchor<AnchorType> ());
 		}
 #endif // !MONOMAC || NET
+	}
+	
+	
+	[MacCatalyst (13, 1)]
+	[Protocol]
+	[Model]
+	[BaseType (typeof (NSObject))]
+	interface UILayoutSupport {
+		[Export ("length")]
+		[Abstract]
+		nfloat Length { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("topAnchor", ArgumentSemantic.Strong)]
+#if NET
+		// Apple added a new required member in iOS 9, but that breaks our binary compat, so we can't do that in our existing code.
+		[Abstract]
+#endif
+		NSLayoutYAxisAnchor TopAnchor { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("bottomAnchor", ArgumentSemantic.Strong)]
+#if NET
+		// Apple added a new required member in iOS 9, but that breaks our binary compat, so we can't do that in our existing code.
+		[Abstract]
+#endif
+		NSLayoutYAxisAnchor BottomAnchor { get; }
+
+		[MacCatalyst (13, 1)]
+		[Export ("heightAnchor", ArgumentSemantic.Strong)]
+#if NET
+		// Apple added a new required member in iOS 9, but that breaks our binary compat, so we can't do that in our existing code.
+		[Abstract]
+#endif
+		NSLayoutDimension HeightAnchor { get; }
 	}
 }
 

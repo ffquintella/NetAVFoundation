@@ -74,6 +74,10 @@ namespace ObjCRuntime {
 			static public readonly IntPtr Handle = Dlfcn._dlopen (Constants.CoreTextLibrary, 0);
 		}
 		
+		static public class UIKit {
+			static public readonly IntPtr Handle = Dlfcn._dlopen (Constants.UIKitLibrary, 0);
+		}
+		
 		static public class libdispatch {
 			static public readonly IntPtr Handle = Dlfcn._dlopen (Constants.libdispatchLibrary, 0);
 		}

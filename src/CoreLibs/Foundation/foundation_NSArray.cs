@@ -61,7 +61,7 @@ using UIPreferredPresentationStyle = Foundation.NSObject;
 using NSPasteboard = Foundation.NSObject;
 using NSWorkspaceAuthorization = Foundation.NSObject;
 
-using NSStringAttributes = UIKit.UIStringAttributes;
+//using NSStringAttributes = UIKit.UIStringAttributes;
 #endif
 
 #if IOS && !__MACCATALYST__

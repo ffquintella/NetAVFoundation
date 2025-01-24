@@ -63,8 +63,8 @@ namespace Foundation {
 		const string selInitWithCharactersLength = "initWithCharacters:length:";
 
 #if MONOMAC
-		static IntPtr selUTF8StringHandle = Selector.GetHandle (selUTF8String);
-		static IntPtr selInitWithCharactersLengthHandle = Selector.GetHandle (selInitWithCharactersLength);
+		//static IntPtr selUTF8StringHandle = Selector.GetHandle (selUTF8String);
+		//static IntPtr selInitWithCharactersLengthHandle = Selector.GetHandle (selInitWithCharactersLength);
 #endif
 
 		public static readonly NSString Empty = new NSString (String.Empty);
@@ -77,21 +77,25 @@ namespace Foundation {
 		{
 		}
 
-		static NativeHandle CreateWithCharacters (NativeHandle handle, string str, int offset, int length, bool autorelease = false)
+		static NativeHandle CreateWithCharacters (NativeHandle classHandle, string str, int offset, int length, bool autorelease = false)
 		{
+			var chandle = Class.GetHandle(nameof(NSString));
+			
 			unsafe {
 				fixed (char* ptrFirstChar = str) {
 					var ptrStart = (IntPtr) (ptrFirstChar + offset);
 #if MONOMAC
-					handle = Messaging.IntPtr_objc_msgSend_IntPtr_IntPtr (handle, selInitWithCharactersLengthHandle, ptrStart, (IntPtr) length);
+					var resHandle = Messaging.IntPtr_objc_msgSend_IntPtr_IntPtr (chandle, Selector.GetHandle (selInitWithCharactersLength), ptrStart, (IntPtr) length);
+					
+					//Messaging.void_objc_msgSend_IntPtr_IntPtr (handle, selInitWithCharactersLengthHandle, ptrStart, (IntPtr) length);
 #else
-					handle = Messaging.IntPtr_objc_msgSend_IntPtr_IntPtr (handle, Selector.GetHandle (selInitWithCharactersLength), ptrStart, (IntPtr) length);
+					var resHandle = Messaging.IntPtr_objc_msgSend_IntPtr_IntPtr (classHandle, Selector.GetHandle (selInitWithCharactersLength), ptrStart, (IntPtr) length);
 #endif
 
 					if (autorelease)
-						NSObject.DangerousAutorelease (handle);
+						NSObject.DangerousAutorelease (resHandle);
 
-					return handle;
+					return resHandle;
 				}
 			}
 		}
@@ -158,21 +162,23 @@ namespace Foundation {
 					break;
 			}
 			
-			Handle = CreateWithCharacters (Handle, str, 0, str.Length);
+			Handle = CreateWithCharacters (ClassHandle, str, 0, str.Length);
 		}
-		public NSString (string str) 
+		public NSString (string str) : base()
 		{
 			if (str is null)
 				throw new ArgumentNullException ("str");
 
-			Handle = CreateWithCharacters (Handle, str, 0, str.Length);
+			Handle = CreateWithCharacters (ClassHandle, str, 0, str.Length);
+			
 		}
 		
 		public NSString ()
 		{
+			//class_ptr = Class.GetHandle (nameof(NSString));
 			var str = "";
 
-			Handle = CreateWithCharacters (Handle, str, 0, str.Length);
+			Handle = CreateWithCharacters (ClassHandle, str, 0, str.Length);
 		}
 
 		public NSString (string value, int start, int length)

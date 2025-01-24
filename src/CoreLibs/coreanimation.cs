@@ -1455,7 +1455,7 @@ namespace CoreAnimation {
 #elif MONOMAC
 	[Protocol (FormalSince = "10.12")]
 #else
-	[Synthetic]
+	//[Synthetic]
 #endif
 	[Model]
 	interface CAAnimationDelegate {

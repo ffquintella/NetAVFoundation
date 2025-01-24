@@ -66,9 +66,11 @@ using UniformTypeIdentifiers;
 using ImageIO;
 //using MediaPlayer;
 using System;
+using System.Runtime.InteropServices;
 using AudioUnit;
 using Cinematic;
 using CoreLibs;
+using CoreLibs.Foundation;
 using MediaToolbox;
 
 
@@ -11966,7 +11968,8 @@ namespace AVFoundation {
 	[TV (17, 0)]
 	[BaseType (typeof (NSObject))]
 	// Objective-C exception thrown.  Name: NSInvalidArgumentException Reason: Cannot instantiate a AVCaptureDevice directly.
-	[DisableDefaultCtor]
+	//[DisableDefaultCtor]
+	[ClassTarget(Constants.AVFoundationLibrary)]
 	public partial class AVCaptureDevice: NSObject {
 		[MacCatalyst (13, 1)]
 		[Export ("uniqueID")]
@@ -12005,11 +12008,13 @@ namespace AVFoundation {
 		[Static]
 		[Export ("defaultDeviceWithMediaType:")]
 		[return: NullAllowed]
-		public static extern AVCaptureDevice GetDefaultDevice (NSString mediaType);
+		[DllImport(Constants.AVFoundationLibrary, EntryPoint = "defaultDeviceWithMediaType:", CharSet = CharSet.Unicode)]
+		
+		public static extern AVCaptureDevice? GetDefaultDevice (NSString mediaType);
 
 		[MacCatalyst (13, 1)]
 		[Static]
-		//[Wrap ("GetDefaultDevice (mediaType.GetConstant ()!)")]
+		[Wrap ("GetDefaultDevice (mediaType.GetConstant ()!)")]
 		[return: NullAllowed]
 		public static extern AVCaptureDevice? GetDefaultDevice (AVMediaTypes mediaType);
 		//public static extern AVCaptureDevice? GetDefaultDevice (NSString mediaType);

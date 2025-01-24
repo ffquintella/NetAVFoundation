@@ -10,7 +10,7 @@
 //
 
 #if !WATCH && !MONOMAC
-using AddressBook;
+//using AddressBook;
 #endif
 using ObjCRuntime;
 using Foundation;
@@ -418,6 +418,7 @@ namespace EventKit {
 		[Export ("participantType")]
 		EKParticipantType ParticipantType { get; }
 
+		/*
 		[NoMac]
 		[NoWatch]
 		//[Deprecated (PlatformName.iOS, 9, 0, message: "Replaced by 'ContactPredicate'.")]
@@ -426,7 +427,8 @@ namespace EventKit {
 		[return: NullAllowed]
 		[Export ("ABRecordWithAddressBook:")]
 		extern ABRecord GetRecord (ABAddressBook addressBook);
-
+*/
+		
 		[MacCatalyst (13, 1)]
 		[Export ("isCurrentUser")]
 		bool IsCurrentUser { get; }

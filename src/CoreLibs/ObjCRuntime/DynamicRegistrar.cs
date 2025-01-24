@@ -426,6 +426,8 @@ namespace Registrar {
 
 		protected override string PlatformName {
 			get {
+
+
 #if __TVOS__
 				return "tvOS";
 #elif __WATCHOS__
@@ -435,8 +437,11 @@ namespace Registrar {
 #elif MONOMAC
 				return "Mac";
 #else
-#error No platform
+				return "Mac";
+				//throw new Exception("Platform not supported");
+//#error No platform
 #endif
+
 			}
 		}
 

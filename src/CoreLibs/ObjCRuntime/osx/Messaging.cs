@@ -8,7 +8,7 @@ using ObjCRuntime;
 namespace ObjCRuntime;
 
 public static partial class Messaging {
-		//internal const string LIBOBJC_DYLIB = "/usr/lib/libobjc.dylib";
+		internal const string LIBOBJC_DYLIB = "/usr/lib/libobjc.dylib";
 
 		public struct objc_super {
 			public IntPtr Handle;

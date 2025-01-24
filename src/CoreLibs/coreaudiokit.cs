@@ -165,7 +165,7 @@ namespace CoreAudioKit {
 	[NoMac]
 	[MacCatalyst (13, 1)]
 	// in iOS 8.3 (Xcode 6.3 SDK) the base type was changed from UIViewController to UITableViewController
-	[BaseType (typeof (UITableViewController), Name = "CABTMIDICentralViewController")]
+	//[BaseType (typeof (UITableViewController), Name = "CABTMIDICentralViewController")]
 	interface CABTMidiCentralViewController {
 		[Export ("initWithNibName:bundle:")]
 		[PostGet ("NibBundle")]
@@ -192,7 +192,7 @@ namespace CoreAudioKit {
 	///     
 	///     <related type="externalDocumentation" href="https://developer.apple.com/reference/CoreAudioKit/CAInterAppAudioSwitcherView">Apple documentation for <c>CAInterAppAudioSwitcherView</c></related>
 	[NoMac]
-	[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'AudioUnit' instead.")]
+	//[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'AudioUnit' instead.")]
 	[NoMacCatalyst]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AudioUnit' instead.")]
 	[BaseType (typeof (UIView))]
@@ -214,7 +214,7 @@ namespace CoreAudioKit {
 	///     
 	///     <related type="externalDocumentation" href="https://developer.apple.com/reference/CoreAudioKit/CAInterAppAudioTransportView">Apple documentation for <c>CAInterAppAudioTransportView</c></related>
 	[NoMac]
-	[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'AudioUnit' instead.")]
+	//[Deprecated (PlatformName.iOS, 13, 0, message: "Use 'AudioUnit' instead.")]
 	[NoMacCatalyst]
 	[Deprecated (PlatformName.MacCatalyst, 13, 1, message: "Use 'AudioUnit' instead.")]
 	[BaseType (typeof (UIView))]

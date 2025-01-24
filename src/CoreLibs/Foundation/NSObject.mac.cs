@@ -34,7 +34,9 @@ namespace Foundation {
 		
 		public NSObject (IntPtr handle) 
 		{
+			InializeClassHandle ();
 			Handle = handle;
+			InitializeObject(false);
 		}
 		
 #if !COREBUILD

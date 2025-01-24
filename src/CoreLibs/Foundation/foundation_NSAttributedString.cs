@@ -40,6 +40,7 @@ using UIKit;
 
 using System;
 using System.ComponentModel;
+using AppKit;
 using CoreLibs;
 
 // In Apple headers, this is a typedef to a pointer to a private struct
@@ -60,7 +61,7 @@ using UIPreferredPresentationStyle = Foundation.NSObject;
 using NSPasteboard = Foundation.NSObject;
 using NSWorkspaceAuthorization = Foundation.NSObject;
 
-using NSStringAttributes = UIKit.UIStringAttributes;
+//using NSStringAttributes = UIKit.UIStringAttributes;
 #endif
 
 #if IOS && !__MACCATALYST__
@@ -170,7 +171,7 @@ namespace Foundation
 
 		[Export ("initWithString:attributes:")]
 		[EditorBrowsable (EditorBrowsableState.Advanced)]
-		public extern NativeHandle Constructor (string str, [NullAllowed] NSDictionary attributes);
+		public extern NativeHandle Constructor (string str, [NullAllowed] NSDictionary? attributes);
 
 		[Export ("initWithAttributedString:")]
 		public extern NativeHandle Constructor (NSAttributedString other);
@@ -412,14 +413,14 @@ namespace Foundation
 		[return: NullAllowed]
 		[Obsolete ("Use 'GetData' instead.")]
 		[Export ("dataFromRange:documentAttributes:error:")]
-		public NSData GetDataFromRange (NSRange range, NSDictionary attributes, ref NSError error);
+		public extern NSData GetDataFromRange (NSRange range, NSDictionary attributes, ref NSError error);
 #endif
 
 #if !(MONOMAC || XAMCORE_5_0)
 		[return: NullAllowed]
 		[Obsolete ("Use 'GetData' instead.")]
 		[Wrap ("GetDataFromRange (range, documentAttributes.GetDictionary ()!, ref error)")]
-		public NSData GetDataFromRange (NSRange range, NSAttributedStringDocumentAttributes documentAttributes, ref NSError error);
+		public extern NSData GetDataFromRange (NSRange range, NSAttributedStringDocumentAttributes documentAttributes, ref NSError error);
 #endif
 
 #if !(MONOMAC || XAMCORE_5_0)
@@ -433,7 +434,7 @@ namespace Foundation
 		[return: NullAllowed]
 		[Obsolete ("Use 'GetFileWrapper' instead.")]
 		[Export ("fileWrapperFromRange:documentAttributes:error:")]
-		public NSFileWrapper GetFileWrapperFromRange (NSRange range, NSDictionary attributes, ref NSError error);
+		public extern NSFileWrapper GetFileWrapperFromRange (NSRange range, NSDictionary attributes, ref NSError error);
 #endif
 
 		[return: NullAllowed]
@@ -444,7 +445,7 @@ namespace Foundation
 		[return: NullAllowed]
 		[Obsolete ("Use 'GetFileWrapper' instead.")]
 		[Wrap ("GetFileWrapperFromRange (range, documentAttributes.GetDictionary ()!, ref error)")]
-		public NSFileWrapper GetFileWrapperFromRange (NSRange range, NSAttributedStringDocumentAttributes documentAttributes, ref NSError error);
+		public extern NSFileWrapper GetFileWrapperFromRange (NSRange range, NSAttributedStringDocumentAttributes documentAttributes, ref NSError error);
 #endif
 
 		[NoiOS]

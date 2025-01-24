@@ -79,7 +79,7 @@ using NativeHandle = System.IntPtr;
 namespace UIKit
 {
 
-	// NSUInteger -> UICollisionBehavior.h
+	/*// NSUInteger -> UICollisionBehavior.h
 	[Native]
 	[Flags]
 	[MacCatalyst (13, 1)]
@@ -87,7 +87,7 @@ namespace UIKit
 		Items = 1,
 		Boundaries = 2,
 		Everything = UInt64.MaxValue
-	}
+	}*/
 	
 	[MacCatalyst (13, 1)]
 	[BaseType (typeof (UIDynamicBehavior),

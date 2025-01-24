@@ -39,6 +39,7 @@ using System.Runtime.InteropServices.ObjectiveC;
 #endif
 
 using ObjCRuntime;
+using UIKit;
 #if !COREBUILD
 using Xamarin.Bundler;
 #if MONOTOUCH
@@ -117,9 +118,21 @@ namespace Foundation {
 		NativeHandle handle;
 		IntPtr super; /* objc_super* */
 		
-		public static readonly IntPtr class_ptr = Class.GetHandle ("__NSObject");
+		//public static IntPtr class_ptr = Class.GetHandle ("NSObject");
+		public static IntPtr class_ptr = IntPtr.Zero;
+		
+		//public IntPtr ClassHandle => class_ptr;
+		public IntPtr ClassHandle {
+			get
+			{
+				if (class_ptr == IntPtr.Zero)
+				{
+					class_ptr = Class.GetHandle(this.GetType().Name);
+				}
 
-		public IntPtr ClassHandle => class_ptr;
+				return class_ptr;
+			}
+		}
 
 #if !NET
 		Flags flags;
@@ -214,6 +227,7 @@ namespace Foundation {
 		[Export ("init")]
 		public NSObject ()
 		{
+			InializeClassHandle ();
 			bool alloced = AllocIfNeeded ();
 			InitializeObject (alloced);
 		}
@@ -222,6 +236,7 @@ namespace Foundation {
 		// only do Init at the most derived class.
 		public NSObject (NSObjectFlag x)
 		{
+			InializeClassHandle ();
 			bool alloced = AllocIfNeeded ();
 			InitializeObject (alloced);
 		}
@@ -243,6 +258,7 @@ namespace Foundation {
 		public NSObject (NativeHandle handle, bool alloced)
 #endif
 		{
+			InializeClassHandle ();
 			this.handle = handle;
 			InitializeObject (alloced);
 		}
@@ -372,8 +388,14 @@ namespace Foundation {
 			RegisterToggleReference (this, Handle, allowCustomTypes);
 		}
 
+		private void InializeClassHandle ()
+		{
+				class_ptr = Class.GetHandle (this.GetType ().Name);
+		}
+		
 		private void InitializeObject (bool alloced)
 		{
+			
 			if (alloced && handle == NativeHandle.Zero && Class.ThrowOnInitFailure) {
 				if (ClassHandle == NativeHandle.Zero)
 					throw new Exception ($"Could not create an native instance of the type '{GetType ().FullName}': the native class hasn't been loaded.\n{Constants.SetThrowOnInitFailureToFalse}.");
@@ -400,9 +422,16 @@ namespace Foundation {
 			CreateManagedRef (!alloced || native_ref);
 		}
 
-		[DllImport ("__Internal")]
-		static extern byte xamarin_set_gchandle_with_flags_safe (IntPtr handle, IntPtr gchandle, XamarinGCHandleFlags flags);
+		//[DllImport ("__Internal")]
+		//static extern byte xamarin_set_gchandle_with_flags_safe (IntPtr handle, IntPtr gchandle, XamarinGCHandleFlags flags);
 
+		static byte xamarin_set_gchandle_with_flags_safe(IntPtr handle, IntPtr gchandle,
+			XamarinGCHandleFlags flags)
+		{
+			//TODO: We may need to implement a cache here 
+			return 1;
+		}
+		
 		void CreateManagedRef (bool retain)
 		{
 			HasManagedRef = true;
@@ -706,7 +735,7 @@ namespace Foundation {
 		{
 			if (handle == NativeHandle.Zero) {
 #if MONOMAC
-				handle = Messaging.IntPtr_objc_msgSend (Class.GetHandle (this.GetType ()), Selector.AllocHandle);
+				handle = Messaging.IntPtr_objc_msgSend (Class.GetHandle (this.GetType ().Name), Selector.AllocHandle);
 #else
 				handle = Messaging.IntPtr_objc_msgSend (Class.GetHandle (this.GetType ()), Selector.GetHandle (Selector.Alloc));
 #endif
@@ -866,7 +895,7 @@ namespace Foundation {
 					return NSValue.FromCGRect ((CGRect) obj);
 				else if (t == typeof (CGPoint))
 					return NSValue.FromCGPoint ((CGPoint) obj);
-
+/*
 #if !MONOMAC
 				if (t == typeof (CGAffineTransform))
 					return NSValue.FromCGAffineTransform ((CGAffineTransform) obj);
@@ -877,6 +906,7 @@ namespace Foundation {
 					return NSValue.FromCATransform3D ((CATransform3D) obj);
 #endif
 #endif
+*/
 				// last chance for types like CGPath, CGColor... that are not NSObject but are CFObject
 				// see https://bugzilla.xamarin.com/show_bug.cgi?id=8458
 				INativeObject native = (obj as INativeObject);

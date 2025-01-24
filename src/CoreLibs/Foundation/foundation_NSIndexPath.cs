@@ -60,7 +60,7 @@ using UIPreferredPresentationStyle = Foundation.NSObject;
 using NSPasteboard = Foundation.NSObject;
 using NSWorkspaceAuthorization = Foundation.NSObject;
 
-using NSStringAttributes = UIKit.UIStringAttributes;
+//using NSStringAttributes = UIKit.UIStringAttributes;
 #endif
 
 #if IOS && !__MACCATALYST__
@@ -174,12 +174,13 @@ namespace Foundation
     		[Export ("indexPathForRow:inSection:")]
 		    public extern NSIndexPath FromRowSection (nint row, nint section);
     
-    		[NoiOS]
+    		/*[NoiOS]
     		[NoMacCatalyst]
     		[NoWatch]
     		[NoTV]
     		[Export ("section")]
 		    public extern nint Section { get; }
+		    */
     
     		[NoWatch]
     		[Static]

@@ -74,6 +74,7 @@ using NativeHandle = System.IntPtr;
 
 namespace UIKit
 {
+	/*
 	// NSUInteger -> UIPopoverController.h
 	[Native]
 	[Flags]
@@ -84,6 +85,7 @@ namespace UIKit
 		BottomRight = 1 << 3,
 		AllCorners = ~(ulong) 0
 	}
+	*/
 	
 	[BaseType (typeof (NSObject))]
 	[ThreadSafe]

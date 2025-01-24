@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ObjCRuntime {
 	static partial class Messaging {
-		internal const string LIBOBJC_DYLIB = "/usr/lib/libobjc.dylib";
+		//internal const string LIBOBJC_DYLIB = "/usr/lib/libobjc.dylib";
 
 #if !COREBUILD
 		internal delegate IntPtr VariadicFunction19 (IntPtr arg1, IntPtr arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5, IntPtr arg6, IntPtr arg7, IntPtr arg8, IntPtr arg9, IntPtr arg10, IntPtr arg11, IntPtr arg12, IntPtr arg13, IntPtr arg14, IntPtr arg15, IntPtr arg16, IntPtr arg17, IntPtr arg18, IntPtr arg19);

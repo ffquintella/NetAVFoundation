@@ -67,7 +67,7 @@ namespace Foundation {
 				case NSRunLoopMode.Other:
 					return new NSString("NSRunLoopOtherModes");
 					break;
-				case NSRunLoopMode.ConnectionReply:
+				/*case NSRunLoopMode.ConnectionReply:
 					return new NSString("NSConnectionReplyMode");
 					break;
 				case NSRunLoopMode.ModalPanel:
@@ -75,7 +75,7 @@ namespace Foundation {
 					break;
 				case NSRunLoopMode.EventTracking:
 					return new NSString("NSEventTrackingRunLoopMode");
-					break;
+					break;*/
 				default:
 					return new NSString("NSRunLoopOtherModes");
 					break;

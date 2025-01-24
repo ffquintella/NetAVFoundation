@@ -779,14 +779,19 @@ namespace ObjCRuntime {
 			return objc_allocateClassPair (superclass, namePtr, extraBytes);
 		}
 
-		[DllImport (Messaging.LIBOBJC_DYLIB)]
-		static extern IntPtr objc_getClass (IntPtr name);
+		//[DllImport (Messaging.LIBOBJC_DYLIB)]
+		//static extern IntPtr objc_getClass (IntPtr name);
+		
+		[DllImport (Constants.AppKitLibrary, CharSet = CharSet.Auto)]
+		static extern IntPtr objc_getClass (string name);
 
-		internal static IntPtr objc_getClass (string name)
+
+		/*internal static IntPtr objc_getClass (string name)
 		{
 			using var namePtr = new TransientString (name);
 			return objc_getClass (namePtr);
 		}
+		*/
 
 		[DllImport (Messaging.LIBOBJC_DYLIB)]
 		internal static extern void objc_registerClassPair (IntPtr cls);

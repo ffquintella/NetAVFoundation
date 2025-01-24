@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 using System.ComponentModel;
+using AppKit;
 using Foundation;
 using ObjCRuntime;
 using CoreAnimation;
@@ -13,6 +14,7 @@ using UniformTypeIdentifiers;
 
 using CGGlyph = System.UInt16;
 using NSGlyph = System.UInt32;
+using NSStringDrawingContext = Foundation.NSStringDrawingContext;
 
 #if HAS_WEBKIT
 using WebKit;
@@ -27,7 +29,7 @@ using NSFont = UIKit.UIFont;
 
 // dummy types to simplify build
 #if !MONOMAC
-using NSAppearance = UIKit.UIAppearance;
+//using NSAppearance = UIKit.UIAppearance;
 using NSCell = System.Object;
 using NSGlyphGenerator = System.Object;
 using NSGlyphStorageOptions = System.Object;
@@ -95,7 +97,7 @@ using View = UIKit.UIView;
 	using XWritingToolsResultOptions = AppKit.NSWritingToolsResultOptions;
 #else
 using IXWritingToolsCoordinatorDelegate = UIKit.IUIWritingToolsCoordinatorDelegate;
-using XWritingToolsBehavior = UIKit.UIWritingToolsBehavior;
+//using XWritingToolsBehavior = UIKit.UIWritingToolsBehavior;
 using XWritingToolsCoordinator = UIKit.UIWritingToolsCoordinator;
 using XWritingToolsCoordinatorAnimationParameters = UIKit.UIWritingToolsCoordinatorAnimationParameters;
 using XWritingToolsCoordinatorContext = UIKit.UIWritingToolsCoordinatorContext;
@@ -113,7 +115,7 @@ using XWritingToolsCoordinatorState = UIKit.UIWritingToolsCoordinatorState;
 using XWritingToolsCoordinatorTextAnimation = UIKit.UIWritingToolsCoordinatorTextAnimation;
 using XWritingToolsCoordinatorTextReplacementReason = UIKit.UIWritingToolsCoordinatorTextReplacementReason;
 using XWritingToolsCoordinatorTextUpdateReason = UIKit.UIWritingToolsCoordinatorTextUpdateReason;
-using XWritingToolsResultOptions = UIKit.UIWritingToolsResultOptions;
+//using XWritingToolsResultOptions = UIKit.UIWritingToolsResultOptions;
 #endif
 
 #if !NET
@@ -934,6 +936,7 @@ namespace UIKit {
 		[Export ("decorationItems", ArgumentSemantic.Copy)]
 		NSCollectionLayoutDecorationItem [] DecorationItems { get; set; }
 
+		/*
 		// NSCollectionLayoutSection (UICollectionLayoutListSection) category
 		[NoMac]
 		[MacCatalyst (14, 0)]
@@ -941,7 +944,7 @@ namespace UIKit {
 		[Static]
 		[Export ("sectionWithListConfiguration:layoutEnvironment:")]
 		static extern NSCollectionLayoutSection GetSection (UICollectionLayoutListConfiguration listConfiguration, INSCollectionLayoutEnvironment layoutEnvironment);
-
+*/
 		// NSCollectionLayoutSection (TVMediaItemContentConfiguration) category
 		[TV (15, 0), NoMac, NoiOS, NoMacCatalyst]
 		[Static]
@@ -953,9 +956,11 @@ namespace UIKit {
 		[Export ("supplementaryContentInsetsReference", ArgumentSemantic.Assign)]
 		UIContentInsetsReference SupplementaryContentInsetsReference { get; set; }
 
+		/*
 		[TV (17, 0), iOS (17, 0), MacCatalyst (17, 0), NoMac]
 		[Export ("orthogonalScrollingProperties")]
 		UICollectionLayoutSectionOrthogonalScrollingProperties OrthogonalScrollingProperties { get; }
+		*/
 	}
 
 	[TV (13, 0), iOS (13, 0)]
@@ -1028,7 +1033,7 @@ namespace UIKit {
 	[Protocol]
 	partial class NSCollectionLayoutVisibleItem
 #if !MONOMAC
-	: UIDynamicItem
+	//: UIDynamicItem
 #endif
 	{
 
@@ -1406,7 +1411,7 @@ namespace UIKit {
 	//[MacCatalyst (13, 1)]
 	public partial class NSTextAttachment : NSTextAttachmentContainer
 #if !MONOMAC
-	, UIAccessibilityContentSizeCategoryImageAdjusting
+	//, UIAccessibilityContentSizeCategoryImageAdjusting
 #endif // !MONOMAC
 	{
 
@@ -3418,7 +3423,7 @@ namespace UIKit {
 #if MONOMAC
 	interface NSWritingToolsCoordinator
 #else
-	interface UIWritingToolsCoordinator : UIInteraction
+	interface UIWritingToolsCoordinator //: UIInteraction
 #endif
 	{
 		[Static]
@@ -3452,6 +3457,7 @@ namespace UIKit {
 		[Export ("stopWritingTools")]
 		void StopWritingTools ();
 
+		/*
 		[Export ("preferredBehavior", ArgumentSemantic.Assign)]
 		XWritingToolsBehavior PreferredBehavior { get; set; }
 
@@ -3463,6 +3469,7 @@ namespace UIKit {
 
 		[Export ("resultOptions")]
 		XWritingToolsResultOptions ResultOptions { get; }
+		*/
 
 		[Export ("updateRange:withText:reason:forContextWithIdentifier:")]
 		void UpdateRange (NSRange range, NSAttributedString replacementText, XWritingToolsCoordinatorTextUpdateReason reason, NSUuid contextId);

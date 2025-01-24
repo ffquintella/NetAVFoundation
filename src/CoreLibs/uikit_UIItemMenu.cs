@@ -75,7 +75,7 @@ using NativeHandle = System.IntPtr;
 
 namespace UIKit
 {
-    
+    /*
    // [iOS (13, 0), TV (13, 0)]
 	[MacCatalyst (13, 1)]
 	public enum UIMenuIdentifier {
@@ -188,7 +188,7 @@ namespace UIKit
 		[Field ("UIMenuOpen")]
 		Open,
 	}
-    
+    */
     //[TV (16, 0), iOS (16, 0), MacCatalyst (16, 0)]
     [Native]
     public enum UIMenuElementSize : long {
@@ -206,7 +206,7 @@ namespace UIKit
         [Export ("maximumNumberOfTitleLines")]
         public extern nint MaximumNumberOfTitleLines { get; set; }
     }
-    
+    /*
     [Flags]
     //[iOS (13, 0), TV (13, 0)]
     [MacCatalyst (13, 1)]
@@ -219,7 +219,7 @@ namespace UIKit
         //[iOS (17, 0), TV (17, 0), MacCatalyst (17, 0)]
         DisplayAsPalette = 1uL << 7,
     }
-    
+    */
     //[iOS (13, 0), TV (13, 0)]
     [MacCatalyst (13, 1)]
     [BaseType (typeof (UIMenuElement))]

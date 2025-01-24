@@ -78,7 +78,7 @@ using NativeHandle = System.IntPtr;
 
 namespace UIKit
 {
-
+/*
 	[MacCatalyst (13, 1)]
 	[Native]
 	public enum UIImageSymbolWeight : long {
@@ -105,11 +105,14 @@ namespace UIKit
 		Medium,
 		Large,
 	}
-	
+	*/
+	/*
 	public enum UIImageResizingMode : long {
 		Tile, Stretch
 	}
+	*/
 	
+	/*
 	// NSInteger -> UIImage.h
 	[Native]
 	public enum UIImageOrientation : long {
@@ -121,8 +124,8 @@ namespace UIKit
 		DownMirrored,
 		LeftMirrored,
 		RightMirrored,
-	}
-	
+	}*/
+	/*
 	// NSInteger -> UIImage.h
 	[Native]
 	public enum UIImageRenderingMode : long {
@@ -187,7 +190,7 @@ namespace UIKit
 		//[iOS (17, 0), TV (17, 0), MacCatalyst (17, 0)]
 		[Field ("UIFontTextStyleExtraLargeTitle2")]
 		ExtraLargeTitle2,
-	}
+	}*/
 	
 	public interface IUIDynamicAnimatorDelegate { }
 	
@@ -332,7 +335,7 @@ namespace UIKit
 		public extern IntPtr _SystemFontOfSize (nfloat fontSize, nfloat weight, nfloat width);
 
 	} 
-	
+	/*
 	// uint32_t -> UIFontDescriptor.h
 	[Flags]
 	public enum UIFontDescriptorSymbolicTraits : uint {
@@ -360,7 +363,7 @@ namespace UIKit
 		ClassScripts = 10U << 28,
 		ClassSymbolic = 12U << 28
 	}	
-	
+	*/
 	//[iOS (13, 0), TV (13, 0)]
 	[MacCatalyst (13, 1)]
 	/* NS_TYPED_ENUM */

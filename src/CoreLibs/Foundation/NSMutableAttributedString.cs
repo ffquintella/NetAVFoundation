@@ -80,7 +80,7 @@ namespace Foundation {
 			}
 		}
 #if !MONOMAC
-		public NSMutableAttributedString (string str, UIStringAttributes attributes)
+		/*public NSMutableAttributedString (string str, UIStringAttributes attributes)
 		: this (str, attributes is not null ? attributes.Dictionary : null)
 		{
 		}
@@ -100,6 +100,7 @@ namespace Foundation {
 		: this (str, ToDictionary (font, foregroundColor, backgroundColor, strokeColor, paragraphStyle, ligatures, kerning, underlineStyle, shadow, strokeWidth, strikethroughStyle))
 		{
 		}
+		*/
 #endif
 	}
 }

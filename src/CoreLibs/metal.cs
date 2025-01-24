@@ -3685,13 +3685,14 @@ namespace Metal {
 		[Export ("setThreadgroupMemoryLength:offset:atIndex:")]
 		extern void SetThreadgroupMemoryLength (nuint length, nuint offset, nuint index);
 
+		/*
 #if NET
 		[Abstract (GenerateExtensionMethod = true)]
 #endif
 		[MacCatalyst (13, 4), TV (16, 0), iOS (13, 0)]
 		[Export ("setVertexAmplificationCount:viewMappings:")]
 		extern void SetVertexAmplificationCount (nuint count, MTLVertexAmplificationViewMapping viewMappings);
-
+*/
 #if NET
 		[Abstract]
 #endif
@@ -5506,6 +5507,7 @@ namespace Metal {
 		[Export ("physicalSizeForLayer:")]
 		extern MTLSize GetPhysicalSize (nuint layerIndex);
 
+		/*
 		[Abstract]
 		[Export ("mapScreenToPhysicalCoordinates:forLayer:")]
 		extern MTLCoordinate2D MapScreenToPhysicalCoordinates (MTLCoordinate2D screenCoordinates, nuint layerIndex);
@@ -5513,6 +5515,7 @@ namespace Metal {
 		[Abstract]
 		[Export ("mapPhysicalToScreenCoordinates:forLayer:")]
 		extern MTLCoordinate2D MapPhysicalToScreenCoordinates (MTLCoordinate2D physicalCoordinates, nuint layerIndex);
+		*/
 	}
 
 	interface IMTLResourceStateCommandEncoder { }

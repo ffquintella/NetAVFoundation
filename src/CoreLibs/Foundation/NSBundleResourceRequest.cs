@@ -8,7 +8,7 @@ using ObjCRuntime;
 #if !MONOMAC
 
 namespace Foundation {
-	public partial class NSBundleResourceRequest : NSObject {
+	public partial class NSBundleResourceRequest  {
 		static NSSet<NSString> MakeSetFromTags (string [] tags)
 		{
 			var x = new NSString [tags.Length];
@@ -22,6 +22,15 @@ namespace Foundation {
 			return new NSSet<NSString> (tags);
 		}
 
+		public NSBundleResourceRequest(NSSet<NSString> set)
+		{
+			Handle = this.Constructor(set);
+		}
+		
+		public NSBundleResourceRequest(NSSet<NSString> set, NSBundle bundle)
+		{
+			Handle = this.Constructor(set, bundle);
+		}
 		public NSBundleResourceRequest (params string [] tags) : this (MakeSetFromTags (tags)) { }
 		public NSBundleResourceRequest (NSBundle bundle, params string [] tags) : this (MakeSetFromTags (tags), bundle) { }
 

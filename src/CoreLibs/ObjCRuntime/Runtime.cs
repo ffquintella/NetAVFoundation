@@ -65,7 +65,7 @@ namespace ObjCRuntime {
 		internal const uint INVALID_TOKEN_REF = 0xFFFFFFFF;
 
 #pragma warning disable 649 // Field 'X' is never assigned to, and will always have its default value
-		internal unsafe struct MTRegistrationMap {
+		public unsafe struct MTRegistrationMap {
 			public IntPtr product_hash;
 			public MTAssembly* assemblies;
 			public MTClassMap* map;
@@ -98,53 +98,53 @@ namespace ObjCRuntime {
 #endif
 
 		[Flags]
-		internal enum MTTypeFlags : uint {
+		public enum MTTypeFlags : uint {
 			None = 0,
 			CustomType = 1,
 			UserType = 2,
 		}
 
 		[StructLayout (LayoutKind.Sequential, Pack = 1)]
-		internal unsafe struct MTFullTokenReference {
+		public unsafe struct MTFullTokenReference {
 			public uint assembly_index;
 			public uint module_token;
 			public uint token;
 		}
 
 		[StructLayout (LayoutKind.Sequential, Pack = 1)]
-		internal struct MTClassMap {
+		public struct MTClassMap {
 			public IntPtr handle;
 			public uint type_reference;
 			public MTTypeFlags flags;
 		}
 
 		[StructLayout (LayoutKind.Sequential, Pack = 1)]
-		internal struct MTManagedClassMap {
+		public struct MTManagedClassMap {
 			public uint skipped_reference; // implied token type: TypeDef
 			public uint actual_reference; // implied token type: TypeDef
 		}
 
 		[StructLayout (LayoutKind.Sequential, Pack = 1)]
-		internal struct MTProtocolWrapperMap {
+		public struct MTProtocolWrapperMap {
 			public uint protocol_token;
 			public uint wrapper_token;
 		}
 
 		[StructLayout (LayoutKind.Sequential, Pack = 1)]
-		internal unsafe struct MTProtocolMap {
+		public unsafe struct MTProtocolMap {
 			public uint* protocol_tokens;
 			public IntPtr* protocols;
 		}
 
 		[StructLayout (LayoutKind.Sequential, Pack = 1)]
-		internal unsafe struct MTAssembly {
+		public unsafe struct MTAssembly {
 			public IntPtr name;
 			public IntPtr mvid;
 		}
 
 		/* Keep Delegates, Trampolines and InitializationOptions in sync with monotouch-glue.m */
 #pragma warning disable 649 // Field 'X' is never assigned to, and will always have its default value
-		internal struct Trampolines {
+		public struct Trampolines {
 			public IntPtr tramp;
 			public IntPtr stret_tramp;
 			public IntPtr fpret_single_tramp;
@@ -172,7 +172,7 @@ namespace ObjCRuntime {
 #pragma warning restore 649
 
 		[Flags]
-		internal enum InitializationFlags : int {
+		public enum InitializationFlags : int {
 			IsPartialStaticRegistrar = 0x01,
 			IsManagedStaticRegistrar = 0x02,
 			/* unused				= 0x04,*/
@@ -186,7 +186,7 @@ namespace ObjCRuntime {
 
 #if MONOMAC
 		/* This enum must always match the identical enum in runtime/xamarin/main.h */
-		internal enum LaunchMode : int {
+		public enum LaunchMode : int {
 			App = 0,
 			Extension = 1,
 			Embedded = 2,
@@ -194,7 +194,7 @@ namespace ObjCRuntime {
 #endif
 
 		[StructLayout (LayoutKind.Sequential)]
-		internal unsafe struct InitializationOptions {
+		public unsafe struct InitializationOptions {
 			public int Size;
 			public InitializationFlags Flags;
 			//public Delegates* Delegates;
@@ -320,13 +320,51 @@ namespace ObjCRuntime {
 		}
 #endif
 
+		public static void DefaultInitialization()
+		{
+			
+			
+			var InializationOptions = new Runtime.InitializationOptions();
+			//InializationOptions.LaunchMode = Runtime.LaunchMode.App;
+			unsafe
+			{
+				InializationOptions.Trampolines = GetTrampolines();
+			}
+			
+			InializationOptions.xamarin_objc_msgsend = IntPtr.Zero;
+
+			SafeInitialize(InializationOptions);
+		
+		}
+
+		internal unsafe static Trampolines* GetTrampolines()
+		{
+			unsafe
+			{
+				var trampolines = new Trampolines();
+				
+
+				return  &trampolines;
+			}
+			
+		}
+		
+		public static void SafeInitialize (InitializationOptions options)
+		{
+			unsafe {
+				Initialize (&options);
+			}
+		}
+		
+
 		[Preserve] // called from native - runtime.m.
 		[BindingImpl (BindingImplOptions.Optimizable)] // To inline the Runtime.DynamicRegistrationSupported code if possible.
-		unsafe static void Initialize (InitializationOptions* options)
+		public unsafe static void Initialize (InitializationOptions* options)
 		{
 #if PROFILE
 			var watch = new Stopwatch ();
 #endif
+			/*
 			if (options->Size != Marshal.SizeOf<InitializationOptions> ()) {
 				var msg = $"Version mismatch between the native {ProductName} runtime and {AssemblyName}. Please reinstall {ProductName}.";
 				NSLog (msg);
@@ -372,6 +410,7 @@ namespace ObjCRuntime {
 				NSLog (msg);
 				throw ErrorHelper.CreateError (8010, msg);
 			}
+			*/
 
 #if NET
 			if (System.Runtime.GCSettings.IsServerGC) {
@@ -381,6 +420,14 @@ namespace ObjCRuntime {
 			}
 #endif
 
+			if (options->RegistrationMap is null)
+			{
+				var map = new MTRegistrationMap();
+				map.classHandles = null;
+				
+				options->RegistrationMap = &map;
+			}
+			
 #if NET
 			if (options->RegistrationMap is not null && options->RegistrationMap->classHandles is not null) {
 				ClassHandles.InitializeClassHandles (options->RegistrationMap->classHandles);
@@ -2284,6 +2331,8 @@ namespace ObjCRuntime {
 			if (!Class.TryGetClass (self, out var cls, out error_message))
 				return false;
 
+			return true;
+
 			lock (usertype_cache) {
 #if NET
 				ref var result = ref CollectionsMarshal.GetValueRefOrAddDefault (usertype_cache, cls, out var exists);
@@ -2303,9 +2352,15 @@ namespace ObjCRuntime {
 		[DllImport ("__Internal")]
 		extern static byte xamarin_is_user_type (IntPtr cls);
 
+		//public static byte xamarin_is_user_type(IntPtr cls)
+		//{
+		//	return 1;
+		//}
+
 		[BindingImpl (BindingImplOptions.Optimizable)]
 		static bool SlowIsUserType (IntPtr cls)
 		{
+			
 			unsafe {
 				if (options->RegistrationMap is not null && options->RegistrationMap->map_count > 0) {
 					var map = options->RegistrationMap->map;

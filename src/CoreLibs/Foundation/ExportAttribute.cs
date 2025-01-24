@@ -31,6 +31,8 @@
 using System;
 using System.Globalization;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using ObjCRuntime;
 using Registrar;
 
@@ -45,10 +47,11 @@ namespace Foundation {
 
 		protected ExportAttribute () { }
 
-		public ExportAttribute (string? selector)
+		public ExportAttribute (string? selector, [CallerMemberName] string? callerClass = null)
 		{
 			this.selector = selector;
 			this.semantic = ArgumentSemantic.None;
+			ClassName = callerClass;
 		}
 
 		public ExportAttribute (string? selector, ArgumentSemantic semantic)
@@ -57,6 +60,8 @@ namespace Foundation {
 			this.semantic = semantic;
 		}
 
+		public string? ClassName { get; set; }
+		
 		public string? Selector {
 			get { return this.selector; }
 			set { this.selector = value; }

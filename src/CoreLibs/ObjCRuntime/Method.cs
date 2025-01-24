@@ -1,13 +1,14 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Registrar;
 
 namespace ObjCRuntime {
 	internal static class Method {
 #if !COREBUILD
 		public unsafe static IntPtr Trampoline {
 			get {
-				return IntPtr.Zero;
+				//return IntPtr.Zero;
 				return Runtime.options->Trampolines->tramp;
 			}
 		}

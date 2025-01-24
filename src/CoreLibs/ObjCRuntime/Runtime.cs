@@ -342,6 +342,8 @@ namespace ObjCRuntime {
 			{
 				var trampolines = new Trampolines();
 				
+				//trampolines.tramp = 
+				
 
 				return  &trampolines;
 			}

@@ -332,6 +332,11 @@ namespace Foundation {
 
 		internal static NativeHandle Initialize ()
 		{
+			if (class_ptr == IntPtr.Zero)
+			{
+				class_ptr = Class.GetHandle ( MethodBase.GetCurrentMethod().DeclaringType.Name); 
+			}
+			
 			return class_ptr;
 		}
 
@@ -390,7 +395,7 @@ namespace Foundation {
 
 		private void InializeClassHandle ()
 		{
-				class_ptr = Class.GetHandle (this.GetType ().Name);
+			class_ptr = Class.GetHandle (this.GetType ().Name);
 		}
 		
 		private void InitializeObject (bool alloced)

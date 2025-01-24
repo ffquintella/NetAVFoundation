@@ -7,6 +7,7 @@ namespace ObjCRuntime {
 #if !COREBUILD
 		public unsafe static IntPtr Trampoline {
 			get {
+				return IntPtr.Zero;
 				return Runtime.options->Trampolines->tramp;
 			}
 		}

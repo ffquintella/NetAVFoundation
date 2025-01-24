@@ -323,7 +323,6 @@ namespace ObjCRuntime {
 		public static void DefaultInitialization()
 		{
 			
-			
 			var InializationOptions = new Runtime.InitializationOptions();
 			//InializationOptions.LaunchMode = Runtime.LaunchMode.App;
 			unsafe

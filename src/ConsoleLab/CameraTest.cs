@@ -20,12 +20,12 @@ public class CameraTest
     public void CaptureSS()
     {
         
-       Runtime.DefaultInitialization();
+        Runtime.DefaultInitialization();
         
         
         device = AVCaptureDevice.GetDefaultDevice(AVMediaTypes.Video.GetConstant());
         input = AVCaptureDeviceInput.FromDevice(device, out var error);
-       
+
         if (error == null)
         {
             session = new AVCaptureSession();

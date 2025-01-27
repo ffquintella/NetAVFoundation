@@ -1,4 +1,6 @@
 using AVFoundation;
+using CoreFoundation;
+using CoreLibs.Foundation;
 using Foundation;
 
 namespace NetAVFoundation;
@@ -10,7 +12,9 @@ public static class EnumExtensions
         switch (self)
         {
             case AVMediaTypes.Video:
-                return new NSString("AVMediaTypeVideo");
+                //var str2 =  new NewNSString("AVMediaTypeVideo");
+                var str = new NSString("AVMediaTypeVideo");
+                return str;
             case AVMediaTypes.Audio:
                 return new NSString("AVMediaTypeAudio");
             case AVMediaTypes.Text:

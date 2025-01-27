@@ -1100,6 +1100,13 @@ namespace Registrar {
 
 			reg_handle = (method.IsStatic && !method.IsCategoryInstance) ? Class.object_getClass (method.DeclaringType.Handle) : method.DeclaringType.Handle;
 
+			return true; 
+			
+			//Class.class_addMethod (reg_handle, Selector.GetHandle (method.Selector), IntPtr.Zero, method.Signature);
+			
+			// TODO: REVIEW - Disabling this for now
+
+			/*
 			switch (method.Trampoline) {
 			case Trampoline.Constructor:
 				tramp = Method.ConstructorTrampoline;
@@ -1171,6 +1178,8 @@ namespace Registrar {
 			}
 
 			return Class.class_addMethod (reg_handle, Selector.GetHandle (method.Selector), tramp, method.Signature);
+
+			*/
 		}
 
 		static MethodInfo GetPropertyMethod (PropertyInfo property)

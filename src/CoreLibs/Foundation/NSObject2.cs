@@ -93,7 +93,7 @@ namespace Foundation {
 	[SupportedOSPlatform ("macos")]
 	[SupportedOSPlatform ("tvos")]
 #endif
-	[StructLayout (LayoutKind.Sequential)]
+	//[StructLayout (LayoutKind.Sequential)]
 	public partial class NSObject :  INativeObject //NativeObject,
 #if !COREBUILD
 		, IEquatable<NSObject>
@@ -224,12 +224,39 @@ namespace Foundation {
 			}
 		}
 
-		[Export ("init")]
-		public NSObject ()
+		private string TopClassName { get; set; } = "";
+		
+		public NSObject( string topClassName)
 		{
+			TopClassName = topClassName;
 			InializeClassHandle ();
 			bool alloced = AllocIfNeeded ();
 			InitializeObject (alloced);
+		}
+		
+		public NSObject(bool noAlloc)
+		{
+			if (noAlloc)
+			{
+				InializeClassHandle ();
+			}
+			else
+			{
+				InializeClassHandle ();
+				bool alloced = AllocIfNeeded ();
+				InitializeObject (alloced);
+			}
+		}
+
+
+		[Export ("init")]
+		public NSObject ()
+		{
+			
+			InializeClassHandle ();
+			bool alloced = AllocIfNeeded ();
+			InitializeObject (alloced);
+			
 		}
 
 		// This is just here as a constructor chain that can will
@@ -395,7 +422,11 @@ namespace Foundation {
 
 		private void InializeClassHandle ()
 		{
-			class_ptr = Class.GetHandle (this.GetType ().Name);
+			var name = "";
+			if (!string.IsNullOrEmpty(TopClassName)) name = TopClassName;
+			else name = this.GetType().Name;
+			
+			class_ptr = Class.GetHandle (name);
 		}
 		
 		private void InitializeObject (bool alloced)

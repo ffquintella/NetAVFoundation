@@ -4651,7 +4651,7 @@ namespace Foundation {
 #pragma warning restore 108
 
 		[Export ("doesNotRecognizeSelector:")]
-		extern public void DoesNotRecognizeSelector (Selector sel);
+		public extern  void DoesNotRecognizeSelector (Selector sel);
 
 		[Export ("observeValueForKeyPath:ofObject:change:context:")]
 		extern public void ObserveValue (NSString keyPath, NSObject ofObject, NSDictionary change, IntPtr context);

@@ -324,15 +324,40 @@ namespace ObjCRuntime {
 		{
 			
 			var InializationOptions = new Runtime.InitializationOptions();
-			//InializationOptions.LaunchMode = Runtime.LaunchMode.App;
+			
 			unsafe
 			{
+	
+				var map = new MTRegistrationMap();
+				map.classHandles = null;
+			
+				InializationOptions.RegistrationMap = &map;
+				
+				
 				InializationOptions.Trampolines = GetTrampolines();
+				InializationOptions.xamarin_objc_msgsend = IntPtr.Zero;
+				
+				options = &InializationOptions;
+				
+				//delegates = new List<object> ();
+				object_map = new Dictionary<IntPtr, GCHandle> (IntPtrEqualityComparer);
+				usertype_cache = new Dictionary<IntPtr, bool> (IntPtrEqualityComparer);
+				intptr_ctor_cache = new Dictionary<Type, ConstructorInfo> (TypeEqualityComparer);
+				intptr_bool_ctor_cache = new Dictionary<Type, ConstructorInfo> (TypeEqualityComparer);
+				block_lifetime_table = new ConditionalWeakTable<Delegate, BlockCollector> ();
+				lock_obj = new object ();
+
+				//NSObjectClass = NSObject.Initialize ();
+
+				if (DynamicRegistrationSupported) {
+					//Registrar = new DynamicRegistrar ();
+					//protocol_cache = new Dictionary<IntPtr, Dictionary<IntPtr, bool>> (IntPtrEqualityComparer);
+				}
+				
+				Class.Initialize(&InializationOptions);
 			}
 			
-			InializationOptions.xamarin_objc_msgsend = IntPtr.Zero;
-
-			SafeInitialize(InializationOptions);
+			//SafeInitialize(InializationOptions);
 		
 		}
 

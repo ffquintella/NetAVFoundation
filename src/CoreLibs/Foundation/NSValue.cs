@@ -116,6 +116,13 @@ namespace Foundation {
 			//Handle = IntPtr.Zero;
 		}
 		
+		public NSValue(bool noAlloc): base(noAlloc)
+		{
+		}
+		
+		public NSValue(string topClassName) : base(topClassName)
+		{}
+		
 		public NSValue(NativeHandle handle) : base(handle)
 		{}
 

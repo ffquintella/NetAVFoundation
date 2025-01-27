@@ -77,9 +77,11 @@ namespace Foundation {
 		{
 		}
 
-		static NativeHandle CreateWithCharacters (NativeHandle classHandle, string str, int offset, int length, bool autorelease = false)
+		public static NativeHandle CreateWithCharacters (NativeHandle classHandle, string str, int offset, int length, bool autorelease = false)
 		{
-			var chandle = Class.GetHandle(nameof(NSString));
+			//var chandle = Class.GetHandle(nameof(NSString));
+			
+			var resHandle = IntPtr.Zero;
 			
 			unsafe {
 				fixed (char* ptrFirstChar = str) {
@@ -89,15 +91,21 @@ namespace Foundation {
 					
 					//Messaging.void_objc_msgSend_IntPtr_IntPtr (handle, selInitWithCharactersLengthHandle, ptrStart, (IntPtr) length);
 #else
-					var resHandle = Messaging.IntPtr_objc_msgSend_IntPtr_IntPtr (classHandle, Selector.GetHandle (selInitWithCharactersLength), ptrStart, (IntPtr) length);
+					resHandle = Messaging.IntPtr_objc_msgSend (classHandle, Selector.GetHandle(Selector.Alloc));
+					
+					resHandle = Messaging.IntPtr_objc_msgSend_IntPtr_IntPtr (resHandle, Selector.GetHandle(selInitWithCharactersLength), ptrStart, (IntPtr) length);
 #endif
 
 					if (autorelease)
 						NSObject.DangerousAutorelease (resHandle);
 
-					return resHandle;
+					
 				}
+				
 			}
+			return resHandle;
+			
+			return NativeHandle.Zero;
 		}
 
 		[Obsolete ("Use of 'CFString.CreateNative' offers better performance.")]
@@ -115,7 +123,7 @@ namespace Foundation {
 			return CreateNative (str, 0, str.Length, autorelease);
 		}
 
-		public static NativeHandle CreateNative (string value, int start, int length)
+		public static  NativeHandle CreateNative (string value, int start, int length)
 		{
 			return CreateNative (value, start, length, false);
 		}
@@ -164,7 +172,7 @@ namespace Foundation {
 			
 			Handle = CreateWithCharacters (ClassHandle, str, 0, str.Length);
 		}
-		public NSString (string str) : base()
+		public NSString (string str) : base(true)
 		{
 			if (str is null)
 				throw new ArgumentNullException ("str");
@@ -268,6 +276,7 @@ namespace Foundation {
 			return Equals (this, obj as NSString);
 		}
 
+		/*
 		[DllImport ("__Internal")]
 		extern static IntPtr xamarin_localized_string_format (IntPtr fmt);
 		[DllImport ("__Internal")]
@@ -288,7 +297,7 @@ namespace Foundation {
 		extern static IntPtr xamarin_localized_string_format_8 (IntPtr fmt, IntPtr arg1, IntPtr arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5, IntPtr arg6, IntPtr arg7, IntPtr arg8);
 		[DllImport ("__Internal")]
 		extern static IntPtr xamarin_localized_string_format_9 (IntPtr fmt, IntPtr arg1, IntPtr arg2, IntPtr arg3, IntPtr arg4, IntPtr arg5, IntPtr arg6, IntPtr arg7, IntPtr arg8, IntPtr arg9);
-
+		*/
 		public static NSString LocalizedFormat (string format, params object [] args)
 		{
 			using (var ns = new NSString (format))
@@ -307,6 +316,8 @@ namespace Foundation {
 
 		public static NSString LocalizedFormat (NSString format, NSObject [] args)
 		{
+			throw new NotImplementedException();
+			/*
 			switch (args.Length) {
 			case 0:
 				return new NSString (xamarin_localized_string_format (format.Handle));
@@ -331,6 +342,7 @@ namespace Foundation {
 			default:
 				throw new Exception ("Unsupported number of arguments, maximum number is 9");
 			}
+			*/
 		}
 
 		public NSString TransliterateString (NSStringTransform transform, bool reverse)

@@ -31,7 +31,7 @@ using ObjCRuntime;
 
 namespace Foundation {
 
-	public partial class NSString : NSValue, IComparable<NSString> {
+	public partial class NSString : NSObject, IComparable<NSString> {
 		const string selDataUsingEncodingAllow = "dataUsingEncoding:allowLossyConversion:";
 
 #if MONOMAC

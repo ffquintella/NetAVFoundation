@@ -53,7 +53,8 @@ namespace Foundation {
 	public partial class INSSecureCoding {}
 #endif
 
-	public partial class NSString : NSValue, IComparable<NSString>
+	//[StructLayout(LayoutKind.Sequential)]
+	public partial class NSString : NSObject, IComparable<NSString>
 #if COREBUILD
 		, INSCopying, INSSecureCoding
 #endif
@@ -82,6 +83,7 @@ namespace Foundation {
 			//var chandle = Class.GetHandle(nameof(NSString));
 			
 			var resHandle = IntPtr.Zero;
+			var initialClass = IntPtr.Zero;
 			
 			unsafe {
 				fixed (char* ptrFirstChar = str) {
@@ -250,7 +252,9 @@ namespace Foundation {
 
 		public static bool Equals (NSString a, NSString b)
 		{
-			if ((a as object) == (b as object))
+			return false;
+			
+			/*if ((a as object) == (b as object))
 				return true;
 
 			if (((object) a) is null || ((object) b) is null)
@@ -258,7 +262,7 @@ namespace Foundation {
 
 			if (a.Handle == b.Handle)
 				return true;
-			return a.IsEqualTo (b);
+			return a.IsEqualTo (b);*/
 		}
 
 		public static bool operator == (NSString a, NSString b)
@@ -361,7 +365,7 @@ namespace Foundation {
 	
 	[BaseType (typeof (NSObject)), Bind ("NSString")]
 	//[DesignatedDefaultCtor]
-	public partial class NSString : NSValue //, NSMutableCopying, CKRecordValue
+	public partial class NSString : NSObject //, NSMutableCopying, CKRecordValue
 #if MONOMAC
 		//, NSPasteboardReading, NSPasteboardWriting // Documented that it implements NSPasteboard protocols even if header doesn't show it
 #endif

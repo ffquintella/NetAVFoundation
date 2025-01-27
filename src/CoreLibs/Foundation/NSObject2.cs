@@ -115,7 +115,7 @@ namespace Foundation {
 		// replace older Mono[Touch|Mac]Assembly field (ease code sharing across platforms)
 		public static readonly Assembly PlatformAssembly = typeof (NSObject).Assembly;
 
-		NativeHandle handle;
+		protected NativeHandle handle;
 		IntPtr super; /* objc_super* */
 		
 		//public static IntPtr class_ptr = Class.GetHandle ("NSObject");

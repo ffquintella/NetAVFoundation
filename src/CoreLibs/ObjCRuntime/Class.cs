@@ -121,7 +121,21 @@ namespace ObjCRuntime {
 
 		public static NativeHandle GetHandle (string name)
 		{
-			return objc_getClass (name);
+			
+			var handle = objc_getClass (name);
+
+			if (handle == IntPtr.Zero)
+			{
+				var nsPtr = Class.GetHandle(typeof(NSObject));
+
+				var classAlloc = Class.objc_allocateClassPair(nsPtr, name, 0);
+        
+				Class.objc_registerClassPair(classAlloc);
+				
+				handle = objc_getClass (name);
+			}
+			
+			return handle;
 		}
 
 		public override bool Equals (object? right)
@@ -339,7 +353,8 @@ namespace ObjCRuntime {
 #endif
 				return rv;
 			}
-
+			
+			/*
 			// The type we're looking for might be a type the registrar skipped, in which case we must
 			// find it in the table of skipped types
 			for (int i = 0; i < map->skipped_map_count; i++) {
@@ -357,6 +372,7 @@ namespace ObjCRuntime {
 						return class_map.handle;
 				}
 			}
+			*/
 
 			return IntPtr.Zero;
 		}
@@ -843,7 +859,7 @@ namespace ObjCRuntime {
 		[DllImport (Messaging.LIBOBJC_DYLIB)]
 		static extern byte class_addMethod (IntPtr cls, IntPtr name, IntPtr imp, IntPtr types);
 
-		internal static bool class_addMethod (IntPtr cls, IntPtr name, IntPtr imp, string types)
+		public static bool class_addMethod (IntPtr cls, IntPtr name, IntPtr imp, string types)
 		{
 			using var typesPtr = new TransientString (types);
 			return class_addMethod (cls, name, imp, typesPtr) != 0;

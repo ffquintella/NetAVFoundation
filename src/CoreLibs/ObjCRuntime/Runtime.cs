@@ -354,10 +354,10 @@ namespace ObjCRuntime {
 					//protocol_cache = new Dictionary<IntPtr, Dictionary<IntPtr, bool>> (IntPtrEqualityComparer);
 				}
 				
-				Class.Initialize(&InializationOptions);
+				//Class.Initialize(&InializationOptions);
 			}
 			
-			//SafeInitialize(InializationOptions);
+			SafeInitialize(InializationOptions);
 		
 		}
 

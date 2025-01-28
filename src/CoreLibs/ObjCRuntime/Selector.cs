@@ -36,11 +36,11 @@ using NativeHandle = System.IntPtr;
 
 namespace ObjCRuntime {
 	public partial class Selector : IEquatable<Selector>, INativeObject {
-		internal const string Alloc = "alloc";
+		public const string Alloc = "alloc";
 		internal const string Class = "class";
-		internal const string Release = "release";
-		internal const string Retain = "retain";
-		internal const string Autorelease = "autorelease";
+		public const string Release = "release";
+		public const string Retain = "retain";
+		public const string Autorelease = "autorelease";
 		internal const string PerformSelectorOnMainThreadWithObjectWaitUntilDone = "performSelectorOnMainThread:withObject:waitUntilDone:";
 
 		NativeHandle handle;

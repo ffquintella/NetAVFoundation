@@ -158,7 +158,7 @@ namespace ObjCRuntime {
 		}
 
 		[BindingImpl (BindingImplOptions.Optimizable)] // To inline the Runtime.DynamicRegistrationSupported code if possible.
-		static IntPtr GetClassHandle (Type type, bool throw_if_failure, out bool is_custom_type)
+		public static IntPtr GetClassHandle (Type type, bool throw_if_failure, out bool is_custom_type)
 		{
 			IntPtr @class = IntPtr.Zero;
 
@@ -807,17 +807,17 @@ namespace ObjCRuntime {
 		[DllImport (Messaging.LIBOBJC_DYLIB)]
 		static extern IntPtr objc_allocateClassPair (IntPtr superclass, IntPtr name, IntPtr extraBytes);
 
-		internal static IntPtr objc_allocateClassPair (IntPtr superclass, string name, IntPtr extraBytes)
+		public static IntPtr objc_allocateClassPair (IntPtr superclass, string name, IntPtr extraBytes)
 		{
 			using var namePtr = new TransientString (name);
 			return objc_allocateClassPair (superclass, namePtr, extraBytes);
 		}
 
-		//[DllImport (Messaging.LIBOBJC_DYLIB)]
-		//static extern IntPtr objc_getClass (IntPtr name);
-		
-		[DllImport (Constants.AppKitLibrary, CharSet = CharSet.Auto)]
+		[DllImport (Messaging.LIBOBJC_DYLIB, EntryPoint = "objc_getClass", CharSet = CharSet.Auto)]
 		static extern IntPtr objc_getClass (string name);
+		
+		//[DllImport (Constants.AppKitLibrary, CharSet = CharSet.Auto)]
+		//static extern IntPtr objc_getClass (string name);
 
 
 		/*internal static IntPtr objc_getClass (string name)
@@ -828,7 +828,7 @@ namespace ObjCRuntime {
 		*/
 
 		[DllImport (Messaging.LIBOBJC_DYLIB)]
-		internal static extern void objc_registerClassPair (IntPtr cls);
+		public static extern void objc_registerClassPair (IntPtr cls);
 
 		[DllImport (Messaging.LIBOBJC_DYLIB)]
 		static extern byte class_addIvar (IntPtr cls, IntPtr name, IntPtr size, byte alignment, IntPtr types);
